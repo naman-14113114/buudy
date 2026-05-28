@@ -1,0 +1,150 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { ChevronDown, HelpCircle, Mail, MessageSquare } from "lucide-react";
+import { faqsData } from "@/data/faqs";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+
+type FaqItemProps = {
+  question: string;
+  answerHtml: string;
+  isOpen: boolean;
+  onClick: () => void;
+};
+
+function FaqAccordionItem({ question, answerHtml, isOpen, onClick }: FaqItemProps) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState<number | string>(0);
+
+  // Dynamically update the height on open/close or window resizing
+  useEffect(() => {
+    if (isOpen) {
+      const handleResize = () => {
+        if (contentRef.current) {
+          setHeight(contentRef.current.scrollHeight);
+        }
+      };
+      
+      // Set initial height
+      handleResize();
+      
+      // Add event listener for dynamic resize (responsive adjustments)
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    } else {
+      setHeight(0);
+    }
+  }, [isOpen]);
+
+  return (
+    <div 
+      className={`group rounded-[20px] border border-[var(--border)] bg-[var(--card)] transition-all duration-300 ease-out hover:border-[rgba(58,31,61,0.2)] hover:shadow-[0_12px_32px_-16px_rgba(58,31,61,0.06)] ${
+        isOpen ? "shadow-[0_16px_40px_-24px_rgba(58,31,61,0.1)] border-[rgba(58,31,61,0.18)]" : ""
+      }`}
+    >
+      {/* Header / Click Target */}
+      <button
+        onClick={onClick}
+        type="button"
+        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left select-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--plum)] rounded-[20px]"
+        aria-expanded={isOpen}
+      >
+        <span className={`buudy-display text-lg sm:text-xl text-[var(--plum)] font-normal transition-colors duration-300 ${
+          isOpen ? "text-[var(--plum)]" : "group-hover:text-[var(--ink)]"
+        }`}>
+          {question}
+        </span>
+        <span className={`flex h-8 w-8 items-center justify-center rounded-full bg-[rgba(58,31,61,0.04)] text-[var(--plum)] transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:bg-[rgba(58,31,61,0.08)] ${
+          isOpen ? "rotate-180 bg-[var(--plum)]! text-[var(--cream)]!" : ""
+        }`}>
+          <ChevronDown size={18} className="stroke-[2.5]" />
+        </span>
+      </button>
+
+      {/* Answer Panel with measured height transition */}
+      <div
+        className="overflow-hidden transition-[height] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
+        style={{ height }}
+      >
+        <div ref={contentRef} className="px-6 pb-6">
+          <div className="h-[1px] w-full bg-[var(--border)] mb-5" />
+          <div 
+            className={`text-sm sm:text-base leading-7 text-[var(--muted)] transition-all duration-500 ease-out font-light ${
+              isOpen ? "opacity-100 translate-y-0 delay-100" : "opacity-0 -translate-y-2"
+            }`}
+            dangerouslySetInnerHTML={{ __html: answerHtml }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function FaqPage() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(0); // Expand first by default
+
+  const handleToggle = (index: number) => {
+    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
+  return (
+    <div className="bg-[var(--cream)] min-h-screen py-16 md:py-24 relative overflow-hidden">
+      {/* Background glow animations */}
+      <div className="buudy-glow -left-20 top-10 h-[360px] w-[360px] bg-[#f4a17b] opacity-20" />
+      <div className="buudy-glow -right-20 bottom-10 h-[420px] w-[420px] bg-[#a05080] opacity-20" />
+
+      <div className="buudy-wrap relative z-10 max-w-4xl">
+        {/* Page Headings */}
+        <div className="text-center mb-16">
+          <SectionHeading
+            eyebrow="Help Center"
+            title={
+              <>
+                Frequently Asked <em className="buudy-italic">Questions</em>
+              </>
+            }
+            copy="Find fast answers to shipping queries, return policies, payment terms, and support info below."
+            align="center"
+          />
+        </div>
+
+        {/* FAQ Accordion List */}
+        <div className="space-y-4">
+          {faqsData.map((faq, index) => (
+            <FaqAccordionItem
+              key={index}
+              question={faq.question}
+              answerHtml={faq.answerHtml}
+              isOpen={activeIndex === index}
+              onClick={() => handleToggle(index)}
+            />
+          ))}
+        </div>
+
+        {/* Footer Contact Help Center Widget */}
+        <div className="mt-16 rounded-[24px] border border-[var(--border)] bg-[rgba(255,255,255,0.4)] backdrop-blur-md p-8 text-center max-w-2xl mx-auto shadow-[0_20px_50px_-28px_rgba(58,31,61,0.08)]">
+          <h3 className="buudy-display text-2xl text-[var(--plum)]">Still have questions?</h3>
+          <p className="mt-2 text-sm sm:text-base text-[var(--muted)] font-light">
+            Our support desk is here for you Monday through Friday, 9am - 5pm EST.
+          </p>
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a 
+              href="mailto:support@buudy.com" 
+              className="flex items-center gap-2 px-5 py-3 rounded-full bg-[var(--plum)] text-[var(--cream)] text-sm font-semibold hover:bg-[var(--ink)] transition-colors duration-200 w-full sm:w-auto justify-center"
+            >
+              <Mail size={16} />
+              support@buudy.com
+            </a>
+            <a 
+              href="/pages/contact" 
+              className="flex items-center gap-2 px-5 py-3 rounded-full border border-[rgba(58,31,61,0.2)] text-[var(--plum)] text-sm font-semibold hover:bg-[rgba(58,31,61,0.04)] transition-colors duration-200 w-full sm:w-auto justify-center"
+            >
+              <MessageSquare size={16} />
+              Open Support Ticket
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

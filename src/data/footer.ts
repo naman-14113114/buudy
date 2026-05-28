@@ -18,8 +18,8 @@ export const footerMenus = [
     links: [
       { label: "Contact Us", href: "mailto:support@buudy.com" },
       { label: "Order Tracking", href: "/order-tracking" },
-      { label: "About Us", href: "/about-us" },
-      { label: "FAQs", href: "/products/buudy-led-mask#faq" },
+      { label: "About Us", href: "/pages/about-us" },
+      { label: "FAQs", href: "/pages/faqs" },
       { label: "Cookies Policy", href: "/cookies-policy" },
     ],
   },
