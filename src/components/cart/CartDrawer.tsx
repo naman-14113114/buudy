@@ -38,7 +38,7 @@ export function CartDrawer() {
           <div>
             <p className="buudy-mono text-[var(--gold)]">Cart</p>
             <h2 className="buudy-display text-2xl text-[var(--plum)]">
-              Your glow kit
+              Your Buudy bag
             </h2>
           </div>
           <button
@@ -68,11 +68,11 @@ export function CartDrawer() {
                 Your bag is waiting.
               </p>
               <p className="buudy-copy mt-3 max-w-xs text-sm">
-                Add the Buudy LED Mask to unlock 3 free gifts and the GLOWKIT
-                promo.
+                Add the Buudy LED Mask or Red Torch to unlock current offers
+                and free shipping.
               </p>
               <Button asChild className="mt-6" onClick={closeCart}>
-                <Link href="/products/buudy-led-mask">Shop the mask</Link>
+                <Link href="/">Shop Buudy</Link>
               </Button>
             </div>
           )}

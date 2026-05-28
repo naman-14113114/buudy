@@ -20,11 +20,11 @@ export function CartPageContent() {
           <ShoppingBag className="mx-auto text-[var(--gold)]" size={42} />
           <h1 className="buudy-heading mt-5">Your cart is empty.</h1>
           <p className="buudy-copy mx-auto mt-5 max-w-lg">
-            Add the Buudy LED Mask to unlock the GLOWKIT promo, 3 free gifts,
-            and free shipping.
+            Add the Buudy LED Mask or Red Torch to unlock current offers and
+            free shipping.
           </p>
           <Button asChild className="mt-8">
-            <Link href="/products/buudy-led-mask">Shop Buudy LED Mask</Link>
+            <Link href="/">Shop Buudy</Link>
           </Button>
         </div>
       </section>
@@ -38,8 +38,8 @@ export function CartPageContent() {
           <p className="buudy-eyebrow">Cart</p>
           <h1 className="buudy-heading mt-3">Your glow kit.</h1>
           <p className="buudy-copy mt-4 max-w-2xl">
-            Review your mask, unlocked free gifts, promo code, and optional gift
-            message before checkout.
+            Review your products, unlocked rewards, promo summary, and optional
+            gift message before checkout.
           </p>
         </div>
 

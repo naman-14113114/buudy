@@ -416,6 +416,114 @@ export const wavelengths: Wavelength[] = [
   },
 ];
 
+export const torchWavelengths: Wavelength[] = [
+  {
+    nm: "460nm",
+    name: "BLUE",
+    color: "#4a6acf",
+    description: "Supports acne-focused routines and surface-level skin clarity.",
+  },
+  {
+    nm: "630nm",
+    name: "RED",
+    color: "#d4523a",
+    description: "Supports smoother-looking skin, fine-line care, and collagen rituals.",
+  },
+  {
+    nm: "660nm",
+    name: "DEEP RED",
+    color: "#b9332c",
+    description: "A deeper red wavelength for targeted body and skin wellness sessions.",
+  },
+  {
+    nm: "850nm",
+    name: "NIR",
+    color: "#7a2b2b",
+    description: "Near-infrared light for localized muscle stiffness and body relief routines.",
+  },
+  {
+    nm: "900nm",
+    name: "NIR+",
+    color: "#4d2525",
+    description: "Near-infrared support for deeper, focused application on body areas.",
+  },
+];
+
+export const torchFeatures: Feature[] = [
+  {
+    title: "Compact Build",
+    kicker: "4.92 inch handheld design",
+    body: "Lightweight enough for home, the office, or travel, with durable one-button operation for quick targeted sessions.",
+  },
+  {
+    title: "Clinical Strength",
+    kicker: "3 visible and 2 invisible LEDs",
+    body: "The T5 torch combines blue, red, deep red, and near-infrared wavelengths for a focused skin and body care routine.",
+  },
+  {
+    title: "Precision Wavelengths",
+    kicker: "460, 630, 660, 850, 900nm",
+    body: "Use the specific wavelength blend for localized application on the face, back, knees, shoulders, hands, feet, or other target areas.",
+  },
+  {
+    title: "Rapid Treatment",
+    kicker: "Targeted 1 to 5 minute sessions",
+    body: "Hold the torch over the target area for quick sessions, building gradually as your body gets used to red light therapy.",
+  },
+];
+
+export const torchDetailImages = [
+  {
+    src: productAsset("09-buudy-red-torch-detail-wide.jpeg", "buudy-red-torch"),
+    alt: "Buudy Red Torch detail image",
+  },
+  {
+    src: productAsset("10-buudy-red-torch-wellness.jpeg", "buudy-red-torch"),
+    alt: "Buudy Red Torch wellness use",
+  },
+  {
+    src: productAsset("11-buudy-red-torch-treatment.jpeg", "buudy-red-torch"),
+    alt: "Buudy Red Torch treatment application",
+  },
+];
+
+export const torchHowToUse = [
+  "Set up the red light therapy device on a chair, table, wall, or door, then uncover the target area before use.",
+  "Position the device 4 to 6 inches away from the skin for best results.",
+  "Treat each area that needs attention for 5 to 15 minutes, starting with 1 to 2 minutes per area.",
+  "Increase time slowly over the next few weeks as your body gets used to red light therapy.",
+  "Use four to ten times a week depending on your routine, allowing at least 6 hours between multiple daily sessions.",
+];
+
+export const torchFaqs: FAQItem[] = [
+  {
+    question: "How does this handheld light therapy device work?",
+    answer:
+      "The device uses LED technology with specific wavelengths: 460nm, 630nm, 660nm, 850nm, and 900nm. It emits blue, red, and near-infrared light for non-invasive application on body surfaces, where light energy may support local blood circulation and relieve muscle stiffness.",
+  },
+  {
+    question: "Can I use this device on any part of my body?",
+    answer:
+      "Yes, the compact design allows localized application on most body areas, including the back, knees, and shoulders. Always follow the user manual for positioning and session duration.",
+  },
+  {
+    question: "Can I use it in my country?",
+    answer:
+      "Yes. The Buudy Red Torch is dual voltage, which means it can be used worldwide without any issues.",
+  },
+  {
+    question:
+      "What if I am pregnant, sensitive to light, have epilepsy, or take light sensitive medication?",
+    answer:
+      "Consult your physician or another qualified healthcare professional before using LED products. People who may be sensitive to light, including women who are pregnant, people with epilepsy, or people taking medications such as tetracycline, steroids, or cortisone injections, should not use LED products without medical guidance.",
+  },
+  {
+    question: "Do you sell this anywhere else?",
+    answer:
+      "The Buudy Red Torch is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
+  },
+];
+
 export const expertVideo = {
   poster: productAsset("dermatologist-video-poster.png"),
   src: "https://res.cloudinary.com/dzurujbwh/video/upload/v1778069326/Untitled_video_-_Made_with_Clipchamp_5_zbxbso.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9jNmYyYzVlYi00ZTNjLTQxNTgtOGZlNS1iNTE1MWNmMmRjZDQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJCdXVkeSBMRUQgbWFzayBJbWFnZXMvMS1iLm1wNCIsImlhdCI6MTc3NTM5MzE4NiwiZXhwIjoxODA2OTI5MTg2fQ.pdE4pHngDME_BBlYIlVSfW7tuIzE-WNHBOs0vtRvZaE",

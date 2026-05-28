@@ -1,9 +1,10 @@
-import type { Product } from "@/data/products";
+import { getProductById, getProductBySlug, type Product } from "@/data/products";
 
 export type CartLineType = "product" | "gift";
 
 export type CartLine = {
   id: string;
+  productId: string;
   slug?: string;
   type: CartLineType;
   title: string;
@@ -21,7 +22,7 @@ export type CartState = {
   giftMessage: string;
 };
 
-export const promoCode = "GLOWKIT";
+export const promoCode = "AUTO";
 
 export const emptyCart: CartState = {
   lines: [],
@@ -30,8 +31,15 @@ export const emptyCart: CartState = {
 };
 
 export function buildProductCartLines(product: Product, quantity = 1): CartLine[] {
+  const normalizedQuantity = Math.max(quantity, 0);
+
+  if (normalizedQuantity <= 0) {
+    return [];
+  }
+
   const productLine: CartLine = {
     id: product.id,
+    productId: product.id,
     slug: product.slug,
     type: "product",
     title: product.name,
@@ -39,22 +47,55 @@ export function buildProductCartLines(product: Product, quantity = 1): CartLine[
     image: product.cartImage,
     unitPriceCents: product.priceCents,
     compareAtCents: product.compareAtCents,
-    quantity,
+    quantity: normalizedQuantity,
   };
 
   const gifts = product.gifts.map<CartLine>((gift) => ({
-    id: gift.id,
+    id: `${product.id}:${gift.id}`,
+    productId: product.id,
+    slug: product.slug,
     type: "gift",
     title: gift.name,
-    subtitle: "Free gift unlocked",
+    subtitle: `${product.name} free gift unlocked`,
     image: gift.image,
     unitPriceCents: 0,
     compareAtCents: gift.valueCents,
-    quantity,
+    quantity: normalizedQuantity,
     locked: true,
   }));
 
   return [productLine, ...gifts];
+}
+
+function findProductForLine(line: CartLine) {
+  return (
+    getProductById(line.productId) ??
+    getProductById(line.id) ??
+    (line.slug ? getProductBySlug(line.slug) : undefined)
+  );
+}
+
+export function normalizeCartLines(lines: CartLine[]) {
+  const productLines = lines.filter((line) => line.type === "product");
+
+  return productLines.flatMap((line) => {
+    const product = findProductForLine(line);
+
+    if (!product) {
+      return [];
+    }
+
+    return buildProductCartLines(product, line.quantity);
+  });
+}
+
+export function upsertProductCartLines(
+  lines: CartLine[],
+  product: Product,
+  quantity: number,
+) {
+  const withoutProduct = lines.filter((line) => line.productId !== product.id);
+  return [...withoutProduct, ...buildProductCartLines(product, quantity)];
 }
 
 export function calculateCartTotals(lines: CartLine[]) {

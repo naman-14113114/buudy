@@ -1,11 +1,11 @@
 export const primaryNavigation = [
   { label: "LED Face Mask", href: "/products/buudy-led-mask" },
-  { label: "Red Light Torch", href: "/products/buudy-led-mask#free-gifts" },
-  { label: "Skincare Quiz", href: "/products/buudy-led-mask#buudy-ai" },
+  { label: "Red Light Torch", href: "/products/red-light-torch" },
+  { label: "Skincare Quiz", href: "/#wavelength-map" },
 ];
 
 export const secondaryNavigation = [
-  { label: "About Us", href: "/products/buudy-led-mask#expert" },
+  { label: "About Us", href: "/#light-therapy" },
   { label: "FAQs", href: "/products/buudy-led-mask#faq" },
   { label: "Contact Us", href: "mailto:support@buudy.com" },
 ];

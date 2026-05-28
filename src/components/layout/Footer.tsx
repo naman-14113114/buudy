@@ -7,7 +7,7 @@ export function Footer() {
       <div className="buudy-wrap py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Link className="buudy-display text-4xl" href="/products/buudy-led-mask">
+            <Link className="buudy-display text-4xl" href="/">
               buudy<span className="text-[var(--gold)]">.</span>
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,241,232,.62)]">
@@ -47,7 +47,7 @@ export function Footer() {
             <p className="mt-4 text-sm leading-7 text-[rgba(247,241,232,.72)]">
               Operating Hours
               <br />
-              Monday - Friday · 9am - 5pm EST
+              Monday - Friday - 9am - 5pm EST
             </p>
             <a
               className="mt-3 inline-block text-sm underline underline-offset-4"
@@ -60,7 +60,7 @@ export function Footer() {
 
         <div className="mt-16 flex flex-wrap items-center justify-between gap-6 border-t border-[rgba(247,241,232,.14)] pt-8">
           <p className="buudy-mono text-[rgba(247,241,232,.5)]">
-            © 2026 Buudy · All rights reserved
+            (c) 2026 Buudy - All rights reserved
           </p>
           <div className="flex gap-3">
             {paymentIcons.map((icon) => (

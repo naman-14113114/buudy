@@ -10,10 +10,15 @@ import { ProductHero } from "./ProductHero";
 import { ResultsMarquee } from "./ResultsMarquee";
 import { SpecsPanel } from "./SpecsPanel";
 import { StickyAddToCart } from "./StickyAddToCart";
+import { TorchProductPage } from "./TorchProductPage";
 import { VideoReviews } from "./VideoReviews";
 import { WavelengthSelector } from "./WavelengthSelector";
 
 export function ProductPage({ product }: { product: Product }) {
+  if (product.template === "torch") {
+    return <TorchProductPage product={product} />;
+  }
+
   return (
     <>
       <ProductHero product={product} />
@@ -29,7 +34,7 @@ export function ProductPage({ product }: { product: Product }) {
       <TouchTechSection />
       <AppPromo />
       <BlueLightSection />
-      <FAQSection />
+      <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
       <StickyAddToCart product={product} />
     </>

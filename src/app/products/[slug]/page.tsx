@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductPage } from "@/components/product/ProductPage";
-import { faqs } from "@/data/productSections";
 import { getProductBySlug, products } from "@/data/products";
 import { faqJsonLd, productJsonLd } from "@/lib/seo";
 
@@ -28,8 +27,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${product.name} | 7 Wavelength LED Face and Neck Mask`,
-    description: product.description,
+    title: product.seoTitle,
+    description: product.seoDescription,
     alternates: {
       canonical: `/products/${product.slug}`,
     },
@@ -73,7 +72,7 @@ export default async function ProductRoute({ params }: PageProps) {
       />
       <script
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqJsonLd(faqs)),
+          __html: JSON.stringify(faqJsonLd(product.faqs)),
         }}
         type="application/ld+json"
       />

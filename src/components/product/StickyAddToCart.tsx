@@ -11,6 +11,10 @@ import { useCart } from "@/components/cart/CartProvider";
 export function StickyAddToCart({ product }: { product: Product }) {
   const { addProduct } = useCart();
   const [visible, setVisible] = useState(false);
+  const giftLabel =
+    product.gifts.length > 0
+      ? ` + ${product.gifts.length} free gifts`
+      : " + free shipping";
 
   useEffect(() => {
     const button = document.getElementById("hero-cta");
@@ -51,13 +55,14 @@ export function StickyAddToCart({ product }: { product: Product }) {
           <div>
             <p className="font-semibold text-[var(--plum)]">{product.name}</p>
             <p className="text-sm text-[var(--muted)]">
-              {formatMoney(product.priceCents, product.currency)} + 3 free gifts
+              {formatMoney(product.priceCents, product.currency)}
+              {giftLabel}
             </p>
           </div>
         </div>
         <Button className="w-full sm:w-auto" onClick={() => addProduct(product)}>
           <ShoppingBag size={17} />
-          Add to cart + free gifts
+          Add to cart{giftLabel}
         </Button>
       </div>
     </div>

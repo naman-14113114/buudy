@@ -1,7 +1,8 @@
 # Buudy Storefront
 
-Scalable Next.js product-page project for the Buudy LED Mask at
-`/products/buudy-led-mask`.
+Scalable Next.js ecommerce storefront for Buudy, with a real homepage at `/`,
+the LED Mask page at `/products/buudy-led-mask`, and the Red Torch page at
+`/products/red-light-torch`.
 
 ## Stack
 
@@ -19,7 +20,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000/products/buudy-led-mask`.
+Open `http://localhost:3000`.
 
 ## Build Checks
 
@@ -32,17 +33,20 @@ npm run build
 
 Most product and commerce content is data-driven:
 
+- `src/data/home.ts` for homepage section content
 - `src/data/products.ts` for product pricing, gifts, specs, gallery, and badges
-- `src/data/productSections.ts` for reusable section content
+- `src/data/productSections.ts` for reusable product section content
 - `src/data/navigation.ts` and `src/data/footer.ts` for shared layout data
 
-Adding another product should usually mean adding a product record and section data,
-then allowing `src/app/products/[slug]/page.tsx` to render it.
+Adding another product should usually mean adding a product record and section
+data, then allowing `src/app/products/[slug]/page.tsx` to render it.
 
 ## Cart And Checkout
 
-The cart is handled in `src/components/cart/CartProvider.tsx` and persisted in the
-browser. Checkout routing is isolated in `src/lib/checkout.ts`.
+The cart is handled in `src/components/cart/CartProvider.tsx` and persisted in
+the browser. It supports multiple product lines, product-specific gifts, editable
+quantities, gift messaging, promo summaries, and checkout routing isolated in
+`src/lib/checkout.ts`.
 
 Set this environment variable on Vercel when the real checkout destination is ready:
 
@@ -58,6 +62,8 @@ Key product images are stored in:
 
 ```txt
 public/images/products/buudy-led-mask/
+public/images/products/buudy-red-torch/
+public/images/home/
 ```
 
 To re-sync the local product images from the known source URLs:
@@ -79,4 +85,3 @@ Recommended production settings:
 - Install command: `npm install`
 - Output directory: leave empty for Next.js
 - Environment variable: `NEXT_PUBLIC_CHECKOUT_URL` when available
-

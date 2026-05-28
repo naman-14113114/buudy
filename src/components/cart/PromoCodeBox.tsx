@@ -4,8 +4,9 @@ import { CheckCircle2 } from "lucide-react";
 import { useCart } from "./CartProvider";
 
 export function PromoCodeBox() {
-  const { promoCode, totals } = useCart();
+  const { activePromoCodes, totals } = useCart();
   const active = totals.itemCount > 0;
+  const codes = activePromoCodes.length > 0 ? activePromoCodes.join(" + ") : "AUTO";
 
   return (
     <div className="rounded-xl border border-[var(--border)] bg-[rgba(241,223,210,.35)] p-4">
@@ -14,13 +15,13 @@ export function PromoCodeBox() {
           <p className="buudy-mono text-[var(--gold)]">Promo code</p>
           <p className="mt-1 text-sm text-[var(--muted)]">
             {active
-              ? "Applied automatically for free gifts and shipping."
-              : "Add the mask to unlock the glow kit promo."}
+              ? "Applied automatically for product offers and free shipping."
+              : "Add a Buudy product to unlock the current offer."}
           </p>
         </div>
         <span className="inline-flex items-center gap-2 rounded-full bg-[var(--cream)] px-3 py-2 text-xs font-semibold text-[var(--plum)]">
           {active ? <CheckCircle2 size={15} className="text-[var(--success)]" /> : null}
-          {promoCode}
+          {codes}
         </span>
       </div>
     </div>

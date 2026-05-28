@@ -28,19 +28,19 @@ const jetBrains = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://buudy.com"),
   title: {
-    default: "Buudy LED Mask",
+    default: "Buudy Light Therapy",
     template: "%s | Buudy",
   },
   description:
-    "Salon-grade LED light therapy for home with 192 LEDs, 7 wavelengths, face and neck coverage, cordless design, and free gifts.",
+    "Professional-grade LED light therapy for home skincare and targeted wellness routines.",
   applicationName: "Buudy",
   alternates: {
-    canonical: "/products/buudy-led-mask",
+    canonical: "/",
   },
   openGraph: {
     siteName: "Buudy",
     type: "website",
-    url: "https://buudy.com/products/buudy-led-mask",
+    url: "https://buudy.com/",
   },
 };
 

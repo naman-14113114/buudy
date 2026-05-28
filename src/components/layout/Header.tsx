@@ -25,7 +25,7 @@ export function Header() {
 
         <Link
           className="buudy-display text-4xl text-[var(--plum)]"
-          href="/products/buudy-led-mask"
+          href="/"
           aria-label="Buudy home"
         >
           buudy<span className="text-[var(--gold)]">.</span>
@@ -46,11 +46,13 @@ export function Header() {
           <button
             aria-label={`Open cart with ${totals.itemCount} items`}
             className="buudy-mono inline-flex items-center gap-2 rounded-full border border-[rgba(58,31,61,.18)] px-4 py-2 text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
+            data-testid="cart-trigger"
             onClick={openCart}
             type="button"
           >
             <ShoppingBag size={16} strokeWidth={1.8} />
-            Bag · {totals.itemCount}
+            <span className="hidden sm:inline">Bag -</span>
+            {totals.itemCount}
           </button>
         </div>
       </div>

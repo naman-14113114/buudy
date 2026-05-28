@@ -39,6 +39,7 @@ body {
     var(--cream);
   color: var(--foreground);
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
 button,
@@ -64,13 +65,18 @@ video {
 }
 
 .buudy-wrap {
-  width: min(100% - 32px, 1180px);
+  width: calc(100% - 32px);
+  max-width: 1180px;
   margin-inline: auto;
+}
+
+.buudy-wrap > * {
+  min-width: 0;
 }
 
 @media (min-width: 768px) {
   .buudy-wrap {
-    width: min(100% - 80px, 1180px);
+    width: calc(100% - 80px);
   }
 }
 
@@ -81,6 +87,7 @@ video {
 
 .buudy-display {
   font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  overflow-wrap: break-word;
 }
 
 .buudy-mono {

@@ -26,6 +26,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
           loading="eager"
           sizes="(min-width: 1024px) 50vw, 100vw"
           src={current.src}
+          unoptimized={current.animated}
         />
       </div>
 
@@ -50,6 +51,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
               loading={index === 0 ? "eager" : "lazy"}
               sizes="90px"
               src={image.src}
+              unoptimized={image.animated}
             />
           </button>
         ))}

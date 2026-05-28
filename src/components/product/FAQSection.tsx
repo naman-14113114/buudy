@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { faqs } from "@/data/productSections";
+import { faqs as maskFaqs, type FAQItem } from "@/data/productSections";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function FAQSection() {
+export function FAQSection({ faqs = maskFaqs }: { faqs?: FAQItem[] }) {
   const [open, setOpen] = useState(0);
 
   return (

@@ -47,9 +47,9 @@ export function SpecsPanel({ product }: { product: Product }) {
             ))}
           </ul>
           <div className="mt-8 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(241,223,210,.5)] p-6">
-            <p className="buudy-eyebrow">Certifications</p>
+            <p className="buudy-eyebrow">Product Signals</p>
             <p className="buudy-display mt-2 text-xl text-[var(--plum)]">
-              Health Canada approved · CE · FCC · ROHS
+              {product.badges.join(" · ")}
             </p>
           </div>
         </div>

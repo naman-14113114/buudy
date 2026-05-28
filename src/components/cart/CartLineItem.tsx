@@ -53,7 +53,8 @@ export function CartLineItem({ line }: { line: CartLine }) {
               <button
                 aria-label="Decrease quantity"
                 className="grid h-9 w-9 place-items-center"
-                onClick={() => setQuantity(line.quantity - 1)}
+                data-testid={`quantity-decrease-${line.productId}`}
+                onClick={() => setQuantity(line.productId, line.quantity - 1)}
                 type="button"
               >
                 <Minus size={14} />
@@ -64,7 +65,8 @@ export function CartLineItem({ line }: { line: CartLine }) {
               <button
                 aria-label="Increase quantity"
                 className="grid h-9 w-9 place-items-center"
-                onClick={() => setQuantity(line.quantity + 1)}
+                data-testid={`quantity-increase-${line.productId}`}
+                onClick={() => setQuantity(line.productId, line.quantity + 1)}
                 type="button"
               >
                 <Plus size={14} />
@@ -73,9 +75,10 @@ export function CartLineItem({ line }: { line: CartLine }) {
           )}
           {!line.locked ? (
             <button
-              aria-label="Remove product"
+              aria-label={`Remove ${line.title}`}
               className="inline-flex items-center gap-2 text-xs text-[var(--muted)] transition hover:text-[var(--plum)]"
-              onClick={removeProduct}
+              data-testid={`remove-${line.productId}`}
+              onClick={() => removeProduct(line.productId)}
               type="button"
             >
               <Trash2 size={14} />

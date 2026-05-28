@@ -8,21 +8,22 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { buudyMask, type Product } from "@/data/products";
+import { getProductById, type Product } from "@/data/products";
 import {
-  buildProductCartLines,
   calculateCartTotals,
   emptyCart,
-  type CartLine,
+  normalizeCartLines,
+  upsertProductCartLines,
   type CartState,
 } from "@/lib/cart";
 
 type CartContextValue = CartState & {
   isOpen: boolean;
   totals: ReturnType<typeof calculateCartTotals>;
+  activePromoCodes: string[];
   addProduct: (product: Product) => void;
-  setQuantity: (quantity: number) => void;
-  removeProduct: () => void;
+  setQuantity: (productId: string, quantity: number) => void;
+  removeProduct: (productId: string) => void;
   clearCart: () => void;
   openCart: () => void;
   closeCart: () => void;
@@ -30,7 +31,8 @@ type CartContextValue = CartState & {
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
-const storageKey = "buudy-cart-v1";
+const storageKey = "buudy-cart-v2";
+const legacyStorageKey = "buudy-cart-v1";
 
 function readStoredCart() {
   if (typeof window === "undefined" || !("localStorage" in window)) {
@@ -38,7 +40,10 @@ function readStoredCart() {
   }
 
   try {
-    return window.localStorage.getItem(storageKey);
+    return (
+      window.localStorage.getItem(storageKey) ??
+      window.localStorage.getItem(legacyStorageKey)
+    );
   } catch {
     return null;
   }
@@ -54,13 +59,6 @@ function writeStoredCart(state: CartState) {
   } catch {
     // Private browsing and embedded browsers can disable storage.
   }
-}
-
-function normalizeLines(lines: CartLine[]) {
-  const productLine = lines.find((line) => line.type === "product");
-  const quantity = Math.max(productLine?.quantity ?? 0, 0);
-
-  return quantity > 0 ? buildProductCartLines(buudyMask, quantity) : [];
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
@@ -83,7 +81,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           const storedState = {
             ...emptyCart,
             ...parsed,
-            lines: normalizeLines(parsed.lines ?? []),
+            lines: normalizeCartLines(parsed.lines ?? []),
           };
           const hasStoredCart =
             storedState.lines.length > 0 || storedState.giftMessage.length > 0;
@@ -113,31 +111,52 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [hydrated, state]);
 
   const totals = useMemo(() => calculateCartTotals(state.lines), [state.lines]);
+  const activePromoCodes = useMemo(() => {
+    const productIds = new Set(
+      state.lines
+        .filter((line) => line.type === "product")
+        .map((line) => line.productId),
+    );
+
+    return Array.from(productIds)
+      .map((productId) => getProductById(productId)?.promoCode)
+      .filter((code): code is string => Boolean(code));
+  }, [state.lines]);
 
   function addProduct(product: Product) {
     setState((current) => {
-      const currentProduct = current.lines.find((line) => line.type === "product");
+      const currentProduct = current.lines.find(
+        (line) => line.type === "product" && line.productId === product.id,
+      );
       const quantity = (currentProduct?.quantity ?? 0) + 1;
 
       return {
         ...current,
-        lines: buildProductCartLines(product, quantity),
+        lines: upsertProductCartLines(current.lines, product, quantity),
       };
     });
     setIsOpen(true);
   }
 
-  function setQuantity(quantity: number) {
-    setState((current) => ({
-      ...current,
-      lines: quantity > 0 ? buildProductCartLines(buudyMask, quantity) : [],
-    }));
+  function setQuantity(productId: string, quantity: number) {
+    setState((current) => {
+      const product = getProductById(productId);
+
+      if (!product) {
+        return current;
+      }
+
+      return {
+        ...current,
+        lines: upsertProductCartLines(current.lines, product, quantity),
+      };
+    });
   }
 
-  function removeProduct() {
+  function removeProduct(productId: string) {
     setState((current) => ({
       ...current,
-      lines: [],
+      lines: current.lines.filter((line) => line.productId !== productId),
     }));
   }
 
@@ -150,6 +169,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       ...state,
       isOpen,
       totals,
+      activePromoCodes,
       addProduct,
       setQuantity,
       removeProduct,
@@ -159,7 +179,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setGiftMessage: (message: string) =>
         setState((current) => ({ ...current, giftMessage: message })),
     }),
-    [isOpen, state, totals],
+    [activePromoCodes, isOpen, state, totals],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

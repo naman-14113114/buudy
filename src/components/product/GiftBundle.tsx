@@ -30,6 +30,7 @@ export function GiftBundle({ product }: { product: Product }) {
   const { addProduct } = useCart();
   const timer = useCountdown(15 * 60 - 1);
   const giftValue = product.gifts.reduce((total, gift) => total + gift.valueCents, 0);
+  const hasGifts = product.gifts.length > 0;
 
   return (
     <div>
@@ -43,9 +44,21 @@ export function GiftBundle({ product }: { product: Product }) {
       </div>
 
       <h1 className="buudy-display mt-5 text-[3rem] leading-[1.02] text-[var(--plum)] md:text-[4.5rem]">
-        Buudy LED <em className="buudy-italic">Mask</em>
+        {product.heroTitle} <em className="buudy-italic">{product.heroEmphasis}</em>
       </h1>
       <p className="buudy-copy mt-4 max-w-xl">{product.shortDescription}</p>
+
+      <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+        {product.highlights.map((highlight) => (
+          <li
+            className="flex items-start gap-2 text-sm leading-6 text-[var(--plum)]"
+            key={highlight}
+          >
+            <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[var(--gold)]" />
+            {highlight}
+          </li>
+        ))}
+      </ul>
 
       <div className="mt-7">
         <Price
@@ -68,7 +81,9 @@ export function GiftBundle({ product }: { product: Product }) {
             <p className="buudy-display mt-1 text-lg text-[var(--plum)]">In 4 days</p>
           </div>
           <div className="text-right">
-            <p className="buudy-eyebrow">Free gifts unlock in</p>
+            <p className="buudy-eyebrow">
+              {hasGifts ? "Free gifts unlock in" : "Order today"}
+            </p>
             <p className="buudy-mono mt-1 text-2xl text-[var(--plum)]">{timer}</p>
           </div>
         </div>
@@ -86,35 +101,54 @@ export function GiftBundle({ product }: { product: Product }) {
         Add to cart · {formatMoney(product.priceCents, product.currency)}
       </Button>
 
-      <section className="mt-8" id="free-gifts">
-        <div className="flex items-center justify-between gap-4">
-          <p className="buudy-eyebrow">+ Free gifts today</p>
-          <p className="buudy-mono text-[var(--gold)]">{formatMoney(giftValue)} value</p>
-        </div>
-        <div className="mt-4 grid grid-cols-3 gap-3">
-          {product.gifts.map((gift) => (
-            <div
-              className="rounded-xl border border-[rgba(58,31,61,.15)] bg-[var(--card)] p-3 text-center"
-              key={gift.id}
-            >
-              <p className="buudy-mono text-[var(--gold)]">Free</p>
-              <div className="relative mt-2 aspect-square overflow-hidden rounded-lg bg-[rgba(241,223,210,.5)]">
-                <Image
-                  alt={gift.name}
-                  className="object-contain p-2 mix-blend-multiply"
-                  fill
-                  sizes="120px"
-                  src={gift.image}
-                />
+      {hasGifts ? (
+        <section className="mt-8" id="free-gifts">
+          <div className="flex items-center justify-between gap-4">
+            <p className="buudy-eyebrow">+ Free gifts today</p>
+            <p className="buudy-mono text-[var(--gold)]">{formatMoney(giftValue)} value</p>
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-3">
+            {product.gifts.map((gift) => (
+              <div
+                className="rounded-xl border border-[rgba(58,31,61,.15)] bg-[var(--card)] p-3 text-center"
+                key={gift.id}
+              >
+                <p className="buudy-mono text-[var(--gold)]">Free</p>
+                <div className="relative mt-2 aspect-square overflow-hidden rounded-lg bg-[rgba(241,223,210,.5)]">
+                  <Image
+                    alt={gift.name}
+                    className="object-contain p-2 mix-blend-multiply"
+                    fill
+                    sizes="120px"
+                    src={gift.image}
+                  />
+                </div>
+                <p className="buudy-display mt-2 text-lg text-[var(--plum)]">
+                  {formatMoney(gift.valueCents)}
+                </p>
+                <p className="text-[0.7rem] leading-4 text-[var(--muted)]">
+                  {gift.name}
+                </p>
               </div>
-              <p className="buudy-display mt-2 text-lg text-[var(--plum)]">
-                {formatMoney(gift.valueCents)}
-              </p>
-              <p className="text-[0.7rem] leading-4 text-[var(--muted)]">{gift.name}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section
+          className="mt-8 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[var(--card)] p-5"
+          id="torch-offer"
+        >
+          <p className="buudy-eyebrow">{product.promoLabel}</p>
+          <p className="buudy-display mt-2 text-2xl text-[var(--plum)]">
+            60% off, free shipping, and a rechargeable wellness kit.
+          </p>
+          <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+            Includes the torch, rechargeable battery, charger, USB cable,
+            glasses, and user manual for a complete targeted light therapy
+            routine.
+          </p>
+        </section>
+      )}
 
       <div className="mt-8 flex flex-wrap gap-3 border-t border-[var(--border)] pt-6">
         {product.badges.map((badge, index) => (
