@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+:root {
+  --plum: oklch(29% 0.071 322);
+  --plum-soft: oklch(46% 0.083 326);
+  --gold: oklch(66% 0.088 86);
+  --cream: oklch(95% 0.018 75);
+  --blush: oklch(89% 0.032 52);
+  --ink: oklch(17% 0.03 318);
+  --card: oklch(97% 0.014 75);
+  --border: oklch(83% 0.026 64);
+  --muted: oklch(48% 0.037 315);
+  --success: oklch(59% 0.14 151);
+  --background: var(--cream);
+  --foreground: var(--plum);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--cream);
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, oklch(82% 0.058 38 / 0.38), transparent 34rem),
+    var(--cream);
+  color: var(--foreground);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background: oklch(66% 0.088 86 / 0.35);
+  color: var(--plum);
+}
+
+.buudy-wrap {
+  width: min(100% - 32px, 1180px);
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .buudy-wrap {
+    width: min(100% - 80px, 1180px);
+  }
+}
+
+.buudy-section {
+  position: relative;
+  overflow: clip;
+}
+
+.buudy-display {
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+}
+
+.buudy-mono {
+  font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.69rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.buudy-italic {
+  font-style: italic;
+  font-weight: 340;
+}
+
+.buudy-eyebrow {
+  font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.buudy-heading {
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  color: var(--plum);
+  font-size: clamp(2.5rem, 6vw, 4.7rem);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.buudy-copy {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.buudy-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(110px);
+  opacity: 0.22;
+}
+
+.buudy-marquee {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  gap: 2rem;
+  animation: buudy-marquee 32s linear infinite;
+}
+
+.buudy-marquee:hover {
+  animation-play-state: paused;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes buudy-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes buudy-ping {
+  75%,
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
