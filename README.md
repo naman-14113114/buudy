@@ -64,11 +64,18 @@ plan. Create a Web3Forms access key for the email inbox, then add it locally and
 in Vercel:
 
 ```bash
-NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your-web3forms-access-key
+WEB3FORMS_ACCESS_KEY=your-web3forms-access-key
 ```
 
-`src/app/api/contact/route.ts` remains as a graceful fallback, but Web3Forms free
-accounts reject server-side proxy submissions.
+The browser loads that key at runtime through `src/app/api/contact/config/route.ts`,
+so the same deployment works on `buudy-zeta.vercel.app`, `us.buudy.com`, or a
+future domain without changing code. The submitted payload also records the
+actual `window.location.href` as `source_url`.
+
+`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` is still supported as an optional build-time
+shortcut, but `WEB3FORMS_ACCESS_KEY` is preferred on Vercel. The legacy
+`src/app/api/contact/route.ts` remains as a graceful fallback for validation,
+but Web3Forms free accounts reject server-side proxy submissions.
 
 ## Assets
 
@@ -99,4 +106,4 @@ Recommended production settings:
 - Install command: `npm install`
 - Output directory: leave empty for Next.js
 - Environment variable: `NEXT_PUBLIC_CHECKOUT_URL` when available
-- Environment variable: `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` for the contact form
+- Environment variable: `WEB3FORMS_ACCESS_KEY` for the contact form

@@ -9,6 +9,9 @@ type ContactPayload = {
   subject?: unknown;
   message?: unknown;
   botcheck?: unknown;
+  sourceOrigin?: unknown;
+  sourcePath?: unknown;
+  sourceUrl?: unknown;
 };
 
 const web3FormsEndpoint = "https://api.web3forms.com/submit";
@@ -61,6 +64,9 @@ export async function POST(request: Request) {
   const phone = getValue(payload.phone);
   const subject = getValue(payload.subject);
   const message = getValue(payload.message);
+  const sourceOrigin = getValue(payload.sourceOrigin);
+  const sourcePath = getValue(payload.sourcePath) || "/pages/contact-us";
+  const sourceUrl = getValue(payload.sourceUrl) || sourcePath;
 
   if (!firstName || !lastName || !email || !message) {
     return jsonResponse(
@@ -127,7 +133,9 @@ export async function POST(request: Request) {
         phone,
         inquiry_subject: subject,
         message,
-        page: "/pages/contact-us",
+        page: sourcePath,
+        source_url: sourceUrl,
+        source_origin: sourceOrigin,
         submitted_at: new Date().toISOString(),
         public_support_email: publicSupportEmail,
         notification_recipient: contactRecipientEmail,

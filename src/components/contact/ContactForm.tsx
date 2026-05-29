@@ -11,6 +11,11 @@ type FormState = {
   mailtoHref?: string;
 };
 
+type ContactConfig = {
+  accessKey: string;
+  endpoint: string;
+};
+
 const initialState: FormState = {
   status: "idle",
   message: "",
@@ -19,6 +24,9 @@ const initialState: FormState = {
 const inputClasses =
   "mt-2 min-h-12 w-full rounded-xl border border-[var(--border)] bg-[rgba(247,241,232,.72)] px-4 text-sm text-[var(--plum)] outline-none transition placeholder:text-[rgba(78,55,78,.48)] focus:border-[var(--gold)] focus:bg-[var(--cream)] focus:ring-4 focus:ring-[rgba(183,141,72,.12)]";
 const web3FormsEndpoint = "https://api.web3forms.com/submit";
+const contactConfigEndpoint = "/api/contact/config";
+
+let contactConfigPromise: Promise<ContactConfig> | null = null;
 
 function buildMailto(formData: FormData) {
   const subject =
@@ -38,7 +46,80 @@ function buildMailto(formData: FormData) {
   )}&body=${encodeURIComponent(body)}`;
 }
 
-function buildWeb3FormsData(formData: FormData, accessKey: string) {
+async function getContactConfig() {
+  const bundledAccessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
+
+  contactConfigPromise ??= fetch(contactConfigEndpoint, {
+    cache: "no-store",
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then(async (response) => {
+      const result = (await response.json().catch(() => null)) as
+        | {
+            success?: boolean;
+            accessKey?: string;
+            endpoint?: string;
+            message?: string;
+          }
+        | null;
+
+      if (!response.ok || !result?.success || !result.accessKey) {
+        if (bundledAccessKey) {
+          return {
+            accessKey: bundledAccessKey,
+            endpoint: web3FormsEndpoint,
+          };
+        }
+
+        throw new Error(
+          result?.message ||
+            "The contact form is not configured yet. Please use the email fallback below.",
+        );
+      }
+
+      return {
+        accessKey: result.accessKey,
+        endpoint: result.endpoint || web3FormsEndpoint,
+      };
+    })
+    .catch((error) => {
+      contactConfigPromise = null;
+      if (bundledAccessKey) {
+        return {
+          accessKey: bundledAccessKey,
+          endpoint: web3FormsEndpoint,
+        };
+      }
+
+      throw error;
+    });
+
+  return contactConfigPromise;
+}
+
+function getSourceMeta() {
+  if (typeof window === "undefined") {
+    return {
+      sourceOrigin: "",
+      sourcePath: "/pages/contact-us",
+      sourceUrl: "/pages/contact-us",
+    };
+  }
+
+  return {
+    sourceOrigin: window.location.origin,
+    sourcePath: `${window.location.pathname}${window.location.search}`,
+    sourceUrl: window.location.href,
+  };
+}
+
+function buildWeb3FormsData(
+  formData: FormData,
+  accessKey: string,
+  sourceMeta: ReturnType<typeof getSourceMeta>,
+) {
   const web3FormsData = new FormData();
   const firstName = formData.get("firstName")?.toString().trim() || "";
   const lastName = formData.get("lastName")?.toString().trim() || "";
@@ -58,7 +139,9 @@ function buildWeb3FormsData(formData: FormData, accessKey: string) {
   web3FormsData.set("name", `${firstName} ${lastName}`.trim());
   web3FormsData.set("email", email);
   web3FormsData.set("replyto", email);
-  web3FormsData.set("page", "/pages/contact-us");
+  web3FormsData.set("page", sourceMeta.sourcePath);
+  web3FormsData.set("source_url", sourceMeta.sourceUrl);
+  web3FormsData.set("source_origin", sourceMeta.sourceOrigin);
   web3FormsData.set("submitted_at", new Date().toISOString());
 
   return web3FormsData;
@@ -107,29 +190,17 @@ export function ContactForm() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const payload = Object.fromEntries(formData);
+    const sourceMeta = getSourceMeta();
     const mailtoHref = buildMailto(formData);
 
     setState({ status: "submitting", message: "" });
 
     try {
-      const publicAccessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-      const endpoint = publicAccessKey ? web3FormsEndpoint : "/api/contact";
-      const requestInit = publicAccessKey
-        ? {
-            method: "POST",
-            body: buildWeb3FormsData(formData, publicAccessKey),
-          }
-        : {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify(payload),
-          };
-
-      const response = await fetch(endpoint, requestInit);
+      const config = await getContactConfig();
+      const response = await fetch(config.endpoint, {
+        method: "POST",
+        body: buildWeb3FormsData(formData, config.accessKey, sourceMeta),
+      });
       const result = (await response.json()) as {
         success?: boolean;
         message?: string;
@@ -157,11 +228,15 @@ export function ContactForm() {
           result.message ||
           "Thanks for contacting us. We will get back to you as soon as possible.",
       });
-    } catch {
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "We could not send your message right now. Please use the email fallback below.";
+
       setState({
         status: "error",
-        message:
-          "We could not send your message right now. Please use the email fallback below.",
+        message: errorMessage,
         mailtoHref,
       });
     }
