@@ -1,23 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Lock } from "lucide-react";
-import { getCheckoutUrl } from "@/lib/checkout";
+import { ArrowRight } from "lucide-react";
 import { formatMoney } from "@/lib/money";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
 
 type CartSummaryProps = {
-  action?: "cart" | "checkout";
+  action?: "cart" | "summary";
 };
 
-export function CartSummary({ action = "checkout" }: CartSummaryProps) {
+export function CartSummary({ action = "summary" }: CartSummaryProps) {
   const { totals, closeCart } = useCart();
   const hasItems = totals.itemCount > 0;
-
-  function checkout() {
-    window.location.href = getCheckoutUrl();
-  }
 
   return (
     <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
@@ -62,12 +57,7 @@ export function CartSummary({ action = "checkout" }: CartSummaryProps) {
             <ArrowRight size={17} />
           </Link>
         </Button>
-      ) : (
-        <Button className="mt-5 w-full" disabled={!hasItems} onClick={checkout}>
-          <Lock size={17} />
-          Checkout securely
-        </Button>
-      )}
+      ) : null}
     </div>
   );
 }

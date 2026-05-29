@@ -45,16 +45,29 @@ data, then allowing `src/app/products/[slug]/page.tsx` to render it.
 
 The cart is handled in `src/components/cart/CartProvider.tsx` and persisted in
 the browser. It supports multiple product lines, product-specific gifts, editable
-quantities, gift messaging, promo summaries, and checkout routing isolated in
-`src/lib/checkout.ts`.
+quantities, gift messaging, promo summaries, and checkout recording.
 
-Set this environment variable on Vercel when the real checkout destination is ready:
+Checkout currently treats the checkout click as the v1 sale record. It validates
+customer details, recalculates totals on the server from product data, writes the
+order to Supabase, clears the local cart, and redirects to
+`/order-confirmation/[orderNumber]`.
+
+## Accounts, Orders, And Admin
+
+Customer accounts, profiles, order history, and the admin dashboard use Supabase
+Auth and Postgres. Apply the migration in `supabase/migrations/` and set these
+environment variables locally and in Vercel:
 
 ```bash
-NEXT_PUBLIC_CHECKOUT_URL=https://your-checkout-url.example
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+ADMIN_EMAILS=sahiljainsj004@gmail.com,support@buudy.com
 ```
 
-Until then, checkout falls back to `https://buudy.com/cart`.
+Protected customer routes are `/my-profile`, `/order-history`, and
+`/account-settings`. Admin routes are protected by `ADMIN_EMAILS` and start at
+`/admin`. Never expose `SUPABASE_SERVICE_ROLE_KEY` to client-side code.
 
 ## Contact Form
 
@@ -105,5 +118,6 @@ Recommended production settings:
 - Build command: `npm run build`
 - Install command: `npm install`
 - Output directory: leave empty for Next.js
-- Environment variable: `NEXT_PUBLIC_CHECKOUT_URL` when available
 - Environment variable: `WEB3FORMS_ACCESS_KEY` for the contact form
+- Supabase env variables listed above for accounts, orders, checkout recording,
+  and admin dashboard

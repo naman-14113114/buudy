@@ -6,10 +6,15 @@ import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
 import { CartLineItem } from "./CartLineItem";
 import { CartSummary } from "./CartSummary";
+import { CheckoutForm, type CheckoutCustomer } from "./CheckoutForm";
 import { FreeGiftsPanel } from "./FreeGiftsPanel";
 import { PromoCodeBox } from "./PromoCodeBox";
 
-export function CartPageContent() {
+export function CartPageContent({
+  initialCustomer,
+}: {
+  initialCustomer: CheckoutCustomer;
+}) {
   const { lines, totals, giftMessage, setGiftMessage } = useCart();
   const hasItems = totals.itemCount > 0;
 
@@ -74,6 +79,7 @@ export function CartPageContent() {
               />
             </div>
             <CartSummary />
+            <CheckoutForm initialCustomer={initialCustomer} />
           </aside>
         </div>
       </div>
