@@ -1,7 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import {
+  ChevronDown,
+  Ruler,
+  Lightbulb,
+  Palette,
+  Battery,
+  Smile,
+  Zap,
+  Sun,
+} from "lucide-react";
 import type { Product } from "@/data/products";
 import type { ReactNode } from "react";
 
@@ -11,6 +20,19 @@ type AccordionItem = {
   title: string;
   content: ReactNode;
 };
+
+function getSpecIcon(label: string) {
+  const normLabel = label.toLowerCase();
+  if (normLabel.includes("dimension")) return Ruler;
+  if (normLabel.includes("led")) return Lightbulb;
+  if (normLabel.includes("color")) return Palette;
+  if (normLabel.includes("battery")) return Battery;
+  if (normLabel.includes("use")) return Smile;
+  if (normLabel.includes("power")) return Zap;
+  if (normLabel.includes("irradiance") || normLabel.includes("wavelength")) return Sun;
+  if (normLabel.includes("voltage")) return Zap;
+  return Zap;
+}
 
 function AccordionPanel({
   item,
@@ -69,14 +91,22 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
       title: "The numbers, in detail",
       content: (
         <dl className="grid gap-3">
-          {product.specs.map((spec) => (
-            <div className="grid grid-cols-[1fr_auto] gap-4" key={spec.label}>
-              <dt className="buudy-mono text-[var(--muted)]">{spec.label}</dt>
-              <dd className="text-right text-sm font-semibold leading-5 text-[var(--plum)]">
-                {spec.value}
-              </dd>
-            </div>
-          ))}
+          {product.specs.map((spec) => {
+            const Icon = getSpecIcon(spec.label);
+            return (
+              <div className="grid grid-cols-[1fr_auto] gap-4 items-center" key={spec.label}>
+                <dt className="flex items-center gap-2">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[var(--gold)]">
+                    <Icon size={15} strokeWidth={2} />
+                  </span>
+                  <span className="buudy-mono text-[var(--muted)]">{spec.label}</span>
+                </dt>
+                <dd className="text-right text-sm font-semibold leading-5 text-[var(--plum)]">
+                  {spec.value}
+                </dd>
+              </div>
+            );
+          })}
         </dl>
       ),
     },

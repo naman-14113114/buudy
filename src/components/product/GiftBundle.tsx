@@ -130,12 +130,12 @@ export function GiftBundle({ product }: { product: Product }) {
         </span>
       </div>
 
-      <h1 className="buudy-display mt-5 whitespace-nowrap text-[2rem] leading-[1.02] text-[var(--plum)] sm:text-[2.55rem] md:text-[3.25rem] xl:text-[4rem] 2xl:text-[4.45rem]">
+      <h1 className="font-playfair mt-5 whitespace-nowrap text-[2rem] leading-[1.02] text-[var(--plum)] sm:text-[2.55rem] md:text-[3.25rem] xl:text-[4rem] 2xl:text-[4.45rem]">
         {product.heroTitle}{" "}
-        <em className="buudy-italic text-[var(--gold)]">{product.heroEmphasis}</em>
+        <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
       </h1>
 
-      <ul className="mt-4 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+      {/* <ul className="mt-4 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
         {heroBullets.map(({ icon: Icon, text }) => (
           <li
             className="flex items-center gap-2 text-sm font-medium leading-tight text-[var(--plum)]"
@@ -147,7 +147,7 @@ export function GiftBundle({ product }: { product: Product }) {
             <span>{text}</span>
           </li>
         ))}
-      </ul>
+      </ul> */}
 
       <div className="mt-7 flex flex-col gap-2.5">
         <Price
@@ -251,9 +251,9 @@ export function GiftBundle({ product }: { product: Product }) {
                 className="relative rounded-[24px] border border-[rgba(58,31,61,.18)] bg-[var(--card)] p-3 pt-6 text-center flex flex-col justify-between shadow-sm min-h-[220px]"
                 key={gift.id}
               >
-                {/* Absolute Overlapping Badge: FREE + Original Price Strikethrough */}
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-2.5 py-1 bg-[rgba(247,241,232,0.98)] border border-[rgba(58,31,61,.18)] rounded-full flex items-center gap-1.5 shadow-sm whitespace-nowrap">
-                  <span className="bg-[var(--ink)] text-[var(--cream)] px-1.5 py-0.5 rounded-full text-[8px] font-extrabold buudy-mono tracking-wider leading-none">
+                {/* Single absolute overlapping badge: FREE (bold & clear) + price strikethrough (no nested container) */}
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-[var(--card)] border border-[rgba(58,31,61,.22)] rounded-full flex items-center gap-1.5 shadow-[0_2px_8px_rgba(58,31,61,0.06)] whitespace-nowrap">
+                  <span className="text-black text-xs font-black tracking-widest uppercase buudy-mono">
                     FREE
                   </span>
                   <span className="line-through text-[10px] text-[var(--muted)] buudy-mono leading-none">

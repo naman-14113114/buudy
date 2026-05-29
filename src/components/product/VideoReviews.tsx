@@ -189,10 +189,10 @@ export function VideoReviews() {
       <div className="buudy-wrap">
         <SectionHeading
           align="center"
-          eyebrow="Real Customers"
+          eyebrow="§ Real Customers"
           title={
             <>
-              Buudy Mask <em className="buudy-italic">reviews</em> & real results
+              Buudy Mask <span className="buudy-italic text-[var(--gold)]">reviews</span> <span className="font-playfair italic text-[var(--plum)]">&</span> real results
             </>
           }
         />

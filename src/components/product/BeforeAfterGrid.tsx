@@ -139,7 +139,7 @@ export function BeforeAfterGrid() {
               data-story-card
               key={`${story.id}-${index}`}
             >
-              <div className="relative aspect-[4/5] overflow-hidden bg-[var(--blush)]">
+              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--blush)]">
                 <Image
                   alt={story.concern}
                   className="object-cover"
