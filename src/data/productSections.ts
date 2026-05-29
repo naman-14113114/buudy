@@ -532,7 +532,7 @@ export const torchFaqs: FAQItem[] = [
 
 export const expertVideo = {
   poster: productAsset("dermatologist-video-poster.png"),
-  src: "https://res.cloudinary.com/dzurujbwh/video/upload/v1778069326/Untitled_video_-_Made_with_Clipchamp_5_zbxbso.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9jNmYyYzVlYi00ZTNjLTQxNTgtOGZlNS1iNTE1MWNmMmRjZDQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJCdXVkeSBMRUQgbWFzayBJbWFnZXMvMS1iLm1wNCIsImlhdCI6MTc3NTM5MzE4NiwiZXhwIjoxODA2OTI5MTg2fQ.pdE4pHngDME_BBlYIlVSfW7tuIzE-WNHBOs0vtRvZaE",
+  src: productMediaAsset("Buudy Dermatologists Video.webm", "buudy-led-mask", "videos"),
 };
 
 export const comparison = {

@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { reviewVideos, type ReviewVideo } from "@/data/productSections";
 import { productMediaAsset } from "@/lib/media";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+
+const loopedVideos = [...reviewVideos, ...reviewVideos, ...reviewVideos];
 
 function ReviewVideoCard({
   index,
@@ -90,24 +92,97 @@ function ReviewVideoCard({
 
 export function VideoReviews() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
-  function scroll(direction: -1 | 1) {
+  const getStep = useCallback(() => {
     const track = trackRef.current;
+    const card = track?.querySelector<HTMLElement>("article");
+
+    if (!track || !card) {
+      return 180;
+    }
+
+    const styles = window.getComputedStyle(track);
+    const rawGap = styles.columnGap === "normal" ? styles.gap : styles.columnGap;
+    const gap = Number.parseFloat(rawGap) || 0;
+
+    return card.getBoundingClientRect().width + gap;
+  }, []);
+
+  const normalizeScroll = useCallback(() => {
+    const track = trackRef.current;
+
     if (!track) {
       return;
     }
 
-    const distance = track.clientWidth * 0.8;
-    const max = track.scrollWidth - track.clientWidth;
-    const target =
-      direction === 1 && track.scrollLeft >= max - 10
-        ? 0
-        : direction === -1 && track.scrollLeft <= 10
-          ? max
-          : track.scrollLeft + distance * direction;
+    const segmentWidth = track.scrollWidth / 3;
+    const step = getStep();
 
-    track.scrollTo({ left: target, behavior: "smooth" });
-  }
+    if (segmentWidth <= 0) {
+      return;
+    }
+
+    if (track.scrollLeft >= segmentWidth * 2 - step * 2) {
+      track.scrollLeft -= segmentWidth;
+    }
+
+    if (track.scrollLeft <= step) {
+      track.scrollLeft += segmentWidth;
+    }
+  }, [getStep]);
+
+  const scrollVideos = useCallback(
+    (direction: -1 | 1) => {
+      const track = trackRef.current;
+
+      if (!track) {
+        return;
+      }
+
+      track.scrollBy({
+        behavior: "smooth",
+        left: getStep() * direction,
+      });
+
+      window.setTimeout(normalizeScroll, 520);
+    },
+    [getStep, normalizeScroll],
+  );
+
+  useEffect(() => {
+    const track = trackRef.current;
+
+    if (!track) {
+      return;
+    }
+
+    const setMiddleSegment = () => {
+      track.scrollLeft = track.scrollWidth / 3;
+    };
+
+    const frame = window.requestAnimationFrame(setMiddleSegment);
+    window.addEventListener("resize", setMiddleSegment);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", setMiddleSegment);
+    };
+  }, []);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (isPaused || prefersReducedMotion) {
+      return;
+    }
+
+    const interval = window.setInterval(() => scrollVideos(1), 3200);
+
+    return () => window.clearInterval(interval);
+  }, [isPaused, scrollVideos]);
 
   return (
     <section className="buudy-section bg-[rgba(241,223,210,.3)] py-20">
@@ -123,32 +198,44 @@ export function VideoReviews() {
         />
 
         <div
-          className="no-scrollbar mt-10 flex snap-x gap-4 overflow-x-auto pb-3"
-          ref={trackRef}
+          className="relative"
+          onFocusCapture={() => setIsPaused(true)}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
-          {reviewVideos.map((video, index) => (
-            <ReviewVideoCard index={index} key={video.id} video={video} />
-          ))}
-        </div>
+          <div
+            className="no-scrollbar mt-10 flex snap-x gap-4 overflow-x-auto scroll-smooth pb-3 px-4 md:px-10"
+            onScroll={normalizeScroll}
+            ref={trackRef}
+          >
+            {loopedVideos.map((video, index) => (
+              <ReviewVideoCard
+                index={index}
+                key={`${video.id}-${index}`}
+                video={video}
+              />
+            ))}
+          </div>
 
-        <div className="mt-7 flex items-center justify-center gap-5">
-          <button
-            aria-label="Previous video reviews"
-            className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.3)] text-[var(--plum)] transition hover:bg-[var(--plum)] hover:text-[var(--cream)]"
-            onClick={() => scroll(-1)}
-            type="button"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <span className="buudy-mono text-[var(--plum)]">video reviews</span>
-          <button
-            aria-label="Next video reviews"
-            className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.3)] text-[var(--plum)] transition hover:bg-[var(--plum)] hover:text-[var(--cream)]"
-            onClick={() => scroll(1)}
-            type="button"
-          >
-            <ChevronRight size={20} />
-          </button>
+          <div className="mt-7 flex items-center justify-center gap-5">
+            <button
+              aria-label="Previous video reviews"
+              className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.3)] text-[var(--plum)] transition hover:bg-[var(--plum)] hover:text-[var(--cream)]"
+              onClick={() => scrollVideos(-1)}
+              type="button"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <span className="buudy-mono text-[var(--plum)]">video reviews</span>
+            <button
+              aria-label="Next video reviews"
+              className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.3)] text-[var(--plum)] transition hover:bg-[var(--plum)] hover:text-[var(--cream)]"
+              onClick={() => scrollVideos(1)}
+              type="button"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
         </div>
       </div>
     </section>

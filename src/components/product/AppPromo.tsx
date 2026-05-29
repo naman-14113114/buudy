@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Play, Sparkles } from "lucide-react";
 import { touchTech } from "@/data/productSections";
-import { productAsset } from "@/lib/media";
+import { productAsset, productMediaAsset } from "@/lib/media";
 import { Button } from "@/components/ui/Button";
 
 export function RitualSection() {
@@ -77,13 +77,15 @@ export function TouchTechSection() {
           </ul>
         </div>
         <div className="relative aspect-square overflow-hidden rounded-[18px] bg-[var(--ink)]">
-          <Image
-            alt="Buudy tap technology"
-            className="object-cover"
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            src={productAsset("07-buudy-led-mask-controller.webp")}
-          />
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src={productMediaAsset("7 colors muted.mp4", "buudy-led-mask", "videos")} type="video/mp4" />
+          </video>
           <div className="absolute bottom-6 right-6 rounded-2xl bg-[rgba(247,241,232,.94)] p-4 text-[var(--plum)] backdrop-blur">
             <p className="buudy-mono">Tap to cycle</p>
             <p className="buudy-display mt-1 text-xl">7 modes · 1 gesture</p>
@@ -97,14 +99,15 @@ export function TouchTechSection() {
 export function AppPromo() {
   return (
     <section className="buudy-section bg-[var(--cream)] py-24" id="buudy-ai">
-      <div className="buudy-wrap grid items-center gap-12 lg:grid-cols-[1fr_1.2fr]">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[18px] bg-[var(--blush)]">
+      <div className="buudy-wrap grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
+        <div className="relative overflow-hidden rounded-[18px] bg-[var(--blush)] w-full">
           <Image
             alt="Buudy AI companion app"
-            className="object-cover"
-            fill
-            sizes="(min-width: 1024px) 44vw, 100vw"
-            src={productAsset("09-buudy-led-mask-home-spa.webp")}
+            className="w-full h-auto block"
+            width={1200}
+            height={799}
+            sizes="(min-width: 1024px) 55vw, 100vw"
+            src={productMediaAsset("app_pic.png")}
           />
           <span className="buudy-mono absolute left-5 top-5 rounded-full bg-[rgba(247,241,232,.9)] px-4 py-2 text-[var(--plum)] backdrop-blur">
             Free with Buudy
@@ -112,28 +115,30 @@ export function AppPromo() {
         </div>
         <div>
           <p className="buudy-eyebrow">Companion App</p>
-          <h2 className="buudy-display mt-3 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl">
-            Free access to <em className="buudy-italic">Buudy AI</em>.
+          <h2 className="buudy-display mt-2 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl">
+            Buudy <em className="buudy-italic">AI App</em>.
           </h2>
-          <p className="buudy-copy mt-5">
+          <p className="buudy-copy mt-3 text-sm leading-6">
             Buudy Glow Coach is the AI Skincare app for Buudy LED Mask
             customers. It helps customers plan, time, and track their
             personalized LED mask sessions using the seven color modes available
             on the mask.
           </p>
-          <div className="mt-8 grid grid-cols-3 gap-3">
+          <div className="mt-4 grid grid-cols-3 gap-2">
             {["Plan", "Time", "Track"].map((step) => (
               <div
-                className="rounded-xl border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-4 py-5 text-center"
+                className="rounded-lg border border-[rgba(58,31,61,.12)] bg-[var(--card)] px-3 py-2 text-center"
                 key={step}
               >
-                <p className="buudy-display text-2xl text-[var(--plum)]">{step}</p>
+                <p className="buudy-mono text-[var(--plum)] font-semibold">{step}</p>
               </div>
             ))}
           </div>
-          <Button className="mt-8">
-            <Sparkles size={17} />
-            Try the app now
+          <Button className="mt-5" asChild>
+            <a href="https://app.buudy.com" target="_blank" rel="noopener noreferrer">
+              <Sparkles size={17} />
+              Try the app now
+            </a>
           </Button>
         </div>
       </div>

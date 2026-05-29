@@ -1,5 +1,5 @@
 import type { Product } from "@/data/products";
-import { AppPromo, BlueLightSection, RitualSection, TouchTechSection } from "./AppPromo";
+import { AppPromo, BlueLightSection, TouchTechSection } from "./AppPromo";
 import { BeforeAfterGrid } from "./BeforeAfterGrid";
 import { ComparisonTable } from "./ComparisonTable";
 import { ExpertSection } from "./ExpertSection";
@@ -25,7 +25,6 @@ export function ProductPage({ product }: { product: Product }) {
       <BeforeAfterGrid />
       <WavelengthSelector />
       <ExpertSection />
-      <RitualSection />
       <ComparisonTable />
       <TouchTechSection />
       <AppPromo />

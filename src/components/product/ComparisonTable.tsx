@@ -1,66 +1,349 @@
-import { comparison } from "@/data/productSections";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import React from "react";
+import { productMediaAsset } from "@/lib/media";
+
+function CheckIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      className="w-5 h-5 text-[#008763]"
+    >
+      <circle cx="10" cy="10" r="9.375" stroke="currentColor" strokeWidth="1.25" />
+      <path
+        d="M5.55469 10L8.88802 13.3333L15 7.22217"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CrossIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      className="w-5 h-5 text-[#c2bcb1]"
+    >
+      <circle cx="10" cy="10" r="9.375" stroke="currentColor" strokeWidth="1.25" />
+      <path
+        d="M6.5 6.5L13.5 13.5M13.5 6.5L6.5 13.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+type BrandValues = [React.ReactNode, React.ReactNode, React.ReactNode, React.ReactNode];
+
+interface ComparisonRowProps {
+  title: string;
+  subtitle?: string;
+  values: BrandValues;
+  isLast?: boolean;
+}
+
+function ComparisonRow({ title, subtitle, values, isLast = false }: ComparisonRowProps) {
+  return (
+    <div className={`border-b border-[rgba(194,188,177,0.4)] ${isLast ? "border-0" : ""}`}>
+      <div className="flex flex-col md:flex-row md:items-stretch">
+        {/* Feature Info */}
+        <div className="w-full md:w-1/3 pr-4 py-2.5 md:py-3.5 flex flex-col justify-center">
+          <p className="font-semibold text-[var(--plum)] text-base md:text-lg leading-tight">
+            {title}
+          </p>
+          {subtitle && (
+            <p className="text-[var(--success)] text-xs md:text-sm font-medium italic mt-0.5 leading-tight">
+              {subtitle}
+            </p>
+          )}
+        </div>
+
+        {/* Brand Values */}
+        <div className="w-full md:w-2/3">
+          <div className="flex h-full items-stretch">
+            {values.map((val, idx) => (
+              <div
+                key={idx}
+                className={`w-1/4 py-2.5 md:py-3.5 flex items-center justify-center text-center px-2 min-h-[48px] ${
+                  idx === 0
+                    ? `bg-[rgba(58,31,61,0.05)] font-semibold text-[var(--plum)] ${isLast ? "rounded-b-2xl" : ""}`
+                    : "text-[var(--muted)]"
+                }`}
+              >
+                {val}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface ColorRowProps {
+  colorName: string;
+  colorCode: string;
+  description: string;
+  values: BrandValues;
+  borderBottom?: boolean;
+}
+
+function ColorRow({ colorName, colorCode, description, values, borderBottom = false }: ColorRowProps) {
+  return (
+    <div className={`${borderBottom ? "border-b border-[rgba(194,188,177,0.4)]" : ""}`}>
+      <div className="flex flex-col md:flex-row md:items-stretch">
+        {/* Color Badge & Info */}
+        <div className="w-full md:w-1/3 pr-4 py-2 md:py-2.5 flex items-center">
+          <div className="flex items-center gap-2">
+            <span
+              className="inline-flex items-center justify-center font-bold text-[10px] uppercase text-white rounded-lg h-[17px] w-[81px] tracking-wider shrink-0"
+              style={{ backgroundColor: colorCode }}
+            >
+              {colorName}
+            </span>
+            <span className="text-[var(--plum)] text-sm md:text-base font-normal">
+              {description}
+            </span>
+          </div>
+        </div>
+
+        {/* Brand Values */}
+        <div className="w-full md:w-2/3">
+          <div className="flex h-full items-stretch">
+            {values.map((val, idx) => (
+              <div
+                key={idx}
+                className={`w-1/4 py-2 md:py-2.5 flex items-center justify-center text-center px-2 min-h-[42px] ${
+                  idx === 0
+                    ? "bg-[rgba(58,31,61,0.05)] font-semibold text-[var(--plum)]"
+                    : "text-[var(--muted)]"
+                }`}
+              >
+                {val}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function ComparisonTable() {
   return (
     <section className="buudy-section bg-[var(--cream)] py-24">
-      <div className="buudy-wrap">
-        <SectionHeading
-          eyebrow="Compared"
-          title={
-            <>
-              Why Buudy is <em className="buudy-italic">right for you</em>.
-            </>
-          }
-          copy={comparison.intro}
-        />
+      <div className="buudy-wrap max-w-[1144px]">
+        {/* Section Header */}
+        <div className="text-center mb-12 px-4">
+          <h2 className="buudy-heading hidden md:block pb-2">
+            What makes Buudy right for you?
+          </h2>
+          <h2 className="buudy-heading block md:hidden pb-2 text-[2.2rem]">
+            Why is Buudy is right for you?
+          </h2>
+          <h3 className="buudy-display text-xl md:text-2xl text-[var(--plum-soft)] italic mt-3">
+            (Here is a comparison, but there is really no comparison)
+          </h3>
+        </div>
 
-        <div className="mt-12 overflow-x-auto rounded-[18px] border border-[var(--border)] bg-[var(--card)]">
-          <table className="w-full min-w-[760px] border-collapse text-left">
-            <thead>
-              <tr className="border-b border-[var(--border)] bg-[rgba(241,223,210,.42)]">
-                <th className="buudy-mono p-5 text-[var(--plum)]">Feature</th>
-                {comparison.columns.map((column) => (
-                  <th
-                    className={`p-5 ${
-                      column.featured
-                        ? "bg-[var(--plum)] text-[var(--cream)]"
-                        : "text-[var(--plum)]"
-                    }`}
-                    key={column.label}
-                  >
-                    <p className="buudy-display text-2xl">{column.label}</p>
-                    <p
-                      className={`buudy-mono mt-1 ${
-                        column.featured ? "text-[var(--gold)]" : "text-[var(--muted)]"
-                      }`}
-                    >
-                      {column.price}
-                    </p>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {comparison.rows.map((row) => (
-                <tr className="border-b border-[var(--border)] last:border-0" key={row[0]}>
-                  <td className="buudy-display p-5 text-[var(--plum)]">{row[0]}</td>
-                  {row.slice(1).map((cell, index) => (
-                    <td
-                      className={`p-5 text-sm ${
-                        index === 0
-                          ? "bg-[rgba(58,31,61,.05)] font-semibold text-[var(--plum)]"
-                          : "text-[var(--muted)]"
-                      }`}
-                      key={`${row[0]}-${index}`}
-                    >
-                      {cell}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="mt-12 flex flex-col">
+          {/* Header Comp Row */}
+          <div className="border-0">
+            <div className="flex flex-col md:flex-row md:items-stretch">
+              <div className="hidden md:block md:w-1/3"></div>
+              <div className="w-full md:w-2/3">
+                <div className="flex items-stretch">
+                  <div className="w-1/4 flex justify-center bg-[rgba(58,31,61,0.05)] rounded-t-2xl p-3">
+                    <img
+                      src="https://img.thesitebase.net/10650/10650730/themes/175579000979c2a2281d.png?width=640&height=0&min_height=0"
+                      alt="Buudy Logo"
+                      className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
+                    />
+                  </div>
+                  <div className="w-1/4 flex justify-center p-3">
+                    <img
+                      src={productMediaAsset("shark_logo.png")}
+                      alt="Shark"
+                      className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
+                    />
+                  </div>
+                  <div className="w-1/4 flex justify-center p-3">
+                    <img
+                      src={productMediaAsset("current_body_logo.png")}
+                      alt="CurrentBody"
+                      className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
+                    />
+                  </div>
+                  <div className="w-1/4 flex justify-center p-3">
+                    <img
+                      src={productMediaAsset("59 (2).png")}
+                      alt="Dr Dennis Gross"
+                      className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Mask Images Row */}
+          <div className="border-b border-[rgba(194,188,177,0.4)]">
+            <div className="flex flex-col md:flex-row md:items-stretch">
+              <div className="hidden md:block md:w-1/3"></div>
+              <div className="w-full md:w-2/3">
+                <div className="flex items-stretch">
+                  <div className="w-1/4 flex justify-center bg-[rgba(58,31,61,0.05)] py-3 md:py-5 px-3 overflow-visible">
+                    <img
+                      src="https://i.postimg.cc/8cytzn6N/Chat-GPT-Image-May-3-2026-03-11-11-PM.png"
+                      alt="Buudy Mask"
+                      className="h-20 md:h-24 w-auto object-contain scale-[1.3] md:scale-[1.4] transform origin-center transition-transform"
+                    />
+                  </div>
+                  <div className="w-1/4 flex justify-center py-3 md:py-5 px-3">
+                    <img
+                      src="https://img.thesitebase.net/10650/10650730/themes/175900439737e42788a9.png?width=1920&height=0&min_height=0"
+                      alt="Shark Mask"
+                      className="h-20 md:h-24 w-auto object-contain"
+                    />
+                  </div>
+                  <div className="w-1/4 flex justify-center py-3 md:py-5 px-3">
+                    <img
+                      src={productMediaAsset("current Body.png")}
+                      alt="CurrentBody Mask"
+                      className="h-20 md:h-24 w-auto object-contain"
+                    />
+                  </div>
+                  <div className="w-1/4 flex justify-center py-3 md:py-5 px-3">
+                    <img
+                      src={productMediaAsset("Dr Dennis Gross.png")}
+                      alt="Dr Dennis Gross Mask"
+                      className="h-20 md:h-24 w-auto object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Features */}
+          <ComparisonRow
+            title="Portable"
+            subtitle="Hands-free, cordless and rechargeable"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+          />
+
+          <ComparisonRow
+            title="Light Colors"
+            subtitle="Each with specific skin benefits"
+            values={[
+              <strong key="1" className="font-bold text-xs md:text-sm text-[var(--plum)]">7 TOTAL</strong>,
+              <strong key="2" className="font-bold text-xs md:text-sm text-[var(--muted)]">3 TOTAL</strong>,
+              <strong key="3" className="font-bold text-xs md:text-sm text-[var(--muted)]">1 TOTAL</strong>,
+              <strong key="4" className="font-bold text-xs md:text-sm text-[var(--muted)]">3 TOTAL</strong>,
+            ]}
+          />
+
+          {/* Color Sub-rows */}
+          <ColorRow
+            colorName="Red"
+            colorCode="#F00202"
+            description="Anti-aging and Revitalization"
+            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CheckIcon key="4" />]}
+          />
+
+          <ColorRow
+            colorName="Blue"
+            colorCode="#0231F0"
+            description="Anti-acne Fighter"
+            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+          />
+
+          <ColorRow
+            colorName="Green"
+            colorCode="#05CF1D"
+            description="Reduces dark spots"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+          />
+
+          <ColorRow
+            colorName="Cyan"
+            colorCode="#02E1F0"
+            description="Reduces Swollen capillaries"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+          />
+
+          <ColorRow
+            colorName="Yellow"
+            colorCode="#F0E602"
+            description="Balances skin texture"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+          />
+
+          <ColorRow
+            colorName="Purple"
+            colorCode="#DE02F0"
+            description="Red and Blue in one"
+            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+          />
+
+          <ColorRow
+            colorName="White"
+            colorCode="#D2D2D2"
+            description="Speed up skin metabolism"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+            borderBottom={true}
+          />
+
+          <ComparisonRow
+            title="Neck Coverage"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+          />
+
+          <ComparisonRow
+            title="Customizable treatments"
+            subtitle="Hands-free, cordless and rechargeable"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+          />
+
+          <ComparisonRow
+            title="App companion"
+            subtitle="iPhone/Android"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+          />
+
+          <ComparisonRow
+            title="Treatment Time"
+            subtitle="Full Face + Neck"
+            values={[
+              <strong key="1" className="font-bold text-xs md:text-sm text-[var(--plum)]">3 MINS</strong>,
+              <strong key="2" className="font-bold text-xs md:text-sm text-[var(--muted)]">10 MINS</strong>,
+              <strong key="3" className="font-bold text-xs md:text-sm text-[var(--muted)]">10 MINS</strong>,
+              <strong key="4" className="font-bold text-xs md:text-sm text-[var(--muted)]">3 MINS</strong>,
+            ]}
+          />
+
+          <ComparisonRow
+            title="Price"
+            values={[
+              <span key="1" className="font-bold text-base md:text-lg text-[var(--plum)]">£179</span>,
+              <span key="2" className="text-base md:text-lg">£299</span>,
+              <span key="3" className="text-base md:text-lg">£399</span>,
+              <span key="4" className="text-base md:text-lg">£372</span>,
+            ]}
+            isLast={true}
+          />
         </div>
       </div>
     </section>
