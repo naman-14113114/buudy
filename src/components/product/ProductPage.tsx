@@ -7,6 +7,7 @@ import { FAQSection } from "./FAQSection";
 import { FeatureGrid } from "./FeatureGrid";
 import { GuaranteeSection } from "./GuaranteeSection";
 import { ProductHero } from "./ProductHero";
+import { ProductReviewsSection } from "./ProductReviewsSection";
 import { StickyAddToCart } from "./StickyAddToCart";
 import { TorchProductPage } from "./TorchProductPage";
 import { VideoReviews } from "./VideoReviews";
@@ -29,6 +30,7 @@ export function ProductPage({ product }: { product: Product }) {
       <TouchTechSection />
       <AppPromo />
       <BlueLightSection />
+      <ProductReviewsSection />
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
       <StickyAddToCart product={product} />

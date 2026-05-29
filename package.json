@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "normalize:reviews": "node scripts/normalize-reviews.mjs",
     "build": "next build",
     "sync:assets": "node scripts/sync-product-assets.mjs",
     "start": "next start",

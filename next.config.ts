@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "img.shopbase.com",
+      },
+      {
+        protocol: "https",
         hostname: "assets.thesitebase.net",
       },
       {
