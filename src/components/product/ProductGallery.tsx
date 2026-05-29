@@ -17,12 +17,17 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
 
   // 1. Handle opacity transition during image changes
   useEffect(() => {
-    setTransitionOpacity(0.5);
-    const timeout = setTimeout(() => {
+    const fadeTimeout = setTimeout(() => {
+      setTransitionOpacity(0.5);
+    }, 0);
+    const swapTimeout = setTimeout(() => {
       setDisplayIndex(currentIndex);
       setTransitionOpacity(1);
     }, 150);
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(fadeTimeout);
+      clearTimeout(swapTimeout);
+    };
   }, [currentIndex]);
 
   // 2. Navigation controls

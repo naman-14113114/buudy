@@ -1,4 +1,4 @@
-import { productAsset, productMediaAsset, type ProductImage } from "@/lib/media";
+import { productAsset, type ProductImage } from "@/lib/media";
 import { faqs, torchFaqs, torchWavelengths, type FAQItem, type Wavelength } from "./productSections";
 
 export type ProductGift = {

@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
+import { TawkToWidget } from "@/components/integrations/TawkToWidget";
 import "./globals.css";
 
 const inter = Inter({
@@ -63,6 +64,7 @@ export default function RootLayout({
           <Footer />
           <CartDrawer />
         </CartProvider>
+        <TawkToWidget />
       </body>
     </html>
   );
