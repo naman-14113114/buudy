@@ -9,7 +9,8 @@ export function FeatureGrid() {
           eyebrow="Why Buudy"
           title={
             <>
-              What makes our mask <em className="buudy-italic">unique</em>?
+              What makes our mask{" "}
+              <em className="buudy-italic text-[var(--gold)]">unique</em>?
             </>
           }
         />

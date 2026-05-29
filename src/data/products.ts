@@ -1,4 +1,4 @@
-import { productAsset, type ProductImage } from "@/lib/media";
+import { productAsset, productMediaAsset, type ProductImage } from "@/lib/media";
 import { faqs, torchFaqs, torchWavelengths, type FAQItem, type Wavelength } from "./productSections";
 
 export type ProductGift = {
@@ -108,6 +108,32 @@ export const buudyMask: Product = {
       src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
       alt: "Buudy LED Mask lifestyle use",
     },
+    {
+      src: productAsset("09-buudy-led-mask-home-spa.webp"),
+      alt: "Buudy LED Mask home spa",
+    },
+    /*
+    {
+      src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
+      alt: "Buudy LED Mask dermatologist recommended",
+    },
+    {
+      src: productAsset("11-buudy-led-mask-flexible-silicone.webp"),
+      alt: "Buudy LED Mask flexible silicone",
+    },
+    {
+      src: productAsset("13-buudy-led-mask-starter-kit.webp"),
+      alt: "Buudy LED Mask starter kit",
+    },
+    {
+      src: productAsset("14-buudy-led-mask-award-2026.webp"),
+      alt: "Buudy LED Mask award 2026",
+    },
+    {
+      src: productAsset("15-buudy-led-mask-warranty.webp"),
+      alt: "Buudy LED Mask warranty",
+    },
+    */
   ],
   gifts: [
     {

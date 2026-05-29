@@ -2,12 +2,21 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ShieldCheck, Truck } from "lucide-react";
+import {
+  BatteryCharging,
+  Gem,
+  ScanFace,
+  ShieldCheck,
+  Sparkles,
+  Truck,
+  Waves,
+} from "lucide-react";
 import type { Product } from "@/data/products";
 import { formatMoney } from "@/lib/money";
 import { Button } from "@/components/ui/Button";
 import { Price } from "@/components/ui/Price";
 import { useCart } from "@/components/cart/CartProvider";
+import { ProductDetailsAccordion } from "./ProductDetailsAccordion";
 
 function useCountdown(seconds: number) {
   const [remaining, setRemaining] = useState(seconds);
@@ -26,36 +35,94 @@ function useCountdown(seconds: number) {
   return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 }
 
+function useDeliveryDate(daysFromToday: number) {
+  const [dateLabel, setDateLabel] = useState("");
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      const date = new Date();
+      date.setDate(date.getDate() + daysFromToday);
+
+      const weekday = date.toLocaleString("en-US", { weekday: "long" });
+      const day = date.getDate();
+      const month = date.toLocaleString("en-US", { month: "long" });
+
+      setDateLabel(`${weekday} ${day} ${month}`);
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
+  }, [daysFromToday]);
+
+  return dateLabel;
+}
+
+const maskHeroBullets = [
+  {
+    icon: Sparkles,
+    text: "Stimulates collagen production",
+  },
+  {
+    icon: Waves,
+    text: "Smooths skin and reduces fine lines",
+  },
+  {
+    icon: ScanFace,
+    text: "Full face and neck coverage",
+  },
+  {
+    icon: BatteryCharging,
+    text: "Cordless, rechargeable ritual",
+  },
+  {
+    icon: ShieldCheck,
+    text: "Health Canada approved",
+  },
+  {
+    icon: Gem,
+    text: "3 free gifts included today",
+  },
+];
+
 export function GiftBundle({ product }: { product: Product }) {
   const { addProduct } = useCart();
   const timer = useCountdown(15 * 60 - 1);
+  const deliveryDate = useDeliveryDate(4);
   const giftValue = product.gifts.reduce((total, gift) => total + gift.valueCents, 0);
   const hasGifts = product.gifts.length > 0;
+  const heroBullets =
+    product.template === "mask"
+      ? maskHeroBullets
+      : product.highlights.map((highlight) => ({
+          icon: Sparkles,
+          text: highlight,
+        }));
 
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-3">
-        <div className="text-lg text-[var(--gold)]" aria-hidden>
+      <div className="flex flex-wrap items-center gap-2.5">
+        <div className="text-lg leading-none text-[var(--gold)]" aria-hidden>
           ★★★★★
         </div>
-        <span className="buudy-mono text-[var(--muted)]">
-          {product.rating} · Trusted by {product.customerCount} customers
+        <span className="buudy-mono text-[var(--gold)]">
+          {product.rating} · TRUSTED BY {product.customerCount} CUSTOMERS
         </span>
       </div>
 
-      <h1 className="buudy-display mt-5 text-[3rem] leading-[1.02] text-[var(--plum)] md:text-[4.5rem]">
-        {product.heroTitle} <em className="buudy-italic">{product.heroEmphasis}</em>
+      <h1 className="buudy-display mt-5 whitespace-nowrap text-[2rem] leading-[1.02] text-[var(--plum)] sm:text-[2.55rem] md:text-[3.25rem] xl:text-[4rem] 2xl:text-[4.45rem]">
+        {product.heroTitle}{" "}
+        <em className="buudy-italic text-[var(--gold)]">{product.heroEmphasis}</em>
       </h1>
-      <p className="buudy-copy mt-4 max-w-xl">{product.shortDescription}</p>
 
-      <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-        {product.highlights.map((highlight) => (
+      <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+        {heroBullets.map(({ icon: Icon, text }) => (
           <li
-            className="flex items-start gap-2 text-sm leading-6 text-[var(--plum)]"
-            key={highlight}
+            className="flex items-center gap-3 rounded-full border border-[rgba(58,31,61,.12)] bg-[rgba(247,241,232,.55)] px-3.5 py-2 text-sm font-medium leading-5 text-[var(--plum)]"
+            key={text}
           >
-            <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[var(--gold)]" />
-            {highlight}
+            <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.18)] text-[var(--gold)]">
+              <Icon size={15} strokeWidth={1.8} />
+            </span>
+            {text}
           </li>
         ))}
       </ul>
@@ -74,17 +141,21 @@ export function GiftBundle({ product }: { product: Product }) {
         </p>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-4">
+      <div className="mt-6 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-5">
         <div className="flex items-center justify-between gap-5">
           <div>
-            <p className="buudy-eyebrow">Delivery</p>
-            <p className="buudy-display mt-1 text-lg text-[var(--plum)]">In 4 days</p>
+            <p className="buudy-eyebrow text-[var(--gold)]">DELIVERY</p>
+            <p className="buudy-display mt-1.5 text-xl sm:text-2xl text-[var(--plum)] font-normal leading-none">
+              {deliveryDate || "soon"}
+            </p>
           </div>
           <div className="text-right">
-            <p className="buudy-eyebrow">
-              {hasGifts ? "Free gifts unlock in" : "Order today"}
+            <p className="buudy-eyebrow text-[var(--gold)] whitespace-nowrap">
+              {hasGifts ? "FREE GIFTS UNLOCK IN" : "ORDER TODAY"}
             </p>
-            <p className="buudy-mono mt-1 text-2xl text-[var(--plum)]">{timer}</p>
+            <p className="buudy-display mt-1.5 text-2xl sm:text-[2.2rem] font-normal text-[var(--plum)] leading-none">
+              {timer}
+            </p>
           </div>
         </div>
       </div>
@@ -98,7 +169,7 @@ export function GiftBundle({ product }: { product: Product }) {
           <span className="absolute inset-0 rounded-full bg-[rgba(247,241,232,.75)] [animation:buudy-ping_1.4s_infinite]" />
           <span className="relative h-2 w-2 rounded-full bg-[var(--cream)]" />
         </span>
-        Add to cart · {formatMoney(product.priceCents, product.currency)}
+        Add to cart - {formatMoney(product.priceCents, product.currency)}
       </Button>
 
       {hasGifts ? (
@@ -117,7 +188,7 @@ export function GiftBundle({ product }: { product: Product }) {
                 <div className="relative mt-2 aspect-square overflow-hidden rounded-lg bg-[rgba(241,223,210,.5)]">
                   <Image
                     alt={gift.name}
-                    className="object-contain p-2 mix-blend-multiply"
+                    className="object-contain p-2"
                     fill
                     sizes="120px"
                     src={gift.image}
@@ -150,17 +221,21 @@ export function GiftBundle({ product }: { product: Product }) {
         </section>
       )}
 
-      <div className="mt-8 flex flex-wrap gap-3 border-t border-[var(--border)] pt-6">
-        {product.badges.map((badge, index) => (
-          <span
-            className="buudy-mono inline-flex items-center gap-2 text-[var(--plum)] opacity-80"
-            key={badge}
-          >
-            {index % 2 === 0 ? <ShieldCheck size={15} /> : <Truck size={15} />}
-            {badge}
-          </span>
-        ))}
-      </div>
+      {product.template === "mask" ? (
+        <ProductDetailsAccordion product={product} />
+      ) : (
+        <div className="mt-8 flex flex-wrap gap-3 border-t border-[var(--border)] pt-6">
+          {product.badges.map((badge, index) => (
+            <span
+              className="buudy-mono inline-flex items-center gap-2 text-[var(--plum)] opacity-80"
+              key={badge}
+            >
+              {index % 2 === 0 ? <ShieldCheck size={15} /> : <Truck size={15} />}
+              {badge}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

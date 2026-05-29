@@ -22,21 +22,38 @@ export function StickyAddToCart({ product }: { product: Product }) {
       return;
     }
 
+    let frame = 0;
+    const updateVisibility = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        const rect = button.getBoundingClientRect();
+        setVisible(rect.bottom < 0);
+      });
+    };
+
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setVisible(!entry.isIntersecting && window.scrollY > 200);
+      () => {
+        updateVisibility();
       },
-      { threshold: 0 },
+      { threshold: [0, 1] },
     );
 
     observer.observe(button);
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
+    };
   }, []);
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--border)] bg-[rgba(247,241,232,.95)] shadow-[0_-20px_50px_-35px_rgba(0,0,0,.45)] backdrop-blur transition duration-300 ${
+      className={`fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--border)] bg-[rgba(247,241,232,.97)] shadow-[0_-20px_50px_-35px_rgba(0,0,0,.45)] transition duration-300 ${
         visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
       }`}
     >

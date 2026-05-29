@@ -7,8 +7,6 @@ import { FAQSection } from "./FAQSection";
 import { FeatureGrid } from "./FeatureGrid";
 import { GuaranteeSection } from "./GuaranteeSection";
 import { ProductHero } from "./ProductHero";
-import { ResultsMarquee } from "./ResultsMarquee";
-import { SpecsPanel } from "./SpecsPanel";
 import { StickyAddToCart } from "./StickyAddToCart";
 import { TorchProductPage } from "./TorchProductPage";
 import { VideoReviews } from "./VideoReviews";
@@ -22,11 +20,9 @@ export function ProductPage({ product }: { product: Product }) {
   return (
     <>
       <ProductHero product={product} />
-      <FeatureGrid />
-      <SpecsPanel product={product} />
-      <ResultsMarquee />
-      <BeforeAfterGrid />
       <VideoReviews />
+      <FeatureGrid />
+      <BeforeAfterGrid />
       <WavelengthSelector />
       <ExpertSection />
       <RitualSection />

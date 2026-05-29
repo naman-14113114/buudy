@@ -11,7 +11,7 @@ export function RitualSection() {
         <div className="relative aspect-video overflow-hidden rounded-[18px] bg-[var(--ink)]">
           <Image
             alt="Buudy LED Mask lifestyle ritual"
-            className="object-cover opacity-85 transition duration-700 hover:scale-105 hover:opacity-100"
+            className="object-cover"
             fill
             sizes="(min-width: 1024px) 58vw, 100vw"
             src={productAsset("08-buudy-led-mask-lifestyle-use.webp")}
@@ -79,7 +79,7 @@ export function TouchTechSection() {
         <div className="relative aspect-square overflow-hidden rounded-[18px] bg-[var(--ink)]">
           <Image
             alt="Buudy tap technology"
-            className="object-cover opacity-90"
+            className="object-cover"
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
             src={productAsset("07-buudy-led-mask-controller.webp")}

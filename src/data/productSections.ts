@@ -1,4 +1,4 @@
-import { productAsset } from "@/lib/media";
+import { productAsset, productMediaAsset } from "@/lib/media";
 
 export type Feature = {
   title: string;
@@ -19,6 +19,7 @@ export type ReviewVideo = {
   id: string;
   poster: string;
   src: string;
+  fallbackSrc?: string;
 };
 
 export type Wavelength = {
@@ -181,31 +182,36 @@ export const reviewVideos: ReviewVideo[] = [
     id: "review-01",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486304350_448129a4-6d94-4e44-b8af-511f3e7999b2.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1680194145059_06e68cf3-1a7d-4636-a05a-8c1922a066a4_h264c_h264q6clip.mp4#t=0.1",
+    src: productMediaAsset("review-01.mp4", "buudy-led-mask", "videos"),
+    fallbackSrc: "https://cdn2.videowise.com/converted/videos/1680194145059_06e68cf3-1a7d-4636-a05a-8c1922a066a4_h264c_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-02",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486138534_38dd960f-2287-4bfc-b1be-af40bc8ef5d6.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511751028_e8ecbe6c-94ca-4754-bff1-4bdfff8aad16_h264q6clip.mp4#t=0.1",
+    src: productMediaAsset("review-02.mp4", "buudy-led-mask", "videos"),
+    fallbackSrc: "https://cdn2.videowise.com/converted/videos/1686511751028_e8ecbe6c-94ca-4754-bff1-4bdfff8aad16_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-03",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485722607_ded18359-40b7-427c-b2a9-62e48436f87c.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081088110_c7eea873-a477-4a43-aafb-bcbc47f285ca_h264q6clip.mp4#t=0.1",
+    src: productMediaAsset("review-03.mp4", "buudy-led-mask", "videos"),
+    fallbackSrc: "https://cdn2.videowise.com/converted/videos/1679081088110_c7eea873-a477-4a43-aafb-bcbc47f285ca_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-04",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485860443_d12fd0ec-8701-4fe7-8e68-1c801ff59f85.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1684780828045_7e4e871c-89be-45e4-9fb5-1d4c9ac1f30f_h264q6clip.mp4#t=0.1",
+    src: productMediaAsset("review-04.mp4", "buudy-led-mask", "videos"),
+    fallbackSrc: "https://cdn2.videowise.com/converted/videos/1684780828045_7e4e871c-89be-45e4-9fb5-1d4c9ac1f30f_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-05",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485816239_f9dba8d1-d096-4067-aff8-eb4a72366122.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081092710_1bac0b63-1caf-46ec-8a9e-33981ec0d67c_h264q6clip.mp4#t=0.1",
+    src: productMediaAsset("review-05.mp4", "buudy-led-mask", "videos"),
+    fallbackSrc: "https://cdn2.videowise.com/converted/videos/1679081092710_1bac0b63-1caf-46ec-8a9e-33981ec0d67c_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-06",

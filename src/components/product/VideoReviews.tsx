@@ -1,9 +1,92 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { reviewVideos } from "@/data/productSections";
+import { reviewVideos, type ReviewVideo } from "@/data/productSections";
+import { productMediaAsset } from "@/lib/media";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+
+function ReviewVideoCard({
+  index,
+  video,
+}: {
+  index: number;
+  video: ReviewVideo;
+}) {
+  const cardRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const localSrc = productMediaAsset(`${video.id}.mp4`, "buudy-led-mask", "videos");
+  const fallbackSrc = video.fallbackSrc ?? video.src;
+  const [isVisible, setIsVisible] = useState(false);
+  const [src, setSrc] = useState(localSrc);
+
+  useEffect(() => {
+    const element = cardRef.current;
+    if (!element) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { rootMargin: "160px 0px", threshold: 0.2 },
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const element = videoRef.current;
+    if (!element) {
+      return;
+    }
+
+    element.muted = true;
+
+    if (isVisible) {
+      element.load();
+      element.play().catch(() => undefined);
+      return;
+    }
+
+    element.pause();
+  }, [isVisible, src]);
+
+  return (
+    <article
+      className="relative aspect-[9/16] w-40 flex-none snap-start overflow-hidden rounded-[18px] bg-[var(--ink)] shadow-[0_8px_24px_-12px_rgba(0,0,0,.28)] transition hover:-translate-y-1 md:w-52"
+      ref={cardRef}
+    >
+      <video
+        aria-label={`Buudy customer video review ${index + 1}`}
+        autoPlay={isVisible}
+        className="h-full w-full object-cover"
+        disablePictureInPicture
+        loop
+        muted
+        onError={() => {
+          if (src !== fallbackSrc) {
+            setSrc(fallbackSrc);
+          }
+        }}
+        playsInline
+        poster={video.poster}
+        preload={isVisible || index < 5 ? "metadata" : "none"}
+        ref={videoRef}
+        src={src}
+      >
+        Your browser does not support the video tag.
+      </video>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[rgba(18,9,20,.48)] to-transparent"
+      />
+    </article>
+  );
+}
 
 export function VideoReviews() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -44,22 +127,7 @@ export function VideoReviews() {
           ref={trackRef}
         >
           {reviewVideos.map((video, index) => (
-            <article
-              className="relative aspect-[9/16] w-40 flex-none snap-start overflow-hidden rounded-[18px] bg-[var(--ink)] shadow-[0_8px_24px_-12px_rgba(0,0,0,.28)] transition hover:-translate-y-1 md:w-52"
-              key={video.id}
-            >
-              <video
-                className="h-full w-full object-cover"
-                controls
-                muted
-                playsInline
-                poster={video.poster}
-                preload="none"
-                title={`Buudy customer video review ${index + 1}`}
-              >
-                <source src={video.src} type="video/mp4" />
-              </video>
-            </article>
+            <ReviewVideoCard index={index} key={video.id} video={video} />
           ))}
         </div>
 
