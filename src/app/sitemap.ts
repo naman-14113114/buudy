@@ -26,5 +26,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.4,
     },
+    {
+      url: "https://buudy.com/pages/contact-us",
+      lastModified: new Date("2026-05-29"),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
   ];
 }

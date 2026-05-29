@@ -7,7 +7,7 @@ export const primaryNavigation = [
 export const secondaryNavigation = [
   { label: "About Us", href: "/pages/about-us" },
   { label: "FAQs", href: "/pages/faqs" },
-  { label: "Contact Us", href: "mailto:support@buudy.com" },
+  { label: "Contact Us", href: "/pages/contact-us" },
 ];
 
 export const announcementItems = [

@@ -56,6 +56,20 @@ NEXT_PUBLIC_CHECKOUT_URL=https://your-checkout-url.example
 
 Until then, checkout falls back to `https://buudy.com/cart`.
 
+## Contact Form
+
+The contact page lives at `/pages/contact-us` and posts to
+Web3Forms directly from the browser, which is required for the free Web3Forms
+plan. Create a Web3Forms access key for the email inbox, then add it locally and
+in Vercel:
+
+```bash
+NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your-web3forms-access-key
+```
+
+`src/app/api/contact/route.ts` remains as a graceful fallback, but Web3Forms free
+accounts reject server-side proxy submissions.
+
 ## Assets
 
 Key product images are stored in:
@@ -85,3 +99,4 @@ Recommended production settings:
 - Install command: `npm install`
 - Output directory: leave empty for Next.js
 - Environment variable: `NEXT_PUBLIC_CHECKOUT_URL` when available
+- Environment variable: `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` for the contact form

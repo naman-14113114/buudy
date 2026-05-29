@@ -50,7 +50,7 @@ export function AboutPage() {
 
       {/* Main Alternating Sections */}
       <div className="relative z-10 space-y-12 py-16 md:py-24">
-        {aboutSections.map((section, index) => {
+        {aboutSections.map((section) => {
           const isRight = section.align === "right";
           
           return (

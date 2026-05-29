@@ -16,7 +16,7 @@ export const footerMenus = [
   {
     title: "Help",
     links: [
-      { label: "Contact Us", href: "mailto:support@buudy.com" },
+      { label: "Contact Us", href: "/pages/contact-us" },
       { label: "Order Tracking", href: "/order-tracking" },
       { label: "About Us", href: "/pages/about-us" },
       { label: "FAQs", href: "/pages/faqs" },

@@ -58,13 +58,13 @@ export const faqsData: FaqItem[] = [
   {
     question: "What are shipping costs?",
     answerHtml: `
-      <p class="text-sm leading-6">Shipping is free for all orders within the USA as well as internationally. If you have any questions, please feel free to <a href="/pages/contact" class="underline text-[var(--plum)] font-semibold">contact us</a>.</p>
+      <p class="text-sm leading-6">Shipping is free for all orders within the USA as well as internationally. If you have any questions, please feel free to <a href="/pages/contact-us" class="underline text-[var(--plum)] font-semibold">contact us</a>.</p>
     `
   },
   {
     question: "How can I contact customer service?",
     answerHtml: `
-      <p class="text-sm leading-6">You can reach our customer service through our <a href="/pages/contact" class="underline text-[var(--plum)] font-semibold">Contact Us</a> page or by emailing <a href="mailto:support@buudy.com" class="underline text-[var(--plum)] font-semibold">support@buudy.com</a>.</p>
+      <p class="text-sm leading-6">You can reach our customer service through our <a href="/pages/contact-us" class="underline text-[var(--plum)] font-semibold">Contact Us</a> page or by emailing <a href="mailto:support@buudy.com" class="underline text-[var(--plum)] font-semibold">support@buudy.com</a>.</p>
     `
   },
   {

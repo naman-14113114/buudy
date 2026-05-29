@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { ChevronDown, HelpCircle, Mail, MessageSquare } from "lucide-react";
+import { useState } from "react";
+import { ChevronDown, Mail, MessageSquare } from "lucide-react";
 import { faqsData } from "@/data/faqs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -13,29 +13,6 @@ type FaqItemProps = {
 };
 
 function FaqAccordionItem({ question, answerHtml, isOpen, onClick }: FaqItemProps) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState<number | string>(0);
-
-  // Dynamically update the height on open/close or window resizing
-  useEffect(() => {
-    if (isOpen) {
-      const handleResize = () => {
-        if (contentRef.current) {
-          setHeight(contentRef.current.scrollHeight);
-        }
-      };
-      
-      // Set initial height
-      handleResize();
-      
-      // Add event listener for dynamic resize (responsive adjustments)
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    } else {
-      setHeight(0);
-    }
-  }, [isOpen]);
-
   return (
     <div 
       className={`group rounded-[20px] border border-[var(--border)] bg-[var(--card)] transition-all duration-300 ease-out hover:border-[rgba(58,31,61,0.2)] hover:shadow-[0_12px_32px_-16px_rgba(58,31,61,0.06)] ${
@@ -64,9 +41,9 @@ function FaqAccordionItem({ question, answerHtml, isOpen, onClick }: FaqItemProp
       {/* Answer Panel with measured height transition */}
       <div
         className="overflow-hidden transition-[height] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
-        style={{ height }}
+        style={{ height: isOpen ? "auto" : 0 }}
       >
-        <div ref={contentRef} className="px-6 pb-6">
+        <div className="px-6 pb-6">
           <div className="h-[1px] w-full bg-[var(--border)] mb-5" />
           <div 
             className={`text-sm sm:text-base leading-7 text-[var(--muted)] transition-all duration-500 ease-out font-light ${
@@ -135,8 +112,8 @@ export function FaqPage() {
               <Mail size={16} />
               support@buudy.com
             </a>
-            <a 
-              href="/pages/contact" 
+            <a
+              href="/pages/contact-us"
               className="flex items-center gap-2 px-5 py-3 rounded-full border border-[rgba(58,31,61,0.2)] text-[var(--plum)] text-sm font-semibold hover:bg-[rgba(58,31,61,0.04)] transition-colors duration-200 w-full sm:w-auto justify-center"
             >
               <MessageSquare size={16} />

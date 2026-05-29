@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { ChevronDown, Search, Truck, Package, Clock, ShieldCheck, Mail, MapPin } from "lucide-react";
+import { useState } from "react";
+import { ChevronDown, Search, Truck } from "lucide-react";
 import { orderTrackingData } from "@/data/policies";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
@@ -13,25 +13,23 @@ type FaqItemProps = {
   onClick: () => void;
 };
 
+type TransitStep = {
+  label: string;
+  desc: string;
+  date: string;
+  active: boolean;
+};
+
+type TrackingResult = {
+  orderId: string;
+  status: string;
+  carrier: string;
+  trackingId: string;
+  dispatchedFrom: string;
+  transitSteps: TransitStep[];
+};
+
 function TrackingFaqItem({ question, answerHtml, isOpen, onClick }: FaqItemProps) {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState<number | string>(0);
-
-  useEffect(() => {
-    if (isOpen) {
-      const handleResize = () => {
-        if (contentRef.current) {
-          setHeight(contentRef.current.scrollHeight);
-        }
-      };
-      handleResize();
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    } else {
-      setHeight(0);
-    }
-  }, [isOpen]);
-
   return (
     <div 
       className={`group rounded-[20px] border border-[var(--border)] bg-[var(--card)] transition-all duration-300 ease-out hover:border-[rgba(58,31,61,0.2)] ${
@@ -56,9 +54,9 @@ function TrackingFaqItem({ question, answerHtml, isOpen, onClick }: FaqItemProps
 
       <div
         className="overflow-hidden transition-[height] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
-        style={{ height }}
+        style={{ height: isOpen ? "auto" : 0 }}
       >
-        <div ref={contentRef} className="px-5 pb-5">
+        <div className="px-5 pb-5">
           <div className="h-[1px] w-full bg-[var(--border)] mb-4" />
           <div 
             className={`text-sm leading-6 text-[var(--muted)] transition-all duration-500 ease-out font-light ${
@@ -79,7 +77,7 @@ export function OrderTrackingPage() {
   const [orderNumber, setOrderNumber] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [trackingResult, setTrackingResult] = useState<any | null>(null);
+  const [trackingResult, setTrackingResult] = useState<TrackingResult | null>(null);
   const [error, setError] = useState("");
 
   const handleToggle = (index: number) => {
@@ -239,7 +237,7 @@ export function OrderTrackingPage() {
 
                   {/* Horizontal tracker steps */}
                   <div className="relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-[1px] before:bg-[var(--border)]">
-                    {trackingResult.transitSteps.map((step: any, index: number) => (
+                    {trackingResult.transitSteps.map((step, index) => (
                       <div key={index} className="relative flex items-start gap-4">
                         <span className={`absolute -left-[21px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-[var(--card)] ${
                           step.active ? "bg-[var(--plum)]" : "bg-[var(--cream)] border-[var(--border)]"
