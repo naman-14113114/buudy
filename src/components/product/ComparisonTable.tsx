@@ -60,11 +60,11 @@ function ComparisonRow({ title, subtitle, values, isLast = false }: ComparisonRo
       <div className="flex flex-col md:flex-row md:items-stretch">
         {/* Feature Info */}
         <div className="w-full md:w-1/3 pr-4 py-2.5 md:py-3.5 flex flex-col justify-center">
-          <p className="font-semibold text-[var(--plum)] text-base md:text-lg leading-tight">
+          <p className="buudy-display font-semibold text-[var(--plum)] text-base md:text-lg leading-tight">
             {title}
           </p>
           {subtitle && (
-            <p className="text-[var(--success)] text-xs md:text-sm font-medium italic mt-0.5 leading-tight">
+            <p className="buudy-display text-[var(--success)] text-xs md:text-sm font-medium italic mt-0.5 leading-tight">
               {subtitle}
             </p>
           )}
@@ -108,12 +108,12 @@ function ColorRow({ colorName, colorCode, description, values, borderBottom = fa
         <div className="w-full md:w-1/3 pr-4 py-2 md:py-2.5 flex items-center">
           <div className="flex items-center gap-2">
             <span
-              className="inline-flex items-center justify-center font-bold text-[10px] uppercase text-white rounded-lg h-[17px] w-[81px] tracking-wider shrink-0"
+              className="buudy-mono inline-flex items-center justify-center font-bold text-[9px] uppercase text-white rounded-lg h-[18px] w-[81px] tracking-wider shrink-0"
               style={{ backgroundColor: colorCode }}
             >
               {colorName}
             </span>
-            <span className="text-[var(--plum)] text-sm md:text-base font-normal">
+            <span className="buudy-display text-[var(--plum)] text-sm md:text-base font-normal">
               {description}
             </span>
           </div>
@@ -248,10 +248,10 @@ export function ComparisonTable() {
             title="Light Colors"
             subtitle="Each with specific skin benefits"
             values={[
-              <strong key="1" className="font-bold text-xs md:text-sm text-[var(--plum)]">7 TOTAL</strong>,
-              <strong key="2" className="font-bold text-xs md:text-sm text-[var(--muted)]">3 TOTAL</strong>,
-              <strong key="3" className="font-bold text-xs md:text-sm text-[var(--muted)]">1 TOTAL</strong>,
-              <strong key="4" className="font-bold text-xs md:text-sm text-[var(--muted)]">3 TOTAL</strong>,
+              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">7 TOTAL</strong>,
+              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">3 TOTAL</strong>,
+              <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">1 TOTAL</strong>,
+              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">3 TOTAL</strong>,
             ]}
           />
 
@@ -320,27 +320,27 @@ export function ComparisonTable() {
           <ComparisonRow
             title="App companion"
             subtitle="iPhone/Android"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
           />
 
           <ComparisonRow
             title="Treatment Time"
             subtitle="Full Face + Neck"
             values={[
-              <strong key="1" className="font-bold text-xs md:text-sm text-[var(--plum)]">3 MINS</strong>,
-              <strong key="2" className="font-bold text-xs md:text-sm text-[var(--muted)]">10 MINS</strong>,
-              <strong key="3" className="font-bold text-xs md:text-sm text-[var(--muted)]">10 MINS</strong>,
-              <strong key="4" className="font-bold text-xs md:text-sm text-[var(--muted)]">3 MINS</strong>,
+              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">3 MINS</strong>,
+              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
+              <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
+              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">3 MINS</strong>,
             ]}
           />
 
           <ComparisonRow
             title="Price"
             values={[
-              <span key="1" className="font-bold text-base md:text-lg text-[var(--plum)]">£179</span>,
-              <span key="2" className="text-base md:text-lg">£299</span>,
-              <span key="3" className="text-base md:text-lg">£399</span>,
-              <span key="4" className="text-base md:text-lg">£372</span>,
+              <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">£179</span>,
+              <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">£299</span>,
+              <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">£399</span>,
+              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£372</span>,
             ]}
             isLast={true}
           />

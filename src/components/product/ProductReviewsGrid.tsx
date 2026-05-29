@@ -1,10 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { BadgeCheck, LoaderCircle, Star } from "lucide-react";
+import { BadgeCheck, LoaderCircle } from "lucide-react";
 import { Button, cn } from "@/components/ui/Button";
 import type { ProductReview, ProductReviewsResponse } from "@/types/reviews";
+
+type AnimatableProductReview = ProductReview & {
+  isNew?: boolean;
+  staggerIndex?: number;
+};
 
 type ProductReviewsGridProps = {
   productHandle: string;
@@ -14,17 +19,21 @@ type ProductReviewsGridProps = {
 };
 
 function RatingStars({ rating }: { rating: number }) {
+  const filledStars = "★".repeat(rating);
+  const emptyStars = "★".repeat(5 - rating);
+
   return (
-    <div aria-label={`${rating} out of 5 stars`} className="flex gap-1 text-[var(--gold)]">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <Star
-          aria-hidden="true"
-          className={index < rating ? "fill-current" : "opacity-30"}
-          key={index}
-          size={16}
-        />
-      ))}
-    </div>
+    <span
+      aria-label={`${rating} out of 5 stars`}
+      className="text-lg leading-none text-[var(--gold)]"
+    >
+      <span aria-hidden="true">{filledStars}</span>
+      {emptyStars ? (
+        <span aria-hidden="true" className="opacity-30">
+          {emptyStars}
+        </span>
+      ) : null}
+    </span>
   );
 }
 
@@ -69,9 +78,19 @@ function ReviewImages({ images, name }: { images: string[]; name: string }) {
   );
 }
 
-function ReviewCard({ review }: { review: ProductReview }) {
+function ReviewCard({ review }: { review: AnimatableProductReview }) {
   return (
-    <article className="flex h-full flex-col rounded-[18px] border border-[rgba(58,31,61,.14)] bg-[var(--card)] p-5 shadow-[0_18px_44px_-34px_rgba(58,31,61,.45)]">
+    <article
+      className={cn(
+        "rounded-[18px] border border-[rgba(58,31,61,.14)] bg-[var(--card)] p-5 shadow-[0_18px_44px_-34px_rgba(58,31,61,.45)]",
+        review.isNew && "animate-fade-in-up"
+      )}
+      style={
+        review.isNew && review.staggerIndex !== undefined
+          ? { animationDelay: `${review.staggerIndex * 75}ms`, animationFillMode: "both" }
+          : undefined
+      }
+    >
       <ReviewImages images={review.images} name={review.customerName} />
       <div className="flex items-center justify-between gap-4">
         <RatingStars rating={review.rating} />
@@ -86,7 +105,7 @@ function ReviewCard({ review }: { review: ProductReview }) {
         </h3>
       ) : null}
 
-      <p className="mt-3 flex-1 text-sm leading-7 text-[var(--muted)]">{review.body}</p>
+      <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{review.body}</p>
 
       <div className="mt-6 flex items-center justify-between gap-4 border-t border-[rgba(58,31,61,.12)] pt-4">
         <span className="buudy-display text-base text-[var(--plum)]">
@@ -107,7 +126,8 @@ export function ProductReviewsGrid({
   pageSize,
   total,
 }: ProductReviewsGridProps) {
-  const [reviews, setReviews] = useState(initialReviews);
+  const [reviews, setReviews] = useState<AnimatableProductReview[]>(initialReviews);
+  const [columnCount, setColumnCount] = useState(4);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -117,6 +137,32 @@ export function ProductReviewsGrid({
     () => `${visibleCount.toLocaleString("en-US")} of ${total.toLocaleString("en-US")}`,
     [total, visibleCount],
   );
+  const reviewColumns = useMemo(() => {
+    const columns = Array.from({ length: columnCount }, () => [] as AnimatableProductReview[]);
+
+    reviews.forEach((review, index) => {
+      columns[index % columnCount].push(review);
+    });
+
+    return columns;
+  }, [columnCount, reviews]);
+
+  useEffect(() => {
+    const updateColumnCount = () => {
+      if (window.matchMedia("(min-width: 1024px)").matches) {
+        setColumnCount(4);
+      } else if (window.matchMedia("(min-width: 768px)").matches) {
+        setColumnCount(2);
+      } else {
+        setColumnCount(1);
+      }
+    };
+
+    updateColumnCount();
+    window.addEventListener("resize", updateColumnCount);
+
+    return () => window.removeEventListener("resize", updateColumnCount);
+  }, []);
 
   async function loadMoreReviews() {
     if (isLoading || !hasMore) {
@@ -145,7 +191,14 @@ export function ProductReviewsGrid({
       }
 
       const data = (await response.json()) as ProductReviewsResponse;
-      setReviews((currentReviews) => [...currentReviews, ...data.reviews]);
+      setReviews((currentReviews) => [
+        ...currentReviews,
+        ...data.reviews.map((r, i) => ({
+          ...r,
+          isNew: true,
+          staggerIndex: i,
+        })),
+      ]);
     } catch {
       setError("We could not load more reviews right now. Please try again.");
     } finally {
@@ -155,9 +208,13 @@ export function ProductReviewsGrid({
 
   return (
     <div>
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {reviews.map((review) => (
-          <ReviewCard key={review.id} review={review} />
+      <div className="grid items-start gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {reviewColumns.map((column, index) => (
+          <div className="grid gap-5" key={`review-column-${index}`}>
+            {column.map((review) => (
+              <ReviewCard key={review.id} review={review} />
+            ))}
+          </div>
         ))}
       </div>
 

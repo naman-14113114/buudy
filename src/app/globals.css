@@ -139,6 +139,10 @@ video {
   animation: buudy-marquee 32s linear infinite;
 }
 
+.buudy-marquee-slow {
+  animation-duration: 60s;
+}
+
 .buudy-marquee:hover {
   animation-play-state: paused;
 }
@@ -167,6 +171,21 @@ video {
     transform: scale(2.1);
     opacity: 0;
   }
+}
+
+@keyframes buudy-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: buudy-fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {

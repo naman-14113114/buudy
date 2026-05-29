@@ -112,7 +112,6 @@ export const buudyMask: Product = {
       src: productAsset("09-buudy-led-mask-home-spa.webp"),
       alt: "Buudy LED Mask home spa",
     },
-    /*
     {
       src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
       alt: "Buudy LED Mask dermatologist recommended",
@@ -125,15 +124,6 @@ export const buudyMask: Product = {
       src: productAsset("13-buudy-led-mask-starter-kit.webp"),
       alt: "Buudy LED Mask starter kit",
     },
-    {
-      src: productAsset("14-buudy-led-mask-award-2026.webp"),
-      alt: "Buudy LED Mask award 2026",
-    },
-    {
-      src: productAsset("15-buudy-led-mask-warranty.webp"),
-      alt: "Buudy LED Mask warranty",
-    },
-    */
   ],
   gifts: [
     {
@@ -180,7 +170,7 @@ export const buudyMask: Product = {
   ],
   highlights: [
     "Stimulates collagen production",
-    "Smooths skin and reduces fine lines",
+    "Smooths skin & fine lines",
     "Full face and neck coverage",
     "Cordless, rechargeable, and easy to use",
   ],
@@ -280,7 +270,7 @@ export const buudyRedTorch: Product = {
   ],
   highlights: [
     "Stimulate collagen production",
-    "Smooths skin and reduces fine lines",
+    "Smooths skin & fine lines",
     "Assist with anti-aging and healing",
     "Enhances overall skin health",
     "Portable, safe, and easy to use",

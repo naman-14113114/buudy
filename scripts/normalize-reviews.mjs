@@ -83,17 +83,27 @@ function cleanValue(value) {
 }
 
 function getDateParts(rawDate) {
-  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(rawDate);
+  const match =
+    /^(\d{4})-(\d{2})-(\d{2})(?:\s+(\d{2}):(\d{2}):(\d{2}))?/.exec(rawDate);
 
   if (!match) {
     return {
       date: "",
       displayDate: "",
+      sortTimestamp: 0,
     };
   }
 
-  const [, year, month, day] = match;
+  const [, year, month, day, hour = "00", minute = "00", second = "00"] = match;
   const date = `${year}-${month}-${day}`;
+  const sortTimestamp = Date.UTC(
+    Number(year),
+    Number(month) - 1,
+    Number(day),
+    Number(hour),
+    Number(minute),
+    Number(second),
+  );
   const formatter = new Intl.DateTimeFormat("en-US", {
     day: "numeric",
     month: "short",
@@ -104,12 +114,15 @@ function getDateParts(rawDate) {
   return {
     date,
     displayDate: formatter.format(new Date(`${date}T00:00:00.000Z`)),
+    sortTimestamp,
   };
 }
 
 function normalizeReview(row, sourceIndex) {
   const rating = Math.min(5, Math.max(1, Number.parseInt(row.rating, 10) || 5));
-  const { date, displayDate } = getDateParts(cleanValue(row.date_of_review));
+  const { date, displayDate, sortTimestamp } = getDateParts(
+    cleanValue(row.date_of_review),
+  );
   const images = imageColumns
     .map((column) => cleanValue(row[column]))
     .filter((url) => /^https?:\/\//.test(url));
@@ -125,6 +138,7 @@ function normalizeReview(row, sourceIndex) {
     date,
     displayDate,
     images,
+    sortTimestamp,
   };
 }
 
@@ -132,7 +146,16 @@ const csvText = await readFile(sourceFile, "utf8");
 const rows = parseCsv(csvText);
 const reviews = rows
   .map((row, index) => normalizeReview(row, index + 1))
-  .filter((review) => review.productHandle === "buudy-led-mask" && review.body);
+  .filter((review) => review.productHandle === "buudy-led-mask" && review.body)
+  .sort((a, b) => {
+    const dateOrder = b.sortTimestamp - a.sortTimestamp;
+    return dateOrder || a.sourceIndex - b.sourceIndex;
+  })
+  .map((review) => {
+    const publicReview = { ...review };
+    delete publicReview.sortTimestamp;
+    return publicReview;
+  });
 
 await mkdir(path.dirname(outputFile), { recursive: true });
 await writeFile(outputFile, `${JSON.stringify(reviews, null, 2)}\n`);

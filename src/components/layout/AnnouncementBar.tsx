@@ -5,7 +5,7 @@ export function AnnouncementBar() {
 
   return (
     <div className="overflow-hidden bg-[var(--plum)] py-3 text-[var(--cream)]">
-      <div className="buudy-marquee">
+      <div className="buudy-marquee buudy-marquee-slow">
         {items.map((item, index) => (
           <span className="buudy-mono whitespace-nowrap" key={`${item}-${index}`}>
             {item}
