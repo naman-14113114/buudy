@@ -44,11 +44,29 @@ function ReviewImages({ images, name }: { images: string[]; name: string }) {
 
   const visibleImages = images.slice(0, 3);
 
+  /* ── Single image: natural aspect ratio, zero white-space ── */
+  if (visibleImages.length === 1) {
+    return (
+      <div className="mb-5 overflow-hidden rounded-[16px] border border-[rgba(58,31,61,.12)]">
+        <Image
+          alt={`Review photo from ${name}`}
+          className="w-full h-auto block"
+          height={0}
+          loading="lazy"
+          sizes="(min-width: 1024px) 280px, (min-width: 768px) 45vw, 92vw"
+          src={visibleImages[0]}
+          width={0}
+        />
+      </div>
+    );
+  }
+
+  /* ── Multi-image grid: tight object-cover, no background bleed ── */
   return (
     <div
       className={cn(
-        "mb-5 grid overflow-hidden rounded-[16px] border border-[rgba(58,31,61,.12)] bg-[var(--blush)]",
-        visibleImages.length === 1 ? "grid-cols-1" : "grid-cols-2",
+        "mb-5 grid overflow-hidden rounded-[16px] border border-[rgba(58,31,61,.12)]",
+        "grid-cols-2",
       )}
     >
       {visibleImages.map((image, index) => (
