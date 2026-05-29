@@ -26,7 +26,7 @@ export function ExpertSection() {
         <div className="relative">
           <div className="relative overflow-hidden rounded-[18px] border border-[rgba(58,31,61,.12)] bg-[var(--ink)] shadow-[0_24px_48px_-28px_rgba(0,0,0,.4)]">
             <video
-              className="w-full h-auto block"
+              className="w-full aspect-[2/3] object-cover object-center block"
               playsInline
               poster={expertVideo.poster}
               preload="none"
