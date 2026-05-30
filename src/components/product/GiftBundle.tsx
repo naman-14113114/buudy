@@ -141,15 +141,15 @@ export function GiftBundle({ product }: { product: Product }) {
       <div className="mt-3 flex flex-nowrap items-center gap-2">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-3 py-1.5">
           <ShieldCheck size={14} strokeWidth={2} className="shrink-0 text-[var(--gold)]" />
-          <span className="whitespace-nowrap font-mono text-[9.5px] font-bold uppercase tracking-[0.1em] text-[var(--plum)]">Clinically Proven</span>
+          <span className="whitespace-nowrap buudy-display text-[10.5px] font-bold uppercase tracking-[0.05em] text-[var(--plum)]">Clinically Proven</span>
         </span>
         <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-3 py-1.5">
           <RotateCcw size={13} strokeWidth={2} className="shrink-0 text-[var(--gold)]" />
-          <span className="whitespace-nowrap font-mono text-[9.5px] font-bold uppercase tracking-[0.1em] text-[var(--plum)]">90-Day Returns</span>
+          <span className="whitespace-nowrap buudy-display text-[10.5px] font-bold uppercase tracking-[0.05em] text-[var(--plum)]">90-Day Returns</span>
         </span>
         <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-3 py-1.5">
           <Sparkles size={14} strokeWidth={2} className="shrink-0 text-[var(--gold)]" />
-          <span className="whitespace-nowrap font-mono text-[9.5px] font-bold uppercase tracking-[0.1em] text-[var(--plum)]">Dermatologist Approved</span>
+          <span className="whitespace-nowrap buudy-display text-[10.5px] font-bold uppercase tracking-[0.05em] text-[var(--plum)]">Dermatologist Approved</span>
         </span>
       </div>
 
@@ -159,15 +159,31 @@ export function GiftBundle({ product }: { product: Product }) {
           currency={product.currency}
           priceCents={product.priceCents}
         />
-        <div className="flex flex-wrap items-center gap-2 text-sm text-[var(--muted)]">
-          <span>or 4 interest-free payments of <strong>{formatMoney(product.priceCents / 4, product.currency)}</strong> with</span>
-          <div className="flex items-center gap-1.5">
-            <span className="inline-flex h-[18px] items-center justify-center rounded bg-[#FFB3C7] px-1.5 text-[8.5px] font-bold text-black buudy-mono tracking-widest leading-none">
-              Klarna.
-            </span>
-            <span className="inline-flex h-[18px] items-center justify-center rounded bg-[#B2FCE4] px-1.5 text-[8.5px] font-bold text-black buudy-mono tracking-widest leading-none">
-              afterpay
-            </span>
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-[var(--muted)]">
+          <span className="flex items-center gap-1.5 flex-wrap">
+            or <strong className="buudy-display text-base font-medium text-[var(--plum)]">4</strong> interest-free payments of{" "}
+            <strong className="buudy-display text-base font-semibold text-[var(--plum)]">
+              {formatMoney(product.priceCents / 4, product.currency)}
+            </strong>{" "}
+            with
+          </span>
+          <div className="inline-flex items-center gap-1.5">
+            {/* Klarna Badge Container */}
+            <div className="relative w-[52px] h-[18px] overflow-hidden rounded-full bg-[#FFB3C7] shrink-0">
+              <img
+                src="/media/products/buudy-led-mask/images/klarna_badge.png"
+                alt="Klarna"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-auto object-contain"
+              />
+            </div>
+            {/* Afterpay Badge Container */}
+            <div className="relative w-[50px] h-[18px] overflow-hidden rounded-full bg-[#B2FCE4] shrink-0 flex items-center justify-center">
+              <img
+                src="/media/products/buudy-led-mask/images/afterpay_badge.png"
+                alt="Afterpay"
+                className="w-[82%] h-auto object-contain"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -307,7 +323,7 @@ export function GiftBundle({ product }: { product: Product }) {
           <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
             <FaceNeckIcon size={22} />
           </span>
-          <p className="buudy-mono text-[9px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider">
+          <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
             Full-Face &<br />Neck Coverage
           </p>
         </div>
@@ -315,7 +331,7 @@ export function GiftBundle({ product }: { product: Product }) {
           <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
             <BatteryCharging size={22} strokeWidth={1.5} />
           </span>
-          <p className="buudy-mono text-[9px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider">
+          <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
             Wireless &<br />Rechargeable
           </p>
         </div>
@@ -323,7 +339,7 @@ export function GiftBundle({ product }: { product: Product }) {
           <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
             <RotateCcw size={20} strokeWidth={1.5} />
           </span>
-          <p className="buudy-mono text-[9px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider">
+          <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
             90 Days Money<br />Back Guarantee
           </p>
         </div>
@@ -331,7 +347,7 @@ export function GiftBundle({ product }: { product: Product }) {
           <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(184,149,86,.08)] text-[var(--plum)]">
             <Waves size={22} strokeWidth={1.5} />
           </span>
-          <p className="buudy-mono text-[9px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider">
+          <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
             Science-Backed<br />Light
           </p>
         </div>
@@ -343,8 +359,9 @@ export function GiftBundle({ product }: { product: Product }) {
             <h3 className="buudy-display text-3xl font-medium text-[var(--plum)]">
               Special Spring Sale
             </h3>
-            <p className="buudy-mono mt-1.5 text-xs text-[var(--gold)] font-bold tracking-widest">
-              {formatMoney(giftValue, product.currency)} VALUE OF FREE GIFTS FOR TODAY ONLY
+            <p className="buudy-mono mt-1.5 text-xs text-[var(--gold)] font-bold tracking-widest flex items-center justify-center gap-1 flex-wrap">
+              <span className="buudy-display text-sm font-semibold text-[var(--gold)] normal-case">{formatMoney(giftValue, product.currency)}</span>
+              <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
             </p>
           </div>
           <div className="grid grid-cols-3 gap-4">
@@ -355,10 +372,10 @@ export function GiftBundle({ product }: { product: Product }) {
               >
                 {/* Single absolute overlapping badge: FREE (bold & clear) + price strikethrough (no nested container) */}
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-[var(--card)] border border-[rgba(58,31,61,.22)] rounded-full flex items-center gap-1.5 shadow-[0_2px_8px_rgba(58,31,61,0.06)] whitespace-nowrap">
-                  <span className="text-black text-xs font-black tracking-widest uppercase buudy-mono">
+                  <span className="text-black text-[10px] font-extrabold tracking-widest uppercase font-sans">
                     FREE
                   </span>
-                  <span className="line-through text-[10px] text-[var(--muted)] buudy-mono leading-none">
+                  <span className="line-through text-[10.5px] text-[var(--muted)] buudy-display font-semibold leading-none">
                     {formatMoney(gift.valueCents, product.currency)}
                   </span>
                 </div>
