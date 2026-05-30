@@ -46,7 +46,7 @@ export function FeatureGrid() {
                   </span>
                   <div className="flex flex-1 items-center gap-4">
                     <span className="h-px flex-1 bg-[rgba(58,31,61,.15)]" />
-                    <span className="buudy-mono text-sm text-[var(--gold)] font-medium">
+                    <span className="buudy-display text-base text-[var(--gold)] font-medium">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>

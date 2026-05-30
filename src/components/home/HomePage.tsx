@@ -264,7 +264,7 @@ function WavelengthMapPreview() {
                 key={zone}
               >
                 <span className="buudy-display text-xl text-[var(--plum)]">{zone}</span>
-                <span className="buudy-mono text-[var(--gold)]">
+                <span className="buudy-display text-sm font-medium text-[var(--gold)]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>

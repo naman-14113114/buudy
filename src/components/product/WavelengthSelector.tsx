@@ -95,7 +95,7 @@ export function WavelengthSelector() {
                         boxShadow: isActive ? `0 0 10px ${wavelength.color}` : "none",
                       }}
                     />
-                    <span className="buudy-mono w-20 text-[rgba(247,241,232,.6)]">
+                    <span className="buudy-display w-20 uppercase text-[rgba(247,241,232,.6)]">
                       {wavelength.nm}
                     </span>
                     <span className={`buudy-display text-xl transition-colors duration-300 ${
@@ -103,7 +103,7 @@ export function WavelengthSelector() {
                     }`}>
                       {wavelength.name}
                     </span>
-                    <span className="ml-auto hidden text-sm text-[rgba(247,241,232,.6)] sm:block">
+                    <span className="buudy-display ml-auto hidden text-sm text-[rgba(247,241,232,.6)] sm:block">
                       {wavelength.description}
                     </span>
                   </button>
