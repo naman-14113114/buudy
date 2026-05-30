@@ -39,12 +39,12 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
         <button
           aria-controls="cart-price-breakdown"
           aria-expanded={detailsOpen}
-          className="mt-3 flex w-full items-center justify-between gap-4 rounded-full bg-[rgba(2,177,117,.1)] px-4 py-2.5 text-sm transition hover:bg-[rgba(2,177,117,.18)]"
+          className="mt-3 flex w-full items-center justify-between gap-4 rounded-full bg-[rgba(184,149,86,.1)] px-4 py-2.5 text-sm transition hover:bg-[rgba(184,149,86,.18)]"
           onClick={() => setDetailsOpen((current) => !current)}
           type="button"
         >
           <span className="font-semibold text-[var(--plum)]">Total discount</span>
-          <span className="flex items-center gap-1.5 font-bold text-[var(--success)]">
+          <span className="flex items-center gap-1.5 font-bold text-[var(--gold)]">
             {formatMoney(totalSavingsCents)}
             <ChevronDown
               className={`transition-transform duration-300 ${
@@ -72,13 +72,13 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
             </div>
             <div className="flex justify-between gap-4">
               <span className="text-[var(--muted)]">Compare-at savings</span>
-              <span className="font-semibold text-[var(--success)]">
+              <span className="font-semibold text-[var(--gold)]">
                 -{formatMoney(totals.savingsCents)}
               </span>
             </div>
             <div className="flex justify-between gap-4">
               <span className="text-[var(--muted)]">Free gift value</span>
-              <span className="font-semibold text-[var(--success)]">
+              <span className="font-semibold text-[var(--gold)]">
                 {formatMoney(totals.giftValueCents)}
               </span>
             </div>

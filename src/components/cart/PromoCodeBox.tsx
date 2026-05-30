@@ -20,7 +20,7 @@ export function PromoCodeBox() {
           </p>
         </div>
         <span className="inline-flex items-center gap-2 rounded-full bg-[var(--cream)] px-3 py-2 text-xs font-semibold text-[var(--plum)]">
-          {active ? <CheckCircle2 size={15} className="text-[var(--success)]" /> : null}
+          {active ? <CheckCircle2 size={15} className="text-[var(--gold)]" /> : null}
           {codes}
         </span>
       </div>

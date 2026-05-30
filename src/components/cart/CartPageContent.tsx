@@ -101,7 +101,7 @@ export function CartPageContent({
         <div className="mb-8 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] px-5 py-4 shadow-[0_18px_40px_-32px_rgba(58,31,61,.45)]">
           <div className="flex flex-col items-start justify-between gap-3 md:flex-row md:items-center">
             <div className="flex items-center gap-3">
-              <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(2,177,117,.12)] text-[var(--success)]">
+              <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
                 <Truck size={22} />
               </span>
               <p className="buudy-display text-xl leading-snug text-[var(--plum)] md:text-2xl">
@@ -202,13 +202,13 @@ export function CartPageContent({
 
 function DigitalGiftNotice({ line }: { line: CartLine }) {
   return (
-    <div className="relative overflow-hidden rounded-[1.5rem] border border-[rgba(2,177,117,.25)] bg-[rgba(2,177,117,.09)] p-5 md:pl-6 md:pr-36">
+    <div className="relative overflow-hidden rounded-[1.5rem] border border-[rgba(184,149,86,.25)] bg-[rgba(184,149,86,.09)] p-5 md:pl-6 md:pr-36">
       <div className="flex items-start gap-4">
-        <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-[var(--card)] text-[var(--success)] shadow-sm">
+        <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-[var(--card)] text-[var(--gold)] shadow-sm">
           <BookOpen size={22} />
         </span>
         <div>
-          <p className="buudy-mono text-[var(--success)]">Free digital reward</p>
+          <p className="buudy-mono text-[var(--gold)]">Free digital reward</p>
           <p className="mt-2 buudy-display text-2xl leading-tight text-[var(--plum)]">
             {line.title} is sent by email after checkout.
           </p>
@@ -238,7 +238,7 @@ function PaymentTrustStrip() {
       <img
         alt="Payment Options"
         className="w-full max-w-[340px] h-auto object-contain"
-        src="/media/products/buudy-led-mask/images/payment_options.webp"
+        src="/media/products/buudy-led-mask/images/payment_options.png"
       />
     </div>
   );

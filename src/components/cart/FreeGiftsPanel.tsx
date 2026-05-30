@@ -38,10 +38,10 @@ export function FreeGiftsPanel({ compact = false }: { compact?: boolean }) {
 
       <div className="relative mt-6 grid grid-cols-3 gap-3">
         <div className="absolute left-6 right-6 top-4 h-0.5 bg-[var(--border)]" />
-        <div className="absolute left-6 right-6 top-4 h-0.5 bg-[var(--success)] transition-all" />
+        <div className="absolute left-6 right-6 top-4 h-0.5 bg-[var(--gold)] transition-all" />
         {giftLines.map((giftLine) => (
           <div className="relative text-center" key={giftLine.id}>
-            <span className="mx-auto grid h-8 w-8 place-items-center rounded-full bg-[var(--success)] text-white shadow-[0_0_0_5px_var(--card)]">
+            <span className="mx-auto grid h-8 w-8 place-items-center rounded-full bg-[var(--gold)] text-white shadow-[0_0_0_5px_var(--card)]">
               <Check size={16} />
             </span>
             <p className="mt-3 text-[0.64rem] font-semibold uppercase tracking-[.16em] text-[var(--plum)]">
@@ -74,7 +74,7 @@ export function FreeGiftsPanel({ compact = false }: { compact?: boolean }) {
                 <p className="text-sm text-[var(--muted)]">{giftLine.subtitle}</p>
               </div>
               <div className="text-right">
-                <p className="text-sm font-semibold text-[var(--success)]">Free</p>
+                <p className="text-sm font-semibold text-[var(--gold)]">Free</p>
                 <p className="text-xs text-[var(--muted)] line-through">
                   {formatMoney(giftLine.compareAtCents ?? 0)}
                 </p>
