@@ -409,13 +409,13 @@ export const wavelengths: Wavelength[] = [
     description: "Balances skin texture",
   },
   {
-    nm: "-",
+    nm: "390nm",
     name: "PURPLE",
     color: "#8a52c0",
     description: "Red and Blue in one",
   },
   {
-    nm: "400-700",
+    nm: "510nm",
     name: "WHITE",
     color: "#f5f0e0",
     description: "Speed up skin metabolism",
@@ -582,7 +582,7 @@ export const faqs: FAQItem[] = [
   {
     question: "What are the wavelengths? Irradiance / Power Density?",
     answer:
-      "Red: 633nm. Blue: 415nm. Green: 525nm. Cyan: 490nm. Yellow: 590nm. Purple: Red and Blue. White: 400-700 nm. White cannot be assigned to a single wavelength as it is composed of wavelengths of different colors. Irradiance / Power Density: 32mW/cm2.",
+      "Red: 633nm. Blue: 415nm. Green: 525nm. Cyan: 490nm. Yellow: 590nm. Purple: 390nm. White: 510nm. Irradiance / Power Density: 32mW/cm2.",
   },
   {
     question: "Can I use it in my country?",
