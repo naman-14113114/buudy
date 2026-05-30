@@ -8,7 +8,6 @@ import { CartLineItem } from "./CartLineItem";
 import { CartSummary } from "./CartSummary";
 import { CheckoutForm, type CheckoutCustomer } from "./CheckoutForm";
 import { FreeGiftsPanel } from "./FreeGiftsPanel";
-import { PromoCodeBox } from "./PromoCodeBox";
 
 export function CartPageContent({
   initialCustomer,
@@ -56,8 +55,7 @@ export function CartPageContent({
           </div>
 
           <aside className="space-y-5">
-            <FreeGiftsPanel />
-            <PromoCodeBox />
+            <FreeGiftsPanel compact />
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
               <div className="flex items-center justify-between gap-4">
                 <div>

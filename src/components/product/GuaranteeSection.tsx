@@ -1,6 +1,6 @@
 export function GuaranteeSection() {
   return (
-    <section className="buudy-section relative overflow-hidden py-24 text-center">
+    <section className="buudy-section relative overflow-hidden py-24 pb-36 text-center">
       {/* Background Autoplay Video (Highly visible) */}
       <video
         autoPlay

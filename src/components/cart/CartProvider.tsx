@@ -135,7 +135,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
         lines: upsertProductCartLines(current.lines, product, quantity),
       };
     });
-    setIsOpen(true);
   }
 
   function setQuantity(productId: string, quantity: number) {

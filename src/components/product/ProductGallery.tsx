@@ -105,7 +105,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
         /* 1. CONTAINER */
         .buudyLED-23435t23-container { max-width: 900px; margin: 0 auto; padding: 10px 10px 40px 10px !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
         /* 2. MAIN IMAGE */
-        .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
+        .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: default; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
         .buudyLED-23435t23-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; transition: opacity 0.3s ease; }
         /* 3. THUMBNAILS GRID */
         .buudyLED-23435t23-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; }
@@ -181,7 +181,6 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          onClick={() => setIsLightboxOpen(true)}
         >
           <img
             src={currentImage.src}
@@ -192,7 +191,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
           />
 
           {/* Overlaid Badges */}
-          <span className="buudy-mono absolute right-5 top-5 z-10 rounded-full bg-[var(--plum)] px-4 py-2 text-[var(--cream)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.8)]">
+          <span className="buudy-mono absolute left-5 top-5 z-10 rounded-full bg-[var(--plum)] px-4 py-2 text-[var(--cream)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.8)]">
             3 Free Gifts
           </span>
           <span className="absolute bottom-5 right-5 z-10 flex items-center gap-1.5 rounded-full bg-[rgba(247,241,232,.92)] px-3.5 py-2 text-[var(--plum)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.55)]">
@@ -298,16 +297,6 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
           >
             <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_right" />
           </button>
-
-          <button
-            className="buudyLED-23435t23-zoom_btn"
-            aria-label="Zoom image"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsLightboxOpen(true);
-            }}
-            dangerouslySetInnerHTML={{ __html: zoomIconSVG }}
-          />
         </div>
 
         <div
@@ -328,22 +317,16 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
               onClick={(e) => {
                 e.stopPropagation();
                 setCurrentIndex(index);
+                const container = document.getElementById("buudyLED-23435t23-Container");
+                if (container) {
+                  container.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
               }}
             >
               <img
                 src={image.src}
                 className="buudyLED-23435t23-thumb_img"
                 alt={image.alt}
-              />
-              <button
-                className="buudyLED-23435t23-zoom_btn"
-                aria-label="Zoom image"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentIndex(index);
-                  setIsLightboxOpen(true);
-                }}
-                dangerouslySetInnerHTML={{ __html: zoomIconSVG }}
               />
             </div>
           ))}

@@ -116,7 +116,7 @@ export function AppPromo() {
         <div>
           <p className="buudy-eyebrow">Companion App</p>
           <h2 className="buudy-display mt-2 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl">
-            Buudy <em className="buudy-italic">AI App</em>.
+            Buudy <span className="text-[var(--gold)]">AI App</span>.
           </h2>
           <p className="buudy-copy mt-3 text-sm leading-6">
             Buudy Glow Coach is the AI Skincare app for Buudy LED Mask

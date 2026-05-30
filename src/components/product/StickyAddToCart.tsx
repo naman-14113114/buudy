@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
 import type { Product } from "@/data/products";
 import { formatMoney } from "@/lib/money";
@@ -10,6 +11,7 @@ import { useCart } from "@/components/cart/CartProvider";
 
 export function StickyAddToCart({ product }: { product: Product }) {
   const { addProduct } = useCart();
+  const router = useRouter();
   const [visible, setVisible] = useState(false);
   const giftLabel =
     product.gifts.length > 0
@@ -77,7 +79,13 @@ export function StickyAddToCart({ product }: { product: Product }) {
             </p>
           </div>
         </div>
-        <Button className="w-full sm:w-auto" onClick={() => addProduct(product)}>
+        <Button
+          className="w-full sm:w-auto"
+          onClick={() => {
+            addProduct(product);
+            router.push("/cart");
+          }}
+        >
           <ShoppingBag size={17} />
           Add to cart{giftLabel}
         </Button>

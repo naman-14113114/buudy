@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   BatteryCharging,
   Gem,
@@ -107,6 +108,7 @@ const maskHeroBullets = [
 
 export function GiftBundle({ product }: { product: Product }) {
   const { addProduct } = useCart();
+  const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
   const deliveryDate = useDeliveryDate(4);
   const giftValue = product.gifts.reduce((total, gift) => total + gift.valueCents, 0);
@@ -121,11 +123,11 @@ export function GiftBundle({ product }: { product: Product }) {
 
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-2.5">
-        <div className="text-lg leading-none text-[var(--gold)]" aria-hidden>
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="text-xl sm:text-2xl leading-none text-[var(--gold)]" aria-hidden>
           ★★★★★
         </div>
-        <span className="buudy-mono text-[var(--gold)]">
+        <span className="font-sans text-sm sm:text-base font-medium text-[var(--gold)]">
           {product.rating} · TRUSTED BY {product.customerCount} CUSTOMERS
         </span>
       </div>
@@ -170,7 +172,77 @@ export function GiftBundle({ product }: { product: Product }) {
         </div>
       </div>
 
-      <div className="mt-5 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-5">
+      {/* Premium Compact Bullet Points List */}
+      <ul className="mt-4 mb-4 flex flex-col gap-1.5 pl-1.5">
+        <li className="flex items-center gap-3 text-[14.5px] font-normal leading-normal text-[var(--plum)] buudy-display">
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)]">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </span>
+          <span>Stimulate collagen production</span>
+        </li>
+        <li className="flex items-center gap-3 text-[14.5px] font-normal leading-normal text-[var(--plum)] buudy-display">
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)]">
+              <path d="M5 2h14M5 22h14M19 2v4c0 4-3 6-7 6s-7-2-7-6V2M5 22v-4c0-4 3-6 7-6s7 2 7 6v4" />
+              <path d="M12 12v4" />
+            </svg>
+          </span>
+          <span>Assist with anti-aging</span>
+        </li>
+        <li className="flex items-center gap-3 text-[14.5px] font-normal leading-normal text-[var(--plum)] buudy-display">
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)]">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </span>
+          <span>Reduce acne</span>
+        </li>
+        <li className="flex items-center gap-3 text-[14.5px] font-normal leading-normal text-[var(--plum)] buudy-display">
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)]">
+              <rect x="2" y="7" width="20" height="10" rx="2" transform="rotate(-45 12 12)" />
+              <circle cx="9" cy="9" r="1" />
+              <circle cx="12" cy="12" r="1" />
+              <circle cx="15" cy="15" r="1" />
+            </svg>
+          </span>
+          <span>Aid in healing</span>
+        </li>
+        <li className="flex items-center gap-3 text-[14.5px] font-normal leading-normal text-[var(--plum)] buudy-display">
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)]">
+              <path d="M12 2v10M12 12a3 3 0 0 1-3-3M22 12A10 10 0 0 0 2 12z" />
+              <path d="M12 12v6a2 2 0 0 0 4 0" />
+            </svg>
+          </span>
+          <span>Address sun damage</span>
+        </li>
+        <li className="flex items-center gap-3 text-[14.5px] font-normal leading-normal text-[var(--plum)] buudy-display">
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)]">
+              <path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-11-7-11S5 10.7 5 15a7 7 0 0 0 7 7z" />
+              <path d="M12 10a4 4 0 0 1 4 4" />
+            </svg>
+          </span>
+          <span>Cleanse your skin</span>
+        </li>
+        <li className="flex items-center gap-3 text-[14.5px] font-normal leading-normal text-[var(--plum)] buudy-display">
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--gold)]">
+              <path d="M2 8c4-2 6-2 10 0s6 2 10 0M2 12c4-2 6-2 10 0s6 2 10 0M2 16c4-2 6-2 10 0s6 2 10 0" />
+            </svg>
+          </span>
+          <span>Minimize wrinkles and lines</span>
+        </li>
+      </ul>
+
+      <div className="mt-4 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-5">
         <div className="flex items-center justify-between gap-5">
           <div>
             <p className="buudy-eyebrow text-[var(--gold)]">DELIVERY</p>
@@ -189,10 +261,38 @@ export function GiftBundle({ product }: { product: Product }) {
         </div>
       </div>
 
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes cta-shine {
+          0% { transform: skewX(-20deg) translateX(-150%); opacity: 0; }
+          20% { opacity: 0.6; }
+          50%, 100% { transform: skewX(-20deg) translateX(250%); opacity: 0; }
+        }
+        .cta-shine-btn {
+          position: relative;
+          overflow: hidden;
+        }
+        .cta-shine-btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+          transform: skewX(-20deg) translateX(-150%);
+          animation: cta-shine 3s infinite ease-in-out;
+          z-index: 1;
+          pointer-events: none;
+        }
+      ` }} />
+
       <Button
-        className="mt-5 w-full py-3.5 text-lg font-extrabold tracking-wider uppercase buudy-mono bg-[var(--ink)] text-[var(--cream)] hover:bg-[var(--plum)] shadow-md"
+        className="mt-5 w-full py-4 text-xl sm:text-[22px] font-bold tracking-wide uppercase buudy-display text-[var(--cream)] bg-[var(--ink)] hover:bg-[var(--plum)] rounded-[30px] border border-[var(--ink)] hover:border-[var(--plum)] shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 cta-shine-btn"
         id="hero-cta"
-        onClick={() => addProduct(product)}
+        onClick={() => {
+          addProduct(product);
+          router.push("/cart");
+        }}
       >
         <span className="relative flex h-2 w-2">
           <span className="absolute inset-0 rounded-full bg-[rgba(247,241,232,.75)] [animation:buudy-ping_1.4s_infinite]" />

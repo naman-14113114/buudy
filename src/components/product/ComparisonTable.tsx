@@ -9,7 +9,7 @@ function CheckIcon() {
       height="20"
       viewBox="0 0 20 20"
       fill="none"
-      className="w-5 h-5 text-[#008763]"
+      className="w-5 h-5 text-[var(--plum)]"
     >
       <circle cx="10" cy="10" r="9.375" stroke="currentColor" strokeWidth="1.25" />
       <path
@@ -64,7 +64,7 @@ function ComparisonRow({ title, subtitle, values, isLast = false }: ComparisonRo
             {title}
           </p>
           {subtitle && (
-            <p className="buudy-display text-[var(--success)] text-xs md:text-sm font-medium italic mt-0.5 leading-tight">
+            <p className="buudy-display text-[var(--plum-soft)] text-xs md:text-sm font-medium italic mt-0.5 leading-tight">
               {subtitle}
             </p>
           )}
@@ -174,8 +174,8 @@ export function ComparisonTable() {
                   </div>
                   <div className="w-1/4 flex justify-center p-3">
                     <img
-                      src={productMediaAsset("shark_logo.png")}
-                      alt="Shark"
+                      src={productMediaAsset("OmniLux_Logo.png")}
+                      alt="Omnilux"
                       className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
                     />
                   </div>
@@ -213,8 +213,8 @@ export function ComparisonTable() {
                   </div>
                   <div className="w-1/4 flex justify-center py-3 md:py-5 px-3">
                     <img
-                      src="https://img.thesitebase.net/10650/10650730/themes/175900439737e42788a9.png?width=1920&height=0&min_height=0"
-                      alt="Shark Mask"
+                      src={productMediaAsset("omnilux.png")}
+                      alt="Omnilux Contour Face Mask"
                       className="h-20 md:h-24 w-auto object-contain"
                     />
                   </div>
@@ -241,7 +241,7 @@ export function ComparisonTable() {
           <ComparisonRow
             title="Portable"
             subtitle="Hands-free, cordless and rechargeable"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
           />
 
           <ComparisonRow
@@ -249,7 +249,7 @@ export function ComparisonTable() {
             subtitle="Each with specific skin benefits"
             values={[
               <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">7 TOTAL</strong>,
-              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">3 TOTAL</strong>,
+              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">2 TOTAL</strong>,
               <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">1 TOTAL</strong>,
               <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">3 TOTAL</strong>,
             ]}
@@ -267,7 +267,7 @@ export function ComparisonTable() {
             colorName="Blue"
             colorCode="#0231F0"
             description="Anti-acne Fighter"
-            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
           />
 
           <ColorRow
@@ -295,7 +295,7 @@ export function ComparisonTable() {
             colorName="Purple"
             colorCode="#DE02F0"
             description="Red and Blue in one"
-            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
           />
 
           <ColorRow
@@ -337,10 +337,10 @@ export function ComparisonTable() {
           <ComparisonRow
             title="Price"
             values={[
-              <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">£179</span>,
-              <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">£299</span>,
-              <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">£399</span>,
-              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£372</span>,
+              <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">$199</span>,
+              <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">$395</span>,
+              <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">$380</span>,
+              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">$455</span>,
             ]}
             isLast={true}
           />
