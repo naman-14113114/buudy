@@ -152,6 +152,7 @@ export const buudyMask: Product = {
     { label: "Dimensions", value: "20cm x 29cm (7.87in x 11.42in)" },
     { label: "Number of LEDs", value: "192" },
     { label: "Light Colors", value: "7-color LED mask" },
+    { label: "Near-Infrared (NIR)", value: "830nm" },
     { label: "Battery Life", value: "Up to 12 sessions per charge (1500mAh)" },
     { label: "Use Type", value: "Portable cordless LED mask for household" },
     { label: "Power Source", value: "Rechargeable battery" },
