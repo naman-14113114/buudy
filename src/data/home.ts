@@ -1,4 +1,4 @@
-import { homeAsset } from "@/lib/media";
+import { homeAsset, productAsset } from "@/lib/media";
 import { buudyMask, buudyRedTorch } from "./products";
 
 export const homeHero = {
@@ -38,17 +38,17 @@ export const homeFeatureCards = [
   {
     title: "Industry leading 192 LEDs",
     copy: "Your Buudy LED Mask is armed with 192 powerful LEDs to have you glowing in your best light.",
-    image: homeAsset("05-home-led-density.png"),
+    image: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
   },
   {
     title: "For all different types",
     copy: "There is a light for everyone. It is non-invasive and contains no ingredients. Get a picture perfect glow.",
-    image: homeAsset("06-home-skin-types.png"),
+    image: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
   },
   {
     title: "Full neck coverage",
     copy: "The neck is always first to show signs of aging. Get your neck glowing with a simple tap.",
-    image: homeAsset("07-home-neck-coverage.png"),
+    image: productAsset("01-buudy-led-mask-front.webp"),
   },
 ];
 

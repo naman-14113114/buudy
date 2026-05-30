@@ -158,15 +158,11 @@ function HomeFeatureGrid() {
               className="overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--card)]"
               key={feature.title}
             >
-              <div className="relative aspect-[4/3] bg-[var(--blush)]">
-                <Image
-                  alt=""
-                  className="object-cover"
-                  fill
-                  sizes="(min-width: 768px) 31vw, 90vw"
-                  src={feature.image}
-                />
-              </div>
+              <img
+                alt={feature.title}
+                className="w-full h-auto block bg-[var(--blush)]"
+                src={feature.image}
+              />
               <div className="p-5">
                 <h2 className="buudy-display text-2xl text-[var(--plum)]">
                   {feature.title}
@@ -217,9 +213,15 @@ function YoungerYou() {
     <section className="buudy-section bg-[var(--cream)] py-24">
       <div className="buudy-wrap grid gap-12 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
         <div>
-          <p className="buudy-eyebrow">Reveal a younger you</p>
-          <h2 className="buudy-heading mt-4">{homeYoungerYou.title}</h2>
-          <p className="buudy-copy mt-5 max-w-2xl">{homeYoungerYou.copy}</p>
+          <SectionHeading
+            eyebrow="Reveal a younger you"
+            title={
+              <>
+                Reveal a <em className="buudy-italic">younger you</em>.
+              </>
+            }
+            copy={homeYoungerYou.copy}
+          />
           <Button asChild className="mt-8">
             <Link href="/products/buudy-led-mask">
               Shop the mask
@@ -312,10 +314,26 @@ function WhyTryBuudy() {
   );
 }
 
+function HomeVideoHero() {
+  return (
+    <section className="buudy-section relative w-full overflow-hidden bg-[var(--plum)]">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full h-auto block"
+        src="/media/products/buudy-led-mask/videos/buudy-goddess-bg.mp4"
+      />
+    </section>
+  );
+}
+
 export function HomePage() {
   return (
     <>
-      <HomeHero />
+      {/* <HomeHero /> */}
+      <HomeVideoHero />
       <ProductSpotlight />
       <HomeFeatureGrid />
       <LightTherapyStory />
