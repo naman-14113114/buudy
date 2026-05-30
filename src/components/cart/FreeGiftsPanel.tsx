@@ -7,7 +7,15 @@ import { useCart } from "./CartProvider";
 
 export function FreeGiftsPanel({ compact = false }: { compact?: boolean }) {
   const { lines, totals } = useCart();
-  const giftLines = lines.filter((line) => line.type === "gift");
+  const giftLines = lines
+    .filter((line) => line.type === "gift")
+    .sort((first, second) => {
+      const order = ["skincare-ebook", "buudy-led-torch", "premium-travel-box"];
+      const firstIndex = order.findIndex((id) => first.id.includes(id));
+      const secondIndex = order.findIndex((id) => second.id.includes(id));
+
+      return (firstIndex === -1 ? 99 : firstIndex) - (secondIndex === -1 ? 99 : secondIndex);
+    });
   const unlocked = giftLines.length > 0;
 
   if (!unlocked) {
@@ -37,7 +45,9 @@ export function FreeGiftsPanel({ compact = false }: { compact?: boolean }) {
               <Check size={16} />
             </span>
             <p className="mt-3 text-[0.64rem] font-semibold uppercase tracking-[.16em] text-[var(--plum)]">
-              {giftLine.title}
+              {giftLine.id.includes("skincare-ebook")
+                ? "Skincare guide"
+                : giftLine.title}
             </p>
           </div>
         ))}

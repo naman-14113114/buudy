@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
 import { CartLineItem } from "./CartLineItem";
 import { CartSummary } from "./CartSummary";
-import { FreeGiftsPanel } from "./FreeGiftsPanel";
-import { PromoCodeBox } from "./PromoCodeBox";
+import { getDisplayLines } from "@/lib/cart";
 
 export function CartDrawer() {
   const { lines, isOpen, closeCart, totals } = useCart();
+  const visibleLines = getDisplayLines(lines);
   const hasItems = totals.itemCount > 0;
 
   return (
@@ -54,13 +54,9 @@ export function CartDrawer() {
         <div className="flex-1 overflow-y-auto px-5">
           {hasItems ? (
             <>
-              {lines.map((line) => (
+              {visibleLines.map((line) => (
                 <CartLineItem key={line.id} line={line} />
               ))}
-              <div className="space-y-4 py-5">
-                <FreeGiftsPanel compact />
-                <PromoCodeBox />
-              </div>
             </>
           ) : (
             <div className="flex h-full flex-col items-center justify-center text-center">

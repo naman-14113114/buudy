@@ -126,3 +126,34 @@ export function calculateCartTotals(lines: CartLine[]) {
     totalCents: subtotalCents,
   };
 }
+
+export function getDisplayLines(lines: CartLine[]): CartLine[] {
+  const hasMaskProduct = lines.some(
+    (line) => line.productId === "buudy-led-mask" && line.type === "product"
+  );
+
+  if (!hasMaskProduct) {
+    return lines;
+  }
+
+  return lines
+    .map((line) => {
+      if (line.productId === "buudy-led-mask" && line.type === "product") {
+        return {
+          ...line,
+          title: "Buudy LED Mask + Premium Travel Box",
+          image: "/media/products/buudy-led-mask/images/84-w.webp",
+        };
+      }
+      return line;
+    })
+    .filter((line) => {
+      if (line.productId === "buudy-led-mask" && line.type === "gift") {
+        const giftId = line.id.split(":")[1];
+        if (giftId === "premium-travel-box" || giftId === "skincare-ebook") {
+          return false;
+        }
+      }
+      return true;
+    });
+}

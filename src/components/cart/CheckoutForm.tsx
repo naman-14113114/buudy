@@ -1,15 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useActionState, useEffect, useMemo } from "react";
-import { Lock, Mail, MapPin, Phone, UserRound } from "lucide-react";
-import { recordCheckoutAction } from "@/app/actions/checkout";
+import { Lock } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { formatMoney } from "@/lib/money";
-import {
-  initialCheckoutState,
-  type CheckoutActionState,
-} from "@/types/actions";
 import { useCart } from "./CartProvider";
 
 export type CheckoutCustomer = {
@@ -30,6 +22,7 @@ type CheckoutFormProps = {
 };
 
 export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
+  void initialCustomer;
   const { totals } = useCart();
   const hasItems = totals.itemCount > 0;
 
