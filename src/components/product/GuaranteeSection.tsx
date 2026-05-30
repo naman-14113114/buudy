@@ -29,7 +29,7 @@ export function GuaranteeSection() {
           ritual, or your reflection, send it back for a full refund. No
           questions, no hassle.
         </p>
-        <div className="mx-auto mt-10 inline-flex flex-wrap items-center justify-center gap-4 rounded-full border border-[rgba(247,241,232,0.25)] bg-[rgba(18,9,20,0.52)] px-7 py-4 backdrop-blur-md">
+        {/* <div className="mx-auto mt-10 inline-flex flex-wrap items-center justify-center gap-4 rounded-full border border-[rgba(247,241,232,0.25)] bg-[rgba(18,9,20,0.52)] px-7 py-4 backdrop-blur-md">
           {["90 days", "Free returns", "Full refund"].map((item, index) => (
             <span className="contents" key={item}>
               {index > 0 ? (
@@ -38,7 +38,7 @@ export function GuaranteeSection() {
               <span className="buudy-mono text-[var(--cream)]">{item}</span>
             </span>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

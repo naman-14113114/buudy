@@ -18,7 +18,7 @@ export function Price({
   const off = compareAtCents ? percentOff(priceCents, compareAtCents) : 0;
 
   return (
-    <div className="flex flex-wrap items-baseline gap-3">
+    <div className="flex flex-wrap items-center gap-3">
       <span
         className={`buudy-display ${
           invert ? "text-[var(--cream)]" : "text-[var(--plum)]"

@@ -130,26 +130,28 @@ export function GiftBundle({ product }: { product: Product }) {
         </span>
       </div>
 
-      <h1 className="font-playfair mt-5 whitespace-nowrap text-[2rem] leading-[1.02] text-[var(--plum)] sm:text-[2.55rem] md:text-[3.25rem] xl:text-[4rem] 2xl:text-[4.45rem]">
+      <h1 className="font-playfair mt-3 whitespace-nowrap text-[2rem] leading-[1.02] text-[var(--plum)] sm:text-[2.55rem] md:text-[3.25rem] xl:text-[4rem] 2xl:text-[4.45rem]">
         {product.heroTitle}{" "}
         <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
       </h1>
 
-      {/* <ul className="mt-4 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
-        {heroBullets.map(({ icon: Icon, text }) => (
-          <li
-            className="flex items-center gap-2 text-sm font-medium leading-tight text-[var(--plum)]"
-            key={text}
-          >
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[var(--gold)]">
-              <Icon size={16} strokeWidth={2.2} />
-            </span>
-            <span>{text}</span>
-          </li>
-        ))}
-      </ul> */}
+      {/* Clinically Proven Badges */}
+      <div className="mt-3 flex flex-nowrap items-center gap-2">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-3 py-1.5">
+          <ShieldCheck size={14} strokeWidth={2} className="shrink-0 text-[var(--gold)]" />
+          <span className="whitespace-nowrap font-mono text-[9.5px] font-bold uppercase tracking-[0.1em] text-[var(--plum)]">Clinically Proven</span>
+        </span>
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-3 py-1.5">
+          <RotateCcw size={13} strokeWidth={2} className="shrink-0 text-[var(--gold)]" />
+          <span className="whitespace-nowrap font-mono text-[9.5px] font-bold uppercase tracking-[0.1em] text-[var(--plum)]">90-Day Returns</span>
+        </span>
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-3 py-1.5">
+          <Sparkles size={14} strokeWidth={2} className="shrink-0 text-[var(--gold)]" />
+          <span className="whitespace-nowrap font-mono text-[9.5px] font-bold uppercase tracking-[0.1em] text-[var(--plum)]">Dermatologist Approved</span>
+        </span>
+      </div>
 
-      <div className="mt-7 flex flex-col gap-2.5">
+      <div className="mt-4 flex flex-col gap-2.5">
         <Price
           compareAtCents={product.compareAtCents}
           currency={product.currency}
@@ -168,7 +170,7 @@ export function GiftBundle({ product }: { product: Product }) {
         </div>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-5">
+      <div className="mt-5 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-5">
         <div className="flex items-center justify-between gap-5">
           <div>
             <p className="buudy-eyebrow text-[var(--gold)]">DELIVERY</p>
@@ -188,7 +190,7 @@ export function GiftBundle({ product }: { product: Product }) {
       </div>
 
       <Button
-        className="mt-6 w-full py-4 text-base font-bold tracking-wider uppercase buudy-mono bg-[var(--ink)] text-[var(--cream)] hover:bg-[var(--plum)] shadow-md"
+        className="mt-5 w-full py-3.5 text-lg font-extrabold tracking-wider uppercase buudy-mono bg-[var(--ink)] text-[var(--cream)] hover:bg-[var(--plum)] shadow-md"
         id="hero-cta"
         onClick={() => addProduct(product)}
       >
