@@ -138,18 +138,18 @@ export function GiftBundle({ product }: { product: Product }) {
       </h1>
 
       {/* Clinically Proven Badges */}
-      <div className="mt-3 flex flex-nowrap items-center gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-3 py-1.5">
-          <ShieldCheck size={14} strokeWidth={2} className="shrink-0 text-[var(--gold)]" />
-          <span className="whitespace-nowrap buudy-display text-[10.5px] font-bold uppercase tracking-[0.05em] text-[var(--plum)]">Clinically Proven</span>
+      <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
+        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
+          <ShieldCheck size={14} strokeWidth={2} className="hidden sm:block shrink-0 text-[var(--gold)]" />
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">Clinically Proven</span>
         </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-3 py-1.5">
-          <RotateCcw size={13} strokeWidth={2} className="shrink-0 text-[var(--gold)]" />
-          <span className="whitespace-nowrap buudy-display text-[10.5px] font-bold uppercase tracking-[0.05em] text-[var(--plum)]">90-Day Returns</span>
+        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
+          <RotateCcw size={13} strokeWidth={2} className="hidden sm:block shrink-0 text-[var(--gold)]" />
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">90-Day Returns</span>
         </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-3 py-1.5">
-          <Sparkles size={14} strokeWidth={2} className="shrink-0 text-[var(--gold)]" />
-          <span className="whitespace-nowrap buudy-display text-[10.5px] font-bold uppercase tracking-[0.05em] text-[var(--plum)]">Dermatologist Approved</span>
+        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
+          <Sparkles size={14} strokeWidth={2} className="hidden sm:block shrink-0 text-[var(--gold)]" />
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">Dermatologist Approved</span>
         </span>
       </div>
 
@@ -159,29 +159,29 @@ export function GiftBundle({ product }: { product: Product }) {
           currency={product.currency}
           priceCents={product.priceCents}
         />
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-[var(--muted)]">
-          <span className="flex items-center gap-1.5 flex-wrap">
-            or <strong className="buudy-display text-base font-medium text-[var(--plum)]">4</strong> interest-free payments of{" "}
-            <strong className="buudy-display text-base font-semibold text-[var(--plum)]">
+        <div className="flex flex-nowrap items-center gap-x-1 sm:gap-x-1.5 text-[9.5px] sm:text-[13px] text-[var(--muted)]">
+          <span className="whitespace-nowrap tracking-tight sm:tracking-normal">
+            or <strong className="buudy-display text-[10px] sm:text-[14px] font-medium text-[var(--plum)]">4</strong> interest-free payments of{" "}
+            <strong className="buudy-display text-[10px] sm:text-[14px] font-semibold text-[var(--plum)]">
               {formatMoney(product.priceCents / 4, product.currency)}
             </strong>{" "}
             with
           </span>
-          <div className="inline-flex items-center gap-1.5">
+          <div className="inline-flex items-center gap-1 sm:gap-1.5 shrink-0">
             {/* Klarna Badge Container */}
-            <div className="relative w-[52px] h-[18px] overflow-hidden rounded-full bg-[#FFB3C7] shrink-0">
+            <div className="relative w-[50px] sm:w-[58px] h-[15px] sm:h-[18px] overflow-hidden rounded-[3px] bg-[#FFB3C7] flex items-center justify-center shrink-0">
               <img
                 src="/media/products/buudy-led-mask/images/klarna_badge.png"
                 alt="Klarna"
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-auto object-contain"
+                className="w-[85%] h-auto object-contain"
               />
             </div>
             {/* Afterpay Badge Container */}
-            <div className="relative w-[50px] h-[18px] overflow-hidden rounded-full bg-[#B2FCE4] shrink-0 flex items-center justify-center">
+            <div className="relative w-[56px] sm:w-[68px] h-[15px] sm:h-[18px] overflow-hidden rounded-[3px] bg-[#B2FCE4] flex items-center justify-center shrink-0">
               <img
                 src="/media/products/buudy-led-mask/images/afterpay_badge.png"
                 alt="Afterpay"
-                className="w-[82%] h-auto object-contain"
+                className="w-[88%] h-auto object-contain"
               />
             </div>
           </div>
@@ -262,7 +262,7 @@ export function GiftBundle({ product }: { product: Product }) {
         <div className="flex items-center justify-between gap-5">
           <div>
             <p className="buudy-eyebrow text-[var(--gold)]">DELIVERY</p>
-            <p className="buudy-display mt-1.5 text-xl sm:text-2xl text-[var(--plum)] font-normal leading-none">
+            <p className="buudy-display mt-1.5 text-lg sm:text-2xl text-[var(--plum)] font-normal leading-none whitespace-nowrap">
               {deliveryDate || "soon"}
             </p>
           </div>
@@ -364,27 +364,27 @@ export function GiftBundle({ product }: { product: Product }) {
               <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
             </p>
           </div>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-2 md:gap-4">
             {product.gifts.map((gift) => (
               <div
-                className="relative rounded-[24px] border border-[rgba(58,31,61,.18)] bg-[var(--card)] p-3 pt-6 text-center flex flex-col justify-between shadow-sm min-h-[220px]"
+                className="relative rounded-[24px] border border-[rgba(58,31,61,.18)] bg-[var(--card)] p-2 pt-5 md:p-3 md:pt-6 text-center flex flex-col justify-between shadow-sm min-h-[180px] md:min-h-[220px]"
                 key={gift.id}
               >
                 {/* Single absolute overlapping badge: FREE (bold & clear) + price strikethrough (no nested container) */}
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-[var(--card)] border border-[rgba(58,31,61,.22)] rounded-full flex items-center gap-1.5 shadow-[0_2px_8px_rgba(58,31,61,0.06)] whitespace-nowrap">
-                  <span className="text-black text-[10px] font-extrabold tracking-widest uppercase font-sans">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-2 sm:px-3 py-1 bg-[var(--card)] border border-[rgba(58,31,61,.22)] rounded-full flex items-center gap-1 sm:gap-1.5 shadow-[0_2px_8px_rgba(58,31,61,0.06)] whitespace-nowrap">
+                  <span className="text-black text-[9px] sm:text-[10px] font-extrabold tracking-widest uppercase font-sans">
                     FREE
                   </span>
-                  <span className="line-through text-[10.5px] text-[var(--muted)] buudy-display font-semibold leading-none">
+                  <span className="line-through text-[9px] sm:text-[10.5px] text-[var(--muted)] buudy-display font-semibold leading-none">
                     {formatMoney(gift.valueCents, product.currency)}
                   </span>
                 </div>
 
                 {/* Gift Image (No inner box container, directly given standard even border-radius) */}
-                <div className="relative mt-2 aspect-square w-full overflow-hidden rounded-[20px] p-1 flex items-center justify-center">
+                <div className="relative mt-1 md:mt-2 aspect-square w-full overflow-hidden rounded-[20px] p-0.5 md:p-1 flex items-center justify-center">
                   <Image
                     alt={gift.name}
-                    className="object-contain p-1 rounded-[20px] transition-transform duration-300 hover:scale-105"
+                    className="object-contain p-0.5 md:p-1 rounded-[20px] transition-transform duration-300 hover:scale-105"
                     fill
                     sizes="120px"
                     src={gift.image}
@@ -392,7 +392,7 @@ export function GiftBundle({ product }: { product: Product }) {
                 </div>
 
                 {/* Gift Label / Title */}
-                <p className="buudy-display mt-3.5 text-xs md:text-sm font-semibold text-[var(--plum)] leading-snug">
+                <p className="buudy-display mt-0.5 md:mt-3.5 text-[10px] md:text-sm font-semibold text-[var(--plum)] leading-snug">
                   {gift.name}
                 </p>
               </div>

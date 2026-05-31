@@ -56,7 +56,7 @@ interface ComparisonRowProps {
 
 function ComparisonRow({ title, subtitle, values, isLast = false }: ComparisonRowProps) {
   return (
-    <div className={`border-b border-[rgba(194,188,177,0.4)] ${isLast ? "border-0" : ""}`}>
+    <div className={isLast ? "" : "border-b border-[rgba(194,188,177,0.4)]"}>
       <div className="flex flex-col md:flex-row md:items-stretch">
         {/* Feature Info */}
         <div className="w-full md:w-1/3 pr-4 py-2.5 md:py-3.5 flex flex-col justify-center">
@@ -164,33 +164,33 @@ export function ComparisonTable() {
             <div className="flex flex-col md:flex-row md:items-stretch">
               <div className="hidden md:block md:w-1/3"></div>
               <div className="w-full md:w-2/3">
-                <div className="flex items-stretch">
-                  <div className="w-1/4 flex justify-center bg-[rgba(58,31,61,0.05)] rounded-t-2xl p-3">
+                <div className="flex items-center h-full">
+                  <div className="w-1/4 flex justify-center items-center h-full bg-[rgba(58,31,61,0.05)] rounded-t-2xl pt-4 px-2 pb-1 md:pb-2">
                     <img
                       src="https://img.thesitebase.net/10650/10650730/themes/175579000979c2a2281d.png?width=640&height=0&min_height=0"
                       alt="Buudy Logo"
                       className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
                     />
                   </div>
-                  <div className="w-1/4 flex justify-center p-3">
+                  <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
                     <img
                       src={productMediaAsset("OmniLux_Logo.png")}
                       alt="Omnilux"
-                      className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
+                      className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
                     />
                   </div>
-                  <div className="w-1/4 flex justify-center p-3">
+                  <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
                     <img
                       src={productMediaAsset("current_body_logo.png")}
                       alt="CurrentBody"
-                      className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
+                      className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
                     />
                   </div>
-                  <div className="w-1/4 flex justify-center p-3">
+                  <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
                     <img
                       src={productMediaAsset("59 (2).png")}
                       alt="Dr Dennis Gross"
-                      className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
+                      className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
                     />
                   </div>
                 </div>
@@ -200,36 +200,36 @@ export function ComparisonTable() {
 
           {/* Mask Images Row */}
           <div className="border-b border-[rgba(194,188,177,0.4)]">
-            <div className="flex flex-col md:flex-row md:items-stretch">
+            <div className="flex flex-col md:flex-row md:items-stretch h-full">
               <div className="hidden md:block md:w-1/3"></div>
               <div className="w-full md:w-2/3">
-                <div className="flex items-stretch">
-                  <div className="w-1/4 flex justify-center bg-[rgba(58,31,61,0.05)] py-3 md:py-5 px-3 overflow-visible">
+                <div className="flex items-center h-full">
+                  <div className="w-1/4 flex justify-center items-center h-full bg-[rgba(58,31,61,0.05)] pb-4 md:pb-5 px-2 overflow-visible">
                     <img
                       src="https://i.postimg.cc/8cytzn6N/Chat-GPT-Image-May-3-2026-03-11-11-PM.png"
                       alt="Buudy Mask"
-                      className="h-20 md:h-24 w-auto object-contain scale-[1.3] md:scale-[1.4] transform origin-center transition-transform"
+                      className="h-24 sm:h-28 md:h-32 w-auto object-contain scale-[1.3] md:scale-[1.4] transform origin-center transition-transform"
                     />
                   </div>
-                  <div className="w-1/4 flex justify-center py-3 md:py-5 px-3">
+                  <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
                     <img
                       src={productMediaAsset("omnilux.png")}
                       alt="Omnilux Contour Face Mask"
-                      className="h-20 md:h-24 w-auto object-contain"
+                      className="h-24 sm:h-28 md:h-32 w-auto object-contain"
                     />
                   </div>
-                  <div className="w-1/4 flex justify-center py-3 md:py-5 px-3">
+                  <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
                     <img
                       src={productMediaAsset("current Body.png")}
                       alt="CurrentBody Mask"
-                      className="h-20 md:h-24 w-auto object-contain"
+                      className="h-24 sm:h-28 md:h-32 w-auto object-contain"
                     />
                   </div>
-                  <div className="w-1/4 flex justify-center py-3 md:py-5 px-3">
+                  <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
                     <img
                       src={productMediaAsset("Dr Dennis Gross.png")}
                       alt="Dr Dennis Gross Mask"
-                      className="h-20 md:h-24 w-auto object-contain"
+                      className="h-24 sm:h-28 md:h-32 w-auto object-contain"
                     />
                   </div>
                 </div>

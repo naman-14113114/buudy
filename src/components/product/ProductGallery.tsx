@@ -103,7 +103,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
       <style dangerouslySetInnerHTML={{ __html: `
         /* --- CSS STYLES --- */
         /* 1. CONTAINER */
-        .buudyLED-23435t23-container { max-width: 900px; margin: 0 auto; padding: 10px 10px 40px 10px !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
+        .buudyLED-23435t23-container { max-width: 900px; margin: 0 auto; padding: 10px 10px 10px 10px !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
         /* 2. MAIN IMAGE */
         .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: default; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
         .buudyLED-23435t23-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; transition: opacity 0.3s ease; }
@@ -141,25 +141,19 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
                 flex-wrap: nowrap;
                 overflow-x: auto;
                 gap: 12px; 
-                padding-bottom: 10px;
+                padding-bottom: 4px;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* IE/Edge */
             } 
+            /* Hide scrollbar for Chrome/Safari/Opera */
+            .buudyLED-23435t23-grid::-webkit-scrollbar {
+                display: none;
+            }
             /* Hide Zoom Button on Mobile */
             .buudyLED-23435t23-zoom_btn {
                 display: none !important;
-            }
-            /* Custom Scrollbar for Mobile */
-            .buudyLED-23435t23-grid::-webkit-scrollbar {
-                height: 5px;
-            }
-            .buudyLED-23435t23-grid::-webkit-scrollbar-track {
-                background: rgba(0,0,0,0.05);
-                border-radius: 4px;
-            }
-            .buudyLED-23435t23-grid::-webkit-scrollbar-thumb {
-                background: rgba(0,0,0,0.2);
-                border-radius: 4px;
             }
             .buudyLED-23435t23-thumb_item {
                 flex: 0 0 28%; /* Show ~3.5 items to hint at scrolling */
