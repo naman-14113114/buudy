@@ -11,7 +11,6 @@ import {
   UserRound,
 } from "lucide-react";
 import { signOutAction } from "@/app/actions/auth";
-import Lottie from "lottie-react";
 import { primaryNavigation, secondaryNavigation } from "@/data/navigation";
 import { useCart } from "@/components/cart/CartProvider";
 
@@ -32,16 +31,8 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [session, setSession] = useState<HeaderSession | null>(null);
-  const [cartIconData, setCartIconData] = useState<any>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
-
-  useEffect(() => {
-    fetch("/media/products/buudy-led-mask/images/cart_lottieflow-ecommerce-14-8-3b1e40-easey.json")
-      .then((res) => res.json())
-      .then((data) => setCartIconData(data))
-      .catch((err) => console.error("Error loading cart lottie", err));
-  }, []);
 
   useEffect(() => {
     async function loadSession() {
@@ -140,11 +131,16 @@ export function Header() {
         </nav>
 
         <Link
-          className="buudy-display text-4xl text-[var(--plum)]"
+          className="flex items-center"
           href="/"
           aria-label="Buudy home"
         >
-          buudy<span className="text-[var(--gold)]">.</span>
+          <img
+            src="/media/products/buudy-led-mask/images/ChatGPT Image May 31, 2026, 12_10_21 AM.png"
+            alt="Buudy Logo"
+            className="w-auto object-contain"
+            style={{ height: '50px' }}
+          />
         </Link>
 
         <div className="flex items-center gap-6">
@@ -161,20 +157,14 @@ export function Header() {
           </nav>
           <button
             aria-label={`Open cart with ${totals.itemCount} items`}
-            className="relative flex h-12 w-12 items-center justify-center rounded-full text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
+            className="relative grid h-12 w-12 place-items-center rounded-full border border-[rgba(58,31,61,.18)] text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
             data-testid="cart-trigger"
             onClick={openCart}
             type="button"
           >
-            {cartIconData ? (
-              <div className="w-7 h-7 flex items-center justify-center">
-                <Lottie animationData={cartIconData} loop={true} />
-              </div>
-            ) : (
-              <ShoppingBag size={22} strokeWidth={1.5} />
-            )}
+            <ShoppingBag size={18} strokeWidth={1.8} />
             {totals.itemCount > 0 ? (
-              <span className="buudy-mono absolute right-0 top-0 grid h-5 min-w-5 place-items-center rounded-full bg-[var(--plum)] px-1 text-[0.58rem] leading-none text-[var(--cream)]">
+              <span className="buudy-mono absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-[var(--plum)] px-1 text-[0.58rem] leading-none text-[var(--cream)]">
                 {totals.itemCount}
               </span>
             ) : null}
@@ -185,14 +175,14 @@ export function Header() {
               aria-expanded={menuOpen}
               aria-haspopup="menu"
               aria-label={signedIn ? `Open account menu for ${accountLabel}` : "Open account menu"}
-              className="inline-flex h-12 items-center justify-center gap-1 rounded-full px-3 text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
+              className="inline-flex h-12 items-center gap-1 rounded-full border border-[rgba(58,31,61,.18)] px-3 text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
               onClick={() => {
                 setHidden(false);
                 setMenuOpen((open) => !open);
               }}
               type="button"
             >
-              <UserRound size={22} strokeWidth={1.5} />
+              <UserRound size={18} strokeWidth={1.8} />
               <ChevronDown
                 className={`transition ${menuOpen ? "rotate-180" : ""}`}
                 size={14}
