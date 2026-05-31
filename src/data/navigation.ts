@@ -1,7 +1,7 @@
 export const primaryNavigation = [
   { label: "LED Face Mask", href: "/products/buudy-led-mask" },
   { label: "Red Light Torch", href: "/products/red-light-torch" },
-  { label: "Skincare Quiz", href: "/#wavelength-map" },
+  { label: "Skincare Quiz", href: "/pages/skincare-quiz" },
 ];
 
 export const secondaryNavigation = [

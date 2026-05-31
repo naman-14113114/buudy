@@ -32,5 +32,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    {
+      url: "https://buudy.com/pages/skincare-quiz",
+      lastModified: new Date("2026-05-31"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 }

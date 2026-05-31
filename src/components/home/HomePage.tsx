@@ -280,6 +280,15 @@ function WavelengthMapPreview() {
               Match each skin concern with a targeted wavelength, then build a
               routine that feels easy to repeat.
             </p>
+            <Button
+              asChild
+              className="mt-5 bg-[var(--cream)] text-[var(--plum)] hover:bg-[var(--blush)]"
+            >
+              <Link href="/pages/skincare-quiz">
+                Take the skincare quiz
+                <ArrowRight size={17} />
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

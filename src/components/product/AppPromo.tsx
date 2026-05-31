@@ -157,7 +157,7 @@ export function BlueLightSection() {
             className="object-cover"
             fill
             sizes="(min-width: 1024px) 42vw, 100vw"
-            src={productAsset("04-buudy-led-mask-blue-light-acne.webp")}
+            src={productMediaAsset("ChatGPT Image May 31, 2026, 03_48_31 PM.png")}
           />
         </div>
         <div>

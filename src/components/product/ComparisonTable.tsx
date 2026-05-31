@@ -167,7 +167,7 @@ export function ComparisonTable() {
                 <div className="flex items-center h-full">
                   <div className="w-1/4 flex justify-center items-center h-full bg-[rgba(58,31,61,0.05)] rounded-t-2xl pt-4 px-2 pb-1 md:pb-2">
                     <img
-                      src="https://img.thesitebase.net/10650/10650730/themes/175579000979c2a2281d.png?width=640&height=0&min_height=0"
+                      src={productMediaAsset("ChatGPT Image May 31, 2026, 12_10_21 AM.png")}
                       alt="Buudy Logo"
                       className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
                     />

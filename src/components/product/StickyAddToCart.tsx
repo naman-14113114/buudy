@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
+import Lottie from "lottie-react";
 import type { Product } from "@/data/products";
 import { formatMoney } from "@/lib/money";
 import { Button } from "@/components/ui/Button";
@@ -13,6 +14,15 @@ export function StickyAddToCart({ product }: { product: Product }) {
   const { addProduct } = useCart();
   const router = useRouter();
   const [visible, setVisible] = useState(false);
+  const [cartIconData, setCartIconData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-8-f6ede2-cart.json")
+      .then((res) => res.json())
+      .then((data) => setCartIconData(data))
+      .catch((err) => console.error("Error loading sticky cart lottie", err));
+  }, []);
+
   const giftLabel =
     product.gifts.length > 0
       ? ` + ${product.gifts.length} free gifts`
@@ -91,7 +101,13 @@ export function StickyAddToCart({ product }: { product: Product }) {
             router.push("/cart");
           }}
         >
-          <ShoppingBag size={17} />
+          {cartIconData ? (
+            <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center">
+              <Lottie animationData={cartIconData} loop={true} />
+            </div>
+          ) : (
+            <ShoppingBag size={17} />
+          )}
           <span className="sm:hidden">Add to cart</span>
           <span className="hidden sm:inline">Add to cart{giftLabel}</span>
         </Button>
