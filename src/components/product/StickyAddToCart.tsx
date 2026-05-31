@@ -14,7 +14,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
   const { addProduct } = useCart();
   const router = useRouter();
   const [visible, setVisible] = useState(false);
-  const [cartIconData, setCartIconData] = useState<any>(null);
+  const [cartIconData, setCartIconData] = useState<Record<string, unknown> | null>(null);
 
   useEffect(() => {
     fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-8-f6ede2-cart.json")
@@ -27,6 +27,18 @@ export function StickyAddToCart({ product }: { product: Product }) {
     product.gifts.length > 0
       ? ` + ${product.gifts.length} free gifts`
       : " + free shipping";
+
+  useEffect(() => {
+    if (product.template !== "mask") {
+      return;
+    }
+
+    document.documentElement.classList.add("buudy-mask-sticky-cta");
+
+    return () => {
+      document.documentElement.classList.remove("buudy-mask-sticky-cta");
+    };
+  }, [product.template]);
 
   useEffect(() => {
     const button = document.getElementById("hero-cta");
@@ -95,14 +107,14 @@ export function StickyAddToCart({ product }: { product: Product }) {
         </div>
         <Button
           aria-label={`Add ${product.name} to cart${giftLabel}`}
-          className="min-h-11 flex-none px-4 text-xs sm:min-h-12 sm:px-6 sm:text-sm"
+          className="buudy-cart-wipe min-h-11 flex-none border border-[var(--plum)] bg-[var(--plum)] px-4 text-xs hover:border-[var(--gold)] hover:bg-[var(--plum)] sm:min-h-12 sm:px-6 sm:text-sm"
           onClick={() => {
             addProduct(product);
             router.push("/cart");
           }}
         >
           {cartIconData ? (
-            <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center">
+            <div className="buudy-sticky-cart-icon flex h-5 w-5 flex-shrink-0 items-center justify-center">
               <Lottie animationData={cartIconData} loop={true} />
             </div>
           ) : (

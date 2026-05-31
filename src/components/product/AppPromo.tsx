@@ -100,14 +100,13 @@ export function AppPromo() {
   return (
     <section className="buudy-section bg-[var(--cream)] py-24" id="buudy-ai">
       <div className="buudy-wrap grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
-        <div className="relative overflow-hidden rounded-[18px] bg-[var(--blush)] w-full">
+        <div className="relative aspect-[1200/799] w-full overflow-hidden rounded-[18px] bg-[var(--blush)]">
           <Image
             alt="Buudy AI companion app"
-            className="w-full h-auto block"
-            width={1200}
-            height={799}
+            className="object-cover"
+            fill
             sizes="(min-width: 1024px) 55vw, 100vw"
-            src={productMediaAsset("app_pic.png")}
+            src={productMediaAsset("ChatGPT Image May 31, 2026, 11_35_03 PM (2).png")}
           />
           <span className="buudy-mono absolute left-5 top-5 rounded-full bg-[rgba(247,241,232,.9)] px-4 py-2 text-[var(--plum)] backdrop-blur">
             Free with Buudy

@@ -206,7 +206,7 @@ export function ComparisonTable() {
                 <div className="flex items-center h-full">
                   <div className="w-1/4 flex justify-center items-center h-full bg-[rgba(58,31,61,0.05)] pb-4 md:pb-5 px-2 overflow-visible">
                     <img
-                      src="https://i.postimg.cc/8cytzn6N/Chat-GPT-Image-May-3-2026-03-11-11-PM.png"
+                      src={productMediaAsset("ChatGPT Image May 31, 2026, 11_38_29 PM.png")}
                       alt="Buudy Mask"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain scale-[1.3] md:scale-[1.4] transform origin-center transition-transform"
                     />
@@ -337,7 +337,9 @@ export function ComparisonTable() {
           <ComparisonRow
             title="Price"
             values={[
-              <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">$199</span>,
+              <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">
+                <span className="line-through mr-1.5 opacity-60">$399</span>$199
+              </span>,
               <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">$395</span>,
               <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">$380</span>,
               <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">$455</span>,

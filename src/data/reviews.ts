@@ -49,6 +49,7 @@ export function getProductReviews(
   productHandle: string,
   offset = 0,
   limit = reviewPageSize,
+  rating?: number,
 ) {
   if (!isReviewProductHandle(productHandle)) {
     return [];
@@ -56,6 +57,19 @@ export function getProductReviews(
 
   const safeOffset = Math.max(0, offset);
   const safeLimit = Math.min(maxReviewPageSize, Math.max(1, limit));
+  const reviews = rating
+    ? reviewCollections[productHandle].filter((review) => review.rating === rating)
+    : reviewCollections[productHandle];
 
-  return reviewCollections[productHandle].slice(safeOffset, safeOffset + safeLimit);
+  return reviews.slice(safeOffset, safeOffset + safeLimit);
+}
+
+export function getProductReviewCount(productHandle: string, rating?: number) {
+  if (!isReviewProductHandle(productHandle)) {
+    return 0;
+  }
+
+  return rating
+    ? reviewCollections[productHandle].filter((review) => review.rating === rating).length
+    : reviewCollections[productHandle].length;
 }

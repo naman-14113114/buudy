@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 import {
   BatteryCharging,
-  Gem,
-  ScanFace,
   ShieldCheck,
   Sparkles,
   Truck,
@@ -80,39 +78,12 @@ function FaceNeckIcon({ size = 22 }: { size?: number }) {
   );
 }
 
-const maskHeroBullets = [
-  {
-    icon: Sparkles,
-    text: "Stimulates collagen production",
-  },
-  {
-    icon: Waves,
-    text: "Smooths skin & fine lines",
-  },
-  {
-    icon: ScanFace,
-    text: "Full face and neck coverage",
-  },
-  {
-    icon: BatteryCharging,
-    text: "Cordless, rechargeable ritual",
-  },
-  {
-    icon: ShieldCheck,
-    text: "Health Canada approved",
-  },
-  {
-    icon: Gem,
-    text: "3 free gifts included today",
-  },
-];
-
 export function GiftBundle({ product }: { product: Product }) {
   const { addProduct } = useCart();
   const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
   const deliveryDate = useDeliveryDate(4);
-  const [deliveryIconData, setDeliveryIconData] = useState<any>(null);
+  const [deliveryIconData, setDeliveryIconData] = useState<Record<string, unknown> | null>(null);
   
   useEffect(() => {
     fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-aa8e50-easey.json")
@@ -123,24 +94,16 @@ export function GiftBundle({ product }: { product: Product }) {
 
   const giftValue = product.gifts.reduce((total, gift) => total + gift.valueCents, 0);
   const hasGifts = product.gifts.length > 0;
-  const heroBullets =
-    product.template === "mask"
-      ? maskHeroBullets
-      : product.highlights.map((highlight) => ({
-          icon: Sparkles,
-          text: highlight,
-        }));
-
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-3">
+      <a href="#reviews" className="flex flex-wrap items-center gap-3 no-underline hover:no-underline cursor-pointer">
         <div className="text-xl sm:text-2xl leading-none text-[var(--gold)]" aria-hidden>
           ★★★★★
         </div>
         <span className="font-sans text-sm sm:text-base font-medium text-[var(--gold)]">
           {product.rating} · TRUSTED BY {product.customerCount} CUSTOMERS
         </span>
-      </div>
+      </a>
 
       <h1 className="font-playfair mt-3 whitespace-nowrap text-[2rem] leading-[1.02] text-[var(--plum)] sm:text-[2.55rem] md:text-[3.25rem] xl:text-[4rem] 2xl:text-[4.45rem]">
         {product.heroTitle}{" "}
@@ -294,33 +257,8 @@ export function GiftBundle({ product }: { product: Product }) {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes cta-shine {
-          0% { transform: skewX(-20deg) translateX(-150%); opacity: 0; }
-          20% { opacity: 0.6; }
-          50%, 100% { transform: skewX(-20deg) translateX(250%); opacity: 0; }
-        }
-        .cta-shine-btn {
-          position: relative;
-          overflow: hidden;
-        }
-        .cta-shine-btn::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-          transform: skewX(-20deg) translateX(-150%);
-          animation: cta-shine 3s infinite ease-in-out;
-          z-index: 1;
-          pointer-events: none;
-        }
-      ` }} />
-
       <Button
-        className="mt-5 w-full py-4 text-xl sm:text-[22px] font-bold tracking-wide uppercase buudy-display text-[var(--cream)] bg-[var(--ink)] hover:bg-[var(--plum)] rounded-[30px] border border-[var(--ink)] hover:border-[var(--plum)] shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 cta-shine-btn"
+        className="buudy-cart-wipe mt-5 w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px]"
         id="hero-cta"
         onClick={() => {
           addProduct(product);
@@ -328,10 +266,10 @@ export function GiftBundle({ product }: { product: Product }) {
         }}
       >
         <span className="relative flex h-2 w-2">
-          <span className="absolute inset-0 rounded-full bg-[rgba(247,241,232,.75)] [animation:buudy-ping_1.4s_infinite]" />
-          <span className="relative h-2 w-2 rounded-full bg-[var(--cream)]" />
+          <span className="buudy-cart-pulse-ring absolute inset-0 rounded-full bg-[rgba(247,241,232,.75)] [animation:buudy-ping_1.4s_infinite]" />
+          <span className="buudy-cart-pulse relative h-2 w-2 rounded-full bg-[var(--cream)]" />
         </span>
-        ADD TO CART + FREE GIFTS
+        <span>ADD TO CART + FREE GIFTS</span>
       </Button>
 
       {/* 4-Item Benefits Grid Row */}

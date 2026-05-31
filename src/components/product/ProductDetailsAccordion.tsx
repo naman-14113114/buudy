@@ -10,6 +10,7 @@ import {
   Smile,
   Zap,
   Sun,
+  Activity,
 } from "lucide-react";
 import type { Product } from "@/data/products";
 import type { ReactNode } from "react";
@@ -31,6 +32,7 @@ function getSpecIcon(label: string) {
   if (normLabel.includes("power")) return Zap;
   if (normLabel.includes("irradiance") || normLabel.includes("wavelength")) return Sun;
   if (normLabel.includes("voltage")) return Zap;
+  if (normLabel.includes("intensity")) return Activity;
   return Zap;
 }
 
@@ -55,8 +57,8 @@ function AccordionPanel({
         type="button"
       >
         <span>
-          <span className="buudy-mono block text-[var(--gold)]">{item.eyebrow}</span>
-          <span className="buudy-display mt-1 block text-xl text-[var(--plum)]">
+          <span className="font-sans text-xs font-bold uppercase tracking-widest text-[var(--gold)]">{item.eyebrow}</span>
+          <span className="font-playfair mt-1 block text-xl text-[var(--plum)]">
             {item.title}
           </span>
         </span>
@@ -99,9 +101,9 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[var(--gold)]">
                     <Icon size={15} strokeWidth={2} />
                   </span>
-                  <span className="buudy-mono text-[var(--muted)]">{spec.label}</span>
+                  <span className="font-sans text-sm font-medium text-[var(--muted)]">{spec.label}</span>
                 </dt>
-                <dd className="text-right text-sm font-semibold leading-5 text-[var(--plum)]">
+                <dd className="font-sans text-right text-sm font-semibold leading-5 text-[var(--plum)]">
                   {spec.value}
                 </dd>
               </div>

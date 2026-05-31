@@ -1,4 +1,4 @@
-import { productAsset, type ProductImage } from "@/lib/media";
+import { productAsset, productMediaAsset, type ProductImage } from "@/lib/media";
 import { faqs, torchFaqs, torchWavelengths, type FAQItem, type Wavelength } from "./productSections";
 
 export type ProductGift = {
@@ -62,10 +62,10 @@ export const buudyMask: Product = {
   shortDescription:
     "Salon-grade light therapy with 192 high-density LEDs and full face plus neck coverage.",
   description:
-    "Salon-grade light therapy reimagined for home. The Buudy LED Mask combines 192 high-density LEDs, 7 wavelengths, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
-  seoTitle: "Buudy LED Mask | 7 Wavelength LED Face and Neck Mask",
+    "Salon-grade light therapy reimagined for home. The Buudy LED Mask combines 192 high-density LEDs, 7 visible light colors plus a dedicated 830nm near-infrared mode, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
+  seoTitle: "Buudy LED Mask | 8-Mode LED Face and Neck Mask",
   seoDescription:
-    "Salon-grade LED light therapy for home with 192 LEDs, 7 wavelengths, face and neck coverage, cordless design, and free gifts.",
+    "Salon-grade LED light therapy for home with 192 LEDs, 7 visible light colors plus a dedicated 830nm near-infrared mode, face and neck coverage, cordless design, and free gifts.",
   currency: "USD",
   priceCents: 19900,
   compareAtCents: 39900,
@@ -130,7 +130,7 @@ export const buudyMask: Product = {
       id: "premium-travel-box",
       name: "Premium Travel Box",
       valueCents: 3900,
-      image: productAsset("premium-travel-box.jpg"),
+      image: productMediaAsset("ChatGPT Image May 31, 2026, 11_53_13 PM.png"),
       label: "Exclusive item",
     },
     {
@@ -151,7 +151,8 @@ export const buudyMask: Product = {
   specs: [
     { label: "Dimensions", value: "20cm x 29cm (7.87in x 11.42in)" },
     { label: "Number of LEDs", value: "192" },
-    { label: "Light Colors", value: "7-color LED mask" },
+    { label: "Intensity Level", value: "4 levels" },
+    { label: "Light Modes", value: "7 visible colors + 830nm near-infrared" },
     { label: "Near-Infrared (NIR)", value: "830nm" },
     { label: "Battery Life", value: "Up to 12 sessions per charge (1500mAh)" },
     { label: "Use Type", value: "Portable cordless LED mask for household" },
@@ -162,7 +163,7 @@ export const buudyMask: Product = {
   ],
   included: [
     { quantity: "1x", label: "Premium Travel Box", tag: "Free gift" },
-    { quantity: "1x", label: "7-color LED Light Face Mask" },
+    { quantity: "1x", label: "8-mode LED Light Face Mask" },
     { quantity: "1x", label: "Charger with USB-C cable" },
     { quantity: "2x", label: "Eye Support" },
     { quantity: "1x", label: "User Manual" },
@@ -249,6 +250,7 @@ export const buudyRedTorch: Product = {
   specs: [
     { label: "Dimensions", value: "2.9cm x 12.5cm (0.95in x 4.92in)" },
     { label: "Wavelength", value: "460nm, 630nm, 660nm, 850nm, 900nm" },
+    { label: "Intensity Level", value: "4 levels" },
     { label: "Power Source", value: "Rechargeable battery" },
     { label: "LED Count", value: "5 LEDs" },
     { label: "Light Color", value: "Blue, Red, Infrared" },

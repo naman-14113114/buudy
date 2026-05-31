@@ -59,8 +59,11 @@ function ReviewVideoCard({
 
   return (
     <article
-      className="relative aspect-[9/16] w-40 flex-none snap-start overflow-hidden rounded-[18px] bg-[var(--ink)] transition hover:-translate-y-1 md:w-52"
+      className="relative aspect-[9/16] w-40 flex-none snap-start overflow-hidden rounded-[18px] bg-[var(--ink)] transition hover:-translate-y-1 md:w-52 cursor-pointer"
       ref={cardRef}
+      onClick={() => {
+        window.location.href = "#reviews";
+      }}
     >
       <video
         aria-label={`Buudy customer video review ${index + 1}`}

@@ -46,9 +46,9 @@ export const features: Feature[] = [
     body: "The face is only half the story. Unlike many popular brands that neglect the neck or charge extra for a separate attachment, Buudy includes integrated neck coverage. It is specifically designed to firm and rejuvenate the neck area, preventing aging where it often shows most.",
   },
   {
-    title: "7-in-1 Multi-Spectrum",
+    title: "8-in-1 Multi-Spectrum",
     kicker: "Therapy in a single device",
-    body: "Why settle for one or three colors? Buudy offers 7 distinct wavelengths: Red, Blue, Green, Cyan, Yellow, Purple, and White. Whether you are fighting stubborn acne, reducing deep wrinkles, or supporting skin repair, you have a professional-grade solution for every skin concern.",
+    body: "Why settle for one or three colors? Buudy offers 7 visible light colors plus a dedicated 830nm near-infrared mode: Infra-red, Red, Blue, Green, Cyan, Yellow, Purple, and White. Whether you are fighting stubborn acne, reducing deep wrinkles, or supporting skin repair, you have a professional-grade solution for every skin concern.",
   },
   {
     title: "Cordless Freedom",
@@ -378,6 +378,12 @@ export const reviewVideos: ReviewVideo[] = [
 ];
 
 export const wavelengths: Wavelength[] = [
+  {
+    nm: "830nm",
+    name: "INFRA-RED",
+    color: "#a52c25",
+    description: "Near-infrared support for deeper skincare rituals",
+  },
   {
     nm: "633nm",
     name: "RED",

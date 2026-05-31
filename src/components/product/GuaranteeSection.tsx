@@ -25,9 +25,7 @@ export function GuaranteeSection() {
           money back guarantee.
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-white font-medium text-sm sm:text-base leading-7">
-          Try Buudy at home for 90 days. If you do not fall in love with the
-          ritual, or your reflection, send it back for a full refund. No
-          questions, no hassle.
+          Bring clinical-inspired skincare into your daily routine with Buudy. Designed for visible glow, smoother-looking skin, and effortless at-home use, Buudy gives you a premium treatment experience you can trust every time.
         </p>
         {/* <div className="mx-auto mt-10 inline-flex flex-wrap items-center justify-center gap-4 rounded-full border border-[rgba(247,241,232,0.25)] bg-[rgba(18,9,20,0.52)] px-7 py-4 backdrop-blur-md">
           {["90 days", "Free returns", "Full refund"].map((item, index) => (

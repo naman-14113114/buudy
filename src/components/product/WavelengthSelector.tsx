@@ -5,6 +5,7 @@ import { wavelengths } from "@/data/productSections";
 import { productMediaAsset } from "@/lib/media";
 
 const wavelengthImages: Record<string, string> = {
+  "INFRA-RED": productMediaAsset("ChatGPT Image May 31, 2026, 05_41_49 PM.png"),
   RED: productMediaAsset("ChatGPT Image May 30, 2026, 05_13_17 PM (1).png"),
   BLUE: productMediaAsset("91.png"),
   GREEN: productMediaAsset("ChatGPT Image May 30, 2026, 05_13_20 PM (4).png"),
@@ -15,7 +16,9 @@ const wavelengthImages: Record<string, string> = {
 };
 
 export function WavelengthSelector() {
-  const [active, setActive] = useState(wavelengths[0]);
+  const [active, setActive] = useState(
+    wavelengths.find((wavelength) => wavelength.name === "RED") ?? wavelengths[0],
+  );
 
   return (
     <section className="buudy-section bg-[var(--ink)] py-24 text-[var(--cream)] overflow-hidden">
@@ -27,7 +30,7 @@ export function WavelengthSelector() {
         <div className="max-w-3xl">
           <p className="buudy-mono text-[var(--gold)]">Spectrum</p>
           <h2 className="buudy-display mt-3 text-[2.5rem] leading-[1.06] text-[var(--cream)] md:text-6xl">
-            Change <em className="buudy-italic">7 wavelengths</em> with a tap.
+            Change <em className="buudy-italic">8 light modes</em> with a tap.
           </h2>
         </div>
 
@@ -116,4 +119,3 @@ export function WavelengthSelector() {
     </section>
   );
 }
-

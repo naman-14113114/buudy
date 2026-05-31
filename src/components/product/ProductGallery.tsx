@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
+import { createPortal } from "react-dom";
+import { Search, X } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
-
-const zoomIconSVG = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>';
 
 export function ProductGallery({ images }: { images: ProductImage[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,6 +14,9 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
 
   const thumbsRef = useRef<HTMLDivElement>(null);
   const touchStartXRef = useRef(0);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
+  const previousActiveElementRef = useRef<HTMLElement | null>(null);
 
   // 1. Handle opacity transition during image changes
   useEffect(() => {
@@ -31,12 +34,18 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
   }, [currentIndex]);
 
   // 2. Navigation controls
-  const goNext = () => {
+  const goNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
-  const goPrev = () => {
+  }, [images.length]);
+  const goPrev = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
+  }, [images.length]);
+  const openLightbox = useCallback((index = currentIndex) => {
+    setCurrentIndex(index);
+    setDisplayIndex(index);
+    setTransitionOpacity(1);
+    setIsLightboxOpen(true);
+  }, [currentIndex]);
 
   // 3. Auto-rotate effect
   useEffect(() => {
@@ -47,7 +56,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isLightboxOpen, isPaused, images.length]);
+  }, [goNext, isLightboxOpen, isPaused]);
 
   // 4. Center active thumbnail in mobile horizontal scrolling list
   useEffect(() => {
@@ -63,19 +72,43 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
     }
   }, [currentIndex]);
 
-  // 5. Keyboard event listener for Lightbox
+  // 5. Keep modal focus contained and lock the page while magnified.
   useEffect(() => {
     if (!isLightboxOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    previousActiveElementRef.current = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") goNext();
       if (e.key === "ArrowLeft") goPrev();
       if (e.key === "Escape") setIsLightboxOpen(false);
+      if (e.key === "Tab" && lightboxRef.current) {
+        const focusable = Array.from(
+          lightboxRef.current.querySelectorAll<HTMLButtonElement>("button:not([disabled])"),
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isLightboxOpen, images.length]);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      previousActiveElementRef.current?.focus();
+    };
+  }, [goNext, goPrev, isLightboxOpen]);
 
   // 6. Mobile swipe gesture handlers on main wrapper
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -105,14 +138,17 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
         /* 1. CONTAINER */
         .buudyLED-23435t23-container { max-width: 900px; margin: 0 auto; padding: 10px 10px 10px 10px !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
         /* 2. MAIN IMAGE */
-        .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: default; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
+        .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
         .buudyLED-23435t23-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; transition: opacity 0.3s ease; }
         /* 3. THUMBNAILS GRID */
         .buudyLED-23435t23-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; }
-        .buudyLED-23435t23-thumb_item { position: relative; width: 100%; padding-bottom: 100%; cursor: pointer; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; }
+        .buudyLED-23435t23-thumb_item { position: relative; appearance: none; width: 100%; padding: 0 0 100%; cursor: zoom-in; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; }
         .buudyLED-23435t23-thumb_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; transition: transform 0.3s ease; z-index: 0; }
+        .buudyLED-23435t23-thumb_zoom { position: absolute; bottom: 9px; left: 9px; z-index: 2; display: grid; width: 29px; height: 29px; place-items: center; border: 1px solid rgba(58, 31, 61, .16); border-radius: 50%; background: rgba(247, 241, 232, .92); color: var(--plum); opacity: 0; transform: translateY(5px); transition: opacity .2s ease, transform .2s ease; }
         .buudyLED-23435t23-thumb_item:hover { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16), inset 0 0 0 1px rgba(0, 0, 0, 0.05); z-index: 1; }
         .buudyLED-23435t23-thumb_item:hover .buudyLED-23435t23-thumb_img { transform: scale(1.08); }
+        .buudyLED-23435t23-thumb_item:hover .buudyLED-23435t23-thumb_zoom,
+        .buudyLED-23435t23-thumb_item:focus-visible .buudyLED-23435t23-thumb_zoom { opacity: 1; transform: translateY(0); }
         .buudyLED-23435t23-thumb_item.buudyLED-23435t23-active { box-shadow: inset 0 0 0 2px #000; }
         /* 4. ARROWS */
         .buudyLED-23435t23-arrow { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.9); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); padding: 0; transition: transform 0.2s, background-color 0.2s; }
@@ -126,12 +162,13 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
         .buudyLED-23435t23-lightbox { position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: none; justify-content: center; align-items: center; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 99999999; pointer-events: auto; }
         .buudyLED-23435t23-lightbox_content { position: relative; z-index: 100000000; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
         .buudyLED-23435t23-lightbox_img { max-width: 90vw; max-height: 85vh; border-radius: 25px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); user-select: none; object-fit: contain; }
-        .buudyLED-23435t23-close { position: absolute; top: 20px; right: 30px; background: none; border: none; color: #333; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 100000001; }
+        .buudyLED-23435t23-close { position: absolute; top: 20px; right: 30px; display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 50%; background: rgba(247, 241, 232, .94); border: 1px solid rgba(58, 31, 61, .18); color: var(--plum); cursor: pointer; z-index: 100000001; transition: transform .2s ease, background-color .2s ease; }
+        .buudyLED-23435t23-close:hover { background: var(--cream); transform: scale(1.06); }
         .buudyLED-23435t23-modal_nav { width: 60px; height: 60px; background: rgba(0, 0, 0, 0.1); border-radius: 50%; }
         .buudyLED-23435t23-modal_nav:hover { background: rgba(0, 0, 0, 0.2); }
         .buudyLED-23435t23-modal_nav .buudyLED-23435t23-icon { border-color: #333; }
         /* 6. ZOOM BUTTON */
-        .buudyLED-23435t23-zoom_btn { position: absolute; bottom: 10px; right: 10px; width: 25px !important; min-height: 25px !important; background-color: rgba(255, 255, 255, 0.9); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); transition: transform 0.2s ease, background-color 0.2s ease; color: #000; }
+        .buudyLED-23435t23-zoom_btn { position: absolute; bottom: 16px; left: 16px; width: 38px !important; min-height: 38px !important; background-color: rgba(247, 241, 232, 0.94); border: 1px solid rgba(58, 31, 61, .18); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 6px rgba(58, 31, 61, 0.18); transition: transform 0.2s ease, background-color 0.2s ease; color: var(--plum); }
         .buudyLED-23435t23-zoom_btn:hover { background-color: #fff; transform: scale(1.1); }
         
         /* 7. MOBILE RESPONSIVENESS */
@@ -158,12 +195,16 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
             .buudyLED-23435t23-thumb_item {
                 flex: 0 0 28%; /* Show ~3.5 items to hint at scrolling */
                 min-width: 80px; 
-                padding-bottom: 0; /* Override desktop padding hack */
+                padding: 0; /* Override desktop padding hack */
                 aspect-ratio: 1 / 1; /* Maintain perfect square */
                 scroll-snap-align: start;
             }
             .buudyLED-23435t23-thumb_img {
                 height: 100%; /* Reset the 100.5% height to exact fit */
+            }
+            .buudyLED-23435t23-thumb_zoom {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
       ` }} />
@@ -181,6 +222,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
             id="buudyLED-23435t23-MainImg"
             className="buudyLED-23435t23-main_img"
             alt={currentImage.alt}
+            onClick={() => openLightbox()}
             style={{ opacity: transitionOpacity }}
           />
 
@@ -270,6 +312,17 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
           </span>
 
           <button
+            aria-label="Magnify current product image"
+            className="buudyLED-23435t23-zoom_btn"
+            onClick={(event) => {
+              event.stopPropagation();
+              openLightbox();
+            }}
+          >
+            <Search aria-hidden="true" size={16} strokeWidth={2.2} />
+          </button>
+
+          <button
             className="buudyLED-23435t23-arrow buudyLED-23435t23-prev"
             aria-label="Previous Image"
             onClick={(e) => {
@@ -303,83 +356,97 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
           onTouchEnd={() => setIsPaused(false)}
         >
           {images.map((image, index) => (
-            <div
+            <button
+              aria-label={`Magnify ${image.alt}`}
               key={image.src}
               className={`buudyLED-23435t23-thumb_item ${
                 index === currentIndex ? "buudyLED-23435t23-active" : ""
               }`}
               onClick={(e) => {
                 e.stopPropagation();
-                setCurrentIndex(index);
-                const container = document.getElementById("buudyLED-23435t23-Container");
-                if (container) {
-                  container.scrollIntoView({ behavior: "smooth", block: "start" });
-                }
+                openLightbox(index);
               }}
+              type="button"
             >
               <img
                 src={image.src}
                 className="buudyLED-23435t23-thumb_img"
                 alt={image.alt}
               />
-            </div>
+              <span aria-hidden="true" className="buudyLED-23435t23-thumb_zoom">
+                <Search size={14} strokeWidth={2.2} />
+              </span>
+            </button>
           ))}
         </div>
       </div>
 
-      <div
-        className="buudyLED-23435t23-lightbox"
-        id="buudyLED-23435t23-Modal"
-        style={{ display: isLightboxOpen ? "flex" : "none" }}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            setIsLightboxOpen(false);
-          }
-        }}
-      >
-        <div className="buudyLED-23435t23-lightbox_content" onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            setIsLightboxOpen(false);
-          }
-        }}>
-          <button
-            className="buudyLED-23435t23-close"
-            id="buudyLED-23435t23-ModalClose"
-            aria-label="Close View"
-            onClick={() => setIsLightboxOpen(false)}
-          >
-            &times;
-          </button>
-          <button
-            className="buudyLED-23435t23-arrow buudyLED-23435t23-modal_nav buudyLED-23435t23-prev"
-            id="buudyLED-23435t23-ModalPrev"
-            aria-label="Previous Image"
-            onClick={(e) => {
-              e.stopPropagation();
-              goPrev();
-            }}
-          >
-            <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_left" />
-          </button>
-          <img
-            className="buudyLED-23435t23-lightbox_img"
-            id="buudyLED-23435t23-ModalImg"
-            src={images[currentIndex]?.src}
-            alt="Expanded Product View"
-          />
-          <button
-            className="buudyLED-23435t23-arrow buudyLED-23435t23-modal_nav buudyLED-23435t23-next"
-            id="buudyLED-23435t23-ModalNext"
-            aria-label="Next Image"
-            onClick={(e) => {
-              e.stopPropagation();
-              goNext();
-            }}
-          >
-            <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_right" />
-          </button>
-        </div>
-      </div>
+      {isLightboxOpen && typeof document !== "undefined"
+        ? createPortal(
+            <div
+              aria-label="Expanded product gallery"
+              aria-modal="true"
+              className="buudyLED-23435t23-lightbox"
+              id="buudyLED-23435t23-Modal"
+              ref={lightboxRef}
+              role="dialog"
+              style={{ display: "flex" }}
+              onClick={(e) => {
+                if (e.target === e.currentTarget) {
+                  setIsLightboxOpen(false);
+                }
+              }}
+            >
+              <div
+                className="buudyLED-23435t23-lightbox_content"
+                onClick={(e) => {
+                  if (e.target === e.currentTarget) {
+                    setIsLightboxOpen(false);
+                  }
+                }}
+              >
+                <button
+                  className="buudyLED-23435t23-close"
+                  id="buudyLED-23435t23-ModalClose"
+                  aria-label="Close View"
+                  onClick={() => setIsLightboxOpen(false)}
+                  ref={closeButtonRef}
+                >
+                  <X aria-hidden="true" size={24} />
+                </button>
+                <button
+                  className="buudyLED-23435t23-arrow buudyLED-23435t23-modal_nav buudyLED-23435t23-prev"
+                  id="buudyLED-23435t23-ModalPrev"
+                  aria-label="Previous Image"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goPrev();
+                  }}
+                >
+                  <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_left" />
+                </button>
+                <img
+                  className="buudyLED-23435t23-lightbox_img"
+                  id="buudyLED-23435t23-ModalImg"
+                  src={images[currentIndex]?.src}
+                  alt="Expanded Product View"
+                />
+                <button
+                  className="buudyLED-23435t23-arrow buudyLED-23435t23-modal_nav buudyLED-23435t23-next"
+                  id="buudyLED-23435t23-ModalNext"
+                  aria-label="Next Image"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    goNext();
+                  }}
+                >
+                  <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_right" />
+                </button>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
     </>
   );
 }
