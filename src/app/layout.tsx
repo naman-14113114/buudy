@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
+import { ClarityAnalytics } from "@/components/integrations/ClarityAnalytics";
 import { TawkToWidget } from "@/components/integrations/TawkToWidget";
 import "./globals.css";
 
@@ -72,6 +73,7 @@ export default function RootLayout({
           <Footer />
           <CartDrawer />
         </CartProvider>
+        <ClarityAnalytics />
         <TawkToWidget />
       </body>
     </html>
