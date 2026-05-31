@@ -17,7 +17,7 @@ s0.parentNode.insertBefore(s1,s0);
 
 const tawkToPositionScript = `
 (function(){
-  var desktop = { right: '28px', bottom: '112px' };
+  var desktop = { right: '28px', bottom: '128px' };
   var mobile = { right: '18px', bottom: '112px' };
 
   function isTawkFrame(frame) {

@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { reviewVideos, type ReviewVideo } from "@/data/productSections";
-import { productMediaAsset } from "@/lib/media";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const NUM_SETS = 3;
@@ -18,9 +17,16 @@ function ReviewVideoCard({
 }) {
   const cardRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const localSrc = productMediaAsset(`${video.id}.mp4`, "buudy-led-mask", "videos");
-  const fallbackSrc = video.fallbackSrc ?? video.src;
-  const [src, setSrc] = useState(localSrc);
+  const shouldPlayRef = useRef(false);
+  const primarySrc = video.fallbackSrc ?? video.src;
+  const [src, setSrc] = useState(primarySrc);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  const playWhenReady = useCallback(() => {
+    if (!shouldPlayRef.current) return;
+
+    videoRef.current?.play().catch(() => undefined);
+  }, []);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -31,18 +37,24 @@ function ReviewVideoCard({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        shouldPlayRef.current = entry.isIntersecting;
+
         if (entry.isIntersecting) {
+          setShouldLoad(true);
           videoEl.play().catch(() => undefined);
         } else {
           videoEl.pause();
         }
       },
-      { rootMargin: "0px 1500px", threshold: 0.1 },
+      { rootMargin: "900px 700px", threshold: 0.01 },
     );
 
     observer.observe(card);
 
-    return () => observer.disconnect();
+    return () => {
+      shouldPlayRef.current = false;
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -55,17 +67,20 @@ function ReviewVideoCard({
         className="h-full w-full object-cover"
         disablePictureInPicture
         loop
+        autoPlay={shouldLoad}
         muted
+        onCanPlay={playWhenReady}
         onError={() => {
-          if (src !== fallbackSrc) {
-            setSrc(fallbackSrc);
+          if (src !== video.src) {
+            setSrc(video.src);
           }
         }}
+        onLoadedData={playWhenReady}
         playsInline
         poster={video.poster}
-        preload="metadata"
+        preload={shouldLoad ? "auto" : "none"}
         ref={videoRef}
-        src={src}
+        src={shouldLoad ? src : undefined}
       >
         Your browser does not support the video tag.
       </video>

@@ -55,13 +55,15 @@ export function StickyAddToCart({ product }: { product: Product }) {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--border)] bg-[rgba(247,241,232,.97)] shadow-[0_-20px_50px_-35px_rgba(0,0,0,.45)] transition duration-300 ${
-        visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+      className={`pointer-events-none fixed bottom-3 left-3 right-[5.25rem] z-40 transition duration-300 ease-out sm:inset-x-0 sm:bottom-5 sm:px-3 ${
+        visible
+          ? "translate-y-0 opacity-100"
+          : "translate-y-[calc(100%+2rem)] opacity-0"
       }`}
     >
-      <div className="buudy-wrap flex min-h-[76px] items-center justify-between gap-4 py-3">
-        <div className="hidden items-center gap-4 sm:flex">
-          <div className="relative h-14 w-14 overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--blush)]">
+      <div className="pointer-events-auto flex min-h-12 w-fit max-w-full items-center rounded-full border border-[var(--border)] bg-[var(--card)] p-1 shadow-[0_18px_42px_-20px_rgba(58,31,61,.68)] sm:mx-auto sm:min-h-[78px] sm:w-full sm:max-w-[850px] sm:justify-between sm:gap-5 sm:px-3 sm:py-2.5">
+        <div className="hidden min-w-0 items-center gap-4 sm:flex">
+          <div className="relative h-14 w-14 flex-none overflow-hidden rounded-full border border-[var(--border)] bg-[var(--blush)]">
             <Image
               alt={product.name}
               className="object-cover"
@@ -71,23 +73,27 @@ export function StickyAddToCart({ product }: { product: Product }) {
               src={product.cartImage}
             />
           </div>
-          <div>
-            <p className="font-semibold text-[var(--plum)]">{product.name}</p>
-            <p className="text-sm text-[var(--muted)]">
+          <div className="min-w-0">
+            <p className="truncate text-base font-semibold text-[var(--plum)]">
+              {product.name}
+            </p>
+            <p className="truncate text-sm text-[var(--muted)]">
               {formatMoney(product.priceCents, product.currency)}
               {giftLabel}
             </p>
           </div>
         </div>
         <Button
-          className="w-full sm:w-auto"
+          aria-label={`Add ${product.name} to cart${giftLabel}`}
+          className="min-h-11 flex-none px-4 text-xs sm:min-h-12 sm:px-6 sm:text-sm"
           onClick={() => {
             addProduct(product);
             router.push("/cart");
           }}
         >
           <ShoppingBag size={17} />
-          Add to cart{giftLabel}
+          <span className="sm:hidden">Add to cart</span>
+          <span className="hidden sm:inline">Add to cart{giftLabel}</span>
         </Button>
       </div>
     </div>

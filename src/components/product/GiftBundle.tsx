@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Lottie from "lottie-react";
 import {
   BatteryCharging,
   Gem,
@@ -111,6 +112,15 @@ export function GiftBundle({ product }: { product: Product }) {
   const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
   const deliveryDate = useDeliveryDate(4);
+  const [deliveryIconData, setDeliveryIconData] = useState<any>(null);
+  
+  useEffect(() => {
+    fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-aa8e50-easey.json")
+      .then((res) => res.json())
+      .then((data) => setDeliveryIconData(data))
+      .catch((err) => console.error("Error loading delivery lottie", err));
+  }, []);
+
   const giftValue = product.gifts.reduce((total, gift) => total + gift.valueCents, 0);
   const hasGifts = product.gifts.length > 0;
   const heroBullets =
@@ -261,7 +271,14 @@ export function GiftBundle({ product }: { product: Product }) {
       <div className="mt-4 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-5">
         <div className="flex items-center justify-between gap-5">
           <div>
-            <p className="buudy-eyebrow text-[var(--gold)]">DELIVERY</p>
+            <div className="flex items-center gap-2">
+              {deliveryIconData && (
+                <div className="w-7 h-7 flex-shrink-0 flex items-center justify-center">
+                  <Lottie animationData={deliveryIconData} loop={true} />
+                </div>
+              )}
+              <p className="buudy-eyebrow text-[var(--gold)] m-0 leading-none flex items-center h-7 font-bold">DELIVERY</p>
+            </div>
             <p className="buudy-display mt-1.5 text-lg sm:text-2xl text-[var(--plum)] font-normal leading-none whitespace-nowrap">
               {deliveryDate || "soon"}
             </p>
