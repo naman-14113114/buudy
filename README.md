@@ -1,123 +1,99 @@
-# Buudy Storefront
+# Buudy Country Store Monorepo
 
-Scalable Next.js ecommerce storefront for Buudy, with a real homepage at `/`,
-the LED Mask page at `/products/buudy-led-mask`, and the Red Torch page at
-`/products/red-light-torch`.
+This repository is a pnpm/Turborepo monorepo for the Buudy country storefronts.
+Each country is a fully independent Next.js app so copy, SEO, pricing, product
+IDs, checkout labels, policies, images, and page structure can change in one
+country without changing another.
 
-## Stack
+## Apps
 
-- Next.js 16 App Router
-- TypeScript
-- Tailwind CSS 4
-- `next/font` and `next/image`
-- Local product assets for key SEO/LCP images
-- Client components only for cart, gallery, FAQ, video, selector, and sticky CTA interactions
+- `apps/uk` -> `https://uk.buudy.com`
+- `apps/us` -> `https://us.buudy.com`
+- `apps/ca` -> `https://ca.buudy.com`
+- `apps/au` -> `https://au.buudy.com`
 
-## Run Locally
+The UK app is the current source of truth. US, CA, and AU were cloned from UK
+and then updated with their own market data.
 
-```bash
-npm install
-npm run dev
-```
+## Packages
 
-Open `http://localhost:3000`.
+- `packages/shared`: market-agnostic utilities such as class merging, money
+  formatting, percentage-off, and delivery-date helpers.
+- `packages/ui`: reusable, non-content UI primitives.
+- `packages/eslint-config`: shared ESLint configuration.
+- `packages/tsconfig`: shared TypeScript configuration.
 
-## Build Checks
+Country-specific content stays inside each app. Do not move product data,
+policies, page layouts, SEO copy, checkout IDs, or country images into shared
+packages unless the same content truly belongs to every country.
 
-```bash
-npm run lint
-npm run build
-```
-
-## Product Data
-
-Most product and commerce content is data-driven:
-
-- `src/data/home.ts` for homepage section content
-- `src/data/products.ts` for product pricing, gifts, specs, gallery, and badges
-- `src/data/productSections.ts` for reusable product section content
-- `src/data/navigation.ts` and `src/data/footer.ts` for shared layout data
-
-Adding another product should usually mean adding a product record and section
-data, then allowing `src/app/products/[slug]/page.tsx` to render it.
-
-## Cart And Checkout
-
-The cart is handled in `src/components/cart/CartProvider.tsx` and persisted in
-the browser. It supports multiple product lines, product-specific gifts, editable
-quantities, gift messaging, promo summaries, and checkout recording.
-
-Checkout currently treats the checkout click as the v1 sale record. It validates
-customer details, recalculates totals on the server from product data, writes the
-order to Supabase, clears the local cart, and redirects to
-`/order-confirmation/[orderNumber]`.
-
-## Accounts, Orders, And Admin
-
-Customer accounts, profiles, order history, and the admin dashboard use Supabase
-Auth and Postgres. Apply the migration in `supabase/migrations/` and set these
-environment variables locally and in Vercel:
+## Install
 
 ```bash
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
-ADMIN_EMAILS=sahiljainsj004@gmail.com,support@buudy.com
+pnpm install
 ```
 
-Protected customer routes are `/my-profile`, `/order-history`, and
-`/account-settings`. Admin routes are protected by `ADMIN_EMAILS` and start at
-`/admin`. Never expose `SUPABASE_SERVICE_ROLE_KEY` to client-side code.
-
-## Contact Form
-
-The contact page lives at `/pages/contact-us` and posts to
-Web3Forms directly from the browser, which is required for the free Web3Forms
-plan. Create a Web3Forms access key for the email inbox, then add it locally and
-in Vercel:
+## Local Development
 
 ```bash
-WEB3FORMS_ACCESS_KEY=your-web3forms-access-key
+pnpm dev:uk
+pnpm dev:us
+pnpm dev:ca
+pnpm dev:au
 ```
 
-The browser loads that key at runtime through `src/app/api/contact/config/route.ts`,
-so the same deployment works on `buudy-zeta.vercel.app`, `uk.buudy.com`, or a
-future domain without changing code. The submitted payload also records the
-actual `window.location.href` as `source_url`.
-
-`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` is still supported as an optional build-time
-shortcut, but `WEB3FORMS_ACCESS_KEY` is preferred on Vercel. The legacy
-`src/app/api/contact/route.ts` remains as a graceful fallback for validation,
-but Web3Forms free accounts reject server-side proxy submissions.
-
-## Assets
-
-Key product images are stored in:
-
-```txt
-public/images/products/buudy-led-mask/
-public/images/products/buudy-red-torch/
-public/images/home/
-```
-
-To re-sync the local product images from the known source URLs:
+You can also use filters directly:
 
 ```bash
-npm run sync:assets
+pnpm --filter @buudy/uk dev
 ```
 
-Heavy review videos stay remote and lazy-loaded to keep the initial product page fast.
+## Build And Lint
 
-## Vercel Deployment
+```bash
+pnpm lint
+pnpm build
+pnpm build:uk
+pnpm --filter @buudy/us build
+```
 
-Create a new Vercel project from this folder. The default framework detection should
-select Next.js automatically.
+## Vercel Setup
 
-Recommended production settings:
+Create one Vercel project per country and set the project root directory:
 
-- Build command: `npm run build`
-- Install command: `npm install`
-- Output directory: leave empty for Next.js
-- Environment variable: `WEB3FORMS_ACCESS_KEY` for the contact form
-- Supabase env variables listed above for accounts, orders, checkout recording,
-  and admin dashboard
+- UK root directory: `apps/uk`
+- US root directory: `apps/us`
+- CA root directory: `apps/ca`
+- AU root directory: `apps/au`
+
+Use these commands in Vercel:
+
+- Install command: `pnpm install --frozen-lockfile`
+- Build command UK: `pnpm --filter @buudy/uk build`
+- Build command US: `pnpm --filter @buudy/us build`
+- Build command CA: `pnpm --filter @buudy/ca build`
+- Build command AU: `pnpm --filter @buudy/au build`
+- Output directory: leave the default Next.js output.
+
+Keep environment variables per Vercel project. Do not blindly share Supabase,
+Web3Forms, Klaviyo, checkout, or admin variables between countries unless they
+are intentionally the same.
+
+## Adding A New Country
+
+1. Copy `apps/uk` to `apps/<country-code>`.
+2. Rename the app package in `apps/<country-code>/package.json`.
+3. Update app-local market data in `src/lib/market.ts`.
+4. Update app-local product prices, copy, policies, metadata, country badge,
+   checkout labels, and any country-specific assets.
+5. Add root scripts if you want shortcuts like `dev:<country-code>`.
+6. Create a Vercel project with root directory `apps/<country-code>`.
+
+## Migration Notes
+
+- The former single UK Next.js app now lives in `apps/uk`.
+- `apps/us`, `apps/ca`, and `apps/au` are cloned country apps with independent
+  market configuration and pricing.
+- Shared packages are intentionally conservative. They contain generic helpers
+  and primitives only, not country content.
+- npm workflow was replaced by pnpm workspaces and Turborepo task orchestration.
