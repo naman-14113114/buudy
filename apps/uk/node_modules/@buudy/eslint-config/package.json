@@ -1,0 +1,14 @@
+{
+  "name": "@buudy/eslint-config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./next": "./next.mjs"
+  },
+  "peerDependencies": {
+    "eslint": "^9",
+    "eslint-config-next": "^16.2.6",
+    "typescript": "^5"
+  }
+}
