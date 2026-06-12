@@ -47,3 +47,17 @@ dev-server*.log
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# dependencies
+node_modules/
+**/node_modules/
+
+# build output
+.next/
+dist/
+build/
+
+# env files
+.env
+.env.*
+!.env.example
