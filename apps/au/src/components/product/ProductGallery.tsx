@@ -273,9 +273,24 @@ export function ProductGallery({
             </span>
           )}
           <span className="absolute bottom-5 right-5 z-10 flex items-center gap-1.5 rounded-full bg-[rgba(247,241,232,.92)] px-3.5 py-2 text-[var(--plum)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.55)]">
-            <span aria-hidden="true" className="text-sm leading-none">
-              {market.flagEmoji}
-            </span>
+            <svg
+              aria-hidden="true"
+              className="h-3 w-[21px] flex-shrink-0 object-contain rounded-[1px]"
+              viewBox="0 0 60 30"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect fill="#012169" height="30" width="60" />
+              <path d="M0 0 30 15M30 0 0 15" stroke="#fff" strokeWidth="3" />
+              <path d="M0 0 30 15M30 0 0 15" stroke="#c8102e" strokeWidth="1.5" />
+              <path d="M15 0v15M0 7.5h30" stroke="#fff" strokeWidth="5" />
+              <path d="M15 0v15M0 7.5h30" stroke="#c8102e" strokeWidth="3" />
+              <circle cx="15" cy="22.5" r="3" fill="#fff" />
+              <circle cx="45" cy="7" r="1.5" fill="#fff" />
+              <circle cx="38" cy="14" r="1.5" fill="#fff" />
+              <circle cx="52" cy="12" r="1.5" fill="#fff" />
+              <circle cx="45" cy="23" r="1.5" fill="#fff" />
+              <circle cx="48.5" cy="17.5" r="1" fill="#fff" />
+            </svg>
             <span className="buudy-mono leading-none">
               {market.madeInLabel}
             </span>

@@ -273,9 +273,23 @@ export function ProductGallery({
             </span>
           )}
           <span className="absolute bottom-5 right-5 z-10 flex items-center gap-1.5 rounded-full bg-[rgba(247,241,232,.92)] px-3.5 py-2 text-[var(--plum)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.55)]">
-            <span aria-hidden="true" className="text-sm leading-none">
-              {market.flagEmoji}
-            </span>
+            <svg
+              aria-hidden="true"
+              className="h-3 w-[21px] flex-shrink-0 object-contain rounded-[1px]"
+              viewBox="0 0 60 30"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect fill="#fff" height="30" width="60" />
+              <path fill="#b22234" d="M0 0h60v2.3H0zM0 4.6h60v2.3H0zM0 9.2h60v2.3H0zM0 13.8h60v2.3H0zM0 18.5h60v2.3H0zM0 23.1h60v2.3H0zM0 27.7h60v2.3H0z" />
+              <rect fill="#3c3b6e" height="16.1" width="24" />
+              <g fill="#fff">
+                <circle cx="4" cy="3" r="0.8" /> <circle cx="8" cy="3" r="0.8" /> <circle cx="12" cy="3" r="0.8" /> <circle cx="16" cy="3" r="0.8" /> <circle cx="20" cy="3" r="0.8" />
+                <circle cx="6" cy="6" r="0.8" /> <circle cx="10" cy="6" r="0.8" /> <circle cx="14" cy="6" r="0.8" /> <circle cx="18" cy="6" r="0.8" />
+                <circle cx="4" cy="9" r="0.8" /> <circle cx="8" cy="9" r="0.8" /> <circle cx="12" cy="9" r="0.8" /> <circle cx="16" cy="9" r="0.8" /> <circle cx="20" cy="9" r="0.8" />
+                <circle cx="6" cy="12" r="0.8" /> <circle cx="10" cy="12" r="0.8" /> <circle cx="14" cy="12" r="0.8" /> <circle cx="18" cy="12" r="0.8" />
+                <circle cx="4" cy="15" r="0.8" /> <circle cx="8" cy="15" r="0.8" /> <circle cx="12" cy="15" r="0.8" /> <circle cx="16" cy="15" r="0.8" /> <circle cx="20" cy="15" r="0.8" />
+              </g>
+            </svg>
             <span className="buudy-mono leading-none">
               {market.madeInLabel}
             </span>
