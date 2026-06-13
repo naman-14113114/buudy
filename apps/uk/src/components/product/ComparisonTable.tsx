@@ -200,8 +200,8 @@ export function ComparisonTable() {
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
                     <img
-                      src={productMediaAsset("59 (2).png")}
-                      alt="Dr Dennis Gross"
+                      src={productMediaAsset("shark_logo.png")}
+                      alt="Shark"
                       className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
                       decoding="async"
                       loading="lazy"
@@ -247,8 +247,8 @@ export function ComparisonTable() {
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
                     <img
-                      src={productMediaAsset("Dr Dennis Gross.png")}
-                      alt="Dr Dennis Gross Mask"
+                      src={productMediaAsset("shark.png")}
+                      alt="Shark Mask"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain"
                       decoding="async"
                       loading="lazy"
@@ -264,7 +264,7 @@ export function ComparisonTable() {
           <ComparisonRow
             title="Portable"
             subtitle="Hands-free, cordless and rechargeable"
-            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
@@ -283,7 +283,7 @@ export function ComparisonTable() {
             colorName="Infrared"
             colorCode="#8B0000"
             description="Deep tissue repair and healing"
-            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ColorRow
@@ -350,13 +350,13 @@ export function ComparisonTable() {
           <ComparisonRow
             title="Customizable treatments"
             subtitle="Hands-free, cordless and rechargeable"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
             title="App companion"
             subtitle="iPhone/Android"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
@@ -366,7 +366,7 @@ export function ComparisonTable() {
               <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">3 MINS</strong>,
               <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
               <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
-              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">3 MINS</strong>,
+              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
             ]}
           />
 
@@ -378,7 +378,7 @@ export function ComparisonTable() {
               </span>,
               <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">£395</span>,
               <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">£380</span>,
-              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£455</span>,
+              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£299</span>,
             ]}
             isLast={true}
           />
