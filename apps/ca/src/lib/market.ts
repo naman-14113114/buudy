@@ -4,6 +4,7 @@ export const market = {
   currency: "CAD",
   country: "Canada",
   marketLabel: "CA",
+  flagEmoji: "🇨🇦",
   madeInLabel: "Made in Canada",
   checkoutSource: "ca_buudy",
   checkoutUtmSource: "ca.buudy.com",

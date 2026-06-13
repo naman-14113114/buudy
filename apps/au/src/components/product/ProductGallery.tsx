@@ -273,18 +273,9 @@ export function ProductGallery({
             </span>
           )}
           <span className="absolute bottom-5 right-5 z-10 flex items-center gap-1.5 rounded-full bg-[rgba(247,241,232,.92)] px-3.5 py-2 text-[var(--plum)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.55)]">
-            <svg
-              aria-hidden="true"
-              className="h-3 w-[21px] flex-shrink-0 object-contain rounded-[1px]"
-              viewBox="0 0 60 30"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect fill="#012169" height="30" width="60" />
-              <path d="M0 0 60 30M60 0 0 30" stroke="#fff" strokeWidth="6" />
-              <path d="M0 0 60 30M60 0 0 30" stroke="#c8102e" strokeWidth="3" />
-              <path d="M30 0v30M0 15h60" stroke="#fff" strokeWidth="10" />
-              <path d="M30 0v30M0 15h60" stroke="#c8102e" strokeWidth="6" />
-            </svg>
+            <span aria-hidden="true" className="text-sm leading-none">
+              {market.flagEmoji}
+            </span>
             <span className="buudy-mono leading-none">
               {market.madeInLabel}
             </span>

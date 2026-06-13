@@ -45,9 +45,6 @@ function ContactHero() {
             <span className="buudy-mono rounded-full border border-[var(--border)] bg-[rgba(247,241,232,.72)] px-4 py-3 text-[var(--plum)]">
               {contactPage.supportHours}
             </span>
-            <span className="buudy-mono rounded-full border border-[var(--border)] bg-[rgba(247,241,232,.72)] px-4 py-3 text-[var(--plum)]">
-              13 Harefield Rd, Rickmansworth, England, WD3 1LY, Canada
-            </span>
           </div>
 
           <p className="mt-8 max-w-xl leading-8 text-[var(--muted)]">

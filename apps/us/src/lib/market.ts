@@ -4,6 +4,7 @@ export const market = {
   currency: "USD",
   country: "United States",
   marketLabel: "US",
+  flagEmoji: "🇺🇸",
   madeInLabel: "Made in USA",
   checkoutSource: "us_buudy",
   checkoutUtmSource: "us.buudy.com",
