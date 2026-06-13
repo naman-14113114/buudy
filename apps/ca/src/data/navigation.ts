@@ -13,6 +13,6 @@ export const secondaryNavigation = [
 export const announcementItems = [
   "Free shipping on all orders",
   "Made in Canada",
-  "Sign up and enjoy Â\$10 off",
+  "Sign up and enjoy \$10 off",
   "4.9 stars from 16,000+ customers",
 ];
