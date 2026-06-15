@@ -494,7 +494,7 @@ function ReviewCard({
     <button
       aria-label={`Open full review from ${review.customerName}`}
       className={cn(
-        "w-full min-w-0 rounded-[18px] border border-[rgba(58,31,61,.14)] bg-[var(--card)] p-5 text-left shadow-[0_18px_44px_-34px_rgba(58,31,61,.45)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(180,145,76,.5)] hover:shadow-[0_24px_48px_-32px_rgba(58,31,61,.58)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)]",
+        "w-full min-w-0 rounded-[14px] sm:rounded-[18px] border border-[rgba(58,31,61,.14)] bg-[var(--card)] p-3 sm:p-5 text-left shadow-[0_18px_44px_-34px_rgba(58,31,61,.45)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(180,145,76,.5)] hover:shadow-[0_24px_48px_-32px_rgba(58,31,61,.58)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)]",
         review.isNew && "animate-fade-in-up",
       )}
       onClick={() => void onOpen(review)}
@@ -510,22 +510,22 @@ function ReviewCard({
     >
       <ReviewImages images={review.images} name={review.customerName} />
       <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
-        <RatingStars rating={review.rating} />
-        <span className="buudy-mono whitespace-nowrap text-[0.65rem] text-[var(--plum-soft)]">
+        <RatingStars rating={review.rating} size={13} />
+        <span className="buudy-mono whitespace-nowrap text-[0.55rem] sm:text-[0.65rem] text-[var(--plum-soft)]">
           {review.displayDate || review.date}
         </span>
       </div>
 
       {review.title ? (
-        <h3 className="buudy-display mt-4 text-[1.3rem] sm:text-xl leading-snug text-[var(--plum)]">
+        <h3 className="buudy-display mt-2 sm:mt-4 text-[0.85rem] sm:text-xl leading-snug text-[var(--plum)]">
           {review.title}
         </h3>
       ) : null}
 
-      <p className="mt-3 text-sm leading-7 text-[var(--muted)] line-clamp-4">{review.body}</p>
+      <p className="mt-2 sm:mt-3 text-[0.7rem] sm:text-sm leading-5 sm:leading-7 text-[var(--muted)] line-clamp-3 sm:line-clamp-4">{review.body}</p>
 
-      <div className="mt-6 flex items-center justify-between gap-1.5 sm:gap-2 border-t border-[rgba(58,31,61,.12)] pt-4">
-        <span className="buudy-display min-w-0 text-sm text-[var(--plum)] whitespace-nowrap overflow-hidden text-ellipsis">
+      <div className="mt-3 sm:mt-6 flex items-center justify-between gap-1 sm:gap-2 border-t border-[rgba(58,31,61,.12)] pt-3 sm:pt-4">
+        <span className="buudy-display min-w-0 text-[0.7rem] sm:text-sm text-[var(--plum)] whitespace-nowrap overflow-hidden text-ellipsis">
           <span className="sm:hidden">
             {(() => {
               const parts = review.customerName.trim().split(" ");
@@ -536,8 +536,9 @@ function ReviewCard({
           </span>
           <span className="hidden sm:inline">{review.customerName}</span>
         </span>
-        <span className="inline-flex flex-none items-center gap-1 rounded-full bg-[rgba(180,145,76,.12)] px-1.5 py-1 sm:px-2 text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-[var(--plum-soft)]">
-          <BadgeCheck aria-hidden="true" size={12} />
+        <span className="inline-flex flex-none items-center gap-1 rounded-full bg-[rgba(180,145,76,.12)] px-1.5 py-1 sm:px-2 text-[0.5rem] sm:text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-[var(--plum-soft)]">
+          <BadgeCheck aria-hidden="true" size={10} className="sm:hidden" />
+          <BadgeCheck aria-hidden="true" size={12} className="hidden sm:block" />
           <span className="hidden sm:inline">Verified</span>
         </span>
       </div>
@@ -1174,10 +1175,8 @@ export function ProductReviewsGrid({
     const updateColumnCount = () => {
       if (window.matchMedia("(min-width: 1024px)").matches) {
         setColumnCount(4);
-      } else if (window.matchMedia("(min-width: 640px)").matches) {
-        setColumnCount(2);
       } else {
-        setColumnCount(1);
+        setColumnCount(2);
       }
     };
 
@@ -1435,9 +1434,9 @@ export function ProductReviewsGrid({
       />
 
       {reviews.length ? (
-        <div aria-busy={isLoading} className="grid min-w-0 grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div aria-busy={isLoading} className="grid min-w-0 grid-cols-2 items-start gap-3 sm:gap-5 lg:grid-cols-4">
           {reviewColumns.map((column, index) => (
-            <div className="grid min-w-0 gap-5" key={`review-column-${index}`}>
+            <div className="grid min-w-0 gap-3 sm:gap-5" key={`review-column-${index}`}>
               {column.map((review) => (
                 <ReviewCard
                   key={review.id}
