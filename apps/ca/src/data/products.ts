@@ -74,7 +74,7 @@ export const buudyMask: Product = {
   heroTitle: "Buudy LED",
   heroEmphasis: "Mask",
   shortDescription:
-    "Canada salon-grade LED face mask with 192 high-density LEDs, 7 wavelengths plus 830nm near-infrared, and full face plus neck coverage.",
+    "Salon-grade LED mask with the Premium Travel Box included for protected storage and travel.",
   description:
     "Salon-grade light therapy reimagined for Canadian homes. The Buudy LED Mask combines 192 high-density LEDs, 7 visible light colours plus a dedicated 830nm near-infrared mode, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
   seoTitle: "Best LED Face Mask Canada | Buudy Red Light Therapy Mask",

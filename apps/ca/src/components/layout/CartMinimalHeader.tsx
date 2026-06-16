@@ -68,7 +68,7 @@ export function CartMinimalHeader() {
 
         <div className="justify-self-end">
           <button
-            className={`buudy-cart-wipe buudy-display relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-[30px] border border-[var(--plum)] bg-[var(--plum)] px-6 py-3 text-xs font-bold uppercase leading-none tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] sm:text-sm ${!isRedirecting ? "proxy-bundle-btn" : ""}`}
+            className={`buudy-cart-wipe buudy-display relative inline-flex h-11 items-center justify-center overflow-hidden rounded-[30px] border border-[var(--plum)] bg-[var(--plum)] px-6 py-3 text-xs font-bold uppercase leading-none tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] sm:text-sm ${!isRedirecting ? "proxy-bundle-btn" : ""}`}
             type="button"
             disabled={isRedirecting}
             onClick={() => {
@@ -82,7 +82,7 @@ export function CartMinimalHeader() {
                   <Lock size={16} strokeWidth={1.8} />
                   <span>Buy Now</span>
                 </span>
-                <span className="absolute inset-0 flex items-center justify-center">
+                <span style={{ position: "absolute", inset: 0 }} className="flex items-center justify-center">
                   <Lottie animationData={loadingLottie} loop={true} className="h-14 w-20 scale-[1.35]" />
                 </span>
               </>

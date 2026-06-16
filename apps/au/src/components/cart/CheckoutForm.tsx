@@ -145,6 +145,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
   return (
     <>
       <Button
+        id="main-checkout-btn"
         className={`relative overflow-hidden w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] buudy-display ${!isRedirecting ? "proxy-bundle-btn" : "disabled:!opacity-100"}`}
         disabled={!hasItems || isRedirecting}
         onClick={handleCheckout}
