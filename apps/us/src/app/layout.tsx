@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
+import { CartMinimalFooter } from "@/components/layout/CartMinimalFooter";
+import { CartMinimalHeader } from "@/components/layout/CartMinimalHeader";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { RouteChrome } from "@/components/layout/RouteChrome";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { ClarityAnalytics } from "@/components/integrations/ClarityAnalytics";
@@ -111,10 +114,19 @@ export default function RootLayout({
     >
       <body>
         <CartProvider>
-          <AnnouncementBar />
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <RouteChrome
+            cartFooter={<CartMinimalFooter />}
+            cartHeader={<CartMinimalHeader />}
+            defaultFooter={<Footer />}
+            defaultHeader={
+              <>
+                <AnnouncementBar />
+                <Header />
+              </>
+            }
+          >
+            {children}
+          </RouteChrome>
           <CartDrawer />
         </CartProvider>
         <ClarityAnalytics />

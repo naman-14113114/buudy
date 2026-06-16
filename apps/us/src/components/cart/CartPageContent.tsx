@@ -120,7 +120,7 @@ export function CartPageContent({
                 </span>
               </p>
             </div>
-            <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--gold)]">
+            <span className="buudy-mono rounded-full border border-[rgba(184,149,86,.32)] bg-[rgba(184,149,86,.2)] px-4 py-2 text-[var(--plum)] shadow-[inset_0_1px_0_rgba(255,255,255,.55)]">
               Free tracked shipping
             </span>
           </div>
@@ -138,6 +138,7 @@ export function CartPageContent({
 
           <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
             <CartSummary>
+              <span className="sr-only" id="checkout" />
               <CheckoutForm initialCustomer={initialCustomer} />
             </CartSummary>
             <FreeGiftsPanel compact />
