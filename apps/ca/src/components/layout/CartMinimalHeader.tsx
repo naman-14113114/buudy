@@ -1,14 +1,38 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Lock } from "lucide-react";
+import Lottie from "lottie-react";
+import loadingLottie from "@/components/cart/loading-lottie.json";
 
 const TRUST_ITEMS = [
   "FREE TRACKED SHIPPING \u2022 4.9/5 FROM 16,000+ CUSTOMERS \u2022 SECURE CHECKOUT",
 ];
 
 export function CartMinimalHeader() {
+  const [isRedirecting, setIsRedirecting] = useState(false);
+
+  useEffect(() => {
+    function handleCheckoutStarted() {
+      setIsRedirecting(true);
+    }
+
+    function handlePageShow(event: PageTransitionEvent) {
+      if (event.persisted) {
+        setIsRedirecting(false);
+      }
+    }
+
+    window.addEventListener("buudy:started-checkout", handleCheckoutStarted);
+    window.addEventListener("pageshow", handlePageShow);
+    return () => {
+      window.removeEventListener("buudy:started-checkout", handleCheckoutStarted);
+      window.removeEventListener("pageshow", handlePageShow);
+    };
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(58,31,61,.14)] bg-[rgba(247,241,232,.96)]">
       <div className="bg-[var(--plum)] px-4 py-2 text-center text-[var(--cream)]">
@@ -42,26 +66,33 @@ export function CartMinimalHeader() {
           />
         </Link>
 
-        <div className="flex min-w-0 flex-col items-end gap-1 justify-self-end text-right sm:flex-row sm:items-center sm:gap-4">
+        <div className="justify-self-end">
           <button
-            className="proxy-bundle-btn buudy-display relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-[30px] border border-[var(--plum)] bg-[var(--plum)] px-4 py-3 text-xs font-bold uppercase leading-none tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] sm:text-sm"
+            className={`buudy-cart-wipe buudy-display relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-[30px] border border-[var(--plum)] bg-[var(--plum)] px-6 py-3 text-xs font-bold uppercase leading-none tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] sm:text-sm ${!isRedirecting ? "proxy-bundle-btn" : ""}`}
             type="button"
+            disabled={isRedirecting}
             onClick={() => {
               const btn = document.getElementById('main-checkout-btn') as HTMLButtonElement;
               btn?.click();
             }}
           >
-            <span className="relative z-10 inline-flex items-center justify-center gap-2">
-              <Lock size={16} strokeWidth={1.8} />
-              <span>Checkout securely</span>
-            </span>
+            {isRedirecting ? (
+              <>
+                <span style={{ visibility: "hidden" }} className="inline-flex items-center gap-2">
+                  <Lock size={16} strokeWidth={1.8} />
+                  <span>Buy Now</span>
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <Lottie animationData={loadingLottie} loop={true} className="h-14 w-20 scale-[1.35]" />
+                </span>
+              </>
+            ) : (
+              <span className="relative z-10 inline-flex items-center justify-center gap-2">
+                <Lock size={16} strokeWidth={1.8} />
+                <span>Buy Now</span>
+              </span>
+            )}
           </button>
-          <a
-            className="hidden text-xs font-semibold text-[var(--muted)] underline-offset-4 hover:text-[var(--plum)] sm:inline"
-            href="mailto:support@buudy.com"
-          >
-            Need help? support@buudy.com
-          </a>
         </div>
       </div>
     </header>
