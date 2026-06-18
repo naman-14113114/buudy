@@ -42,8 +42,8 @@ export function buildPlusbaseCheckoutUrl(options: CheckoutBridgeOptions = {}) {
   );
 
   const params: Record<string, string> = {
-    variant_id: "1000000667066221",
-    product_id: "1000000611225890",
+    variant_id: "1000020440781449",
+    product_id: "1000000667066221",
     quantity: String(quantity),
     qty: String(quantity),
     product_quantity: String(quantity),
@@ -52,7 +52,7 @@ export function buildPlusbaseCheckoutUrl(options: CheckoutBridgeOptions = {}) {
     gift_quantity: String(giftQuantity),
     gift: "buudy-red-light-torch",
     redirect: "checkout",
-    product_handle: "buudy-led-mask",
+    product_handle: "buudy-led-face-mask-premium-travel-case",
     source: options.source ?? market.checkoutSource,
     utm_source: options.utmSource ?? market.checkoutUtmSource,
     utm_medium: options.utmMedium ?? "store_cart_checkout",

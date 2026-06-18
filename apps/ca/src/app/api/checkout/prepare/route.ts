@@ -5,8 +5,8 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const plusbaseOrigin = "https://buudy.com";
-const maskProductId = 1000000611225890;
-const maskVariantId = 1000000667066221;
+const maskProductId = 1000000667066221;
+const maskVariantId = 1000020440781449;
 const torchProductId = 1000000667092650;
 const torchVariantId = 1000020441935145;
 
@@ -129,8 +129,19 @@ async function createPlusbaseCheckout(quantity: number) {
     cookie = appendCookies(cookie, response);
 
     const json = await response.json();
-    if (!response.ok || json?.code !== 0) {
-      throw new Error("Could not add item to PlusBase cart.");
+    const messages = Array.isArray(json?.messages) ? json.messages : [];
+
+    if (
+      !response.ok ||
+      json?.code !== 0 ||
+      !json?.result ||
+      messages.length > 0
+    ) {
+      throw new Error(
+        `Could not add item to PlusBase cart${
+          messages.length ? `: ${messages.join(", ")}` : "."
+        }`,
+      );
     }
   }
 
