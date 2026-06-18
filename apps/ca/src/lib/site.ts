@@ -42,15 +42,15 @@ export function buildPlusbaseCheckoutUrl(options: CheckoutBridgeOptions = {}) {
   );
 
   const params: Record<string, string> = {
-    variant_id: "1000019092784268",
+    variant_id: "1000000667066221",
     product_id: "1000000611225890",
     quantity: String(quantity),
     qty: String(quantity),
     product_quantity: String(quantity),
-    gift_variant_id: "1000020384558655",
-    gift_product_id: "1000000665008955",
+    gift_variant_id: "1000020441935145",
+    gift_product_id: "1000000667092650",
     gift_quantity: String(giftQuantity),
-    gift: "buudy-red-torch",
+    gift: "buudy-red-light-torch",
     redirect: "checkout",
     product_handle: "buudy-led-mask",
     source: options.source ?? market.checkoutSource,

@@ -75,16 +75,16 @@ export const freeGiftDetails: FreeGiftDetail[] = [
   {
     slug: "buudy-led-torch",
     eyebrow: "Free Bonus Gift",
-    title: "Buudy LED Torch",
-    seoTitle: "Buudy LED Torch Bonus Gift",
+    title: "Buudy Red Light Torch",
+    seoTitle: "Buudy Red Light Torch Bonus Gift",
     seoDescription:
-      "Explore the targeted Buudy LED Torch included as a free companion gift with the Buudy LED Mask offer.",
+      "Explore the targeted Buudy Red Light Torch included as a free companion gift with the Buudy LED Mask offer.",
     intro:
-      "The Buudy LED Torch adds precision to the main mask offer. While the LED Mask gives you broad face-and-neck coverage, the torch gives you a smaller tool you can use for targeted touch-up areas and travel-friendly sessions.",
+      "The Buudy Red Light Torch adds precision to the main mask offer. While the LED Mask gives you broad face-and-neck coverage, the torch gives you a smaller tool you can use for targeted touch-up areas and travel-friendly sessions.",
     note:
-      "The current Buudy LED Mask offer includes the LED Torch as a free bonus gift.",
+      "The current Buudy LED Mask offer includes the Red Light Torch as a free bonus gift.",
     image: productMediaAsset("free_torch.png"),
-    imageAlt: "Buudy LED Torch bonus gift",
+    imageAlt: "Buudy Red Light Torch bonus gift",
     cardTitle: "Why customers like this bonus",
     cardBullets: [
       "Great for targeted touch-up zones",

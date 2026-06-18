@@ -141,9 +141,9 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
       if (line.productId === "buudy-led-mask" && line.type === "product") {
         return {
           ...line,
-          title: "Buudy LED Mask + Premium Travel Box",
+          title: "Buudy LED Face Mask + Premium Travel Case",
           subtitle:
-            "Salon-grade LED mask with the Premium Travel Box included for protected storage and travel.",
+            "Salon-grade LED mask with the Premium Travel Case included for protected storage and travel.",
           image: "/media/products/buudy-led-mask/images/84-w.webp",
         };
       }

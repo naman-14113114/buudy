@@ -162,7 +162,7 @@ export const buudyMask: Product = {
     },
     {
       id: "buudy-led-torch",
-      name: "Buudy LED Torch",
+      name: "Buudy Red Light Torch",
       valueCents: 7000,
       image: productAsset("buudy-led-torch.jpg"),
       label: "Limited edition",
@@ -197,7 +197,7 @@ export const buudyMask: Product = {
     { quantity: "2x", label: "Eye Support" },
     { quantity: "1x", label: "User Manual" },
     { quantity: "1x", label: "Comprehensive Treatment Guide" },
-    { quantity: "1x", label: "Buudy LED Torch", tag: "Free gift" },
+    { quantity: "1x", label: "Buudy Red Light Torch", tag: "Free gift" },
   ],
   highlights: [
     "Stimulates collagen production",
