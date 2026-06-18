@@ -7,8 +7,8 @@ export const dynamic = "force-dynamic";
 const plusbaseOrigin = "https://buudy.com";
 const maskProductId = 1000000667066221;
 const maskVariantId = 1000020440781449;
-const torchProductId = 1000000667092650;
-const torchVariantId = 1000020441935145;
+const torchProductId = 1000000665008955;
+const torchVariantId = 1000020384558655;
 
 type CheckoutPrepareBody = {
   customerEmail?: string;
@@ -99,7 +99,11 @@ async function createPlusbaseCheckout(quantity: number) {
     throw new Error("Could not create PlusBase cart.");
   }
 
-  async function addItem(productId: number, variantId: number, itemQuantity: number) {
+  async function addItem(
+    productId: number,
+    variantId: number,
+    itemQuantity: number,
+  ) {
     const response = await fetch(
       `${plusbaseOrigin}/api/checkout/next/cart.json?cart_token=${encodeURIComponent(
         cartToken,

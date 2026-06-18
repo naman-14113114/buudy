@@ -6,7 +6,10 @@ export const plusbaseStoreUrl = "https://buudy.com";
 const plusbaseBridgePath = "/pages/add-to-cart";
 
 export function getSiteUrl() {
-  return (process.env.NEXT_PUBLIC_SITE_URL ?? defaultSiteUrl).replace(/\/+$/, "");
+  return (process.env.NEXT_PUBLIC_SITE_URL ?? defaultSiteUrl).replace(
+    /\/+$/,
+    "",
+  );
 }
 
 export function absoluteUrl(path = "/") {
@@ -47,8 +50,8 @@ export function buildPlusbaseCheckoutUrl(options: CheckoutBridgeOptions = {}) {
     quantity: String(quantity),
     qty: String(quantity),
     product_quantity: String(quantity),
-    gift_variant_id: "1000020441935145",
-    gift_product_id: "1000000667092650",
+    gift_variant_id: "1000020384558655",
+    gift_product_id: "1000000665008955",
     gift_quantity: String(giftQuantity),
     gift: "buudy-red-light-torch",
     redirect: "checkout",
