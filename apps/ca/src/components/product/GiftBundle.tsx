@@ -124,53 +124,53 @@ export function GiftBundle({ product }: { product: Product }) {
     <div>
       <a
         href="#reviews"
-        className="flex flex-wrap items-center gap-3 no-underline hover:no-underline cursor-pointer"
+        className="flex flex-nowrap items-center gap-2 no-underline hover:no-underline cursor-pointer"
       >
         <div
-          className="text-xl sm:text-2xl leading-none text-[var(--gold)]"
+          className="text-xl sm:text-2xl leading-none text-[var(--gold)] shrink-0"
           aria-hidden
         >
           ★★★★★
         </div>
-        <span className="font-sans text-sm sm:text-base font-medium text-[var(--plum)] bg-[rgba(184,149,86,.18)] px-2.5 py-0.5 rounded-md">
+        <span className="font-sans text-xs sm:text-base font-medium text-[var(--plum)] bg-[rgba(184,149,86,.18)] px-2 sm:px-2.5 py-0.5 rounded-md whitespace-nowrap">
           {product.rating} · TRUSTED BY {product.customerCount} CUSTOMERS
         </span>
       </a>
 
-      <h1 className="font-playfair mt-3 whitespace-nowrap text-[2rem] leading-[1.02] text-[var(--plum)] sm:text-[2.55rem] md:text-[3.25rem] xl:text-[4rem] 2xl:text-[4.45rem]">
+      <h1 className="font-playfair mt-3 whitespace-nowrap text-[3rem] leading-[1.02] text-[var(--plum)] sm:text-[2.55rem] md:text-[3.25rem] xl:text-[4rem] 2xl:text-[4.45rem]">
         {product.heroTitle}{" "}
         <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
       </h1>
 
       {/* Clinically Proven Badges */}
-      <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
-        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
+      <div className="mt-3 flex flex-nowrap items-center gap-0.5 sm:gap-2 overflow-hidden">
+        <span className="inline-flex shrink-0 items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1 sm:px-3 py-1 sm:py-1.5">
           <ShieldCheck
             size={14}
             strokeWidth={2}
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
+          <span className="whitespace-nowrap buudy-display text-[9px] sm:text-[10.5px] font-bold uppercase tracking-[0em] sm:tracking-[0.05em] text-[var(--plum)]">
             Clinically Proven
           </span>
         </span>
-        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
+        <span className="inline-flex shrink-0 items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1 sm:px-3 py-1 sm:py-1.5">
           <RotateCcw
             size={13}
             strokeWidth={2}
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
+          <span className="whitespace-nowrap buudy-display text-[9px] sm:text-[10.5px] font-bold uppercase tracking-[0em] sm:tracking-[0.05em] text-[var(--plum)]">
             90-Day Returns
           </span>
         </span>
-        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
+        <span className="inline-flex shrink-0 items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1 sm:px-3 py-1 sm:py-1.5">
           <Sparkles
             size={14}
             strokeWidth={2}
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
+          <span className="whitespace-nowrap buudy-display text-[9px] sm:text-[10.5px] font-bold uppercase tracking-[0em] sm:tracking-[0.05em] text-[var(--plum)]">
             Dermatologist Approved
           </span>
         </span>
@@ -182,14 +182,14 @@ export function GiftBundle({ product }: { product: Product }) {
           currency={product.currency}
           priceCents={product.priceCents}
         />
-        <div className="flex flex-nowrap items-center gap-x-1 sm:gap-x-1.5 text-[9.5px] sm:text-[13px] text-[var(--muted)]">
-          <span className="whitespace-nowrap tracking-tight sm:tracking-normal">
+        <div className="flex flex-nowrap items-center gap-x-1 sm:gap-x-1.5 text-[13px] sm:text-[13px] text-[var(--muted)]">
+          <span className="whitespace-nowrap tracking-normal">
             or{" "}
-            <strong className="buudy-display text-[10px] sm:text-[14px] font-medium text-[var(--plum)]">
+            <strong className="buudy-display text-[14px] sm:text-[14px] font-medium text-[var(--plum)]">
               4
             </strong>{" "}
             interest-free payments of{" "}
-            <strong className="buudy-display text-[10px] sm:text-[14px] font-semibold text-[var(--plum)]">
+            <strong className="buudy-display text-[14px] sm:text-[14px] font-semibold text-[var(--plum)]">
               {formatMoney(product.priceCents / 4, product.currency)}
             </strong>
           </span>

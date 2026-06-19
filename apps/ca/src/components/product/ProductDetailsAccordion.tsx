@@ -143,34 +143,34 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
           {(product.template === "torch" ? torchFeatures : features).map((feature, index) => {
             const Icon = product.template === "torch" ? IconBulb : featureIcons[index];
             return (
-            <li
-              key={index}
-              className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-4"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
-                    {Icon ? <Icon size={20} stroke={1.5} /> : null}
-                  </span>
-                  <div>
-                    <p className="font-sans text-sm font-bold text-[var(--plum)]">
-                      {feature.title}
-                    </p>
-                    <p className="font-sans mt-0.5 text-xs italic font-semibold text-[var(--gold)]">
-                      {feature.kicker}
-                    </p>
+              <li
+                key={index}
+                className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-4"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
+                      {Icon ? <Icon size={20} stroke={1.5} /> : null}
+                    </span>
+                    <div>
+                      <p className="font-sans text-[14.5px] font-bold text-[var(--plum)]">
+                        {feature.title}
+                      </p>
+                      <p className="font-sans mt-0.5 text-[13px] italic font-semibold text-[var(--gold)]">
+                        {feature.kicker}
+                      </p>
+                    </div>
                   </div>
+                  <span className="buudy-display text-[14.5px] text-[var(--gold)] font-medium self-start mt-1">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
-                <span className="buudy-display text-sm text-[var(--gold)] font-medium self-start mt-1">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <p className="font-sans mt-1 text-xs leading-5 text-[var(--muted)]">
-                {feature.body}
-              </p>
-            </li>
-          );
-        })}
+                <p className="font-sans mt-1 text-[14.5px] leading-6 text-[var(--muted)]">
+                  {feature.body}
+                </p>
+              </li>
+            );
+          })}
         </ul>
       ),
     },
@@ -179,18 +179,18 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
       eyebrow: "Specifications",
       title: "The numbers, in detail",
       content: (
-        <dl className="grid gap-3">
+        <dl className="grid gap-2.5">
           {product.specs.map((spec) => {
             const Icon = getSpecIcon(spec.label);
             return (
-              <div className="grid grid-cols-[1fr_auto] gap-4 items-center" key={spec.label}>
-                <dt className="flex items-center gap-2">
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[var(--gold)]">
-                    <Icon size={15} strokeWidth={2} />
+              <div className="flex items-center justify-between gap-2" key={spec.label}>
+                <dt className="flex items-center gap-1.5 min-w-0">
+                  <span className="flex h-4 w-4 shrink-0 items-center justify-center text-[var(--gold)]">
+                    <Icon size={13} strokeWidth={2} />
                   </span>
-                  <span className="font-sans text-sm font-medium text-[var(--muted)]">{spec.label}</span>
+                  <span className="font-sans text-[12px] sm:text-[13px] font-medium text-[var(--muted)] leading-tight">{spec.label}</span>
                 </dt>
-                <dd className="font-sans text-right text-sm font-semibold leading-5 text-[var(--plum)]">
+                <dd className="font-sans text-right text-[12px] sm:text-[13px] font-semibold leading-tight text-[var(--plum)] shrink-0 whitespace-nowrap">
                   {spec.value}
                 </dd>
               </div>
@@ -199,47 +199,25 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
         </dl>
       ),
     },
-    /* {
-      id: "benefits",
-      eyebrow: "Key benefits",
-      title: "What your ritual supports",
-      content: (
-        <ul className="grid gap-2 sm:grid-cols-2">
-          {(product.differentiators ?? product.keyBenefits ?? product.highlights).map((benefit, index) => {
-            const Icon = keyBenefitIcons[index % keyBenefitIcons.length];
-
-            return (
-              <li
-                className="flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-sm font-semibold leading-5 text-[var(--plum)]"
-                key={benefit}
-              >
-                <Icon className="shrink-0 text-[var(--gold)]" size={15} strokeWidth={1.8} />
-                {benefit}
-              </li>
-            );
-          })}
-        </ul>
-      ),
-    }, */
     {
       id: "included",
       eyebrow: "In the box",
       title: "Everything you need",
       content: (
-        <ul className="grid gap-2">
+        <ul className="grid gap-1.5">
           {product.included.map((item) => (
             <li
-              className="flex items-center justify-between gap-4 rounded-xl border border-[var(--border)] bg-[rgba(247,241,232,.55)] px-4 py-3"
+              className="flex items-center justify-between gap-2 rounded-xl border border-[var(--border)] bg-[rgba(247,241,232,.55)] px-3 py-2"
               key={`${item.quantity}-${item.label}`}
             >
-              <span className="flex items-center gap-3">
-                <span className="buudy-mono text-[var(--gold)]">{item.quantity}</span>
-                <span className="text-sm font-semibold text-[var(--plum)]">
+              <span className="flex items-center gap-2 min-w-0">
+                <span className="buudy-mono shrink-0 text-[var(--gold)] text-[11px]">{item.quantity}</span>
+                <span className="text-[12px] sm:text-[13px] font-semibold text-[var(--plum)] truncate">
                   {item.label}
                 </span>
               </span>
               {item.tag ? (
-                <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.18)] px-3 py-1 text-[var(--plum)]">
+                <span className="buudy-mono shrink-0 rounded-full bg-[rgba(184,149,86,.18)] px-2 py-0.5 text-[10px] whitespace-nowrap text-[var(--plum)]">
                   {item.tag}
                 </span>
               ) : null}
@@ -256,7 +234,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
         <ul className="grid gap-2 sm:grid-cols-2">
           {product.badges.map((badge) => (
             <li
-              className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-sm font-semibold leading-5 text-[var(--plum)]"
+              className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-[14.5px] font-semibold leading-5 text-[var(--plum)]"
               key={badge}
             >
               {badge}

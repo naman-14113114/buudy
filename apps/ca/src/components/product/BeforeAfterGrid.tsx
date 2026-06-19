@@ -176,7 +176,7 @@ export function BeforeAfterGrid() {
               </>
             }
           />
-          <p className="max-w-sm text-sm leading-7 text-[var(--muted)]">
+          <p className="max-w-sm text-[14.5px] leading-7 text-[var(--muted)]">
             Verified customer transformations, photographed in their own homes
             after consistent use of the Buudy LED Mask.
           </p>
@@ -220,7 +220,7 @@ export function BeforeAfterGrid() {
                 <h3 className="buudy-display mt-3 text-xl text-[var(--plum)]">
                   {story.title}
                 </h3>
-                <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
+                <p className="mt-2 text-[14.5px] leading-7 text-[var(--muted)]">
                   {story.quote}
                 </p>
                 <div className="mt-4 flex items-center justify-between border-t border-[var(--border)] pt-3">
