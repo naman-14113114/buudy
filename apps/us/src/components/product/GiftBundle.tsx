@@ -143,34 +143,34 @@ export function GiftBundle({ product }: { product: Product }) {
       </h1>
 
       {/* Clinically Proven Badges */}
-      <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
-        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
+      <div className="mt-3 flex flex-nowrap items-center gap-0.5 sm:gap-1.5 w-full">
+        <span className="inline-flex items-center gap-1 sm:gap-1 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-2 py-1 sm:py-1">
           <ShieldCheck
-            size={14}
-            strokeWidth={2}
-            className="hidden sm:block shrink-0 text-[var(--gold)]"
-          />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            Clinically Proven
-          </span>
-        </span>
-        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
-          <RotateCcw
             size={13}
             strokeWidth={2}
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            90-Day Returns
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[9.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.02em] text-[var(--plum)]">
+            Clinically Proven
           </span>
         </span>
-        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
-          <Sparkles
-            size={14}
+        <span className="inline-flex items-center gap-1 sm:gap-1 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-2 py-1 sm:py-1">
+          <RotateCcw
+            size={12}
             strokeWidth={2}
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[9.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.02em] text-[var(--plum)]">
+            90-Day Returns
+          </span>
+        </span>
+        <span className="inline-flex items-center gap-1 sm:gap-1 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-2 py-1 sm:py-1">
+          <Sparkles
+            size={13}
+            strokeWidth={2}
+            className="hidden sm:block shrink-0 text-[var(--gold)]"
+          />
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[9.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.02em] text-[var(--plum)]">
             Dermatologist Approved
           </span>
         </span>
