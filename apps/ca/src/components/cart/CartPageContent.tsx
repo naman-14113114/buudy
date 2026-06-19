@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  BookOpen,
   Check,
   ChevronDown,
   Gift,
@@ -103,7 +102,7 @@ export function CartPageContent({
   }
 
   return (
-    <section className="buudy-section bg-[var(--cream)] pt-2 pb-8 md:pt-4 md:pb-12">
+    <section className="buudy-section bg-[var(--cream)] pt-2 pb-28 md:pt-4 md:pb-12">
       <div className="buudy-wrap">
         <div className="mb-8 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] px-5 py-4 shadow-[0_18px_40px_-32px_rgba(58,31,61,.45)]">
           <div className="flex flex-col items-start justify-between gap-3 md:flex-row md:items-center">
@@ -240,10 +239,16 @@ function CartRestoringState() {
 
 function DigitalGiftNotice({ line }: { line: CartLine }) {
   return (
-    <div className="relative overflow-hidden rounded-[1.5rem] border border-[rgba(184,149,86,.25)] bg-[rgba(184,149,86,.09)] p-5 md:pl-6 md:pr-36">
+    <div className="overflow-hidden rounded-[1.5rem] border border-[rgba(184,149,86,.25)] bg-[rgba(184,149,86,.09)] p-5 md:p-6">
       <div className="flex items-start gap-4">
-        <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-[var(--card)] text-[var(--gold)] shadow-sm">
-          <BookOpen size={22} />
+        <span className="relative h-20 w-14 flex-none overflow-hidden rounded-lg border border-[rgba(58,31,61,.14)] bg-[var(--card)] shadow-sm">
+          <Image
+            alt={line.title}
+            className="object-contain p-1"
+            fill
+            sizes="56px"
+            src={line.image}
+          />
         </span>
         <div>
           <p className="buudy-mono text-[var(--gold)]">Free digital reward</p>
@@ -256,15 +261,6 @@ function DigitalGiftNotice({ line }: { line: CartLine }) {
             email arrives.
           </p>
         </div>
-      </div>
-      <div className="pointer-events-none absolute bottom-[-24px] right-3 hidden h-32 w-24 rotate-[-7deg] overflow-hidden rounded-xl border border-[rgba(58,31,61,.14)] bg-[var(--card)] shadow-xl md:block">
-        <Image
-          alt={line.title}
-          className="object-contain p-2"
-          fill
-          sizes="96px"
-          src={line.image}
-        />
       </div>
     </div>
   );

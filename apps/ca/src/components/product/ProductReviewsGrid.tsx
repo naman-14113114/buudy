@@ -1075,7 +1075,6 @@ export function ProductReviewsGrid({
   const [summaryTotal, setSummaryTotal] = useState(total);
   const [currentAverageRating, setCurrentAverageRating] = useState(averageRating);
   const [currentRatingDistribution, setCurrentRatingDistribution] = useState(ratingDistribution);
-  const [columnCount, setColumnCount] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedReview, setSelectedReview] = useState<ProductReview | null>(null);
@@ -1161,31 +1160,6 @@ export function ProductReviewsGrid({
 
     return labels;
   }, [activeRating, reviewSort, verifiedOnly, withPhotos]);
-  const reviewColumns = useMemo(() => {
-    const columns = Array.from({ length: columnCount }, () => [] as AnimatableProductReview[]);
-
-    reviews.forEach((review, index) => {
-      columns[index % columnCount].push(review);
-    });
-
-    return columns;
-  }, [columnCount, reviews]);
-
-  useEffect(() => {
-    const updateColumnCount = () => {
-      if (window.matchMedia("(min-width: 1024px)").matches) {
-        setColumnCount(4);
-      } else {
-        setColumnCount(2);
-      }
-    };
-
-    updateColumnCount();
-    window.addEventListener("resize", updateColumnCount);
-
-    return () => window.removeEventListener("resize", updateColumnCount);
-  }, []);
-
   useEffect(() => {
     if (!openMenu) {
       return;
@@ -1247,19 +1221,6 @@ export function ProductReviewsGrid({
 
     return (await response.json()) as ProductReviewsResponse;
   }, [pageSize, productHandle]);
-
-  useEffect(() => {
-    const requestId = requestIdRef.current + 1;
-    requestIdRef.current = requestId;
-
-    fetchReviews(defaultReviewFilters, 0)
-      .then((data) => {
-        if (requestId === requestIdRef.current) {
-          applyReviewResponse(data, "replace");
-        }
-      })
-      .catch(() => undefined);
-  }, [applyReviewResponse, fetchReviews]);
 
   const handleReviewSubmitted = useCallback(
     async (review: ProductReview) => {
@@ -1434,17 +1395,14 @@ export function ProductReviewsGrid({
       />
 
       {reviews.length ? (
-        <div aria-busy={isLoading} className="grid min-w-0 grid-cols-2 items-start gap-3 sm:gap-5 lg:grid-cols-4">
-          {reviewColumns.map((column, index) => (
-            <div className="grid min-w-0 gap-3 sm:gap-5" key={`review-column-${index}`}>
-              {column.map((review) => (
-                <ReviewCard
-                  key={review.id}
-                  onOpen={openSelectedReview}
-                  onPrefetch={prefetchReviewImages}
-                  review={review}
-                />
-              ))}
+        <div aria-busy={isLoading} className="min-w-0 columns-2 gap-3 sm:gap-5 lg:columns-4">
+          {reviews.map((review) => (
+            <div className="mb-3 inline-block w-full break-inside-avoid sm:mb-5" key={review.id}>
+              <ReviewCard
+                onOpen={openSelectedReview}
+                onPrefetch={prefetchReviewImages}
+                review={review}
+              />
             </div>
           ))}
         </div>

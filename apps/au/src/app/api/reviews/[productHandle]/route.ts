@@ -1,5 +1,6 @@
 import { Buffer } from "node:buffer";
 import { randomUUID } from "node:crypto";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
@@ -329,6 +330,13 @@ export async function POST(
       { message: "We could not publish your review right now. Please try again." },
       { status: 500 },
     );
+  }
+
+  if (productHandle === "buudy-led-mask") {
+    revalidatePath("/products/buudy-led-mask");
+    revalidatePath("/products/buudy-led-mask-2");
+  } else {
+    revalidatePath("/products/red-light-torch");
   }
 
   return NextResponse.json({ review: toPublicProductReview(data) }, { status: 201 });

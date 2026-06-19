@@ -1,20 +1,17 @@
 import type { Product } from "@/data/products";
-import { AppPromo, BlueLightSection, TouchTechSection } from "./AppPromo";
+import { AppPromo, BlueLightSection } from "./AppPromo";
+import { BeforeAfterGrid } from "./BeforeAfterGrid";
 import { ComparisonTable } from "./ComparisonTable";
+import { ExpertSection } from "./ExpertSection";
 import { FAQSection } from "./FAQSection";
-import { FeatureGrid } from "./FeatureGrid";
 import { GuaranteeSection } from "./GuaranteeSection";
 import { ProductHero } from "./ProductHero";
 import { ProductReviewsSection } from "./ProductReviewsSection";
 import { StickyAddToCart } from "./StickyAddToCart";
 import { TorchProductPage } from "./TorchProductPage";
-import {
-  DeferredBeforeAfterGrid,
-  DeferredExpertSection,
-  DeferredVideoReviews,
-  DeferredWavelengthSelector,
-} from "./DeferredClientSections";
 import { TrustBadges } from "./TrustBadges";
+import { VideoReviews } from "./VideoReviews";
+import { WavelengthSelector } from "./WavelengthSelector";
 
 export function ProductPage({ product }: { product: Product }) {
   if (product.template === "torch") {
@@ -24,13 +21,11 @@ export function ProductPage({ product }: { product: Product }) {
   return (
     <>
       <ProductHero product={product} />
-      <DeferredVideoReviews />
+      <VideoReviews />
       <TrustBadges />
-      {/* <FeatureGrid /> */}
-      <DeferredBeforeAfterGrid />
-      <DeferredWavelengthSelector />
-      <DeferredExpertSection />
-      {/* <TouchTechSection /> */}
+      <BeforeAfterGrid />
+      <WavelengthSelector />
+      <ExpertSection />
       <AppPromo />
       <ProductReviewsSection />
       <BlueLightSection />

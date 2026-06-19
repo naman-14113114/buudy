@@ -10,6 +10,7 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { ClarityAnalytics } from "@/components/integrations/ClarityAnalytics";
 import { KlaviyoAnalytics } from "@/components/integrations/KlaviyoAnalytics";
+import { PageMediaPreloader } from "@/components/integrations/PageMediaPreloader";
 import { TawkToWidget } from "@/components/integrations/TawkToWidget";
 import { market } from "@/lib/market";
 import "./globals.css";
@@ -116,7 +117,12 @@ export default function RootLayout({
         <CartProvider>
           <RouteChrome
             cartFooter={<CartMinimalFooter />}
-            cartHeader={<CartMinimalHeader />}
+            cartHeader={
+              <>
+                <AnnouncementBar />
+                <CartMinimalHeader />
+              </>
+            }
             defaultFooter={<Footer />}
             defaultHeader={
               <>
@@ -127,6 +133,7 @@ export default function RootLayout({
           >
             {children}
           </RouteChrome>
+          <PageMediaPreloader />
           <CartDrawer />
         </CartProvider>
         <ClarityAnalytics />

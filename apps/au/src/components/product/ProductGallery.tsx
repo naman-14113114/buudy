@@ -14,8 +14,6 @@ export function ProductGallery({
   hasGifts?: boolean;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [displayIndex, setDisplayIndex] = useState(0);
-  const [transitionOpacity, setTransitionOpacity] = useState(1);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -25,20 +23,31 @@ export function ProductGallery({
   const lightboxRef = useRef<HTMLDivElement>(null);
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
 
-  // 1. Handle opacity transition during image changes
+  // 1. Warm the next gallery asset without delaying the current image swap.
   useEffect(() => {
-    const fadeTimeout = setTimeout(() => {
-      setTransitionOpacity(0.5);
-    }, 0);
-    const swapTimeout = setTimeout(() => {
-      setDisplayIndex(currentIndex);
-      setTransitionOpacity(1);
-    }, 150);
+    const nextImage = images[(currentIndex + 1) % images.length];
+    if (!nextImage) return;
+
+    if (nextImage.src.endsWith(".mp4") || nextImage.src.endsWith(".webm")) {
+      const video = document.createElement("video");
+      video.preload = "metadata";
+      video.src = nextImage.src;
+      video.load();
+      return () => {
+        video.removeAttribute("src");
+        video.load();
+      };
+    }
+
+    const image = new window.Image();
+    image.decoding = "async";
+    image.fetchPriority = "low";
+    image.src = nextImage.src;
+    void image.decode?.().catch(() => undefined);
     return () => {
-      clearTimeout(fadeTimeout);
-      clearTimeout(swapTimeout);
+      image.src = "";
     };
-  }, [currentIndex]);
+  }, [currentIndex, images]);
 
   // 2. Navigation controls
   const goNext = useCallback(() => {
@@ -50,8 +59,6 @@ export function ProductGallery({
   const openLightbox = useCallback(
     (index = currentIndex) => {
       setCurrentIndex(index);
-      setDisplayIndex(index);
-      setTransitionOpacity(1);
       setIsLightboxOpen(true);
     },
     [currentIndex],
@@ -144,7 +151,7 @@ export function ProductGallery({
     }
   };
 
-  const currentImage = images[displayIndex] ?? images[0];
+  const currentImage = images[currentIndex] ?? images[0];
 
   return (
     <>
@@ -156,7 +163,7 @@ export function ProductGallery({
         .buudyLED-23435t23-container { max-width: 900px; margin: 0 auto; padding: 10px 10px 10px 10px !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
         /* 2. MAIN IMAGE */
         .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
-        .buudyLED-23435t23-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; transition: opacity 0.3s ease; }
+        .buudyLED-23435t23-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; }
         /* 3. THUMBNAILS GRID */
         .buudyLED-23435t23-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; }
         .buudyLED-23435t23-thumb_item { position: relative; appearance: none; width: 100%; padding: 0 0 100%; cursor: zoom-in; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; }
@@ -250,7 +257,6 @@ export function ProductGallery({
               loop
               playsInline
               onClick={() => openLightbox()}
-              style={{ opacity: transitionOpacity }}
             />
           ) : (
             <img
@@ -262,7 +268,6 @@ export function ProductGallery({
               fetchPriority="high"
               loading="eager"
               onClick={() => openLightbox()}
-              style={{ opacity: transitionOpacity }}
             />
           )}
 
