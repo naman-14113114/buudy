@@ -45,8 +45,8 @@ export function buildPlusbaseCheckoutUrl(options: CheckoutBridgeOptions = {}) {
   );
 
   const params: Record<string, string> = {
-    variant_id: "1000020440781449",
-    product_id: "1000000667066221",
+    variant_id: "1000020374538805",
+    product_id: "1000000664830560",
     quantity: String(quantity),
     qty: String(quantity),
     product_quantity: String(quantity),
