@@ -208,7 +208,7 @@ export function CartPageContent({
                 </div>
               </div>
             </div>
-            <PaymentTrustStrip />
+            {/* <PaymentTrustStrip /> */}
           </aside>
         </div>
       </div>
