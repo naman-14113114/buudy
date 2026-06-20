@@ -102,10 +102,31 @@ export function CartPageContent({
   }
 
   return (
-    <section className="buudy-section bg-[var(--cream)] pt-2 pb-28 md:pt-4 md:pb-12">
+    <section className="buudy-section bg-[var(--cream)] pt-2 pb-8 md:pt-4 md:pb-12">
       <div className="buudy-wrap">
         <div className="mb-8 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] px-5 py-4 shadow-[0_18px_40px_-32px_rgba(58,31,61,.45)]">
-          <div className="flex flex-col items-start justify-between gap-3 md:flex-row md:items-center">
+          {/* Mobile Layout */}
+          <div className="flex flex-col items-center gap-3 md:hidden">
+            <div className="flex items-center justify-center gap-3">
+              <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
+                <Truck size={22} />
+              </span>
+              <span className="buudy-mono rounded-full border border-[rgba(184,149,86,.32)] bg-[rgba(184,149,86,.2)] px-4 py-2 text-[var(--plum)] shadow-[inset_0_1px_0_rgba(255,255,255,.55)]">
+                Free tracked shipping
+              </span>
+            </div>
+            <p className="buudy-display text-center text-xl leading-snug text-[var(--plum)]">
+              Order in next{" "}
+              <span className="font-semibold text-[var(--ink)]">{timer}</span>{" "}
+              and receive it by{" "}
+              <span className="font-semibold text-[var(--plum)]">
+                {deliveryDate || "soon"}
+              </span>
+            </p>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden md:flex flex-row items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
                 <Truck size={22} />
@@ -239,28 +260,32 @@ function CartRestoringState() {
 
 function DigitalGiftNotice({ line }: { line: CartLine }) {
   return (
-    <div className="overflow-hidden rounded-[1.5rem] border border-[rgba(184,149,86,.25)] bg-[rgba(184,149,86,.09)] p-5 md:p-6">
-      <div className="flex items-start gap-4">
-        <span className="relative h-20 w-14 flex-none overflow-hidden rounded-lg border border-[rgba(58,31,61,.14)] bg-[var(--card)] shadow-sm">
-          <Image
-            alt={line.title}
-            className="object-contain p-1"
-            fill
-            sizes="56px"
-            src={line.image}
-          />
-        </span>
-        <div>
-          <p className="buudy-mono text-[var(--gold)]">Free digital reward</p>
-          <p className="mt-2 buudy-display text-2xl leading-tight text-[var(--plum)]">
-            {line.title} is sent by email after checkout.
-          </p>
-          <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-            It will not appear as a shipped cart item, but it stays unlocked with
-            your mask order so your routine starts the moment your confirmation
-            email arrives.
-          </p>
+    <div className="overflow-hidden rounded-[1.5rem] border border-[rgba(184,149,86,.25)] bg-[rgba(184,149,86,.09)] p-4 md:p-5">
+      <div className="flex flex-col gap-4">
+        <div className="flex items-start gap-4">
+          <span className="relative h-24 w-20 flex-none overflow-hidden rounded-lg bg-[var(--card)] shadow-sm">
+            <Image
+              alt={line.title}
+              className="object-cover"
+              fill
+              sizes="80px"
+              src={line.image}
+            />
+          </span>
+          <div className="flex flex-col items-start gap-2">
+            <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-3 py-1 text-xs font-semibold text-[var(--plum)]">
+              Free digital reward
+            </span>
+            <p className="buudy-display text-xl leading-tight text-[var(--plum)] md:text-2xl">
+              {line.title} is sent by email after checkout.
+            </p>
+          </div>
         </div>
+        <p className="text-sm leading-6 text-[var(--muted)]">
+          It will not appear as a shipped cart item, but it stays unlocked with
+          your mask order so your routine starts the moment your confirmation
+          email arrives.
+        </p>
       </div>
     </div>
   );
