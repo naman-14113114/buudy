@@ -23,7 +23,7 @@ function TorchFeatureGrid({ product }: { product: Product }) {
               Take your wellness <em className="buudy-italic">anywhere</em>.
             </>
           }
-          copy="Lightweight 500g design works at home, the office, or during travel. Durable one-button operation keeps each targeted session simple."
+          copy="Lightweight 200g design works at home, the office, or during travel. Durable one-button operation keeps each targeted session simple."
           invert
         />
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">

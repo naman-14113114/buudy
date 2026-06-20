@@ -9,7 +9,7 @@ const tabs = [
     id: "compact-build",
     tabLabel: "Compact Build",
     title: "Take your Wellness Anywhere",
-    body: "Lightweight 500g design (4.9 inches) works at home, the office, or during travel. Durable one-button operation.",
+    body: "Lightweight 200g design (4.9 inches) works at home, the office, or during travel. Durable one-button operation.",
     image: productAsset("tab-1-compact.jpeg", "buudy-red-torch"),
   },
   {

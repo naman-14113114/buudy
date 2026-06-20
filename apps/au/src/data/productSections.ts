@@ -434,13 +434,7 @@ export const wavelengths: Wavelength[] = [
 ];
 
 export const torchWavelengths: Wavelength[] = [
-  {
-    nm: "460nm",
-    name: "BLUE",
-    color: "#4a6acf",
-    description:
-      "Supports acne-focused routines and surface-level skin clarity.",
-  },
+  
   {
     nm: "630nm",
     name: "RED",
@@ -462,13 +456,7 @@ export const torchWavelengths: Wavelength[] = [
     description:
       "Near-infrared light for localized muscle stiffness and body relief routines.",
   },
-  {
-    nm: "900nm",
-    name: "NIR+",
-    color: "#4d2525",
-    description:
-      "Near-infrared support for deeper, focused application on body areas.",
-  },
+  
 ];
 
 export const torchFeatures: Feature[] = [
@@ -479,12 +467,12 @@ export const torchFeatures: Feature[] = [
   },
   {
     title: "Clinical Strength",
-    kicker: "3 visible and 2 invisible LEDs",
-    body: "The T5 torch combines blue, red, deep red, and near-infrared wavelengths for a focused skin and body care routine.",
+    kicker: "3 precision wavelengths",
+    body: "The torch combines red, deep red, and near-infrared wavelengths for a focused skin and body care routine.",
   },
   {
     title: "Precision Wavelengths",
-    kicker: "460, 630, 660, 850, 900nm",
+    kicker: "630, 660, 850nm",
     body: "Use the specific wavelength blend for localized application on the face, back, knees, shoulders, hands, feet, or other target areas.",
   },
   {
@@ -521,7 +509,7 @@ export const torchFaqs: FAQItem[] = [
   {
     question: "How does this handheld light therapy device work?",
     answer:
-      "The device uses LED technology with specific wavelengths: 460nm, 630nm, 660nm, 850nm, and 900nm. It emits blue, red, and near-infrared light for non-invasive application on body surfaces, where light energy may support local blood circulation and relieve muscle stiffness.",
+      "The device uses LED technology with specific wavelengths: 630nm, 660nm, and 850nm. It emits red and near-infrared light for non-invasive application on body surfaces, where light energy may support local blood circulation and relieve muscle stiffness.",
   },
   {
     question: "Can I use this device on any part of my body?",
