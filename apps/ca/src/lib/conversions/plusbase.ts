@@ -4,8 +4,8 @@ import {
   type Attribution,
 } from "./attribution";
 
-const maskProductId = 1000000664830560;
-const maskVariantId = 1000020374538805;
+const maskProductId = 1000000667637100;
+const maskVariantId = 1000020458546865;
 export const googleAdsUploadTag = "google_ads_purchase_uploaded";
 
 export type PlusbaseLineItem = {
