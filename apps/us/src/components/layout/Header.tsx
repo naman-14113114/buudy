@@ -257,8 +257,8 @@ export function Header() {
                     </>
                   ) : (
                     <>
-                      <HeaderMenuLink href="/sign-in" label="Sign in" />
-                      <HeaderMenuLink href="/sign-up" label="Sign up" />
+                      <HeaderMenuLink href="https://buudy.com/sign-in" label="Sign in" />
+                      <HeaderMenuLink href="https://buudy.com/sign-up" label="Sign up" />
                     </>
                   )}
                 </div>
@@ -376,12 +376,12 @@ export function Header() {
                     ) : (
                       <>
                         <MobileMenuLink
-                          href="/sign-in"
+                          href="https://buudy.com/sign-in"
                           label="Sign in"
                           onClick={() => setMobileMenuOpen(false)}
                         />
                         <MobileMenuLink
-                          href="/sign-up"
+                          href="https://buudy.com/sign-up"
                           label="Sign up"
                           onClick={() => setMobileMenuOpen(false)}
                         />

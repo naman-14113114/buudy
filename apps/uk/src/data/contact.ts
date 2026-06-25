@@ -24,7 +24,7 @@ export const contactHelpLinks = [
   },
   {
     label: "Order tracking",
-    href: "/order-tracking",
+    href: "https://buudy.com/order-tracking",
     copy: "Check the latest delivery status after your order has shipped.",
   },
   {

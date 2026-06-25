@@ -9,7 +9,7 @@ export const shippingPolicyHtml = `
   <p>If your order contains a pre-ordered or back-ordered item, we will ship any items we have available immediately and send the remaining items as soon as they become available. If you ordered more than one item and received only part of your order, do not worry. Your other items will arrive shortly after.</p>
 
   <h2>Tracking your order</h2>
-  <p>You will receive a confirmation email and/or text message, if you provided a mobile phone number, containing a tracking ID and a link to follow the journey of your package. You can also visit our <a href="/order-tracking">Tracking Page</a>. Please allow 1 to 2 business days for tracking information to appear.</p>
+  <p>You will receive a confirmation email and/or text message, if you provided a mobile phone number, containing a tracking ID and a link to follow the journey of your package. You can also visit our <a href="https://buudy.com/order-tracking">Tracking Page</a>. Please allow 1 to 2 business days for tracking information to appear.</p>
 
   <h2>Wrong address disclaimer</h2>
   <p>It is the buyer's responsibility to make sure the shipping address entered is correct. We do our best to speed up processing and shipping, so there is only a small window to correct an incorrect shipping address. Please contact us immediately at <a href="mailto:support@buudy.com">support@buudy.com</a> if you believe you provided the wrong shipping address.</p>

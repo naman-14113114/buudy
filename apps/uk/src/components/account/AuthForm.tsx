@@ -137,8 +137,8 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
           className="font-semibold text-[var(--plum)] underline underline-offset-4"
           href={
             isSignIn
-              ? `/sign-up${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ""}`
-              : `/sign-in${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ""}`
+              ? `https://buudy.com/sign-up${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ""}`
+              : `https://buudy.com/sign-in${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ""}`
           }
         >
           {isSignIn ? "Create an account" : "Sign in"}

@@ -10,7 +10,7 @@ const routes = [
   { path: "/pages/contact-us", lastModified: "2026-05-29", changeFrequency: "monthly", priority: 0.6 },
   { path: "/pages/about-us", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.6 },
   { path: "/pages/faqs", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.6 },
-  { path: "/order-tracking", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.5 },
+  { path: "https://buudy.com/order-tracking", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.5 },
   { path: "/policies/shipping-policy", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.4 },
   { path: "/policies/return-policy", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.4 },
   { path: "/policies/refund-policy", lastModified: "2026-06-01", changeFrequency: "monthly", priority: 0.4 },
