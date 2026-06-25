@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 const FOOTER_LINKS = [
-  { href: "/shipping-policy", label: "Shipping Policy" },
-  { href: "/return-policy", label: "Return Policy" },
-  { href: "/refund-policy", label: "Refund Policy" },
-  { href: "/privacy-policy", label: "Privacy Policy" },
-  { href: "/terms-of-service", label: "Terms of Service" },
+  { href: "/policies/shipping-policy", label: "Shipping Policy" },
+  { href: "/policies/return-policy", label: "Return Policy" },
+  { href: "/policies/refund-policy", label: "Refund Policy" },
+  { href: "/policies/privacy-policy", label: "Privacy Policy" },
+  { href: "/policies/terms-of-service", label: "Terms of Service" },
   { href: "/pages/contact-us", label: "Contact Us" },
 ];
 
