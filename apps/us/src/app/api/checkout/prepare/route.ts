@@ -139,7 +139,7 @@ async function createPlusbaseCheckout(quantity: number) {
 
   return {
     checkoutToken,
-    checkoutUrl: `${plusbaseOrigin}/checkouts/${checkoutToken}`,
+    checkoutUrl: `${plusbaseOrigin}/checkouts/${checkoutToken}?discount=free_bundle_us`,
   };
 }
 
@@ -165,7 +165,7 @@ export async function POST(request: NextRequest) {
       checkoutRef: token,
       quantity,
       giftQuantity: quantity,
-      extraParams: bridgeParams(body.attribution),
+      extraParams: { ...bridgeParams(body.attribution), discount: "free_bundle_us" },
     }),
   });
 }
