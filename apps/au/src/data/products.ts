@@ -166,7 +166,7 @@ export const buudyMask: Product = {
       valueCents: 14900,
       image: productAsset("buudy-led-torch.jpg"),
       label: "Limited edition",
-      href: "/pages/buudy-led-torch",
+      href: "/products/red-light-torch",
     },
     {
       id: "skincare-ebook",
