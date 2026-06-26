@@ -40,7 +40,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
               />
             </span>
             <span className="font-bold text-[var(--plum)]">
-              -{formatMoney(7000)}
+              -{formatMoney(totalSavingsCents)}
             </span>
           </button>
 
@@ -58,7 +58,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                     FREE TORCH
                   </span>
                   <span className="font-semibold text-[var(--muted)]">
-                    -{formatMoney(7000)}
+                    -{formatMoney(totals.giftValueCents)}
                   </span>
                 </div>
               </div>

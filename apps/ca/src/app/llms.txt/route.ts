@@ -14,7 +14,7 @@ Buudy Canada sells at-home LED light therapy devices for skincare and wellness r
 
 ## Buudy LED Mask Summary
 - Product: Buudy LED Mask
-- Price: CAD 279 launch offer, compare-at CAD 559
+- Price: CAD 279 launch offer, compare-at CAD 699
 - Category: LED face mask, red light therapy mask, blue light acne routine mask, anti-ageing LED mask
 - LEDs: 192 high-density LEDs
 - Modes: 7 visible light colours plus 830nm near-infrared

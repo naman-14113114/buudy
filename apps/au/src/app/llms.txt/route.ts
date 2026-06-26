@@ -14,7 +14,7 @@ Buudy Australia sells at-home LED light therapy devices for skincare and wellnes
 
 ## Buudy LED Mask Summary
 - Product: Buudy LED Mask
-- Price: AUD 299 launch offer, compare-at AUD 498
+- Price: AUD 299 launch offer, compare-at AUD 749
 - Category: LED face mask, red light therapy mask, blue light acne routine mask, anti-ageing LED mask
 - LEDs: 192 high-density LEDs
 - Modes: 7 visible light colours plus 830nm near-infrared

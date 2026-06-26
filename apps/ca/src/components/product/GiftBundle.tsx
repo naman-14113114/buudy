@@ -350,7 +350,7 @@ export function GiftBundle({ product }: { product: Product }) {
         >
           <p className="buudy-eyebrow mb-1">Total Value</p>
           <p className="text-sm font-medium leading-relaxed text-[var(--ink-light)] lg:text-base">
-            50% off, free shipping, and a rechargeable wellness kit.
+            60% off, free shipping, and a rechargeable wellness kit.
           </p>
           <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
             Includes the torch, rechargeable battery, charger, USB cable,
