@@ -5,10 +5,10 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const plusbaseOrigin = "https://buudy.com";
-const maskProductId = 1000000611225890;
-const maskVariantId = 1000019092784268;
-const torchProductId = 1000000665008955;
-const torchVariantId = 1000020384558655;
+const maskProductId = 1000000667824913;
+const maskVariantId = 1000020463775916;
+const torchProductId = 1000000667833408;
+const torchVariantId = 1000020464156040;
 
 type CheckoutPrepareBody = {
   customerEmail?: string;

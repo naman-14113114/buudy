@@ -13,8 +13,8 @@ export const dynamic = "force-dynamic";
 const plusbaseOrigin = "https://buudy.com";
 const maskProductId = 1000000667637100;
 const maskVariantId = 1000020458546865;
-const torchProductId = 1000000665008955;
-const torchVariantId = 1000020384558655;
+const torchProductId = 1000000667833423;
+const torchVariantId = 1000020464156156;
 
 type CheckoutPrepareBody = {
   customerEmail?: string;
