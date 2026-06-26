@@ -125,7 +125,7 @@ async function createPlusbaseCheckout(
   await addItem(torchProductId, torchVariantId, quantity);
   return {
     checkoutToken,
-    checkoutUrl: `${plusbaseOrigin}/checkouts/${checkoutToken}`,
+    checkoutUrl: `${plusbaseOrigin}/checkouts/${checkoutToken}?discount=FREE_BUNDLE_CA`,
   };
 }
 
@@ -146,7 +146,7 @@ export async function POST(request: NextRequest) {
       checkoutRef: token,
       quantity,
       giftQuantity: quantity,
-      extraParams: bridgeParams(attribution),
+      extraParams: { ...bridgeParams(attribution), discount: "FREE_BUNDLE_CA" },
     }),
   });
 }

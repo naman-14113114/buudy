@@ -109,7 +109,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     } catch {
       setError("Opening secure checkout...");
       window.location.assign(
-        buildPlusbaseCheckoutUrl({ quantity: maskQuantity, extraParams: attribution }),
+        buildPlusbaseCheckoutUrl({ quantity: maskQuantity, extraParams: { ...attribution, discount: "FREE_BUNDLE_CA" } }),
       );
     }
   }
