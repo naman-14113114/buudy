@@ -82,7 +82,7 @@ export const buudyMask: Product = {
     "Shop the Buudy LED Face Mask in the UK: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, 90-day returns, and free glow kit.",
   currency: market.currency,
   priceCents: 17900,
-  compareAtCents: 44900,
+  compareAtCents: 35900,
   rating: 4.9,
   reviewCount: 16000,
   customerCount: "16,000+",
@@ -256,7 +256,7 @@ export const buudyRedTorch: Product = {
   rating: 4.8,
   reviewCount: 16000,
   customerCount: "16,000+",
-  promoCode: "TORCH60",
+  promoCode: "TORCH50",
   promoLabel: "Red torch offer applied",
   cartImage: torchAsset("01-buudy-red-torch-main.png"),
   gallery: [

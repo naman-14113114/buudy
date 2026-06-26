@@ -14,7 +14,7 @@ Buudy UK sells at-home LED light therapy devices for skincare and wellness routi
 
 ## Buudy LED Mask Summary
 - Product: Buudy LED Mask
-- Price: GBP 179 launch offer, compare-at GBP 449
+- Price: GBP 179 launch offer, compare-at GBP 359
 - Category: LED face mask, red light therapy mask, blue light acne routine mask, anti-ageing LED mask
 - LEDs: 192 high-density LEDs
 - Modes: 7 visible light colours plus 830nm near-infrared

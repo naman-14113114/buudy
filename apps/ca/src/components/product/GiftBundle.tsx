@@ -348,9 +348,9 @@ export function GiftBundle({ product }: { product: Product }) {
           className="mt-8 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[var(--card)] p-5"
           id="torch-offer"
         >
-          <p className="buudy-eyebrow">{product.promoLabel}</p>
-          <p className="buudy-display mt-2 text-2xl text-[var(--plum)]">
-            60% off, free shipping, and a rechargeable wellness kit.
+          <p className="buudy-eyebrow mb-1">Total Value</p>
+          <p className="text-sm font-medium leading-relaxed text-[var(--ink-light)] lg:text-base">
+            50% off, free shipping, and a rechargeable wellness kit.
           </p>
           <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
             Includes the torch, rechargeable battery, charger, USB cable,

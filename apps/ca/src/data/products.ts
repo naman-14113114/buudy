@@ -155,7 +155,7 @@ export const buudyMask: Product = {
     {
       id: "premium-travel-box",
       name: "Premium Travel Box",
-      valueCents: 3900,
+      valueCents: 7100,
       image: productMediaAsset("ChatGPT Image May 31, 2026, 11_53_13 PM.png"),
       label: "Exclusive item",
       href: "/pages/premium-travel-box",
@@ -163,7 +163,7 @@ export const buudyMask: Product = {
     {
       id: "buudy-led-torch",
       name: "Buudy Red Light Torch",
-      valueCents: 9900,
+      valueCents: 12900,
       image: productAsset("buudy-led-torch.jpg"),
       label: "Limited edition",
       href: "/pages/buudy-led-torch",
@@ -171,7 +171,7 @@ export const buudyMask: Product = {
     {
       id: "skincare-ebook",
       name: "Skincare E-Book",
-      valueCents: 1900,
+      valueCents: 2900,
       image: productMediaAsset("free_guide-v2.webp"),
       label: "Digital copy",
       href: "/pages/skincare-guide",
@@ -251,12 +251,12 @@ export const buudyRedTorch: Product = {
   seoDescription:
     "Portable red light therapy torch with 3 wavelengths, near infrared support, rechargeable battery, and targeted body and skin relief.",
   currency: market.currency,
-  priceCents: 9900,
-  compareAtCents: 17900,
+  priceCents: 12900,
+  compareAtCents: 25900,
   rating: 4.8,
   reviewCount: 16000,
   customerCount: "16,000+",
-  promoCode: "TORCH60",
+  promoCode: "TORCH50",
   promoLabel: "Red torch offer applied",
   cartImage: torchAsset("01-buudy-red-torch-main.png"),
   gallery: [

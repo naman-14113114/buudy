@@ -256,7 +256,7 @@ export const buudyRedTorch: Product = {
   rating: 4.8,
   reviewCount: 16000,
   customerCount: "16,000+",
-  promoCode: "TORCH60",
+  promoCode: "TORCH50",
   promoLabel: "Red torch offer applied",
   cartImage: torchAsset("01-buudy-red-torch-main.png"),
   gallery: [
