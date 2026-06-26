@@ -81,8 +81,8 @@ export const buudyMask: Product = {
   seoDescription:
     "Shop the Buudy LED Face Mask in Canada: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, 90-day returns, and free glow kit.",
   currency: market.currency,
-  priceCents: 27900,
-  compareAtCents: 69900,
+  priceCents: 29900,
+  compareAtCents: 64900,
   rating: 4.9,
   reviewCount: 16000,
   customerCount: "16,000+",

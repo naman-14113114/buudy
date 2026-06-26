@@ -546,7 +546,7 @@ export const expertVideo = {
 export const comparison = {
   intro: "Here is a comparison, but really, there is no comparison.",
   columns: [
-    { label: "Buudy", price: "$279", featured: true },
+    { label: "Buudy", price: "$299", featured: true },
     { label: "Brand A", price: "$399" },
     { label: "Brand B", price: "$499" },
     { label: "Brand C", price: "$472" },
