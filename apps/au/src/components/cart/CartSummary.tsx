@@ -13,10 +13,14 @@ type CartSummaryProps = {
 };
 
 export function CartSummary({ action = "summary", children }: CartSummaryProps) {
-  const { totals, closeCart } = useCart();
+  const { totals, lines, closeCart } = useCart();
   const [detailsOpen, setDetailsOpen] = useState(false);
   const hasItems = totals.itemCount > 0;
-  const totalSavingsCents = totals.savingsCents + totals.giftValueCents;
+  
+  const torchLine = lines.find((l) => l.type === "gift" && l.id.includes("torch"));
+  const torchGiftValue = torchLine ? (torchLine.compareAtCents ?? 0) * torchLine.quantity : 0;
+  
+  const totalSavingsCents = torchGiftValue;
 
   return (
     <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
@@ -58,7 +62,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                     FREE TORCH
                   </span>
                   <span className="font-semibold text-[var(--muted)]">
-                    -{formatMoney(totals.giftValueCents)}
+                    -{formatMoney(torchGiftValue)}
                   </span>
                 </div>
               </div>
