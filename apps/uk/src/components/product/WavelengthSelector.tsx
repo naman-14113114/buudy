@@ -51,9 +51,9 @@ export function WavelengthSelector() {
             {wavelengths.map((wavelength) => {
               const isActive = active.name === wavelength.name;
               return (
-                <li key={wavelength.name}>
+                <li key={wavelength.name} className="border-b border-[rgba(247,241,232,.1)]">
                   <button
-                    className={`flex w-full items-center gap-4 border-b border-[rgba(247,241,232,.1)] py-2 text-left transition-all duration-300 hover:pl-3 group ${
+                    className={`flex w-full items-center gap-4 py-2 text-left transition-all duration-300 hover:pl-3 group ${
                       isActive ? "bg-[rgba(247,241,232,.03)] pl-3 border-l-2 border-l-[var(--gold)]" : ""
                     }`}
                     onClick={() => setActive(wavelength)}
@@ -81,6 +81,17 @@ export function WavelengthSelector() {
                       {wavelength.description}
                     </span>
                   </button>
+                  <div
+                    className={`grid transition-all duration-300 ease-in-out sm:hidden ${
+                      isActive ? "grid-rows-[1fr] opacity-100 bg-[rgba(247,241,232,.03)] border-l-2 border-l-[var(--gold)]" : "grid-rows-[0fr] opacity-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="px-4 pb-3 pl-11 text-sm text-[rgba(247,241,232,.7)] buudy-display transition-all duration-300">
+                        {wavelength.description}
+                      </p>
+                    </div>
+                  </div>
                 </li>
               );
             })}

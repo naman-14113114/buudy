@@ -596,7 +596,7 @@ export const faqs: FAQItem[] = [
   {
     question: "What are the wavelengths? Irradiance / Power Density?",
     answer:
-      "Red: 633nm. Blue: 415nm. Green: 525nm. Cyan: 490nm. Yellow: 590nm. Purple: 390nm. White: 510nm. Irradiance / Power Density: 32mW/cm2.",
+      "Infra-red: 830nm. Red: 633nm. Blue: 415nm. Green: 525nm. Cyan: 490nm. Yellow: 590nm. Purple: 390nm. White: 510nm. Irradiance / Power Density: 32mW/cm2.",
   },
   {
     question: "Can I use it in my country?",
@@ -612,6 +612,6 @@ export const faqs: FAQItem[] = [
   {
     question: "Do you sell this anywhere else?",
     answer:
-      "The Buudy LED Mask is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
+      "The Buudy LED Mask is exclusively sold through ca.buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
   },
 ];
