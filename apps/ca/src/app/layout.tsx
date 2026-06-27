@@ -8,6 +8,7 @@ import { Header } from "@/components/layout/Header";
 import { RouteChrome } from "@/components/layout/RouteChrome";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
+import { AttributionCapture } from "@/components/integrations/AttributionCapture";
 import { ClarityAnalytics } from "@/components/integrations/ClarityAnalytics";
 import { KlaviyoAnalytics } from "@/components/integrations/KlaviyoAnalytics";
 import { PageMediaPreloader } from "@/components/integrations/PageMediaPreloader";
@@ -139,6 +140,7 @@ export default function RootLayout({
         <ClarityAnalytics />
         <KlaviyoAnalytics />
         <TawkToWidget />
+        <AttributionCapture />
       </body>
     </html>
   );
