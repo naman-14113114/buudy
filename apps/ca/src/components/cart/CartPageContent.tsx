@@ -40,7 +40,6 @@ function useCheckoutCountdown(seconds: number) {
 
 function useDeliveryDate(daysFromToday: number) {
   const [dateLabel, setDateLabel] = useState("");
-
   useEffect(() => {
     const timeout = window.setTimeout(() => {
       const date = new Date();
@@ -50,7 +49,7 @@ function useDeliveryDate(daysFromToday: number) {
       const day = date.getDate();
       const month = date.toLocaleString(market.locale, { month: "long" });
 
-      setDateLabel(`${weekday} ${day} ${month}`);
+      setDateLabel(`${weekday} ${month} ${day}`);
     }, 0);
 
     return () => window.clearTimeout(timeout);
