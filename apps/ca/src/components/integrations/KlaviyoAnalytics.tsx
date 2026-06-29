@@ -25,11 +25,11 @@ type CheckoutEventDetail = {
 
 const KLAVIYO_COMPANY_ID =
   process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID || "Tp323F";
-const KLAVIYO_UK_POPUP_FORM_ID = "UBEgb8";
+const KLAVIYO_CA_POPUP_FORM_ID = "UTadDU";
 const productBySlug = new Map(products.map((product) => [product.slug, product]));
 const marketHost = new URL(market.siteUrl).hostname;
-const poundOfferLabel = `${String.fromCharCode(163)}10`;
-const staleDollarOfferLabel = `${String.fromCharCode(36)}10`;
+const currentOfferLabel = `${String.fromCharCode(36)}10`;
+const stalePoundOfferLabel = `${String.fromCharCode(163)}10`;
 const klaviyoNodeSelector =
   '[aria-modal="true"], [role="dialog"], [data-testid="POPUP"], div[class*="kl-private-reset-css"], .needsclick[class*="kl-private-reset-css"]';
 
@@ -133,8 +133,8 @@ function isBlockingKlaviyoModal(node: HTMLElement) {
   const looksLikeOfferModal =
     (text.includes("WELCOME") ||
       text.includes("NO, THANKS") ||
-      text.includes(poundOfferLabel) ||
-      text.includes(staleDollarOfferLabel)) &&
+      text.includes(currentOfferLabel) ||
+      text.includes(stalePoundOfferLabel)) &&
     rect.width >= 240 &&
     rect.height >= 160;
 
@@ -145,13 +145,13 @@ function guardKlaviyoScrollLock() {
   let raf = 0;
   let startupChecks = 0;
 
-  const removeStaleDollarPopupNodes = () => {
+  const removeStalePoundPopupNodes = () => {
     document
       .querySelectorAll<HTMLElement>(klaviyoNodeSelector)
       .forEach((node) => {
         const text = node.textContent || "";
 
-        if (!text.includes(staleDollarOfferLabel)) {
+        if (!text.includes(stalePoundOfferLabel)) {
           return;
         }
 
@@ -169,8 +169,8 @@ function guardKlaviyoScrollLock() {
         const text = node.textContent || "";
 
         if (
-          !text.includes(`${staleDollarOfferLabel} WELCOME`) &&
-          !text.includes(`${poundOfferLabel} WELCOME`)
+          !text.includes(`${currentOfferLabel} WELCOME`) &&
+          !text.includes(`${stalePoundOfferLabel} WELCOME`)
         ) {
           return;
         }
@@ -207,7 +207,7 @@ function guardKlaviyoScrollLock() {
   const unlockScroll = () => {
     window.cancelAnimationFrame(raf);
     raf = window.requestAnimationFrame(() => {
-      removeStaleDollarPopupNodes();
+      removeStalePoundPopupNodes();
 
       if (hasVisibleBlockingKlaviyoModal()) {
         return;
@@ -343,20 +343,20 @@ export function KlaviyoAnalytics() {
 
     let hasTriggered = false;
 
-    const openUkPopup = (event: MouseEvent) => {
+    const openCaPopup = (event: MouseEvent) => {
       if (hasTriggered || event.clientY > 12) {
         return;
       }
 
       hasTriggered = true;
       window._klOnsite = window._klOnsite || [];
-      window._klOnsite.push(["openForm", KLAVIYO_UK_POPUP_FORM_ID]);
+      window._klOnsite.push(["openForm", KLAVIYO_CA_POPUP_FORM_ID]);
     };
 
-    document.addEventListener("mouseleave", openUkPopup, { capture: true });
+    document.addEventListener("mouseleave", openCaPopup, { capture: true });
 
     return () => {
-      document.removeEventListener("mouseleave", openUkPopup, { capture: true });
+      document.removeEventListener("mouseleave", openCaPopup, { capture: true });
     };
   }, []);
 
