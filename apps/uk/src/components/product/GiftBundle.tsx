@@ -256,13 +256,20 @@ export function GiftBundle({ product }: { product: Product }) {
       >
         {isNavigating ? (
           <>
-            <span style={{ visibility: "hidden" }} className="relative z-20 whitespace-nowrap">
+            <span
+              style={{ visibility: "hidden" }}
+              className="relative z-20 whitespace-nowrap"
+            >
               {hasGifts
                 ? "ADD TO CART + FREE GIFTS"
                 : "ADD TO CART + FREE SHIPPING"}
             </span>
             <span className="absolute inset-0 flex items-center justify-center">
-              <Lottie animationData={loadingLottie} loop className="h-16 w-24 scale-[1.35]" />
+              <Lottie
+                animationData={loadingLottie}
+                loop
+                className="h-16 w-24 scale-[1.35]"
+              />
             </span>
           </>
         ) : (
@@ -278,21 +285,39 @@ export function GiftBundle({ product }: { product: Product }) {
       {product.id === "buudy-led-mask" && (
         <div className="mt-8 grid grid-cols-4 gap-2 border-b border-[rgba(58,31,61,.12)] pb-8 text-center">
           <div className="flex flex-col items-center gap-2">
-            <Image src="/media/products/buudy-led-mask/images/i5.png" alt="Full-Face & Neck Coverage" width={60} height={60} className="object-contain" />
+            <Image
+              src="/media/products/buudy-led-mask/images/i5.png"
+              alt="Full-Face & Neck Coverage"
+              width={60}
+              height={60}
+              className="object-contain"
+            />
             <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
               Full-Face &<br />
               Neck Coverage
             </p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <Image src="/media/products/buudy-led-mask/images/i6.png" alt="Wireless & Rechargeable" width={60} height={60} className="object-contain" />
+            <Image
+              src="/media/products/buudy-led-mask/images/i6.png"
+              alt="Wireless & Rechargeable"
+              width={60}
+              height={60}
+              className="object-contain"
+            />
             <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
               Wireless &<br />
               Rechargeable
             </p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <Image src="/media/products/buudy-led-mask/images/i7.png" alt="90 Days Money Back Guarantee" width={60} height={60} className="object-contain" />
+            <Image
+              src="/media/products/buudy-led-mask/images/i7.png"
+              alt="90 Days Money Back Guarantee"
+              width={60}
+              height={60}
+              className="object-contain"
+            />
             <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
               90 Days Money
               <br />
@@ -300,7 +325,13 @@ export function GiftBundle({ product }: { product: Product }) {
             </p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <Image src="/media/products/buudy-led-mask/images/i8.png" alt="Science-Backed Light" width={60} height={60} className="object-contain" />
+            <Image
+              src="/media/products/buudy-led-mask/images/i8.png"
+              alt="Science-Backed Light"
+              width={60}
+              height={60}
+              className="object-contain"
+            />
             <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
               Science-Backed
               <br />
@@ -314,7 +345,7 @@ export function GiftBundle({ product }: { product: Product }) {
         <section className="mt-8" id="free-gifts">
           <div className="text-center mb-8 flex flex-col items-center">
             <h3 className="buudy-display text-3xl font-medium text-[var(--plum)]">
-              Special Spring Sale
+              Big Summer Savings
             </h3>
             <p className="buudy-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded bg-[rgba(184,149,86,.15)] px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--plum)]">
               <span className="buudy-display text-sm sm:text-base font-extrabold normal-case text-[var(--plum)]">
