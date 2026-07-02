@@ -25,7 +25,7 @@ type CheckoutEventDetail = {
 
 const KLAVIYO_COMPANY_ID =
   process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID || "Tp323F";
-const KLAVIYO_UK_POPUP_FORM_ID = "UBEgb8";
+const KLAVIYO_UK_POPUP_FORM_ID = "SGzH5k";
 const productBySlug = new Map(products.map((product) => [product.slug, product]));
 const marketHost = new URL(market.siteUrl).hostname;
 const poundOfferLabel = `${String.fromCharCode(163)}10`;
