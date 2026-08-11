@@ -13,6 +13,7 @@ import { getProductById, type Product } from "@/data/products";
 import {
   calculateCartTotals,
   emptyCart,
+  getAppliedManualPromoCode,
   normalizeCartLines,
   upsertProductCartLines,
   type CartState,
@@ -29,6 +30,8 @@ type CartContextValue = CartState & {
   clearCart: () => void;
   openCart: () => void;
   closeCart: () => void;
+  applyManualPromoCode: (code: string) => boolean;
+  clearManualPromoCode: () => void;
   setGiftMessage: (message: string) => void;
 };
 
@@ -66,6 +69,7 @@ function readStoredCart() {
       const storedState = {
         ...emptyCart,
         ...parsed,
+        manualPromoCode: getAppliedManualPromoCode(parsed.manualPromoCode),
         lines: normalizeCartLines(Array.isArray(parsed.lines) ? parsed.lines : []),
       };
 
@@ -171,7 +175,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [hydrated, state]);
 
-  const totals = useMemo(() => calculateCartTotals(state.lines), [state.lines]);
+  const totals = useMemo(
+    () => calculateCartTotals(state.lines, state.manualPromoCode),
+    [state.lines, state.manualPromoCode],
+  );
   const activePromoCodes = useMemo(() => {
     const productIds = new Set(
       state.lines
@@ -179,10 +186,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
         .map((line) => line.productId),
     );
 
-    return Array.from(productIds)
+    const productPromoCodes = Array.from(productIds)
       .map((productId) => getProductById(productId)?.promoCode)
       .filter((code): code is string => Boolean(code));
-  }, [state.lines]);
+
+    return Array.from(
+      new Set([
+        ...productPromoCodes,
+        ...(state.manualPromoCode ? [state.manualPromoCode] : []),
+      ]),
+    );
+  }, [state.lines, state.manualPromoCode]);
 
   function addProduct(product: Product) {
     dispatchAddToCartEvent(product);
@@ -214,7 +228,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       };
 
       if (!hasProductLines(nextState)) {
-        clearCheckoutRecovery(nextState);
+        const emptyState = { ...nextState, manualPromoCode: "" };
+        clearCheckoutRecovery(emptyState);
+        return emptyState;
       }
 
       return nextState;
@@ -229,11 +245,31 @@ export function CartProvider({ children }: { children: ReactNode }) {
       };
 
       if (!hasProductLines(nextState)) {
-        clearCheckoutRecovery(nextState);
+        const emptyState = { ...nextState, manualPromoCode: "" };
+        clearCheckoutRecovery(emptyState);
+        return emptyState;
       }
 
       return nextState;
     });
+  }
+
+  function applyManualPromoCode(code: string) {
+    const nextManualPromoCode = getAppliedManualPromoCode(code);
+
+    setState((current) => ({
+      ...current,
+      manualPromoCode: nextManualPromoCode,
+    }));
+
+    return Boolean(nextManualPromoCode);
+  }
+
+  function clearManualPromoCode() {
+    setState((current) => ({
+      ...current,
+      manualPromoCode: "",
+    }));
   }
 
   function clearCart() {
@@ -254,6 +290,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       clearCart,
       openCart: () => setIsOpen(true),
       closeCart: () => setIsOpen(false),
+      applyManualPromoCode,
+      clearManualPromoCode,
       setGiftMessage: (message: string) =>
         setState((current) => ({ ...current, giftMessage: message })),
     }),

@@ -63,6 +63,11 @@ select {
 
 button {
   cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+}
+
+button:active {
+  transform: scale(0.95);
 }
 
 img,
@@ -336,6 +341,13 @@ section.bg-\[\#f6ede2\] + section.bg-\[\#f6ede2\] {
 
 .buudy-mask-sticky-cta footer {
   padding-bottom: 1.5rem;
+}
+
+img[data-buudy-image-loading="true"] {
+  background-image: url("/images/buudy-image-loader.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: clamp(16px, 12%, 40px) clamp(16px, 12%, 40px);
 }
 
 @media (min-width: 640px) {

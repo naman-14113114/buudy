@@ -3,13 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
+  BookOpen,
   Check,
   ChevronDown,
   Gift,
   ShoppingBag,
   Truck,
+  Lock,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import Lottie from "lottie-react";
+import loadingLottie from "@/components/cart/loading-lottie.json";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
 import { CartLineItem } from "./CartLineItem";
@@ -102,35 +106,20 @@ export function CartPageContent({
   }
 
   return (
+    <>
     <section className="buudy-section bg-[var(--cream)] pt-2 pb-8 md:pt-4 md:pb-12">
       <div className="buudy-wrap">
         <div className="mb-8 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] px-5 py-4 shadow-[0_18px_40px_-32px_rgba(58,31,61,.45)]">
-          {/* Mobile Layout */}
-          <div className="flex flex-col items-center gap-3 md:hidden">
-            <div className="flex items-center justify-center gap-3">
-              <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
-                <Truck size={22} />
-              </span>
-              <span className="buudy-mono rounded-full border border-[rgba(184,149,86,.32)] bg-[rgba(184,149,86,.2)] px-4 py-2 text-[var(--plum)] shadow-[inset_0_1px_0_rgba(255,255,255,.55)]">
-                Free tracked shipping
-              </span>
-            </div>
-            <p className="buudy-display text-center text-xl leading-snug text-[var(--plum)]">
-              Order in next{" "}
-              <span className="font-semibold text-[var(--ink)]">{timer}</span>{" "}
-              and receive it by{" "}
-              <span className="font-semibold text-[var(--plum)]">
-                {deliveryDate || "soon"}
-              </span>
-            </p>
-          </div>
-
-          {/* Desktop Layout */}
-          <div className="hidden md:flex flex-row items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
-                <Truck size={22} />
-              </span>
+          <div className="flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
+            <div className="flex flex-col items-center gap-3 md:flex-row">
+              <div className="flex w-full items-center justify-center gap-3 md:w-auto">
+                <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
+                  <Truck size={22} />
+                </span>
+                <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)] md:hidden">
+                  Free tracked shipping
+                </span>
+              </div>
               <p className="buudy-display text-xl leading-snug text-[var(--plum)] md:text-2xl">
                 Order in next{" "}
                 <span className="font-semibold text-[var(--ink)]">{timer}</span>{" "}
@@ -140,7 +129,7 @@ export function CartPageContent({
                 </span>
               </p>
             </div>
-            <span className="buudy-mono rounded-full border border-[rgba(184,149,86,.32)] bg-[rgba(184,149,86,.2)] px-4 py-2 text-[var(--plum)] shadow-[inset_0_1px_0_rgba(255,255,255,.55)]">
+            <span className="buudy-mono hidden rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)] md:block">
               Free tracked shipping
             </span>
           </div>
@@ -158,7 +147,6 @@ export function CartPageContent({
 
           <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
             <CartSummary>
-              <span className="sr-only" id="checkout" />
               <CheckoutForm initialCustomer={initialCustomer} />
             </CartSummary>
             <FreeGiftsPanel compact />
@@ -229,11 +217,88 @@ export function CartPageContent({
                 </div>
               </div>
             </div>
-            {/* <PaymentTrustStrip /> */}
           </aside>
         </div>
       </div>
     </section>
+    <MobileStickyCheckout />
+    </>
+  );
+}
+
+function MobileStickyCheckout() {
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  const [isMainBtnVisible, setIsMainBtnVisible] = useState(false);
+
+  useEffect(() => {
+    function handleCheckoutStarted() {
+      setIsRedirecting(true);
+    }
+
+    function handlePageShow(event: PageTransitionEvent) {
+      if (event.persisted) {
+        setIsRedirecting(false);
+      }
+    }
+
+    window.addEventListener("buudy:started-checkout", handleCheckoutStarted);
+    window.addEventListener("pageshow", handlePageShow);
+
+    const mainBtn = document.getElementById("main-checkout-btn");
+    let observer: IntersectionObserver | null = null;
+
+    if (mainBtn) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsMainBtnVisible(entry.isIntersecting);
+        },
+        { threshold: 0 }
+      );
+      observer.observe(mainBtn);
+    }
+
+    return () => {
+      window.removeEventListener("buudy:started-checkout", handleCheckoutStarted);
+      window.removeEventListener("pageshow", handlePageShow);
+      if (observer && mainBtn) {
+        observer.unobserve(mainBtn);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      className={`fixed bottom-0 left-0 right-0 z-50 p-4 pb-6 pointer-events-none flex justify-center lg:hidden transition-all duration-300 ${
+        isMainBtnVisible ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
+      }`}
+    >
+      <button
+        className={`pointer-events-auto buudy-cart-wipe buudy-display relative flex h-14 w-full max-w-[400px] items-center justify-center overflow-hidden rounded-[35px] border border-[var(--plum)] bg-[var(--plum)] px-6 py-3 text-[15px] font-bold uppercase leading-none tracking-wide text-[var(--cream)] shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] ${!isRedirecting ? "proxy-bundle-btn" : ""}`}
+        type="button"
+        disabled={isRedirecting}
+        onClick={() => {
+          const btn = document.getElementById('main-checkout-btn') as HTMLButtonElement;
+          btn?.click();
+        }}
+      >
+        {isRedirecting ? (
+          <>
+            <span style={{ visibility: "hidden" }} className="inline-flex items-center gap-2">
+              <Lock size={16} strokeWidth={1.8} />
+              <span>Checkout Securly</span>
+            </span>
+            <span style={{ position: "absolute", inset: 0 }} className="flex items-center justify-center">
+              <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
+            </span>
+          </>
+        ) : (
+          <span className="relative z-10 inline-flex items-center justify-center gap-2">
+            <Lock size={16} strokeWidth={1.8} />
+            <span>Checkout Securly</span>
+          </span>
+        )}
+      </button>
+    </div>
   );
 }
 
@@ -260,45 +325,39 @@ function CartRestoringState() {
 
 function DigitalGiftNotice({ line }: { line: CartLine }) {
   return (
-    <div className="overflow-hidden rounded-[1.5rem] border border-[rgba(184,149,86,.25)] bg-[rgba(184,149,86,.09)] p-4 md:p-5">
-      <div className="flex flex-col gap-4">
-        <div className="flex items-start gap-4">
-          <span className="relative h-24 w-20 flex-none overflow-hidden rounded-lg bg-[var(--card)] shadow-sm">
-            <Image
-              alt={line.title}
-              className="object-cover"
-              fill
-              sizes="80px"
-              src={line.image}
-            />
+    <div className="relative overflow-hidden rounded-[1.5rem] border border-[rgba(184,149,86,.25)] bg-[rgba(184,149,86,.09)] p-5 md:pl-6 md:pr-36">
+      <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-start md:gap-4 md:text-left">
+        <div className="flex items-center justify-center gap-3 md:w-auto">
+          <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-[var(--card)] text-[var(--gold)] shadow-sm">
+            <BookOpen size={22} />
           </span>
-          <div className="flex flex-col items-start gap-2">
-            <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-3 py-1 text-xs font-semibold text-[var(--plum)]">
-              Free digital reward
-            </span>
-            <p className="buudy-display text-xl leading-tight text-[var(--plum)] md:text-2xl">
-              {line.title} is sent by email after checkout.
-            </p>
-          </div>
+          <span className="buudy-mono rounded-full bg-[var(--card)] px-4 py-2 text-[var(--plum)] md:hidden">
+            Free digital reward
+          </span>
         </div>
-        <p className="text-sm leading-6 text-[var(--muted)]">
-          It will not appear as a shipped cart item, but it stays unlocked with
-          your mask order so your routine starts the moment your confirmation
-          email arrives.
-        </p>
+        <div className="flex flex-col items-center md:items-start">
+          <span className="buudy-mono hidden rounded-full bg-[var(--card)] px-4 py-2 text-[var(--plum)] md:block">
+            Free digital reward
+          </span>
+          <p className="mt-2 buudy-display text-2xl leading-tight text-[var(--plum)]">
+            {line.title} is sent by email after checkout.
+          </p>
+          <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+            It will not appear as a shipped cart item, but it stays unlocked with
+            your mask order so your routine starts the moment your confirmation
+            email arrives.
+          </p>
+        </div>
       </div>
-    </div>
-  );
-}
-
-function PaymentTrustStrip() {
-  return (
-    <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 flex justify-center items-center">
-      <img
-        alt="Payment Options"
-        className="w-full max-w-[340px] h-auto object-contain"
-        src="/media/products/buudy-led-mask/images/payment_options.png"
-      />
+      <div className="pointer-events-none absolute bottom-[-24px] right-3 hidden h-32 w-24 rotate-[-7deg] overflow-hidden rounded-xl border border-[rgba(58,31,61,.14)] bg-[var(--card)] shadow-xl md:block">
+        <Image
+          alt={line.title}
+          className="object-contain p-2"
+          fill
+          sizes="96px"
+          src={line.image}
+        />
+      </div>
     </div>
   );
 }

@@ -54,9 +54,9 @@ export function Footer() {
             </p>
             <a
               className="mt-3 block text-sm underline underline-offset-4"
-              href="mailto:support@buudy.com"
+              href="mailto:support@buudy.co.uk"
             >
-              support@buudy.com
+              support@buudy.co.uk
             </a>
             
             {/* Social Media Links using Inline SVGs */}

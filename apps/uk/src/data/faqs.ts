@@ -45,13 +45,13 @@ export const faqsData: FaqItem[] = [
   {
     question: "How can I contact customer service?",
     answerHtml: `
-      <p class="text-sm leading-6">You can reach our customer service through our <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">Contact Us</a> page or by emailing <a href="mailto:support@buudy.com" class="underline text-[var(--plum)] font-semibold">support@buudy.com</a>.</p>
+      <p class="text-sm leading-6">You can reach our customer service through our <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">Contact Us</a> page or by emailing <a href="mailto:support@buudy.co.uk" class="underline text-[var(--plum)] font-semibold">support@buudy.co.uk</a>.</p>
     `
   },
   {
     question: "My tracking number isn't working",
     answerHtml: `
-      <p class="text-sm leading-6">Tracking numbers can take 1 to 2 business days to appear in the shipping carrier's system. If your tracking number is still not working after that window, please email <a href="mailto:support@buudy.com" class="underline text-[var(--plum)] font-semibold">support@buudy.com</a> or use our <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">Contact Form</a>.</p>
+      <p class="text-sm leading-6">Tracking numbers can take 1 to 2 business days to appear in the shipping carrier's system. If your tracking number is still not working after that window, please email <a href="mailto:support@buudy.co.uk" class="underline text-[var(--plum)] font-semibold">support@buudy.co.uk</a> or use our <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">Contact Form</a>.</p>
     `
   },
   {

@@ -12,12 +12,12 @@ export const shippingPolicyHtml = `
   <p>You will receive a confirmation email and/or text message, if you provided a mobile phone number, containing a tracking ID and a link to follow the journey of your package. You can also visit our <a href="https://buudy.com/order-tracking">Tracking Page</a>. Please allow 1 to 2 business days for tracking information to appear.</p>
 
   <h2>Wrong address disclaimer</h2>
-  <p>It is the buyer's responsibility to make sure the shipping address entered is correct. We do our best to speed up processing and shipping, so there is only a small window to correct an incorrect shipping address. Please contact us immediately at <a href="mailto:support@buudy.com">support@buudy.com</a> if you believe you provided the wrong shipping address.</p>
+  <p>It is the buyer's responsibility to make sure the shipping address entered is correct. We do our best to speed up processing and shipping, so there is only a small window to correct an incorrect shipping address. Please contact us immediately at <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> if you believe you provided the wrong shipping address.</p>
 
   <h2>Contact us</h2>
   <p>If you have any questions about our Shipping Policy, please contact us:</p>
   <ul>
-    <li>By email: <a href="mailto:support@buudy.com">support@buudy.com</a></li>
+    <li>By email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></li>
     <li>By visiting our <a href="/pages/contact-us#contact-form">Contact Form</a></li>
     <li>Customer service hours: Monday to Friday, 9:00 AM to 5:00 PM GMT</li>
   </ul>

@@ -4,6 +4,7 @@ import { z } from "zod";
 import { getProductById } from "@/data/products";
 import {
   calculateCartTotals,
+  getAppliedManualPromoCode,
   normalizeCartLines,
   type CartLine,
   type CartState,
@@ -50,6 +51,7 @@ function parseCart(cartJson: string): CartState | null {
     return {
       lines: Array.isArray(parsed.lines) ? (parsed.lines as CartLine[]) : [],
       promoCode: typeof parsed.promoCode === "string" ? parsed.promoCode : "AUTO",
+      manualPromoCode: getAppliedManualPromoCode(parsed.manualPromoCode),
       giftMessage:
         typeof parsed.giftMessage === "string" ? parsed.giftMessage.slice(0, 300) : "",
     };
@@ -112,15 +114,17 @@ export async function recordCheckoutAction(
     };
   }
 
-  const totals = calculateCartTotals(lines);
+  const totals = calculateCartTotals(lines, cart.manualPromoCode);
   const userId = await getSignedInUserId();
   const admin = createSupabaseAdminClient();
-  const promoCodes = Array.from(
-    new Set(
-      productLines
+  const productPromoCodes = productLines
         .map((line) => getProductById(line.productId)?.promoCode)
-        .filter((code): code is string => Boolean(code)),
-    ),
+        .filter((code): code is string => Boolean(code));
+  const promoCodes = Array.from(
+    new Set([
+      ...productPromoCodes,
+      ...(cart.manualPromoCode ? [cart.manualPromoCode] : []),
+    ]),
   );
   const orderNumber = generateOrderNumber();
 

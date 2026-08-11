@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .buudy-loader-arc {
+      animation: buudy-loader-spin 1s linear infinite;
+      transform-origin: 32px 32px;
+    }
+
+    @keyframes buudy-loader-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .buudy-loader-arc {
+        animation: none;
+      }
+    }
+  </style>
+  <circle cx="32" cy="32" fill="none" opacity=".2" r="26" stroke="#b89556" stroke-width="5" />
+  <circle class="buudy-loader-arc" cx="32" cy="32" fill="none" r="26" stroke="#b89556" stroke-dasharray="82 164" stroke-linecap="round" stroke-width="5" />
+</svg>

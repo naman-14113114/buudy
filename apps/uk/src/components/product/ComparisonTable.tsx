@@ -200,9 +200,10 @@ export function ComparisonTable() {
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
                     <img
-                      src={productMediaAsset("kala_logo.png")}
-                      alt="Kala"
-                      className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
+                      src={productMediaAsset("shark_logo.png")}
+                      alt="Dr Dennis Gross"
+                      className="w-auto object-contain"
+                      style={{ maxHeight: "28px", maxWidth: "70%" }}
                       decoding="async"
                       loading="lazy"
                     />
@@ -247,9 +248,10 @@ export function ComparisonTable() {
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
                     <img
-                      src={productMediaAsset("kala.png")}
-                      alt="Kala Mask"
-                      className="h-24 sm:h-28 md:h-32 w-auto object-contain"
+                      src={productMediaAsset("shark-2.png")}
+                      alt="Dr Dennis Gross Mask"
+                      className="w-auto object-contain"
+                      style={{ maxHeight: "150px" }}
                       decoding="async"
                       loading="lazy"
                     />
@@ -283,7 +285,7 @@ export function ComparisonTable() {
             colorName="Infrared"
             colorCode="#8B0000"
             description="Deep tissue repair and healing"
-            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CheckIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ColorRow
@@ -325,7 +327,7 @@ export function ComparisonTable() {
             colorName="Purple"
             colorCode="#DE02F0"
             description="Red and Blue in one"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
           />
 
           <ColorRow
@@ -344,7 +346,7 @@ export function ComparisonTable() {
           <ComparisonRow
             title="Eye Protection"
             subtitle="Integrated eye support"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
           />
 
           <ComparisonRow
@@ -376,9 +378,9 @@ export function ComparisonTable() {
               <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">
                 <span className="line-through mr-1.5 opacity-60">£449</span>£179
               </span>,
-              <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">£395</span>,
-              <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">£380</span>,
-              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£382.49</span>,
+              <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">£348</span>,
+              <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">£399</span>,
+              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£299</span>,
             ]}
             isLast={true}
           />

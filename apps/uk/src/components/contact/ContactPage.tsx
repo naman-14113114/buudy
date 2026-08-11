@@ -38,7 +38,7 @@ function ContactHero() {
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               className="buudy-mono rounded-full bg-[var(--plum)] px-4 py-3 text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--ink)]"
-              href="mailto:support@buudy.com"
+              href="mailto:support@buudy.co.uk"
             >
               {contactPage.supportLabel}
             </a>

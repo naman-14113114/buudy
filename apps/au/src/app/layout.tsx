@@ -12,6 +12,7 @@ import { ClarityAnalytics } from "@/components/integrations/ClarityAnalytics";
 import { KlaviyoAnalytics } from "@/components/integrations/KlaviyoAnalytics";
 import { PageMediaPreloader } from "@/components/integrations/PageMediaPreloader";
 import { TawkToWidget } from "@/components/integrations/TawkToWidget";
+import { GlobalImageLoader } from "@/components/ui/GlobalImageLoader";
 import { market } from "@/lib/market";
 import "./globals.css";
 
@@ -114,6 +115,7 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body>
+        <GlobalImageLoader />
         <CartProvider>
           <RouteChrome
             cartFooter={<CartMinimalFooter />}

@@ -115,8 +115,8 @@ function TorchDetailSection() {
         <div>
           <SectionHeading
             eyebrow="Product detail"
-            title="Blue and red light therapy, focused."
-            copy="A 5-wavelength near-infrared flashlight wand for body relief, acne-focused care, skin health, and targeted face or body application."
+            title="Red and near-infrared light therapy, focused."
+            copy="A 3-wavelength near-infrared flashlight wand for body relief, skin health, and targeted face or body application."
           />
           <div className="mt-8 space-y-5 leading-8 text-[var(--muted)]">
             <p>
@@ -126,9 +126,9 @@ function TorchDetailSection() {
               sleep-quality support.
             </p>
             <p>
-              Buudy Red Torch combines blue 460nm, red 630nm and 660nm, plus
-              near-infrared 850nm and 900nm light. Three LEDs are visible, while
-              two infrared LEDs are invisible to the naked eye.
+              Buudy Red Torch combines red 630nm and 660nm, plus
+              near-infrared 850nm light. The red LEDs are visible, while
+              the near-infrared LED is invisible to the naked eye.
             </p>
           </div>
         </div>
@@ -137,7 +137,7 @@ function TorchDetailSection() {
           <ul className="mt-6 grid gap-5">
             {[
               "Natural pain relief: safe, painless, and designed to help reduce body aches while supporting smoother-looking skin.",
-              "Powerful combination: blue, red, and infrared lights reach different target depths for a flexible routine.",
+              "Powerful combination: red and near-infrared lights reach different target depths for a flexible routine.",
               "Portable and easy to use: includes a storage bag and hanging strip so it can travel with you.",
               "Humans and pets: pet owners may use it for animal joint-care routines when appropriate.",
               "Excellent material: 303 stainless steel outer shell with a 50,000+ hour service life.",

@@ -29,7 +29,7 @@ export function ExpertSection() {
               className="w-full aspect-[2/3] object-cover object-center block"
               playsInline
               poster={expertVideo.poster}
-              preload="metadata"
+              preload="none"
               ref={videoRef}
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}

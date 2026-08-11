@@ -110,12 +110,12 @@ export function FaqPage() {
             Our support desk is here for you {market.supportHours}.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a 
-              href="mailto:support@buudy.com" 
+            <a
+              href="mailto:support@buudy.co.uk"
               className="flex items-center gap-2 px-5 py-3 rounded-full bg-[var(--plum)] text-[var(--cream)] text-sm font-semibold hover:bg-[var(--ink)] transition-colors duration-200 w-full sm:w-auto justify-center"
             >
               <Mail size={16} />
-              support@buudy.com
+              support@buudy.co.uk
             </a>
             <Link
               href="/pages/contact-us#contact-form"

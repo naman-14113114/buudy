@@ -36,7 +36,7 @@ create table if not exists public.orders (
   total_cents integer not null check (total_cents >= 0),
   savings_cents integer not null default 0 check (savings_cents >= 0),
   gift_value_cents integer not null default 0 check (gift_value_cents >= 0),
-  currency text not null default 'GBP',
+  currency text not null default 'USD',
   promo_codes text[] not null default '{}',
   gift_message text,
   created_at timestamptz not null default now(),

@@ -1,8 +1,6 @@
 import type { Product } from "@/data/products";
 import { AppPromo, BlueLightSection } from "./AppPromo";
-import { BeforeAfterGrid } from "./BeforeAfterGrid";
 import { ComparisonTable } from "./ComparisonTable";
-import { ExpertSection } from "./ExpertSection";
 import { FAQSection } from "./FAQSection";
 import { GuaranteeSection } from "./GuaranteeSection";
 import { ProductHero } from "./ProductHero";
@@ -10,8 +8,12 @@ import { ProductReviewsSection } from "./ProductReviewsSection";
 import { StickyAddToCart } from "./StickyAddToCart";
 import { TorchProductPage } from "./TorchProductPage";
 import { TrustBadges } from "./TrustBadges";
-import { VideoReviews } from "./VideoReviews";
-import { WavelengthSelector } from "./WavelengthSelector";
+import {
+  DeferredBeforeAfterGrid,
+  DeferredExpertSection,
+  DeferredVideoReviews,
+  DeferredWavelengthSelector,
+} from "./DeferredClientSections";
 
 export function ProductPage({ product }: { product: Product }) {
   if (product.template === "torch") {
@@ -21,11 +23,11 @@ export function ProductPage({ product }: { product: Product }) {
   return (
     <>
       <ProductHero product={product} />
-      <VideoReviews />
+      <DeferredVideoReviews />
       <TrustBadges />
-      <BeforeAfterGrid />
-      <WavelengthSelector />
-      <ExpertSection />
+      <DeferredBeforeAfterGrid />
+      <DeferredWavelengthSelector />
+      <DeferredExpertSection />
       <AppPromo />
       <ProductReviewsSection />
       <BlueLightSection />

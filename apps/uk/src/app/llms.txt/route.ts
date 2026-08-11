@@ -5,12 +5,14 @@ const body = `# Buudy UK
 Buudy UK sells at-home LED light therapy devices for skincare and wellness routines.
 
 ## Primary Pages
-- Home: ${market.siteUrl}
-- Buudy LED Mask: ${market.siteUrl}/products/buudy-led-mask
-- Best LED Face Mask UK Guide: ${market.siteUrl}/pages/best-led-face-mask-uk
-- Buudy Red Torch: ${market.siteUrl}/products/red-light-torch
-- Skincare Quiz: ${market.siteUrl}/pages/skincare-quiz
-- FAQs: ${market.siteUrl}/pages/faqs
+- [Home](${market.siteUrl}): UK storefront for Buudy light therapy devices.
+- [Buudy LED Mask](${market.siteUrl}/products/buudy-led-mask): Product page for the 7 colour LED face and neck mask.
+- [Best LED Face Mask UK Guide](${market.siteUrl}/pages/best-led-face-mask-uk): Buyer guide for UK shoppers comparing LED face masks.
+- [Buudy Red Torch](${market.siteUrl}/products/red-light-torch): Product page for the handheld red light therapy torch.
+- [Skincare Quiz](${market.siteUrl}/pages/skincare-quiz): Guided quiz for choosing a light therapy routine.
+- [FAQs](${market.siteUrl}/pages/faqs): Common questions about shipping, returns, product use, and safety.
+- [Shipping Policy](${market.siteUrl}/shipping-policy): UK shipping timelines and tracking guidance.
+- [Return Policy](${market.siteUrl}/return-policy): 90-day money-back guarantee and return steps.
 
 ## Buudy LED Mask Summary
 - Product: Buudy LED Mask

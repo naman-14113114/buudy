@@ -106,7 +106,7 @@ export function AboutPage() {
                                         {boldPart === "Email" ? (
                                           <a
                                             className="ml-1 underline underline-offset-2 hover:text-[var(--gold)] transition-colors"
-                                            href="mailto:support@buudy.com"
+                                            href="mailto:support@buudy.co.uk"
                                           >
                                             {rest.trim()}
                                           </a>
@@ -179,7 +179,7 @@ export function AboutPage() {
                                       {boldPart === "Email" ? (
                                         <a
                                           className="ml-1 underline underline-offset-2 hover:text-[var(--gold)] transition-colors"
-                                          href="mailto:support@buudy.com"
+                                          href="mailto:support@buudy.co.uk"
                                         >
                                           {rest.trim()}
                                         </a>

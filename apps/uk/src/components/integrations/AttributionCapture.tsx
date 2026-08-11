@@ -1,40 +1,23 @@
 "use client";
 
 import { useEffect } from "react";
-
-const storageKey = "buudy-attribution-v1";
-const attributionKeys = [
-  "utm_source",
-  "utm_medium",
-  "utm_campaign",
-  "utm_term",
-  "utm_content",
-  "msclkid",
-  "gclid",
-  "fbclid",
-  "source",
-];
+import {
+  attributionStorageKey,
+  pickAttributionFromSearch,
+} from "@/lib/attribution";
 
 export function AttributionCapture() {
   useEffect(() => {
     try {
-      const params = new URLSearchParams(window.location.search);
-      const next: Record<string, string> = {};
-
-      attributionKeys.forEach((key) => {
-        const value = params.get(key);
-        if (value) {
-          next[key] = value;
-        }
-      });
+      const next = pickAttributionFromSearch(window.location.search);
 
       const existing = JSON.parse(
-        window.localStorage.getItem(storageKey) ?? "{}",
+        window.localStorage.getItem(attributionStorageKey) ?? "{}",
       ) as Record<string, string>;
 
       if (Object.keys(next).length || !existing.landing_path) {
         window.localStorage.setItem(
-          storageKey,
+          attributionStorageKey,
           JSON.stringify({
             ...existing,
             ...next,
@@ -53,5 +36,3 @@ export function AttributionCapture() {
 
   return null;
 }
-
-export { storageKey as attributionStorageKey };

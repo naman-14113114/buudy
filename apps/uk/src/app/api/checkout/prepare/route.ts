@@ -1,18 +1,27 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
+import { getAppliedManualPromoCode } from "@/lib/cart";
 import { buildPlusbaseCheckoutUrl } from "@/lib/site";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const plusbaseOrigin = "https://buudy.com";
-const maskProductId = 1000000611225890;
-const maskVariantId = 1000019092784268;
-const torchProductId = 1000000665008955;
-const torchVariantId = 1000020384558655;
+
+const PLUSBASE_PRODUCTS: Record<string, { productId: number; variantId: number }> = {
+  "buudy-led-mask": { productId: 1000000667467053, variantId: 1000020450989467 },
+  "buudy-ipl-device": { productId: 1000000667723529, variantId: 1000020460632985 },
+  "buudy-red-torch": { productId: 1000000670474158, variantId: 1000020550222900 },
+};
 
 type CheckoutPrepareBody = {
   customerEmail?: string;
   quantity?: number;
+  cart?: {
+    lines: Array<{ productId: string; quantity: number; type?: string }>;
+    manualPromoCode?: string;
+    promoCodes?: string[];
+  };
   attribution?: Record<string, string | null | undefined>;
 };
 
@@ -27,6 +36,19 @@ const passthroughAttributionKeys = [
   "fbclid",
 ];
 
+function buildPlusbaseAttributionProperties(attribution: CheckoutPrepareBody["attribution"]) {
+  const properties: Array<{ name: string; value: string }> = [];
+
+  passthroughAttributionKeys.forEach((key) => {
+    const value = attribution?.[key];
+    if (value) {
+      properties.push({ name: `_blfm_${key}`, value: String(value).slice(0, 500) });
+    }
+  });
+
+  return properties;
+}
+
 function bridgeParams(attribution: CheckoutPrepareBody["attribution"]) {
   const params: Record<string, string> = {};
 
@@ -38,6 +60,34 @@ function bridgeParams(attribution: CheckoutPrepareBody["attribution"]) {
   });
 
   return params;
+}
+
+function cleanAttribution(attribution: CheckoutPrepareBody["attribution"]) {
+  const params: Record<string, string> = {};
+
+  passthroughAttributionKeys.forEach((key) => {
+    const value = attribution?.[key];
+    if (value) {
+      params[key] = String(value).slice(0, 500);
+    }
+  });
+
+  return params;
+}
+
+function getManualPromoFromCart(cart: CheckoutPrepareBody["cart"]) {
+  return getAppliedManualPromoCode(
+    cart?.manualPromoCode ??
+      cart?.promoCodes?.find((code) => getAppliedManualPromoCode(code)),
+  );
+}
+
+function appendDiscountCodeToUrl(href: string, discountCode: string) {
+  if (!discountCode) return href;
+
+  const url = new URL(href);
+  url.searchParams.set("discount", discountCode);
+  return url.toString();
 }
 
 function appendCookies(current: string, response: Response) {
@@ -77,7 +127,11 @@ function appendCookies(current: string, response: Response) {
   return Array.from(cookieMap.values()).join("; ");
 }
 
-async function createPlusbaseCheckout(quantity: number) {
+async function createPlusbaseCheckout(
+  quantity: number,
+  attribution: CheckoutPrepareBody["attribution"],
+  cart?: CheckoutPrepareBody["cart"]
+) {
   let cookie = "";
 
   const createResponse = await fetch(
@@ -99,7 +153,12 @@ async function createPlusbaseCheckout(quantity: number) {
     throw new Error("Could not create PlusBase cart.");
   }
 
-  async function addItem(productId: number, variantId: number, itemQuantity: number) {
+  async function addItem(
+    productId: number,
+    variantId: number,
+    itemQuantity: number,
+    properties: Array<{ name: string; value: string }> = [],
+  ) {
     const response = await fetch(
       `${plusbaseOrigin}/api/checkout/next/cart.json?cart_token=${encodeURIComponent(
         cartToken,
@@ -117,7 +176,7 @@ async function createPlusbaseCheckout(quantity: number) {
             product_id: productId,
             variant_id: variantId,
             qty: itemQuantity,
-            properties: [],
+            properties,
             metadata: {
               image_preview_id: "",
             },
@@ -134,8 +193,38 @@ async function createPlusbaseCheckout(quantity: number) {
     }
   }
 
-  await addItem(maskProductId, maskVariantId, quantity);
-  await addItem(torchProductId, torchVariantId, quantity);
+  // Support either dynamic cart lines or legacy mask quantity fallback
+  if (cart?.lines && cart.lines.length > 0) {
+    for (const line of cart.lines) {
+      if (line.type !== "gift" && PLUSBASE_PRODUCTS[line.productId]) {
+        await addItem(
+          PLUSBASE_PRODUCTS[line.productId].productId,
+          PLUSBASE_PRODUCTS[line.productId].variantId,
+          line.quantity,
+          buildPlusbaseAttributionProperties(attribution),
+        );
+      }
+    }
+    const maskQuantity = cart.lines.find(
+      (line) => line.type !== "gift" && line.productId === "buudy-led-mask",
+    )?.quantity;
+    if (maskQuantity) {
+      await addItem(
+        PLUSBASE_PRODUCTS["buudy-red-torch"].productId,
+        PLUSBASE_PRODUCTS["buudy-red-torch"].variantId,
+        maskQuantity,
+      );
+    }
+  } else {
+    // Legacy fallback (assume mask)
+    await addItem(
+      PLUSBASE_PRODUCTS["buudy-led-mask"].productId,
+      PLUSBASE_PRODUCTS["buudy-led-mask"].variantId,
+      quantity,
+      buildPlusbaseAttributionProperties(attribution),
+    );
+    await addItem(PLUSBASE_PRODUCTS["buudy-red-torch"].productId, PLUSBASE_PRODUCTS["buudy-red-torch"].variantId, quantity);
+  }
 
   return {
     checkoutToken,
@@ -147,13 +236,27 @@ export async function POST(request: NextRequest) {
   const token = crypto.randomUUID();
   const body = (await request.json().catch(() => ({}))) as CheckoutPrepareBody;
   const quantity = Math.max(1, Math.round(Number(body.quantity) || 1));
+  const appliedManualPromoCode = getManualPromoFromCart(body.cart);
+  const fallbackProductLine = body.cart?.lines.find(
+    (line) => line.type !== "gift" && PLUSBASE_PRODUCTS[line.productId],
+  );
+  const fallbackProductId = fallbackProductLine?.productId ?? "buudy-led-mask";
+  const fallbackQuantity = fallbackProductLine?.quantity ?? quantity;
+  const requestedMaskQuantity = body.cart?.lines
+    ? (body.cart.lines.find(
+        (line) => line.type !== "gift" && line.productId === "buudy-led-mask",
+      )?.quantity ?? 0)
+    : quantity;
 
   try {
-    const checkout = await createPlusbaseCheckout(quantity);
+    const checkout = await createPlusbaseCheckout(quantity, body.attribution, body.cart);
 
     return NextResponse.json({
       checkoutToken: checkout.checkoutToken,
-      checkoutUrl: checkout.checkoutUrl,
+      checkoutUrl: appendAttributionToAbsoluteUrl(
+        appendDiscountCodeToUrl(checkout.checkoutUrl, appliedManualPromoCode),
+        cleanAttribution(body.attribution),
+      ),
     });
   } catch (error) {
     console.error("Direct PlusBase checkout creation failed", error);
@@ -163,8 +266,10 @@ export async function POST(request: NextRequest) {
     checkoutToken: token,
     checkoutUrl: buildPlusbaseCheckoutUrl({
       checkoutRef: token,
-      quantity,
-      giftQuantity: quantity,
+      quantity: fallbackQuantity,
+      giftQuantity: requestedMaskQuantity,
+      productId: fallbackProductId,
+      discountCode: appliedManualPromoCode,
       extraParams: bridgeParams(body.attribution),
     }),
   });

@@ -44,7 +44,7 @@ export const aboutSections = [
     id: "customer-support",
     eyebrow: "Support",
     title: "Customer Support",
-    copy: "We understand that great customer service is crucial. That's why we have a dedicated support team ready to assist you with any questions or concerns. You can reach us at:\n\n- Email: support@buudy.com\n- Operating Hours: Monday to Friday, 9am - 5pm GMT",
+    copy: "We understand that great customer service is crucial. That's why we have a dedicated support team ready to assist you with any questions or concerns. You can reach us at:\n\n- Email: support@buudy.co.uk\n- Operating Hours: Monday to Friday, 9am - 5pm GMT",
     image: {
       src: "/images/about/about-support.png",
       alt: "Dedicated customer service representatives ready to assist you"

@@ -30,7 +30,8 @@ export type CheckoutCustomer = {
 type CheckoutFormProps = { initialCustomer: CheckoutCustomer };
 
 export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
-  const { totals, lines, giftMessage, activePromoCodes } = useCart();
+  const { totals, lines, giftMessage, activePromoCodes, manualPromoCode } =
+    useCart();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [error, setError] = useState("");
   const hasItems = totals.itemCount > 0;
@@ -61,7 +62,12 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
   const maskQuantity =
     lines.find(
       (line) => line.type === "product" && line.productId === "buudy-led-mask",
-    )?.quantity ?? totals.itemCount;
+    )?.quantity ?? 0;
+  const fallbackQuantity = maskQuantity || totals.itemCount;
+  const fallbackDiscountCodes = [
+    ...(maskQuantity > 0 ? ["free_bundle_ca"] : []),
+    ...(manualPromoCode ? [manualPromoCode] : []),
+  ];
 
   function readAttribution() {
     const params = new URLSearchParams(window.location.search);
@@ -83,7 +89,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
   async function handleCheckout() {
     if (!hasItems || isRedirecting) return;
     const attribution = readAttribution();
-    writeCheckoutSnapshot({ lines, giftMessage, promoCode });
+    writeCheckoutSnapshot({ lines, giftMessage, promoCode, manualPromoCode });
     setError("");
     setIsRedirecting(true);
     window.dispatchEvent(
@@ -95,8 +101,13 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           customerEmail: initialCustomer.email,
-          quantity: maskQuantity,
-          cart: { lines, giftMessage, promoCodes: activePromoCodes },
+          quantity: fallbackQuantity,
+          cart: {
+            lines,
+            giftMessage,
+            promoCodes: activePromoCodes,
+            manualPromoCode,
+          },
           totals,
           attribution,
         }),
@@ -104,12 +115,20 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       if (!response.ok) throw new Error("Could not prepare checkout.");
       const data = (await response.json()) as { checkoutUrl?: string };
       window.location.assign(
-        data.checkoutUrl ?? buildPlusbaseCheckoutUrl({ quantity: maskQuantity }),
+        data.checkoutUrl ??
+          buildPlusbaseCheckoutUrl({
+            quantity: fallbackQuantity,
+            discountCodes: fallbackDiscountCodes,
+          }),
       );
     } catch {
       setError("Opening secure checkout...");
       window.location.assign(
-        buildPlusbaseCheckoutUrl({ quantity: maskQuantity, extraParams: { ...attribution, discount: "FREE_BUNDLE_CA" } }),
+        buildPlusbaseCheckoutUrl({
+          quantity: fallbackQuantity,
+          discountCodes: fallbackDiscountCodes,
+          extraParams: attribution,
+        }),
       );
     }
   }

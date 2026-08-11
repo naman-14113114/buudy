@@ -338,6 +338,13 @@ section.bg-\[\#f6ede2\] + section.bg-\[\#f6ede2\] {
   padding-bottom: 1.5rem;
 }
 
+img[data-buudy-image-loading="true"] {
+  background-image: url("/images/buudy-image-loader.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: clamp(16px, 12%, 40px) clamp(16px, 12%, 40px);
+}
+
 @media (min-width: 640px) {
   .buudy-mask-sticky-cta footer {
     padding-bottom: 3.75rem;

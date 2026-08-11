@@ -1,11 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Lock } from "lucide-react";
 import Lottie from "lottie-react";
 import loadingLottie from "./loading-lottie.json";
 import { Button } from "@/components/ui/Button";
-import { attributionStorageKey } from "@/components/integrations/AttributionCapture";
+import {
+  appendAttributionToAbsoluteUrl,
+  attributionStorageKey,
+  pickAttributionFromSearch,
+} from "@/lib/attribution";
 import { buildPlusbaseCheckoutUrl } from "@/lib/site";
 import { promoCode } from "@/lib/cart";
 import { useCart, writeCheckoutSnapshot } from "./CartProvider";
@@ -28,24 +32,11 @@ type CheckoutFormProps = {
 };
 
 export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
-  const { totals, lines, giftMessage, activePromoCodes } = useCart();
+  const { totals, lines, giftMessage, activePromoCodes, manualPromoCode } =
+    useCart();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [error, setError] = useState("");
   const hasItems = totals.itemCount > 0;
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const [isOriginalVisible, setIsOriginalVisible] = useState(true);
-
-  useEffect(() => {
-    if (!buttonRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsOriginalVisible(entry.isIntersecting);
-      },
-      { threshold: 0 }
-    );
-    observer.observe(buttonRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     function handlePageShow(event: PageTransitionEvent) {
@@ -66,25 +57,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     )?.quantity ?? totals.itemCount;
 
   function readAttribution() {
-    const currentParams = new URLSearchParams(window.location.search);
-    const current: Record<string, string> = {};
-
-    [
-      "utm_source",
-      "utm_medium",
-      "utm_campaign",
-      "utm_term",
-      "utm_content",
-      "msclkid",
-      "gclid",
-      "fbclid",
-      "source",
-    ].forEach((key) => {
-      const value = currentParams.get(key);
-      if (value) {
-        current[key] = value;
-      }
-    });
+    const current = pickAttributionFromSearch(window.location.search);
 
     try {
       return {
@@ -106,7 +79,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     }
 
     const attribution = readAttribution();
-    writeCheckoutSnapshot({ lines, giftMessage, promoCode });
+    writeCheckoutSnapshot({ lines, giftMessage, promoCode, manualPromoCode });
     setError("");
     setIsRedirecting(true);
     window.dispatchEvent(
@@ -126,11 +99,12 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
         },
         body: JSON.stringify({
           customerEmail: initialCustomer.email,
-          quantity: maskQuantity,
+          quantity: maskQuantity, // fallback quantity
           cart: {
             lines,
             giftMessage,
             promoCodes: activePromoCodes,
+            manualPromoCode,
           },
           totals,
           attribution,
@@ -141,15 +115,28 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
         throw new Error("Could not prepare checkout.");
       }
 
+      const primaryProductId = lines.find((l) => l.type === "product")?.productId || "buudy-led-mask";
+
       const data = (await response.json()) as { checkoutUrl?: string };
+      const fallbackUrl = buildPlusbaseCheckoutUrl({
+        quantity: maskQuantity,
+        productId: primaryProductId,
+        discountCode: manualPromoCode,
+        extraParams: attribution,
+      });
       window.location.assign(
-        data.checkoutUrl ?? buildPlusbaseCheckoutUrl({ quantity: maskQuantity }),
+        data.checkoutUrl
+          ? appendAttributionToAbsoluteUrl(data.checkoutUrl, attribution)
+          : fallbackUrl,
       );
     } catch {
+      const primaryProductId = lines.find((l) => l.type === "product")?.productId || "buudy-led-mask";
       setError("Opening secure checkout...");
       window.location.assign(
         buildPlusbaseCheckoutUrl({
           quantity: maskQuantity,
+          productId: primaryProductId,
+          discountCode: manualPromoCode,
           extraParams: attribution,
         }),
       );
@@ -158,9 +145,8 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
 
   return (
     <>
-      <div ref={buttonRef} className="w-full">
-        <Button
-          id="main-checkout-btn"
+      <Button
+        id="main-checkout-btn"
         className={`relative overflow-hidden w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] buudy-display ${!isRedirecting ? "proxy-bundle-btn" : "disabled:!opacity-100"}`}
         disabled={!hasItems || isRedirecting}
         onClick={handleCheckout}
@@ -182,37 +168,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
             Checkout securely
           </>
         )}
-        </Button>
-      </div>
-
-      <div
-        className={`fixed bottom-0 left-0 right-0 z-50 transform transition-all duration-300 md:hidden p-4 pb-6 ${isOriginalVisible ? "translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"}`}
-      >
-        <Button
-          className={`relative overflow-hidden w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 buudy-display ${!isRedirecting ? "proxy-bundle-btn" : "disabled:!opacity-100"}`}
-          disabled={!hasItems || isRedirecting}
-          onClick={handleCheckout}
-          type="button"
-        >
-          {isRedirecting ? (
-            <>
-              <span style={{ visibility: "hidden" }} className="flex items-center gap-2">
-                <Lock size={17} />
-                Checkout securely
-              </span>
-              <span className="absolute inset-0 flex items-center justify-center">
-                <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
-              </span>
-            </>
-          ) : (
-            <>
-              <Lock size={17} />
-              Checkout securely
-            </>
-          )}
-        </Button>
-      </div>
-
+      </Button>
       {error ? (
         <p className="mt-3 text-center text-xs font-semibold text-[var(--plum)]">
           {error}

@@ -19,7 +19,7 @@ function ReviewVideoCard({
   const shouldPlayRef = useRef(false);
   const primarySrc = video.fallbackSrc ?? video.src;
   const [src, setSrc] = useState(primarySrc);
-  const [shouldLoad, setShouldLoad] = useState(index < 4);
+  const [shouldLoad, setShouldLoad] = useState(index < reviewVideos.length);
 
   const playWhenReady = useCallback(() => {
     if (!shouldPlayRef.current) return;
@@ -69,6 +69,7 @@ function ReviewVideoCard({
         className="h-full w-full object-cover"
         disablePictureInPicture
         loop
+        autoPlay={shouldLoad}
         muted
         onCanPlay={playWhenReady}
         onError={() => {

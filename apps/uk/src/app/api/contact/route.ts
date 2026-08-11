@@ -108,7 +108,7 @@ export async function POST(request: Request) {
       {
         success: false,
         message:
-          "The contact form is not configured yet. Please email support@buudy.com directly.",
+          "The contact form is not configured yet. Please email support@buudy.co.uk directly.",
         code: "CONFIG_MISSING",
       },
       503,
@@ -153,7 +153,7 @@ export async function POST(request: Request) {
           success: false,
           message:
             result?.message ||
-            "We could not send your message right now. Please email support@buudy.com directly.",
+            "We could not send your message right now. Please email support@buudy.co.uk directly.",
           code: "WEB3FORMS_ERROR",
         },
         response.ok ? 502 : response.status,
@@ -173,7 +173,7 @@ export async function POST(request: Request) {
       {
         success: false,
         message:
-          "We could not send your message right now. Please email support@buudy.com directly.",
+          "We could not send your message right now. Please email support@buudy.co.uk directly.",
         code: "NETWORK_ERROR",
       },
       502,

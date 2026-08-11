@@ -23,31 +23,7 @@ export function ProductGallery({
   const lightboxRef = useRef<HTMLDivElement>(null);
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
 
-  // 1. Warm the next gallery asset without delaying the current image swap.
-  useEffect(() => {
-    const nextImage = images[(currentIndex + 1) % images.length];
-    if (!nextImage) return;
 
-    if (nextImage.src.endsWith(".mp4") || nextImage.src.endsWith(".webm")) {
-      const video = document.createElement("video");
-      video.preload = "metadata";
-      video.src = nextImage.src;
-      video.load();
-      return () => {
-        video.removeAttribute("src");
-        video.load();
-      };
-    }
-
-    const image = new window.Image();
-    image.decoding = "async";
-    image.fetchPriority = "low";
-    image.src = nextImage.src;
-    void image.decode?.().catch(() => undefined);
-    return () => {
-      image.src = "";
-    };
-  }, [currentIndex, images]);
 
   // 2. Navigation controls
   const goNext = useCallback(() => {
@@ -257,6 +233,7 @@ export function ProductGallery({
               loop
               playsInline
               onClick={() => openLightbox()}
+
             />
           ) : (
             <img
@@ -268,6 +245,7 @@ export function ProductGallery({
               fetchPriority="high"
               loading="eager"
               onClick={() => openLightbox()}
+
             />
           )}
 

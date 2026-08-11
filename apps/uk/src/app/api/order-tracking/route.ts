@@ -101,7 +101,7 @@ function errorMessage(code: string) {
     return "No matching Buudy order was found. Check the order number from your confirmation email and try again.";
   }
   if (code === "email_invalid_format") return "Enter a valid email address.";
-  return "We could not verify that order right now. Please try again or contact support@buudy.com.";
+  return "We could not verify that order right now. Please try again or contact support@buudy.co.uk.";
 }
 
 export async function POST(request: NextRequest) {

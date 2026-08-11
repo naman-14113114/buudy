@@ -8,6 +8,7 @@ import {
   faqJsonLd,
   organizationJsonLd,
   productJsonLd,
+  productWebPageJsonLd,
   websiteJsonLd,
 } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
@@ -113,6 +114,7 @@ export default async function ProductRoute({ params }: PageProps) {
       {[
         organizationJsonLd(),
         websiteJsonLd(),
+        productWebPageJsonLd(product),
         productJsonLd(product),
         breadcrumbJsonLd([
           { name: "Home", url: "/" },

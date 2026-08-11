@@ -1,9 +1,6 @@
 import type { Product } from "@/data/products";
 import type { FAQItem } from "@/data/productSections";
 import { absoluteUrl } from "@/lib/site";
-import { market } from "@/lib/market";
-
-const schemaCountry = (market.marketLabel as string) === "UK" ? "GB" : market.marketLabel;
 
 export function productJsonLd(product: Product) {
   const productUrl = absoluteUrl(`/products/${product.slug}`);
@@ -24,7 +21,6 @@ export function productJsonLd(product: Product) {
         ? "LED light therapy face mask"
         : "Handheld red light therapy device",
     sku: product.sku,
-    mpn: product.sku,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: product.rating,
@@ -37,7 +33,6 @@ export function productJsonLd(product: Product) {
       url: productUrl,
       priceCurrency: product.currency,
       price: (product.priceCents / 100).toFixed(2),
-      priceValidUntil: "2026-12-31",
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: {
@@ -53,31 +48,23 @@ export function productJsonLd(product: Product) {
         },
         shippingDestination: {
           "@type": "DefinedRegion",
-          addressCountry: schemaCountry,
+          addressCountry: "GB",
         },
         deliveryTime: {
           "@type": "ShippingDeliveryTime",
           handlingTime: {
             "@type": "QuantitativeValue",
-            minValue: 0,
-            maxValue: 2,
+            minValue: 1,
+            maxValue: 3,
             unitCode: "DAY",
           },
           transitTime: {
             "@type": "QuantitativeValue",
-            minValue: 2,
-            maxValue: 5,
+            minValue: 3,
+            maxValue: 10,
             unitCode: "DAY",
           },
         },
-      },
-      hasMerchantReturnPolicy: {
-        "@type": "MerchantReturnPolicy",
-        applicableCountry: schemaCountry,
-        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-        merchantReturnDays: 90,
-        returnMethod: "https://schema.org/ReturnByMail",
-        returnFees: "https://schema.org/FreeReturn",
       },
     },
     additionalProperty: product.specs.map((spec) => ({
@@ -85,6 +72,42 @@ export function productJsonLd(product: Product) {
       name: spec.label,
       value: spec.value,
     })),
+  };
+}
+
+export function productWebPageJsonLd(product: Product) {
+  const productUrl = absoluteUrl(`/products/${product.slug}`);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${productUrl}#webpage`,
+    url: productUrl,
+    name: product.seoTitle,
+    description: product.seoDescription,
+    inLanguage: "en-GB",
+    dateModified: "2026-06-16",
+    isPartOf: {
+      "@id": `${absoluteUrl("/")}#website`,
+    },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: absoluteUrl(product.gallery[0].src),
+    },
+    mainEntity: {
+      "@id": `${productUrl}#product`,
+    },
+    audience: {
+      "@type": "Audience",
+      audienceType: "UK skincare shoppers comparing LED face masks",
+    },
+    about: [
+      { "@type": "Thing", name: "best LED face mask UK" },
+      { "@type": "Thing", name: "red light therapy mask" },
+      { "@type": "Thing", name: "blue light acne routine" },
+      { "@type": "Thing", name: "anti-ageing skincare device" },
+      { "@type": "Thing", name: "near-infrared light therapy" },
+    ],
   };
 }
 
@@ -132,8 +155,8 @@ export function organizationJsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
-      email: "support@buudy.com",
-      availableLanguage: [market.locale, "English"],
+      email: "support@buudy.co.uk",
+      availableLanguage: ["en-GB", "English"],
     },
   };
 }
@@ -175,7 +198,7 @@ export function guidePageJsonLd({
       name: title,
       description,
       url: absoluteUrl(url),
-      inLanguage: market.locale,
+      inLanguage: "en-GB",
       isPartOf: {
         "@id": `${absoluteUrl("/")}#website`,
       },

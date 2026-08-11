@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
-import loadingLottie from "../cart/loading-lottie.json";
 import {
   BatteryCharging,
   ShieldCheck,
@@ -23,6 +22,10 @@ import {
 import type { Product } from "@/data/products";
 import { market } from "@/lib/market";
 import { formatMoney } from "@/lib/money";
+import {
+  appendAttributionToPath,
+  pickAttributionFromSearch,
+} from "@/lib/attribution";
 import { Button } from "@/components/ui/Button";
 import { Price } from "@/components/ui/Price";
 import { useCart } from "@/components/cart/CartProvider";
@@ -99,7 +102,6 @@ const keyBenefitIcons = [
 
 export function GiftBundle({ product }: { product: Product }) {
   const { addProduct } = useCart();
-  const [isNavigating, setIsNavigating] = useState(false);
   const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
   const deliveryDate = useDeliveryDate(3);
@@ -145,34 +147,34 @@ export function GiftBundle({ product }: { product: Product }) {
       </h1>
 
       {/* Clinically Proven Badges */}
-      <div className="mt-3 flex flex-nowrap items-center gap-0.5 sm:gap-1.5 w-full">
-        <span className="inline-flex items-center gap-1 sm:gap-1 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-2 py-1 sm:py-1">
+      <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
+        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
           <ShieldCheck
-            size={13}
+            size={14}
             strokeWidth={2}
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[9.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.02em] text-[var(--plum)]">
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
             Clinically Proven
           </span>
         </span>
-        <span className="inline-flex items-center gap-1 sm:gap-1 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-2 py-1 sm:py-1">
+        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
           <RotateCcw
-            size={12}
-            strokeWidth={2}
-            className="hidden sm:block shrink-0 text-[var(--gold)]"
-          />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[9.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.02em] text-[var(--plum)]">
-            90-Day Returns
-          </span>
-        </span>
-        <span className="inline-flex items-center gap-1 sm:gap-1 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-2 py-1 sm:py-1">
-          <Sparkles
             size={13}
             strokeWidth={2}
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[9.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.02em] text-[var(--plum)]">
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
+            90-Day Returns
+          </span>
+        </span>
+        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
+          <Sparkles
+            size={14}
+            strokeWidth={2}
+            className="hidden sm:block shrink-0 text-[var(--gold)]"
+          />
+          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
             Dermatologist Approved
           </span>
         </span>
@@ -245,40 +247,23 @@ export function GiftBundle({ product }: { product: Product }) {
       </div>
 
       <Button
-        className={`proxy-bundle-btn mt-5 w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px] ${!isNavigating ? "" : "disabled:!opacity-100"}`}
+        className="proxy-bundle-btn mt-5 w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px]"
         id="hero-cta"
-        disabled={isNavigating}
         onClick={() => {
-          setIsNavigating(true);
           addProduct(product);
-          router.push("/cart");
+          router.push(
+            appendAttributionToPath(
+              "/cart",
+              pickAttributionFromSearch(window.location.search),
+            ),
+          );
         }}
       >
-        {isNavigating ? (
-          <>
-            <span
-              style={{ visibility: "hidden" }}
-              className="relative z-20 whitespace-nowrap"
-            >
-              {hasGifts
-                ? "ADD TO CART + FREE GIFTS"
-                : "ADD TO CART + FREE SHIPPING"}
-            </span>
-            <span className="absolute inset-0 flex items-center justify-center">
-              <Lottie
-                animationData={loadingLottie}
-                loop
-                className="h-16 w-24 scale-[1.35]"
-              />
-            </span>
-          </>
-        ) : (
-          <span className="relative z-20 whitespace-nowrap">
-            {hasGifts
-              ? "ADD TO CART + FREE GIFTS"
-              : "ADD TO CART + FREE SHIPPING"}
-          </span>
-        )}
+        <span className="relative z-20 whitespace-nowrap">
+          {hasGifts
+            ? "ADD TO CART + FREE GIFTS"
+            : "ADD TO CART + FREE SHIPPING"}
+        </span>
       </Button>
 
       {/* Benefits Grid Row (Mask Only) */}
@@ -391,13 +376,13 @@ export function GiftBundle({ product }: { product: Product }) {
             ))}
           </div>
         </section>
-      ) : (
-        <section
+      ) : null}
+      {/* <section
           className="mt-8 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[var(--card)] p-5"
           id="torch-offer"
         >
-          <p className="buudy-eyebrow mb-1">Total Value</p>
-          <p className="text-sm font-medium leading-relaxed text-[var(--ink-light)] lg:text-base">
+          <p className="buudy-eyebrow">{product.promoLabel}</p>
+          <p className="buudy-display mt-2 text-2xl text-[var(--plum)]">
             60% off, free shipping, and a rechargeable wellness kit.
           </p>
           <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
@@ -405,8 +390,7 @@ export function GiftBundle({ product }: { product: Product }) {
             glasses, and user manual for a complete targeted light therapy
             routine.
           </p>
-        </section>
-      )}
+        </section> */}
 
       <ProductDetailsAccordion product={product} />
     </div>

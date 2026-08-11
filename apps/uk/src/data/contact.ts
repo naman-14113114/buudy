@@ -4,7 +4,7 @@ export const contactPage = {
   eyebrow: "Contact Buudy",
   title: "We are here to help.",
   copy: "Welcome to Buudy, where professional-grade light therapy meets thoughtful support. We are delighted to assist you with product questions, order help, and anything you need for a smoother daily routine.",
-  supportLabel: "support@buudy.com",
+  supportLabel: "support@buudy.co.uk",
   supportHours: market.supportHours,
   supportIntro:
     "Choose the contact path that suits you best. For product questions, order support, or store help, our team will get back to you promptly.",
@@ -29,7 +29,7 @@ export const contactHelpLinks = [
   },
   {
     label: "Support email",
-    href: "mailto:support@buudy.com",
+    href: "mailto:support@buudy.co.uk",
     copy: "Prefer email? Reach the Buudy support desk directly.",
   },
 ];
@@ -50,4 +50,4 @@ export const contactSocialLinks = [
 ];
 
 export const contactRecipientEmail = "sahiljainsj004@gmail.com";
-export const publicSupportEmail = "support@buudy.com";
+export const publicSupportEmail = "support@buudy.co.uk";

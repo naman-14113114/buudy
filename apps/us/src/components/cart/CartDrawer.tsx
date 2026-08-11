@@ -16,6 +16,7 @@ export function CartDrawer() {
   return (
     <div
       aria-hidden={!isOpen}
+      inert={!isOpen}
       className={`fixed inset-0 z-50 transition ${
         isOpen ? "pointer-events-auto" : "pointer-events-none"
       }`}

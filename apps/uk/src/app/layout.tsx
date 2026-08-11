@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
-import { CartMinimalFooter } from "@/components/layout/CartMinimalFooter";
-import { CartMinimalHeader } from "@/components/layout/CartMinimalHeader";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { RouteChrome } from "@/components/layout/RouteChrome";
+import { HideOnPaths } from "@/components/layout/HideOnPaths";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
+import { AttributionCapture } from "@/components/integrations/AttributionCapture";
 import { ClarityAnalytics } from "@/components/integrations/ClarityAnalytics";
 import { KlaviyoAnalytics } from "@/components/integrations/KlaviyoAnalytics";
-import { PageMediaPreloader } from "@/components/integrations/PageMediaPreloader";
+import { MarketingAnalytics } from "@/components/integrations/MarketingAnalytics";
 import { TawkToWidget } from "@/components/integrations/TawkToWidget";
+import { GlobalImageLoader } from "@/components/ui/GlobalImageLoader";
 import { market } from "@/lib/market";
 import "./globals.css";
 
@@ -50,6 +50,9 @@ export const metadata: Metadata = {
   description:
     "UK LED face mask for red light therapy, blue light acne routines, anti-ageing skincare, full face and neck coverage, and salon-grade home treatments.",
   applicationName: "Buudy",
+  verification: {
+    google: "nqRKsSVoB5bni_WXRqWob9zh6fCXpxqGABAS_XxPr_w",
+  },
   keywords: [
     "best LED face mask UK",
     "LED face mask UK",
@@ -114,28 +117,20 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body>
+        <GlobalImageLoader />
         <CartProvider>
-          <RouteChrome
-            cartFooter={<CartMinimalFooter />}
-            cartHeader={
-              <>
-                <AnnouncementBar />
-                <CartMinimalHeader />
-              </>
-            }
-            defaultFooter={<Footer />}
-            defaultHeader={
-              <>
-                <AnnouncementBar />
-                <Header />
-              </>
-            }
-          >
-            {children}
-          </RouteChrome>
-          <PageMediaPreloader />
+          <HideOnPaths paths={["/cart"]}>
+            <AnnouncementBar />
+            <Header />
+          </HideOnPaths>
+          <main>{children}</main>
+          <HideOnPaths paths={["/cart"]}>
+            <Footer />
+          </HideOnPaths>
           <CartDrawer />
         </CartProvider>
+        <AttributionCapture />
+        <MarketingAnalytics />
         <ClarityAnalytics />
         <KlaviyoAnalytics />
         <TawkToWidget />
