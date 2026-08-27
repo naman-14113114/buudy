@@ -16,8 +16,8 @@ export function SkincareQuizPage() {
             <em className="buudy-italic text-[var(--gold)]">better ritual</em>.
           </h1>
           <p className="buudy-copy mt-5 max-w-2xl">
-            A 60-second assessment for a practical LED light therapy routine,
-            shaped around your skin concerns and daily habits.
+            A 90-second assessment that turns your concerns, skin type, safety
+            profile and preferred time into a detailed five-day timetable.
           </p>
         </div>
 
@@ -33,9 +33,9 @@ export function SkincareQuizPage() {
                 src="/images/home/04-home-mask-spotlight.png"
               />
               <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(23,10,24,.88))] p-6 pt-24 text-[var(--cream)]">
-                <p className="buudy-mono text-[var(--gold)]">7 LED Colours + NIR modes</p>
+                <p className="buudy-mono text-[var(--gold)]">7 LED colours + NIR modes</p>
                 <p className="buudy-display mt-2 text-3xl leading-tight">
-                  A routine that meets your skin where it is.
+                  Five guided days, mapped hour by hour.
                 </p>
               </div>
             </div>
@@ -44,13 +44,13 @@ export function SkincareQuizPage() {
               <div className="flex items-center gap-3 rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-4">
                 <Sparkles className="shrink-0 text-[var(--gold)]" size={18} />
                 <span className="text-xs font-semibold leading-5 text-[var(--plum)]">
-                  Targeted wavelength guide
+                  Personal colour rotation
                 </span>
               </div>
               <div className="flex items-center gap-3 rounded-[14px] border border-[var(--border)] bg-[var(--card)] p-4">
                 <ShieldCheck className="shrink-0 text-[var(--gold)]" size={18} />
                 <span className="text-xs font-semibold leading-5 text-[var(--plum)]">
-                  Thoughtful safety note
+                  28-day calendar preview
                 </span>
               </div>
             </div>

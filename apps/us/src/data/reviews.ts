@@ -1,5 +1,6 @@
 import maskReviews from "./reviews/buudy-led-mask-reviews.json";
 import torchReviews from "./reviews/buudy-red-torch-reviews.json";
+import iplReviews from "./reviews/buudy-ipl-hair-removal-device-reviews.json";
 import { market } from "@/lib/market";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { isSupabaseAdminConfigured } from "@/lib/supabase/config";
@@ -35,6 +36,7 @@ function normalizeStaticReview(r: ProductReview) {
 const reviewCollections = {
   "buudy-led-mask": maskReviews.map(normalizeStaticReview) as ProductReview[],
   "buudy-red-torch": torchReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-ipl-device": iplReviews.map(normalizeStaticReview) as ProductReview[],
 } as const;
 
 export type ReviewProductHandle = keyof typeof reviewCollections;
@@ -137,32 +139,8 @@ export function toPublicProductReview(row: ProductReviewRow): ProductReview {
   };
 }
 
-async function getSubmittedProductReviews(productHandle: ReviewProductHandle) {
-  if (!isSupabaseAdminConfigured()) {
-    return [];
-  }
-
-  try {
-    const supabase = createSupabaseAdminClient();
-    const { data, error } = await supabase
-      .from("product_reviews")
-      .select(
-        "id, product_handle, customer_name, customer_email, rating, title, body, images, status, source, created_at, updated_at",
-      )
-      .eq("product_handle", productHandle)
-      .eq("status", "published")
-      .order("created_at", { ascending: false });
-
-    if (error || !data) {
-      console.error("Unable to load submitted product reviews.", error);
-      return [];
-    }
-
-    return data.map(toPublicProductReview);
-  } catch (error) {
-    console.error("Unable to load submitted product reviews.", error);
-    return [];
-  }
+async function getSubmittedProductReviews(_productHandle: ReviewProductHandle) {
+  return [];
 }
 
 export async function getMergedProductReviewDataset(

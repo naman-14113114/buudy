@@ -92,12 +92,19 @@ function AccordionPanel({
 
   return (
     <div className="border-b border-[var(--border)] last:border-b-0">
-      <button
+      <div
         aria-controls={contentId}
         aria-expanded={isOpen}
-        className="flex w-full items-center justify-between gap-5 py-4 text-left"
+        className="flex w-full items-center justify-between gap-5 py-4 text-left cursor-pointer select-none"
         onClick={onToggle}
-        type="button"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onToggle();
+          }
+        }}
       >
         <span>
           <span className="font-sans text-xs font-bold uppercase tracking-widest text-[var(--gold)]">{item.eyebrow}</span>
@@ -111,7 +118,7 @@ function AccordionPanel({
           }`}
           size={19}
         />
-      </button>
+      </div>
       <div
         className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
           isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"

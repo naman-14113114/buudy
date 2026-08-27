@@ -267,7 +267,7 @@ function MobileStickyCheckout() {
   }, []);
 
   return (
-    <div
+    <div 
       className={`fixed bottom-0 left-0 right-0 z-50 p-4 pb-6 pointer-events-none flex justify-center lg:hidden transition-all duration-300 ${
         isMainBtnVisible ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
       }`}

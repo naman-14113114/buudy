@@ -13,6 +13,11 @@ export type Transformation = {
   title: string;
   quote: string;
   name: string;
+  fullName: string;
+  age: number;
+  skinType: string;
+  routine: string;
+  experience: string;
 };
 
 export type ReviewVideo = {
@@ -67,6 +72,34 @@ export const features: Feature[] = [
   },
 ];
 
+export const iplFeatures: Feature[] = [
+  {
+    title: "Sapphire Ice-Cooling Technology",
+    kicker: "Painless at 5°C",
+    body: "Unlike traditional IPL devices that can cause burning or discomfort, our built-in Sapphire Ice-Cooling head maintains a consistent 5-8°C temperature. This instantly soothes the skin while the light pulses, ensuring a completely painless and comfortable hair removal experience even on sensitive areas.",
+  },
+  {
+    title: "999,999 Lifetime Flashes",
+    kicker: "No Refills Needed",
+    body: "Never worry about running out of flashes. With up to 999,999 flashes, the Buudy IPL device provides enough pulses for a lifetime of full-body treatments for you and even your partner. It's a one-time investment that completely replaces expensive salon laser treatments.",
+  },
+  {
+    title: "9 Adjustable Intensity Levels",
+    kicker: "Customized for You",
+    body: "Whether you're treating stubborn thick hair on your legs or fine hair on your upper lip, you can customize the power output with 9 distinct intensity levels. Start low for sensitive areas and increase the intensity for faster results on thicker hair.",
+  },
+  {
+    title: "Dual Treatment Modes",
+    kicker: "Auto & Manual Glide",
+    body: "Use the Manual Mode for precision treatments on smaller areas like the bikini line, underarms, and face. Switch to Auto Glide Mode for effortless, continuous flashes while gliding the device across larger areas like your legs or back—completing a full body session in just 15 minutes.",
+  },
+  {
+    title: "Visible Results in 4 Weeks",
+    kicker: "Clinically Proven",
+    body: "Our high-energy IPL targets the hair follicle at the root, breaking the cycle of hair growth. With consistent use, you will see a noticeable reduction in hair growth in just 4 weeks, leading to permanently smooth, hair-free skin.",
+  },
+];
+
 export const realLifeImages = [
   {
     src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
@@ -111,6 +144,13 @@ export const transformations: Transformation[] = [
     quote:
       '"I have noticed a significant reduction in the sagging around my cheeks and jawline."',
     name: "Donna P.",
+    fullName: "Donna Parker",
+    age: 52,
+    skinType: "Dry, mature skin",
+    routine:
+      "Cleanse and dry the skin, use red and near-infrared light for 10 minutes four times a week, then apply a hydrating serum and moisturiser.",
+    experience:
+      "After eight weeks of consistent sessions, Donna felt that her cheeks and jawline looked firmer and more defined.",
   },
   {
     id: "result-02",
@@ -120,6 +160,13 @@ export const transformations: Transformation[] = [
     quote:
       '"After using for 1 month, I cannot believe the difference! Fine lines are much less noticeable."',
     name: "Jane P.",
+    fullName: "Jane Phillips",
+    age: 46,
+    skinType: "Normal-to-dry skin",
+    routine:
+      "Use red light on clean, dry skin for 10 minutes four times a week, followed by peptide serum and moisturiser, with SPF each morning.",
+    experience:
+      "After one month, Jane felt that the fine lines around her eyes and forehead looked softer and less noticeable.",
   },
   {
     id: "result-03",
@@ -129,6 +176,13 @@ export const transformations: Transformation[] = [
     quote:
       '"In less than 2 months, noticed the fine lines around my eyes and mouth are much less noticeable."',
     name: "Sarah K.",
+    fullName: "Sarah King",
+    age: 49,
+    skinType: "Dry, sensitive skin",
+    routine:
+      "Treat the face and neck with red and near-infrared light for 10 minutes four times a week, then finish with a fragrance-free ceramide moisturiser.",
+    experience:
+      "Within two months, Sarah noticed that fine lines around her eyes, mouth, and neck looked less pronounced.",
   },
   {
     id: "result-04",
@@ -138,6 +192,13 @@ export const transformations: Transformation[] = [
     quote:
       '"Within just a few weeks, my skin started to clear up and the scars began to fade."',
     name: "Michelle L.",
+    fullName: "Michelle Lewis",
+    age: 41,
+    skinType: "Combination, acne-prone skin",
+    routine:
+      "Alternate blue and red modes for 10 minutes four times a week on freshly cleansed skin, followed by niacinamide and a light moisturiser.",
+    experience:
+      "After several weeks, Michelle felt that her skin looked clearer and the appearance of old blemish marks had begun to fade.",
   },
   {
     id: "result-05",
@@ -147,6 +208,13 @@ export const transformations: Transformation[] = [
     quote:
       '"I never thought I would see my jawline again without surgery. This device is a total game changer."',
     name: "James D.",
+    fullName: "James Davies",
+    age: 44,
+    skinType: "Normal skin",
+    routine:
+      "Use red and near-infrared light for 10 minutes four evenings a week after cleansing, then apply a lightweight moisturiser.",
+    experience:
+      "After eight weeks, James felt that his jawline looked more defined and his skin appeared firmer overall.",
   },
   {
     id: "result-06",
@@ -156,6 +224,13 @@ export const transformations: Transformation[] = [
     quote:
       '"My skin looks so much more radiant and healthy. I have even stopped wearing heavy foundation!"',
     name: "Karen W.",
+    fullName: "Karen Wilson",
+    age: 38,
+    skinType: "Dehydrated, dull skin",
+    routine:
+      "Use red light for 10 minutes five times a week on clean, dry skin, then follow with hyaluronic serum and moisturiser.",
+    experience:
+      "After five weeks, Karen noticed a brighter, more radiant appearance and felt comfortable wearing lighter foundation.",
   },
   {
     id: "result-07",
@@ -165,6 +240,13 @@ export const transformations: Transformation[] = [
     quote:
       '"The puffiness under my eyes has vanished. I look like I have actually had 8 hours of sleep!"',
     name: "Linda S.",
+    fullName: "Linda Scott",
+    age: 55,
+    skinType: "Sensitive, mature skin",
+    routine:
+      "Use red and near-infrared light for 10 minutes four times a week, then apply a gentle eye cream and barrier-supporting moisturiser.",
+    experience:
+      "After six weeks, Linda felt that the under-eye area looked fresher and the appearance of puffiness was reduced.",
   },
   {
     id: "result-08",
@@ -174,6 +256,13 @@ export const transformations: Transformation[] = [
     quote:
       '"The overall texture of my skin has improved immensely. It feels incredibly soft and looks smooth."',
     name: "Jennifer H.",
+    fullName: "Jennifer Harris",
+    age: 36,
+    skinType: "Combination skin with uneven texture",
+    routine:
+      "Use red light for 10 minutes four times a week after cleansing, followed by a barrier serum and non-comedogenic moisturiser.",
+    experience:
+      "After six weeks, Jennifer felt that her skin looked smoother and more even and felt noticeably softer.",
   },
 ];
 
@@ -434,7 +523,6 @@ export const wavelengths: Wavelength[] = [
 ];
 
 export const torchWavelengths: Wavelength[] = [
-  
   {
     nm: "630nm",
     name: "RED",
@@ -456,7 +544,6 @@ export const torchWavelengths: Wavelength[] = [
     description:
       "Near-infrared light for localized muscle stiffness and body relief routines.",
   },
-  
 ];
 
 export const torchFeatures: Feature[] = [
@@ -530,7 +617,12 @@ export const torchFaqs: FAQItem[] = [
   {
     question: "Do you sell this anywhere else?",
     answer:
-      "The Buudy Red Torch is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
+      "The Buudy Red Torch is exclusively sold through ca.buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
+  },
+  {
+    question: "If I receive the Red Torch as a free gift with the LED Mask, does it include a battery or USB?",
+    answer:
+      "No. When the Red Torch is included as a free gift with the LED Mask, it comes as a standalone device and does not include a battery or USB cable.",
   },
 ];
 
@@ -546,10 +638,10 @@ export const expertVideo = {
 export const comparison = {
   intro: "Here is a comparison, but really, there is no comparison.",
   columns: [
-    { label: "Buudy", price: "$299", featured: true },
-    { label: "Brand A", price: "$399" },
-    { label: "Brand B", price: "$499" },
-    { label: "Brand C", price: "$472" },
+    { label: "Buudy", price: "CA$299", featured: true },
+    { label: "Brand A", price: "CA$399" },
+    { label: "Brand B", price: "CA$499" },
+    { label: "Brand C", price: "CA$472" },
   ],
   rows: [
     ["Portable", "Hands-free, cordless and rechargeable", "-", "-", "-"],
@@ -613,5 +705,28 @@ export const faqs: FAQItem[] = [
     question: "Do you sell this anywhere else?",
     answer:
       "The Buudy LED Mask is exclusively sold through ca.buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
+  },
+];
+
+export const iplFaqs: FAQItem[] = [
+  {
+    question: "Does the ice cooling really make it painless?",
+    answer: "Yes! The Buudy IPL device features an advanced sapphire ice-cooling head that lowers the temperature to 5-8°C during treatment. This counteracts the heat of the IPL flash, making the experience virtually painless, even on sensitive areas.",
+  },
+  {
+    question: "How many flashes does it have?",
+    answer: "The device comes packed with 999,999 flashes, which is enough for a lifetime of full-body treatments. You will never need to buy a replacement cartridge.",
+  },
+  {
+    question: "How often should I use it?",
+    answer: "For best results, we recommend using the device 2-3 times a week for the first 4 weeks, 1-2 times a week for weeks 5-8, and then just once a month for maintenance.",
+  },
+  {
+    question: "Is it safe for my skin tone and hair colour?",
+    answer: "IPL technology works best on high-contrast combinations, such as light skin with dark hair (black, brown, or dark blonde). It is less effective on very light blonde, red, or grey hair, and is not recommended for very dark skin tones due to the risk of burns.",
+  },
+  {
+    question: "Can I use it on my face and bikini line?",
+    answer: "Absolutely. The device has 9 adjustable intensity levels, allowing you to lower the power for sensitive areas like the upper lip, chin, and bikini line, while using higher power for legs and arms.",
   },
 ];

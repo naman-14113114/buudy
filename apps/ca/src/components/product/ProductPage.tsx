@@ -1,23 +1,29 @@
 import type { Product } from "@/data/products";
-import { AppPromo, BlueLightSection } from "./AppPromo";
+import { AppPromo, BlueLightSection, TouchTechSection } from "./AppPromo";
 import { ComparisonTable } from "./ComparisonTable";
 import { FAQSection } from "./FAQSection";
+import { FeatureGrid } from "./FeatureGrid";
 import { GuaranteeSection } from "./GuaranteeSection";
 import { ProductHero } from "./ProductHero";
 import { ProductReviewsSection } from "./ProductReviewsSection";
 import { StickyAddToCart } from "./StickyAddToCart";
 import { TorchProductPage } from "./TorchProductPage";
-import { TrustBadges } from "./TrustBadges";
+import { IplProductPage } from "./IplProductPage";
 import {
   DeferredBeforeAfterGrid,
   DeferredExpertSection,
   DeferredVideoReviews,
   DeferredWavelengthSelector,
 } from "./DeferredClientSections";
+import { TrustBadges } from "./TrustBadges";
 
-export function ProductPage({ product }: { product: Product }) {
+export function ProductPage({ product, variant }: { product: Product; variant?: string }) {
   if (product.template === "torch") {
     return <TorchProductPage product={product} />;
+  }
+
+  if (product.template === "ipl") {
+    return <IplProductPage product={product} />;
   }
 
   return (
@@ -25,9 +31,11 @@ export function ProductPage({ product }: { product: Product }) {
       <ProductHero product={product} />
       <DeferredVideoReviews />
       <TrustBadges />
+      {/* <FeatureGrid /> */}
       <DeferredBeforeAfterGrid />
       <DeferredWavelengthSelector />
       <DeferredExpertSection />
+      {/* <TouchTechSection /> */}
       <AppPromo />
       <ProductReviewsSection />
       <BlueLightSection />

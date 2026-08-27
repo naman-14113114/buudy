@@ -8,6 +8,7 @@ import {
   faqJsonLd,
   organizationJsonLd,
   productJsonLd,
+  productWebPageJsonLd,
   websiteJsonLd,
 } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
@@ -50,12 +51,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             "LED mask with neck coverage",
             "near infrared LED face mask",
           ]
-        : [
-            "red light torch Canada",
-            "handheld red light therapy",
-            "near infrared torch",
-            "blue red light therapy device",
-          ],
+        : product.template === "ipl"
+          ? [
+              "IPL hair removal device Canada",
+              "laser hair removal Canada",
+              "painless IPL hair removal",
+              "at home laser hair removal",
+            ]
+          : [
+              "red light torch Canada",
+              "handheld red light therapy",
+              "near infrared torch",
+              "blue red light therapy device",
+            ],
     alternates: {
       canonical: `/products/${product.slug}`,
       languages: {
@@ -113,6 +121,7 @@ export default async function ProductRoute({ params }: PageProps) {
       {[
         organizationJsonLd(),
         websiteJsonLd(),
+        productWebPageJsonLd(product),
         productJsonLd(product),
         breadcrumbJsonLd([
           { name: "Home", url: "/" },

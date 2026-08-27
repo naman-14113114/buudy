@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 
 export function CartMinimalHeader() {
-
   return (
     <header className="border-b border-[rgba(58,31,61,.14)] bg-[rgba(247,241,232,.96)]">
+      <AnnouncementBar />
+
       <div className="buudy-wrap grid min-h-[68px] grid-cols-[1fr_auto_1fr] items-center gap-3 py-3">
         <span aria-hidden="true" />
         <Link
@@ -25,12 +27,8 @@ export function CartMinimalHeader() {
           />
         </Link>
 
-        <div className="hidden justify-self-end sm:block">
-        </div>
+        <span aria-hidden="true" />
       </div>
-
-      
     </header>
   );
 }
-

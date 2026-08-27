@@ -1,40 +1,26 @@
 "use client";
 
 import { useEffect } from "react";
-import { attributionKeys } from "@/lib/conversions/attribution";
-
-const storageKey = "buudy-attribution-v1";
-
-function createJourneyId() {
-  if (typeof crypto.randomUUID === "function") return crypto.randomUUID();
-  return `journey-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-}
+import {
+  attributionStorageKey,
+  pickAttributionFromSearch,
+} from "@/lib/attribution";
 
 export function AttributionCapture() {
   useEffect(() => {
     try {
-      const params = new URLSearchParams(window.location.search);
-      const next: Record<string, string> = {};
-      attributionKeys.forEach((key) => {
-        const value = params.get(key);
-        if (value) next[key] = value;
-      });
+      const next = pickAttributionFromSearch(window.location.search);
+
       const existing = JSON.parse(
-        window.localStorage.getItem(storageKey) ?? "{}",
+        window.localStorage.getItem(attributionStorageKey) ?? "{}",
       ) as Record<string, string>;
-      const journeyId =
-        next.journey_id || existing.journey_id || createJourneyId();
-      if (
-        Object.keys(next).length ||
-        !existing.landing_path ||
-        !existing.journey_id
-      ) {
+
+      if (Object.keys(next).length || !existing.landing_path) {
         window.localStorage.setItem(
-          storageKey,
+          attributionStorageKey,
           JSON.stringify({
             ...existing,
             ...next,
-            journey_id: journeyId,
             landing_path: existing.landing_path ?? window.location.pathname,
             first_referrer: existing.first_referrer ?? document.referrer,
             last_path: window.location.pathname,
@@ -47,7 +33,6 @@ export function AttributionCapture() {
       // Attribution is helpful, not critical to shopping.
     }
   }, []);
+
   return null;
 }
-
-export { storageKey as attributionStorageKey };

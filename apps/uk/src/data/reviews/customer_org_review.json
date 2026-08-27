@@ -1,0 +1,30 @@
+[
+  {
+    "id": "28761a01-e014-41ba-bda3-89a1cf2963eb",
+    "productHandle": "buudy-red-torch",
+    "customerName": "Sarah P",
+    "customerEmail": "sarah@test.com",
+    "rating": 5,
+    "title": "Targeted Red Light",
+    "body": "Very handy for spot treatment on face and neck.",
+    "images": [],
+    "dateIST": "16 Aug 2026",
+    "timeIST": "04:19:07 pm",
+    "submittedAtIST": "16 Aug 2026, 04:19:07 pm IST",
+    "createdAtISO": "2026-08-16T10:49:07.617Z"
+  },
+  {
+    "id": "6395a3e3-5876-4297-902f-07145db8cd5a",
+    "productHandle": "buudy-led-mask",
+    "customerName": "Naman K",
+    "customerEmail": "naman@test.com",
+    "rating": 5,
+    "title": "Amazing Mask",
+    "body": "Really loved how light and comfortable this mask feels on skin.",
+    "images": [],
+    "dateIST": "16 Aug 2026",
+    "timeIST": "04:19:01 pm",
+    "submittedAtIST": "16 Aug 2026, 04:19:01 pm IST",
+    "createdAtISO": "2026-08-16T10:49:01.959Z"
+  }
+]

@@ -11,21 +11,17 @@ const FOOTER_LINKS = [
 
 export function CartMinimalFooter() {
   return (
-    <footer className="border-t border-[rgba(247,241,232,.12)] bg-[var(--ink)]">
-      <div className="buudy-wrap py-7 text-center">
-        <p className="buudy-mono text-[0.68rem] tracking-[0.18em] text-[var(--gold)] sm:text-xs">
-          Secure payments {"\u2022"} Free tracked shipping {"\u2022"} Easy support
+    <footer className="border-t border-[rgba(247,241,232,.14)] bg-[var(--ink)] pt-8 pb-28 lg:py-8">
+      <div className="buudy-wrap text-center">
+        <p className="buudy-mono text-[var(--gold)]">
+          Secure Payments &bull; Free Tracked Shipping &bull; Easy Support
         </p>
-
-        <nav
-          aria-label="Checkout footer"
-          className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-[rgba(247,241,232,.76)]"
-        >
+        <nav className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
           {FOOTER_LINKS.map((link) => (
             <Link
-              className="transition hover:text-[var(--cream)]"
+              className="text-sm text-[rgba(247,241,232,.72)] transition hover:text-[var(--cream)]"
               href={link.href}
-              key={link.href}
+              key={link.label}
             >
               {link.label}
             </Link>

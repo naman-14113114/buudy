@@ -63,7 +63,7 @@ function FaqAccordionItem({ question, answerHtml, isOpen, onClick }: FaqItemProp
 }
 
 export function FaqPage() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0); // Expand first by default
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   const handleToggle = (index: number) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));

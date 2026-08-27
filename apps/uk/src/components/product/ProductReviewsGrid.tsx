@@ -286,144 +286,90 @@ function ReviewFiltersToolbar({
     "flex w-full items-center justify-between rounded-[13px] px-4 py-3 text-left text-sm font-semibold text-[var(--plum)] transition hover:bg-[rgba(180,145,76,.12)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]";
 
   return (
-    <div
-      className="mb-8 rounded-[22px] border border-[rgba(58,31,61,.12)] bg-[rgba(255,252,245,.68)] p-4 shadow-[0_18px_46px_-38px_rgba(58,31,61,.55)]"
-      ref={toolbarRef}
-    >
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex flex-nowrap items-center gap-1.5 sm:gap-3">
-          <span className="buudy-display text-sm sm:text-xl text-[var(--plum)]">Filters</span>
-          <div className="relative">
-            <button
-              aria-controls="buudy-review-stars-menu"
-              aria-expanded={openMenu === "stars"}
-              className={dropdownButtonClass}
-              disabled={disabled}
-              onClick={() => setOpenMenu(openMenu === "stars" ? null : "stars")}
-              type="button"
-            >
-              <span>{activeStarsLabel}</span>
-              <ChevronDown
-                aria-hidden="true"
-                className={cn("transition", openMenu === "stars" && "rotate-180")}
-                size={17}
-              />
-            </button>
-            {openMenu === "stars" ? (
-              <div className={menuClass} id="buudy-review-stars-menu" role="menu">
-                {starFilterOptions.map((option) => {
-                  const isActive = filters.rating === option.value;
+    <div className="flex flex-nowrap items-center gap-1.5 sm:gap-3 mb-8" ref={toolbarRef}>
+      <span className="buudy-display text-sm sm:text-xl text-[var(--plum)]">Filters</span>
+      <div className="relative">
+        <button
+          aria-controls="buudy-review-stars-menu"
+          aria-expanded={openMenu === "stars"}
+          className={dropdownButtonClass}
+          disabled={disabled}
+          onClick={() => setOpenMenu(openMenu === "stars" ? null : "stars")}
+          type="button"
+        >
+          <span>{activeStarsLabel}</span>
+          <ChevronDown
+            aria-hidden="true"
+            className={cn("transition", openMenu === "stars" && "rotate-180")}
+            size={17}
+          />
+        </button>
+        {openMenu === "stars" ? (
+          <div className={menuClass} id="buudy-review-stars-menu" role="menu">
+            {starFilterOptions.map((option) => {
+              const isActive = filters.rating === option.value;
 
-                  return (
-                    <button
-                      className={menuItemClass}
-                      key={option.label}
-                      onClick={() => {
-                        onRatingChange(option.value);
-                        setOpenMenu(null);
-                      }}
-                      role="menuitemradio"
-                      aria-checked={isActive}
-                      type="button"
-                    >
-                      <span>{option.label}</span>
-                      {isActive ? <Check aria-hidden="true" size={16} /> : null}
-                    </button>
-                  );
-                })}
-                <div className="sm:hidden mt-2 pt-2 border-t border-[rgba(58,31,61,.1)]">
-                  <button
-                    className={menuItemClass}
-                    onClick={() => {
-                      onTogglePhotos();
-                      setOpenMenu(null);
-                    }}
-                    role="menuitemcheckbox"
-                    aria-checked={filters.withPhotos}
-                    type="button"
-                  >
-                    <span>With photos</span>
-                    {filters.withPhotos ? <Check aria-hidden="true" size={16} /> : null}
-                  </button>
-                  <button
-                    className={menuItemClass}
-                    onClick={() => {
-                      onToggleVerified();
-                      setOpenMenu(null);
-                    }}
-                    role="menuitemcheckbox"
-                    aria-checked={filters.verifiedOnly}
-                    type="button"
-                  >
-                    <span>Verified purchase</span>
-                    {filters.verifiedOnly ? <Check aria-hidden="true" size={16} /> : null}
-                  </button>
-                </div>
-              </div>
-            ) : null}
-          </div>
-          <div className="hidden sm:flex flex-nowrap items-center gap-1.5 sm:gap-3">
-            <ReviewFilterCheckbox
-              checked={filters.withPhotos}
-              disabled={disabled}
-              label="With photos"
-              onToggle={onTogglePhotos}
-            />
-            <ReviewFilterCheckbox
-              checked={filters.verifiedOnly}
-              disabled={disabled}
-              label="Verified purchase"
-              onToggle={onToggleVerified}
-            />
-          </div>
-        </div>
-
-        <div className="relative flex flex-wrap items-center gap-3 lg:justify-end">
-          <span className="buudy-display text-xl text-[var(--plum)]">Sort by</span>
-          <button
-            aria-controls="buudy-review-sort-menu"
-            aria-expanded={openMenu === "sort"}
-            className={dropdownButtonClass}
-            disabled={disabled}
-            onClick={() => setOpenMenu(openMenu === "sort" ? null : "sort")}
-            type="button"
-          >
-            <span>{reviewSortLabels[filters.sort]}</span>
-            <ChevronDown
-              aria-hidden="true"
-              className={cn("transition", openMenu === "sort" && "rotate-180")}
-              size={17}
-            />
-          </button>
-          {openMenu === "sort" ? (
-            <div
-              className={cn(menuClass, "right-auto lg:right-0")}
-              id="buudy-review-sort-menu"
-              role="menu"
-            >
-              {reviewSortOptions.map((option) => {
-                const isActive = filters.sort === option.value;
-
-                return (
-                  <button
-                    aria-checked={isActive}
-                    className={menuItemClass}
-                    key={option.value}
-                    onClick={() => {
-                      onSortChange(option.value);
-                      setOpenMenu(null);
-                    }}
-                    role="menuitemradio"
-                    type="button"
-                  >
-                    <span>{option.label}</span>
-                    {isActive ? <Check aria-hidden="true" size={16} /> : null}
-                  </button>
-                );
-              })}
+              return (
+                <button
+                  className={menuItemClass}
+                  key={option.label}
+                  onClick={() => {
+                    onRatingChange(option.value);
+                    setOpenMenu(null);
+                  }}
+                  role="menuitemradio"
+                  aria-checked={isActive}
+                  type="button"
+                >
+                  <span>{option.label}</span>
+                  {isActive ? <Check aria-hidden="true" size={16} /> : null}
+                </button>
+              );
+            })}
+            <div className="sm:hidden mt-2 pt-2 border-t border-[rgba(58,31,61,.1)]">
+              <button
+                className={menuItemClass}
+                onClick={() => {
+                  onTogglePhotos();
+                  setOpenMenu(null);
+                }}
+                role="menuitemcheckbox"
+                aria-checked={filters.withPhotos}
+                type="button"
+              >
+                <span>With photos</span>
+                {filters.withPhotos ? <Check aria-hidden="true" size={16} /> : null}
+              </button>
+              <button
+                className={menuItemClass}
+                onClick={() => {
+                  onToggleVerified();
+                  setOpenMenu(null);
+                }}
+                role="menuitemcheckbox"
+                aria-checked={filters.verifiedOnly}
+                type="button"
+              >
+                <span>Verified purchase</span>
+                {filters.verifiedOnly ? <Check aria-hidden="true" size={16} /> : null}
+              </button>
             </div>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
+      </div>
+      <div className="hidden sm:flex flex-nowrap items-center gap-1.5 sm:gap-3">
+        <ReviewFilterCheckbox
+          checked={filters.withPhotos}
+          disabled={disabled}
+          label="With photos"
+          onToggle={onTogglePhotos}
+        />
+        <ReviewFilterCheckbox
+          checked={filters.verifiedOnly}
+          disabled={disabled}
+          label="Verified purchase"
+          onToggle={onToggleVerified}
+        />
       </div>
     </div>
   );
@@ -1261,32 +1207,15 @@ export function ProductReviewsGrid({
   }, [applyReviewResponse, fetchReviews]);
 
   const handleReviewSubmitted = useCallback(
-    async (review: ProductReview) => {
+    async (_review: ProductReview) => {
       setActiveRating(null);
       setReviewSort(defaultReviewFilters.sort);
       setVerifiedOnly(defaultReviewFilters.verifiedOnly);
       setWithPhotos(defaultReviewFilters.withPhotos);
       setOpenMenu(null);
       setError("");
-      setReviews((currentReviews) => [
-        {
-          ...review,
-          isNew: true,
-          staggerIndex: 0,
-        },
-        ...currentReviews.filter((currentReview) => currentReview.id !== review.id),
-      ]);
-      setCurrentTotal((current) => current + 1);
-      setSummaryTotal((current) => current + 1);
-
-      try {
-        const data = await fetchReviews(defaultReviewFilters, 0);
-        applyReviewResponse(data, "replace");
-      } catch {
-        setError("Your review is live, but we could not refresh the full archive yet.");
-      }
     },
-    [applyReviewResponse, fetchReviews],
+    [],
   );
 
   async function applyFilters(nextFilters: ReviewFilters) {

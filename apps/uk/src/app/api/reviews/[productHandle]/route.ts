@@ -1,5 +1,7 @@
 import { Buffer } from "node:buffer";
 import { randomUUID } from "node:crypto";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
@@ -225,13 +227,6 @@ export async function POST(
     return NextResponse.json({ message: "Reviews not found." }, { status: 404 });
   }
 
-  if (!isSupabaseAdminConfigured()) {
-    return NextResponse.json(
-      { message: "Review submissions are not configured on this environment yet." },
-      { status: 503 },
-    );
-  }
-
   let formData: FormData;
 
   try {
@@ -279,57 +274,133 @@ export async function POST(
     );
   }
 
-  const supabase = createSupabaseAdminClient();
   const reviewId = randomUUID();
   const imageUrls: string[] = [];
 
-  for (const [index, image] of imageFiles.entries()) {
-    const extension = imageExtensionByType[image.type] ?? "jpg";
-    const path = `${productHandle}/${reviewId}/review-image-${index + 1}.${extension}`;
-    const bytes = Buffer.from(await image.arrayBuffer());
-    const { error: uploadError } = await supabase.storage
-      .from(REVIEW_IMAGE_BUCKET)
-      .upload(path, bytes, {
-        contentType: image.type,
-        upsert: false,
-      });
+  if (isSupabaseAdminConfigured()) {
+    try {
+      const supabase = createSupabaseAdminClient();
 
-    if (uploadError) {
-      return NextResponse.json(
-        { message: "Review image upload is not configured yet. Please try again later." },
-        { status: 500 },
-      );
+      for (const [index, image] of imageFiles.entries()) {
+        const extension = imageExtensionByType[image.type] ?? "jpg";
+        const path = `${productHandle}/${reviewId}/review-image-${index + 1}.${extension}`;
+        const bytes = Buffer.from(await image.arrayBuffer());
+        const { error: uploadError } = await supabase.storage
+          .from(REVIEW_IMAGE_BUCKET)
+          .upload(path, bytes, {
+            contentType: image.type,
+            upsert: false,
+          });
+
+        if (!uploadError) {
+          const { data } = supabase.storage.from(REVIEW_IMAGE_BUCKET).getPublicUrl(path);
+          imageUrls.push(data.publicUrl);
+        }
+      }
+    } catch (storageError) {
+      console.error("Storage upload error:", storageError);
+    }
+  }
+
+  const now = new Date();
+  const dateIST = new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(now);
+
+  const timeIST = new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  }).format(now);
+
+  const submittedAtIST = `${dateIST}, ${timeIST} IST`;
+
+  const organicReview = {
+    id: reviewId,
+    productHandle,
+    customerName: parsed.data.customerName,
+    customerEmail: parsed.data.customerEmail.toLowerCase(),
+    rating: parsed.data.rating,
+    title: parsed.data.title,
+    body: parsed.data.body,
+    images: imageUrls,
+    dateIST,
+    timeIST,
+    submittedAtIST,
+    createdAtISO: now.toISOString(),
+  };
+
+  const organicReviewsPath = path.join(
+    process.cwd(),
+    "src",
+    "data",
+    "reviews",
+    "customer_org_review.json",
+  );
+
+  try {
+    let existingReviews: unknown[] = [];
+    try {
+      const fileContent = await fs.readFile(organicReviewsPath, "utf-8");
+      existingReviews = JSON.parse(fileContent);
+      if (!Array.isArray(existingReviews)) {
+        existingReviews = [];
+      }
+    } catch {
+      existingReviews = [];
     }
 
-    const { data } = supabase.storage.from(REVIEW_IMAGE_BUCKET).getPublicUrl(path);
-    imageUrls.push(data.publicUrl);
-  }
-
-  const { data, error } = await supabase
-    .from("product_reviews")
-    .insert({
-      body: parsed.data.body,
-      customer_email: parsed.data.customerEmail.toLowerCase(),
-      customer_name: parsed.data.customerName,
-      id: reviewId,
-      images: imageUrls,
-      product_handle: productHandle,
-      rating: parsed.data.rating,
-      source: "uk_buudy_review_form",
-      status: "published",
-      title: parsed.data.title,
-    })
-    .select(
-      "id, product_handle, customer_name, customer_email, rating, title, body, images, status, source, created_at, updated_at",
-    )
-    .single();
-
-  if (error || !data) {
-    return NextResponse.json(
-      { message: "We could not publish your review right now. Please try again." },
-      { status: 500 },
+    existingReviews.unshift(organicReview);
+    await fs.writeFile(
+      organicReviewsPath,
+      JSON.stringify(existingReviews, null, 2),
+      "utf-8",
     );
+  } catch (fileWriteError) {
+    console.error("Failed to write to customer_org_review.json:", fileWriteError);
   }
 
-  return NextResponse.json({ review: toPublicProductReview(data) }, { status: 201 });
+  if (isSupabaseAdminConfigured()) {
+    try {
+      const supabase = createSupabaseAdminClient();
+      await supabase.from("product_reviews").insert({
+        body: parsed.data.body,
+        customer_email: parsed.data.customerEmail.toLowerCase(),
+        customer_name: parsed.data.customerName,
+        id: reviewId,
+        images: imageUrls,
+        product_handle: productHandle,
+        rating: parsed.data.rating,
+        source: "uk_buudy_review_form",
+        status: "pending_review",
+        title: parsed.data.title,
+      });
+    } catch (dbError) {
+      console.error("Failed to insert pending review into database:", dbError);
+    }
+  }
+
+  return NextResponse.json(
+    {
+      message: "Thank you for submitting your review.",
+      review: {
+        body: parsed.data.body,
+        customerName: parsed.data.customerName,
+        date: now.toISOString(),
+        displayDate: submittedAtIST,
+        id: reviewId,
+        images: imageUrls,
+        productHandle,
+        rating: parsed.data.rating,
+        sourceIndex: -now.getTime(),
+        title: parsed.data.title,
+      },
+    },
+    { status: 201 },
+  );
 }

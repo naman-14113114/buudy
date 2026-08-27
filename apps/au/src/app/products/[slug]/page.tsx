@@ -8,6 +8,7 @@ import {
   faqJsonLd,
   organizationJsonLd,
   productJsonLd,
+  productWebPageJsonLd,
   websiteJsonLd,
 } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
@@ -49,6 +50,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             "anti ageing LED mask",
             "LED mask with neck coverage",
             "near infrared LED face mask",
+          ]
+        : product.template === "ipl"
+        ? [
+            "IPL hair removal device Australia",
+            "at home IPL laser hair removal",
+            "ice cooling IPL device",
+            "painless laser hair removal",
           ]
         : [
             "red light torch Australia",
@@ -113,6 +121,7 @@ export default async function ProductRoute({ params }: PageProps) {
       {[
         organizationJsonLd(),
         websiteJsonLd(),
+        productWebPageJsonLd(product),
         productJsonLd(product),
         breadcrumbJsonLd([
           { name: "Home", url: "/" },

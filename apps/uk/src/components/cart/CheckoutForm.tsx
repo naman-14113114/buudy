@@ -10,7 +10,6 @@ import {
   attributionStorageKey,
   pickAttributionFromSearch,
 } from "@/lib/attribution";
-import { buildPlusbaseCheckoutUrl } from "@/lib/site";
 import { promoCode } from "@/lib/cart";
 import { useCart, writeCheckoutSnapshot } from "./CartProvider";
 
@@ -115,31 +114,15 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
         throw new Error("Could not prepare checkout.");
       }
 
-      const primaryProductId = lines.find((l) => l.type === "product")?.productId || "buudy-led-mask";
-
       const data = (await response.json()) as { checkoutUrl?: string };
-      const fallbackUrl = buildPlusbaseCheckoutUrl({
-        quantity: maskQuantity,
-        productId: primaryProductId,
-        discountCode: manualPromoCode,
-        extraParams: attribution,
-      });
-      window.location.assign(
-        data.checkoutUrl
-          ? appendAttributionToAbsoluteUrl(data.checkoutUrl, attribution)
-          : fallbackUrl,
-      );
+      if (!data.checkoutUrl) {
+        throw new Error("Could not prepare checkout.");
+      }
+
+      window.location.assign(appendAttributionToAbsoluteUrl(data.checkoutUrl, attribution));
     } catch {
-      const primaryProductId = lines.find((l) => l.type === "product")?.productId || "buudy-led-mask";
-      setError("Opening secure checkout...");
-      window.location.assign(
-        buildPlusbaseCheckoutUrl({
-          quantity: maskQuantity,
-          productId: primaryProductId,
-          discountCode: manualPromoCode,
-          extraParams: attribution,
-        }),
-      );
+      setIsRedirecting(false);
+      setError("Checkout could not be opened. Please try again.");
     }
   }
 

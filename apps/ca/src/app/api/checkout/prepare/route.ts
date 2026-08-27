@@ -1,19 +1,18 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
 import { getAppliedManualPromoCode } from "@/lib/cart";
-import { buildPlusbaseCheckoutUrl } from "@/lib/site";
-import {
-  buildPlusbaseAttributionProperties,
-  normalizeAttribution,
-} from "@/lib/conversions/attribution";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+// Buudy's replacement PlusBase store uses this public primary domain for checkout.
 const plusbaseOrigin = "https://buudy.com";
-const freeGiftCode = "free_bundle_ca";
+
 const PLUSBASE_PRODUCTS: Record<string, { productId: number; variantId: number }> = {
-  "buudy-led-mask": { productId: 1000000667637100, variantId: 1000020458546865 },
-  "buudy-red-torch": { productId: 1000000667833423, variantId: 1000020464156156 },
+  "buudy-led-mask": { productId: 1000000671255940, variantId: 1000020579664196 },
+  "buudy-7-colour-led-mask": { productId: 1000000671255940, variantId: 1000020579664196 },
+  "buudy-ipl-device": { productId: 1000000671255943, variantId: 1000020579664199 },
+  "buudy-red-torch": { productId: 1000000671255948, variantId: 1000020579664204 },
 };
 
 type CheckoutPrepareBody = {
@@ -27,10 +26,41 @@ type CheckoutPrepareBody = {
   attribution?: Record<string, string | null | undefined>;
 };
 
+const passthroughAttributionKeys = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+  "msclkid",
+  "gclid",
+  "fbclid",
+];
+
+function buildPlusbaseAttributionProperties(attribution: CheckoutPrepareBody["attribution"]) {
+  const properties: Array<{ name: string; value: string }> = [];
+
+  passthroughAttributionKeys.forEach((key) => {
+    const value = attribution?.[key];
+    if (value) {
+      properties.push({ name: `_blfm_${key}`, value: String(value).slice(0, 500) });
+    }
+  });
+
+  return properties;
+}
+
 function cleanAttribution(attribution: CheckoutPrepareBody["attribution"]) {
-  return Object.fromEntries(
-    Object.entries(normalizeAttribution(attribution)),
-  ) as Record<string, string>;
+  const params: Record<string, string> = {};
+
+  passthroughAttributionKeys.forEach((key) => {
+    const value = attribution?.[key];
+    if (value) {
+      params[key] = String(value).slice(0, 500);
+    }
+  });
+
+  return params;
 }
 
 function getManualPromoFromCart(cart: CheckoutPrepareBody["cart"]) {
@@ -40,40 +70,48 @@ function getManualPromoFromCart(cart: CheckoutPrepareBody["cart"]) {
   );
 }
 
-function appendParamsToUrl(
-  href: string,
-  params: Record<string, string>,
-  discountCodes: string[],
-) {
+function appendDiscountCodeToUrl(href: string, discountCode: string) {
+  if (!discountCode) return href;
+
   const url = new URL(href);
-  Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value));
-  Array.from(new Set(discountCodes.filter(Boolean))).forEach((code) =>
-    url.searchParams.append("discount", code),
-  );
+  url.searchParams.set("discount", discountCode);
   return url.toString();
 }
 
 function appendCookies(current: string, response: Response) {
-  const headers = response.headers as Headers & { getSetCookie?: () => string[] };
+  const headers = response.headers as Headers & {
+    getSetCookie?: () => string[];
+  };
   const setCookies =
     typeof headers.getSetCookie === "function"
       ? headers.getSetCookie()
       : headers.get("set-cookie")
         ? [headers.get("set-cookie") as string]
         : [];
-  if (!setCookies.length) return current;
+
+  if (!setCookies.length) {
+    return current;
+  }
 
   const cookieMap = new Map<string, string>();
+
   current
     .split(";")
     .map((part) => part.trim())
     .filter(Boolean)
-    .forEach((part) => cookieMap.set(part.split("=")[0], part));
+    .forEach((part) => {
+      const [name] = part.split("=");
+      cookieMap.set(name, part);
+    });
+
   setCookies.forEach((cookie) => {
     const pair = cookie.split(";")[0];
-    const name = pair.split("=")[0];
-    if (name && pair) cookieMap.set(name, pair);
+    const [name] = pair.split("=");
+    if (name && pair) {
+      cookieMap.set(name, pair);
+    }
   });
+
   return Array.from(cookieMap.values()).join("; ");
 }
 
@@ -81,16 +119,40 @@ async function createPlusbaseCheckout(
   quantity: number,
   attribution: CheckoutPrepareBody["attribution"],
   cart?: CheckoutPrepareBody["cart"],
+  clientHeaders?: {
+    forwardedFor?: string | null;
+    connectingIp?: string | null;
+    acceptLanguage?: string | null;
+  },
 ) {
-  let cookie = "";
-  const createResponse = await fetch(`${plusbaseOrigin}/api/checkout/next/cart.json`, {
-    method: "POST",
-    headers: { accept: "application/json" },
-  });
+  let cookie = "X-Global-Market=CA; X-Global-Market-Currency=CAD; X-Lang=en-ca; country_code=CA; currency=CAD";
+
+  const requestHeaders: Record<string, string> = {
+    accept: "application/json",
+    cookie,
+    "accept-language": clientHeaders?.acceptLanguage || "en-CA,en;q=0.9",
+  };
+
+  if (clientHeaders?.forwardedFor) {
+    requestHeaders["x-forwarded-for"] = clientHeaders.forwardedFor;
+  }
+  if (clientHeaders?.connectingIp) {
+    requestHeaders["cf-connecting-ip"] = clientHeaders.connectingIp;
+  }
+
+  const createResponse = await fetch(
+    `${plusbaseOrigin}/api/checkout/next/cart.json`,
+    {
+      method: "POST",
+      headers: requestHeaders,
+    },
+  );
   cookie = appendCookies(cookie, createResponse);
+
   const createJson = await createResponse.json();
   const cartToken = createJson?.result?.token;
   const checkoutToken = createJson?.result?.checkout_token;
+
   if (!createResponse.ok || !cartToken || !checkoutToken) {
     throw new Error("Could not create PlusBase cart.");
   }
@@ -102,12 +164,14 @@ async function createPlusbaseCheckout(
     properties: Array<{ name: string; value: string }> = [],
   ) {
     const response = await fetch(
-      `${plusbaseOrigin}/api/checkout/next/cart.json?cart_token=${encodeURIComponent(cartToken)}`,
+      `${plusbaseOrigin}/api/checkout/next/cart.json?cart_token=${encodeURIComponent(
+        cartToken,
+      )}`,
       {
         method: "PUT",
         credentials: "include",
         headers: {
-          accept: "application/json",
+          ...requestHeaders,
           "content-type": "application/json",
           ...(cookie ? { cookie } : {}),
         },
@@ -117,132 +181,87 @@ async function createPlusbaseCheckout(
             variant_id: variantId,
             qty: itemQuantity,
             properties,
-            metadata: { image_preview_id: "" },
+            metadata: {
+              image_preview_id: "",
+            },
           },
           from: "add-to-cart",
         }),
       },
     );
     cookie = appendCookies(cookie, response);
+
     const json = await response.json();
     if (!response.ok || json?.code !== 0) {
       throw new Error("Could not add item to PlusBase cart.");
     }
   }
 
-  let maskQuantity = 0;
-  if (cart?.lines?.length) {
+  // Support either dynamic cart lines or legacy mask quantity fallback
+  if (cart?.lines && cart.lines.length > 0) {
     for (const line of cart.lines) {
-      if (line.type === "gift" || !PLUSBASE_PRODUCTS[line.productId]) continue;
+      if (line.type !== "gift" && PLUSBASE_PRODUCTS[line.productId]) {
+        await addItem(
+          PLUSBASE_PRODUCTS[line.productId].productId,
+          PLUSBASE_PRODUCTS[line.productId].variantId,
+          line.quantity,
+          buildPlusbaseAttributionProperties(attribution),
+        );
+      }
+    }
+    const maskQuantity = cart.lines.find(
+      (line) => line.type !== "gift" && (line.productId === "buudy-led-mask" || line.productId === "buudy-7-colour-led-mask"),
+    )?.quantity;
+    if (maskQuantity) {
       await addItem(
-        PLUSBASE_PRODUCTS[line.productId].productId,
-        PLUSBASE_PRODUCTS[line.productId].variantId,
-        line.quantity,
-        buildPlusbaseAttributionProperties(normalizeAttribution(attribution)),
+        PLUSBASE_PRODUCTS["buudy-red-torch"].productId,
+        PLUSBASE_PRODUCTS["buudy-red-torch"].variantId,
+        maskQuantity,
       );
-      if (line.productId === "buudy-led-mask") maskQuantity = line.quantity;
     }
   } else {
-    maskQuantity = quantity;
+    // Legacy fallback (assume mask)
     await addItem(
       PLUSBASE_PRODUCTS["buudy-led-mask"].productId,
       PLUSBASE_PRODUCTS["buudy-led-mask"].variantId,
       quantity,
-      buildPlusbaseAttributionProperties(normalizeAttribution(attribution)),
+      buildPlusbaseAttributionProperties(attribution),
     );
-  }
-
-  if (maskQuantity > 0) {
-    await addItem(
-      PLUSBASE_PRODUCTS["buudy-red-torch"].productId,
-      PLUSBASE_PRODUCTS["buudy-red-torch"].variantId,
-      maskQuantity,
-    );
+    await addItem(PLUSBASE_PRODUCTS["buudy-red-torch"].productId, PLUSBASE_PRODUCTS["buudy-red-torch"].variantId, quantity);
   }
 
   return {
     checkoutToken,
     checkoutUrl: `${plusbaseOrigin}/checkouts/${checkoutToken}`,
-    hasMask: maskQuantity > 0,
   };
 }
 
-async function attemptManualPromo(checkoutToken: string, code: string) {
-  if (!code) return;
-
-  try {
-    const response = await fetch(
-      `${plusbaseOrigin}/api/checkout/${encodeURIComponent(checkoutToken)}/next/apply-coupon.json`,
-      {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json",
-          "x-lang": "en-us",
-          "x-shopbase-checkout-token": checkoutToken,
-          "x-source-page": "checkout",
-        },
-        body: JSON.stringify({ code, is_coupon_from_share_able_link: true }),
-      },
-    );
-    if (!response.ok) {
-      console.error(`PlusBase promo request failed for ${code}.`);
-    }
-  } catch (error) {
-    console.error(`PlusBase promo request failed for ${code}.`, error);
-  }
-}
-
 export async function POST(request: NextRequest) {
-  const token = crypto.randomUUID();
   const body = (await request.json().catch(() => ({}))) as CheckoutPrepareBody;
   const quantity = Math.max(1, Math.round(Number(body.quantity) || 1));
-  const manualPromo = getManualPromoFromCart(body.cart);
-  const fallbackProductLine = body.cart?.lines.find(
-    (line) => line.type !== "gift" && PLUSBASE_PRODUCTS[line.productId],
-  );
-  const fallbackProductId = fallbackProductLine?.productId ?? "buudy-led-mask";
-  const fallbackQuantity = fallbackProductLine?.quantity ?? quantity;
-  const requestedMaskQuantity = body.cart?.lines
-    ? (body.cart.lines.find(
-        (line) => line.type !== "gift" && line.productId === "buudy-led-mask",
-      )?.quantity ?? 0)
-    : quantity;
-  const fallbackCodes = [
-    ...(requestedMaskQuantity > 0 ? [freeGiftCode] : []),
-    ...(manualPromo ? [manualPromo] : []),
-  ];
+  const appliedManualPromoCode = getManualPromoFromCart(body.cart);
+
+  const clientHeaders = {
+    forwardedFor: request.headers.get("x-forwarded-for"),
+    connectingIp: request.headers.get("cf-connecting-ip") || request.headers.get("x-real-ip"),
+    acceptLanguage: request.headers.get("accept-language"),
+  };
 
   try {
-    const checkout = await createPlusbaseCheckout(quantity, body.attribution, body.cart);
-    if (checkout.hasMask && manualPromo) {
-      await attemptManualPromo(checkout.checkoutToken, manualPromo);
-    }
-    const discountCodes = [
-      ...(checkout.hasMask ? [freeGiftCode] : []),
-      ...(manualPromo ? [manualPromo] : []),
-    ];
+    const checkout = await createPlusbaseCheckout(quantity, body.attribution, body.cart, clientHeaders);
+
     return NextResponse.json({
       checkoutToken: checkout.checkoutToken,
-      checkoutUrl: appendParamsToUrl(
-        checkout.checkoutUrl,
+      checkoutUrl: appendAttributionToAbsoluteUrl(
+        appendDiscountCodeToUrl(checkout.checkoutUrl, appliedManualPromoCode),
         cleanAttribution(body.attribution),
-        discountCodes,
       ),
     });
   } catch (error) {
     console.error("Direct PlusBase checkout creation failed", error);
+    return NextResponse.json(
+      { error: "Could not prepare checkout. Please try again." },
+      { status: 502 },
+    );
   }
-
-  return NextResponse.json({
-    checkoutToken: token,
-    checkoutUrl: buildPlusbaseCheckoutUrl({
-      checkoutRef: token,
-      quantity: fallbackQuantity,
-      giftQuantity: requestedMaskQuantity,
-      productId: fallbackProductId,
-      discountCodes: fallbackCodes,
-      extraParams: cleanAttribution(body.attribution),
-    }),
-  });
 }

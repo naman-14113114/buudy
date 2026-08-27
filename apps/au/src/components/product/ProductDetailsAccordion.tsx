@@ -17,10 +17,14 @@ import {
   Timer,
   Hand,
   ShieldCheck,
+  Snowflake,
+  Sparkles,
+  Plug,
+  Sliders,
 } from "lucide-react";
 import type { Product } from "@/data/products";
 import type { ReactNode } from "react";
-import { features, torchFeatures } from "@/data/productSections";
+import { features, torchFeatures, iplFeatures } from "@/data/productSections";
 import {
   IconGrid4x4,
   IconShieldHeart,
@@ -54,10 +58,14 @@ function getSpecIcon(label: string) {
   if (normLabel.includes("color")) return Palette;
   if (normLabel.includes("battery")) return Battery;
   if (normLabel.includes("use")) return Smile;
-  if (normLabel.includes("power")) return Zap;
+  if (normLabel.includes("power")) return Plug;
   if (normLabel.includes("irradiance") || normLabel.includes("wavelength")) return Sun;
   if (normLabel.includes("voltage")) return Zap;
   if (normLabel.includes("intensity")) return Activity;
+  if (normLabel.includes("cooling")) return Snowflake;
+  if (normLabel.includes("flash")) return Sparkles;
+  if (normLabel.includes("mode")) return Sliders;
+  if (normLabel.includes("lamp")) return Lightbulb;
   return Zap;
 }
 
@@ -84,12 +92,19 @@ function AccordionPanel({
 
   return (
     <div className="border-b border-[var(--border)] last:border-b-0">
-      <button
+      <div
         aria-controls={contentId}
         aria-expanded={isOpen}
-        className="flex w-full items-center justify-between gap-5 py-4 text-left"
+        className="flex w-full items-center justify-between gap-5 py-4 text-left cursor-pointer select-none"
         onClick={onToggle}
-        type="button"
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onToggle();
+          }
+        }}
       >
         <span>
           <span className="font-sans text-xs font-bold uppercase tracking-widest text-[var(--gold)]">{item.eyebrow}</span>
@@ -103,7 +118,7 @@ function AccordionPanel({
           }`}
           size={19}
         />
-      </button>
+      </div>
       <div
         className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
           isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
@@ -137,11 +152,11 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
     {
       id: "unique",
       eyebrow: "Features",
-      title: product.template === "torch" ? "What makes our torch unique?" : "What makes our mask unique?",
+      title: product.template === "torch" ? "What makes our torch unique?" : product.template === "ipl" ? "What makes our IPL unique?" : "What makes our mask unique?",
       content: (
         <ul className="grid gap-3">
-          {(product.template === "torch" ? torchFeatures : features).map((feature, index) => {
-            const Icon = product.template === "torch" ? IconBulb : featureIcons[index];
+          {(product.template === "torch" ? torchFeatures : product.template === "ipl" ? iplFeatures : features).map((feature, index) => {
+            const Icon = product.template === "torch" ? IconBulb : featureIcons[index % featureIcons.length];
             return (
             <li
               key={index}

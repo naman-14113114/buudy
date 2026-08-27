@@ -22,6 +22,8 @@ export function productJsonLd(product: Product) {
     category:
       product.template === "mask"
         ? "LED light therapy face mask"
+        : product.template === "ipl"
+        ? "IPL laser hair removal device"
         : "Handheld red light therapy device",
     sku: product.sku,
     mpn: product.sku,
@@ -85,6 +87,42 @@ export function productJsonLd(product: Product) {
       name: spec.label,
       value: spec.value,
     })),
+  };
+}
+
+export function productWebPageJsonLd(product: Product) {
+  const productUrl = absoluteUrl(`/products/${product.slug}`);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${productUrl}#webpage`,
+    url: productUrl,
+    name: product.seoTitle,
+    description: product.seoDescription,
+    inLanguage: market.locale,
+    dateModified: "2026-06-16",
+    isPartOf: {
+      "@id": `${absoluteUrl("/")}#website`,
+    },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: absoluteUrl(product.gallery[0].src),
+    },
+    mainEntity: {
+      "@id": `${productUrl}#product`,
+    },
+    audience: {
+      "@type": "Audience",
+      audienceType: "Australian skincare shoppers comparing LED face masks and light therapy devices",
+    },
+    about: [
+      { "@type": "Thing", name: "Best LED Face Mask Australia" },
+      { "@type": "Thing", name: "red light therapy mask" },
+      { "@type": "Thing", name: "blue light acne routine" },
+      { "@type": "Thing", name: "anti-ageing skincare device" },
+      { "@type": "Thing", name: "near-infrared light therapy" },
+    ],
   };
 }
 

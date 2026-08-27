@@ -1,7 +1,7 @@
 {
   "crons": [
     {
-      "path": "/api/cron/reconcile-purchases",
+      "path": "/api/cron/reconcile-microsoft-purchases",
       "schedule": "15 6 * * *"
     }
   ]

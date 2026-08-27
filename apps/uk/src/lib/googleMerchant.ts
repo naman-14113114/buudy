@@ -99,6 +99,64 @@ export const googleMerchantProducts: MerchantProduct[] = [
     customLabels: ["hero-product", "price-100-plus", "uk", "light-therapy", "free-shipping"],
   },
   {
+    id: "buudy-7-colour-led-mask-uk",
+    title: "Buudy 7 Colour LED Light Therapy Face Mask - Red Light Therapy & 830nm NIR - Face & Neck Piece",
+    description:
+      "Buudy 7 Colour LED Face Mask delivers clinical-grade LED light therapy for home use. Features 7 visible light wavelengths plus 830 nm Near-Infrared (NIR) mode to stimulate collagen, reduce wrinkles, and clear acne. Full face and neck coverage with wireless tap controls. Includes USB-C charger, eye protection, and free £70 glow kit.",
+    link: absoluteUrl("/products/buudy-7-colour-led-face-mask"),
+    imageLink: productImage(
+      "/images/products/buudy-led-mask/01-buudy-led-mask-front.webp",
+    ),
+    additionalImageLinks: [
+      productImage("/images/products/buudy-led-mask/02-buudy-led-mask-side-profile.webp"),
+      productImage("/images/products/buudy-led-mask/05-buudy-led-mask-packaging.webp"),
+      productImage("/images/products/buudy-led-mask/07-buudy-led-mask-controller.webp"),
+      productImage("/images/products/buudy-led-mask/08-buudy-led-mask-lifestyle-use.webp"),
+      productImage("/images/products/buudy-led-mask/11-buudy-led-mask-flexible-silicone.webp"),
+    ],
+    availability: "in_stock",
+    price: priceFromCents(buudyMask.priceCents),
+    brand: "Buudy",
+    googleProductCategory,
+    productType: "Health & Beauty > Personal Care > Light Therapy Devices",
+    productHighlights: [
+      "7 targeted light colours + 830nm NIR",
+      "Complete face and neck collar coverage",
+      "Cordless, rechargeable, tap-to-cycle control",
+      "Four adjustable intensity levels",
+      "192 high-density LEDs",
+      "90-day money back guarantee",
+    ],
+    productDetails: [
+      {
+        sectionName: "Technical specifications",
+        attributeName: "Dimensions",
+        attributeValue: "20 cm x 29 cm",
+      },
+      {
+        sectionName: "Technical specifications",
+        attributeName: "Battery capacity",
+        attributeValue: "1500 mAh",
+      },
+      {
+        sectionName: "Technical specifications",
+        attributeName: "Irradiance",
+        attributeValue: "32 mW/cm2",
+      },
+      {
+        sectionName: "Technical specifications",
+        attributeName: "Power",
+        attributeValue: "6.8 W",
+      },
+      {
+        sectionName: "Technical specifications",
+        attributeName: "Voltage",
+        attributeValue: "110 V / 220 V",
+      },
+    ],
+    customLabels: ["best-led-mask", "generic-shopping", "uk", "light-therapy", "free-shipping"],
+  },
+  {
     id: "buudy-red-light-torch-uk",
     title: "Buudy Handheld Red Light Therapy Torch",
     description:

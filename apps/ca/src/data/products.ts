@@ -7,6 +7,7 @@ import { market, type StoreCurrency } from "@/lib/market";
 import {
   faqs,
   torchFaqs,
+  iplFaqs,
   torchWavelengths,
   type FAQItem,
   type Wavelength,
@@ -36,7 +37,7 @@ export type Product = {
   id: string;
   sku: string;
   slug: string;
-  template: "mask" | "torch";
+  template: "mask" | "torch" | "ipl";
   name: string;
   heroTitle: string;
   heroEmphasis: string;
@@ -237,7 +238,7 @@ const torchAsset = (fileName: string) =>
 
 export const buudyRedTorch: Product = {
   id: "buudy-red-torch",
-  sku: "1000020464156156",
+  sku: "1000020579664204",
   slug: "red-light-torch",
   template: "torch",
   name: "Buudy Red Torch",
@@ -251,8 +252,8 @@ export const buudyRedTorch: Product = {
   seoDescription:
     "Portable red light therapy torch with 3 wavelengths, near infrared support, rechargeable battery, and targeted body and skin relief.",
   currency: market.currency,
-  priceCents: 12900,
-  compareAtCents: 32500,
+  priceCents: 9900,
+  compareAtCents: 24900,
   rating: 4.8,
   reviewCount: 16000,
   customerCount: "16,000+",
@@ -285,30 +286,22 @@ export const buudyRedTorch: Product = {
       src: torchAsset("06-buudy-red-torch-body-relief.jpeg"),
       alt: "Buudy Red Torch body relief use",
     },
-    {
-      src: torchAsset("07-buudy-red-torch-closeup.jpeg"),
-      alt: "Buudy Red Torch LED close up",
-    },
-    {
-      src: torchAsset("08-buudy-red-torch-travel.jpeg"),
-      alt: "Buudy Red Torch travel-ready design",
-    },
   ],
   gifts: [],
   specs: [
-    { label: "Dimensions", value: "2.9cm x 12.5cm (0.95in x 4.92in)" },
+    { label: "Dimensions", value: "2.5cm × 12.5cm (0.98 in × 4.92 in)" },
     { label: "Wavelength", value: "630nm, 660nm, 850nm" },
     { label: "Intensity Level", value: "4 levels" },
-    { label: "Power Source", value: "Rechargeable battery" },
-    { label: "LED Count", value: "3 LEDs" },
+    { label: "Power Source", value: "Rechargeable Battery" },
+    { label: "LED Count", value: "5 LEDs" },
     { label: "Light Color", value: "Red" },
     { label: "Voltage", value: "220V / 110V" },
-    { label: "Power", value: "3W" },
+    { label: "Power", value: "5W" },
     { label: "Irradiance", value: "Surface 281mW/cm2, 4in 71mW/cm2" },
     { label: "Battery", value: "2200mA" },
     { label: "Warranty", value: "24 months" },
     { label: "Lifespan", value: "50,000+ hours" },
-    { label: "Weight", value: "0.2kg" },
+    { label: "Weight", value: "200g" },
   ],
   included: [
     { quantity: "1x", label: "Strap" },
@@ -333,7 +326,90 @@ export const buudyRedTorch: Product = {
   ],
 };
 
-export const products = [buudyMask, buudyRedTorch];
+export const buudyIplDevice: Product = {
+  id: "buudy-ipl-device",
+  sku: "BUUDY-IPL-ICE",
+  slug: "buudy-ipl-hair-removal-device",
+  template: "ipl",
+  name: "Buudy IPL Hair Removal Device",
+  heroTitle: "Buudy IPL",
+  heroEmphasis: "Device",
+  shortDescription:
+    "Painless at-home laser hair removal with Ice Cooling technology and 999,999 flashes for smooth skin.",
+  description:
+    "Experience professional-grade, painless hair removal at home. The Buudy IPL Device features an advanced ice-cooling head that stays at 5-8°C to soothe your skin while treating hair follicles. With 9 intensity levels and 999,999 flashes, it's a lifetime solution for smooth, hair-free skin.",
+  seoTitle: "Buudy IPL Hair Removal Device | Painless Ice Cooling Laser",
+  seoDescription:
+    "Shop the Buudy IPL Hair Removal Device: 999,999 flashes, Ice Cooling technology, 9 intensity levels, painless hair removal at home.",
+  currency: "GBP",
+  priceCents: 12900,
+  compareAtCents: 24900,
+  rating: 4.9,
+  reviewCount: 450,
+  customerCount: "1,000+",
+  promoCode: "SMOOTH20",
+  promoLabel: "Launch promo applied",
+  cartImage: "/images/products/buudy-ipl/hero.png",
+  gallery: [
+    {
+      src: "/images/products/buudy-ipl/hero.png",
+      alt: "Buudy IPL Hair Removal Device",
+    },
+    {
+      src: "/images/products/buudy-ipl/standalone.png",
+      alt: "Buudy IPL Device with Ice Cooling Display",
+    },
+    {
+      src: "/images/products/buudy-ipl/lifestyle.png",
+      alt: "2 Years of Smooth Skin",
+    },
+    {
+      src: "/images/products/buudy-ipl/cooling.png",
+      alt: "Ice Cooling for Sensitive Zones",
+    },
+    {
+      src: "/images/products/buudy-ipl/arm.png",
+      alt: "15-Min Full Body Treatment",
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Cooling Technology", value: "Sapphire Ice Cooling (5-8°C)" },
+    { label: "Flashes", value: "999,999 flashes (lifetime use)" },
+    { label: "Intensity Levels", value: "9 adjustable levels" },
+    { label: "Modes", value: "Auto (continuous) and Manual (single flash)" },
+    { label: "Power Source", value: "Mains powered (Plug-in)" },
+    { label: "Lamp Tube", value: "Quartz tube" },
+  ],
+  included: [
+    { quantity: "1x", label: "Buudy IPL Hair Removal Device" },
+    { quantity: "1x", label: "Power Adapter" },
+    { quantity: "1x", label: "Protective Glasses" },
+    { quantity: "1x", label: "Shaving Razor" },
+    { quantity: "1x", label: "User Manual" },
+  ],
+  highlights: [
+    "Virtually painless with Ice Cooling",
+    "999,999 flashes - no refills needed",
+    "Results visible in just 4 weeks",
+    "Safe for face and body",
+  ],
+  keyBenefits: [
+    "Painless hair removal",
+    "Long-lasting smooth skin",
+    "Saves money on salon trips",
+    "Quick full body treatments",
+  ],
+  faqs: iplFaqs,
+  badges: [
+    "Ice Cooling Tech",
+    "Painless Treatment",
+    "999,999 Flashes",
+    "1 Year Warranty",
+  ],
+};
+
+export const products = [buudyMask, buudyRedTorch, buudyIplDevice];
 
 export const productsById = Object.fromEntries(
   products.map((product) => [product.id, product]),

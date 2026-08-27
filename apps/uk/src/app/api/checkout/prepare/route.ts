@@ -1,17 +1,18 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
 import { getAppliedManualPromoCode } from "@/lib/cart";
-import { buildPlusbaseCheckoutUrl } from "@/lib/site";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+// Buudy's replacement PlusBase store uses this public primary domain for checkout.
 const plusbaseOrigin = "https://buudy.com";
 
 const PLUSBASE_PRODUCTS: Record<string, { productId: number; variantId: number }> = {
-  "buudy-led-mask": { productId: 1000000667467053, variantId: 1000020450989467 },
-  "buudy-ipl-device": { productId: 1000000667723529, variantId: 1000020460632985 },
-  "buudy-red-torch": { productId: 1000000670474158, variantId: 1000020550222900 },
+  "buudy-led-mask": { productId: 1000000671255940, variantId: 1000020579664196 },
+  "buudy-7-colour-led-mask": { productId: 1000000671255940, variantId: 1000020579664196 },
+  "buudy-ipl-device": { productId: 1000000671255943, variantId: 1000020579664199 },
+  "buudy-red-torch": { productId: 1000000671255948, variantId: 1000020579664204 },
 };
 
 type CheckoutPrepareBody = {
@@ -47,19 +48,6 @@ function buildPlusbaseAttributionProperties(attribution: CheckoutPrepareBody["at
   });
 
   return properties;
-}
-
-function bridgeParams(attribution: CheckoutPrepareBody["attribution"]) {
-  const params: Record<string, string> = {};
-
-  passthroughAttributionKeys.forEach((key) => {
-    const value = attribution?.[key];
-    if (value) {
-      params[key] = String(value).slice(0, 500);
-    }
-  });
-
-  return params;
 }
 
 function cleanAttribution(attribution: CheckoutPrepareBody["attribution"]) {
@@ -130,17 +118,33 @@ function appendCookies(current: string, response: Response) {
 async function createPlusbaseCheckout(
   quantity: number,
   attribution: CheckoutPrepareBody["attribution"],
-  cart?: CheckoutPrepareBody["cart"]
+  cart?: CheckoutPrepareBody["cart"],
+  clientHeaders?: {
+    forwardedFor?: string | null;
+    connectingIp?: string | null;
+    acceptLanguage?: string | null;
+  },
 ) {
-  let cookie = "";
+  let cookie = "X-Global-Market=GB; X-Global-Market-Currency=GBP; X-Lang=en-gb; country_code=GB; currency=GBP";
+
+  const requestHeaders: Record<string, string> = {
+    accept: "application/json",
+    cookie,
+    "accept-language": clientHeaders?.acceptLanguage || "en-GB,en;q=0.9",
+  };
+
+  if (clientHeaders?.forwardedFor) {
+    requestHeaders["x-forwarded-for"] = clientHeaders.forwardedFor;
+  }
+  if (clientHeaders?.connectingIp) {
+    requestHeaders["cf-connecting-ip"] = clientHeaders.connectingIp;
+  }
 
   const createResponse = await fetch(
     `${plusbaseOrigin}/api/checkout/next/cart.json`,
     {
       method: "POST",
-      headers: {
-        accept: "application/json",
-      },
+      headers: requestHeaders,
     },
   );
   cookie = appendCookies(cookie, createResponse);
@@ -167,7 +171,7 @@ async function createPlusbaseCheckout(
         method: "PUT",
         credentials: "include",
         headers: {
-          accept: "application/json",
+          ...requestHeaders,
           "content-type": "application/json",
           ...(cookie ? { cookie } : {}),
         },
@@ -206,7 +210,7 @@ async function createPlusbaseCheckout(
       }
     }
     const maskQuantity = cart.lines.find(
-      (line) => line.type !== "gift" && line.productId === "buudy-led-mask",
+      (line) => line.type !== "gift" && (line.productId === "buudy-led-mask" || line.productId === "buudy-7-colour-led-mask"),
     )?.quantity;
     if (maskQuantity) {
       await addItem(
@@ -233,23 +237,18 @@ async function createPlusbaseCheckout(
 }
 
 export async function POST(request: NextRequest) {
-  const token = crypto.randomUUID();
   const body = (await request.json().catch(() => ({}))) as CheckoutPrepareBody;
   const quantity = Math.max(1, Math.round(Number(body.quantity) || 1));
   const appliedManualPromoCode = getManualPromoFromCart(body.cart);
-  const fallbackProductLine = body.cart?.lines.find(
-    (line) => line.type !== "gift" && PLUSBASE_PRODUCTS[line.productId],
-  );
-  const fallbackProductId = fallbackProductLine?.productId ?? "buudy-led-mask";
-  const fallbackQuantity = fallbackProductLine?.quantity ?? quantity;
-  const requestedMaskQuantity = body.cart?.lines
-    ? (body.cart.lines.find(
-        (line) => line.type !== "gift" && line.productId === "buudy-led-mask",
-      )?.quantity ?? 0)
-    : quantity;
+
+  const clientHeaders = {
+    forwardedFor: request.headers.get("x-forwarded-for"),
+    connectingIp: request.headers.get("cf-connecting-ip") || request.headers.get("x-real-ip"),
+    acceptLanguage: request.headers.get("accept-language"),
+  };
 
   try {
-    const checkout = await createPlusbaseCheckout(quantity, body.attribution, body.cart);
+    const checkout = await createPlusbaseCheckout(quantity, body.attribution, body.cart, clientHeaders);
 
     return NextResponse.json({
       checkoutToken: checkout.checkoutToken,
@@ -260,17 +259,9 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("Direct PlusBase checkout creation failed", error);
+    return NextResponse.json(
+      { error: "Could not prepare checkout. Please try again." },
+      { status: 502 },
+    );
   }
-
-  return NextResponse.json({
-    checkoutToken: token,
-    checkoutUrl: buildPlusbaseCheckoutUrl({
-      checkoutRef: token,
-      quantity: fallbackQuantity,
-      giftQuantity: requestedMaskQuantity,
-      productId: fallbackProductId,
-      discountCode: appliedManualPromoCode,
-      extraParams: bridgeParams(body.attribution),
-    }),
-  });
 }

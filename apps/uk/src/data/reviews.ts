@@ -139,32 +139,8 @@ export function toPublicProductReview(row: ProductReviewRow): ProductReview {
   };
 }
 
-async function getSubmittedProductReviews(productHandle: ReviewProductHandle) {
-  if (!isSupabaseAdminConfigured()) {
-    return [];
-  }
-
-  try {
-    const supabase = createSupabaseAdminClient();
-    const { data, error } = await supabase
-      .from("product_reviews")
-      .select(
-        "id, product_handle, customer_name, customer_email, rating, title, body, images, status, source, created_at, updated_at",
-      )
-      .eq("product_handle", productHandle)
-      .eq("status", "published")
-      .order("created_at", { ascending: false });
-
-    if (error || !data) {
-      console.error("Unable to load submitted product reviews.", error);
-      return [];
-    }
-
-    return data.map(toPublicProductReview);
-  } catch (error) {
-    console.error("Unable to load submitted product reviews.", error);
-    return [];
-  }
+async function getSubmittedProductReviews(_productHandle: ReviewProductHandle) {
+  return [];
 }
 
 export async function getMergedProductReviewDataset(
