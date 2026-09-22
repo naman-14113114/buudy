@@ -8,11 +8,11 @@ Buudy UK sells at-home LED light therapy devices for skincare and wellness routi
 - [Home](${market.siteUrl}): UK storefront for Buudy light therapy devices.
 - [Buudy LED Mask](${market.siteUrl}/products/buudy-led-mask): Product page for the 7 colour LED face and neck mask.
 - [Best LED Face Mask UK Guide](${market.siteUrl}/pages/best-led-face-mask-uk): Buyer guide for UK shoppers comparing LED face masks.
-- [Buudy Red Torch](${market.siteUrl}/products/red-light-torch): Product page for the handheld red light therapy torch.
+- [Buudy LED Torch](${market.siteUrl}/products/red-light-torch): Product page for the handheld red light therapy torch.
 - [Skincare Quiz](${market.siteUrl}/pages/skincare-quiz): Guided quiz for choosing a light therapy routine.
 - [FAQs](${market.siteUrl}/pages/faqs): Common questions about shipping, returns, product use, and safety.
-- [Shipping Policy](${market.siteUrl}/shipping-policy): UK shipping timelines and tracking guidance.
-- [Return Policy](${market.siteUrl}/return-policy): 90-day money-back guarantee and return steps.
+- [Shipping Policy](${market.siteUrl}/policies/shipping-policy): UK shipping timelines and tracking guidance.
+- [Return Policy](${market.siteUrl}/policies/return-policy): Easy return and refund policy and return steps.
 
 ## Buudy LED Mask Summary
 - Product: Buudy LED Mask
@@ -24,11 +24,11 @@ Buudy UK sells at-home LED light therapy devices for skincare and wellness routi
 - Coverage: face and neck
 - Use style: cordless, rechargeable, hands-free, tap control
 - Offer: free glow kit while the launch offer is live
-- Returns: 90-day money back guarantee
+- Returns: Easy return and refund policy
 - Shipping: free tracked UK shipping
 
 ## Buyer Intent Answers
-- Best LED face mask UK: Buudy is designed for UK buyers who want high LED density, red and blue light modes, near-infrared support, neck coverage, cordless use, free tracked shipping, and a 90-day return window.
+- Best LED face mask UK: Buudy is designed for UK buyers who want high LED density, red and blue light modes, near-infrared support, neck coverage, cordless use, free tracked shipping, and an easy return and refund policy.
 - LED face mask for acne and anti-ageing: Buudy combines blue 415nm light for breakout-prone routines with red 633nm light and 830nm near-infrared support for anti-ageing skincare routines.
 - LED mask with neck coverage: Buudy includes neck coverage in the same device so the jawline and neck can be part of the same session.
 

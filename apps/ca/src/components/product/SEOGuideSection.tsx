@@ -27,7 +27,7 @@ const queryAnswers = [
   {
     question: "Best LED Face Mask Canada",
     answer:
-      "For Canada shoppers comparing LED masks, Buudy is strongest if you want one device with 192 LEDs, 7 wavelengths plus 830nm near-infrared, full face and neck coverage, cordless use, free tracked shipping, and a 90-day return window.",
+      "For Canada shoppers comparing LED masks, Buudy is strongest if you want one device with 192 LEDs, 7 wavelengths plus 830nm near-infrared, full face and neck coverage, cordless use, free tracked shipping, and an easy return and refund policy.",
   },
   {
     question: "LED face mask for acne and anti-ageing",
@@ -63,15 +63,15 @@ export function SEOGuideSection({ product }: { product: Product }) {
                 {formatMoney(product.priceCents, product.currency)}
               </p>
               <p className="mt-2 text-sm leading-6 text-[rgba(247,241,232,.7)]">
-                Includes free glow kit, free tracked shipping, and 90-day money
-                back guarantee while the Canada launch offer is live.
+                Includes free glow kit, free tracked shipping, and an easy
+                return and refund policy while the Canada launch offer is live.
               </p>
             </div>
             <Button
               asChild
-              className="mt-6 bg-[var(--cream)] text-[var(--plum)] hover:bg-[var(--blush)]"
+              className="mt-6 !bg-[var(--cream)] !text-[var(--plum)] !border-[var(--cream)] hover:!bg-[var(--blush)] hover:!text-[var(--plum)]"
             >
-              <Link href="/pages/best-led-face-mask-Canada">Read the full Canada guide</Link>
+              <Link href="/pages/best-led-face-mask-canada">Read the full Canada guide</Link>
             </Button>
           </div>
 

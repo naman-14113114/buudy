@@ -549,8 +549,8 @@ export const torchWavelengths: Wavelength[] = [
 export const torchFeatures: Feature[] = [
   {
     title: "Compact Build",
-    kicker: "4.92 inch handheld design",
-    body: "Lightweight enough for home, the office, or travel, with durable one-button operation for quick targeted sessions.",
+    kicker: "12cm (4.72 in) handheld design",
+    body: "Lightweight 74g design works at home, the office, or during travel, with durable one-button operation for quick targeted sessions.",
   },
   {
     title: "Clinical Strength",
@@ -571,16 +571,25 @@ export const torchFeatures: Feature[] = [
 
 export const torchDetailImages = [
   {
-    src: productAsset("09-buudy-red-torch-detail-wide.jpeg", "buudy-red-torch"),
-    alt: "Buudy Red Torch detail image",
+    src: productAsset(
+      "07-buudy-red-light-torch-lifestyle-portable-relief.webp",
+      "buudy-red-torch",
+    ),
+    alt: "Buudy LED Torch held by a woman for portable on-the-go body and skin wellness",
   },
   {
-    src: productAsset("10-buudy-red-torch-wellness.jpeg", "buudy-red-torch"),
-    alt: "Buudy Red Torch wellness use",
+    src: productAsset(
+      "08-buudy-red-light-torch-neck-targeted-wellness.webp",
+      "buudy-red-torch",
+    ),
+    alt: "Woman using Buudy LED Torch with protective eyewear for targeted neck light therapy",
   },
   {
-    src: productAsset("11-buudy-red-torch-treatment.jpeg", "buudy-red-torch"),
-    alt: "Buudy Red Torch treatment application",
+    src: productAsset(
+      "11-buudy-red-light-torch-multi-body-treatment-grid.webp",
+      "buudy-red-torch",
+    ),
+    alt: "Buudy LED Torch multi-zone application guide for elbow, hand, back, and knee relief",
   },
 ];
 
@@ -606,7 +615,7 @@ export const torchFaqs: FAQItem[] = [
   {
     question: "Can I use it in my country?",
     answer:
-      "Yes. The Buudy Red Torch is dual voltage, which means it can be used worldwide without any issues.",
+      "Yes. The Buudy LED Torch is dual voltage, which means it can be used worldwide without any issues.",
   },
   {
     question:
@@ -617,12 +626,12 @@ export const torchFaqs: FAQItem[] = [
   {
     question: "Do you sell this anywhere else?",
     answer:
-      "The Buudy Red Torch is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
+      "The Buudy LED Torch is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
   },
   {
-    question: "If I receive the Red Torch as a free gift with the LED Mask, does it include a battery or USB?",
+    question: "How do I track my order?",
     answer:
-      "No. When the Red Torch is included as a free gift with the LED Mask, it comes as a standalone device and does not include a battery or USB cable.",
+      "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
   },
 ];
 
@@ -706,6 +715,11 @@ export const faqs: FAQItem[] = [
     answer:
       "The Buudy LED Mask is exclusively sold through www.buudy.co.uk at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
   },
+  {
+    question: "How do I track my order?",
+    answer:
+      "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
+  },
 ];
 
 export const iplFaqs: FAQItem[] = [
@@ -728,5 +742,10 @@ export const iplFaqs: FAQItem[] = [
   {
     question: "Can I use it on my face and bikini line?",
     answer: "Absolutely. The device has 9 adjustable intensity levels, allowing you to lower the power for sensitive areas like the upper lip, chin, and bikini line, while using higher power for legs and arms.",
+  },
+  {
+    question: "How do I track my order?",
+    answer:
+      "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
   },
 ];

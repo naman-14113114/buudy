@@ -53,14 +53,14 @@ const comparisonRows = [
   ["Coverage", "Full face and neck"],
   ["Use style", "Cordless, rechargeable, hands-free, tap control"],
   ["Canada offer", `${formatMoney(buudyMask.priceCents, buudyMask.currency)} launch price with free glow kit`],
-  ["Guarantee", "90-day money back guarantee"],
+  ["Returns", "Easy return and refund policy"],
 ];
 
 export const metadata: Metadata = {
   title: "Best LED Face Mask Canada 2026 | Red Light Therapy Guide",
   description: pageDescription,
   alternates: {
-    canonical: "/pages/best-led-face-mask-Canada",
+    canonical: "/pages/best-led-face-mask-canada",
   },
   keywords: [
     "Best LED Face Mask Canada",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Best LED Face Mask Canada 2026: Buyer Guide",
     description: pageDescription,
-    url: absoluteUrl("/pages/best-led-face-mask-Canada"),
+    url: absoluteUrl("/pages/best-led-face-mask-canada"),
     type: "article",
     images: [
       {
@@ -92,19 +92,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BestLedFaceMaskUkPage() {
+export default function BestLedFaceMaskCanadaPage() {
   const jsonLd = [
     organizationJsonLd(),
     websiteJsonLd(),
     productJsonLd(buudyMask),
     breadcrumbJsonLd([
       { name: "Home", url: "/" },
-      { name: "Best LED Face Mask Canada", url: "/pages/best-led-face-mask-Canada" },
+      { name: "Best LED Face Mask Canada", url: "/pages/best-led-face-mask-canada" },
     ]),
     ...guidePageJsonLd({
       title: pageTitle,
       description: pageDescription,
-      url: "/pages/best-led-face-mask-Canada",
+      url: "/pages/best-led-face-mask-canada",
       faqs: ledMaskSeoFaqs,
     }),
   ];
@@ -124,7 +124,7 @@ export default function BestLedFaceMaskUkPage() {
           <div>
             <p className="buudy-mono text-[var(--gold)]">Canada LED mask guide</p>
             <h1 className="buudy-display mt-5 text-5xl leading-none md:text-7xl">
-              Best LED Face Mask Canada: how to choose one that works for your routine.
+              Best LED face mask Canada: how to choose one that works for your routine.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-[rgba(247,241,232,.76)] md:text-lg">
               If you are comparing red light therapy masks in Canada, focus on
@@ -132,13 +132,13 @@ export default function BestLedFaceMaskUkPage() {
               whether the device fits your real skincare routine.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild className="bg-[var(--cream)] text-[var(--plum)] hover:bg-[var(--blush)]">
+              <Button asChild className="!bg-[var(--cream)] !text-[var(--plum)] !border-[var(--cream)] hover:!bg-[var(--blush)] hover:!text-[var(--plum)]">
                 <Link href="/products/buudy-led-mask">
                   Shop Buudy LED Mask
                   <ArrowRight size={17} />
                 </Link>
               </Button>
-              <Button asChild variant="ghost" className="border-[rgba(247,241,232,.36)] text-[var(--cream)] hover:bg-[rgba(247,241,232,.1)]">
+              <Button asChild variant="ghost" className="!border-[rgba(247,241,232,.4)] !text-[var(--cream)] hover:!bg-[rgba(247,241,232,.12)] hover:!text-[var(--cream)]">
                 <Link href="#comparison">Compare features</Link>
               </Button>
             </div>
@@ -162,7 +162,7 @@ export default function BestLedFaceMaskUkPage() {
               </div>
               <p className="mt-3 text-sm leading-6 text-[rgba(247,241,232,.78)]">
                 4.9 rated by 16,000+ customers, with free tracked shipping and
-                90-day money back guarantee.
+                an easy return and refund policy.
               </p>
             </div>
           </figure>

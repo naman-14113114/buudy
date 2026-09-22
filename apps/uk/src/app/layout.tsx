@@ -119,21 +119,25 @@ export default function RootLayout({
       <body>
         <GlobalImageLoader />
         <CartProvider>
-          <HideOnPaths paths={["/cart"]}>
+          <HideOnPaths paths={["/cart", "/pages/buudy-led-mask-preview"]}>
             <AnnouncementBar />
             <Header />
           </HideOnPaths>
           <main>{children}</main>
-          <HideOnPaths paths={["/cart"]}>
+          <HideOnPaths paths={["/cart", "/pages/buudy-led-mask-preview"]}>
             <Footer />
           </HideOnPaths>
-          <CartDrawer />
+          <HideOnPaths paths={["/pages/buudy-led-mask-preview"]}>
+            <CartDrawer />
+          </HideOnPaths>
         </CartProvider>
         <AttributionCapture />
         <MarketingAnalytics />
         <ClarityAnalytics />
-        <KlaviyoAnalytics />
-        <TawkToWidget />
+        <HideOnPaths paths={["/pages/buudy-led-mask-preview"]}>
+          <KlaviyoAnalytics />
+          <TawkToWidget />
+        </HideOnPaths>
       </body>
     </html>
   );

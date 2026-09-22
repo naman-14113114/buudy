@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
 import { getAppliedManualPromoCode } from "@/lib/cart";
+import { z } from "zod";
+import { createXpageCheckout } from "@/lib/xpage-checkout";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -35,7 +37,22 @@ const passthroughAttributionKeys = [
   "msclkid",
   "gclid",
   "fbclid",
+  "source",
 ];
+
+const prepareSchema = z.object({
+  quantity: z.number().int().min(1).max(100).optional(),
+  cart: z.object({
+    lines: z.array(z.object({
+      productId: z.string().min(1).max(100),
+      quantity: z.number().int().min(1).max(100),
+      type: z.enum(["product", "gift"]).optional(),
+    })).min(1).max(100),
+    manualPromoCode: z.string().max(60).optional(),
+    promoCodes: z.array(z.string().max(60)).max(20).optional(),
+  }).optional(),
+  attribution: z.record(z.string(), z.union([z.string().max(2000), z.null()])).optional(),
+}).refine((body) => body.cart || body.quantity, "The cart is empty.");
 
 function buildPlusbaseAttributionProperties(attribution: CheckoutPrepareBody["attribution"]) {
   const properties: Array<{ name: string; value: string }> = [];
@@ -237,9 +254,54 @@ async function createPlusbaseCheckout(
 }
 
 export async function POST(request: NextRequest) {
-  const body = (await request.json().catch(() => ({}))) as CheckoutPrepareBody;
-  const quantity = Math.max(1, Math.round(Number(body.quantity) || 1));
+  const clientCountry =
+    request.headers.get("x-vercel-ip-country") ||
+    request.headers.get("cf-ipcountry") ||
+    request.headers.get("x-country-code") ||
+    request.headers.get("x-country");
+
+  if (
+    clientCountry &&
+    (clientCountry.trim().toUpperCase() === "MA" ||
+      clientCountry.trim().toUpperCase() === "MOROCCO")
+  ) {
+    return NextResponse.json(
+      { error: "The checkout has not been connected, and no order has been placed." },
+      { status: 400 },
+    );
+  }
+
+  const parsed = prepareSchema.safeParse(await request.json().catch(() => null));
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Please check your cart quantities and try again." }, { status: 400 });
+  }
+  const body = parsed.data;
+  const productLines = body.cart?.lines.filter((line) => line.type !== "gift");
+  if (productLines && (!productLines.length || productLines.some((line) => !PLUSBASE_PRODUCTS[line.productId]))) {
+    return NextResponse.json({ error: "One of these products is not available for checkout." }, { status: 400 });
+  }
+  const maskLines = productLines?.filter((line) =>
+    line.productId === "buudy-led-mask" || line.productId === "buudy-7-colour-led-mask");
+  const quantity = maskLines?.reduce((total, line) => total + line.quantity, 0) || body.quantity || 1;
   const appliedManualPromoCode = getManualPromoFromCart(body.cart);
+
+  if (maskLines?.length && maskLines.length !== productLines?.length) {
+    return NextResponse.json({ error: "Please check out the LED Mask separately from your other products. Your cart has been kept." }, { status: 422 });
+  }
+  if (quantity > 100) {
+    return NextResponse.json({ error: "Please contact us for orders of more than 100 masks." }, { status: 400 });
+  }
+  if (!body.cart || maskLines?.length) {
+    try {
+      const checkout = await createXpageCheckout(quantity, Boolean(appliedManualPromoCode));
+      return NextResponse.json(checkout, { headers: { "Cache-Control": "no-store" } });
+    } catch (error) {
+      // Never log session cookies, CSRF tokens, checkout URLs or customer data.
+      console.error("XPage checkout preparation failed", error instanceof Error ? error.message : "Unknown error");
+      return NextResponse.json({ error: "Could not prepare the mask offer. Please try again; your cart has been kept." },
+        { status: 502, headers: { "Cache-Control": "no-store" } });
+    }
+  }
 
   const clientHeaders = {
     forwardedFor: request.headers.get("x-forwarded-for"),

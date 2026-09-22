@@ -19,8 +19,7 @@ export function Footer() {
               />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,241,232,.62)]">
-              Salon-grade LED light therapy, beautifully wearable. Designed in
-              the United States.
+              Salon-grade LED light therapy, beautifully wearable.
             </p>
           </div>
 
@@ -98,25 +97,19 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-6 border-t border-[rgba(247,241,232,.14)] pt-8">
-          <p className="buudy-mono text-[rgba(247,241,232,.5)]">
-            (c) 2026 Buudy - All rights reserved
+        <div className="mt-16 flex flex-col gap-6 border-t border-[rgba(247,241,232,.12)] pt-8 md:flex-row md:items-center md:justify-between">
+          <p className="text-xs text-[rgba(247,241,232,.45)]">
+            (c) {new Date().getFullYear()} Buudy. All rights reserved.
           </p>
-          <div className="flex gap-3">
+
+          <div className="flex flex-wrap items-center gap-3">
             {paymentIcons.map((icon) => (
-              <span
-                className="inline-flex h-7 w-11 items-center justify-center overflow-hidden rounded bg-[rgba(247,241,232,.96)]"
+              <img
+                alt={icon.label}
+                className="h-6 w-auto rounded bg-white/10 px-1.5 py-0.5"
                 key={icon.label}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  alt={icon.label}
-                  className="h-full w-full object-cover"
-                  decoding="async"
-                  loading="lazy"
-                  src={icon.src}
-                />
-              </span>
+                src={icon.src}
+              />
             ))}
           </div>
         </div>

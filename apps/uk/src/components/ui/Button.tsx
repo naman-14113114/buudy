@@ -8,7 +8,7 @@ import {
 
 type ButtonVariant = "primary" | "ghost" | "quiet";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
   asChild?: boolean;
 };

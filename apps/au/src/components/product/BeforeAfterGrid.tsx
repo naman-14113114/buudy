@@ -3,83 +3,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { transformations } from "@/data/productSections";
+import { transformations, type Transformation } from "@/data/productSections";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const NUM_SETS = 3;
-const storyProfiles: Record<
-  string,
-  {
-    fullName: string;
-    age: number;
-    skinType: string;
-    routine: string;
-    experience: string;
-  }
-> = {
-  "result-01": {
-    fullName: "Donna Parker",
-    age: 52,
-    skinType: "Dry, mature skin",
-    routine: "Cleanse and dry the skin, use red and near-infrared light for 10 minutes four times a week, then apply a hydrating serum and moisturizer.",
-    experience: "After eight weeks of consistent sessions, Donna felt that her cheeks and jawline looked firmer and more defined.",
-  },
-  "result-02": {
-    fullName: "Jane Phillips",
-    age: 46,
-    skinType: "Normal-to-dry skin",
-    routine: "Use red light on clean, dry skin for 10 minutes four times a week, followed by peptide serum and moisturizer, with SPF each morning.",
-    experience: "After one month, Jane felt that the fine lines around her eyes and forehead looked softer and less noticeable.",
-  },
-  "result-03": {
-    fullName: "Sarah King",
-    age: 49,
-    skinType: "Dry, sensitive skin",
-    routine: "Treat the face and neck with red and near-infrared light for 10 minutes four times a week, then finish with a fragrance-free ceramide moisturizer.",
-    experience: "Within two months, Sarah noticed that fine lines around her eyes, mouth, and neck looked less pronounced.",
-  },
-  "result-04": {
-    fullName: "Michelle Lewis",
-    age: 41,
-    skinType: "Combination, acne-prone skin",
-    routine: "Alternate blue and red modes for 10 minutes four times a week on freshly cleansed skin, followed by niacinamide and a light moisturizer.",
-    experience: "After several weeks, Michelle felt that her skin looked clearer and the appearance of old blemish marks had begun to fade.",
-  },
-  "result-05": {
-    fullName: "James Davies",
-    age: 44,
-    skinType: "Normal skin",
-    routine: "Use red and near-infrared light for 10 minutes four evenings a week after cleansing, then apply a lightweight moisturizer.",
-    experience: "After eight weeks, James felt that his jawline looked more defined and his skin appeared firmer overall.",
-  },
-  "result-06": {
-    fullName: "Karen Wilson",
-    age: 38,
-    skinType: "Dehydrated, dull skin",
-    routine: "Use red light for 10 minutes five times a week on clean, dry skin, then follow with hyaluronic serum and moisturizer.",
-    experience: "After five weeks, Karen noticed a brighter, more radiant appearance and felt comfortable wearing lighter foundation.",
-  },
-  "result-07": {
-    fullName: "Linda Scott",
-    age: 55,
-    skinType: "Sensitive, mature skin",
-    routine: "Use red and near-infrared light for 10 minutes four times a week, then apply a gentle eye cream and barrier-supporting moisturizer.",
-    experience: "After six weeks, Linda felt that the under-eye area looked fresher and the appearance of puffiness was reduced.",
-  },
-  "result-08": {
-    fullName: "Jennifer Harris",
-    age: 36,
-    skinType: "Combination skin with uneven texture",
-    routine: "Use red light for 10 minutes four times a week after cleansing, followed by a barrier serum and non-comedogenic moisturizer.",
-    experience: "After six weeks, Jennifer felt that her skin looked smoother and more even and felt noticeably softer.",
-  },
-};
-const customerStories = transformations.map((story) => ({
-  ...story,
-  ...storyProfiles[story.id],
-}));
-type CustomerStory = (typeof customerStories)[number];
-const loopedStories = Array(NUM_SETS).fill(customerStories).flat();
+const loopedStories = Array(NUM_SETS).fill(transformations).flat();
 const storyImagePromises = new Map<string, Promise<void>>();
 
 function preloadStoryImage(src: string) {
@@ -131,9 +59,9 @@ export function BeforeAfterGrid() {
   const [userInteracted, setUserInteracted] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isAnimationVisible, setIsAnimationVisible] = useState(false);
-  const [selectedStory, setSelectedStory] = useState<CustomerStory | null>(null);
+  const [selectedStory, setSelectedStory] = useState<Transformation | null>(null);
 
-  const openStory = useCallback((story: CustomerStory) => {
+  const openStory = useCallback((story: Transformation) => {
     returnFocusRef.current = document.activeElement as HTMLElement | null;
     const requestId = navigationRequestRef.current + 1;
     navigationRequestRef.current = requestId;
@@ -155,14 +83,14 @@ export function BeforeAfterGrid() {
     (offset: number) => {
       if (!selectedStory) return;
 
-      const currentIndex = customerStories.findIndex(
+      const currentIndex = transformations.findIndex(
         (story) => story.id === selectedStory.id,
       );
       if (currentIndex < 0) return;
 
       const nextIndex =
-        (currentIndex + offset + customerStories.length) % customerStories.length;
-      const nextStory = customerStories[nextIndex];
+        (currentIndex + offset + transformations.length) % transformations.length;
+      const nextStory = transformations[nextIndex];
       const requestId = navigationRequestRef.current + 1;
       navigationRequestRef.current = requestId;
 
@@ -210,24 +138,50 @@ export function BeforeAfterGrid() {
     }, reduceMotion ? 50 : 850);
   }, []);
 
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftStartRef = useRef(0);
+  const hasDraggedRef = useRef(false);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track) return;
+    isDraggingRef.current = true;
+    hasDraggedRef.current = false;
+    startXRef.current = e.pageX - track.offsetLeft;
+    scrollLeftStartRef.current = track.scrollLeft;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    const track = trackRef.current;
+    if (!track) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startXRef.current) * 1.2;
+    if (Math.abs(walk) > 4) {
+      hasDraggedRef.current = true;
+      stopAutoScroll();
+    }
+    track.scrollLeft = scrollLeftStartRef.current - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    isDraggingRef.current = false;
+  };
+
   const handleScroll = useCallback(() => {
     if (!isAutoScrollingRef.current) stopAutoScroll();
-    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
 
-    scrollTimeoutRef.current = setTimeout(() => {
-      const track = trackRef.current;
-      const setWidth = setWidthRef.current;
-      if (!track || setWidth <= 0) return;
+    const track = trackRef.current;
+    const setWidth = setWidthRef.current;
+    if (!track || setWidth <= 0) return;
 
-      if (track.scrollLeft >= setWidth * 2 - 10) {
-        track.style.scrollBehavior = "auto";
-        track.scrollLeft -= setWidth;
-      } else if (track.scrollLeft <= 10) {
-        track.style.scrollBehavior = "auto";
-        track.scrollLeft += setWidth;
-      }
-      isAutoScrollingRef.current = false;
-    }, 150);
+    if (track.scrollLeft >= setWidth * 2) {
+      track.scrollLeft -= setWidth;
+    } else if (track.scrollLeft <= 5) {
+      track.scrollLeft += setWidth;
+    }
   }, [stopAutoScroll]);
 
   useEffect(() => {
@@ -299,13 +253,13 @@ export function BeforeAfterGrid() {
   useEffect(() => {
     if (!selectedStory) return;
 
-    const currentIndex = customerStories.findIndex(
+    const currentIndex = transformations.findIndex(
       (story) => story.id === selectedStory.id,
     );
-    const previous = customerStories[
-      (currentIndex - 1 + customerStories.length) % customerStories.length
+    const previous = transformations[
+      (currentIndex - 1 + transformations.length) % transformations.length
     ];
-    const next = customerStories[(currentIndex + 1) % customerStories.length];
+    const next = transformations[(currentIndex + 1) % transformations.length];
     void preloadStoryImage(previous.image);
     void preloadStoryImage(next.image);
 
@@ -360,42 +314,60 @@ export function BeforeAfterGrid() {
       >
         <div
           aria-label="Customer transformation stories"
-          className="no-scrollbar flex snap-x gap-5 overflow-x-auto px-4 pb-4 md:px-10"
+          className="no-scrollbar flex gap-5 overflow-x-auto px-4 pb-4 md:px-10 cursor-grab active:cursor-grabbing select-none"
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseUpOrLeave}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUpOrLeave}
           onPointerDown={stopAutoScroll}
           onScroll={handleScroll}
           onTouchStart={stopAutoScroll}
           onWheel={stopAutoScroll}
           ref={trackRef}
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+            overscrollBehaviorX: "contain",
+          }}
         >
           {loopedStories.map((story, index) => (
             <button
               aria-label={`Open ${story.fullName}'s ${story.concern} story`}
-              className="w-[min(82vw,21rem)] flex-none snap-start overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--card)] text-left transition duration-300 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)]"
+              className="flex w-[min(82vw,21rem)] flex-none flex-col overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--card)] text-left transition duration-300 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)]"
               data-story-card
               key={`${story.id}-${index}`}
-              onClick={() => openStory(story)}
+              onClick={(e) => {
+                if (hasDraggedRef.current) {
+                  e.preventDefault();
+                  return;
+                }
+                openStory(story);
+              }}
               type="button"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--blush)]">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--blush)]">
                 <Image
                   alt={story.concern}
-                  className="object-cover"
+                  className="object-cover pointer-events-none select-none"
                   fill
                   sizes="(min-width: 1024px) 336px, 82vw"
                   src={story.image}
                 />
               </div>
-              <div className="p-5">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="buudy-mono text-[var(--gold)]">{story.concern}</p>
-                  <span className="buudy-mono text-[var(--plum-soft)]">5.0</span>
+              <div className="flex flex-1 flex-col justify-between p-5">
+                <div>
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="buudy-mono text-[var(--gold)]">{story.concern}</p>
+                    <span className="buudy-mono text-[var(--plum-soft)]">5.0</span>
+                  </div>
+                  <h3 className="buudy-display mt-3 text-xl text-[var(--plum)]">
+                    {story.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
+                    {story.quote}
+                  </p>
                 </div>
-                <h3 className="buudy-display mt-3 text-xl text-[var(--plum)]">
-                  {story.title}
-                </h3>
-                <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
-                  {story.quote}
-                </p>
                 <div className="mt-4 flex items-center justify-between border-t border-[var(--border)] pt-3">
                   <span className="buudy-display text-sm text-[var(--plum)]">
                     {story.name}
@@ -438,7 +410,12 @@ export function BeforeAfterGrid() {
         <div
           aria-labelledby="transformation-dialog-title"
           aria-modal="true"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-3 sm:p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4"
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.75)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          }}
           onClick={(event) => {
             if (event.currentTarget === event.target) closeStory();
           }}
@@ -446,7 +423,7 @@ export function BeforeAfterGrid() {
         >
           <button
             aria-label="Previous story"
-            className="absolute left-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--cream)]/30 bg-[var(--cream)]/10 text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--plum)] md:flex xl:left-8"
+            className="absolute left-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-md transition hover:scale-105 hover:bg-[var(--cream)] md:flex xl:left-8"
             onClick={handlePrevStory}
             type="button"
           >
@@ -466,7 +443,7 @@ export function BeforeAfterGrid() {
           >
             <button
               aria-label="Close transformation details"
-              className="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full bg-[rgba(247,241,232,.9)] text-[var(--plum)] shadow-sm transition hover:bg-[var(--cream)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
+              className="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-sm transition hover:scale-105 hover:bg-[var(--cream)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
               onClick={closeStory}
               ref={closeButtonRef}
               type="button"
@@ -553,7 +530,7 @@ export function BeforeAfterGrid() {
 
           <button
             aria-label="Next story"
-            className="absolute right-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--cream)]/30 bg-[var(--cream)]/10 text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--plum)] md:flex xl:right-8"
+            className="absolute right-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-md transition hover:scale-105 hover:bg-[var(--cream)] md:flex xl:right-8"
             onClick={handleNextStory}
             type="button"
           >

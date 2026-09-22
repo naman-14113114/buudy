@@ -19,8 +19,7 @@ export function Footer() {
               />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,241,232,.62)]">
-              Salon-grade LED light therapy, beautifully wearable. Designed in
-              the United Kingdom.
+              Salon-grade LED light therapy, beautifully wearable.
             </p>
             <p className="mt-5 max-w-sm text-sm leading-7 text-[rgba(247,241,232,.62)]">
               13 Harefield Rd, Rickmansworth, England, WD3 1LY, UK

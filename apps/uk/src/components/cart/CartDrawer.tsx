@@ -78,7 +78,7 @@ export function CartDrawer() {
                 Your bag is waiting.
               </p>
               <p className="buudy-copy mt-3 max-w-xs text-sm">
-                Add the Buudy LED Mask or Red Torch to unlock current offers
+                Add the Buudy LED Mask or Buudy LED Torch to unlock current offers
                 and free shipping.
               </p>
               <Button asChild className="mt-6" onClick={closeCart}>
@@ -95,4 +95,3 @@ export function CartDrawer() {
     </div>
   );
 }
-

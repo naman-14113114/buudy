@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/Button";
 
 const pageTitle = "Best LED Face Mask Australia 2026: What to Look For";
 const pageDescription =
-  "A Australia buyer's guide to choosing the best LED face mask for red light therapy, blue light acne routines, anti-ageing skincare, near-infrared support, neck coverage, and value.";
+  "An Australian buyer's guide to choosing the best LED face mask for red light therapy, blue light acne routines, anti-ageing skincare, near-infrared support, neck coverage, and value.";
 
 const checkpoints = [
   {
@@ -53,14 +53,14 @@ const comparisonRows = [
   ["Coverage", "Full face and neck"],
   ["Use style", "Cordless, rechargeable, hands-free, tap control"],
   ["Australia offer", `${formatMoney(buudyMask.priceCents, buudyMask.currency)} launch price with free glow kit`],
-  ["Guarantee", "90-day money back guarantee"],
+  ["Returns", "Easy return and refund policy"],
 ];
 
 export const metadata: Metadata = {
   title: "Best LED Face Mask Australia 2026 | Red Light Therapy Guide",
   description: pageDescription,
   alternates: {
-    canonical: "/pages/best-led-face-mask-Australia",
+    canonical: "/pages/best-led-face-mask-australia",
   },
   keywords: [
     "Best LED Face Mask Australia",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Best LED Face Mask Australia 2026: Buyer Guide",
     description: pageDescription,
-    url: absoluteUrl("/pages/best-led-face-mask-Australia"),
+    url: absoluteUrl("/pages/best-led-face-mask-australia"),
     type: "article",
     images: [
       {
@@ -92,19 +92,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BestLedFaceMaskUkPage() {
+export default function BestLedFaceMaskAustraliaPage() {
   const jsonLd = [
     organizationJsonLd(),
     websiteJsonLd(),
     productJsonLd(buudyMask),
     breadcrumbJsonLd([
       { name: "Home", url: "/" },
-      { name: "Best LED Face Mask Australia", url: "/pages/best-led-face-mask-Australia" },
+      { name: "Best LED Face Mask Australia", url: "/pages/best-led-face-mask-australia" },
     ]),
     ...guidePageJsonLd({
       title: pageTitle,
       description: pageDescription,
-      url: "/pages/best-led-face-mask-Australia",
+      url: "/pages/best-led-face-mask-australia",
       faqs: ledMaskSeoFaqs,
     }),
   ];
@@ -132,13 +132,13 @@ export default function BestLedFaceMaskUkPage() {
               whether the device fits your real skincare routine.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild className="bg-[var(--cream)] text-[var(--plum)] hover:bg-[var(--blush)]">
+              <Button asChild className="!bg-[var(--cream)] !text-[var(--plum)] !border-[var(--cream)] hover:!bg-[var(--blush)] hover:!text-[var(--plum)]">
                 <Link href="/products/buudy-led-mask">
                   Shop Buudy LED Mask
                   <ArrowRight size={17} />
                 </Link>
               </Button>
-              <Button asChild variant="ghost" className="border-[rgba(247,241,232,.36)] text-[var(--cream)] hover:bg-[rgba(247,241,232,.1)]">
+              <Button asChild variant="ghost" className="!border-[rgba(247,241,232,.4)] !text-[var(--cream)] hover:!bg-[rgba(247,241,232,.12)] hover:!text-[var(--cream)]">
                 <Link href="#comparison">Compare features</Link>
               </Button>
             </div>
@@ -162,7 +162,7 @@ export default function BestLedFaceMaskUkPage() {
               </div>
               <p className="mt-3 text-sm leading-6 text-[rgba(247,241,232,.78)]">
                 4.9 rated by 16,000+ customers, with free tracked shipping and
-                90-day money back guarantee.
+                an easy return and refund policy.
               </p>
             </div>
           </figure>

@@ -100,14 +100,18 @@ export function PolicyPage({ policyType }: PolicyPageProps) {
             __html: `
               .buudy-policy-content h2,
               .buudy-policy-content h3,
-              .buudy-policy-content h4,
-              .buudy-policy-content strong {
+              .buudy-policy-content h4 {
                 font-family: var(--font-fraunces), serif;
                 color: var(--plum);
                 font-weight: 500;
                 display: block;
                 margin-top: 1.8rem;
                 margin-bottom: 0.8rem;
+              }
+              .buudy-policy-content strong {
+                color: var(--plum);
+                font-weight: 600;
+                display: inline;
               }
               .buudy-policy-content h2 {
                 font-size: 1.5rem;
@@ -130,13 +134,19 @@ export function PolicyPage({ policyType }: PolicyPageProps) {
                 padding-left: 1.5rem;
                 margin-bottom: 1.2rem;
               }
+              .buudy-policy-content ol {
+                list-style-type: decimal;
+                padding-left: 1.5rem;
+                margin-bottom: 1.2rem;
+              }
               .buudy-policy-content li {
                 margin-bottom: 0.5rem;
+                line-height: 1.7;
               }
               .buudy-policy-content a {
                 color: var(--plum);
                 text-decoration: underline;
-                font-weight: 400;
+                font-weight: 500;
               }
               .buudy-policy-content a:hover {
                 color: var(--ink);

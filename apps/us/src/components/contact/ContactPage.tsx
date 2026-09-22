@@ -94,7 +94,7 @@ function HelpAndSocial() {
           invert
         />
 
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2">
           {contactHelpLinks.map((link) => (
             <Link
               className="rounded-[18px] border border-[rgba(247,241,232,.16)] bg-[rgba(247,241,232,.08)] p-5 transition hover:-translate-y-1 hover:bg-[rgba(247,241,232,.12)]"

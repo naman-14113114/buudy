@@ -80,7 +80,7 @@ export const buudyMask: Product = {
     "Salon-grade light therapy reimagined for US homes. The Buudy LED Mask combines 192 high-density LEDs, 7 visible light colours plus a dedicated 830nm near-infrared mode, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
   seoTitle: "Best LED Face Mask US | Buudy Red Light Therapy Mask",
   seoDescription:
-    "Shop the Buudy LED Face Mask in the US: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, 90-day returns, and free glow kit.",
+    "Shop the Buudy LED Face Mask in the US: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, easy returns and refunds, and free glow kit.",
   currency: market.currency,
   priceCents: 19900,
   compareAtCents: 49900,
@@ -94,34 +94,82 @@ export const buudyMask: Product = {
     {
       src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
       alt: "Cleopatra LED Red Light Mask",
+      badge: {
+        title: "FULL FACE & NECK\nCOVERAGE",
+        sub: "Targeted firming & smoothing for jawline & neck",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("02-buudy-led-mask-side-profile.webp"),
       alt: "Buudy LED Mask side profile",
+      badge: {
+        title: "7 CLINICAL\nWAVELENGTHS",
+        sub: "Complete spectrum for rejuvenation, clarity & glow",
+        position: "bottom-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
       alt: "Buudy LED Mask anti-ageing mode",
+      badge: {
+        title: "FAST 3-MIN\nTREATMENTS",
+        sub: "Green light helps fade dark spots & evens skin tone",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("04-buudy-led-mask-blue-light-acne.webp"),
       alt: "Buudy LED Mask blue light acne mode",
+      badge: {
+        title: "415NM TARGETED\nBLUE LIGHT",
+        sub: "Purifies active blemishes & eliminates acne bacteria",
+        position: "bottom-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("05-buudy-led-mask-packaging.webp"),
       alt: "Buudy LED Mask packaging",
+      badge: {
+        title: "830NM DEEP NEAR\nINFRARED LIGHT",
+        sub: "Deep dermal penetration boosts collagen & elasticity",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("06-buudy-led-mask-results.webp"),
       alt: "Buudy LED Mask results",
+      badge: {
+        title: "PROVEN CLINICAL\nRESULTS",
+        sub: "Noticeable collagen boost & radiant skin in 4 weeks",
+        position: "top-right",
+        theme: "white",
+      },
     },
     {
       src: productAsset("07-buudy-led-mask-controller.webp"),
       alt: "Buudy LED Mask tap controller",
+      badge: {
+        title: "SMART BUUDY\nAPP COMPANION",
+        sub: "Personalised guided routines & progress tracking",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
       alt: "Buudy LED Mask lifestyle use",
+      badge: {
+        title: "100% CORDLESS &\nPORTABLE",
+        sub: "Hands-free cordless design to read, relax & multitask",
+        position: "top-right",
+        theme: "dark",
+      },
     },
     {
       src: productAsset("09-buudy-led-mask-home-spa.webp"),
@@ -130,6 +178,12 @@ export const buudyMask: Product = {
     {
       src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
       alt: "Buudy LED Mask dermatologist recommended",
+      badge: {
+        title: "DERMATOLOGIST\nRECOMMENDED",
+        sub: "Expert-approved non-invasive skincare for all skin types",
+        position: "bottom-right",
+        theme: "dark",
+      },
     },
     {
       src: productAsset("11-buudy-led-mask-flexible-silicone.webp"),
@@ -138,18 +192,42 @@ export const buudyMask: Product = {
     {
       src: productAsset("13-buudy-led-mask-starter-kit.webp"),
       alt: "Buudy LED Mask starter kit",
+      badge: {
+        title: "SAFETY & CLINICALLY\nCERTIFIED",
+        sub: "CE, RoHS & FCC certified for safe everyday home use",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productMediaAsset("O3-w.webp"),
       alt: "Buudy LED Mask O3",
+      badge: {
+        title: "FREE BUUDY\nLED TORCH",
+        sub: "$70 targeted red light device included free with your order",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("buudy_purple.jpeg"),
       alt: "Buudy LED Mask Purple",
+      badge: {
+        title: "FREE PREMIUM\nTRAVEL CASE",
+        sub: "Custom luxury hard-shell box included with every order",
+        position: "top-left",
+        theme: "white",
+      },
     },
     {
       src: productAsset("01-buudy-led-mask-front.webp"),
       alt: "Buudy LED Mask front view",
+      badge: {
+        title: "633NM DEEP RED\nLIGHT THERAPY",
+        sub: "Stimulates natural collagen production & smooths fine lines",
+        position: "top-right",
+        theme: "white",
+      },
     },
   ],
   gifts: [
@@ -164,15 +242,15 @@ export const buudyMask: Product = {
     {
       id: "buudy-led-torch",
       name: "Buudy LED Torch",
-      valueCents: 8900,
-      image: productAsset("buudy-led-torch.jpg"),
+      valueCents: 7000,
+      image: productAsset("01-buudy-red-light-therapy-torch-main.webp", "buudy-red-torch"),
       label: "Limited edition",
       href: "/products/red-light-torch",
     },
     {
       id: "skincare-ebook",
       name: "Skincare E-Book",
-      valueCents: 2100,
+      valueCents: 1900,
       image: productMediaAsset("free_guide-v2.webp"),
       label: "Digital copy",
       href: "/pages/skincare-guide",
@@ -228,7 +306,7 @@ export const buudyMask: Product = {
   badges: [
     "Health Canada approved",
     "CE / FCC / ROHS",
-    "90-day money back",
+    "Easy return and refund",
     "Dermatologist endorsed",
   ],
 };
@@ -241,14 +319,14 @@ export const buudyRedTorch: Product = {
   sku: "1000020579664204",
   slug: "red-light-torch",
   template: "torch",
-  name: "Buudy Red Torch",
-  heroTitle: "Buudy Red",
+  name: "Buudy LED Torch",
+  heroTitle: "Buudy LED",
   heroEmphasis: "Torch",
   shortDescription:
     "A compact red and near-infrared light therapy torch with 3 targeted wavelengths for skin health, body relief, and easy travel use.",
   description:
     "Red light therapy device with 3 wavelengths: 630nm, 660nm, and 850nm. Designed for localized body relief, acne care, skin health, and portable at-home wellness rituals.",
-  seoTitle: "Buudy Red Torch | 3 Wavelength Red Light Therapy Device",
+  seoTitle: "Buudy LED Torch | 3 Wavelength Red Light Therapy Device",
   seoDescription:
     "Portable red light therapy torch with 3 wavelengths, near infrared support, rechargeable battery, and targeted body and skin relief.",
   currency: market.currency,
@@ -258,55 +336,57 @@ export const buudyRedTorch: Product = {
   reviewCount: 16000,
   customerCount: "16,000+",
   promoCode: "TORCH60",
-  promoLabel: "Red torch offer applied",
-  cartImage: torchAsset("01-buudy-red-torch-main.png"),
+  promoLabel: "LED torch offer applied",
+  cartImage: torchAsset("01-buudy-red-light-therapy-torch-main.webp"),
   gallery: [
     {
-      src: torchAsset("01-buudy-red-torch-main.png"),
-      alt: "Buudy Red Torch handheld light therapy device",
+      src: torchAsset("01-buudy-red-light-therapy-torch-main.webp"),
+      alt: "Buudy LED Torch held by a woman applying targeted 630nm and 660nm red light to her cheek for facial skin rejuvenation and collagen stimulation",
     },
     {
-      src: torchAsset("02-buudy-red-torch-animation.gif"),
-      alt: "Buudy Red Torch light therapy in use",
-      animated: true,
+      src: torchAsset("02-buudy-red-light-torch-product-travel-case.webp"),
+      alt: "Buudy LED Torch with sleek aluminium body and red LED emitter alongside its protective black zippered travel storage case",
     },
     {
-      src: torchAsset("03-buudy-red-torch-handheld.jpeg"),
-      alt: "Buudy Red Torch compact handheld device",
+      src: torchAsset("03-buudy-red-light-torch-handheld-ergonomics.webp"),
+      alt: "Compact and ergonomic Buudy LED Torch held in hand with safety wrist strap demonstrating portable travel-ready size",
     },
     {
-      src: torchAsset("04-buudy-red-torch-wavelengths.jpeg"),
-      alt: "Buudy Red Torch wavelength detail",
+      src: torchAsset("04-buudy-red-light-torch-neck-shoulder-treatment.webp"),
+      alt: "Woman using the Buudy LED Torch for targeted red and near-infrared light therapy on her neck and shoulder for skin smoothing and tension relief",
     },
     {
-      src: torchAsset("05-buudy-red-torch-kit.jpeg"),
-      alt: "Buudy Red Torch kit and accessories",
+      src: torchAsset("05-buudy-red-light-torch-arm-joint-pain-relief.webp"),
+      alt: "Targeted application of the Buudy LED Torch on forearm and wrist joint for localized pain relief and cellular repair",
     },
     {
-      src: torchAsset("06-buudy-red-torch-body-relief.jpeg"),
-      alt: "Buudy Red Torch body relief use",
+      src: torchAsset("06-buudy-red-light-torch-deep-tissue-muscle-recovery.webp"),
+      alt: "Close-up of Buudy LED Torch emitting concentrated 630nm, 660nm, and 850nm wavelengths for deep tissue muscle recovery and elbow joint relief",
     },
   ],
   gifts: [],
   specs: [
-    { label: "Dimensions", value: "2.5cm × 12.5cm (0.98 in × 4.92 in)" },
+    { label: "Dimensions", value: "2.5cm × 12cm (0.98 in × 4.72 in)" },
+    { label: "Model", value: "H100-3H" },
     { label: "Wavelength", value: "630nm, 660nm, 850nm" },
-    { label: "Intensity Level", value: "4 levels" },
-    { label: "Power Source", value: "Rechargeable Battery" },
-    { label: "LED Count", value: "5 LEDs" },
-    { label: "Light Color", value: "Red" },
-    { label: "Voltage", value: "220V / 110V" },
-    { label: "Power", value: "5W" },
-    { label: "Irradiance", value: "Surface 281mW/cm2, 4in 71mW/cm2" },
-    { label: "Battery", value: "2200mA" },
+    { label: "Power", value: "7W" },
+    { label: "Operating Voltage", value: "3.7V" },
+    { label: "Protection Level", value: "IPX5 (Living Waterproof)" },
+    { label: "Battery", value: "18650 Ricoh Lithium (2x included)" },
+    { label: "Material", value: "Aluminum alloy" },
+    { label: "Charging Method", value: "USB battery dock charger" },
+    { label: "Weight", value: "74g" },
     { label: "Warranty", value: "24 months" },
     { label: "Lifespan", value: "50,000+ hours" },
-    { label: "Weight", value: "200g" },
   ],
   included: [
-    { quantity: "1x", label: "Strap" },
-    { quantity: "1x", label: "USB cable" },
-    { quantity: "1x", label: "Red Light Torch" },
+    { quantity: "1x", label: "Buudy LED Torch (3-Core Red Light Flashlight)" },
+    { quantity: "2x", label: "18650 Lithium Rechargeable Batteries" },
+    { quantity: "1x", label: "Zipper Storage Box (Travel Case)" },
+    { quantity: "1x", label: "Triangular Bracket (Tripod Stand)" },
+    { quantity: "1x", label: "Anti-Loss Lanyard (Tail Rope)" },
+    { quantity: "1x", label: "Red Light Instruction Manual" },
+    { quantity: "1x", label: "USB Charger (Dock Charger)" },
   ],
   highlights: [
     "Stimulate collagen production",
@@ -320,8 +400,8 @@ export const buudyRedTorch: Product = {
   wavelengths: torchWavelengths,
   badges: [
     "3 precision wavelengths",
-    "Rechargeable battery",
-    "Dual voltage",
+    "7W high-power output",
+    "IPX5 waterproof",
     "24 month warranty",
   ],
 };
@@ -341,7 +421,7 @@ export const buudyIplDevice: Product = {
   seoTitle: "Buudy IPL Hair Removal Device | Painless Ice Cooling Laser",
   seoDescription:
     "Shop the Buudy IPL Hair Removal Device in the US: 999,999 flashes, Ice Cooling technology, 9 intensity levels, painless hair removal at home.",
-  currency: "GBP",
+  currency: market.currency,
   priceCents: 12900,
   compareAtCents: 24900,
   rating: 4.9,

@@ -4,8 +4,8 @@ export const footerMenus = [
     links: [
       { label: "Home", href: "/" },
       { label: "LED Face Mask", href: "/products/buudy-led-mask" },
-      { label: "Best LED Mask US Guide", href: "/pages/best-led-face-mask-US" },
-      { label: "Red Light Torch", href: "/products/red-light-torch" },
+      { label: "Best LED Mask US Guide", href: "/pages/best-led-face-mask-us" },
+      { label: "Buudy LED Torch", href: "/products/red-light-torch" },
       { label: "Skincare Quiz", href: "/pages/skincare-quiz" },
       { label: "Privacy Policy", href: "/policies/privacy-policy" },
       { label: "Return Policy", href: "/policies/return-policy" },
@@ -18,7 +18,7 @@ export const footerMenus = [
     title: "Help",
     links: [
       { label: "Contact Us", href: "/pages/contact-us" },
-      { label: "Order Tracking", href: "https://buudy.com/order-tracking" },
+      // { label: "Order Tracking", href: "https://buudy.com/order-tracking" },
       { label: "About Us", href: "/pages/about-us" },
       { label: "FAQs", href: "/pages/faqs" },
       { label: "Cookies Policy", href: "/policies/cookies-policy" },

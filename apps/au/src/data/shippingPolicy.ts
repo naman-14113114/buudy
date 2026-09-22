@@ -1,24 +1,62 @@
 export const shippingPolicyHtml = `
-  <h2>Overview</h2>
-  <p>We currently offer free worldwide tracked shipping.</p>
-  <p>All orders are processed within 1 to 3 business days and shipped using a fully tracked courier service.</p>
-  <p>Rest assured, we are doing everything in our power to get your order to you as soon as possible. Once your order is dispatched, transit time is normally between 3 and 10 business days depending on your country or region. Please consider any holidays that might impact delivery times.</p>
-  <p>Due to the nature of the shipping business, delays are sometimes inevitable. Our shipping times are guidelines only, and specific delivery dates are not guaranteed.</p>
+<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 1.0</p>
 
-  <h2>For pre-ordered or back-ordered items</h2>
-  <p>If your order contains a pre-ordered or back-ordered item, we will ship any items we have available immediately and send the remaining items as soon as they become available. If you ordered more than one item and received only part of your order, do not worry. Your other items will arrive shortly after.</p>
+<h2>1. About This Policy</h2>
+<p>This Policy explains shipping and delivery terms for purchases from Buudy.</p>
+<p>In this Policy:</p>
+<ul>
+  <li><strong>Store</strong> means Buudy.</li>
+  <li><strong>xPage Drop</strong> means xPage Drop LLC.</li>
+  <li><strong>Seller</strong> means the independent merchant operating the Store.</li>
+  <li><strong>Fulfillment Partner</strong> means a supplier, manufacturer, warehouse or carrier.</li>
+  <li><strong>You</strong> means the buyer.</li>
+  <li><strong>We, us and our</strong> mean the Store and xPage Drop where it coordinates fulfillment.</li>
+</ul>
 
-  <h2>Tracking your order</h2>
-  <p>You will receive a confirmation email and/or text message, if you provided a mobile phone number, containing a tracking ID and a link to follow the journey of your package. You can also visit our <a href="https://buudy.com/order-tracking">Tracking Page</a>. Please allow 1 to 2 business days for tracking information to appear.</p>
+<h2>2. Shipping Destinations</h2>
+<p>We ship to the destinations listed during checkout.</p>
+<p>We may restrict delivery to remote areas, military destinations, forwarding addresses, PO boxes or territories affected by trade or courier restrictions.</p>
 
-  <h2>Wrong address disclaimer</h2>
-  <p>It is the buyer's responsibility to make sure the shipping address entered is correct. We do our best to speed up processing and shipping, so there is only a small window to correct an incorrect shipping address. Please contact us immediately at <a href="mailto:support@buudy.com">support@buudy.com</a> if you believe you provided the wrong shipping address.</p>
+<h2>3. Free Shipping</h2>
+<p>Free shipping rules are shown at checkout or on the product page:</p>
+<p><strong>Free shipping:</strong> Free shipping is available on all qualifying orders, subject to the conditions displayed at checkout.</p>
+<p>Where paid shipping applies, the cost is displayed before payment.</p>
 
-  <h2>Contact us</h2>
-  <p>If you have any questions about our Shipping Policy, please contact us:</p>
-  <ul>
-    <li>By email: <a href="mailto:support@buudy.com">support@buudy.com</a></li>
-    <li>By visiting our <a href="/pages/contact-us#contact-form">Contact Form</a></li>
-    <li>Customer service hours: Monday to Friday, 9:00 AM to 5:00 PM AEST</li>
-  </ul>
+<h2>4. Processing and Transit Times</h2>
+<p>Estimated timelines are:</p>
+<ul>
+  <li><strong>Order processing:</strong> 1–3 business days</li>
+  <li><strong>Standard delivery:</strong> 7–20 business days</li>
+</ul>
+<p>Delivery estimates begin after the order is processed and handed to the carrier. Business days exclude weekends and public holidays.</p>
+<p>Estimates are guidelines unless expressly stated as guaranteed.</p>
+
+<h2>5. Order Tracking</h2>
+<p>A tracking reference or link will be provided by email after dispatch where available from the carrier.</p>
+<p>Tracking information may take 24–72 hours to update after dispatch.</p>
+
+<h2>6. Address Accuracy</h2>
+<p>You must provide an accurate and complete delivery address, including any apartment, suite or unit number, and a reachable phone number.</p>
+<p>Address changes may be requested within:</p>
+<p><strong>Address change period:</strong> Delivery address changes must be requested within 2 hours of order placement. Requests submitted within this period are not guaranteed once an order has entered processing.</p>
+<p>We cannot guarantee address corrections after fulfillment begins.</p>
+<p>Additional carrier fees or losses resulting from an incorrect address provided by the buyer may be the buyer's responsibility where legally permitted.</p>
+
+<h2>7. Delivery Issues</h2>
+<p>Contact support promptly if your order is delayed, damaged or marked delivered but not received.</p>
+<p>For missing or damaged packages, we may ask for photos of the packaging and product, carrier confirmation or a written non-receipt statement to investigate with the carrier.</p>
+<p>We will arrange a replacement, refund or other lawful remedy if a package is confirmed lost in transit.</p>
+
+<h2>8. Customs and Import Taxes</h2>
+<p>Import rules are shown before purchase:</p>
+<p><strong>Customs and duties:</strong> Orders may be subject to customs duties and import taxes, payable by the customer upon delivery.</p>
+<p>Where duties or taxes apply, they are the buyer's responsibility unless the checkout specifically states that taxes and duties are included.</p>
+
+<h2>9. Contact</h2>
+<p>For shipping questions, support or delivery issues, contact:</p>
+<h3>xPage Drop LLC</h3>
+<p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
+<p>Email: <a href="mailto:contact@xpagedrop.com">contact@xpagedrop.com</a></p>
+<p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
+<p>This is a corporate address only. It is not a warehouse, fulfillment center or return address.</p>
 `;

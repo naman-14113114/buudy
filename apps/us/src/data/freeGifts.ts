@@ -1,4 +1,4 @@
-import { productMediaAsset } from "@/lib/media";
+import { productAsset, productMediaAsset } from "@/lib/media";
 
 export type FreeGiftDetailSection = {
   title: string;
@@ -83,7 +83,7 @@ export const freeGiftDetails: FreeGiftDetail[] = [
       "The Buudy LED Torch adds precision to the main mask offer. While the LED Mask gives you broad face-and-neck coverage, the torch gives you a smaller tool you can use for targeted touch-up areas and travel-friendly sessions.",
     note:
       "The current Buudy LED Mask offer includes the LED Torch as a free bonus gift.",
-    image: productMediaAsset("free_torch.png"),
+    image: productAsset("01-buudy-red-light-therapy-torch-main.webp", "buudy-red-torch"),
     imageAlt: "Buudy LED Torch bonus gift",
     cardTitle: "Why customers like this bonus",
     cardBullets: [

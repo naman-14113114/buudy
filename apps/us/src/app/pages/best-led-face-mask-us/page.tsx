@@ -53,14 +53,14 @@ const comparisonRows = [
   ["Coverage", "Full face and neck"],
   ["Use style", "Cordless, rechargeable, hands-free, tap control"],
   ["US offer", `${formatMoney(buudyMask.priceCents, buudyMask.currency)} launch price with free glow kit`],
-  ["Guarantee", "90-day money back guarantee"],
+  ["Guarantee", "Easy return and refund policy"],
 ];
 
 export const metadata: Metadata = {
   title: "Best LED Face Mask US 2026 | Red Light Therapy Guide",
   description: pageDescription,
   alternates: {
-    canonical: "/pages/best-led-face-mask-US",
+    canonical: "/pages/best-led-face-mask-us",
   },
   keywords: [
     "Best LED Face Mask US",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Best LED Face Mask US 2026: Buyer Guide",
     description: pageDescription,
-    url: absoluteUrl("/pages/best-led-face-mask-US"),
+    url: absoluteUrl("/pages/best-led-face-mask-us"),
     type: "article",
     images: [
       {
@@ -92,19 +92,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BestLedFaceMaskUkPage() {
+export default function BestLedFaceMaskUsPage() {
   const jsonLd = [
     organizationJsonLd(),
     websiteJsonLd(),
     productJsonLd(buudyMask),
     breadcrumbJsonLd([
       { name: "Home", url: "/" },
-      { name: "Best LED Face Mask US", url: "/pages/best-led-face-mask-US" },
+      { name: "Best LED Face Mask US", url: "/pages/best-led-face-mask-us" },
     ]),
     ...guidePageJsonLd({
       title: pageTitle,
       description: pageDescription,
-      url: "/pages/best-led-face-mask-US",
+      url: "/pages/best-led-face-mask-us",
       faqs: ledMaskSeoFaqs,
     }),
   ];
@@ -162,7 +162,7 @@ export default function BestLedFaceMaskUkPage() {
               </div>
               <p className="mt-3 text-sm leading-6 text-[rgba(247,241,232,.78)]">
                 4.9 rated by 16,000+ customers, with free tracked shipping and
-                90-day money back guarantee.
+                easy return and refund policy.
               </p>
             </div>
           </figure>

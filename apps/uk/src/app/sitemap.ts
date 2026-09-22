@@ -12,13 +12,13 @@ const routes = [
   { path: "/pages/skincare-quiz", lastModified: "2026-06-16" },
   { path: "/pages/premium-travel-box", lastModified: "2026-06-16" },
   { path: "/pages/buudy-led-torch", lastModified: "2026-06-16" },
-  { path: "/pages/skincare-guide", lastModified: "2026-06-16" },
-  { path: "/shipping-policy", lastModified: "2026-06-16" },
-  { path: "/return-policy", lastModified: "2026-06-16" },
-  { path: "/refund-policy", lastModified: "2026-06-16" },
-  { path: "/privacy-policy", lastModified: "2026-06-16" },
-  { path: "/terms-of-service", lastModified: "2026-06-16" },
-  { path: "/cookies-policy", lastModified: "2026-06-16" },
+  { path: "/policies/shipping-policy", lastModified: "2026-06-16" },
+  { path: "/policies/return-policy", lastModified: "2026-06-16" },
+  { path: "/policies/refund-policy", lastModified: "2026-06-16" },
+  { path: "/policies/privacy-policy", lastModified: "2026-06-16" },
+  { path: "/policies/terms-of-service", lastModified: "2026-06-16" },
+  { path: "/policies/cookies-policy", lastModified: "2026-06-16" },
+  { path: "/order-tracking", lastModified: "2026-06-16" },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

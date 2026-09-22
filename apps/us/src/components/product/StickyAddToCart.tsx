@@ -5,18 +5,35 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
 import Lottie from "lottie-react";
-import loadingLottie from "../cart/loading-lottie.json";
+import loadingLottie from "@/components/cart/loading-lottie.json";
 import type { Product } from "@/data/products";
 import { formatMoney } from "@/lib/money";
+import {
+  appendAttributionToPath,
+  pickAttributionFromSearch,
+} from "@/lib/attribution";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/components/cart/CartProvider";
 
 export function StickyAddToCart({ product }: { product: Product }) {
   const { addProduct } = useCart();
-  const [isNavigating, setIsNavigating] = useState(false);
   const router = useRouter();
   const [visible, setVisible] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
   const [cartIconData, setCartIconData] = useState<Record<string, unknown> | null>(null);
+
+  useEffect(() => {
+    function handlePageShow(event: PageTransitionEvent) {
+      if (event.persisted) {
+        setIsAdding(false);
+      }
+    }
+
+    window.addEventListener("pageshow", handlePageShow);
+    return () => {
+      window.removeEventListener("pageshow", handlePageShow);
+    };
+  }, []);
 
   useEffect(() => {
     fetch("/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-8-f6ede2-cart.json")
@@ -107,22 +124,33 @@ export function StickyAddToCart({ product }: { product: Product }) {
         </div>
         <Button
           aria-label={`Add ${product.name} to cart${giftLabel}`}
-          className={`buudy-cart-wipe min-h-11 w-full flex-none px-3 text-[11px] sm:min-h-12 sm:w-auto sm:px-6 sm:text-sm whitespace-nowrap ${!isNavigating ? "" : "disabled:!opacity-100"}`}
-          disabled={isNavigating}
+          className={`buudy-cart-wipe relative overflow-hidden min-h-11 w-full flex-none px-3 text-[11px] sm:min-h-12 sm:w-auto sm:px-6 sm:text-sm whitespace-nowrap ${isAdding ? "disabled:!opacity-100" : ""}`}
+          disabled={isAdding}
           onClick={() => {
-            setIsNavigating(true);
+            setIsAdding(true);
             addProduct(product);
-            router.push("/cart");
+            router.push(
+              appendAttributionToPath(
+                "/cart",
+                pickAttributionFromSearch(window.location.search),
+              ),
+            );
           }}
         >
-          {isNavigating ? (
+          {isAdding ? (
             <>
-              <span style={{ visibility: "hidden" }} className="flex items-center gap-2">
-                <ShoppingBag size={17} />
+              <span style={{ visibility: "hidden" }} className="inline-flex items-center gap-2">
+                {cartIconData ? (
+                  <div className="buudy-sticky-cart-icon flex h-5 w-5 flex-shrink-0 items-center justify-center">
+                    <Lottie animationData={cartIconData} loop={true} />
+                  </div>
+                ) : (
+                  <ShoppingBag size={17} />
+                )}
                 <span>Add to cart{giftLabel}</span>
               </span>
               <span className="absolute inset-0 flex items-center justify-center">
-                <Lottie animationData={loadingLottie} loop className="h-10 w-16 scale-[1.35]" />
+                <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
               </span>
             </>
           ) : (

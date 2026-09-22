@@ -1,6 +1,6 @@
 export const primaryNavigation = [
   { label: "LED Face Mask", href: "/products/buudy-led-mask" },
-  { label: "Red Light Torch", href: "/products/red-light-torch" },
+  { label: "Buudy LED Torch", href: "/products/red-light-torch" },
   { label: "Skincare Quiz", href: "/pages/skincare-quiz" },
 ];
 
@@ -12,7 +12,7 @@ export const secondaryNavigation = [
 
 export const announcementItems = [
   "Free shipping on all orders",
-  "Made in Australia",
-  "Sign up and enjoy AU\$10 off",
+  "Easy returns and refunds",
+  "Sign up and enjoy AU$10 off",
   "4.9 stars from 16,000+ customers",
 ];

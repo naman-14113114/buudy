@@ -71,8 +71,22 @@ export function CartPageContent({
   const { isHydrated, lines, totals, giftMessage, setGiftMessage } = useCart();
   const [giftMessageOpen, setGiftMessageOpen] = useState(Boolean(giftMessage));
   const [showSaved, setShowSaved] = useState(false);
+  const [deliveryIconData, setDeliveryIconData] = useState<Record<
+    string,
+    unknown
+  > | null>(null);
   const timer = useCheckoutCountdown(10 * 60 - 1);
-  const deliveryDate = useDeliveryDate(3);
+  const deliveryDate = useDeliveryDate(5);
+
+  useEffect(() => {
+    fetch(
+      "/media/products/buudy-led-mask/images/lottieflow-ecommerce-14-19-aa8e50-easey.json",
+    )
+      .then((res) => res.json())
+      .then((data) => setDeliveryIconData(data))
+      .catch((err) => console.error("Error loading delivery lottie", err));
+  }, []);
+
   const visibleLines = useMemo(
     () => getDisplayLines(lines),
     [lines],
@@ -94,7 +108,7 @@ export function CartPageContent({
           <ShoppingBag className="mx-auto text-[var(--gold)]" size={42} />
           <h1 className="buudy-heading mt-5">Your cart is empty.</h1>
           <p className="buudy-copy mx-auto mt-5 max-w-lg">
-            Add the Buudy LED Mask or Red Torch to unlock current offers and
+            Add the Buudy LED Mask or Buudy LED Torch to unlock current offers and
             free shipping.
           </p>
           <Button asChild className="mt-8">
@@ -113,8 +127,14 @@ export function CartPageContent({
           <div className="flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
             <div className="flex flex-col items-center gap-3 md:flex-row">
               <div className="flex w-full items-center justify-center gap-3 md:w-auto">
-                <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)]">
-                  <Truck size={22} />
+                <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)] overflow-hidden">
+                  {deliveryIconData ? (
+                    <div className="w-7 h-7 flex-shrink-0 flex items-center justify-center">
+                      <Lottie animationData={deliveryIconData} loop={true} />
+                    </div>
+                  ) : (
+                    <Truck size={22} />
+                  )}
                 </span>
                 <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)] md:hidden">
                   Free tracked shipping
@@ -123,7 +143,7 @@ export function CartPageContent({
               <p className="buudy-display text-xl leading-snug text-[var(--plum)] md:text-2xl">
                 Order in next{" "}
                 <span className="font-semibold text-[var(--ink)]">{timer}</span>{" "}
-                and receive it by{" "}
+                to get as early as{" "}
                 <span className="font-semibold text-[var(--plum)]">
                   {deliveryDate || "soon"}
                 </span>
@@ -135,8 +155,8 @@ export function CartPageContent({
           </div>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_430px]">
-          <div className="space-y-5">
+        <div className="grid items-start gap-8 lg:grid-cols-[1fr_430px]">
+          <div className="space-y-5 lg:sticky lg:top-6 lg:self-start">
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] px-5">
               {visibleLines.map((line) => (
                 <CartLineItem key={line.id} line={line} />
@@ -145,7 +165,7 @@ export function CartPageContent({
             {digitalGift ? <DigitalGiftNotice line={digitalGift} /> : null}
           </div>
 
-          <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
+          <aside className="space-y-5 lg:sticky lg:top-6 lg:self-start">
             <CartSummary>
               <CheckoutForm initialCustomer={initialCustomer} />
             </CartSummary>

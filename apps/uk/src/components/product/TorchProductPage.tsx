@@ -23,7 +23,7 @@ function TorchFeatureGrid({ product }: { product: Product }) {
               Take your wellness <em className="buudy-italic">anywhere</em>.
             </>
           }
-          copy="Lightweight 200g design works at home, the office, or during travel. Durable one-button operation keeps each targeted session simple."
+          copy="Lightweight 74g design works at home, the office, or during travel. Durable one-button operation keeps each targeted session simple."
           invert
         />
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -126,7 +126,7 @@ function TorchDetailSection() {
               sleep-quality support.
             </p>
             <p>
-              Buudy Red Torch combines red 630nm and 660nm, plus
+              Buudy LED Torch combines red 630nm and 660nm, plus
               near-infrared 850nm light. The red LEDs are visible, while
               the near-infrared LED is invisible to the naked eye.
             </p>
@@ -140,7 +140,7 @@ function TorchDetailSection() {
               "Powerful combination: red and near-infrared lights reach different target depths for a flexible routine.",
               "Portable and easy to use: includes a storage bag and hanging strip so it can travel with you.",
               "Humans and pets: pet owners may use it for animal joint-care routines when appropriate.",
-              "Excellent material: 303 stainless steel outer shell with a 50,000+ hour service life.",
+              "Excellent material: Premium aluminum alloy outer shell with a 50,000+ hour service life.",
             ].map((item) => (
               <li className="flex gap-3 text-sm leading-6 text-[var(--plum)]" key={item}>
                 <span className="mt-2 h-2 w-2 flex-none rounded-full bg-[var(--gold)]" />

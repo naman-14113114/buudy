@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Order Tracking | Buudy",
   description: "Locate your Buudy LED Mask order status, shipment timeline, and official carrier tracking updates.",
   alternates: {
-    canonical: "/policies/order-tracking",
+    canonical: "/order-tracking",
   },
 };
 

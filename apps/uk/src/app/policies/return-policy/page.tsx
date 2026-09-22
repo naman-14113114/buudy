@@ -3,7 +3,7 @@ import { PolicyPage } from "@/components/policies/PolicyPage";
 
 export const metadata: Metadata = {
   title: "Return Policy | Buudy",
-  description: "Learn about the simple, stress-free replacement policy and goddess guarantees for the Buudy LED Skincare Mask.",
+  description: "Learn about the simple, stress-free return and refund policy for the Buudy LED Skincare Mask.",
   alternates: {
     canonical: "/policies/return-policy",
   },

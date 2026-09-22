@@ -52,10 +52,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             "near infrared LED face mask",
           ]
         : [
+            "Buudy LED Torch",
+            "buudy led torch UK",
             "red light torch UK",
             "handheld red light therapy",
             "near infrared torch",
-            "blue red light therapy device",
           ],
     alternates: {
       canonical: `/products/${product.slug}`,

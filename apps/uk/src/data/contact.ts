@@ -23,11 +23,6 @@ export const contactHelpLinks = [
     copy: "Quick answers for shipping, returns, product use, and order questions.",
   },
   {
-    label: "Order tracking",
-    href: "https://buudy.com/order-tracking",
-    copy: "Check the latest delivery status after your order has shipped.",
-  },
-  {
     label: "Support email",
     href: "mailto:support@buudy.co.uk",
     copy: "Prefer email? Reach the Buudy support desk directly.",

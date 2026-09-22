@@ -53,7 +53,7 @@ const comparisonRows = [
   ["Coverage", "Full face and neck"],
   ["Use style", "Cordless, rechargeable, hands-free, tap control"],
   ["UK offer", `${formatMoney(buudyMask.priceCents, buudyMask.currency)} launch price with free glow kit`],
-  ["Guarantee", "90-day money back guarantee"],
+  ["Returns", "Easy return and refund policy"],
 ];
 
 export const metadata: Metadata = {
@@ -132,13 +132,13 @@ export default function BestLedFaceMaskUkPage() {
               whether the device fits your real skincare routine.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild className="bg-[var(--cream)] text-[var(--plum)] hover:bg-[var(--blush)]">
+              <Button asChild className="!bg-[var(--cream)] !text-[var(--plum)] !border-[var(--cream)] hover:!bg-[var(--blush)] hover:!text-[var(--plum)]">
                 <Link href="/products/buudy-led-mask">
                   Shop Buudy LED Mask
                   <ArrowRight size={17} />
                 </Link>
               </Button>
-              <Button asChild variant="ghost" className="border-[rgba(247,241,232,.36)] text-[var(--cream)] hover:bg-[rgba(247,241,232,.1)]">
+              <Button asChild variant="ghost" className="!border-[rgba(247,241,232,.4)] !text-[var(--cream)] hover:!bg-[rgba(247,241,232,.12)] hover:!text-[var(--cream)]">
                 <Link href="#comparison">Compare features</Link>
               </Button>
             </div>
@@ -162,7 +162,7 @@ export default function BestLedFaceMaskUkPage() {
               </div>
               <p className="mt-3 text-sm leading-6 text-[rgba(247,241,232,.78)]">
                 4.9 rated by 16,000+ customers, with free tracked shipping and
-                90-day money back guarantee.
+                an easy return and refund policy.
               </p>
             </div>
           </figure>

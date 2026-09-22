@@ -41,8 +41,8 @@ export function FAQSection({ faqs = maskFaqs }: { faqs?: FAQItem[] }) {
               controlled with a simple tap system, making consistent at-home use
               easier than clinic appointments or wired masks. The current UK
               launch offer is £179 with a £449 compare-at price, free tracked
-              UK shipping, a free glow kit while available, and a 90-day
-              money-back guarantee.
+              UK shipping, a free glow kit while available, and an easy
+              return and refund policy.
             </p>
           </article>
 

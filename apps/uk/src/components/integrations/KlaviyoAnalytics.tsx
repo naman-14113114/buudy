@@ -60,7 +60,7 @@ function productPayload(product: Product) {
     ProductName: product.name,
     ProductID: product.id,
     SKU: product.sku,
-    Categories: ["Light Therapy", product.template === "mask" ? "LED Mask" : "Red Light Torch"],
+    Categories: ["Light Therapy", product.template === "mask" ? "LED Mask" : "Buudy LED Torch"],
     ImageURL: toAbsoluteUrl(product.cartImage),
     URL: toAbsoluteUrl(`/products/${product.slug}`),
     Brand: "Buudy",
@@ -85,7 +85,7 @@ function cartLinePayload(line: CartLine) {
     ImageURL: toAbsoluteUrl(line.image),
     ProductCategories: [
       "Light Therapy",
-      product?.template === "torch" ? "Red Light Torch" : "LED Mask",
+      product?.template === "torch" ? "Buudy LED Torch" : "LED Mask",
     ],
   };
 }

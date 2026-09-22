@@ -1,7 +1,7 @@
 export const aboutHero = {
   eyebrow: "About Buudy",
-  title: "Welcome to Buudy.com!",
-  copy: "At Buudy.com, we are more than just an online store; we are a community dedicated to providing high-quality, affordable products that enhance your daily life. Our mission is to make shopping easy, enjoyable, and reliable for our customers around the world.",
+  title: "Welcome to Buudy!",
+  copy: "At Buudy, we are more than just an online store; we are a community dedicated to providing high-quality, affordable products that enhance your daily life. Our mission is to make shopping easy, enjoyable, and reliable for our customers around the world.",
   imageDesktop: "/images/about/about-hero-desktop-v4.webp",
   imageMobile: "/images/about/about-hero-desktop-v4.webp",
 };
@@ -33,10 +33,10 @@ export const aboutSections = [
     id: "trust-transparency",
     eyebrow: "Values",
     title: "Trust and Transparency",
-    copy: "When it comes to your skin, trust is everything. That's why transparency is woven into the fabric of our brand. We don't believe in exaggerated claims or hidden fine print.\n\n- Tested for Safety: The Buudy LED Mask is rigorously tested to ensure it is safe, effective, and built to last.\n- Privacy First: We utilize state-of-the-art encryption to ensure your personal data and payment information are always 100% secure.\n- The 90-Day Goddess Guarantee: We are so confident in our technology that we back it up with a risk-free 90-day money-back guarantee. If you don't see the glow, you don't pay.",
+    copy: "When it comes to your skin, trust is everything. That's why transparency is woven into the fabric of our brand. We don't believe in exaggerated claims or hidden fine print.\n\n- Tested for Safety: The Buudy LED Mask is rigorously tested to ensure it is safe, effective, and built to last.\n- Privacy First: We utilize state-of-the-art encryption to ensure your personal data and payment information are always 100% secure.\n- Easy Returns & Refunds: We want you to feel completely confident in your purchase, supported by our simple and hassle-free return and refund policy.",
     image: {
       src: "/images/about/about-trust.png",
-      alt: "Goddess guarantee, safety certificates and top security standard badges"
+      alt: "Return policy, safety certificates and top security standard badges"
     },
     align: "left" as const,
   },

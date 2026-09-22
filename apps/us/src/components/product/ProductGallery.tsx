@@ -2,9 +2,8 @@
 
 import { useCallback, useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Search, X } from "lucide-react";
+import { X } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
-import { market } from "@/lib/market";
 
 export function ProductGallery({
   images,
@@ -22,32 +21,6 @@ export function ProductGallery({
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lightboxRef = useRef<HTMLDivElement>(null);
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
-
-  // 1. Warm the next gallery asset without delaying the current image swap.
-  useEffect(() => {
-    const nextImage = images[(currentIndex + 1) % images.length];
-    if (!nextImage) return;
-
-    if (nextImage.src.endsWith(".mp4") || nextImage.src.endsWith(".webm")) {
-      const video = document.createElement("video");
-      video.preload = "metadata";
-      video.src = nextImage.src;
-      video.load();
-      return () => {
-        video.removeAttribute("src");
-        video.load();
-      };
-    }
-
-    const image = new window.Image();
-    image.decoding = "async";
-    image.fetchPriority = "low";
-    image.src = nextImage.src;
-    void image.decode?.().catch(() => undefined);
-    return () => {
-      image.src = "";
-    };
-  }, [currentIndex, images]);
 
   // 2. Navigation controls
   const goNext = useCallback(() => {
@@ -151,8 +124,6 @@ export function ProductGallery({
     }
   };
 
-  const currentImage = images[currentIndex] ?? images[0];
-
   return (
     <>
       <style
@@ -162,17 +133,14 @@ export function ProductGallery({
         /* 1. CONTAINER */
         .buudyLED-23435t23-container { max-width: 900px; margin: 0 auto; padding: 10px 10px 10px 10px !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
         /* 2. MAIN IMAGE */
-        .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
-        .buudyLED-23435t23-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; }
+        .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
+        .buudyLED-23435t23-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         /* 3. THUMBNAILS GRID */
         .buudyLED-23435t23-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; }
-        .buudyLED-23435t23-thumb_item { position: relative; appearance: none; width: 100%; padding: 0 0 100%; cursor: zoom-in; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; }
-        .buudyLED-23435t23-thumb_img { position: absolute; top: 0; left: 0; width: 100%; height: 100.5%; object-fit: cover; object-position: center; display: block; transition: transform 0.3s ease; z-index: 0; }
-        .buudyLED-23435t23-thumb_zoom { position: absolute; bottom: 9px; left: 9px; z-index: 2; display: grid; width: 29px; height: 29px; place-items: center; border: 1px solid rgba(58, 31, 61, .16); border-radius: 50%; background: rgba(247, 241, 232, .92); color: var(--plum); opacity: 0; transform: translateY(5px); transition: opacity .2s ease, transform .2s ease; }
+        .buudyLED-23435t23-thumb_item { position: relative; appearance: none; width: 100%; padding: 0 0 100%; cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in; border-radius: 15px; overflow: hidden; border: none; box-shadow: inset 0 0 0 2px transparent; background: transparent; box-sizing: border-box; transition: box-shadow 0.2s ease, transform 0.2s ease; }
+        .buudyLED-23435t23-thumb_img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.3s ease; z-index: 0; }
         .buudyLED-23435t23-thumb_item:hover { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16), inset 0 0 0 1px rgba(0, 0, 0, 0.05); z-index: 1; }
         .buudyLED-23435t23-thumb_item:hover .buudyLED-23435t23-thumb_img { transform: scale(1.08); }
-        .buudyLED-23435t23-thumb_item:hover .buudyLED-23435t23-thumb_zoom,
-        .buudyLED-23435t23-thumb_item:focus-visible .buudyLED-23435t23-thumb_zoom { opacity: 1; transform: translateY(0); }
         .buudyLED-23435t23-thumb_item.buudyLED-23435t23-active { box-shadow: inset 0 0 0 2px #000; }
         /* 4. ARROWS */
         .buudyLED-23435t23-arrow { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.9); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); padding: 0; transition: transform 0.2s, background-color 0.2s; }
@@ -185,17 +153,232 @@ export function ProductGallery({
         /* 5. LIGHTBOX OVERLAY */
         .buudyLED-23435t23-lightbox { position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: none; justify-content: center; align-items: center; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 99999999; pointer-events: auto; }
         .buudyLED-23435t23-lightbox_content { position: relative; z-index: 100000000; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
-        .buudyLED-23435t23-lightbox_img { max-width: 90vw; max-height: 85vh; border-radius: 25px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); user-select: none; object-fit: contain; }
+        .buudyLED-23435t23-lightbox_stage { position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 90vw; max-height: 85vh; border-radius: 25px; overflow: hidden; }
+        .buudyLED-23435t23-lightbox_img { max-width: 90vw; max-height: 85vh; border-radius: 25px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); user-select: none; object-fit: contain; transition: opacity 0.3s ease; }
         .buudyLED-23435t23-close { position: absolute; top: 20px; right: 30px; display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 50%; background: rgba(247, 241, 232, .94); border: 1px solid rgba(58, 31, 61, .18); color: var(--plum); cursor: pointer; z-index: 100000001; transition: transform .2s ease, background-color .2s ease; }
         .buudyLED-23435t23-close:hover { background: var(--cream); transform: scale(1.06); }
         .buudyLED-23435t23-modal_nav { width: 60px; height: 60px; background: rgba(0, 0, 0, 0.1); border-radius: 50%; }
         .buudyLED-23435t23-modal_nav:hover { background: rgba(0, 0, 0, 0.2); }
         .buudyLED-23435t23-modal_nav .buudyLED-23435t23-icon { border-color: #333; }
-        /* 6. ZOOM BUTTON */
-        .buudyLED-23435t23-zoom_btn { position: absolute; bottom: 16px; left: 16px; width: 38px !important; min-height: 38px !important; background-color: rgba(247, 241, 232, 0.94); border: 1px solid rgba(58, 31, 61, .18); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 6px rgba(58, 31, 61, 0.18); transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease; color: var(--plum); opacity: 0; }
-        .buudyLED-23435t23-main_wrapper:hover .buudyLED-23435t23-zoom_btn, .buudyLED-23435t23-zoom_btn:focus-visible { opacity: 1; }
-        .buudyLED-23435t23-zoom_btn:hover { background-color: #fff; transform: scale(1.1); }
         
+        /* 6. EDITORIAL IMAGE BADGES & ANIMATIONS */
+        .buudy-gallery-badge {
+          position: absolute;
+          z-index: 6;
+          pointer-events: none;
+          user-select: none;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          padding: 0 !important;
+          background: transparent !important;
+          background-color: transparent !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          border: none !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          box-sizing: border-box;
+          max-width: 250px;
+          will-change: opacity, transform;
+        }
+        .buudy-gallery-badge--top-left {
+          top: 26px;
+          left: 26px;
+          align-items: flex-start;
+          text-align: left;
+          max-width: 240px;
+          animation: buudyBadgeSlideInLeft 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+        }
+        .buudy-gallery-badge--bottom-left {
+          bottom: 26px;
+          left: 26px;
+          align-items: flex-start;
+          text-align: left;
+          max-width: 240px;
+          animation: buudyBadgeSlideInLeft 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+        }
+        .buudy-gallery-badge--top-right {
+          top: 26px;
+          right: 26px;
+          align-items: flex-end;
+          text-align: right;
+          max-width: 240px;
+          animation: buudyBadgeSlideInRight 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+        }
+        .buudy-gallery-badge--bottom-right {
+          bottom: 26px;
+          right: 26px;
+          align-items: flex-end;
+          text-align: right;
+          max-width: 240px;
+          animation: buudyBadgeSlideInRight 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+        }
+        .buudy-gallery-badge__header {
+          display: block;
+          margin: 0;
+          padding: 0;
+        }
+        .buudy-gallery-badge__title {
+          font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          font-size: clamp(16px, 2.2vw, 20px);
+          font-weight: 800;
+          line-height: 1.18;
+          letter-spacing: 0.01em;
+          text-transform: uppercase;
+          color: #111111;
+          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95), 0 0 12px rgba(255, 255, 255, 0.85);
+          white-space: normal !important;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          margin: 0;
+          display: block;
+        }
+        .buudy-gallery-badge__sub {
+          font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          font-size: clamp(11.5px, 1.4vw, 13.5px);
+          font-weight: 500;
+          line-height: 1.35;
+          letter-spacing: -0.01em;
+          color: #374151;
+          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+          white-space: normal !important;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          margin: 0;
+          margin-top: 2px;
+          display: block;
+          animation: buudySubSlideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+          will-change: opacity, transform;
+        }
+        .buudy-gallery-badge--top-right .buudy-gallery-badge__sub,
+        .buudy-gallery-badge--bottom-right .buudy-gallery-badge__sub {
+          animation: buudySubSlideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+        }
+        .buudy-gallery-badge--white .buudy-gallery-badge__title {
+          color: #ffffff !important;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85), 0 0 16px rgba(0, 0, 0, 0.75) !important;
+        }
+        .buudy-gallery-badge--white .buudy-gallery-badge__sub {
+          color: rgba(255, 255, 255, 0.92) !important;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+        }
+        .buudy-gallery-badge--lightbox {
+          max-width: clamp(150px, 35vw, 240px);
+          z-index: 10 !important;
+        }
+        .buudy-gallery-badge--lightbox.buudy-gallery-badge--top-left {
+          top: clamp(14px, 2.5vw, 24px);
+          left: clamp(14px, 2.5vw, 24px);
+        }
+        .buudy-gallery-badge--lightbox.buudy-gallery-badge--bottom-left {
+          bottom: clamp(14px, 2.5vw, 24px);
+          left: clamp(14px, 2.5vw, 24px);
+        }
+        .buudy-gallery-badge--lightbox.buudy-gallery-badge--top-right {
+          top: clamp(14px, 2.5vw, 24px);
+          right: clamp(14px, 2.5vw, 24px);
+        }
+        .buudy-gallery-badge--lightbox.buudy-gallery-badge--bottom-right {
+          bottom: clamp(14px, 2.5vw, 24px);
+          right: clamp(14px, 2.5vw, 24px);
+        }
+        @keyframes buudyBadgeSlideInLeft {
+          0% {
+            opacity: 0;
+            transform: translate3d(-36px, 0, 0);
+          }
+          100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        @keyframes buudyBadgeSlideInRight {
+          0% {
+            opacity: 0;
+            transform: translate3d(36px, 0, 0);
+          }
+          100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        @keyframes buudySubSlideInLeft {
+          0% {
+            opacity: 0;
+            transform: translate3d(-14px, 0, 0);
+          }
+          100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        @keyframes buudySubSlideInRight {
+          0% {
+            opacity: 0;
+            transform: translate3d(14px, 0, 0);
+          }
+          100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        @media screen and (max-width: 767px) {
+          .buudy-gallery-badge {
+            max-width: clamp(135px, 42vw, 175px) !important;
+            gap: 2px !important;
+          }
+          .buudy-gallery-badge--top-left {
+            top: clamp(10px, 3vw, 16px) !important;
+            left: clamp(10px, 3vw, 16px) !important;
+            animation-name: buudyBadgeSlideInLeftMobile !important;
+          }
+          .buudy-gallery-badge--bottom-left {
+            bottom: clamp(10px, 3vw, 16px) !important;
+            left: clamp(10px, 3vw, 16px) !important;
+            animation-name: buudyBadgeSlideInLeftMobile !important;
+          }
+          .buudy-gallery-badge--top-right {
+            top: clamp(10px, 3vw, 16px) !important;
+            right: clamp(10px, 3vw, 16px) !important;
+            animation-name: buudyBadgeSlideInRightMobile !important;
+          }
+          .buudy-gallery-badge--bottom-right {
+            bottom: clamp(10px, 3vw, 16px) !important;
+            right: clamp(10px, 3vw, 16px) !important;
+            animation-name: buudyBadgeSlideInRightMobile !important;
+          }
+          .buudy-gallery-badge__title {
+            font-size: clamp(12px, 3.4vw, 14.5px) !important;
+            line-height: 1.16 !important;
+          }
+          .buudy-gallery-badge__sub {
+            font-size: clamp(9.5px, 2.6vw, 11px) !important;
+            line-height: 1.25 !important;
+            margin-top: 1px !important;
+          }
+        }
+        @keyframes buudyBadgeSlideInLeftMobile {
+          0% {
+            opacity: 0;
+            transform: translate3d(-16px, 0, 0);
+          }
+          100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        @keyframes buudyBadgeSlideInRightMobile {
+          0% {
+            opacity: 0;
+            transform: translate3d(16px, 0, 0);
+          }
+          100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+
         /* 7. STACKED RESPONSIVENESS */
         @media (max-width: 1023px) { 
             .buudyLED-23435t23-grid { 
@@ -213,10 +396,6 @@ export function ProductGallery({
             .buudyLED-23435t23-grid::-webkit-scrollbar {
                 display: none;
             }
-            /* Hide Zoom Button on Mobile */
-            .buudyLED-23435t23-zoom_btn {
-                display: none !important;
-            }
             .buudyLED-23435t23-thumb_item {
                 flex: 0 0 28%; /* Show ~3.5 items to hint at scrolling */
                 min-width: 80px; 
@@ -226,9 +405,6 @@ export function ProductGallery({
             }
             .buudyLED-23435t23-thumb_img {
                 height: 100%; /* Reset the 100.5% height to exact fit */
-            }
-            .buudyLED-23435t23-thumb_zoom {
-                display: none !important;
             }
         }
       `,
@@ -246,70 +422,60 @@ export function ProductGallery({
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          {currentImage.src.endsWith(".mp4") ||
-          currentImage.src.endsWith(".webm") ? (
-            <video
-              src={currentImage.src}
-              id="buudyLED-23435t23-MainImg"
-              className="buudyLED-23435t23-main_img"
-              autoPlay
-              muted
-              loop
-              playsInline
-              onClick={() => openLightbox()}
-            />
-          ) : (
-            <img
-              src={currentImage.src}
-              id="buudyLED-23435t23-MainImg"
-              className="buudyLED-23435t23-main_img"
-              alt={currentImage.alt}
-              decoding="async"
-              fetchPriority="high"
-              loading="eager"
-              onClick={() => openLightbox()}
-            />
-          )}
+          {images.map((image, index) => {
+            const isActive = index === currentIndex;
+            const isVideo =
+              image.src.endsWith(".mp4") || image.src.endsWith(".webm");
 
-          {/* Overlaid Badges */}
-          {hasGifts && (
-            <span className="buudy-mono absolute left-5 top-5 z-10 rounded-full bg-[var(--plum)] px-4 py-2 text-[var(--cream)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.8)]">
-              3 Free Gifts
-            </span>
-          )}
-          <span className="absolute bottom-5 right-5 z-10 flex items-center gap-1.5 rounded-full bg-[rgba(247,241,232,.92)] px-3.5 py-2 text-[var(--plum)] shadow-[0_10px_24px_-18px_rgba(58,31,61,.55)]">
-            <svg
-              aria-hidden="true"
-              className="h-3 w-[21px] flex-shrink-0 object-contain rounded-[1px]"
-              viewBox="0 0 60 30"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect fill="#fff" height="30" width="60" />
-              <path fill="#b22234" d="M0 0h60v2.3H0zM0 4.6h60v2.3H0zM0 9.2h60v2.3H0zM0 13.8h60v2.3H0zM0 18.5h60v2.3H0zM0 23.1h60v2.3H0zM0 27.7h60v2.3H0z" />
-              <rect fill="#3c3b6e" height="16.1" width="24" />
-              <g fill="#fff">
-                <circle cx="4" cy="3" r="0.8" /> <circle cx="8" cy="3" r="0.8" /> <circle cx="12" cy="3" r="0.8" /> <circle cx="16" cy="3" r="0.8" /> <circle cx="20" cy="3" r="0.8" />
-                <circle cx="6" cy="6" r="0.8" /> <circle cx="10" cy="6" r="0.8" /> <circle cx="14" cy="6" r="0.8" /> <circle cx="18" cy="6" r="0.8" />
-                <circle cx="4" cy="9" r="0.8" /> <circle cx="8" cy="9" r="0.8" /> <circle cx="12" cy="9" r="0.8" /> <circle cx="16" cy="9" r="0.8" /> <circle cx="20" cy="9" r="0.8" />
-                <circle cx="6" cy="12" r="0.8" /> <circle cx="10" cy="12" r="0.8" /> <circle cx="14" cy="12" r="0.8" /> <circle cx="18" cy="12" r="0.8" />
-                <circle cx="4" cy="15" r="0.8" /> <circle cx="8" cy="15" r="0.8" /> <circle cx="12" cy="15" r="0.8" /> <circle cx="16" cy="15" r="0.8" /> <circle cx="20" cy="15" r="0.8" />
-              </g>
-            </svg>
-            <span className="buudy-mono leading-none">
-              {market.madeInLabel}
-            </span>
-          </span>
+            return (
+              <div
+                key={image.src}
+                className={`buudyLED-23435t23-slide ${
+                  isActive ? "buudyLED-23435t23-slide_active" : ""
+                }`}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  opacity: isActive ? 1 : 0,
+                  zIndex: isActive ? 2 : 1,
+                  pointerEvents: isActive ? "auto" : "none",
+                  transition: "opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1)",
+                }}
+                onClick={() => openLightbox(index)}
+              >
+                {isVideo ? (
+                  <video
+                    src={image.src}
+                    id={isActive ? "buudyLED-23435t23-MainImg" : undefined}
+                    className="buudyLED-23435t23-main_img"
+                    autoPlay={isActive}
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <img
+                    src={image.src}
+                    id={isActive ? "buudyLED-23435t23-MainImg" : undefined}
+                    className="buudyLED-23435t23-main_img"
+                    alt={image.alt}
+                    decoding="async"
+                    fetchPriority={index === 0 ? "high" : "low"}
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                )}
 
-          <button
-            aria-label="Magnify current product image"
-            className="buudyLED-23435t23-zoom_btn"
-            onClick={(event) => {
-              event.stopPropagation();
-              openLightbox();
-            }}
-          >
-            <Search aria-hidden="true" size={16} strokeWidth={2.2} />
-          </button>
+                {isActive && image.badge && (
+                  <div key={`badge-${index}-${image.src}`}>
+                    <GalleryImageBadge badge={image.badge} />
+                  </div>
+                )}
+              </div>
+            );
+          })}
 
           <button
             className="buudyLED-23435t23-arrow buudyLED-23435t23-prev"
@@ -376,9 +542,6 @@ export function ProductGallery({
                   loading="lazy"
                 />
               )}
-              <span aria-hidden="true" className="buudyLED-23435t23-thumb_zoom">
-                <Search size={14} strokeWidth={2.2} />
-              </span>
             </button>
           ))}
         </div>
@@ -428,26 +591,33 @@ export function ProductGallery({
                 >
                   <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_left" />
                 </button>
-                {images[currentIndex]?.src?.endsWith(".mp4") ||
-                images[currentIndex]?.src?.endsWith(".webm") ? (
-                  <video
-                    className="buudyLED-23435t23-lightbox_img"
-                    id="buudyLED-23435t23-ModalImg"
-                    src={images[currentIndex]?.src}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
-                ) : (
-                  <img
-                    className="buudyLED-23435t23-lightbox_img"
-                    id="buudyLED-23435t23-ModalImg"
-                    src={images[currentIndex]?.src}
-                    alt="Expanded Product View"
-                    decoding="async"
-                  />
-                )}
+                <div className="buudyLED-23435t23-lightbox_stage">
+                  {images[currentIndex]?.src?.endsWith(".mp4") ||
+                  images[currentIndex]?.src?.endsWith(".webm") ? (
+                    <video
+                      className="buudyLED-23435t23-lightbox_img"
+                      id="buudyLED-23435t23-ModalImg"
+                      src={images[currentIndex]?.src}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  ) : (
+                    <img
+                      className="buudyLED-23435t23-lightbox_img"
+                      id="buudyLED-23435t23-ModalImg"
+                      src={images[currentIndex]?.src}
+                      alt="Expanded Product View"
+                      decoding="async"
+                    />
+                  )}
+                  {images[currentIndex]?.badge && (
+                    <div key={`modal-badge-${currentIndex}-${images[currentIndex]?.src}`}>
+                      <GalleryImageBadge badge={images[currentIndex].badge!} isLightbox />
+                    </div>
+                  )}
+                </div>
                 <button
                   className="buudyLED-23435t23-arrow buudyLED-23435t23-modal_nav buudyLED-23435t23-next"
                   id="buudyLED-23435t23-ModalNext"
@@ -465,5 +635,39 @@ export function ProductGallery({
           )
         : null}
     </>
+  );
+}
+
+function GalleryImageBadge({
+  badge,
+  isLightbox = false,
+}: {
+  badge: NonNullable<ProductImage["badge"]>;
+  isLightbox?: boolean;
+}) {
+  const positionClass = badge.position
+    ? `buudy-gallery-badge--${badge.position}`
+    : "buudy-gallery-badge--top-left";
+  const themeClass = badge.theme === "white" ? "buudy-gallery-badge--white" : "";
+  const lightboxClass = isLightbox ? "buudy-gallery-badge--lightbox" : "";
+
+  return (
+    <div
+      className={`buudy-gallery-badge ${positionClass} ${themeClass} ${lightboxClass}`}
+    >
+      <div className="buudy-gallery-badge__header">
+        <span className="buudy-gallery-badge__title">
+          {badge.title.split("\n").map((line, idx, arr) => (
+            <span key={idx}>
+              {line}
+              {idx < arr.length - 1 && <br />}
+            </span>
+          ))}
+        </span>
+      </div>
+      {badge.sub && (
+        <span className="buudy-gallery-badge__sub">{badge.sub}</span>
+      )}
+    </div>
   );
 }

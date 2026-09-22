@@ -5,16 +5,18 @@ const body = `# Buudy Australia
 Buudy Australia sells at-home LED light therapy devices for skincare and wellness routines.
 
 ## Primary Pages
-- Home: ${market.siteUrl}
-- Buudy LED Mask: ${market.siteUrl}/products/buudy-led-mask
-- Best LED Face Mask Australia Guide: ${market.siteUrl}/pages/best-led-face-mask-Australia
-- Buudy Red Torch: ${market.siteUrl}/products/red-light-torch
-- Skincare Quiz: ${market.siteUrl}/pages/skincare-quiz
-- FAQs: ${market.siteUrl}/pages/faqs
+- [Home](${market.siteUrl}): Australia storefront for Buudy light therapy devices.
+- [Buudy LED Mask](${market.siteUrl}/products/buudy-led-mask): Product page for the 7 colour LED face and neck mask.
+- [Best LED Face Mask Australia Guide](${market.siteUrl}/pages/best-led-face-mask-australia): Buyer guide for Australian shoppers comparing LED face masks.
+- [Buudy LED Torch](${market.siteUrl}/products/red-light-torch): Product page for the handheld red light therapy torch.
+- [Skincare Quiz](${market.siteUrl}/pages/skincare-quiz): Guided quiz for choosing a light therapy routine.
+- [FAQs](${market.siteUrl}/pages/faqs): Common questions about shipping, returns, product use, and safety.
+- [Shipping Policy](${market.siteUrl}/policies/shipping-policy): Australia shipping timelines and tracking guidance.
+- [Return Policy](${market.siteUrl}/policies/return-policy): Easy return and refund policy and return steps.
 
 ## Buudy LED Mask Summary
 - Product: Buudy LED Mask
-- Price: AUD 299 launch offer, compare-at AUD 749
+- Price: AUD 319 launch offer, compare-at AUD 699
 - Category: LED face mask, red light therapy mask, blue light acne routine mask, anti-ageing LED mask
 - LEDs: 192 high-density LEDs
 - Modes: 7 visible light colours plus 830nm near-infrared
@@ -22,11 +24,11 @@ Buudy Australia sells at-home LED light therapy devices for skincare and wellnes
 - Coverage: face and neck
 - Use style: cordless, rechargeable, hands-free, tap control
 - Offer: free glow kit while the launch offer is live
-- Returns: 90-day money back guarantee
+- Returns: Easy return and refund policy
 - Shipping: free tracked Australia shipping
 
 ## Buyer Intent Answers
-- Best LED Face Mask Australia: Buudy is designed for Australia buyers who want high LED density, red and blue light modes, near-infrared support, neck coverage, cordless use, free tracked shipping, and a 90-day return window.
+- Best LED Face Mask Australia: Buudy is designed for Australia buyers who want high LED density, red and blue light modes, near-infrared support, neck coverage, cordless use, free tracked shipping, and an easy return and refund policy.
 - LED face mask for acne and anti-ageing: Buudy combines blue 415nm light for breakout-prone routines with red 633nm light and 830nm near-infrared support for anti-ageing skincare routines.
 - LED mask with neck coverage: Buudy includes neck coverage in the same device so the jawline and neck can be part of the same session.
 

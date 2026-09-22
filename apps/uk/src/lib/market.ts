@@ -4,7 +4,6 @@ export const market = {
   currency: "GBP",
   country: "United Kingdom",
   marketLabel: "UK",
-  madeInLabel: "Made in UK",
   checkoutSource: "uk_buudy",
   checkoutUtmSource: "www.buudy.co.uk",
   checkoutUtmCampaign: "uk_led_mask",

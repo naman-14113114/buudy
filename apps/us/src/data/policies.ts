@@ -1,31 +1,419 @@
-// Structured policy data compiled from live buudy.com pages
-export const privacyPolicyHtml = "<p>This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make a purchase from buudy (the &ldquo;Site&rdquo;).</p><p>----</p><p><strong>PERSONAL INFORMATION WE COLLECT</strong></p><p>When you visit the Site, we automatically collect certain information about your device, including information about your web browser, IP address, time zone, and some of the cookies that are installed on your device. Additionally, as you browse the Site, we collect information about the individual web pages or products that you view, what websites or search terms referred you to the Site, and information about how you interact with the Site. We refer to this automatically-collected information as &ldquo;Device Information&rdquo;.</p><p>We collect Device Information using the following technologies: - &ldquo;Cookies&rdquo; are data files that are placed on your device or computer and often include an anonymous unique identifier. For more information about cookies, and how to disable cookies, visit <a href=\"http://www.allaboutcookies.org\">http://www.allaboutcookies.org</a>.</p><p>- &ldquo;Log files&rdquo; track actions occurring on the Site, and collect data including your IP address, browser type, Internet service provider, referring/exit pages, and date/time stamps.</p><p>- &ldquo;Web beacons&rdquo;, &ldquo;tags&rdquo;, and &ldquo;pixels&rdquo; are electronic files used to record information about how you browse the Site. Additionally, when you make a purchase or attempt to make a purchase through the Site, we collect certain information from you, including your name, billing address, shipping address, payment information, email address, and phone number. We refer to this information as \"Order Information\".</p><p>Text Marketing and notifications: By subscribing to text notifications you agree to receive recurring automated marketing messages at the phone number provided. Consent is not a condition of purchase. Reply STOP to unsubscribe. HELP for help. Msg &amp; Data rates may apply. More info: view our <a href=\"/policies/privacy-policy\">Privacy Policy</a> and <a href=\"/policies/terms-of-service\">Terms of Service</a>.</p><p>When we talk about &ldquo;Personal Information&rdquo; in this Privacy Policy, we are talking both about Device Information and Order Information.</p><p>----</p><p>HOW DO WE USE YOUR PERSONAL INFORMATION?</p><p>We use the Order Information that we collect generally to fulfill any orders placed through the Site (including processing your payment information, arranging for shipping, and providing you with invoices and/or order confirmations). Additionally, we use this Order Information to:</p><p>- Communicate with you;</p><p>- Screen our orders for potential risk or fraud;</p><p>- When in line with the preferences you have shared with us, provide you with information or advertising relating to our products or services. We use the Device Information that we collect to help us screen for potential risk and fraud (in particular, your IP address), and more generally to improve and optimize our Site (for example, by generating analytics about how our customers browse and interact with the Site, and to assess the success of our marketing and advertising campaigns).</p><p>----</p><p>SHARING YOUR PERSONAL INFORMATION</p><p>We share your Personal Information with third parties to help us use your Personal Information, as described above. For example, we also use Google Analytics to help us understand how our customers use the Site -- you can read more about how Google uses your Personal Information here: <a href=\"https://www.google.com/intl/en/policies/privacy/\">https://www.google.com/intl/en/policies/privacy/</a>.</p><p>You can also opt-out of Google Analytics here: <a href=\"https://tools.google.com/dlpage/gaoptout.\">https://tools.google.com/dlpage/gaoptout.</a></p><p>Finally, we may also share your Personal Information to comply with applicable laws and regulations, to respond to a subpoena, search warrant or other lawful requests for information we receive, or to otherwise protect our rights.</p><p>----</p><p>BEHAVIORAL ADVERTISING As described above, we use your Personal Information to provide you with targeted advertisements or marketing communications we believe may be of interest to you. For more information about how targeted advertising works, you can visit the Network Advertising Initiative&rsquo;s (&ldquo;NAI&rdquo;) educational page at http://www.networkadvertising.org/understanding-online-advertising/how-does-it-work. You can opt-out of targeted advertising by using the links below:</p><p>- Facebook: <a href=\"https://www.facebook.com/settings/?tab=ads\">https://www.facebook.com/settings/?tab=ads</a></p><p>- Google: <a href=\"https://www.google.com/settings/ads/anonymous\">https://www.google.com/settings/ads/anonymous</a></p><p>- Bing: <a href=\"https://advertise.bingads.microsoft.com/en-us/resources/policies/personalized-ads\">https://advertise.bingads.microsoft.com/en-us/resources/policies/personalized-ads</a></p><p>Additionally, you can opt-out of some of these services by visiting the Digital Advertising Alliance&rsquo;s opt-out portal at <a href=\"http://optout.aboutads.info/\">http://optout.aboutads.info/</a>.</p><p>----</p><p>DO NOT TRACK</p><p>Please note that we do not alter our Site&rsquo;s data collection and use practices when we see a Do Not Track signal from your browser.</p><p>----</p><p>YOUR RIGHTS</p><p>If you are a European resident, you have the right to access personal information we hold about you and to ask that your personal information be corrected, updated, or deleted. If you would like to exercise this right, please contact us through the contact information below. Additionally, if you are a European resident we note that we are processing your information in order to fulfill contracts we might have with you (for example if you make an order through the Site), or otherwise to pursue our legitimate business interests listed above. Additionally, please note that your information may be transferred outside of Europe to trusted service providers in other countries where necessary.</p><p>----</p><p>DATA RETENTION</p><p>When you place an order through the Site, we will maintain your Order Information for our records unless and until you ask us to delete this information.</p><p>----</p><p>CHANGES</p><p>We may update this privacy policy from time to time in order to reflect, for example, changes to our practices or for other operational, legal or regulatory reasons.</p><p>----</p><p>CONTACT US</p><p>For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at <a href=\"mailto:support@buudy.com\">support@buudy.com</a>.</p>";
+// Structured policy data compiled from live mask.buudy.com xPage Drop policies
 
-export const returnPolicyHtml = "<ul id=\"bkmrk-if-you-have-any-issu\"><li aria-level=\"1\"><span style=\"font-weight: 400;\">If you have any issues with your order, please contact us via this <a href=\"/pages/contact-us#contact-form\">Contact Form</a> within 07 business days of order delivery to explain your grievance. Our customer service department will then help provide a replacement or refund if deemed appropriate.</span></li><li aria-level=\"1\"><span style=\"font-weight: 400;\">There is no need to return your item under any circumstances. Please note that if you return your item without our prior request, we will not be responsible for any loss or additional costs resulting from your unapproved return.</span></li></ul>";
+export const privacyPolicyHtml = `
+<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 1.0</p>
 
+<h2>1. About This Policy</h2>
+<p>This Privacy Policy explains how personal information is handled when you visit or purchase from Buudy.</p>
+<p>In this Policy:</p>
+<ul>
+  <li><strong>Store</strong> means Buudy.</li>
+  <li><strong>xPage Drop</strong> means xPage Drop LLC.</li>
+  <li><strong>Seller</strong> means the independent merchant operating the Store.</li>
+  <li><strong>Service Provider</strong> includes payment providers, suppliers, warehouses, carriers, analytics services and fraud-prevention providers.</li>
+  <li><strong>You</strong> means the visitor or buyer.</li>
+  <li><strong>We, us and our</strong> mean the Store and xPage Drop for the relevant processing activity.</li>
+</ul>
+<p>xPage Drop handles customer support and may process personal information for checkout, payments, fraud prevention, order administration, refunds and fulfillment coordination.</p>
 
-export const refundPolicyHtml = "<p>The following terms and conditions apply to all orders placed on our website.</p><p>&nbsp;</p><p><strong>1. ORDER ADJUSTMENT/CANCELLATION</strong></p><p>1.1. We typically start processing your order as soon as it is placed to ensure you will receive it on time. As a result, once an order has been processed, certain information cannot be modified. Within 06 hours of placing your order, please reach us via our <a href=\"/pages/contact-us#contact-form\">Contact Form</a> if you need to change any order details so that we can assist in making possible changes.</p><ul><li><span style=\"font-weight: 400;\">You may change the product variant and/or shipping address. If the new product variant or shipping address increases the value of the original order, an additional payment will be required; if we don't receive your payment confirmation within 48 hours, we will process the order following the original information. If your order update request decreases the value of the original order, the pricing difference will not be refunded.</span></li><li>If you cancel some products, your order may no longer be eligible for the promotion.</li></ul><p>1.2. If you cancel your order within 06 hours of placing it, you will be held responsible for the payment fee (if incurred), which is non-refundable.</p><p>1.3. Cancellation beyond 06 hours after placing an order is not allowed. In case there is any inaccurate or insufficient information, such as an incorrect or inadequate address which prevents us from processing and/or delivering the order, we will notify you via your registered email. If we don't hear from you within the specified time, we may need to cancel the order and refund the remaining amount (if any) after deducting all incurred costs of processing and shipping the product(s), depending on the order's state.</p><p>&nbsp;</p><p><strong>2. REPLACEMENT &amp; REFUND</strong></p><p>2.1. Replacement or refund conditions (if applicable):</p><ul><li>Your order is not successfully delivered after 45 business days and no later than 60 business days from the order placement date for Standard shipping and Premium shipping, or after 60 business days and no later than 90 business days for Eco shipping.</li><li>Your order has an issue with inadequate quality. Please be aware that any quality-related claims must be made&nbsp;within <span style=\"font-weight: 400;\">07 business days</span> of the date indicated on the tracking information for the package.</li></ul><p>2.2. To assist us in resolving product-related issues promptly, the complaint should be accompanied by complete and clear proof, as specified below:</p><ul><li>An unboxing video when you receive the package</li><li>Photo(s) of quality issues and any damaged parts of the actual product received;</li><li>Photo(s) of the incorrect item received (in case the item delivered is incorrect in terms of color/design/size compared to the order confirmation);</li><li>Photo(s) of the size label and the entire item when measured with a ruler (in case of size is inconsistent with measurements stipulated in the size chart);</li><li>Photo(s) of the original shipping label of the product received.</li></ul><p>2.3. After we confirm through email that you are qualified for a refund or replacement, we will process your refund/replacement within 07 business days of confirmation.</p><ul><li>You should receive the tracking number for your replacement product(s) within 7-10 business days after confirmation.</li><li>You should receive your refund within 3-5 business days of confirmation. Kindly note that your payment provider determines when your refund will be credited to your payment account.</li></ul><p>&nbsp;</p><p><strong>3. DISCLAIMER</strong></p><p>3.1. You must provide all information and/or documentation related to your order(s) placed in our store upon request. We reserve the right to suspend or terminate your customer account if fraudulent activity is detected, or to refuse support if you do not sufficiently provide complete or accurate information and documents in accordance with our refund policy.</p><p>3.2. We will not be liable for any loss or shipment delivery failure caused by the recipient's absence, an incorrect or insufficient address, package refusal, or theft of goods after delivery.</p><p>3.3. We will not accept responsibility for any claim resulting from user error, such as wrong size, design, or color selection.</p><p>3.4. Bulky and oversized product packaging must adhere to the carrier's standard criteria. As a result, when the products are folded when packaged, they may have creases. Please note that this is not a product flaw. To prevent wrinkles and creases, spread the product flat for 3-5 days.&nbsp;</p>";
+<h2>2. Information We Collect</h2>
+<p>We may collect:</p>
+<ol>
+  <li>Your name, email address, phone number and delivery address.</li>
+  <li>Billing, order, product, currency, tax and shipping information.</li>
+  <li>Payment status, payment method, transaction references and limited payment details.</li>
+  <li>Device, browser, IP address, approximate location and usage information.</li>
+  <li>Cart activity, Store visits and referral information.</li>
+  <li>Cookies and similar technologies.</li>
+  <li>Support messages, attachments, complaints and refund requests.</li>
+  <li>Tracking, delivery and return information.</li>
+  <li>Fraud, identity, age or sanctions-verification information where necessary.</li>
+</ol>
+<p>Full payment credentials may be collected directly by the payment provider rather than by the Store or xPage Drop.</p>
 
-export const termsOfServiceHtml = "<p><strong>OVERVIEW </strong></p><p>This website is operated and hosted by buudy, in accordance with its terms and conditions of the service agreement.</p><p>Throughout the site, the terms &ldquo;we&rdquo;, &ldquo;us&rdquo; and &ldquo;our&rdquo; refer to buudy. buudy offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.</p><p>By visiting our site and/ or purchasing something from us, you engage in our &ldquo;Service&rdquo; and agree to be bound by the following terms and conditions (&ldquo;Terms of Service&rdquo;, &ldquo;Terms&rdquo;), including those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Service apply to all users of the site, including without limitation users who are browsers, vendors, customers, merchants, and/ or contributors of content.</p><p>Please read these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these Terms of Service. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services. If these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service.</p><p>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</p><p>----</p><p>SECTION 1 - ONLINE STORE TERMS</p><p>By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence, or that you are the age of majority in your state or province of residence and you have given us your consent to allow any of your minor dependents to use this site.</p><p>You may not use our products for any illegal or unauthorized purpose nor may you, in the use of the Service, violate any laws in your jurisdiction (including but not limited to copyright laws). You must not transmit any worms or viruses or any code of a destructive nature.</p><p>A breach or violation of any of the Terms will result in an immediate termination of your Services.</p><p>----</p><p>SECTION 2 - GENERAL CONDITIONS</p><p>We reserve the right to refuse service to anyone for any reason at any time.</p><p>You understand that your content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. Credit card information is always encrypted during transfer over networks.</p><p>You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service or any contact on the website through which the service is provided, without express written permission by us.</p><p>The headings used in this agreement are included for convenience only and will not limit or otherwise affect these Terms.</p><p>----</p><p>SECTION 3 - ACCURACY, COMPLETENESS AND TIMELINESS OF INFORMATION</p><p>We are not responsible if information made available on this site is not accurate, complete or current. The material on this site is provided for general information only and should not be relied upon or used as the sole basis for making decisions without consulting primary, more accurate, more complete or more timely sources of information. Any reliance on the material on this site is at your own risk.</p><p>This site may contain certain historical information. Historical information, necessarily, is not current and is provided for your reference only. We reserve the right to modify the contents of this site at any time, but we have no obligation to update any information on our site. You agree that it is your responsibility to monitor changes to our site.</p><p>----</p><p>SECTION 4 - MODIFICATIONS TO THE SERVICE AND PRICES</p><p>Prices for our products are subject to change without notice.</p><p>We reserve the right at any time to modify or discontinue the Service (or any part or content thereof) without notice at any time.</p><p>We shall not be liable to you or to any third-party for any modification, price change, suspension or discontinuance of the Service.</p><p>----</p><p>SECTION 5 - PRODUCTS OR SERVICES (if applicable)</p><p>Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our <a href=\"/policies/return-policy\">Return Policy</a>.</p><p>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.</p><p>We reserve the right, but are not obligated, to limit the sales of our products or Services to any person, geographic region or jurisdiction. We may exercise this right on a case-by-case basis. We reserve the right to limit the quantities of any products or services that we offer. All descriptions of products or product pricing are subject to change at any time without notice, at the sole discretion of us. We reserve the right to discontinue any product at any time. Any offer for any product or service made on this site is void where prohibited.</p><p>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected.</p><p>----</p><p>SECTION 6 - BILLING AND ACCOUNT INFORMATION</p><p>1. The following payment methods are accepted:</p><p>We accept Visa, Mastercard, Discover, American Express, and PayPal.</p><p>When you check out your order, you can select which method you would like to use. After providing the payment information, your card/account will automatically be charged by our payment provider. Your order will begin processing after all necessary verification procedures have been completed.</p><p>2. Currency</p><p>When you place an order on our website, your payment will be processed in USD. If your credit card company or bank uses a different currency, the final transaction price may differ due to currency exchange rates. Please contact your payment provider for further information.</p><p>Please note that although the price of the items on our website may be displayed in your local currency, your payment will be processed in USD.</p><p>3. Payment Security</p><p>All payment providers we partner with are reliable and verified, and guarantee to maintain all applicable PCI DSS standards. Therefore, all data provided by you is secure.</p><p>4. Accuracy of billing and account information</p><p>We reserve the right to refuse any order you place with us. We may, in our sole discretion, limit or cancel quantities purchased per person, per household or per order. These restrictions may include orders placed by or under the same customer account, the same credit card, and/or orders that use the same billing and/or shipping address. In the event that we make a change to or cancel an order, we may attempt to notify you by contacting the eâ€‘mail and/or billing address/phone number provided at the time the order was made. We reserve the right to limit or prohibit orders that, in our sole judgment, appear to be placed by dealers, resellers or distributors.</p><p>You agree to provide current, complete and accurate purchase and account information for all purchases made at our store. You agree to promptly update your account and other information, including your email address and credit card numbers and expiration dates, so that we can complete your transactions and contact you as needed.</p><p>To enable faster checkout, you authorize our payment provider to securely store a temporary, encrypted payment token, allowing you to place a second order without re-entering payment details within 15 minutes of your initial purchase. This token is used only for this purpose, automatically expires thereafter, and is handled in compliance with PCI DSS and applicable data protection and information security standards.</p><p>For more detail, please review our <a href=\"/policies/return-policy\">Return Policy</a>.</p><p>5. Customs/Duty charges</p><p>International orders may be shipped DDU (Delivered Duty Unpaid), and we do not charge local VAT, duties, or customs fees at checkout. All taxes, duties, and customs fees are the responsibility of the recipient of the package. Depending on the country, the postal package may incur local customs or VAT charges. Please contact your local customs office for more information regarding your country's customs policies.</p><p>&mdash;</p><p>SECTION 7 - OPTIONAL TOOLS</p><p>We may provide you with access to third-party tools over which we neither monitor nor have any control nor input.</p><p>You acknowledge and agree that we provide access to such tools &rdquo;as is&rdquo; and &ldquo;as available&rdquo; without any warranties, representations or conditions of any kind and without any endorsement. We shall have no liability whatsoever arising from or relating to your use of optional third-party tools.</p><p>Any use by you of optional tools offered through the site is entirely at your own risk and discretion and you should ensure that you are familiar with and approve of the terms on which tools are provided by the relevant third-party provider(s).</p><p>We may also, in the future, offer new services and/or features through the website (including, the release of new tools and resources). Such new features and/or services shall also be subject to these Terms of Service.</p><p>----</p><p>SECTION 8 - THIRD-PARTY LINKS</p><p>Certain content, products and services available via our Service may include materials from third-parties.</p><p>Third-party links on this site may direct you to third-party websites that are not affiliated with us. We are not responsible for examining or evaluating the content or accuracy and we do not warrant and will not have any liability or responsibility for any third-party materials or websites, or for any other materials, products, or services of third-parties.</p><p>We are not liable for any harm or damages related to the purchase or use of goods, services, resources, content, or any other transactions made in connection with any third-party websites. Please review carefully the third-party's policies and practices and make sure you understand them before you engage in any transaction. Complaints, claims, concerns, or questions regarding third-party products should be directed to the third-party.</p><p>----</p><p>SECTION 9 - USER COMMENTS, FEEDBACK AND OTHER SUBMISSIONS</p><p>If, at our request, you send certain specific submissions (for example contest entries) or without a request from us you send creative ideas, suggestions, proposals, plans, or other materials, whether online, by email, by postal mail, or otherwise (collectively, 'comments'), you agree that we may, at any time, without restriction, edit, copy, publish, distribute, translate and otherwise use in any medium any comments that you forward to us. We are and shall be under no obligation (1) to maintain any comments in confidence; (2) to pay compensation for any comments; or (3) to respond to any comments.</p><p>We may, but have no obligation to, monitor, edit or remove content that we determine in our sole discretion are unlawful, offensive, threatening, libelous, defamatory, pornographic, obscene or otherwise objectionable or violates any party&rsquo;s intellectual property or these Terms of Service.</p><p>You agree that your comments will not violate any right of any third-party, including copyright, trademark, privacy, personality or other personal or proprietary right. You further agree that your comments will not contain libelous or otherwise unlawful, abusive or obscene material, or contain any computer virus or other malware that could in any way affect the operation of the Service or any related website. You may not use a false eâ€‘mail address, pretend to be someone other than yourself, or otherwise mislead us or third-parties as to the origin of any comments. You are solely responsible for any comments you make and their accuracy. We take no responsibility and assume no liability for any comments posted by you or any third-party.</p><p>----</p><p>SECTION 10 - PERSONAL INFORMATION</p><p>Your submission of personal information through the store is governed by our Privacy Policy. For detailed information, view our <a href=\"/policies/privacy-policy\">Privacy Policy</a>.</p><p>----</p><p>SECTION 11 - ERRORS, INACCURACIES AND OMISSIONS</p><p>Occasionally there may be information on our site or in the Service that contains typographical errors, inaccuracies or omissions that may relate to product descriptions, pricing, promotions, offers, product shipping charges, transit times and availability. We reserve the right to correct any errors, inaccuracies or omissions, and to change or update information or cancel orders if any information in the Service or on any related website is inaccurate at any time without prior notice (including after you have submitted your order).</p><p>We undertake no obligation to update, amend or clarify information in the Service or on any related website, including without limitation, pricing information, except as required by law. No specified update or refresh date applied in the Service or on any related website, should be taken to indicate that all information in the Service or on any related website has been modified or updated.</p><p>----</p><p>SECTION 12 - PROHIBITED USES</p><p>In addition to other prohibitions as set forth in the Terms of Service, you are prohibited from using the site or its content: (a) for any unlawful purpose; (b) to solicit others to perform or participate in any unlawful acts; (c) to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances; (d) to infringe upon or violate our intellectual property rights or the intellectual property rights of others; (e) to harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate based on gender, sexual orientation, religion, ethnicity, race, age, national origin, or disability; (f) to submit false or misleading information; (g) to upload or transmit viruses or any other type of malicious code that will or may be used in any way that will affect the functionality or operation of the Service or of any related website, other websites, or the Internet; (h) to collect or track the personal information of others; (i) to spam, phish, pharm, pretext, spider, crawl, or scrape; (j) for any obscene or immoral purpose; or (k) to interfere with or circumvent the security features of the Service or any related website, other websites, or the Internet. We reserve the right to terminate your use of the Service or any related website for violating any of the prohibited uses.</p><p>----</p><p>SECTION 13 - DISCLAIMER OF WARRANTIES; LIMITATION OF LIABILITY</p><p>We do not guarantee, represent or warrant that your use of our service will be uninterrupted, timely, secure or error-free.</p><p>We do not warrant that the results that may be obtained from the use of the service will be accurate or reliable.</p><p>You agree that from time to time we may remove the service for indefinite periods of time or cancel the service at any time, without notice to you.</p><p>You expressly agree that your use of, or inability to use, the service is at your sole risk. The service and all products and services delivered to you through the service are (except as expressly stated by us) provided 'as is' and 'as available' for your use, without any representation, warranties or conditions of any kind, either express or implied, including all implied warranties or conditions of merchantability, merchantable quality, fitness for a particular purpose, durability, title, and non-infringement.</p><p>In no case shall buudy, our directors, officers, employees, affiliates, agents, contractors, interns, suppliers, service providers or licensors be liable for any injury, loss, claim, or any direct, indirect, incidental, punitive, special, or consequential damages of any kind, including, without limitation lost profits, lost revenue, lost savings, loss of data, replacement costs, or any similar damages, whether based in contract, tort (including negligence), strict liability or otherwise, arising from your use of any of the service or any products procured using the service, or for any other claim related in any way to your use of the service or any product, including, but not limited to, any errors or omissions in any content, or any loss or damage of any kind incurred as a result of the use of the service or any content (or product) posted, transmitted, or otherwise made available via the service, even if advised of their possibility. Because some states or jurisdictions do not allow the exclusion or the limitation of liability for consequential or incidental damages, in such states or jurisdictions, our liability shall be limited to the maximum extent permitted by law.</p><p>----</p><p>SECTION 14 - INDEMNIFICATION</p><p>You agree to indemnify, defend and hold harmless buudy and our parent, subsidiaries, affiliates, partners, officers, directors, agents, contractors, licensors, service providers, subcontractors, suppliers, interns and employees, harmless from any claim or demand, including reasonable attorneys&rsquo; fees, made by any third-party due to or arising out of your breach of these Terms of Service or the documents they incorporate by reference, or your violation of any law or the rights of a third-party.</p><p>----</p><p>SECTION 15 - SEVERABILITY</p><p>In the event that any provision of these Terms of Service is determined to be unlawful, void or unenforceable, such provision shall nonetheless be enforceable to the fullest extent permitted by applicable law, and the unenforceable portion shall be deemed to be severed from these Terms of Service, such determination shall not affect the validity and enforceability of any other remaining provisions.</p><p>----</p><p>SECTION 16 - TERMINATION</p><p>The obligations and liabilities of the parties incurred prior to the termination date shall survive the termination of this agreement for all purposes. These Terms of Service are effective unless and until terminated by either you or us. You may terminate these Terms of Service at any time by notifying us that you no longer wish to use our Services, or when you cease using our site. If in our sole judgment you fail, or we suspect that you have failed, to comply with any term or provision of these Terms of Service, we also may terminate this agreement at any time without notice and you will remain liable for all amounts due up to and including the date of termination; and/or accordingly may deny you access to our Services (or any part thereof).</p><p>----</p><p>SECTION 17 - ENTIRE AGREEMENT</p><p>The failure of us to exercise or enforce any right or provision of these Terms of Service shall not constitute a waiver of such right or provision.</p><p>These Terms of Service and any policies or operating rules posted by us on this site or in respect to The Service constitutes the entire agreement and understanding between you and us and govern your use of the Service, superseding any prior or contemporaneous agreements, communications and proposals, whether oral or written, between you and us (including, but not limited to, any prior versions of the Terms of Service).</p><p>Any ambiguities in the interpretation of these Terms of Service shall not be construed against the drafting party.</p><p>----</p><p>SECTION 18 - GOVERNING LAW</p><p>These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of England and Wales.</p><p>----</p><p>SECTION 19 - CHANGES TO TERMS OF SERVICE</p><p>You can review the most current version of the Terms of Service at any time at this page.</p><p>We reserve the right, at our sole discretion, to update, change or replace any part of these Terms of Service by posting updates and changes to our website. It is your responsibility to check our website periodically for changes. Your continued use of or access to our website or the Service following the posting of any changes to these Terms of Service constitutes acceptance of those changes.</p><p>----</p><p>SECTION 20 - CONTACT INFORMATION</p><p>Questions about the Terms of Service should be sent to us at <a href=\"mailto:support@buudy.com\">support@buudy.com</a>.</p>";
+<h2>3. How We Use Information</h2>
+<p>Information may be used to:</p>
+<ol>
+  <li>Operate the Store and checkout.</li>
+  <li>Process payments and orders.</li>
+  <li>Arrange fulfillment and delivery.</li>
+  <li>Send order and tracking updates.</li>
+  <li>Provide customer support.</li>
+  <li>Process cancellations, returns and refunds.</li>
+  <li>Prevent fraud, abuse and unauthorized transactions.</li>
+  <li>Investigate delivery and payment disputes.</li>
+  <li>Comply with tax, customs, sanctions, safety and legal obligations.</li>
+  <li>Maintain Store and payment security.</li>
+  <li>Measure and improve Store performance.</li>
+  <li>Send marketing where permitted.</li>
+</ol>
+<p>Where required, processing will rely on your consent, performance of the purchase contract, legal obligations or legitimate business and security interests.</p>
 
-export const cookiesPolicyHtml = "<p style=\"text-align: left;\">What are cookies?</p>\n<p style=\"text-align: left;\"><br />Cookies are small text files that are placed on your computer by websites that you visit.<br />Our site and our partners use cookies to enhance your experience, analyze traffic and<br />for ad personalization and measurement.<br />You can restrict or block cookies using your browser settings. Information on how to do<br />this is detailed below in the \"How to manage cookies\" section.</p>\n<p style=\"text-align: left;\"><br />How to manage cookies?<br />Some cookies are strictly necessary to allow you to use the website and its features,<br />such as storing items in your basket. Without these cookies these features cannot be<br />provided which may impair the functionality of the website meaning you are unable to<br />shop on our website.<br />You can select the cookies you would like this website to store on your device by<br />changing your browser settings. Each browser allows you to restrict or block cookies in<br />different ways.<br />Details on how to do this in each browser can be found on the ICO website (please note<br />that we are not responsible for the content of external websites),</p>\n<p style=\"text-align: left;\"><br />visit:&nbsp;<a style=\"color: #0000ed; text-decoration: none;\" href=\"https://ico.org.US/global/cookies/\">https://ico.org.US/your-data-matters/online/cookies/</a></p>\n<p style=\"text-align: left;\"><br />Within most browsers you can utilise private browsing modes that typically do not save<br />local data associated with the session, such as cookies. These are typically deleted<br />when you close all the windows.<br />You can install a browser add-on to opt-out of Google Analytics in your browser across<br />all websites (please note that we are not responsible for the content of external<br />websites),</p>\n<p style=\"text-align: left;\"><br />visit:&nbsp;<a style=\"color: #0000ed; text-decoration: none;\" href=\"https://tools.google.com/dlpage/gaoptout\">https://tools.google.com/dlpage/gaoptout</a></p>\n<p style=\"text-align: left;\"><br />Types of cookies<br />First-party cookies - these are set by the website you have accessed. They are often<br />used to remember your preferences on the website, such as your preferred currency or<br />items in your basket.<br />Third-party cookies - these are set by a website other than the one you are accessing.<br />Session cookies - these are temporary cookies, which are deleted when you close your<br />browser.</p>\n<p style=\"text-align: left;\"><br />Persistent cookies - these remain on your device until you erase them or they expire.<br />Cookies that are used on our website<br />We have documented the partners and tools that create cookies that are used by this<br />website and our partners use and their purpose. Please note that we are not<br />responsible for the content of external websites.</p>\n<p style=\"text-align: left;\"><br />Google Analytics<br />These cookies are used to collect information about how visitors use our site. We use<br />the information to compile reports and to help us improve the site. The cookies collect<br />information in an anonymous form, including the number of visitors to the site, where<br />visitors have come to the site from and the pages they visited.<br />Find out how to opt-out of Google Analytics across all websites in the \"How to Manage<br />Cookies\" section.</p>\n<p style=\"text-align: left;\"><br />You can find out more about Google's use of information here:</p>\n<p style=\"text-align: left;\"><br /><a style=\"color: #0000ed; text-decoration: none;\" href=\"https://policies.google.com/technologies/partner-sites\">https://policies.google.com/technologies/partner-sites</a>.</p>\n<p style=\"text-align: left;\"><br />Google Ads (and DoubleClick)<br />Google Ads uses cookies to improve advertising by targeting advertising based on<br />what is relevant for the user. They also allow reporting on advertising performance and<br />to avoid showing ads that a user has already seen. This product collects and uses data<br />using cookies. The data collected may be used to personalise advertising. You can find<br />out more about Google's use of information here:</p>\n<p style=\"text-align: left;\"><br /><a style=\"color: #0000ed; text-decoration: none;\" href=\"https://policies.google.com/technologies/partner-sites\">https://policies.google.com/technologies/partner-sites</a>.</p>\n<p style=\"text-align: left;\"><br />You can revoke your consent to ad personalisation by Google here:</p>\n<p style=\"text-align: left;\"><br /><a style=\"color: #0000ed; text-decoration: none;\" href=\"https://adssettings.google.com/\">https://adssettings.google.com/</a></p>\n<p style=\"text-align: left;\"><br />Google reCAPTCHA</p>\n<p style=\"text-align: left;\"><br />Google reCAPTCHA is used to help establish that a user is human and enhances<br />security on our website. This product collects and uses data using cookies. The data<br />collected may be used to personalise advertising. You can find out more about<br />Google's use of information here:</p>\n<p style=\"text-align: left;\">https://policies.google.com/technologies/partner-sites.</p>\n<p style=\"text-align: left;\">&nbsp;</p>\n<p style=\"text-align: left;\">Cookies for store front functionality</p>\n<p style=\"text-align: left;\">&nbsp;</p>\n<p style=\"text-align: left;\">Reporting and analytics</p>\n<p style=\"text-align: left;\"><br />How long will cookies remain on my computer or mobile device?<br />The length of time that a cookie remains on your computer or mobile device depends<br />on whether it is a \"persistent\" or \"session\" cookie. Session cookies last until you stop<br />browsing and persistent cookies last until they expire or are deleted. Most of the cookies<br />we use are persistent and will expire between 30 minutes and two years from the date<br />they are downloaded to your device. See the section below on how to control cookies<br />for more information on removing them before they expire.</p>";
+<h2>4. Cookies and Analytics</h2>
+<p>The Store may use cookies and similar technologies for:</p>
+<ol>
+  <li>Cart and checkout functions.</li>
+  <li>Security and fraud prevention.</li>
+  <li>Language and session preferences.</li>
+  <li>Analytics and Store improvement.</li>
+  <li>Marketing where permitted.</li>
+</ol>
+<p>Non-essential cookies will be subject to consent or opt-out controls where required by law. Blocking essential cookies may affect Store functionality.</p>
+
+<h2>5. How Information Is Shared</h2>
+<p>Information may be shared with:</p>
+<ol>
+  <li>The Seller, where necessary to operate the Store.</li>
+  <li>Suppliers and warehouses preparing products.</li>
+  <li>Carriers delivering orders.</li>
+  <li>Payment providers and financial institutions.</li>
+  <li>Fraud-prevention and identity-verification providers.</li>
+  <li>Customer-support and technology providers.</li>
+  <li>Analytics and marketing providers where legally permitted.</li>
+  <li>Regulators, courts or government authorities where legally required.</li>
+</ol>
+<p>Only information reasonably necessary for the relevant service should be shared.</p>
+<p>We do not sell personal information for money. Certain advertising or analytics disclosures may be legally classified as a sale, sharing or targeted advertising in some jurisdictions. Required opt-out rights will be provided where applicable.</p>
+
+<h2>6. International Processing</h2>
+<p>Your information may be processed in the United States, your country, the Seller's country, a fulfillment country or another location used by Service Providers.</p>
+<p>Where required, lawful safeguards will be used for international transfers.</p>
+
+<h2>7. Retention</h2>
+<p>Information is retained only for as long as reasonably necessary for:</p>
+<ol>
+  <li>Order fulfillment and support.</li>
+  <li>Refunds, warranties and chargebacks.</li>
+  <li>Tax, accounting and customs requirements.</li>
+  <li>Fraud prevention and security.</li>
+  <li>Product recalls and safety obligations.</li>
+  <li>Legal claims and regulatory compliance.</li>
+</ol>
+<p>Information may then be deleted, anonymized or restricted.</p>
+
+<h2>8. Security</h2>
+<p>Reasonable technical, administrative and organizational measures are used to protect personal information.</p>
+<p>No online system is completely secure. You must protect your device, account and payment credentials and report suspected unauthorized activity promptly.</p>
+
+<h2>9. Marketing</h2>
+<p>Marketing messages will be sent only where legally permitted.</p>
+<p>You may unsubscribe through the link in the message or by contacting support at <a href="mailto:support@buudy.com">support@buudy.com</a>.</p>
+<p>Order confirmations, security messages, recall notices and other necessary service communications are not marketing.</p>
+
+<h2>10. Your Privacy Rights</h2>
+<p>Depending on your location, you may have the right to:</p>
+<ol>
+  <li>Access your personal information.</li>
+  <li>Correct inaccurate information.</li>
+  <li>Request deletion.</li>
+  <li>Restrict or object to processing.</li>
+  <li>Request portable data.</li>
+  <li>Withdraw consent.</li>
+  <li>Opt out of certain marketing, profiling, sale or sharing activities.</li>
+  <li>Appeal a privacy-request decision.</li>
+  <li>Complain to a data-protection authority.</li>
+</ol>
+<p>Legal exceptions may apply where information is required for orders, fraud prevention, safety, accounting or legal claims.</p>
+
+<h2>11. Privacy Requests</h2>
+<p>Submit privacy requests through:</p>
+<p><a href="mailto:support@buudy.com">support@buudy.com</a>, <a href="mailto:contact@xpagedrop.com">contact@xpagedrop.com</a> or <a href="/pages/contact-us">Contact Us</a></p>
+<p>We may request reasonable information to verify your identity and protect your data. Requests will be handled within the period required by applicable law.</p>
+
+<h2>12. Children</h2>
+<p>The Store is not intended for children who lack legal capacity to make purchases.</p>
+<p>If you believe a child submitted personal information without required authorization, contact Buudy support.</p>
+
+<h2>13. Legal Disclosures</h2>
+<p>Information may be preserved or disclosed where reasonably necessary to comply with law, respond to lawful government requests, investigate fraud, protect legal rights, address security threats or manage a product recall.</p>
+
+<h2>14. Mandatory Rights</h2>
+<p>Mandatory privacy and consumer rights in your jurisdiction remain applicable and prevail over conflicting parts of this Policy.</p>
+
+<h2>15. Contact</h2>
+<p>For questions regarding privacy, contact:</p>
+<p>Email: <a href="mailto:support@buudy.com">support@buudy.com</a></p>
+<p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
+<h3>xPage Drop LLC</h3>
+<p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
+<p>Email: <a href="mailto:contact@xpagedrop.com">contact@xpagedrop.com</a></p>
+<p>This is a corporate address only. It is not a warehouse, fulfillment center or return address.</p>
+`;
+
+export const refundPolicyHtml = `
+<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 1.0</p>
+
+<h2>1. About This Policy</h2>
+<p>This Policy applies to purchases from Buudy.</p>
+<p>In this Policy:</p>
+<ul>
+  <li><strong>Store</strong> means Buudy.</li>
+  <li><strong>xPage Drop</strong> means xPage Drop LLC.</li>
+  <li><strong>Seller</strong> means the independent merchant operating the Store.</li>
+  <li><strong>Fulfillment Partner</strong> means a supplier, manufacturer, warehouse or carrier.</li>
+  <li><strong>You</strong> means the buyer.</li>
+  <li><strong>We, us and our</strong> mean the Store and xPage Drop where it handles the request.</li>
+</ul>
+
+<h2>2. Contact Support First</h2>
+<p>Before cancelling or returning an order, contact:</p>
+<p><a href="mailto:support@buudy.com">support@buudy.com</a> or <a href="/pages/contact-us">Contact Us</a></p>
+<p>You must receive written return authorization before sending a product. The approved return address may differ from:</p>
+<ol>
+  <li>The shipping origin.</li>
+  <li>The address printed on the package.</li>
+  <li>The Fulfillment Partner's address.</li>
+  <li>The xPage Drop corporate address.</li>
+</ol>
+<p>Do not return products to any address without written authorization.</p>
+
+<h2>3. Order Cancellations</h2>
+<p>Cancellation requests may be submitted within:</p>
+<p><strong>Cancellation period:</strong> Cancellation requests must be submitted within 12 hours of placing the order. Cancellation is only possible if fulfillment has not started. Requests submitted within this period are not guaranteed once the order has entered processing.</p>
+<p>We will try to stop the order, but cancellation cannot be guaranteed after payment review, preparation, customization, packaging or fulfillment begins.</p>
+<p>If cancellation succeeds, the cancelled amount will be refunded to the original payment method. After fulfillment begins, you may need to receive the order and request a return.</p>
+
+<h2>4. Change-of-Mind Returns</h2>
+<p>Change-of-mind returns may be requested within:</p>
+<p><strong>Return window:</strong> Within 30 days of delivery</p>
+<p>Returned products must meet these conditions:</p>
+<p><strong>Return condition:</strong> Returns are accepted only for damaged, defective, incorrect or missing products. Customers must provide clear photo or video evidence and obtain return authorization before sending anything back. Items must not be returned to the address shown on the package. Change-of-mind, incorrect-size or personal-preference returns are not generally accepted.</p>
+<p>You may inspect a product as reasonably necessary, but you may be responsible for reduced value caused by use, damage or handling beyond normal inspection where permitted by law.</p>
+
+<h2>5. Defective, Damaged or Incorrect Products</h2>
+<p>Contact support promptly if a product:</p>
+<ol>
+  <li>Is defective or unsafe.</li>
+  <li>Arrives damaged.</li>
+  <li>Is materially different from its description.</li>
+  <li>Is the wrong item, size, color or model.</li>
+  <li>Is missing parts or quantities.</li>
+  <li>Does not function as reasonably advertised.</li>
+</ol>
+<p>We may request reasonable evidence such as photographs, measurements, packaging information or a short video showing the issue.</p>
+<p>An unboxing video is not the only accepted evidence.</p>
+<p>Depending on the issue and applicable law, the remedy may include replacement, missing parts, repair, partial refund or full refund.</p>
+
+<h2>6. Missing Items and Lost Shipments</h2>
+<p>Check whether your order was divided into separate packages before reporting a missing item.</p>
+<p>For a missing item, provide photographs of the received package, label and contents where reasonably available.</p>
+<p>If an item was omitted or a shipment is confirmed lost, we will provide a replacement, refund or other remedy required by law.</p>
+
+<h2>7. Delayed Shipments</h2>
+<p>Delivery estimates are not guarantees unless expressly stated otherwise.</p>
+<p>A reasonable delay does not automatically qualify for a refund. However, if delivery materially exceeds the promised period, you may receive a revised delivery option, cancellation or refund as required by law.</p>
+<p>You are not required to accept an indefinite delay.</p>
+
+<h2>8. Return Shipping Costs</h2>
+<p>The applicable return-cost rule is:</p>
+<p><strong>Return shipping:</strong> Return shipping costs are the customer's responsibility unless Buudy confirms otherwise in writing. Products must not be returned without prior authorization and return instructions.</p>
+<p>For validated defective, damaged, incorrect or materially misdescribed products, we will provide a prepaid method, reimburse reasonable authorized return costs or provide another remedy required by law.</p>
+<p>Unauthorized or unnecessarily expensive return shipping may not be reimbursed.</p>
+
+<h2>9. Return Inspection</h2>
+<p>Returned products may be inspected before a refund is approved. The inspection may confirm:</p>
+<ol>
+  <li>The correct product was returned.</li>
+  <li>The product is complete.</li>
+  <li>The reported defect exists.</li>
+  <li>The product was not intentionally damaged or replaced.</li>
+  <li>The return conditions were followed.</li>
+</ol>
+<p>A lawful deduction may be made for missing parts, unauthorized damage or excessive use. Normal inspection will not remove mandatory return rights.</p>
+
+<h2>10. Non-Returnable Products</h2>
+<p>Subject to mandatory law, the following products may not qualify for change-of-mind returns:</p>
+<p><strong>Non-returnable products:</strong> Products are non-returnable when the request is based on a change of mind, personal preference, an incorrectly selected product, variant or size, an incorrect shipping address, minor cosmetic imperfections, packaging damage without product damage, or failure to complete customs clearance.</p>
+<p>This may include personalized, perishable, hygiene-sensitive or opened sealed products where legally permitted.</p>
+<p>A non-returnable classification does not remove rights relating to defective, unsafe, incorrect or materially misdescribed products.</p>
+
+<h2>11. Refunds</h2>
+<p>Approved refunds will normally be sent to the original payment method.</p>
+<p><strong>Refund initiation time:</strong> 5–10 business days</p>
+<p>Your bank or payment provider may require additional time to display the refund.</p>
+<p>Where the original payment method cannot receive the refund, another lawful method may be requested.</p>
+<p>Original delivery fees will be refunded where required by applicable law.</p>
+
+<h2>12. Partial Refunds and Replacements</h2>
+<p>A partial refund may be offered if you choose to keep a product with a minor issue.</p>
+<p>A replacement may be offered for defective, damaged, incorrect, missing or lost products. A materially different replacement will not be sent without your approval.</p>
+<p>A partial refund or replacement will not replace a remedy that applicable law requires.</p>
+
+<h2>13. Refused and Unauthorized Returns</h2>
+<p>Do not refuse a package or send a return without contacting support.</p>
+<p>Unauthorized returns may be refused, lost or delayed. You may be responsible for avoidable costs resulting from failure to follow reasonable return instructions.</p>
+<p>This does not remove mandatory consumer rights.</p>
+
+<h2>14. Fraudulent or Abusive Claims</h2>
+<p>We may reject a claim involving materially false or misleading information, intentional damage, substitution of products, false non-delivery statements or duplicate recovery attempts.</p>
+<p>Exercising a legitimate refund, consumer-protection or chargeback right is not abuse.</p>
+<p>We may provide relevant order, delivery, refund and communication records to payment providers or competent authorities when fraud is reasonably suspected.</p>
+
+<h2>15. Chargebacks</h2>
+<p>Contact Buudy support before opening a chargeback so the issue can be reviewed directly. This does not restrict legitimate chargeback rights.</p>
+<p>Do not seek both a completed refund and a chargeback for the same amount. An active chargeback may pause a separate refund while the payment provider controls the disputed funds.</p>
+
+<h2>16. Mandatory Rights</h2>
+<p>Mandatory cancellation, return, conformity, warranty and refund rights in your jurisdiction remain applicable.</p>
+<p>Where local law grants a longer return period, free return, legal guarantee or stronger remedy, that law prevails over conflicting parts of this Policy.</p>
+
+<h2>17. Contact and Return Warning</h2>
+<p>For questions or assistance with returns, contact:</p>
+<p>Email: <a href="mailto:support@buudy.com">support@buudy.com</a></p>
+<p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
+<h3>xPage Drop LLC</h3>
+<p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
+<p>Email: <a href="mailto:contact@xpagedrop.com">contact@xpagedrop.com</a></p>
+<p>This is a corporate address only. It is not a warehouse, fulfillment center or standard return address. Do not send a return here or to the address printed on a package unless Buudy expressly provides that address in writing.</p>
+`;
+
+export const returnPolicyHtml = refundPolicyHtml;
+export const refundReturnPolicyHtml = refundPolicyHtml;
+
+export const termsOfServiceHtml = `
+<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 1.0</p>
+
+<h2>1. About These Terms</h2>
+<p>These Terms apply when you visit or purchase from Buudy.</p>
+<p>In these Terms:</p>
+<ul>
+  <li><strong>Store</strong> means Buudy.</li>
+  <li><strong>xPage Drop</strong> means xPage Drop LLC.</li>
+  <li><strong>Seller</strong> means the independent merchant operating the Store.</li>
+  <li><strong>Fulfillment Partner</strong> means a third-party supplier, manufacturer, warehouse or carrier.</li>
+  <li><strong>You</strong> means the buyer.</li>
+  <li><strong>We, us and our</strong> mean the Store and, where it handles the transaction, xPage Drop.</li>
+</ul>
+<p>The Store is operated by an independent Seller. xPage Drop provides customer support and may handle checkout, payments, fraud screening, refunds, order administration and fulfillment coordination.</p>
+<p>The party identified as the merchant at checkout or in your order confirmation is your contractual seller. Where no separate merchant is identified, xPage Drop is the merchant of record for the transaction.</p>
+
+<h2>2. Eligibility and Store Use</h2>
+<p>You must have the legal capacity to place an order. Age-restricted products may only be purchased by buyers who meet the applicable age requirements. You must not:</p>
+<ol>
+  <li>Use false identity, payment or delivery information.</li>
+  <li>Place fraudulent or unauthorized orders.</li>
+  <li>Interfere with the Store's operation or security.</li>
+  <li>Use the Store for unlawful activity.</li>
+  <li>Evade geographic, age, sanctions or product restrictions.</li>
+  <li>Copy, scrape or commercially reuse Store content without permission.</li>
+</ol>
+<p>We may restrict access or cancel orders where fraud, abuse or unlawful activity is reasonably suspected.</p>
+
+<h2>3. Products</h2>
+<p>We aim to present product descriptions, photographs, sizes, colors and specifications accurately. Minor differences may occur because of screen settings, lighting, manufacturing batches, packaging changes or manual measurements. These differences do not affect your rights where a product is defective, unsafe, incorrect or materially different from its description.</p>
+<p>You are responsible for reviewing product dimensions, compatibility, warnings and usage instructions before ordering.</p>
+<p>Product reviews and promotional content do not create guarantees beyond the product description, any express warranty and rights provided by law.</p>
+
+<h2>4. Prices, Currency and Taxes</h2>
+<p>Prices and the transaction currency are shown before checkout. All prices are in USD ($).</p>
+<p>Your bank or payment provider may apply currency-conversion or international transaction fees if your funding account is in another currency. These charges are not controlled by the Store or xPage Drop.</p>
+<p>Applicable sales taxes may be collected at checkout. Customs duties, import taxes or brokerage charges will be handled according to the rule shown before purchase:</p>
+<p><strong>Customs and duties:</strong> Orders above $800 may be subject to customs duties and import taxes, payable by the customer upon delivery.</p>
+
+<h2>5. Orders</h2>
+<p>Submitting an order is an offer to purchase. Receiving an order-confirmation email means that the order was received, not necessarily that it was finally accepted. Orders may be reviewed for:</p>
+<ol>
+  <li>Payment authorization.</li>
+  <li>Fraud or chargeback risk.</li>
+  <li>Product availability.</li>
+  <li>Pricing or technical errors.</li>
+  <li>Delivery restrictions.</li>
+  <li>Sanctions or legal restrictions.</li>
+</ol>
+<p>We may reject or cancel an order for a legitimate reason. If payment has already been collected for a cancelled order, the affected amount will be refunded.</p>
+<p>A materially different replacement will not be sent without your approval.</p>
+
+<h2>6. Pricing Errors and Availability</h2>
+<p>We may correct obvious pricing, product or availability errors before accepting an order. If a product becomes unavailable, we may:</p>
+<ol>
+  <li>Cancel and refund the affected item.</li>
+  <li>Offer an alternative for your approval.</li>
+  <li>Ask whether you accept a revised fulfillment date.</li>
+</ol>
+
+<h2>7. Payments</h2>
+<p>By placing an order, you authorize the displayed amount to be charged through the selected payment method.</p>
+<p>Payment authorization or capture does not guarantee order acceptance.</p>
+
+<h2>8. Shipping, Returns and Refunds</h2>
+<p>Processing and delivery estimates are shown on the product page, at checkout or in the Shipping and Delivery Policy.</p>
+<p>Returns, cancellations and refunds are governed by the Returns, Refunds and Cancellations Policy. You must contact Buudy support and receive written authorization before returning a product.</p>
+
+<h2>9. Intellectual Property</h2>
+<p>Store software, branding, photographs, designs, text and other content may belong to the Store, xPage Drop, manufacturers or licensors.</p>
+<p>You may use Store content only for personal shopping purposes.</p>
+<p>Intellectual-property complaints must be sent to <a href="mailto:support@buudy.com">support@buudy.com</a> or <a href="/pages/contact-us">Contact Us</a> and include sufficient information to identify the protected work and disputed content.</p>
+
+<h2>10. Liability</h2>
+<p>Nothing in these Terms excludes liability or consumer rights that cannot legally be excluded.</p>
+<p>To the maximum extent permitted by law, we are not responsible for indirect or unforeseeable losses arising from a consumer purchase.</p>
+<p>For claims that may legally be limited, total liability relating to an order will not exceed the amount paid for the affected product and its associated shipping charge.</p>
+
+<h2>11. Governing Law and Complaints</h2>
+<p>These Terms are governed by Delaware law, except where mandatory law in your country or state provides protections or dispute rights that cannot be removed by contract.</p>
+<p>Before starting a formal dispute, contact:</p>
+<p><a href="mailto:support@buudy.com">support@buudy.com</a> or <a href="/pages/contact-us">Contact Us</a></p>
+<p>This does not prevent you from contacting a payment provider, regulator, consumer authority or court where permitted by law.</p>
+
+<h2>12. Mandatory Rights</h2>
+<p>Mandatory consumer rights in your jurisdiction remain applicable. If these Terms conflict with a right that cannot legally be waived, the mandatory right will prevail.</p>
+
+<h2>13. Contact</h2>
+<p>Customer support for this Store is administered by Buudy and xPage Drop.</p>
+<p>Email: <a href="mailto:support@buudy.com">support@buudy.com</a></p>
+<p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
+<h3>xPage Drop LLC</h3>
+<p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
+<p>Email: <a href="mailto:contact@xpagedrop.com">contact@xpagedrop.com</a></p>
+<p>This is a corporate address only. It is not a warehouse, fulfillment center or return address. Do not send products to this address unless expressly authorized in writing.</p>
+`;
+
+export const cookiesPolicyHtml = `
+<p><strong>What are cookies?</strong></p>
+<p>Cookies are small text files that are placed on your computer by websites that you visit. Our site and our partners use cookies to enhance your experience, analyze traffic and for ad personalization and measurement. You can restrict or block cookies using your browser settings.</p>
+
+<h2>How to manage cookies</h2>
+<p>Some cookies are strictly necessary to allow you to use the website and its features, such as storing items in your basket. Without these cookies these features cannot be provided which may impair the functionality of the website.</p>
+<p>You can select the cookies you would like this website to store on your device by changing your browser settings. Details on how to do this in each browser can be found on the ICO website:</p>
+<p><a href="https://ico.org.uk/your-data-matters/online/cookies/">https://ico.org.uk/your-data-matters/online/cookies/</a></p>
+<p>You can install a browser add-on to opt-out of Google Analytics across all websites:</p>
+<p><a href="https://tools.google.com/dlpage/gaoptout">https://tools.google.com/dlpage/gaoptout</a></p>
+
+<h2>Types of cookies</h2>
+<ul>
+  <li><strong>First-party cookies:</strong> Set by the website you have accessed to remember your preferences.</li>
+  <li><strong>Third-party cookies:</strong> Set by a website other than the one you are accessing.</li>
+  <li><strong>Session cookies:</strong> Temporary cookies deleted when you close your browser.</li>
+  <li><strong>Persistent cookies:</strong> Remain on your device until erased or expired.</li>
+</ul>
+
+<h2>Cookies used on our website</h2>
+<p><strong>Google Analytics:</strong> Collects information in anonymous form about how visitors use our site.</p>
+<p><strong>Google Ads:</strong> Improves advertising relevancy and reporting.</p>
+<p><strong>Google reCAPTCHA:</strong> Enhances security and fraud prevention.</p>
+`;
 
 export const orderTrackingData = {
   title: "Order Tracking",
-  intro: "Once your order has shipped, you will receive an email from us with a link to track your order.\nYou can also enter the order name and your email in the box below to get the status of your shipment.",
-  subIntro: "If you just received a shipment notification, please allow 1 to 2 business days for the tracking information to appear.",
+  intro:
+    "Once your order has shipped, you will receive an email from us with a link to track your order.\nYou can also enter the order name and your email in the box below to get the status of your shipment.",
+  subIntro:
+    "If you just received a shipment notification, please allow 1 to 2 business days for the tracking information to appear.",
   faqs: [
-  {
-    "question": "When will I get my order?",
-    "answerHtml": "<p class=\"text-sm leading-7\">We offer free worldwide tracked shipping. Orders are processed within <strong>1 to 3 business days</strong> and shipped with a fully tracked courier service. Once dispatched, transit usually takes <strong>3 to 10 business days</strong>.</p><p class=\"mt-4 text-sm leading-7\"><strong>Please note:</strong> Your order may split into multiple shipments when it includes a pre-ordered or back-ordered item. If this occurs, you will receive tracking details for each separate shipment.</p><p class=\"mt-4 text-sm leading-7\">Read the full <a class=\"font-semibold text-[var(--plum)] underline\" href=\"/policies/shipping-policy\">Shipping Policy</a>.</p>"
-  },
-  {
-    "question": "Can I add or remove products from my order?",
-    "answerHtml": "<p class=\"text-sm leading-7\">Sorry! To ensure your order arrives on time, we generally begin processing an order as soon as it is placed. As a result we are unable to make any changes to your order after it is placed.</p>"
-  },
-  {
-    "question": "Where can I find my order number?",
-    "answerHtml": "<p class=\"text-sm leading-7\">Your order number can be found at the top of your confirmation email. Please check your inbox, including your spam folder. If you still cannot locate it, email <a class=\"font-semibold text-[var(--plum)] underline\" href=\"mailto:support@buudy.com\">support@buudy.com</a> or use our <a class=\"font-semibold text-[var(--plum)] underline\" href=\"/pages/contact-us#contact-form\">Contact Form</a>.</p>"
-  }
-]
+    {
+      question: "When will I get my order?",
+      answerHtml:
+        '<p class="text-sm leading-7">We offer tracked shipping. Orders are processed within <strong>1 to 3 business days</strong> and shipped with a fully tracked courier service. Once dispatched, transit usually takes <strong>7 to 20 business days</strong>.</p><p class="mt-4 text-sm leading-7"><strong>Please note:</strong> Your order may split into multiple shipments when it includes multiple items. If this occurs, you will receive tracking details for each separate shipment.</p><p class="mt-4 text-sm leading-7">Read the full <a class="font-semibold text-[var(--plum)] underline" href="/policies/shipping-policy">Shipping Policy</a>.</p>'
+    },
+    {
+      question: "Can I add or remove products from my order?",
+      answerHtml:
+        '<p class="text-sm leading-7">To ensure your order arrives on time, orders enter fulfillment rapidly. Address changes must be requested within 2 hours, and cancellation requests within 12 hours of placing the order.</p>'
+    },
+    {
+      question: "Where can I find my order number?",
+      answerHtml:
+        '<p class="text-sm leading-7">Your order number can be found at the top of your confirmation email. Please check your inbox, including your spam folder. If you still cannot locate it, email <a class="font-semibold text-[var(--plum)] underline" href="mailto:support@buudy.com">support@buudy.com</a> or use our <a class="font-semibold text-[var(--plum)] underline" href="/pages/contact-us">Contact Form</a>.</p>'
+    }
+  ]
 };

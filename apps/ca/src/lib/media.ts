@@ -14,6 +14,13 @@ export function homeAsset(fileName: string) {
   return `/images/home/${fileName}`;
 }
 
+export type ProductImageBadge = {
+  title: string;
+  sub?: string;
+  position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+  theme?: "dark" | "white";
+};
+
 export type ProductImage = {
   src: string;
   fallbackSrc?: string;
@@ -21,4 +28,5 @@ export type ProductImage = {
   animated?: boolean;
   width?: number;
   height?: number;
+  badge?: ProductImageBadge;
 };

@@ -9,22 +9,31 @@ const tabs = [
     id: "compact-build",
     tabLabel: "Compact Build",
     title: "Take your Wellness Anywhere",
-    body: "Lightweight 200g design (4.9 inches) works at home, the office, or during travel. Durable one-button operation.",
-    image: productAsset("tab-1-compact.jpeg", "buudy-red-torch"),
+    body: "Lightweight 74g design (12cm / 4.72 inches) works at home, the office, or during travel. Durable one-button operation.",
+    image: productAsset(
+      "07-buudy-red-light-torch-lifestyle-portable-relief.webp",
+      "buudy-red-torch",
+    ),
   },
   {
     id: "clinical-strength",
     tabLabel: "Clinical Strength",
     title: "Clinical Strength",
-    body: "The T5 torch combines blue, red, deep red, and near-infrared wavelengths for a focused skin and body care routine.",
-    image: productAsset("tab-2-clinical.jpeg", "buudy-red-torch"),
+    body: "The Buudy LED Torch combines red (630nm), deep red (660nm), and near-infrared (850nm) wavelengths for a focused skin and body care routine.",
+    image: productAsset(
+      "08-buudy-red-light-torch-neck-targeted-wellness.webp",
+      "buudy-red-torch",
+    ),
   },
   {
     id: "precision-wavelengths",
     tabLabel: "Precision Wavelengths",
     title: "Precision Wavelengths",
     body: "Use the specific wavelength blend for localized application on the face, back, knees, shoulders, hands, feet, or other target areas.",
-    image: productAsset("tab-3-precision.jpeg", "buudy-red-torch"),
+    image: productAsset(
+      "09-buudy-red-light-torch-knee-joint-precision.webp",
+      "buudy-red-torch",
+    ),
   },
   {
     id: "rapid-treatment",
@@ -32,7 +41,7 @@ const tabs = [
     title: "Rapid Treatment",
     body: "Hold the torch over the target area for quick sessions, building gradually as your body gets used to red light therapy.",
     image: productAsset(
-      "tab-4-rapid.jpeg",
+      "10-buudy-red-light-torch-arm-muscle-rapid-treatment.webp",
       "buudy-red-torch",
     ),
   },

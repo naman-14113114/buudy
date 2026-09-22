@@ -82,6 +82,73 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      // xPage Drop exact slugs
+      {
+        source: "/policies/privacy",
+        destination: "/policies/privacy-policy",
+        permanent: true,
+      },
+      {
+        source: "/policies/refund_return",
+        destination: "/policies/return-policy",
+        permanent: true,
+      },
+      {
+        source: "/policies/shipping",
+        destination: "/policies/shipping-policy",
+        permanent: true,
+      },
+      {
+        source: "/policies/terms_of_service",
+        destination: "/policies/terms-of-service",
+        permanent: true,
+      },
+      // Root policy shortcuts to canonical /policies/*
+      {
+        source: "/privacy-policy",
+        destination: "/policies/privacy-policy",
+        permanent: true,
+      },
+      {
+        source: "/return-policy",
+        destination: "/policies/return-policy",
+        permanent: true,
+      },
+      {
+        source: "/shipping-policy",
+        destination: "/policies/shipping-policy",
+        permanent: true,
+      },
+      {
+        source: "/terms-of-service",
+        destination: "/policies/terms-of-service",
+        permanent: true,
+      },
+      {
+        source: "/refund-policy",
+        destination: "/policies/refund-policy",
+        permanent: true,
+      },
+      {
+        source: "/cookies-policy",
+        destination: "/policies/cookies-policy",
+        permanent: true,
+      },
+      // Order tracking aliases
+      {
+        source: "/policies/order-tracking",
+        destination: "/order-tracking",
+        permanent: true,
+      },
+      {
+        source: "/pages/order-tracking",
+        destination: "/order-tracking",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

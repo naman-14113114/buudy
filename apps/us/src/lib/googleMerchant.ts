@@ -102,7 +102,7 @@ export const googleMerchantProducts: MerchantProduct[] = [
     id: "buudy-7-colour-led-mask-us",
     title: "Buudy 7 Colour LED Light Therapy Face Mask - Red Light Therapy & 830nm NIR - Face & Neck Piece",
     description:
-      "Buudy 7 Colour LED Face Mask delivers clinical-grade LED light therapy for home use. Features 7 visible light wavelengths plus 830 nm Near-Infrared (NIR) mode to stimulate collagen, reduce wrinkles, and clear acne. Full face and neck coverage with wireless tap controls. Includes USB-C charger, eye protection, and free $89 glow kit.",
+      "Buudy 7 Colour LED Face Mask delivers clinical-grade LED light therapy for home use. Features 7 visible light wavelengths plus 830 nm Near-Infrared (NIR) mode to stimulate collagen, reduce wrinkles, and clear acne. Full face and neck coverage with wireless tap controls. Includes USB-C charger, eye protection, and free $70 glow kit.",
     link: absoluteUrl("/products/buudy-7-colour-led-face-mask"),
     imageLink: productImage(
       "/images/products/buudy-led-mask/01-buudy-led-mask-front.webp",
@@ -125,7 +125,7 @@ export const googleMerchantProducts: MerchantProduct[] = [
       "Cordless, rechargeable, tap-to-cycle control",
       "Four adjustable intensity levels",
       "192 high-density LEDs",
-      "90-day money back guarantee",
+      "Easy return and refund policy",
     ],
     productDetails: [
       {
@@ -158,19 +158,29 @@ export const googleMerchantProducts: MerchantProduct[] = [
   },
   {
     id: "buudy-red-light-torch-us",
-    title: "Buudy Handheld Red Light Therapy Torch",
+    title: "Buudy LED Handheld Light Therapy Torch",
     description:
-      "Buudy Red Light Therapy Torch is a compact handheld device for targeted adult at-home skincare and wellness routines. It combines red and near-infrared light at 630 nm, 660 nm and 850 nm in a portable format. The torch is supplied with a USB charging cable and wrist strap for easy storage and travel.",
+      "Buudy LED Torch is a compact handheld device for targeted adult at-home skincare and wellness routines. It combines red and near-infrared light at 630 nm, 660 nm and 850 nm in a portable format. The torch is supplied with a USB battery dock charger, 2x 18650 lithium batteries, triangular bracket tripod stand, anti-loss tail rope, and zipper travel storage case.",
     link: absoluteUrl("/products/red-light-torch"),
     imageLink: productImage(
-      "/images/products/buudy-red-torch/07-buudy-red-torch-closeup.jpeg",
+      "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
     ),
     additionalImageLinks: [
-      productImage("/images/products/buudy-red-torch/01-buudy-red-torch-main.png"),
-      productImage("/images/products/buudy-red-torch/03-buudy-red-torch-handheld.jpeg"),
-      productImage("/images/products/buudy-red-torch/05-buudy-red-torch-kit.jpeg"),
-      productImage("/images/products/buudy-red-torch/06-buudy-red-torch-body-relief.jpeg"),
-      productImage("/images/products/buudy-red-torch/08-buudy-red-torch-travel.jpeg"),
+      productImage(
+        "/images/products/buudy-red-torch/02-buudy-red-light-torch-product-travel-case.webp",
+      ),
+      productImage(
+        "/images/products/buudy-red-torch/03-buudy-red-light-torch-handheld-ergonomics.webp",
+      ),
+      productImage(
+        "/images/products/buudy-red-torch/04-buudy-red-light-torch-neck-shoulder-treatment.webp",
+      ),
+      productImage(
+        "/images/products/buudy-red-torch/05-buudy-red-light-torch-arm-joint-pain-relief.webp",
+      ),
+      productImage(
+        "/images/products/buudy-red-torch/06-buudy-red-light-torch-deep-tissue-muscle-recovery.webp",
+      ),
     ],
     availability: "in_stock",
     price: priceFromCents(buudyRedTorch.priceCents),
@@ -178,11 +188,11 @@ export const googleMerchantProducts: MerchantProduct[] = [
     googleProductCategory,
     productType: "Health & Beauty > Light Therapy Devices > Handheld Red Light Devices",
     productHighlights: [
-      "Compact handheld aluminium design",
-      "Four adjustable intensity levels",
-      "Rechargeable battery",
-      "USB charging cable and wrist strap included",
-      "Dual-voltage 110 V / 220 V operation",
+      "Compact handheld aluminum alloy design (12cm / 74g)",
+      "3 precision wavelengths: 630nm, 660nm, 850nm",
+      "7W high-power output with IPX5 waterproof rating",
+      "Includes 2x 18650 batteries, dock charger, tripod, and case",
+      "3.7V operating voltage with 24-month warranty",
     ],
     productDetails: [
       {
@@ -192,23 +202,33 @@ export const googleMerchantProducts: MerchantProduct[] = [
       },
       {
         sectionName: "Technical specifications",
-        attributeName: "LED count",
-        attributeValue: "5 LEDs",
+        attributeName: "Model",
+        attributeValue: "H100-3H",
       },
       {
         sectionName: "Technical specifications",
-        attributeName: "Battery capacity",
-        attributeValue: "2200 mAh",
+        attributeName: "Operating voltage",
+        attributeValue: "3.7 V",
+      },
+      {
+        sectionName: "Technical specifications",
+        attributeName: "Protection level",
+        attributeValue: "IPX5",
       },
       {
         sectionName: "Technical specifications",
         attributeName: "Power",
-        attributeValue: "5 W",
+        attributeValue: "7 W",
       },
       {
         sectionName: "Technical specifications",
         attributeName: "Weight",
-        attributeValue: "200 g",
+        attributeValue: "74 g",
+      },
+      {
+        sectionName: "Technical specifications",
+        attributeName: "Battery",
+        attributeValue: "18650 Ricoh Lithium (2x included)",
       },
     ],
     customLabels: ["accessory", "price-under-100", "us", "light-therapy", "free-shipping"],

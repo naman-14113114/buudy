@@ -35,6 +35,7 @@ const passthroughAttributionKeys = [
   "msclkid",
   "gclid",
   "fbclid",
+  "source",
 ];
 
 function buildPlusbaseAttributionProperties(attribution: CheckoutPrepareBody["attribution"]) {
@@ -237,6 +238,23 @@ async function createPlusbaseCheckout(
 }
 
 export async function POST(request: NextRequest) {
+  const clientCountry =
+    request.headers.get("x-vercel-ip-country") ||
+    request.headers.get("cf-ipcountry") ||
+    request.headers.get("x-country-code") ||
+    request.headers.get("x-country");
+
+  if (
+    clientCountry &&
+    (clientCountry.trim().toUpperCase() === "MA" ||
+      clientCountry.trim().toUpperCase() === "MOROCCO")
+  ) {
+    return NextResponse.json(
+      { error: "The checkout has not been connected, and no order has been placed." },
+      { status: 400 },
+    );
+  }
+
   const body = (await request.json().catch(() => ({}))) as CheckoutPrepareBody;
   const quantity = Math.max(1, Math.round(Number(body.quantity) || 1));
   const appliedManualPromoCode = getManualPromoFromCart(body.cart);

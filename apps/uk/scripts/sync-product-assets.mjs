@@ -68,10 +68,6 @@ const assets = [
         "https://img.thesitebase.net/10650/10650730/themes/17682450181b5f55beb5.png?width=640&height=0&min_height=0",
       ],
       [
-        "buudy-led-torch.png",
-        "https://img.thesitebase.net/10650/10650730/products/ver_1/176738038817f3610740.png?width=640&height=0&min_height=0",
-      ],
-      [
         "skincare-ebook.png",
         "https://img.thesitebase.net/10650/10650730/themes/17682431737d583cc2df.png?width=640&height=0&min_height=0",
       ],
@@ -113,55 +109,7 @@ const assets = [
       ],
     ],
   },
-  {
-    dir: "products/buudy-red-torch",
-    files: [
-      [
-        "01-buudy-red-torch-main.png",
-        "https://img.thesitebase.net/10650/10650730/products/ver_1/176738038817f3610740.png?width=1200&height=0&min_height=0",
-      ],
-      [
-        "02-buudy-red-torch-animation.gif",
-        "https://img.thesitebase.net/10650/10650730/products/ver_1/1766916767110f34f490.gif",
-      ],
-      [
-        "03-buudy-red-torch-handheld.jpeg",
-        "https://img.thesitebase.net/10650/10650730/products/ver_1/176691671788a473605c.jpeg?width=640&height=0&min_height=0",
-      ],
-      [
-        "04-buudy-red-torch-wavelengths.jpeg",
-        "https://img.thesitebase.net/10650/10650730/products/ver_1/1766916717fdb07a394e.jpeg?width=1200&height=0&min_height=0",
-      ],
-      [
-        "05-buudy-red-torch-kit.jpeg",
-        "https://img.thesitebase.net/10650/10650730/products/ver_1/176691671835f1ac3273.jpeg?width=640&height=0&min_height=0",
-      ],
-      [
-        "06-buudy-red-torch-body-relief.jpeg",
-        "https://img.thesitebase.net/10650/10650730/products/ver_1/1766916717b9d19d6230.jpeg?width=640&height=0&min_height=0",
-      ],
-      [
-        "07-buudy-red-torch-closeup.jpeg",
-        "https://img.thesitebase.net/10650/10650730/products/ver_1/1766916717954e3ab294.jpeg?width=1200&height=0&min_height=0",
-      ],
-      [
-        "08-buudy-red-torch-travel.jpeg",
-        "https://img.thesitebase.net/10650/10650730/products/ver_1/1766916716d62e0e9bd6.jpeg?width=640&height=0&min_height=0",
-      ],
-      [
-        "09-buudy-red-torch-detail-wide.jpeg",
-        "https://img.thesitebase.net/10650/10650730/themes/1766920053fb68c245be.jpeg?width=1200&height=0&min_height=0",
-      ],
-      [
-        "10-buudy-red-torch-wellness.jpeg",
-        "https://img.thesitebase.net/10650/10650730/themes/17669188303460b9d9e8.jpeg?width=1080&height=0&min_height=0",
-      ],
-      [
-        "11-buudy-red-torch-treatment.jpeg",
-        "https://img.thesitebase.net/10650/10650730/themes/1766918724e068b3a972.jpeg?width=1080&height=0&min_height=0",
-      ],
-    ],
-  },
+
   {
     dir: "home",
     files: [

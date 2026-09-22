@@ -91,35 +91,15 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
         </>
       ) : null}
 
-      <div className="mb-6 mt-1 text-sm">
-        <button
-          className="font-medium text-[var(--plum)] transition-colors hover:underline"
-          onClick={() => {
-            const button = document.querySelector(
-              ".proxy-bundle-btn",
-            ) as HTMLButtonElement | null;
-            button?.click();
-          }}
-          type="button"
-        >
-          + Wanna add more discount? Move to checkout
-        </button>
-      </div>
-
       {action === "summary" ? (
-        <div className="mt-4">
+        <div className={totalSavingsCents > 0 ? "mt-4" : ""}>
           <PromoCodeBox key={totals.itemCount > 0 ? "active" : "empty"} />
         </div>
       ) : null}
 
       <div className="mt-4 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-5">
-        <span>
-          <span className="buudy-display block text-xl uppercase text-[var(--plum)]">
-            Subtotal
-          </span>
-          <span className="mt-1 block text-xs text-[var(--muted)]">
-            Includes all taxes.
-          </span>
+        <span className="buudy-display block text-xl uppercase text-[var(--plum)]">
+          Sub Total
         </span>
         <span className="buudy-display block text-right text-4xl text-[var(--plum)]">
           {formatMoney(totals.totalCents)}
