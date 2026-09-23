@@ -16,7 +16,7 @@ Buudy US sells at-home LED light therapy devices for skincare and wellness routi
 
 ## Buudy LED Mask Summary
 - Product: Buudy LED Mask
-- Price: USD 199 launch offer, compare-at USD 499
+- Price: USD 238 launch offer, compare-at USD 601
 - Category: LED face mask, red light therapy mask, blue light acne routine mask, anti-ageing LED mask
 - LEDs: 192 high-density LEDs
 - Modes: 7 visible light colours plus 830nm near-infrared

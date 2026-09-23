@@ -102,7 +102,7 @@ export const googleMerchantProducts: MerchantProduct[] = [
     id: "buudy-7-colour-led-mask-us",
     title: "Buudy 7 Colour LED Light Therapy Face Mask - Red Light Therapy & 830nm NIR - Face & Neck Piece",
     description:
-      "Buudy 7 Colour LED Face Mask delivers clinical-grade LED light therapy for home use. Features 7 visible light wavelengths plus 830 nm Near-Infrared (NIR) mode to stimulate collagen, reduce wrinkles, and clear acne. Full face and neck coverage with wireless tap controls. Includes USB-C charger, eye protection, and free $70 glow kit.",
+      "Buudy 7 Colour LED Face Mask delivers clinical-grade LED light therapy for home use. Features 7 visible light wavelengths plus 830 nm Near-Infrared (NIR) mode to stimulate collagen, reduce wrinkles, and clear acne. Full face and neck coverage with wireless tap controls. Includes USB-C charger, eye protection, and free $92 glow kit.",
     link: absoluteUrl("/products/buudy-7-colour-led-face-mask"),
     imageLink: productImage(
       "/images/products/buudy-led-mask/01-buudy-led-mask-front.webp",
