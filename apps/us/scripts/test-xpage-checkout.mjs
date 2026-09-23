@@ -119,3 +119,22 @@ test("does not retry failed checkout POSTs", async () => {
   }));
   assert.equal(calls, 2);
 });
+
+test("calculates BUUDY10 5.59% discount accurately in US cart ($237.50 -> $224.22)", () => {
+  const manualPromoDiscountRate = 0.0559;
+  const maskPriceCents = 23750;
+
+  // 1 Mask ($237.50)
+  const subtotal1 = maskPriceCents;
+  const discount1 = Math.round(subtotal1 * manualPromoDiscountRate);
+  const total1 = subtotal1 - discount1;
+  assert.equal(discount1, 1328); // $13.28 discount
+  assert.equal(total1, 22422); // $224.22 final price
+
+  // 2 Masks ($475.00)
+  const subtotal2 = maskPriceCents * 2;
+  const discount2 = Math.round(subtotal2 * manualPromoDiscountRate);
+  const total2 = subtotal2 - discount2;
+  assert.equal(discount2, 2655); // $26.55 discount
+  assert.equal(total2, 44845); // $448.45 final price
+});

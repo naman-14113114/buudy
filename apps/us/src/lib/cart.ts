@@ -25,7 +25,8 @@ export type CartState = {
 
 export const promoCode = "AUTO";
 export const manualPromoCode = "BUUDY10";
-export const manualPromoDiscountCents = 1000;
+export const manualPromoDiscountRate = 0.0559;
+export const manualPromoDiscountCents = 1328;
 
 export const emptyCart: CartState = {
   lines: [],
@@ -132,7 +133,7 @@ export function calculateCartTotals(lines: CartLine[], appliedManualPromo = "") 
   );
   const savingsCents = Math.max(compareAtCents - subtotalCents, 0);
   const promoDiscountCents = isValidManualPromoCode(appliedManualPromo)
-    ? Math.min(manualPromoDiscountCents, subtotalCents)
+    ? Math.min(Math.round(subtotalCents * manualPromoDiscountRate), subtotalCents)
     : 0;
 
   return {
