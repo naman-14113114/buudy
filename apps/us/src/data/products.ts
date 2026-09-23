@@ -82,7 +82,7 @@ export const buudyMask: Product = {
   seoDescription:
     "Shop the Buudy LED Face Mask in the US: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, easy returns and refunds, and free glow kit.",
   currency: market.currency,
-  priceCents: 23800,
+  priceCents: 23750,
   compareAtCents: 60100,
   rating: 4.9,
   reviewCount: 16000,
