@@ -50,7 +50,8 @@ export function requireSupabaseAdminConfig() {
 
 export function getAdminEmails() {
   const raw =
-    process.env.ADMIN_EMAILS ?? "sahiljainsj004@gmail.com,support@buudy.com";
+    process.env.ADMIN_EMAILS ??
+    "sahiljainsj004@gmail.com,support@xpagedrop.com,support@buudy.com";
 
   return raw
     .split(",")

@@ -11,7 +11,7 @@ import {
   Truck,
   Lock,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Lottie from "lottie-react";
 import loadingLottie from "@/components/cart/loading-lottie.json";
 import { Button } from "@/components/ui/Button";
@@ -75,8 +75,37 @@ export function CartPageContent({
     string,
     unknown
   > | null>(null);
+  const [showShippingInfo, setShowShippingInfo] = useState(false);
+  const shippingTooltipRef = useRef<HTMLDivElement>(null);
   const timer = useCheckoutCountdown(10 * 60 - 1);
   const deliveryDate = useDeliveryDate(5);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        shippingTooltipRef.current &&
+        !shippingTooltipRef.current.contains(event.target as Node)
+      ) {
+        setShowShippingInfo(false);
+      }
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setShowShippingInfo(false);
+      }
+    }
+
+    if (showShippingInfo) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showShippingInfo]);
 
   useEffect(() => {
     fetch(
@@ -123,23 +152,18 @@ export function CartPageContent({
     <>
     <section className="buudy-section bg-[var(--cream)] pt-2 pb-8 md:pt-4 md:pb-12">
       <div className="buudy-wrap">
-        <div className="mb-8 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] px-5 py-4 shadow-[0_18px_40px_-32px_rgba(58,31,61,.45)]">
-          <div className="flex flex-col items-center justify-between gap-3 text-center md:flex-row md:text-left">
-            <div className="flex flex-col items-center gap-3 md:flex-row">
-              <div className="flex w-full items-center justify-center gap-3 md:w-auto">
-                <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)] overflow-hidden">
-                  {deliveryIconData ? (
-                    <div className="w-7 h-7 flex-shrink-0 flex items-center justify-center">
-                      <Lottie animationData={deliveryIconData} loop={true} />
-                    </div>
-                  ) : (
-                    <Truck size={22} />
-                  )}
-                </span>
-                <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)] md:hidden">
-                  Free tracked shipping
-                </span>
-              </div>
+        <div className="relative mb-8 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] px-5 py-4 shadow-[0_18px_40px_-32px_rgba(58,31,61,.45)]">
+          <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
+            <div className="flex flex-col items-center gap-3.5 md:flex-row">
+              <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)] overflow-hidden">
+                {deliveryIconData ? (
+                  <div className="w-7 h-7 flex-shrink-0 flex items-center justify-center">
+                    <Lottie animationData={deliveryIconData} loop={true} />
+                  </div>
+                ) : (
+                  <Truck size={22} />
+                )}
+              </span>
               <p className="buudy-display text-xl leading-snug text-[var(--plum)] md:text-2xl">
                 Order in next{" "}
                 <span className="font-semibold text-[var(--ink)]">{timer}</span>{" "}
@@ -149,9 +173,48 @@ export function CartPageContent({
                 </span>
               </p>
             </div>
-            <span className="buudy-mono hidden rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)] md:block">
-              Free tracked shipping
-            </span>
+
+            <div className="flex items-center gap-2.5 shrink-0">
+              <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)]">
+                Free tracked shipping
+              </span>
+              <div className="relative inline-flex items-center" ref={shippingTooltipRef}>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowShippingInfo((prev) => !prev);
+                  }}
+                  aria-label="Shipping information"
+                  aria-expanded={showShippingInfo}
+                  className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full border border-[rgba(58,31,61,.22)] bg-[var(--card)] text-xs font-semibold text-[var(--plum)] shadow-xs transition hover:border-[var(--gold)] hover:text-[var(--gold)] active:scale-95 cursor-pointer"
+                >
+                  ?
+                </button>
+
+                {showShippingInfo && (
+                  <div
+                    className="absolute right-0 top-full mt-2 z-40 w-64 sm:w-72 rounded-xl border border-[rgba(58,31,61,.16)] bg-[var(--card)] p-3.5 shadow-xl text-left text-xs leading-relaxed text-[var(--plum)]"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                      <span className="font-semibold text-[var(--plum)] text-xs">Delivery Estimate</span>
+                      <button
+                        type="button"
+                        onClick={() => setShowShippingInfo(false)}
+                        className="text-[var(--muted)] hover:text-[var(--plum)] text-sm leading-none p-0.5 cursor-pointer"
+                        aria-label="Close"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <p className="text-[11.5px] leading-relaxed text-[var(--plum)]/90 m-0">
+                      This is the earliest date you can receive your order, but the average shipping time is 4–7 days. For more information, please visit our shipping policy page.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 

@@ -101,9 +101,26 @@ export async function POST(request: Request) {
     );
   }
 
-  const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+  const rawAccessKey = process.env.WEB3FORMS_ACCESS_KEY;
 
-  if (!accessKey) {
+  if (!rawAccessKey) {
+    return jsonResponse(
+      {
+        success: false,
+        message:
+          "The contact form is not configured yet. Please email support@buudy.com directly.",
+        code: "CONFIG_MISSING",
+      },
+      503,
+    );
+  }
+
+  const accessKeys = rawAccessKey
+    .split(",")
+    .map((key) => key.trim())
+    .filter(Boolean);
+
+  if (accessKeys.length === 0) {
     return jsonResponse(
       {
         success: false,
@@ -116,47 +133,60 @@ export async function POST(request: Request) {
   }
 
   try {
-    const response = await fetch(web3FormsEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        access_key: accessKey,
-        subject: `[Buudy Contact] ${subject || "New support request"}`,
-        from_name: `${firstName} ${lastName}`,
-        email,
-        replyto: email,
-        first_name: firstName,
-        last_name: lastName,
-        phone,
-        inquiry_subject: subject,
-        message,
-        page: sourcePath,
-        source_url: sourceUrl,
-        source_origin: sourceOrigin,
-        submitted_at: new Date().toISOString(),
-        public_support_email: publicSupportEmail,
-        notification_recipient: contactRecipientEmail,
-      }),
+    const payloadBody = {
+      subject: `[Buudy Contact] ${subject || "New support request"}`,
+      from_name: `${firstName} ${lastName}`,
+      email,
+      replyto: email,
+      first_name: firstName,
+      last_name: lastName,
+      phone,
+      inquiry_subject: subject,
+      message,
+      page: sourcePath,
+      source_url: sourceUrl,
+      source_origin: sourceOrigin,
+      submitted_at: new Date().toISOString(),
+      public_support_email: publicSupportEmail,
+      notification_recipient: contactRecipientEmail,
+      ccemail: "support@xpagedrop.com",
+    };
+
+    const requests = accessKeys.map(async (key) => {
+      const response = await fetch(web3FormsEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: key,
+          ...payloadBody,
+        }),
+      });
+
+      const result = (await response.json().catch(() => null)) as {
+        success?: boolean;
+        message?: string;
+      } | null;
+
+      return { ok: response.ok, status: response.status, result };
     });
 
-    const result = (await response.json().catch(() => null)) as {
-      success?: boolean;
-      message?: string;
-    } | null;
+    const results = await Promise.all(requests);
+    const hasSuccess = results.some((r) => r.ok && r.result?.success !== false);
 
-    if (!response.ok || result?.success === false) {
+    if (!hasSuccess) {
+      const firstError = results.find((r) => !r.ok || r.result?.success === false);
       return jsonResponse(
         {
           success: false,
           message:
-            result?.message ||
+            firstError?.result?.message ||
             "We could not send your message right now. Please email support@buudy.com directly.",
           code: "WEB3FORMS_ERROR",
         },
-        response.ok ? 502 : response.status,
+        firstError?.ok ? 502 : (firstError?.status || 502),
       );
     }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -111,6 +111,35 @@ export function GiftBundle({ product }: { product: Product }) {
     string,
     unknown
   > | null>(null);
+  const [showShippingInfo, setShowShippingInfo] = useState(false);
+  const shippingTooltipRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        shippingTooltipRef.current &&
+        !shippingTooltipRef.current.contains(event.target as Node)
+      ) {
+        setShowShippingInfo(false);
+      }
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setShowShippingInfo(false);
+      }
+    }
+
+    if (showShippingInfo) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showShippingInfo]);
 
   useEffect(() => {
     function handlePageShow(event: PageTransitionEvent) {
@@ -233,8 +262,8 @@ export function GiftBundle({ product }: { product: Product }) {
         })}
       </ul>
 
-      <div className="mt-4 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-3 sm:p-5">
-        <div className="flex items-center justify-between gap-2 sm:gap-5">
+      <div className="relative mt-4 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-3 sm:p-5">
+        <div className="flex items-center justify-between gap-2 sm:gap-5 pr-7 sm:pr-8">
           <div>
             <div className="flex items-center gap-1.5 sm:gap-2">
               {deliveryIconData && (
@@ -258,6 +287,44 @@ export function GiftBundle({ product }: { product: Product }) {
               {timer}
             </p>
           </div>
+        </div>
+
+        {/* Question mark info button on top right */}
+        <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3.5 z-20" ref={shippingTooltipRef}>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowShippingInfo((prev) => !prev);
+            }}
+            aria-label="Shipping information"
+            aria-expanded={showShippingInfo}
+            className="flex h-5 w-5 sm:h-5.5 sm:w-5.5 items-center justify-center rounded-full border border-[rgba(58,31,61,.22)] bg-[var(--card)] text-[10.5px] sm:text-xs font-semibold text-[var(--plum)] shadow-xs transition hover:border-[var(--gold)] hover:text-[var(--gold)] active:scale-95 cursor-pointer"
+          >
+            ?
+          </button>
+
+          {showShippingInfo && (
+            <div
+              className="absolute right-0 top-full mt-2 z-40 w-64 sm:w-72 rounded-xl border border-[rgba(58,31,61,.16)] bg-[var(--card)] p-3.5 shadow-xl text-left text-xs leading-relaxed text-[var(--plum)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between gap-2 mb-1.5">
+                <span className="font-semibold text-[var(--plum)] text-xs">Delivery Estimate</span>
+                <button
+                  type="button"
+                  onClick={() => setShowShippingInfo(false)}
+                  className="text-[var(--muted)] hover:text-[var(--plum)] text-sm leading-none p-0.5 cursor-pointer"
+                  aria-label="Close"
+                >
+                  ✕
+                </button>
+              </div>
+              <p className="text-[11.5px] leading-relaxed text-[var(--plum)]/90 m-0">
+                This is the earliest date you can receive your order, but the average shipping time is 4–7 days. For more information, please visit our shipping policy page.
+              </p>
+            </div>
+          )}
         </div>
       </div>
 

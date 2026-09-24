@@ -44,5 +44,9 @@ export const contactSocialLinks = [
   },
 ];
 
-export const contactRecipientEmail = "sahiljainsj004@gmail.com";
+export const contactRecipientEmail = "sahiljainsj004@gmail.com, support@xpagedrop.com";
+export const contactRecipientEmails = [
+  "sahiljainsj004@gmail.com",
+  "support@xpagedrop.com",
+];
 export const publicSupportEmail = "support@buudy.com";
