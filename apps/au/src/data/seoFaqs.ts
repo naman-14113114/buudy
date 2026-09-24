@@ -4,7 +4,7 @@ export const ledMaskSeoFaqs: FAQItem[] = [
   {
     question: "What is the best LED face mask to buy in Australia?",
     answer:
-      "The best LED face mask for most Australia buyers is one that combines enough LEDs for even coverage, red light for fine-line and firmness routines, blue light for breakout-prone skin, near-infrared support, integrated eye protection, easy cordless use, and a realistic return policy. Buudy is built around those criteria with 192 LEDs, 7 wavelengths plus 830nm near-infrared, face plus neck coverage, rechargeable wearability, and a 90-day money back guarantee.",
+      "The best LED face mask for most Australia buyers is one that combines enough LEDs for even coverage, red light for fine-line and firmness routines, blue light for breakout-prone skin, near-infrared support, integrated eye protection, easy cordless use, and a realistic return policy. Buudy is built around those criteria with 192 LEDs, 7 wavelengths plus 830nm near-infrared, face plus neck coverage, rechargeable wearability, and an easy return and refund policy.",
   },
   {
     question: "Is Buudy a red light therapy mask or a blue light acne mask?",

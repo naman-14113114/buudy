@@ -125,7 +125,7 @@ export const googleMerchantProducts: MerchantProduct[] = [
       "Cordless, rechargeable, tap-to-cycle control",
       "Four adjustable intensity levels",
       "192 high-density LEDs",
-      "90-day money back guarantee",
+      "Easy return and refund policy",
     ],
     productDetails: [
       {

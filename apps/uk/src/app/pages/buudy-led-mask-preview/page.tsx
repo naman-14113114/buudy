@@ -34,7 +34,7 @@ const questions = [
   },
   {
     title: "What if I need help with delivery or returns?",
-    answer: <>Our team can help with your order. See our <Link href="/policies/shipping-policy">delivery information</Link> and <Link href="/policies/return-policy">90-day return policy</Link> for the full terms, or <Link href="/pages/contact-us">contact Buudy support</Link>.</>,
+    answer: <>Our team can help with your order. See our <Link href="/policies/shipping-policy">delivery information</Link> and <Link href="/policies/return-policy">return policy</Link> for the full terms, or <Link href="/pages/contact-us">contact Buudy support</Link>.</>,
   },
 ];
 

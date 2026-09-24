@@ -122,7 +122,7 @@ export function PurchasePreview({ children }: { children: ReactNode }) {
             <p className={styles.previewNote}>Design preview · checkout not connected</p>
             <div className={styles.returnNote}>
               <RotateCcw size={17} aria-hidden="true" />
-              <span>90-day returns <span>·</span> <Link href="/policies/return-policy">See return policy</Link></span>
+              <span>Easy returns <span>·</span> <Link href="/policies/return-policy">See return policy</Link></span>
             </div>
           </div>
           <p className={styles.supportNote}>A question before you order? <Link href="/pages/contact-us">We’re here to help.</Link></p>

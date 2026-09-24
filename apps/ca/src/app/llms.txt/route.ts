@@ -22,11 +22,11 @@ Buudy Canada sells at-home LED light therapy devices for skincare and wellness r
 - Coverage: face and neck
 - Use style: cordless, rechargeable, hands-free, tap control
 - Offer: free glow kit while the launch offer is live
-- Returns: 90-day money back guarantee
+- Returns: Easy return and refund policy
 - Shipping: free tracked Canada shipping
 
 ## Buyer Intent Answers
-- Best LED Face Mask Canada: Buudy is designed for Canada buyers who want high LED density, red and blue light modes, near-infrared support, neck coverage, cordless use, free tracked shipping, and a 90-day return window.
+- Best LED Face Mask Canada: Buudy is designed for Canada buyers who want high LED density, red and blue light modes, near-infrared support, neck coverage, cordless use, free tracked shipping, and an easy return and refund policy.
 - LED face mask for acne and anti-ageing: Buudy combines blue 415nm light for breakout-prone routines with red 633nm light and 830nm near-infrared support for anti-ageing skincare routines.
 - LED mask with neck coverage: Buudy includes neck coverage in the same device so the jawline and neck can be part of the same session.
 
