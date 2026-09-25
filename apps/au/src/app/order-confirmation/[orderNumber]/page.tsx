@@ -61,8 +61,8 @@ export default async function OrderConfirmationPage({
           <h1 className="buudy-heading mt-5">Order not found.</h1>
           <p className="buudy-copy mx-auto mt-5 max-w-lg">
             We could not load order {orderNumber}. Check the order number or{" "}
-            <a className="font-semibold underline" href="mailto:support@buudy.com">
-              contact support@buudy.com
+            <a className="font-semibold underline" href="mailto:support@buudy.co.uk">
+              contact support@buudy.co.uk
             </a>
             .
           </p>

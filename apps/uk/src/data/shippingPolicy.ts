@@ -56,7 +56,7 @@ export const shippingPolicyHtml = `
 <p>For shipping questions, support or delivery issues, contact:</p>
 <h3>xPage Drop LLC</h3>
 <p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
-<p>Email: <a href="mailto:contact@xpagedrop.com">contact@xpagedrop.com</a></p>
+<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
 <p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
 <p>This is a corporate address only. It is not a warehouse, fulfillment center or return address.</p>
 `;

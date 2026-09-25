@@ -117,7 +117,7 @@ export const privacyPolicyHtml = `
 
 <h2>11. Privacy Requests</h2>
 <p>Submit privacy requests through:</p>
-<p><a href="mailto:support@buudy.com">support@buudy.com</a> or <a href="/pages/contact-us">Contact Us</a></p>
+<p><a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a></p>
 <p>We may request reasonable information to verify your identity and protect your data. Requests will be handled within the period required by applicable law.</p>
 
 <h2>12. Children</h2>
@@ -133,7 +133,7 @@ export const privacyPolicyHtml = `
 <h2>15. Contact</h2>
 <h3>xPage Drop LLC</h3>
 <p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
-<p>Email: <a href="mailto:support@buudy.com">support@buudy.com</a></p>
+<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
 <p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
 <p>This is a corporate address only. It is not a warehouse, fulfillment center or return address.</p>
 `;
@@ -155,7 +155,7 @@ export const refundPolicyHtml = `
 
 <h2>2. Contact Support First</h2>
 <p>Before cancelling or returning an order, contact:</p>
-<p><a href="mailto:support@buudy.com">support@buudy.com</a> or <a href="/pages/contact-us">Contact Us</a></p>
+<p><a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a></p>
 <p>You must receive written return authorization before sending a product. The approved return address may differ from:</p>
 <ol>
   <li>The shipping origin.</li>
@@ -258,7 +258,7 @@ export const refundPolicyHtml = `
 <h2>17. Contact and Return Warning</h2>
 <h3>xPage Drop LLC</h3>
 <p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
-<p>Email: <a href="mailto:support@buudy.com">support@buudy.com</a></p>
+<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
 <p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
 <p>This is a corporate address only. It is not a warehouse, fulfillment center or standard return address. Do not send a return here or to the address printed on a package unless xPage Drop expressly provides that address in writing.</p>
 `;
@@ -339,7 +339,7 @@ export const termsOfServiceHtml = `
 <h2>9. Intellectual Property</h2>
 <p>Store software, branding, photographs, designs, text and other content may belong to the Store, xPage Drop, manufacturers or licensors.</p>
 <p>You may use Store content only for personal shopping purposes.</p>
-<p>Intellectual-property complaints must be sent to <a href="mailto:support@buudy.com">support@buudy.com</a> or <a href="/pages/contact-us">Contact Us</a> and include sufficient information to identify the protected work and disputed content.</p>
+<p>Intellectual-property complaints must be sent to <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a> and include sufficient information to identify the protected work and disputed content.</p>
 
 <h2>10. Liability</h2>
 <p>Nothing in these Terms excludes liability or consumer rights that cannot legally be excluded.</p>
@@ -349,7 +349,7 @@ export const termsOfServiceHtml = `
 <h2>11. Governing Law and Complaints</h2>
 <p>These Terms are governed by Delaware law, except where mandatory law in your country or state provides protections or dispute rights that cannot be removed by contract.</p>
 <p>Before starting a formal dispute, contact:</p>
-<p><a href="mailto:support@buudy.com">support@buudy.com</a> or <a href="/pages/contact-us">Contact Us</a></p>
+<p><a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a></p>
 <p>This does not prevent you from contacting a payment provider, regulator, consumer authority or court where permitted by law.</p>
 
 <h2>12. Mandatory Rights</h2>
@@ -359,7 +359,7 @@ export const termsOfServiceHtml = `
 <p>Customer support for this Store is administered by xPage Drop.</p>
 <h3>xPage Drop LLC</h3>
 <p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
-<p>Email: <a href="mailto:support@buudy.com">support@buudy.com</a></p>
+<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
 <p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
 <p>This is a corporate address only. It is not a warehouse, fulfillment center or return address. Do not send products to this address unless xPage Drop expressly authorizes it in writing.</p>
 `;
@@ -409,7 +409,7 @@ export const orderTrackingData = {
     {
       question: "Where can I find my order number?",
       answerHtml:
-        '<p class="text-sm leading-7">Your order number can be found at the top of your confirmation email. Please check your inbox, including your spam folder. If you still cannot locate it, email <a class="font-semibold text-[var(--plum)] underline" href="mailto:support@buudy.com">support@buudy.com</a> or use our <a class="font-semibold text-[var(--plum)] underline" href="/pages/contact-us">Contact Form</a>.</p>'
+        '<p class="text-sm leading-7">Your order number can be found at the top of your confirmation email. Please check your inbox, including your spam folder. If you still cannot locate it, email <a class="font-semibold text-[var(--plum)] underline" href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or use our <a class="font-semibold text-[var(--plum)] underline" href="/pages/contact-us">Contact Form</a>.</p>'
     }
   ]
 };

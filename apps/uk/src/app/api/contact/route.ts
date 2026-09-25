@@ -149,7 +149,7 @@ export async function POST(request: Request) {
       submitted_at: new Date().toISOString(),
       public_support_email: publicSupportEmail,
       notification_recipient: contactRecipientEmail,
-      ccemail: "support@xpagedrop.com",
+      ccemail: "support@buudy.co.uk",
     };
 
     const requests = accessKeys.map(async (key) => {

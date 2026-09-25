@@ -62,7 +62,7 @@ environment variables locally and in Vercel:
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
-ADMIN_EMAILS=sahiljainsj004@gmail.com,support@buudy.com
+ADMIN_EMAILS=sahiljainsj004@gmail.com,support@buudy.co.uk
 ```
 
 Protected customer routes are `/my-profile`, `/order-history`, and

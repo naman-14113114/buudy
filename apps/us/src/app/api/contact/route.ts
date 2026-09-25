@@ -108,7 +108,7 @@ export async function POST(request: Request) {
       {
         success: false,
         message:
-          "The contact form is not configured yet. Please email support@buudy.com directly.",
+          "The contact form is not configured yet. Please email support@buudy.co.uk directly.",
         code: "CONFIG_MISSING",
       },
       503,
@@ -125,7 +125,7 @@ export async function POST(request: Request) {
       {
         success: false,
         message:
-          "The contact form is not configured yet. Please email support@buudy.com directly.",
+          "The contact form is not configured yet. Please email support@buudy.co.uk directly.",
         code: "CONFIG_MISSING",
       },
       503,
@@ -149,7 +149,7 @@ export async function POST(request: Request) {
       submitted_at: new Date().toISOString(),
       public_support_email: publicSupportEmail,
       notification_recipient: contactRecipientEmail,
-      ccemail: "support@xpagedrop.com",
+      ccemail: "support@buudy.co.uk",
     };
 
     const requests = accessKeys.map(async (key) => {
@@ -183,7 +183,7 @@ export async function POST(request: Request) {
           success: false,
           message:
             firstError?.result?.message ||
-            "We could not send your message right now. Please email support@buudy.com directly.",
+            "We could not send your message right now. Please email support@buudy.co.uk directly.",
           code: "WEB3FORMS_ERROR",
         },
         firstError?.ok ? 502 : (firstError?.status || 502),
@@ -203,7 +203,7 @@ export async function POST(request: Request) {
       {
         success: false,
         message:
-          "We could not send your message right now. Please email support@buudy.com directly.",
+          "We could not send your message right now. Please email support@buudy.co.uk directly.",
         code: "NETWORK_ERROR",
       },
       502,
