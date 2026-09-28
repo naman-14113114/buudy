@@ -394,7 +394,7 @@ export const orderTrackingData = {
   intro:
     "Once your order has shipped, you will receive an email from us with a link to track your order.\nYou can also enter the order name and your email in the box below to get the status of your shipment.",
   subIntro:
-    "If you just received a shipment notification, please allow 1 to 2 business days for the tracking information to appear.",
+    "If you just received a shipment notification, please allow 24 to 72 hours for the tracking information to appear.",
   faqs: [
     {
       question: "When will I get my order?",

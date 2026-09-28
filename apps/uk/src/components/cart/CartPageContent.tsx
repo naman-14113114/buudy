@@ -178,43 +178,46 @@ export function CartPageContent({
               <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)]">
                 Free tracked shipping
               </span>
-              <div className="relative inline-flex items-center" ref={shippingTooltipRef}>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowShippingInfo((prev) => !prev);
-                  }}
-                  aria-label="Shipping information"
-                  aria-expanded={showShippingInfo}
-                  className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full border border-[rgba(58,31,61,.22)] bg-[var(--card)] text-xs font-semibold text-[var(--plum)] shadow-xs transition hover:border-[var(--gold)] hover:text-[var(--gold)] active:scale-95 cursor-pointer"
-                >
-                  ?
-                </button>
-
-                {showShippingInfo && (
-                  <div
-                    className="absolute right-0 top-full mt-2 z-40 w-64 sm:w-72 rounded-xl border border-[rgba(58,31,61,.16)] bg-[var(--card)] p-3.5 shadow-xl text-left text-xs leading-relaxed text-[var(--plum)]"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <span className="font-semibold text-[var(--plum)] text-xs">Delivery Estimate</span>
-                      <button
-                        type="button"
-                        onClick={() => setShowShippingInfo(false)}
-                        className="text-[var(--muted)] hover:text-[var(--plum)] text-sm leading-none p-0.5 cursor-pointer"
-                        aria-label="Close"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                    <p className="text-[11.5px] leading-relaxed text-[var(--plum)]/90 m-0">
-                      This is the earliest date you can receive your order, but the average shipping time is 4–7 days. For more information, please visit our shipping policy page.
-                    </p>
-                  </div>
-                )}
-              </div>
             </div>
+          </div>
+
+          {/* Question mark info button on top right */}
+          <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3.5 z-20" ref={shippingTooltipRef}>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowShippingInfo((prev) => !prev);
+              }}
+              aria-label="Shipping information"
+              aria-expanded={showShippingInfo}
+              style={{ fontSize: "8px", lineHeight: 1 }}
+              className="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[var(--gold)] bg-transparent font-medium text-[var(--gold)] transition hover:opacity-80 active:scale-95 cursor-pointer"
+            >
+              ?
+            </button>
+
+            {showShippingInfo && (
+              <div
+                className="absolute right-0 top-full mt-2 z-40 w-64 sm:w-72 rounded-xl border border-[rgba(58,31,61,.16)] bg-[var(--card)] p-3.5 shadow-xl text-left text-xs leading-relaxed text-[var(--plum)]"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <span className="font-semibold text-[var(--plum)] text-xs">Delivery Estimate</span>
+                  <button
+                    type="button"
+                    onClick={() => setShowShippingInfo(false)}
+                    className="text-[var(--muted)] hover:text-[var(--plum)] text-sm leading-none p-0.5 cursor-pointer"
+                    aria-label="Close"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <p className="text-[11.5px] leading-relaxed text-[var(--plum)]/90 m-0">
+                  This is the earliest date you can receive your order, but standard delivery transit is 7–20 business days. For more information, please visit our shipping policy page.
+                </p>
+              </div>
+            )}
           </div>
         </div>
 

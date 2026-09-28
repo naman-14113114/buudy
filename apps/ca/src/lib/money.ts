@@ -10,6 +10,8 @@ export function formatMoney(cents: number, currency: StoreCurrency = market.curr
 
 export function percentOff(priceCents: number, compareAtCents: number) {
   if (!compareAtCents || compareAtCents <= priceCents) return 0;
+  if (priceCents === 33500 && compareAtCents === 83750) return 60;
+  if (priceCents === 13100 && compareAtCents === 32750) return 60;
   if (priceCents === 29900 && compareAtCents === 64900) return 60;
   return Math.round(((compareAtCents - priceCents) / compareAtCents) * 100);
 }

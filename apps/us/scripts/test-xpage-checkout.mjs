@@ -11,11 +11,11 @@ function fixture() {
     discount_amount: promo ? "5.59" : 0,
     conditions: [{ id: `fresh-mask-${promo}`, quantity: 1,
       product: { id: XPAGE.maskProductId, status: "ACTIVE", variants: [
-        { id: XPAGE.maskVariantId, price: "237.50", is_visible: true },
+        { id: XPAGE.maskVariantId, price: "236.40", is_visible: true },
       ] } }],
     offered: [{ id: `fresh-torch-${promo}`, quantity: 1, discount_type: "PERCENTAGE", discount_amount: "100.00",
       product: { id: XPAGE.torchProductId, status: "ACTIVE", variants: [
-        { id: XPAGE.torchVariantId, price: "92.00", is_visible: true },
+        { id: XPAGE.torchVariantId, price: "92.30", is_visible: true },
       ] } }],
   });
   return { bundle: { id: XPAGE.bundleId, status: "ACTIVE", options: [option(false), option(true)] },
@@ -120,21 +120,21 @@ test("does not retry failed checkout POSTs", async () => {
   assert.equal(calls, 2);
 });
 
-test("calculates BUUDY10 5.59% discount accurately in US cart ($237.50 -> $224.22)", () => {
+test("calculates BUUDY10 5.59% discount accurately in US cart ($236.40 -> $223.19)", () => {
   const manualPromoDiscountRate = 0.0559;
-  const maskPriceCents = 23750;
+  const maskPriceCents = 23640;
 
-  // 1 Mask ($237.50)
+  // 1 Mask ($236.40)
   const subtotal1 = maskPriceCents;
   const discount1 = Math.round(subtotal1 * manualPromoDiscountRate);
   const total1 = subtotal1 - discount1;
-  assert.equal(discount1, 1328); // $13.28 discount
-  assert.equal(total1, 22422); // $224.22 final price
+  assert.equal(discount1, 1321); // $13.21 discount
+  assert.equal(total1, 22319); // $223.19 final price
 
-  // 2 Masks ($475.00)
+  // 2 Masks ($472.80)
   const subtotal2 = maskPriceCents * 2;
   const discount2 = Math.round(subtotal2 * manualPromoDiscountRate);
   const total2 = subtotal2 - discount2;
-  assert.equal(discount2, 2655); // $26.55 discount
-  assert.equal(total2, 44845); // $448.45 final price
+  assert.equal(discount2, 2643); // $26.43 discount
+  assert.equal(total2, 44637); // $446.37 final price
 });

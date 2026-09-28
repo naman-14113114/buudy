@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
 import { getAppliedManualPromoCode } from "@/lib/cart";
 import { z } from "zod";
+import { createXpageCheckout } from "@/lib/xpage-checkout";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -262,7 +263,9 @@ export async function POST(request: NextRequest) {
   if (
     clientCountry &&
     (clientCountry.trim().toUpperCase() === "MA" ||
-      clientCountry.trim().toUpperCase() === "MOROCCO")
+      clientCountry.trim().toUpperCase() === "MOROCCO" ||
+      clientCountry.trim().toUpperCase() === "ES" ||
+      clientCountry.trim().toUpperCase() === "SPAIN")
   ) {
     return NextResponse.json(
       { error: "The checkout has not been connected, and no order has been placed." },
@@ -289,6 +292,17 @@ export async function POST(request: NextRequest) {
   }
   if (quantity > 100) {
     return NextResponse.json({ error: "Please contact us for orders of more than 100 masks." }, { status: 400 });
+  }
+  if (!body.cart || maskLines?.length) {
+    try {
+      const checkout = await createXpageCheckout(quantity, Boolean(appliedManualPromoCode));
+      return NextResponse.json(checkout, { headers: { "Cache-Control": "no-store" } });
+    } catch (error) {
+      // Never log session cookies, CSRF tokens, checkout URLs or customer data.
+      console.error("XPage checkout preparation failed", error instanceof Error ? error.message : "Unknown error");
+      return NextResponse.json({ error: "Could not prepare the mask offer. Please try again; your cart has been kept." },
+        { status: 502, headers: { "Cache-Control": "no-store" } });
+    }
   }
 
   const clientHeaders = {

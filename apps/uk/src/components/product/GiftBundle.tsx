@@ -299,7 +299,8 @@ export function GiftBundle({ product }: { product: Product }) {
             }}
             aria-label="Shipping information"
             aria-expanded={showShippingInfo}
-            className="flex h-5 w-5 sm:h-5.5 sm:w-5.5 items-center justify-center rounded-full border border-[rgba(58,31,61,.22)] bg-[var(--card)] text-[10.5px] sm:text-xs font-semibold text-[var(--plum)] shadow-xs transition hover:border-[var(--gold)] hover:text-[var(--gold)] active:scale-95 cursor-pointer"
+            style={{ fontSize: "8px", lineHeight: 1 }}
+            className="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[var(--gold)] bg-transparent font-medium text-[var(--gold)] transition hover:opacity-80 active:scale-95 cursor-pointer"
           >
             ?
           </button>
@@ -321,7 +322,7 @@ export function GiftBundle({ product }: { product: Product }) {
                 </button>
               </div>
               <p className="text-[11.5px] leading-relaxed text-[var(--plum)]/90 m-0">
-                This is the earliest date you can receive your order, but the average shipping time is 4–7 days. For more information, please visit our shipping policy page.
+                This is the earliest date you can receive your order, but standard delivery transit is 7–20 business days. For more information, please visit our shipping policy page.
               </p>
             </div>
           )}

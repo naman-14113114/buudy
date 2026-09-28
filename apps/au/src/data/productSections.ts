@@ -647,10 +647,10 @@ export const expertVideo = {
 export const comparison = {
   intro: "Here is a comparison, but really, there is no comparison.",
   columns: [
-    { label: "Buudy", price: "AU$319", featured: true },
-    { label: "Brand A", price: "AU$399" },
-    { label: "Brand B", price: "AU$499" },
-    { label: "Brand C", price: "AU$472" },
+    { label: "Buudy", price: "$337", featured: true },
+    { label: "Brand A", price: "$399" },
+    { label: "Brand B", price: "$499" },
+    { label: "Brand C", price: "$472" },
   ],
   rows: [
     ["Portable", "Hands-free, cordless and rechargeable", "-", "-", "-"],

@@ -192,26 +192,36 @@ export const googleMerchantProducts: MerchantProduct[] = [
       },
       {
         sectionName: "Technical specifications",
-        attributeName: "LED count",
-        attributeValue: "5 LEDs",
+        attributeName: "Model",
+        attributeValue: "H100-3H",
       },
       {
         sectionName: "Technical specifications",
-        attributeName: "Battery capacity",
-        attributeValue: "2200 mAh",
+        attributeName: "Operating voltage",
+        attributeValue: "3.7 V",
+      },
+      {
+        sectionName: "Technical specifications",
+        attributeName: "Protection level",
+        attributeValue: "IPX5",
       },
       {
         sectionName: "Technical specifications",
         attributeName: "Power",
-        attributeValue: "5 W",
+        attributeValue: "7 W",
       },
       {
         sectionName: "Technical specifications",
         attributeName: "Weight",
-        attributeValue: "200 g",
+        attributeValue: "74 g",
+      },
+      {
+        sectionName: "Technical specifications",
+        attributeName: "Battery",
+        attributeValue: "18650 Ricoh Lithium (2x included)",
       },
     ],
-    customLabels: ["accessory", "price-under-100", "au", "light-therapy", "free-shipping"],
+    customLabels: ["accessory", "price-100-plus", "au", "light-therapy", "free-shipping"],
   },
 ];
 

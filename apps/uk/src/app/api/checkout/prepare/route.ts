@@ -263,7 +263,9 @@ export async function POST(request: NextRequest) {
   if (
     clientCountry &&
     (clientCountry.trim().toUpperCase() === "MA" ||
-      clientCountry.trim().toUpperCase() === "MOROCCO")
+      clientCountry.trim().toUpperCase() === "MOROCCO" ||
+      clientCountry.trim().toUpperCase() === "ES" ||
+      clientCountry.trim().toUpperCase() === "SPAIN")
   ) {
     return NextResponse.json(
       { error: "The checkout has not been connected, and no order has been placed." },

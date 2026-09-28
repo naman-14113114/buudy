@@ -8,8 +8,9 @@ export const faqsData: FaqItem[] = [
     question: "What is a return policy?",
     answerHtml: `
       <ul class="list-disc pl-5 space-y-2 text-sm leading-6">
-        <li>If you have any issues with your order, please contact us via our <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">Contact Form</a> within 07 business days of order delivery to explain your grievance. Our customer service department will then help provide a replacement or refund if deemed appropriate.</li>
-        <li>There is no need to return your item under any circumstances. Please note that if you return your item without our prior request, we will not be responsible for any loss or additional costs resulting from your unapproved return.</li>
+        <li>Returns are accepted within 30 days of delivery strictly for damaged, defective, incorrect, or missing products with photo or video evidence and prior written return authorization from <a href="mailto:support@buudy.co.uk" class="underline text-[var(--plum)] font-semibold">support@buudy.co.uk</a>.</li>
+        <li>Change-of-mind or personal-preference returns are not accepted. Items must never be returned to the package or sender address without written authorization.</li>
+        <li>Once an authorized return is received and inspected, approved refunds are initiated within 5–10 business days to the original payment method. Read our complete <a href="/policies/return-policy" class="underline text-[var(--plum)] font-semibold">Return Policy</a>.</li>
       </ul>
     `
   },
@@ -17,9 +18,9 @@ export const faqsData: FaqItem[] = [
     question: "What is the Shipping Policy?",
     answerHtml: `
       <div class="space-y-4 text-sm leading-6 text-[var(--muted)]">
-        <p>We offer free worldwide tracked shipping. Orders are processed within 1 to 3 business days and shipped with a fully tracked courier service.</p>
-        <p>After dispatch, transit normally takes 3 to 10 business days depending on the destination. Tracking information may take 1 to 2 business days to appear.</p>
-        <p>Read the complete <a href="/policies/shipping-policy" class="underline text-[var(--plum)] font-semibold">Shipping Policy</a> for pre-order guidance, tracking details, and address-change instructions.</p>
+        <p>We offer free tracked shipping on qualifying orders. Orders are processed within 1–3 business days and shipped with a fully tracked courier service.</p>
+        <p>After dispatch, standard transit takes 7–20 business days. Tracking information may take 24–72 hours after dispatch to update in the carrier system.</p>
+        <p>Read the complete <a href="/policies/shipping-policy" class="underline text-[var(--plum)] font-semibold">Shipping Policy</a> for pre-order guidance, tracking details, and address-change instructions (within 2 hours of order placement).</p>
       </div>
     `
   },
@@ -33,7 +34,7 @@ export const faqsData: FaqItem[] = [
   {
     question: "When will my orders be delivered?",
     answerHtml: `
-      <p class="text-sm leading-6">Orders are processed within 1 to 3 business days and sent with a fully tracked courier service. Once dispatched, transit normally takes 3 to 10 business days depending on the destination. Read the complete <a href="/policies/shipping-policy" class="underline text-[var(--plum)] font-semibold">Shipping Policy</a>.</p>
+      <p class="text-sm leading-6">Orders are processed within 1–3 business days and sent with a fully tracked courier service. Once dispatched, standard delivery transit takes 7–20 business days depending on the destination. Read the complete <a href="/policies/shipping-policy" class="underline text-[var(--plum)] font-semibold">Shipping Policy</a>.</p>
     `
   },
   {
@@ -45,7 +46,7 @@ export const faqsData: FaqItem[] = [
   {
     question: "What are shipping costs?",
     answerHtml: `
-      <p class="text-sm leading-6">Shipping is free worldwide. Orders are processed within 1 to 3 business days and sent with a tracked courier service. Once dispatched, transit usually takes 3 to 10 business days. Read the full <a href="/policies/shipping-policy" class="underline text-[var(--plum)] font-semibold">Shipping Policy</a> or <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">contact us</a> with questions.</p>
+      <p class="text-sm leading-6">We offer free tracked shipping on qualifying orders. Orders are processed within 1–3 business days and sent with a tracked courier service. Once dispatched, standard transit takes 7–20 business days. Read the full <a href="/policies/shipping-policy" class="underline text-[var(--plum)] font-semibold">Shipping Policy</a> or <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">contact us</a> with questions.</p>
     `
   },
   {
@@ -57,7 +58,7 @@ export const faqsData: FaqItem[] = [
   {
     question: "My tracking number isn't working",
     answerHtml: `
-      <p class="text-sm leading-6">Tracking numbers can take 1 to 2 business days to appear in the shipping carrier's system. If your tracking number is still not working after that window, please email <a href="mailto:support@buudy.co.uk" class="underline text-[var(--plum)] font-semibold">support@buudy.co.uk</a> or use our <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">Contact Form</a>.</p>
+      <p class="text-sm leading-6">Tracking updates can take 24–72 hours to appear in the shipping carrier's system after dispatch. If your tracking number is still not updating after that window, please email <a href="mailto:support@buudy.co.uk" class="underline text-[var(--plum)] font-semibold">support@buudy.co.uk</a> or use our <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">Contact Form</a>.</p>
     `
   },
   {

@@ -82,8 +82,8 @@ export const buudyMask: Product = {
   seoDescription:
     "Shop the Buudy LED Face Mask in the US: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, easy returns and refunds, and free glow kit.",
   currency: market.currency,
-  priceCents: 23750,
-  compareAtCents: 60100,
+  priceCents: 23640,
+  compareAtCents: 59100,
   rating: 4.9,
   reviewCount: 16000,
   customerCount: "16,000+",
@@ -204,7 +204,7 @@ export const buudyMask: Product = {
       alt: "Buudy LED Mask O3",
       badge: {
         title: "FREE BUUDY\nLED TORCH",
-        sub: "$92 targeted red light device included free with your order",
+        sub: "$92.30 targeted red light device included free with your order",
         position: "top-left",
         theme: "white",
       },
@@ -242,7 +242,7 @@ export const buudyMask: Product = {
     {
       id: "buudy-led-torch",
       name: "Buudy LED Torch",
-      valueCents: 9200,
+      valueCents: 9230,
       image: productAsset("01-buudy-red-light-therapy-torch-main.webp", "buudy-red-torch"),
       label: "Limited edition",
       href: "/products/red-light-torch",
@@ -330,8 +330,8 @@ export const buudyRedTorch: Product = {
   seoDescription:
     "Portable red light therapy torch with 3 wavelengths, near infrared support, rechargeable battery, and targeted body and skin relief.",
   currency: market.currency,
-  priceCents: 9200,
-  compareAtCents: 23400,
+  priceCents: 9230,
+  compareAtCents: 23075,
   rating: 4.8,
   reviewCount: 16000,
   customerCount: "16,000+",
