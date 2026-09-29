@@ -12,6 +12,8 @@ const routes = [
   { path: "/pages/skincare-quiz", lastModified: "2026-06-16", changeFrequency: "monthly", priority: 0.8 },
   { path: "/pages/premium-travel-box", lastModified: "2026-06-16", changeFrequency: "monthly", priority: 0.6 },
   { path: "/pages/buudy-led-torch", lastModified: "2026-06-16", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/pages/skincare-ebook", lastModified: "2026-09-29", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/ebook", lastModified: "2026-09-29", changeFrequency: "monthly", priority: 0.8 },
   { path: "/policies/shipping-policy", lastModified: "2026-06-16", changeFrequency: "monthly", priority: 0.4 },
   { path: "/policies/return-policy", lastModified: "2026-06-16", changeFrequency: "monthly", priority: 0.4 },
   { path: "/policies/refund-policy", lastModified: "2026-06-16", changeFrequency: "monthly", priority: 0.4 },

@@ -24,12 +24,31 @@ export function FreeGiftDetailPage({ gift }: { gift: FreeGiftDetail }) {
               {gift.intro}
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Button asChild>
-                <Link href={offerHref}>
-                  {gift.primaryCtaLabel}
-                  <ArrowRight aria-hidden="true" size={17} />
-                </Link>
-              </Button>
+              {gift.slug === "skincare-guide" ? (
+                <>
+                  <Button asChild>
+                    <a
+                      href="/Buudy-Clinical-Masterclass-EBook-v2.pdf"
+                      download="Buudy-Clinical-Masterclass-EBook-v2.pdf"
+                    >
+                      Download E-Book (PDF)
+                      <ArrowRight aria-hidden="true" size={17} />
+                    </a>
+                  </Button>
+                  <Button variant="ghost" asChild>
+                    <Link href="/pages/skincare-ebook">
+                      View Masterclass Syllabus
+                    </Link>
+                  </Button>
+                </>
+              ) : (
+                <Button asChild>
+                  <Link href={offerHref}>
+                    {gift.primaryCtaLabel}
+                    <ArrowRight aria-hidden="true" size={17} />
+                  </Link>
+                </Button>
+              )}
             </div>
             <p className="mt-5 max-w-2xl text-sm leading-6 text-[var(--muted)]">
               {gift.note}
