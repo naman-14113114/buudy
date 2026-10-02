@@ -20,7 +20,6 @@ const routes = [
   { path: "/policies/privacy-policy", lastModified: "2026-06-16" },
   { path: "/policies/terms-of-service", lastModified: "2026-06-16" },
   { path: "/policies/cookies-policy", lastModified: "2026-06-16" },
-  { path: "/order-tracking", lastModified: "2026-06-16" },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import {
   Download,
   ExternalLink,
@@ -14,19 +13,14 @@ import {
   ShieldCheck,
   Zap,
   Layers,
-  Clock,
   FileText,
   Smartphone,
   Tablet,
   Laptop,
-  ArrowRight,
-  Gift,
-  HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ebookData, type EbookPart } from "@/data/ebook";
-import { market } from "@/lib/market";
 
 export function EbookDownloadPage() {
   const [copied, setCopied] = useState(false);
@@ -53,28 +47,6 @@ export function EbookDownloadPage() {
 
   return (
     <div className="min-h-screen bg-[var(--cream)]">
-      {/* Top Breadcrumb & Status Marquee */}
-      <section className="border-b border-[var(--border)] bg-[var(--card)] py-3 text-xs text-[var(--muted)]">
-        <div className="buudy-wrap flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <Link href="/" className="transition hover:text-[var(--plum)]">
-              Home
-            </Link>
-            <span>/</span>
-            <span className="text-[var(--plum)] font-medium">
-              Skincare Clinical Masterclass E-Book
-            </span>
-          </div>
-          <div className="flex items-center gap-2 font-mono text-[11px] text-[var(--gold)]">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--gold)] opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--gold)]"></span>
-            </span>
-            <span>OFFICIAL VERSION 2.0 • HIGH RESOLUTION PDF</span>
-          </div>
-        </div>
-      </section>
-
       {/* Hero Section */}
       <section className="buudy-section relative overflow-hidden py-12 md:py-20">
         {/* Subtle Ambient Glows */}
@@ -531,38 +503,6 @@ export function EbookDownloadPage() {
                 </div>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* Bottom Dual Action Banner */}
-      <section className="buudy-section bg-[var(--ink)] py-14 text-center text-[var(--cream)] md:py-20">
-        <div className="buudy-wrap max-w-3xl">
-          <p className="buudy-eyebrow text-[var(--gold)]">
-            COMPANION TO THE BUUDY SYSTEM
-          </p>
-          <h2 className="buudy-display mt-3 text-3xl sm:text-4xl md:text-5xl font-light leading-tight">
-            Ready to start your 10-minute{" "}
-            <em className="buudy-italic text-[var(--gold)]">clinical ritual?</em>
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-sm sm:text-base leading-relaxed text-[rgba(247,241,232,0.8)] font-light">
-            Download the clinical masterclass PDF above, or explore the complete Buudy 7-Colour LED Mask package with free LED Torch, Travel Box, and 90-day money-back guarantee.
-          </p>
-
-          <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
-            <Button asChild className="h-13 px-7 bg-[var(--gold)] border-[var(--gold)] text-[var(--ink)] hover:bg-[var(--cream)]">
-              <a href={ebookData.pdfPath} download={ebookData.pdfFilename}>
-                <Download size={16} />
-                <span>Download Masterclass E-Book</span>
-              </a>
-            </Button>
-
-            <Button variant="ghost" asChild className="h-13 px-7 border-[rgba(247,241,232,0.3)] text-[var(--cream)] hover:bg-[rgba(255,255,255,0.08)]">
-              <Link href="/products/buudy-led-mask">
-                <span>View The Buudy LED Mask</span>
-                <ArrowRight size={16} />
-              </Link>
-            </Button>
           </div>
         </div>
       </section>

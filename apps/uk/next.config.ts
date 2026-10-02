@@ -136,17 +136,6 @@ const nextConfig: NextConfig = {
         destination: "/policies/cookies-policy",
         permanent: true,
       },
-      // Order tracking aliases
-      {
-        source: "/policies/order-tracking",
-        destination: "/order-tracking",
-        permanent: true,
-      },
-      {
-        source: "/pages/order-tracking",
-        destination: "/order-tracking",
-        permanent: true,
-      },
     ];
   },
 };

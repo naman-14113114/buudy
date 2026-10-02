@@ -50,11 +50,11 @@ export async function getCurrentAccount(): Promise<CurrentAccount> {
   };
 }
 
-export async function requireAccount(redirectTo = "/my-profile") {
+export async function requireAccount(_redirectTo = "/my-profile") {
   const account = await getCurrentAccount();
 
   if (!account.user) {
-    redirect(`https://buudy.com/sign-in?redirectTo=${encodeURIComponent(redirectTo)}`);
+    redirect("/");
   }
 
   return account as CurrentAccount & {

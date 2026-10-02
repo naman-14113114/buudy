@@ -27,7 +27,7 @@ export default async function AccountSettingsPage() {
           <p className="buudy-eyebrow">Settings</p>
           <h1 className="buudy-heading mt-3">Account care.</h1>
           <p className="buudy-copy mt-4 max-w-2xl">
-            Update your profile, shipping details, password, and sign-in state.
+            Update your profile, shipping details, password, and account security.
           </p>
         </div>
 

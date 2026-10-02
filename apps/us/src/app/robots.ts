@@ -8,8 +8,6 @@ export default function robots(): MetadataRoute.Robots {
     "/my-profile",
     "/order-history",
     "/order-confirmation",
-    "https://buudy.com/sign-in",
-    "https://buudy.com/sign-up",
   ];
 
   return {

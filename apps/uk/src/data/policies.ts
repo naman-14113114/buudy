@@ -389,28 +389,3 @@ export const cookiesPolicyHtml = `
 <p><strong>Google reCAPTCHA:</strong> Enhances security and fraud prevention.</p>
 `;
 
-export const orderTrackingData = {
-  title: "Order Tracking",
-  intro:
-    "Once your order has shipped, you will receive an email from us with a link to track your order.\nYou can also enter the order name and your email in the box below to get the status of your shipment.",
-  subIntro:
-    "If you just received a shipment notification, please allow 24 to 72 hours for the tracking information to appear.",
-  faqs: [
-    {
-      question: "When will I get my order?",
-      answerHtml:
-        '<p class="text-sm leading-7">We offer tracked shipping. Orders are processed within <strong>1 to 3 business days</strong> and shipped with a fully tracked courier service. Once dispatched, transit usually takes <strong>7 to 20 business days</strong>.</p><p class="mt-4 text-sm leading-7"><strong>Please note:</strong> Your order may split into multiple shipments when it includes multiple items. If this occurs, you will receive tracking details for each separate shipment.</p><p class="mt-4 text-sm leading-7">Read the full <a class="font-semibold text-[var(--plum)] underline" href="/policies/shipping-policy">Shipping Policy</a>.</p>'
-    },
-    {
-      question: "Can I add or remove products from my order?",
-      answerHtml:
-        '<p class="text-sm leading-7">To ensure your order arrives on time, orders enter fulfillment rapidly. Address changes must be requested within 2 hours, and cancellation requests within 12 hours of placing the order.</p>'
-    },
-    {
-      question: "Where can I find my order number?",
-      answerHtml:
-        '<p class="text-sm leading-7">Your order number can be found at the top of your confirmation email. Please check your inbox, including your spam folder. If you still cannot locate it, email <a class="font-semibold text-[var(--plum)] underline" href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or use our <a class="font-semibold text-[var(--plum)] underline" href="/pages/contact-us">Contact Form</a>.</p>'
-    }
-  ]
-};
-

@@ -150,7 +150,7 @@ export const ebookParts: EbookPart[] = [
         title: "Integrated Neck & Décolletage Coverage",
         page: "Page 17",
         description:
-            "Why treating the neck and upper chest is non-negotiable for an even age profile, and how Buudy's extended shield eliminates disparity.",
+          "Why treating the neck and upper chest is non-negotiable for an even age profile, and how Buudy's extended shield eliminates disparity.",
         highlights: ["Full neck shield", "Tech-neck smoothing", "Unified age tone"],
       },
       {
@@ -393,9 +393,9 @@ export const ebookData = {
   title: "The Clinical Light Masterclass",
   subtitle:
     "The Definitive Clinical Guide to 7-Colour Photobiomodulation, Precision Multi-Device Synergy & Active Skincare Chemistry",
-  edition: "Official Customer Companion Edition (v2.0)",
-  pdfFilename: "Buudy-Clinical-Masterclass-EBook-v2.pdf",
-  pdfPath: "/Buudy-Clinical-Masterclass-EBook-v2.pdf",
+  edition: "Official Customer Companion Edition",
+  pdfFilename: "Buudy-Clinical-Skincare-Masterclass-Guide.pdf",
+  pdfPath: "/Buudy-Clinical-Skincare-Masterclass-Guide.pdf",
   legacyPdfPath: "/Buudy-Clinical-Masterclass-EBook.pdf",
   fileSize: "1.5 MB",
   pageCount: "40+ Pages",
@@ -441,7 +441,7 @@ export const ebookData = {
     {
       question: "Is this E-Book completely free for all Buudy customers?",
       answerHtml:
-        "Yes! The Clinical Light Masterclass (v2.0) is our official customer companion edition. It is included free with every Buudy LED Mask order (£19 / $19 standalone value), and we make the digital PDF freely accessible here for all our customers and community members worldwide.",
+        "Yes! The Clinical Light Masterclass is our official customer companion edition. It is included free with every Buudy LED Mask order (£19 / $19 standalone value), and we make the digital PDF freely accessible here for all our customers and community members worldwide.",
     },
     {
       question: "Can I read this guide before my Buudy LED Mask arrives in the post?",

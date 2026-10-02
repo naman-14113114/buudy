@@ -28,8 +28,8 @@ export function FreeGiftDetailPage({ gift }: { gift: FreeGiftDetail }) {
                 <>
                   <Button asChild>
                     <a
-                      href="/Buudy-Clinical-Masterclass-EBook-v2.pdf"
-                      download="Buudy-Clinical-Masterclass-EBook-v2.pdf"
+                      href="/Buudy-Clinical-Skincare-Masterclass-Guide.pdf"
+                      download="Buudy-Clinical-Skincare-Masterclass-Guide.pdf"
                     >
                       Download E-Book (PDF)
                       <ArrowRight aria-hidden="true" size={17} />

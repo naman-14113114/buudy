@@ -2,88 +2,49 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import {
-  ChevronDown,
-  LayoutDashboard,
-  LogOut,
-  Menu,
-  Settings,
-  ShoppingBag,
-  UserRound,
-  X,
-} from "lucide-react";
-import { signOutAction } from "@/app/actions/auth";
+import { Menu, ShoppingBag, X } from "lucide-react";
 import { primaryNavigation, secondaryNavigation } from "@/data/navigation";
 import { useCart } from "@/components/cart/CartProvider";
 
-type HeaderSession = {
-  user: {
-    id: string;
-    email: string;
-  } | null;
-  profile: {
-    fullName: string | null;
-    email: string;
-  } | null;
-  isAdmin: boolean;
-};
-
 export function Header() {
   const { totals, openCart } = useCart();
-  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuMounted, setMobileMenuMounted] = useState(false);
-  const [session, setSession] = useState<HeaderSession | null>(null);
-  const accountMenuRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const openMobileMenu = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setMobileMenuMounted(true);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setMobileMenuOpen(true);
+      });
+    });
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = setTimeout(() => {
+      setMobileMenuMounted(false);
+      closeTimeoutRef.current = null;
+    }, 320);
+  };
 
   useEffect(() => {
-    async function loadSession() {
-      try {
-        const response = await fetch("/api/account/session", {
-          cache: "no-store",
-        });
-
-        if (response.ok) {
-          setSession((await response.json()) as HeaderSession);
-        }
-      } catch {
-        setSession({ user: null, profile: null, isAdmin: false });
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
       }
-    }
-
-    loadSession();
-    window.addEventListener("focus", loadSession);
-
-    return () => window.removeEventListener("focus", loadSession);
+    };
   }, []);
-
-  useEffect(() => {
-    function onPointerDown(event: PointerEvent) {
-      if (
-        accountMenuOpen &&
-        accountMenuRef.current &&
-        !accountMenuRef.current.contains(event.target as Node)
-      ) {
-        setAccountMenuOpen(false);
-      }
-    }
-
-    window.addEventListener("pointerdown", onPointerDown);
-
-    return () => window.removeEventListener("pointerdown", onPointerDown);
-  }, [accountMenuOpen]);
-
-  useEffect(() => {
-    if (mobileMenuOpen || !mobileMenuMounted) {
-      return;
-    }
-
-    const timeout = window.setTimeout(() => setMobileMenuMounted(false), 280);
-
-    return () => window.clearTimeout(timeout);
-  }, [mobileMenuMounted, mobileMenuOpen]);
 
   useEffect(() => {
     if (!mobileMenuMounted) {
@@ -102,7 +63,7 @@ export function Header() {
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        setMobileMenuOpen(false);
+        closeMobileMenu();
       }
     }
 
@@ -117,34 +78,29 @@ export function Header() {
     };
   }, [mobileMenuMounted]);
 
-  const signedIn = Boolean(session?.user);
-  const accountLabel =
-    session?.profile?.fullName || session?.user?.email || "Account";
-
   return (
-    <header
-      className="relative z-40 border-b border-[rgba(58,31,61,.14)] bg-[rgba(247,241,232,.88)] backdrop-blur-xl"
-    >
-      <div className="buudy-wrap relative flex min-h-[64px] items-center justify-between gap-4 lg:min-h-[72px] lg:gap-5 2xl:gap-6">
+    <header className="relative z-40 border-b border-[rgba(58,31,61,.14)] bg-[rgba(247,241,232,.88)] backdrop-blur-xl">
+      <div className="buudy-wrap relative flex min-h-[64px] items-center justify-between gap-4 lg:min-h-[72px]">
+        {/* Mobile Menu Trigger */}
         <button
           aria-controls="mobile-site-navigation"
           aria-expanded={mobileMenuOpen}
           aria-label="Open navigation menu"
           className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.18)] text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)] lg:hidden"
-          onClick={() => {
-            setAccountMenuOpen(false);
-            setMobileMenuMounted(true);
-            setMobileMenuOpen(true);
-          }}
+          onClick={openMobileMenu}
           type="button"
         >
           <Menu size={20} strokeWidth={1.8} />
         </button>
 
-        <nav className="hidden gap-5 lg:flex 2xl:gap-7" aria-label="Primary">
+        {/* Left Side: Primary Navigation */}
+        <nav
+          className="hidden lg:flex items-center gap-5 xl:gap-6 2xl:gap-7"
+          aria-label="Primary"
+        >
           {primaryNavigation.map((item) => (
             <Link
-              className="buudy-mono text-[var(--plum)] opacity-80 transition hover:opacity-100"
+              className="buudy-mono whitespace-nowrap text-[0.62rem] tracking-[0.14em] text-[var(--plum)] opacity-80 transition hover:opacity-100 xl:text-[0.69rem] xl:tracking-[0.2em]"
               href={item.href}
               key={item.label}
             >
@@ -153,27 +109,32 @@ export function Header() {
           ))}
         </nav>
 
+        {/* Center: Logo */}
         <Link
-          className="absolute left-1/2 flex -translate-x-1/2 items-center lg:static lg:translate-x-0"
+          className="absolute left-1/2 flex -translate-x-1/2 items-center shrink-0 px-2 lg:static lg:translate-x-0 xl:px-3"
           href="/"
           aria-label="Buudy home"
         >
           <Image
             alt="Buudy Logo"
-            className="h-[clamp(40px,4vw,50px)] w-auto object-contain"
+            className="h-[34px] w-auto object-contain xl:h-[46px]"
             height={74}
             priority
-            sizes="(min-width: 1024px) 180px, 150px"
+            sizes="(min-width: 1280px) 180px, 140px"
             src="/media/products/buudy-led-mask/images/ChatGPT Image May 31, 2026, 12_10_21 AM.png"
             width={220}
           />
         </Link>
 
-        <div className="flex items-center gap-3 lg:gap-4 2xl:gap-6">
-          <nav className="hidden gap-5 lg:flex 2xl:gap-7" aria-label="Secondary">
+        {/* Right Side: Secondary Navigation + Cart */}
+        <div className="flex items-center gap-4 lg:gap-5 xl:gap-6 2xl:gap-7">
+          <nav
+            className="hidden lg:flex items-center gap-5 xl:gap-6 2xl:gap-7"
+            aria-label="Secondary"
+          >
             {secondaryNavigation.map((item) => (
               <Link
-                className="buudy-mono text-[var(--plum)] opacity-80 transition hover:opacity-100"
+                className="buudy-mono whitespace-nowrap text-[0.62rem] tracking-[0.14em] text-[var(--plum)] opacity-80 transition hover:opacity-100 xl:text-[0.69rem] xl:tracking-[0.2em]"
                 href={item.href}
                 key={item.label}
               >
@@ -183,7 +144,7 @@ export function Header() {
           </nav>
           <button
             aria-label={`Open cart with ${totals.itemCount} items`}
-            className="relative grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.18)] text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)] lg:h-12 lg:w-12"
+            className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[rgba(58,31,61,.18)] text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)] lg:h-12 lg:w-12"
             data-testid="cart-trigger"
             onClick={openCart}
             type="button"
@@ -195,76 +156,6 @@ export function Header() {
               </span>
             ) : null}
           </button>
-
-          <div className="relative hidden lg:block" ref={accountMenuRef}>
-            <button
-              aria-expanded={accountMenuOpen}
-              aria-haspopup="menu"
-              aria-label={signedIn ? `Open account menu for ${accountLabel}` : "Open account menu"}
-              className="inline-flex h-12 items-center gap-1 rounded-full border border-[rgba(58,31,61,.18)] px-3 text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
-              onClick={() => {
-                setAccountMenuOpen((open) => !open);
-              }}
-              type="button"
-            >
-              <UserRound size={18} strokeWidth={1.8} />
-              <ChevronDown
-                className={`transition ${accountMenuOpen ? "rotate-180" : ""}`}
-                size={14}
-              />
-            </button>
-
-            {accountMenuOpen ? (
-              <div
-                className="absolute right-0 top-[calc(100%+12px)] w-72 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-[0_24px_70px_-42px_rgba(58,31,61,.75)]"
-                role="menu"
-              >
-                <div className="border-b border-[var(--border)] p-4">
-                  <p className="buudy-mono text-[var(--gold)]">
-                    {signedIn ? "Signed in" : "Buudy account"}
-                  </p>
-                  <p className="mt-1 truncate text-sm font-semibold text-[var(--plum)]">
-                    {signedIn ? accountLabel : "Save profile and order history"}
-                  </p>
-                </div>
-
-                <div className="p-2">
-                  {signedIn ? (
-                    <>
-                      <HeaderMenuLink href="/my-profile" label="My Profile" />
-                      <HeaderMenuLink href="/order-history" label="Order History" />
-                      <HeaderMenuLink
-                        href="/account-settings"
-                        icon={<Settings size={16} />}
-                        label="Account Settings"
-                      />
-                      {session?.isAdmin ? (
-                        <HeaderMenuLink
-                          href="/admin"
-                          icon={<LayoutDashboard size={16} />}
-                          label="Admin Dashboard"
-                        />
-                      ) : null}
-                      <form action={signOutAction}>
-                        <button
-                          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
-                          type="submit"
-                        >
-                          <LogOut size={16} />
-                          Sign out
-                        </button>
-                      </form>
-                    </>
-                  ) : (
-                    <>
-                      <HeaderMenuLink href="https://buudy.com/sign-in" label="Sign in" />
-                      <HeaderMenuLink href="https://buudy.com/sign-up" label="Sign up" />
-                    </>
-                  )}
-                </div>
-              </div>
-            ) : null}
-          </div>
         </div>
       </div>
 
@@ -280,7 +171,7 @@ export function Header() {
                 className={`absolute inset-0 bg-[rgba(18,9,20,.52)] backdrop-blur-sm transition-opacity duration-300 ease-out ${
                   mobileMenuOpen ? "opacity-100" : "opacity-0"
                 }`}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={closeMobileMenu}
                 type="button"
               />
               <aside
@@ -305,7 +196,7 @@ export function Header() {
                   <button
                     aria-label="Close navigation menu"
                     className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.18)] text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={closeMobileMenu}
                     type="button"
                   >
                     <X size={20} strokeWidth={1.8} />
@@ -320,7 +211,7 @@ export function Header() {
                         href={item.href}
                         key={item.label}
                         label={item.label}
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={closeMobileMenu}
                       />
                     ))}
                   </nav>
@@ -332,62 +223,10 @@ export function Header() {
                         href={item.href}
                         key={item.label}
                         label={item.label}
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={closeMobileMenu}
                       />
                     ))}
                   </nav>
-
-                  <p className="buudy-eyebrow mt-7 px-2">Account</p>
-                  <div className="mt-2">
-                    {signedIn ? (
-                      <>
-                        <MobileMenuLink
-                          href="/my-profile"
-                          label="My Profile"
-                          onClick={() => setMobileMenuOpen(false)}
-                        />
-                        <MobileMenuLink
-                          href="/order-history"
-                          label="Order History"
-                          onClick={() => setMobileMenuOpen(false)}
-                        />
-                        <MobileMenuLink
-                          href="/account-settings"
-                          label="Account Settings"
-                          onClick={() => setMobileMenuOpen(false)}
-                        />
-                        {session?.isAdmin ? (
-                          <MobileMenuLink
-                            href="/admin"
-                            label="Admin Dashboard"
-                            onClick={() => setMobileMenuOpen(false)}
-                          />
-                        ) : null}
-                        <form action={signOutAction}>
-                          <button
-                            className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-semibold text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
-                            type="submit"
-                          >
-                            <LogOut size={16} />
-                            Sign out
-                          </button>
-                        </form>
-                      </>
-                    ) : (
-                      <>
-                        <MobileMenuLink
-                          href="https://buudy.com/sign-in"
-                          label="Sign in"
-                          onClick={() => setMobileMenuOpen(false)}
-                        />
-                        <MobileMenuLink
-                          href="https://buudy.com/sign-up"
-                          label="Sign up"
-                          onClick={() => setMobileMenuOpen(false)}
-                        />
-                      </>
-                    )}
-                  </div>
                 </div>
               </aside>
             </div>,
@@ -413,27 +252,6 @@ function MobileMenuLink({
       href={href}
       onClick={onClick}
     >
-      {label}
-    </Link>
-  );
-}
-
-function HeaderMenuLink({
-  href,
-  label,
-  icon,
-}: {
-  href: string;
-  label: string;
-  icon?: ReactNode;
-}) {
-  return (
-    <Link
-      className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
-      href={href}
-      role="menuitem"
-    >
-      {icon ?? <UserRound size={16} />}
       {label}
     </Link>
   );

@@ -9,8 +9,6 @@ export default function robots(): MetadataRoute.Robots {
     "/order-history",
     "/order-confirmation",
     "/cart",
-    "/sign-in",
-    "/sign-up",
   ];
 
   return {
