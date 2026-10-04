@@ -117,14 +117,12 @@ export default function RootLayout({
         <GlobalImageLoader />
         <CartProvider>
           <HideOnPaths paths={["/cart"]}>
-            <div data-buudy-default-header>
-              <AnnouncementBar />
-              <Header />
-            </div>
+            <AnnouncementBar />
+            <Header />
           </HideOnPaths>
           <main>{children}</main>
           <HideOnPaths paths={["/cart"]}>
-            <div data-buudy-default-footer><Footer /></div>
+            <Footer />
           </HideOnPaths>
           <CartDrawer />
         </CartProvider>
