@@ -713,7 +713,7 @@ export const faqs: FAQItem[] = [
   {
     question: "Do you sell this anywhere else?",
     answer:
-      "The Buudy LED Mask is exclusively sold through us.buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
+      "You can buy the Buudy LED Mask from this official website at www.buudy.com. If you are unsure about a seller or need help with an order, use our Contact Us page to reach Buudy support.",
   },
   {
     question: "How do I track my order?",

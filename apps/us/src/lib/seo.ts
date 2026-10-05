@@ -3,8 +3,6 @@ import type { FAQItem } from "@/data/productSections";
 import { absoluteUrl } from "@/lib/site";
 import { market } from "@/lib/market";
 
-const schemaCountry = (market.marketLabel as string) === "UK" ? "GB" : market.marketLabel;
-
 export function productJsonLd(product: Product) {
   const productUrl = absoluteUrl(`/products/${product.slug}`);
 
@@ -26,60 +24,16 @@ export function productJsonLd(product: Product) {
           ? "IPL hair removal device"
           : "Handheld red light therapy device",
     sku: product.sku,
-    mpn: product.sku,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: product.rating,
-      reviewCount: product.reviewCount,
-      bestRating: 5,
-      worstRating: 1,
-    },
     offers: {
       "@type": "Offer",
       url: productUrl,
       priceCurrency: product.currency,
       price: (product.priceCents / 100).toFixed(2),
-      priceValidUntil: "2026-12-31",
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: {
         "@type": "Organization",
         name: "Buudy",
-      },
-      shippingDetails: {
-        "@type": "OfferShippingDetails",
-        shippingRate: {
-          "@type": "MonetaryAmount",
-          value: "0.00",
-          currency: product.currency,
-        },
-        shippingDestination: {
-          "@type": "DefinedRegion",
-          addressCountry: schemaCountry,
-        },
-        deliveryTime: {
-          "@type": "ShippingDeliveryTime",
-          handlingTime: {
-            "@type": "QuantitativeValue",
-            minValue: 0,
-            maxValue: 2,
-            unitCode: "DAY",
-          },
-          transitTime: {
-            "@type": "QuantitativeValue",
-            minValue: 2,
-            maxValue: 5,
-            unitCode: "DAY",
-          },
-        },
-      },
-      hasMerchantReturnPolicy: {
-        "@type": "MerchantReturnPolicy",
-        applicableCountry: schemaCountry,
-        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-        merchantReturnDays: 90,
-        returnMethod: "https://schema.org/ReturnByMail",
-        returnFees: "https://schema.org/FreeReturn",
       },
     },
     additionalProperty: product.specs.map((spec) => ({
@@ -101,7 +55,6 @@ export function productWebPageJsonLd(product: Product) {
     name: product.seoTitle,
     description: product.seoDescription,
     inLanguage: market.locale,
-    dateModified: "2026-06-16",
     isPartOf: {
       "@id": `${absoluteUrl("/")}#website`,
     },
@@ -181,15 +134,10 @@ export function websiteJsonLd() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${absoluteUrl("/")}#website`,
-    name: "Buudy US",
+    name: "Buudy",
     url: absoluteUrl("/"),
     publisher: {
       "@id": `${absoluteUrl("/")}#organization`,
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${absoluteUrl("/products/buudy-led-mask")}?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
     },
   };
 }

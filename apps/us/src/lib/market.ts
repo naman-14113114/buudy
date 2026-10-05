@@ -1,5 +1,5 @@
 export const market = {
-  siteUrl: "https://us.buudy.com",
+  siteUrl: "https://www.buudy.com",
   locale: "en-US",
   currency: "USD",
   country: "United States",
