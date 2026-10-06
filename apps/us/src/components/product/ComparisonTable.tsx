@@ -1,4 +1,5 @@
 import React from "react";
+import { NativePrice } from '@/components/international/NativePrice';
 import { productMediaAsset } from "@/lib/media";
 
 function CheckIcon() {
@@ -374,7 +375,7 @@ export function ComparisonTable() {
             title="Price"
             values={[
               <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">
-                <span className="line-through mr-1.5 opacity-60">$591</span>$236.40
+                <NativePrice/>
               </span>,
               <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">$395</span>,
               <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">$380</span>,

@@ -12,6 +12,8 @@ import {
   websiteJsonLd,
 } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
+import { languageAlternates } from '@/lib/international/markets';
+import { getInitialOffer } from '@/lib/international/server-offer';
 
 type PageProps = {
   params: Promise<{
@@ -66,9 +68,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             ],
     alternates: {
       canonical: `/products/${product.slug}`,
-      languages: {
-        "en-US": `/products/${product.slug}`,
-      },
+      ...(product.slug==='buudy-led-mask'?{languages:languageAlternates('/products/buudy-led-mask')}:{}),
     },
     robots: {
       index: true,
@@ -115,6 +115,7 @@ export default async function ProductRoute({ params }: PageProps) {
   const productFaqs = product.template === "mask"
     ? [...ledMaskSeoFaqs, ...product.faqs]
     : product.faqs;
+  const nativeQuote=product.template==='mask'?(await getInitialOffer())?.base:null;
 
   return (
     <>
@@ -122,7 +123,7 @@ export default async function ProductRoute({ params }: PageProps) {
         organizationJsonLd(),
         websiteJsonLd(),
         productWebPageJsonLd(product),
-        productJsonLd(product),
+        productJsonLd(product,nativeQuote),
         breadcrumbJsonLd([
           { name: "Home", url: "/" },
           { name: product.name, url: `/products/${product.slug}` },

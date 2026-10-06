@@ -11,6 +11,7 @@ import {
 } from "@/lib/attribution";
 import { promoCode } from "@/lib/cart";
 import { useCart, writeCheckoutSnapshot } from "./CartProvider";
+import { useOffer } from '@/components/international/OfferProvider';
 
 export type CheckoutCustomer = {
   fullName: string;
@@ -30,11 +31,11 @@ type CheckoutFormProps = {
 };
 
 export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
+  const {offer,loading}=useOffer();
   const { totals, lines, giftMessage, activePromoCodes, manualPromoCode } =
     useCart();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [error, setError] = useState("");
-  const [isMorocco, setIsMorocco] = useState(false);
   const hasItems = totals.itemCount > 0;
 
   useEffect(() => {
@@ -49,21 +50,6 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     return () => {
       window.removeEventListener("pageshow", handlePageShow);
     };
-  }, []);
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const countryParam = params.get("country")
-      ? `?country=${encodeURIComponent(params.get("country")!)}`
-      : "";
-    fetch(`/api/geo${countryParam}`)
-      .then((res) => res.json())
-      .then((data: { country?: string }) => {
-        if (data?.country === "MA" || data?.country === "MOROCCO") {
-          setIsMorocco(true);
-        }
-      })
-      .catch(() => {});
   }, []);
 
   const maskQuantity =
@@ -93,11 +79,6 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       return;
     }
 
-    if (isMorocco) {
-      setError("The checkout has not been connected, and no order has been placed.");
-      return;
-    }
-
     const attribution = readAttribution();
     writeCheckoutSnapshot({ lines, giftMessage, promoCode, manualPromoCode });
     setError("");
@@ -106,7 +87,9 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       new CustomEvent("buudy:started-checkout", {
         detail: {
           lines,
-          totals,
+          totals: offer && lines.filter(line=>line.type==='product').every(line=>line.productId==='buudy-led-mask') ? {
+            ...totals,totalCents:Math.round((offer.base.unitPrice*maskQuantity-(manualPromoCode?offer.base.discount:0))*100),currency:'GBP',
+          } : totals,
         },
       }),
     );
@@ -118,6 +101,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          currency:offer?.quote.currency,
           customerEmail: initialCustomer.email,
           quantity: maskQuantity, // fallback quantity
           cart: {
@@ -158,7 +142,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       <Button
         id="main-checkout-btn"
         className={`relative overflow-hidden w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] buudy-display ${!isRedirecting ? "proxy-bundle-btn" : "disabled:!opacity-100"}`}
-        disabled={!hasItems || isRedirecting}
+        disabled={!hasItems || isRedirecting || (lines.some(line=>line.type==='product'&&line.productId==='buudy-led-mask')&&(!offer||loading))}
         onClick={handleCheckout}
         type="button"
       >

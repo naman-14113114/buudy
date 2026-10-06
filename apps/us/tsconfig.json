@@ -1,6 +1,7 @@
 {
   "extends": "@buudy/tsconfig/next.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

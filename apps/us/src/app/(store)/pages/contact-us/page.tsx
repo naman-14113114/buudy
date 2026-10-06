@@ -1,3 +1,4 @@
+import { languageAlternates } from "@/lib/international/markets";
 import type { Metadata } from "next";
 import { ContactPage } from "@/components/contact/ContactPage";
 import { absoluteUrl } from "@/lib/site";
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
     "Contact Buudy for product questions, order support, shipping help, and light therapy guidance.",
   alternates: {
     canonical: "/pages/contact-us",
+    languages: languageAlternates("/pages/contact-us"),
   },
   openGraph: {
     title: "Contact Buudy",

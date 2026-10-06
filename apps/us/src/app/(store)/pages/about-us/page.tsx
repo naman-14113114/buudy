@@ -1,3 +1,4 @@
+import { languageAlternates } from "@/lib/international/markets";
 import type { Metadata } from "next";
 import { AboutPage } from "@/components/about/AboutPage";
 import { absoluteUrl } from "@/lib/site";
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
     "Learn about Buudy, our team of skincare advocates, our story of wire-free LED mask innovation, and our mission to make high-quality light therapy routines simple and effective.",
   alternates: {
     canonical: "/pages/about-us",
+    languages: languageAlternates("/pages/about-us"),
   },
   openGraph: {
     title: "About Buudy | High-Performance LED Skincare",

@@ -2,8 +2,21 @@ import { type NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import type { Database } from "@/types/database";
 import { getSupabaseConfig, isSupabaseConfigured } from "@/lib/supabase/config";
+import { resolveLanguage, localePath } from '@/lib/international/markets';
 
 export async function proxy(request: NextRequest) {
+  // Only the neutral homepage chooses a first-visit language. Deep links,
+  // APIs and explicit language URLs always keep their URL-defined content.
+  if(request.nextUrl.pathname==='/') {
+    const locale=resolveLanguage(request.cookies.get('buudy_language')?.value,request.headers.get('accept-language') || undefined,request.headers.get('x-vercel-ip-country') || undefined);
+    if(locale!=='en') {
+      const target=request.nextUrl.clone();target.pathname=localePath(locale);
+      const redirect=NextResponse.redirect(target,307);
+      redirect.headers.set('Cache-Control','private, no-store');
+      redirect.headers.set('Vary','Accept-Language, Cookie, X-Vercel-IP-Country');
+      return redirect;
+    }
+  }
   let response = NextResponse.next({
     request,
   });

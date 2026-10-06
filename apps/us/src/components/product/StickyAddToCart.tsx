@@ -8,6 +8,7 @@ import Lottie from "lottie-react";
 import loadingLottie from "@/components/cart/loading-lottie.json";
 import type { Product } from "@/data/products";
 import { formatMoney } from "@/lib/money";
+import { NativePrice } from '@/components/international/NativePrice';
 import {
   appendAttributionToPath,
   pickAttributionFromSearch,
@@ -117,7 +118,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
               {product.name}
             </p>
             <p className="truncate text-sm text-[var(--muted)]">
-              {formatMoney(product.priceCents, product.currency)}
+              {product.template==='mask'?<NativePrice/>:formatMoney(product.priceCents, product.currency)}
               {giftLabel}
             </p>
           </div>

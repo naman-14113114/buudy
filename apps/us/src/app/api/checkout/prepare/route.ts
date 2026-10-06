@@ -3,6 +3,7 @@ import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
 import { getAppliedManualPromoCode } from "@/lib/cart";
 import { z } from "zod";
 import { createXpageCheckout } from "@/lib/xpage-checkout";
+import { currencies, resolveCurrency } from '@/lib/international/markets';
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -41,6 +42,7 @@ const passthroughAttributionKeys = [
 ];
 
 const prepareSchema = z.object({
+  currency: z.string().refine(code=>currencies.includes(code)).optional(),
   quantity: z.number().int().min(1).max(100).optional(),
   cart: z.object({
     lines: z.array(z.object({
@@ -254,26 +256,6 @@ async function createPlusbaseCheckout(
 }
 
 export async function POST(request: NextRequest) {
-  const clientCountry =
-    request.headers.get("x-vercel-ip-country") ||
-    request.headers.get("cf-ipcountry") ||
-    request.headers.get("x-country-code") ||
-    request.headers.get("x-country") ||
-    request.headers.get("x-geo-country");
-
-  if (
-    clientCountry &&
-    (clientCountry.trim().toUpperCase() === "MA" ||
-      clientCountry.trim().toUpperCase() === "MOROCCO" ||
-      clientCountry.trim().toUpperCase() === "ES" ||
-      clientCountry.trim().toUpperCase() === "SPAIN")
-  ) {
-    return NextResponse.json(
-      { error: "The checkout has not been connected, and no order has been placed." },
-      { status: 400 },
-    );
-  }
-
   const parsed = prepareSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ error: "Please check your cart quantities and try again." }, { status: 400 });
@@ -296,7 +278,8 @@ export async function POST(request: NextRequest) {
   }
   if (!body.cart || maskLines?.length) {
     try {
-      const checkout = await createXpageCheckout(quantity, Boolean(appliedManualPromoCode));
+      const currency=resolveCurrency(body.currency || request.cookies.get('buudy_currency')?.value,request.headers.get('x-vercel-ip-country'));
+      const checkout = await createXpageCheckout(quantity, Boolean(appliedManualPromoCode),fetch,currency);
       return NextResponse.json(checkout, { headers: { "Cache-Control": "no-store" } });
     } catch (error) {
       // Never log session cookies, CSRF tokens, checkout URLs or customer data.

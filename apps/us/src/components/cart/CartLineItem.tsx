@@ -6,6 +6,7 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import type { CartLine } from "@/lib/cart";
 import { formatMoney } from "@/lib/money";
 import { useCart } from "./CartProvider";
+import { NativePrice } from '@/components/international/NativePrice';
 
 export function CartLineItem({ line }: { line: CartLine }) {
   const { setQuantity, removeProduct } = useCart();
@@ -51,9 +52,9 @@ export function CartLineItem({ line }: { line: CartLine }) {
             <p className="buudy-display text-lg text-[var(--plum)]">
               {line.unitPriceCents === 0
                 ? "Free"
-                : formatMoney(line.unitPriceCents)}
+                : line.productId==='buudy-led-mask'?<NativePrice/>:formatMoney(line.unitPriceCents)}
             </p>
-            {line.compareAtCents ? (
+            {line.compareAtCents && line.productId!=='buudy-led-mask' ? (
               <p className="text-xs text-[var(--muted)] line-through">
                 {formatMoney(line.compareAtCents)}
               </p>

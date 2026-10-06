@@ -43,7 +43,7 @@ for (const url of urls) {
       check(!data.aggregateRating, `${path}: unverified aggregate rating still published`);
       check(!data.offers?.hasMerchantReturnPolicy, `${path}: conflicting return policy still published`);
       check(!data.offers?.shippingDetails, `${path}: unsupported delivery terms still published`);
-      for (const image of data.image || []) {
+      for (const image of (Array.isArray(data.image) ? data.image : data.image ? [data.image] : [])) {
         check(new URL(image).origin === canonicalOrigin, `${path}: product image has wrong host`);
       }
     }

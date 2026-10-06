@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import { HomePage } from "@/components/home/HomePage";
 import { market } from "@/lib/market";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { languageAlternates } from '@/lib/international/markets';
 
 export const metadata: Metadata = {
-  title: "Best LED Face Mask US | Buudy Red Light Therapy",
+  title: "Buudy LED Face and Neck Mask | At-Home Skincare",
   description:
-    "Shop Buudy US for salon-grade LED face masks, red light therapy, blue light acne routines, anti-ageing skincare, near-infrared support, neck coverage, and free tracked shipping.",
+    "Explore the Buudy LED face and neck mask, seven visible colours, an 830 nm near-infrared mode and international delivery information.",
   alternates: {
     canonical: "/",
+    languages: languageAlternates('/'),
   },
   keywords: [
     "Best LED Face Mask US",

@@ -1,3 +1,4 @@
+import { languageAlternates } from "@/lib/international/markets";
 import type { Metadata } from "next";
 import { PolicyPage } from "@/components/policies/PolicyPage";
 
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
   description: "Learn about the simple, stress-free replacement policy and goddess guarantees for the Buudy LED Skincare Mask.",
   alternates: {
     canonical: "/policies/return-policy",
+    languages: languageAlternates("/policies/return-policy"),
   },
 };
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
 import type { Product } from "@/data/products";
 import { formatMoney } from "@/lib/money";
+import { NativePrice } from '@/components/international/NativePrice';
 import { Button } from "@/components/ui/Button";
 
 const criteria = [
@@ -60,7 +61,7 @@ export function SEOGuideSection({ product }: { product: Product }) {
             <div className="mt-6 rounded-2xl border border-[rgba(247,241,232,.18)] bg-[rgba(247,241,232,.08)] p-5">
               <p className="buudy-mono text-[var(--gold)]">Buudy today</p>
               <p className="buudy-display mt-2 text-3xl">
-                {formatMoney(product.priceCents, product.currency)}
+                {product.template==='mask'?<NativePrice/>:formatMoney(product.priceCents, product.currency)}
               </p>
               <p className="mt-2 text-sm leading-6 text-[rgba(247,241,232,.7)]">
                 Includes free glow kit, free tracked shipping, and an easy

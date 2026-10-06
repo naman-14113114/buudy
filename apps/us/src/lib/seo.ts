@@ -2,8 +2,9 @@ import type { Product } from "@/data/products";
 import type { FAQItem } from "@/data/productSections";
 import { absoluteUrl } from "@/lib/site";
 import { market } from "@/lib/market";
+import type { XpageQuote } from '@/lib/xpage-checkout';
 
-export function productJsonLd(product: Product) {
+export function productJsonLd(product: Product, nativeQuote?: XpageQuote | null) {
   const productUrl = absoluteUrl(`/products/${product.slug}`);
 
   return {
@@ -24,18 +25,18 @@ export function productJsonLd(product: Product) {
           ? "IPL hair removal device"
           : "Handheld red light therapy device",
     sku: product.sku,
-    offers: {
+    ...(product.template === 'mask' && !nativeQuote ? {} : { offers: {
       "@type": "Offer",
       url: productUrl,
-      priceCurrency: product.currency,
-      price: (product.priceCents / 100).toFixed(2),
+      priceCurrency: nativeQuote?.currency || product.currency,
+      price: nativeQuote ? nativeQuote.unitPrice.toFixed(2) : (product.priceCents / 100).toFixed(2),
       availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: {
         "@type": "Organization",
         name: "Buudy",
       },
-    },
+    }}),
     additionalProperty: product.specs.map((spec) => ({
       "@type": "PropertyValue",
       name: spec.label,

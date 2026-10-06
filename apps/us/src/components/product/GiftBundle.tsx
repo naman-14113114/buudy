@@ -29,6 +29,7 @@ import {
 } from "@/lib/attribution";
 import { Button } from "@/components/ui/Button";
 import { Price } from "@/components/ui/Price";
+import { NativePrice } from '@/components/international/NativePrice';
 import { useCart } from "@/components/cart/CartProvider";
 import { ProductDetailsAccordion } from "./ProductDetailsAccordion";
 
@@ -225,12 +226,12 @@ export function GiftBundle({ product }: { product: Product }) {
       </div>
 
       <div className="mt-4 flex flex-col gap-2.5">
-        <Price
+        {product.template==='mask'?<div className="buudy-display text-3xl"><NativePrice controls/></div>:<Price
           compareAtCents={product.compareAtCents}
           currency={product.currency}
           priceCents={product.priceCents}
-        />
-        <div className="flex flex-nowrap items-center gap-x-1 sm:gap-x-1.5 text-[9.5px] sm:text-[13px] text-[var(--muted)]">
+        />}
+        {product.template!=='mask'&&<div className="flex flex-nowrap items-center gap-x-1 sm:gap-x-1.5 text-[9.5px] sm:text-[13px] text-[var(--muted)]">
           <span className="whitespace-nowrap tracking-tight sm:tracking-normal">
             or{" "}
             <strong className="buudy-display text-[10px] sm:text-[14px] font-medium text-[var(--plum)]">
@@ -241,7 +242,7 @@ export function GiftBundle({ product }: { product: Product }) {
               {formatMoney(product.priceCents / 4, product.currency)}
             </strong>
           </span>
-        </div>
+        </div>}
       </div>
 
       {/* Premium Compact Bullet Points List */}

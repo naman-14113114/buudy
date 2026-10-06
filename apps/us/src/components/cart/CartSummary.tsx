@@ -8,6 +8,7 @@ import { getDisplayLines } from "@/lib/cart";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
 import { PromoCodeBox } from "./PromoCodeBox";
+import { NativeCartTotal } from '@/components/international/NativeCartTotal';
 
 type CartSummaryProps = {
   action?: "cart" | "summary";
@@ -28,6 +29,8 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
     0,
   );
   const totalSavingsCents = giftOfferDiscountCents + totals.promoDiscountCents;
+  const products=lines.filter(line=>line.type==='product');
+  if(products.length>0&&products.every(line=>line.productId==='buudy-led-mask'))return <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5"><NativeCartTotal/>{children&&<div className="mt-4">{children}</div>}{action==='cart'&&<Button asChild className="mt-5 w-full" onClick={closeCart}><Link href="/cart">Go to cart <ArrowRight size={17}/></Link></Button>}</div>;
 
   return (
     <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">

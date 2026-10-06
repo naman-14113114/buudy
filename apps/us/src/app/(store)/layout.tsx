@@ -13,7 +13,11 @@ import { MarketingAnalytics } from "@/components/integrations/MarketingAnalytics
 import { TawkToWidget } from "@/components/integrations/TawkToWidget";
 import { GlobalImageLoader } from "@/components/ui/GlobalImageLoader";
 import { market } from "@/lib/market";
-import "./globals.css";
+import { LanguageSwitcher } from '@/components/international/LanguageSwitcher';
+import { OfferProvider } from '@/components/international/OfferProvider';
+import { getInitialOffer } from '@/lib/international/server-offer';
+import '../[locale]/international.css';
+import "../globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,11 +48,11 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(market.siteUrl),
   title: {
-    default: "Best LED Face Mask US | Buudy Light Therapy",
+    default: "Buudy LED Face and Neck Mask",
     template: "%s | Buudy",
   },
   description:
-    "US LED face mask for red light therapy, blue light acne routines, anti-ageing skincare, full face and neck coverage, and salon-grade home treatments.",
+    "Explore the Buudy LED face and neck mask, seven visible colours, 830 nm near-infrared mode, product details and international delivery information.",
   applicationName: "Buudy",
   keywords: [
     "Best LED Face Mask US",
@@ -61,9 +65,6 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "/",
-    languages: {
-      "en-US": "/",
-    },
   },
   robots: {
     index: true,
@@ -102,11 +103,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const initialOffer=await getInitialOffer();
   return (
     <html
       lang="en-US"
@@ -115,17 +117,18 @@ export default function RootLayout({
     >
       <body>
         <GlobalImageLoader />
-        <CartProvider>
+        <CartProvider><OfferProvider initialOffer={initialOffer}>
           <HideOnPaths paths={["/cart"]}>
             <AnnouncementBar />
             <Header />
+            <div className="buudy-wrap flex justify-end py-2"><LanguageSwitcher locale="en" label="Language"/></div>
           </HideOnPaths>
           <main>{children}</main>
           <HideOnPaths paths={["/cart"]}>
             <Footer />
           </HideOnPaths>
           <CartDrawer />
-        </CartProvider>
+        </OfferProvider></CartProvider>
         <AttributionCapture />
         <MarketingAnalytics />
         <ClarityAnalytics />

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { market } from "@/lib/market";
+import { languages, indexedLocalizedPaths, localePath, languageAlternates, type Locale } from '@/lib/international/markets';
 
 const routes = [
   { path: "/", lastModified: "2026-06-16", changeFrequency: "weekly", priority: 1 },
@@ -23,10 +24,14 @@ const routes = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map((route) => ({
+  return [...routes.map((route) => ({
     url: `${market.siteUrl}${route.path === "/" ? "" : route.path}`,
     lastModified: new Date(route.lastModified),
     changeFrequency: route.changeFrequency as "weekly" | "monthly",
     priority: route.priority,
-  }));
+    ...(indexedLocalizedPaths.some(path=>path===route.path)?{alternates:{languages:languageAlternates(route.path)}}:{}),
+  })), ...Object.keys(languages).filter(locale=>locale!=='en').flatMap(locale=>indexedLocalizedPaths.map(path=>({
+    url:`${market.siteUrl}${localePath(locale as Locale,path)}`,
+    alternates:{languages:languageAlternates(path)},
+  })))];
 }

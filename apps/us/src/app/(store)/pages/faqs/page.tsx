@@ -1,3 +1,4 @@
+import { languageAlternates } from "@/lib/international/markets";
 import type { Metadata } from "next";
 import { FaqPage } from "@/components/faq/FaqPage";
 import { absoluteUrl } from "@/lib/site";
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
     "Find answers to shipping policies, return policies, payment methods, and technical questions about the Buudy LED Skincare Mask.",
   alternates: {
     canonical: "/pages/faqs",
+    languages: languageAlternates("/pages/faqs"),
   },
   openGraph: {
     title: "Buudy Help Center | Frequently Asked Questions",

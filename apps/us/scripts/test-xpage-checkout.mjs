@@ -1,14 +1,14 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { XPAGE, parsePublishedOffer, selectOffer, buildBundlePayload,
-  validateCheckoutUrl, createXpageCheckout } from "../src/lib/xpage-checkout.ts";
+  validateCheckoutUrl, createXpageCheckout, readQuote } from "../src/lib/xpage-checkout.ts";
 
 function fixture() {
   const option = (promo) => ({
     id: promo ? XPAGE.promoOptionId : XPAGE.regularOptionId,
     discount_target: promo ? "TOTAL" : null,
-    discount_type: promo ? "PERCENTAGE" : null,
-    discount_amount: promo ? "5.59" : 0,
+    discount_type: promo ? "FIXED" : null,
+    discount_amount: promo ? "13.00" : 0,
     conditions: [{ id: `fresh-mask-${promo}`, quantity: 1,
       product: { id: XPAGE.maskProductId, status: "ACTIVE", variants: [
         { id: XPAGE.maskVariantId, price: "236.40", is_visible: true },
@@ -18,12 +18,13 @@ function fixture() {
         { id: XPAGE.torchVariantId, price: "92.30", is_visible: true },
       ] } }],
   });
-  return { bundle: { id: XPAGE.bundleId, status: "ACTIVE", options: [option(false), option(true)] },
+  return { currency: 'USD', baseCurrency: 'GBP', bundle: { id: XPAGE.bundleId, status: "ACTIVE", options: [option(false), option(true)] },
     csrf: "fresh-public-session-token", landingPageId: "a2bbaaff-af2a-4cf9-b563-129e0ac93953" };
 }
 function html(published) {
   return `<div x-data='${JSON.stringify({ bundle: published.bundle })}'></div>
-    <script>orderData.landing_page_id = "${published.landingPageId}";
+    <script>var STORE_CURRENCY = 'GBP'; const formatter = {style: 'currency', currency: '${published.currency}'};
+    orderData.landing_page_id = "${published.landingPageId}";
     const headers = {"X-CSRF-Token": "${published.csrf}"};</script>`;
 }
 
@@ -60,7 +61,7 @@ test("rejects invalid quantities instead of silently reducing the order", () => 
 test("fails closed if gift, promo, variant or product configuration changes", () => {
   const mutations = [
     (o) => { o.offered[0].discount_amount = "99"; },
-    (o) => { o.discount_amount = "10"; },
+    (o) => { o.discount_type = "PERCENTAGE"; },
     (o) => { o.conditions[0].quantity = 2; },
     (o) => { o.offered[0].product.id = "different-product"; },
     (o) => { o.conditions[0].product.variants[0].is_visible = false; },
@@ -120,21 +121,25 @@ test("does not retry failed checkout POSTs", async () => {
   assert.equal(calls, 2);
 });
 
-test("calculates BUUDY10 5.59% discount accurately in US cart ($236.40 -> $223.19)", () => {
-  const manualPromoDiscountRate = 0.0559;
-  const maskPriceCents = 23640;
-
-  // 1 Mask ($236.40)
-  const subtotal1 = maskPriceCents;
-  const discount1 = Math.round(subtotal1 * manualPromoDiscountRate);
-  const total1 = subtotal1 - discount1;
-  assert.equal(discount1, 1321); // $13.21 discount
-  assert.equal(total1, 22319); // $223.19 final price
-
-  // 2 Masks ($472.80)
-  const subtotal2 = maskPriceCents * 2;
-  const discount2 = Math.round(subtotal2 * manualPromoDiscountRate);
-  const total2 = subtotal2 - discount2;
-  assert.equal(discount2, 2643); // $26.43 discount
-  assert.equal(total2, 44637); // $446.37 final price
+test("reads current native prices and fixed discounts without assuming an FX multiplier", () => {
+  const quote = readQuote(fixture(), 'USD');
+  assert.equal(quote.unitPrice, 236.40);
+  assert.equal(quote.discount, 13);
+  assert.equal(quote.settlementCurrency, 'GBP');
+  assert.throws(() => readQuote(fixture(), 'EUR'));
+  for (const bad of ['', '0xFF','Infinity', '-1', null, '1e3']) {
+    const data = fixture(); data.bundle.options[0].conditions[0].product.variants[0].price = bad;
+    assert.throws(() => readQuote(data, 'USD'));
+  }
+});
+test("preserves chosen EUR currency through the provider session", async () => {
+  let calls=0;
+  const result = await createXpageCheckout(1,false,async (url, init)=>{
+    calls++;
+    assert.match(init.headers.cookie, /xp_currency=EUR/);
+    if(calls===1) { const data=fixture();data.currency='EUR'; return new Response(html(data)); }
+    const token='c'.repeat(64);
+    return Response.json({status:'success',checkout_token:token,checkout_url:`${XPAGE.checkoutOrigin}/checkout/${token}`});
+  },'EUR');
+  assert.equal(new URL(result.checkoutUrl).search,'?currency=EUR');
 });
