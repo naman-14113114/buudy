@@ -191,7 +191,7 @@ export function GiftBundle({ product }: { product: Product }) {
         <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
       </h1>
 
-      {/* Clinically Proven Badges */}
+      {/* Product feature badges retain the original compact presentation. */}
       <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
           <ShieldCheck
@@ -200,7 +200,7 @@ export function GiftBundle({ product }: { product: Product }) {
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
           <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            Use as directed
+            {product.template === "mask" ? "192 LEDs" : product.badges[0]}
           </span>
         </span>
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
@@ -210,7 +210,7 @@ export function GiftBundle({ product }: { product: Product }) {
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
           <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            Return terms apply
+            {product.template === "mask" ? "Cordless design" : product.badges[1]}
           </span>
         </span>
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
@@ -220,7 +220,7 @@ export function GiftBundle({ product }: { product: Product }) {
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
           <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            Read safety guidance
+            {product.template === "mask" ? "7 visible colours" : product.badges[2]}
           </span>
         </span>
       </div>
