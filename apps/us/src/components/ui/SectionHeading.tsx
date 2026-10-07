@@ -6,6 +6,7 @@ type SectionHeadingProps = {
   copy?: string;
   align?: "left" | "center";
   invert?: boolean;
+  as?: "h1" | "h2";
 };
 
 export function SectionHeading({
@@ -14,19 +15,20 @@ export function SectionHeading({
   copy,
   align = "left",
   invert,
+  as: Heading = "h2",
 }: SectionHeadingProps) {
   return (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
       <p className={invert ? "buudy-mono text-[var(--gold)]" : "buudy-eyebrow"}>
         {eyebrow}
       </p>
-      <h2
+      <Heading
         className={`buudy-display mt-4 text-[2.5rem] leading-[1.06] md:text-5xl ${
           invert ? "text-[var(--cream)]" : "text-[var(--plum)]"
         }`}
       >
         {title}
-      </h2>
+      </Heading>
       {copy ? (
         <p
           className={`mt-4 leading-7 ${

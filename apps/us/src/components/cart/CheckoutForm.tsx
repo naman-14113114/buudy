@@ -37,6 +37,8 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [error, setError] = useState("");
   const hasItems = totals.itemCount > 0;
+  const hasMask=lines.some(line=>line.type==='product'&&line.productId==='buudy-led-mask');
+  const mixed=hasMask&&lines.some(line=>line.type==='product'&&line.productId!=='buudy-led-mask');
 
   useEffect(() => {
     function handlePageShow(event: PageTransitionEvent) {
@@ -75,7 +77,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
   }
 
   async function handleCheckout() {
-    if (!hasItems || isRedirecting) {
+    if (!hasItems || isRedirecting || mixed || (hasMask&&(!offer||loading))) {
       return;
     }
 
@@ -87,6 +89,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       new CustomEvent("buudy:started-checkout", {
         detail: {
           lines,
+          ...(hasMask&&offer?{currency:'GBP',unitPrice:offer.base.unitPrice,total:offer.base.unitPrice*maskQuantity-(manualPromoCode?offer.base.discount:0)}:{currency:'USD',total:totals.totalCents/100}),
           totals: offer && lines.filter(line=>line.type==='product').every(line=>line.productId==='buudy-led-mask') ? {
             ...totals,totalCents:Math.round((offer.base.unitPrice*maskQuantity-(manualPromoCode?offer.base.discount:0))*100),currency:'GBP',
           } : totals,
@@ -142,7 +145,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
       <Button
         id="main-checkout-btn"
         className={`relative overflow-hidden w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] buudy-display ${!isRedirecting ? "proxy-bundle-btn" : "disabled:!opacity-100"}`}
-        disabled={!hasItems || isRedirecting || (lines.some(line=>line.type==='product'&&line.productId==='buudy-led-mask')&&(!offer||loading))}
+        disabled={!hasItems || isRedirecting || mixed || (hasMask&&(!offer||loading))}
         onClick={handleCheckout}
         type="button"
       >

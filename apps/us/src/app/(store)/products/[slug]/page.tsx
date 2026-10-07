@@ -45,10 +45,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords:
       product.template === "mask"
         ? [
-            "Best LED Face Mask US",
-            "LED face mask US",
-            "red light therapy mask US",
-            "LED face mask for acne US",
+            "Buudy LED face and neck mask",
+            "seven colour LED mask",
+            "red light skincare mask",
+            "830 nm near infrared mask",
             "anti ageing LED mask",
             "LED mask with neck coverage",
             "near infrared LED face mask",
@@ -83,7 +83,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     openGraph: {
       title: product.seoTitle,
-      description: product.description,
+      description: product.seoDescription,
       url: absoluteUrl(`/products/${product.slug}`),
       type: "website",
       images: [

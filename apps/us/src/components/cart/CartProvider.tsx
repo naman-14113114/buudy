@@ -19,12 +19,13 @@ import {
   type CartState,
 } from "@/lib/cart";
 
+type CartAnalytics = {currency?:string;unitPrice?:number;compareAtPrice?:number;quantity?:number;locale?:string;checkoutUrl?:string;productUrl?:string};
 type CartContextValue = CartState & {
   isHydrated: boolean;
   isOpen: boolean;
   totals: ReturnType<typeof calculateCartTotals>;
   activePromoCodes: string[];
-  addProduct: (product: Product) => void;
+  addProduct: (product: Product, analytics?:CartAnalytics) => void;
   setQuantity: (productId: string, quantity: number) => void;
   removeProduct: (productId: string) => void;
   clearCart: () => void;
@@ -100,7 +101,7 @@ function writeStoredCart(state: CartState) {
   }
 }
 
-function dispatchAddToCartEvent(product: Product) {
+function dispatchAddToCartEvent(product: Product, analytics:CartAnalytics={}) {
   if (typeof window === "undefined") {
     return;
   }
@@ -109,6 +110,7 @@ function dispatchAddToCartEvent(product: Product) {
     new CustomEvent("buudy:add-to-cart", {
       detail: {
         product,
+        ...analytics,
       },
     }),
   );
@@ -198,8 +200,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   }, [state.lines, state.manualPromoCode]);
 
-  function addProduct(product: Product) {
-    dispatchAddToCartEvent(product);
+  function addProduct(product: Product, analytics:CartAnalytics={}) {
+    dispatchAddToCartEvent(product,analytics);
 
     setState((current) => {
       const currentProduct = current.lines.find(

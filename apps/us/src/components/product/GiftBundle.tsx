@@ -179,10 +179,10 @@ export function GiftBundle({ product }: { product: Product }) {
           className="text-xl sm:text-2xl leading-none text-[var(--gold)]"
           aria-hidden
         >
-          ★★★★★
+          ✦
         </div>
         <span className="font-sans text-sm sm:text-base font-medium text-[var(--plum)] bg-[rgba(184,149,86,.18)] px-2.5 py-0.5 rounded-md">
-          {product.rating} · TRUSTED BY {product.customerCount} CUSTOMERS
+          {product.id === 'buudy-led-mask' ? '192 LEDs · FACE + NECK COVERAGE' : 'PRODUCT DETAILS & USE INSTRUCTIONS'}
         </span>
       </a>
 
@@ -200,7 +200,7 @@ export function GiftBundle({ product }: { product: Product }) {
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
           <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            Clinically Proven
+            Use as directed
           </span>
         </span>
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
@@ -210,7 +210,7 @@ export function GiftBundle({ product }: { product: Product }) {
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
           <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            Easy Returns
+            Return terms apply
           </span>
         </span>
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
@@ -220,13 +220,13 @@ export function GiftBundle({ product }: { product: Product }) {
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
           <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            Dermatologist Approved
+            Read safety guidance
           </span>
         </span>
       </div>
 
       <div className="mt-4 flex flex-col gap-2.5">
-        {product.template==='mask'?<div className="buudy-display text-3xl"><NativePrice controls/></div>:<Price
+        {product.template==='mask'?<NativePrice large/>:<Price
           compareAtCents={product.compareAtCents}
           currency={product.currency}
           priceCents={product.priceCents}

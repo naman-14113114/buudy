@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { languageAlternates } from '@/lib/international/markets';
 import { PolicyPage } from "@/components/policies/PolicyPage";
 
 export const metadata: Metadata = {
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
   description: "Conditions regarding order cancellations, adjustments, and refunds for Buudy Light Therapy purchases.",
   alternates: {
     canonical: "/policies/refund-policy",
+    languages: languageAlternates('/policies/refund-policy'),
   },
 };
 

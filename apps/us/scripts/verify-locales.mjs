@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
-import { languages, indexedLocalizedPaths, localePath } from '../src/lib/international/markets.ts';
+import { languages, indexedPathsForLocale, localePath, languageAlternates } from '../src/lib/international/markets.ts';
 const dir=new URL('../src/data/locales/',import.meta.url);
 const en=JSON.parse(await fs.readFile(new URL('en.json',dir),'utf8'));
 let assertions=0;
@@ -16,12 +16,12 @@ for(const locale of Object.keys(languages)){
 const origin=process.argv[2];
 if(origin){
  for(const locale of Object.keys(languages).filter(l=>l!=='en')){
-  for(const path of indexedLocalizedPaths){
+  for(const path of indexedPathsForLocale(locale)){
    const url=localePath(locale,path);const response=await fetch(`${origin}${url}`);assert.equal(response.status,200,url);
    const html=await response.text();assert.match(html,new RegExp(`<html[^>]*lang="${locale}"`),url);
    assert.ok(html.includes(`href="https://www.buudy.com${url}"`),`${url}: canonical`);
    assert.equal((html.match(/<h1(?:\s|>)/g)||[]).length,1,`${url}: one H1`);
-   for(const alternate of Object.keys(languages))assert.ok(html.includes(`hrefLang="${alternate}"`),`${url}: ${alternate} hreflang`);
+   for(const alternate of Object.keys(languageAlternates(path)))assert.ok(html.includes(`hrefLang="${alternate}"`),`${url}: ${alternate} hreflang`);
    assert.ok(!html.includes('name="robots" content="noindex'),`${url}: indexable`);assertions+=11;
   }
  }

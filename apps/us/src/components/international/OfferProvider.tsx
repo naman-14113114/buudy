@@ -10,7 +10,14 @@ export function OfferProvider({children,initialOffer=null}:{children:React.React
   const [failed,setFailed]=useState(false);
   const [selected,setSelected]=useState<string|undefined>();
   const [revision,setRevision]=useState(0);
-  const refresh=useCallback((currency?:string)=>{setLoading(true);setFailed(false);setSelected(currency);setRevision(n=>n+1);},[]);
+  const refresh=useCallback((currency?:string)=>{
+    if(currency&&currencies.includes(currency)){
+      const url=new URL(window.location.href);
+      url.searchParams.set('currency',currency);
+      window.history.replaceState(null,'',url);
+    }
+    setLoading(true);setFailed(false);setSelected(currency);setRevision(n=>n+1);
+  },[]);
   useEffect(()=>{
     const controller=new AbortController();
     const queryCurrency=new URLSearchParams(window.location.search).get('currency');

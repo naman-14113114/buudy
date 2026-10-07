@@ -22,6 +22,7 @@ import { CheckoutForm, type CheckoutCustomer } from "./CheckoutForm";
 import { FreeGiftsPanel } from "./FreeGiftsPanel";
 import { getDisplayLines, type CartLine } from "@/lib/cart";
 import { market } from "@/lib/market";
+import { useOffer } from '@/components/international/OfferProvider';
 
 const digitalGiftId = "skincare-ebook";
 
@@ -313,6 +314,10 @@ export function CartPageContent({
 }
 
 function MobileStickyCheckout() {
+  const {lines,totals}=useCart();
+  const {offer,loading}=useOffer();
+  const hasMask=lines.some(line=>line.type==='product'&&line.productId==='buudy-led-mask');
+  const mixed=hasMask&&lines.some(line=>line.type==='product'&&line.productId!=='buudy-led-mask');
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [isMainBtnVisible, setIsMainBtnVisible] = useState(false);
 
@@ -361,7 +366,7 @@ function MobileStickyCheckout() {
       <button
         className={`pointer-events-auto buudy-cart-wipe buudy-display relative flex h-14 w-full max-w-[400px] items-center justify-center overflow-hidden rounded-[35px] border border-[var(--plum)] bg-[var(--plum)] px-6 py-3 text-[15px] font-bold uppercase leading-none tracking-wide text-[var(--cream)] shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] ${!isRedirecting ? "proxy-bundle-btn" : ""}`}
         type="button"
-        disabled={isRedirecting}
+        disabled={isRedirecting||totals.itemCount===0||mixed||(hasMask&&(!offer||loading))}
         onClick={() => {
           const btn = document.getElementById('main-checkout-btn') as HTMLButtonElement;
           btn?.click();

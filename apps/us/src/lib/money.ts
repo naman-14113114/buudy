@@ -1,6 +1,6 @@
-import { market, type StoreCurrency } from "@/lib/market";
+import { market } from "@/lib/market";
 
-export function formatMoney(cents: number, currency: StoreCurrency = market.currency) {
+export function formatMoney(cents: number, currency: string = market.currency) {
   return new Intl.NumberFormat(market.locale, {
     style: "currency",
     currency,

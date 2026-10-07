@@ -14,7 +14,7 @@ export function PromoCodeBox() {
   } = useCart();
   const [code, setCode] = useState("");
   const [message, setMessage] = useState(
-    appliedCode ? "Promo code applied successfully." : "",
+    appliedCode ? "Code saved. Eligibility and discount are confirmed at checkout." : "",
   );
   const [status, setStatus] = useState<"idle" | "success" | "error">(
     appliedCode ? "success" : "idle",
@@ -27,7 +27,7 @@ export function PromoCodeBox() {
     const applied = applyManualPromoCode(code);
     if (applied) {
       setCode("");
-      setMessage("Promo code applied successfully.");
+      setMessage("Code saved. Eligibility and discount are confirmed at checkout.");
       setStatus("success");
       return;
     }
@@ -49,11 +49,11 @@ export function PromoCodeBox() {
         <div aria-live="polite" className="flex items-center justify-between gap-4">
           <span className="flex min-w-0 items-center gap-2 text-xs font-semibold text-[var(--gold)] sm:text-sm">
             <CheckCircle2 aria-hidden="true" className="shrink-0" size={16} />
-            <span>Promo code applied successfully.</span>
+            <span>Code saved. Eligibility and discount are confirmed at checkout.</span>
           </span>
-          <span className="buudy-display shrink-0 text-lg text-[var(--plum)]">
+          {totals.promoDiscountCents>0&&<span className="buudy-display shrink-0 text-lg text-[var(--plum)]">
             -{formatMoney(totals.promoDiscountCents)}
-          </span>
+          </span>}
         </div>
 
         <div className="inline-flex min-w-[150px] items-center justify-between gap-4 rounded-md border border-[var(--border)] bg-[var(--cream)] py-1.5 pl-4 pr-1.5 text-[var(--plum)]">

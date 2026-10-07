@@ -49,7 +49,7 @@ export const shippingPolicyHtml = `
 
 <h2>8. Customs and Import Taxes</h2>
 <p>Import rules are shown before purchase:</p>
-<p><strong>Customs and duties:</strong> Orders above $800 may be subject to customs duties and import taxes, payable by the customer upon delivery.</p>
+<p><strong>Customs and duties:</strong> Import duties and taxes depend on the destination and order. Review the current checkout disclosure before payment.</p>
 <p>Where duties or taxes apply, they are the buyer's responsibility unless the checkout specifically states that taxes and duties are included.</p>
 
 <h2>9. Contact</h2>

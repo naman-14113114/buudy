@@ -78,9 +78,9 @@ export const buudyMask: Product = {
     "Salon-grade LED mask with the Premium Travel Box included for protected storage and travel.",
   description:
     "Salon-grade light therapy reimagined for US homes. The Buudy LED Mask combines 192 high-density LEDs, 7 visible light colours plus a dedicated 830nm near-infrared mode, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
-  seoTitle: "Best LED Face Mask US | Buudy Red Light Therapy Mask",
+  seoTitle: "Buudy LED Face and Neck Mask | Product Details & Current Offer",
   seoDescription:
-    "Shop the Buudy LED Face Mask in the US: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, easy returns and refunds, and free glow kit.",
+    "Explore the Buudy LED face and neck mask: 192 LEDs, seven visible colours, 830 nm near-infrared mode, cordless design, current offer and international delivery information.",
   currency: market.currency,
   priceCents: 23640,
   compareAtCents: 59100,
@@ -304,10 +304,10 @@ export const buudyMask: Product = {
   ],
   faqs,
   badges: [
-    "Health Canada approved",
-    "CE / FCC / ROHS",
-    "Easy return and refund",
-    "Dermatologist endorsed",
+    "Face and neck coverage",
+    "Cordless, rechargeable design",
+    "See return eligibility",
+    "Read supplied instructions",
   ],
 };
 

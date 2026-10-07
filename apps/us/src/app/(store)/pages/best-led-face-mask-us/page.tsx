@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, ShieldCheck, Star, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
 import { buudyMask } from "@/data/products";
 import { ledMaskSeoFaqs } from "@/data/seoFaqs";
 import {
@@ -12,7 +12,7 @@ import {
   websiteJsonLd,
 } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
-import { formatMoney } from "@/lib/money";
+import { NativePrice } from '@/components/international/NativePrice';
 import { Button } from "@/components/ui/Button";
 
 const pageTitle = "Best LED Face Mask US 2026: What to Look For";
@@ -52,8 +52,8 @@ const comparisonRows = [
   ["Key routines", "Anti-ageing, breakout-prone skin, uneven tone, radiance"],
   ["Coverage", "Full face and neck"],
   ["Use style", "Cordless, rechargeable, hands-free, tap control"],
-  ["US offer", `${formatMoney(buudyMask.priceCents, buudyMask.currency)} launch price with free glow kit`],
-  ["Guarantee", "Easy return and refund policy"],
+  ["Current offer", <NativePrice key="price" />],
+  ["Returns", "Check eligibility and mandatory consumer rights in the return policy"],
 ];
 
 export const metadata: Metadata = {
@@ -155,14 +155,9 @@ export default function BestLedFaceMaskUsPage() {
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(39,20,42,.72))]" />
             <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-[rgba(247,241,232,.18)] bg-[rgba(247,241,232,.11)] p-5 backdrop-blur">
-              <div className="flex items-center gap-1 text-[var(--gold)]">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <Star fill="currentColor" key={index} size={17} />
-                ))}
-              </div>
               <p className="mt-3 text-sm leading-6 text-[rgba(247,241,232,.78)]">
-                4.9 rated by 16,000+ customers, with free tracked shipping and
-                easy return and refund policy.
+                Face and neck coverage with a cordless, rechargeable design.
+                Confirm delivery and return conditions before ordering.
               </p>
             </div>
           </figure>
@@ -180,8 +175,7 @@ export default function BestLedFaceMaskUsPage() {
             <p className="mt-5 text-base leading-8 text-[var(--muted)] md:text-lg">
               Buudy is designed for that exact brief: 192 LEDs, 7 wavelengths
               plus 830nm near-infrared, full face and neck coverage, cordless
-              wearability, and a launch bundle at{" "}
-              {formatMoney(buudyMask.priceCents, buudyMask.currency)}.
+              wearability, and a current bundle at <NativePrice />.
             </p>
           </div>
 
@@ -230,7 +224,7 @@ export default function BestLedFaceMaskUsPage() {
             {comparisonRows.map(([label, value]) => (
               <div
                 className="grid gap-2 border-b border-[var(--border)] px-5 py-4 last:border-b-0 md:grid-cols-[190px_1fr]"
-                key={label}
+                key={String(label)}
               >
                 <p className="buudy-mono text-[var(--gold)]">{label}</p>
                 <p className="text-sm leading-7 text-[var(--plum)] md:text-base">

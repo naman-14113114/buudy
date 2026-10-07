@@ -305,10 +305,10 @@ export const termsOfServiceHtml = `
 <p>Product reviews and promotional content do not create guarantees beyond the product description, any express warranty and rights provided by law.</p>
 
 <h2>4. Prices, Currency and Taxes</h2>
-<p>Prices and the transaction currency are shown before checkout. All prices are in USD ($).</p>
+<p>The display currency may be selected on the storefront. Display prices are read from the current checkout offer. The payment provider currently settles in GBP; review the final payment amount and currency before paying.</p>
 <p>Your bank or payment provider may apply currency-conversion or international transaction fees if your funding account is in another currency. These charges are not controlled by the Store or xPage Drop.</p>
 <p>Applicable sales taxes may be collected at checkout. Customs duties, import taxes or brokerage charges will be handled according to the rule shown before purchase:</p>
-<p><strong>Customs and duties:</strong> Orders above $800 may be subject to customs duties and import taxes, payable by the customer upon delivery.</p>
+<p><strong>Customs and duties:</strong> Import duties and taxes depend on the destination and order. Review the current checkout disclosure before payment.</p>
 
 <h2>5. Orders</h2>
 <p>Submitting an order is an offer to purchase. Receiving an order-confirmation email means that the order was received, not necessarily that it was finally accepted. Orders may be reviewed for:</p>

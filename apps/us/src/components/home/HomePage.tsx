@@ -150,6 +150,7 @@ function HomeFeatureGrid() {
       <div className="buudy-wrap">
         <SectionHeading
           eyebrow="Why Buudy"
+          as="h1"
           title={
             <>
               Light therapy that covers the <em className="buudy-italic">details</em>.

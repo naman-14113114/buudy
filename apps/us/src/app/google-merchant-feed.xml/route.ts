@@ -5,9 +5,9 @@ export const dynamic = 'force-dynamic';
 
 export async function GET() {
   let quote;
-  try {quote=await getXpageQuote('USD');} catch {return new Response('Offer temporarily unavailable',{status:503,headers:{'cache-control':'no-store'}});}
+  try {quote=await getXpageQuote('GBP');} catch {return new Response('Offer temporarily unavailable',{status:503,headers:{'cache-control':'no-store'}});}
   const items=googleMerchantProducts.filter(product=>product.id!=='buudy-7-colour-led-mask-us').map(product=>product.id==='buudy-led-face-mask-us'?{
-    ...product,price:`${quote.unitPrice.toFixed(2)} USD`,link:`${product.link}?currency=USD`,
+    ...product,price:`${quote.unitPrice.toFixed(2)} GBP`,link:product.link,
     description:'Buudy LED mask for face and neck, with seven visible colours and an 830 nm near-infrared mode. Cordless, rechargeable design. Premium Travel Box included. Check the current bundle, delivery availability and complete terms before purchase.',
   }:product);
   return new Response(buildGoogleMerchantXml(items), {

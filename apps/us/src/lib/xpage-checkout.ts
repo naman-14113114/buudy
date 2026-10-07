@@ -128,7 +128,7 @@ export function readQuote(published: PublishedOffer, currency: string) {
   if (published.currency !== currency) throw new Error('Price currency mismatch.');
   const { maskVariant } = selectOffer(published,false);
   const { option } = selectOffer(published,true);
-  return { currency, unitPrice:price(maskVariant.price), discount:price(option.discount_amount),
+  return { currency, unitPrice:price(maskVariant.price), ...(maskVariant.compare_price!=null?{compareAtPrice:price(maskVariant.compare_price)}:{}), discount:price(option.discount_amount),
     settlementCurrency:published.baseCurrency, checkedAt:new Date().toISOString() };
 }
 export type XpageQuote = ReturnType<typeof readQuote>;

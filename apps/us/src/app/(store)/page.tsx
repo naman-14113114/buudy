@@ -13,14 +13,14 @@ export const metadata: Metadata = {
     languages: languageAlternates('/'),
   },
   keywords: [
-    "Best LED Face Mask US",
-    "red light therapy mask US",
-    "LED face mask for acne US",
-    "anti ageing LED mask US",
+    "Buudy LED face and neck mask",
+    "red light skincare mask",
+    "seven colour LED mask",
+    "830 nm near infrared mask",
     "home LED light therapy",
   ],
   openGraph: {
-    title: "Best LED Face Mask US | Buudy",
+    title: "Buudy LED Face and Neck Mask | At-Home Skincare",
     description:
       "Discover the Buudy LED Mask with 192 LEDs, red and blue light therapy, near-infrared support, and full face plus neck coverage.",
     url: market.siteUrl,

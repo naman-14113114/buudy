@@ -2,12 +2,21 @@ import { type NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import type { Database } from "@/types/database";
 import { getSupabaseConfig, isSupabaseConfigured } from "@/lib/supabase/config";
-import { resolveLanguage, localePath } from '@/lib/international/markets';
+import { resolveLanguage, localePath, hasLocale } from '@/lib/international/markets';
+import { localizedStorefrontEnabled } from '@/lib/international/rollout';
 
 export async function proxy(request: NextRequest) {
+  const prefix=request.nextUrl.pathname.split('/')[1];
+  if(!localizedStorefrontEnabled&&prefix!=='en'&&hasLocale(prefix)){
+    const target=request.nextUrl.clone();
+    target.pathname=request.nextUrl.pathname.slice(prefix.length+1)||'/';
+    const response=NextResponse.redirect(target,307);
+    response.headers.set('Cache-Control','private, no-store');
+    return response;
+  }
   // Only the neutral homepage chooses a first-visit language. Deep links,
   // APIs and explicit language URLs always keep their URL-defined content.
-  if(request.nextUrl.pathname==='/') {
+  if(localizedStorefrontEnabled&&request.nextUrl.pathname==='/') {
     const locale=resolveLanguage(request.cookies.get('buudy_language')?.value,request.headers.get('accept-language') || undefined,request.headers.get('x-vercel-ip-country') || undefined);
     if(locale!=='en') {
       const target=request.nextUrl.clone();target.pathname=localePath(locale);

@@ -18,10 +18,18 @@ declare global {
 
 type CheckoutEventDetail = {
   lines?: CartLine[];
+  currency?: string;
+  unitPrice?: number;
+  total?: number;
+  locale?: string;
+  checkoutUrl?: string;
+  productUrl?: string;
   totals?: {
     totalCents?: number;
+    currency?: string;
   };
 };
+type ProductEventDetail = {product?:Product;currency?:string;unitPrice?:number;compareAtPrice?:number;quantity?:number;locale?:string;checkoutUrl?:string;productUrl?:string};
 
 const KLAVIYO_COMPANY_ID =
   process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID || "Tp323F";
@@ -55,33 +63,36 @@ function toAbsoluteUrl(url: string) {
   return new URL(url, window.location.origin).href;
 }
 
-function productPayload(product: Product) {
+function productPayload(product: Product, detail:ProductEventDetail={}) {
+  const native=Number.isFinite(detail.unitPrice)&&Boolean(detail.currency);
+  const price=native?detail.unitPrice:product.template==='mask'?undefined:product.priceCents/100;
   return {
     ProductName: product.name,
     ProductID: product.id,
     SKU: product.sku,
     Categories: ["Light Therapy", product.template === "mask" ? "LED Mask" : "Red Light Torch"],
     ImageURL: toAbsoluteUrl(product.cartImage),
-    URL: toAbsoluteUrl(`/products/${product.slug}`),
+    URL: toAbsoluteUrl(detail.productUrl||`/products/${product.slug}`),
     Brand: "Buudy",
-    Price: product.priceCents / 100,
-    CompareAtPrice: product.compareAtCents / 100,
-    Market: market.marketLabel,
+    ...(price!==undefined?{Price:price,$currency:native?detail.currency:'USD'}:{}),
+    ...(Number.isFinite(detail.compareAtPrice)?{CompareAtPrice:detail.compareAtPrice}:product.template!=='mask'?{CompareAtPrice:product.compareAtCents/100}:{}),
+    Language: detail.locale||document.documentElement.lang,
+    Market: "International",
     SourceSite: marketHost,
   };
 }
 
-function cartLinePayload(line: CartLine) {
+function cartLinePayload(line: CartLine, detail:CheckoutEventDetail={}) {
   const product = productsById[line.productId];
+  const unitPrice=line.productId==='buudy-led-mask'?detail.unitPrice:line.unitPriceCents/100;
 
   return {
     ProductID: line.productId,
     SKU: product?.sku ?? line.id,
     ProductName: line.title,
     Quantity: line.quantity,
-    ItemPrice: line.unitPriceCents / 100,
-    RowTotal: (line.unitPriceCents * line.quantity) / 100,
-    ProductURL: product ? toAbsoluteUrl(`/products/${product.slug}`) : undefined,
+    ...(Number.isFinite(unitPrice)?{ItemPrice:unitPrice,RowTotal:unitPrice!*line.quantity}:{}),
+    ProductURL: product ? toAbsoluteUrl(detail.productUrl||`/products/${product.slug}`) : undefined,
     ImageURL: toAbsoluteUrl(line.image),
     ProductCategories: [
       "Light Therapy",
@@ -303,7 +314,7 @@ function guardKlaviyoScrollLock() {
   };
 }
 
-export function KlaviyoAnalytics() {
+export function KlaviyoAnalytics({enableExitPopup=true}:{enableExitPopup?:boolean}={}) {
   const pathname = usePathname();
   const trackedProductSlugs = useRef(new Set<string>());
 
@@ -344,6 +355,7 @@ export function KlaviyoAnalytics() {
     let hasTriggered = false;
 
     const openUkPopup = (event: MouseEvent) => {
+      if(!enableExitPopup)return;
       if (hasTriggered || event.clientY > 12) {
         return;
       }
@@ -358,7 +370,7 @@ export function KlaviyoAnalytics() {
     return () => {
       document.removeEventListener("mouseleave", openUkPopup, { capture: true });
     };
-  }, []);
+  }, [enableExitPopup]);
 
   useEffect(() => {
     if (!KLAVIYO_COMPANY_ID || !isEnabledHost()) {
@@ -372,12 +384,13 @@ export function KlaviyoAnalytics() {
         PageName: document.title,
         URL: window.location.href,
         Path: pathname,
-        Market: market.marketLabel,
+        Market: "International",
+        Language: document.documentElement.lang,
         SourceSite: marketHost,
       },
     ]);
 
-    const slug = pathname?.match(/^\/products\/([^/]+)/)?.[1];
+    const slug = pathname?.match(/^(?:\/[A-Za-z-]+)?\/products\/([^/]+)/)?.[1];
     if (!slug || trackedProductSlugs.current.has(slug)) {
       return;
     }
@@ -387,7 +400,7 @@ export function KlaviyoAnalytics() {
       return;
     }
 
-    const payload = productPayload(product);
+    const payload = productPayload(product,{productUrl:pathname||undefined});
     trackedProductSlugs.current.add(slug);
 
     pushKlaviyo(["track", "Viewed Product", payload]);
@@ -415,20 +428,21 @@ export function KlaviyoAnalytics() {
     }
 
     function handleAddToCart(event: Event) {
-      const detail = (event as CustomEvent<{ product?: Product }>).detail;
+      const detail = (event as CustomEvent<ProductEventDetail>).detail;
       const product = detail?.product;
 
       if (!product) {
         return;
       }
 
-      const payload = productPayload(product);
+      const payload = productPayload(product,detail);
+      const quantity=detail.quantity||1;
 
       pushKlaviyo([
         "track",
         "Added to Cart",
         {
-          $value: payload.Price,
+          ...(payload.Price!==undefined?{$value:payload.Price*quantity,$currency:payload.$currency}:{}),
           AddedItemProductName: payload.ProductName,
           AddedItemProductID: payload.ProductID,
           AddedItemSKU: payload.SKU,
@@ -436,23 +450,24 @@ export function KlaviyoAnalytics() {
           AddedItemImageURL: payload.ImageURL,
           AddedItemURL: payload.URL,
           AddedItemPrice: payload.Price,
-          AddedItemQuantity: 1,
+          AddedItemQuantity: quantity,
           ItemNames: [payload.ProductName],
-          CheckoutURL: toAbsoluteUrl("/cart"),
+          CheckoutURL: toAbsoluteUrl(detail.checkoutUrl||"/cart"),
           Items: [
             {
               ProductID: payload.ProductID,
               SKU: payload.SKU,
               ProductName: payload.ProductName,
-              Quantity: 1,
+              Quantity: quantity,
               ItemPrice: payload.Price,
-              RowTotal: payload.Price,
+              RowTotal: payload.Price===undefined?undefined:payload.Price*quantity,
               ProductURL: payload.URL,
               ImageURL: payload.ImageURL,
               ProductCategories: payload.Categories,
             },
           ],
-          Market: market.marketLabel,
+          Language: detail.locale||document.documentElement.lang,
+          Market: "International",
           SourceSite: marketHost,
         },
       ]);
@@ -462,7 +477,9 @@ export function KlaviyoAnalytics() {
       const detail = (event as CustomEvent<CheckoutEventDetail>).detail;
       const lines = detail?.lines ?? [];
       const productLines = lines.filter((line) => line.type === "product");
-      const items = productLines.map(cartLinePayload);
+      const items = productLines.map(line=>cartLinePayload(line,detail));
+      const total=typeof detail?.total==='number'?detail.total:typeof detail?.totals?.totalCents==='number'?detail.totals.totalCents/100:undefined;
+      const currency=detail?.currency||detail?.totals?.currency;
 
       if (!items.length) {
         return;
@@ -472,18 +489,16 @@ export function KlaviyoAnalytics() {
         "track",
         "Started Checkout",
         {
-          $event_id: `US-buudy-${Date.now()}`,
-          $value:
-            typeof detail?.totals?.totalCents === "number"
-              ? detail.totals.totalCents / 100
-              : items.reduce((total, item) => total + item.RowTotal, 0),
+          $event_id: `buudy-${Date.now()}`,
+          ...(total!==undefined&&currency?{$value:total,$currency:currency}:{}),
           ItemNames: items.map((item) => item.ProductName),
-          CheckoutURL: toAbsoluteUrl("/cart"),
+          CheckoutURL: toAbsoluteUrl(detail?.checkoutUrl||"/cart"),
           Categories: Array.from(
             new Set(items.flatMap((item) => item.ProductCategories)),
           ),
           Items: items,
-          Market: market.marketLabel,
+          Language: detail?.locale||document.documentElement.lang,
+          Market: "International",
           SourceSite: marketHost,
         },
       ]);

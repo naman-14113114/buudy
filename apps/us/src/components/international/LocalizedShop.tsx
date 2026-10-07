@@ -24,7 +24,7 @@ export function LocalizedShop({locale,d,cart=false}:{locale:Locale;d:Dictionary;
     if(!line||!offer||busy||mixed)return;
     setBusy(true);setError('');
     writeCheckoutSnapshot({lines:state.lines,giftMessage:state.giftMessage,promoCode:state.promoCode,manualPromoCode:state.manualPromoCode});
-    window.dispatchEvent(new CustomEvent('buudy:started-checkout',{detail:{lines:state.lines,currency:offer.quote.currency}}));
+    window.dispatchEvent(new CustomEvent('buudy:started-checkout',{detail:{lines:state.lines,currency:'GBP',unitPrice:offer.base.unitPrice,total:offer.base.unitPrice*quantity-(state.manualPromoCode?offer.base.discount:0),quantity,locale,checkoutUrl:localePath(locale,'/cart'),productUrl:localePath(locale,'/products/buudy-led-mask'),totals:{totalCents:Math.round((offer.base.unitPrice*quantity-(state.manualPromoCode?offer.base.discount:0))*100),currency:'GBP'}}}));
     try {
       const response=await fetch('/api/checkout/prepare',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({currency:offer.quote.currency,cart:{lines:state.lines,manualPromoCode:state.manualPromoCode}})});
       const result=await response.json();
@@ -42,7 +42,7 @@ export function LocalizedShop({locale,d,cart=false}:{locale:Locale;d:Dictionary;
     <div aria-live="polite">
       {loading&&<p>{d.loading}</p>}
       {failed&&<p role="alert">{d.priceError} <button type="button" onClick={()=>refresh()}>{d.retry}</button></p>}
-      {offer&&<p className="intl-price"><small>{d.unit}</small>{money(offer.quote.unitPrice,offer.quote.currency)}</p>}
+      {offer&&<><p className="intl-price"><small>{d.unit}</small><bdi>{money(offer.quote.unitPrice,offer.quote.currency)}</bdi></p>{!cart&&offer.quote.currency!=='GBP'&&<p className="intl-note">{d.total}: <bdi>{money(offer.base.unitPrice,'GBP')}</bdi></p>}</>}
     </div>
     <p>{d.gift}<br/><small>{d.free}</small></p>
     {cart ? <>
@@ -52,11 +52,11 @@ export function LocalizedShop({locale,d,cart=false}:{locale:Locale;d:Dictionary;
         <label>{d.promo}<input value={code} onChange={e=>setCode(e.target.value)} maxLength={60}/></label><button type="submit">{d.apply}</button>
       </form>
       {state.manualPromoCode&&<p>{state.manualPromoCode} <button type="button" onClick={()=>state.clearManualPromoCode()}>{d.remove}</button></p>}
-      {offer&&<><p>{d.total}: <strong>{money(offer.base.unitPrice*quantity-(state.manualPromoCode?offer.base.discount:0),'GBP')}</strong></p>{state.manualPromoCode&&<p>{d.discount}: {money(offer.base.discount,'GBP')}</p>}<p className="intl-note">{d.basketConversion}</p></>}
+      {offer&&<><p>{d.total}: <strong><bdi>{money(offer.base.unitPrice*quantity-(state.manualPromoCode?offer.base.discount:0),'GBP')}</bdi></strong></p>{state.manualPromoCode&&<p>{d.discount}: <bdi>{money(offer.base.discount,'GBP')}</bdi></p>}<p className="intl-note">{d.basketConversion}</p></>}
       {mixed&&<p role="alert">{d.mixedCart} <Link href="/cart">{d.englishCart}</Link></p>}
       <button className="intl-button" type="button" disabled={!offer||loading||busy||mixed} onClick={checkout}>{busy?d.loading:d.checkout}</button>
     </> : <>
-      <button className="intl-button" type="button" disabled={!offer||loading} onClick={()=>{state.addProduct(buudyMask);setAdded(true);}}>{d.add}</button>
+      <button className="intl-button" type="button" disabled={!offer||loading} onClick={()=>{if(offer)state.addProduct(buudyMask,{currency:offer.quote.currency,unitPrice:offer.quote.unitPrice,quantity:1,locale,checkoutUrl:localePath(locale,'/cart'),productUrl:localePath(locale,'/products/buudy-led-mask')});setAdded(true);}}>{d.add}</button>
       {added&&<p role="status">{d.added} · <a href={localePath(locale,'/cart')}>{d.cart}</a></p>}
     </>}
     {error&&<p role="alert">{error}</p>}

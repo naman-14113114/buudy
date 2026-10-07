@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { languageAlternates } from '@/lib/international/markets';
 import { PolicyPage } from "@/components/policies/PolicyPage";
 
 export const metadata: Metadata = {
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
   description: "Store operations, guidelines, terms, conditions, and service agreements of the Buudy LED store.",
   alternates: {
     canonical: "/policies/terms-of-service",
+    languages: languageAlternates('/policies/terms-of-service'),
   },
 };
 

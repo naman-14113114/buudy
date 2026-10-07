@@ -13,7 +13,6 @@ import { MarketingAnalytics } from "@/components/integrations/MarketingAnalytics
 import { TawkToWidget } from "@/components/integrations/TawkToWidget";
 import { GlobalImageLoader } from "@/components/ui/GlobalImageLoader";
 import { market } from "@/lib/market";
-import { LanguageSwitcher } from '@/components/international/LanguageSwitcher';
 import { OfferProvider } from '@/components/international/OfferProvider';
 import { getInitialOffer } from '@/lib/international/server-offer';
 import '../[locale]/international.css';
@@ -55,10 +54,10 @@ export const metadata: Metadata = {
     "Explore the Buudy LED face and neck mask, seven visible colours, 830 nm near-infrared mode, product details and international delivery information.",
   applicationName: "Buudy",
   keywords: [
-    "Best LED Face Mask US",
-    "LED face mask US",
-    "red light therapy mask US",
-    "LED face mask for acne US",
+    "Buudy LED face mask",
+    "LED face and neck mask",
+    "red light skincare mask",
+    "LED skincare device",
     "anti ageing LED mask",
     "near infrared face mask",
     "home light therapy mask",
@@ -82,9 +81,9 @@ export const metadata: Metadata = {
     type: "website",
     url: market.siteUrl,
     locale: "en_US",
-    title: "Best LED Face Mask US | Buudy Light Therapy",
+    title: "Buudy LED Face and Neck Mask",
     description:
-      "Salon-grade LED face and neck mask for US skincare routines with 192 LEDs, 7 wavelengths plus 830nm near-infrared, and a launch glow kit.",
+      "Explore the Buudy LED face and neck mask, seven visible colours, 830 nm near-infrared mode, current offer and international delivery information.",
     images: [
       {
         url: "/images/products/buudy-led-mask/01-buudy-led-mask-front.webp",
@@ -96,7 +95,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best LED Face Mask US | Buudy",
+    title: "Buudy LED Face and Neck Mask",
     description:
       "192 LEDs, red and blue light therapy, near-infrared support, cordless wearability, and face plus neck coverage.",
     images: ["/images/products/buudy-led-mask/01-buudy-led-mask-front.webp"],
@@ -111,7 +110,7 @@ export default async function RootLayout({
   const initialOffer=await getInitialOffer();
   return (
     <html
-      lang="en-US"
+      lang="en"
       className={`${inter.variable} ${fraunces.variable} ${jetBrains.variable} ${playfair.variable}`}
       data-scroll-behavior="smooth"
     >
@@ -121,7 +120,6 @@ export default async function RootLayout({
           <HideOnPaths paths={["/cart"]}>
             <AnnouncementBar />
             <Header />
-            <div className="buudy-wrap flex justify-end py-2"><LanguageSwitcher locale="en" label="Language"/></div>
           </HideOnPaths>
           <main>{children}</main>
           <HideOnPaths paths={["/cart"]}>
