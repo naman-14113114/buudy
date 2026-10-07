@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
+
+import { StoreImage as Image } from '@/components/international/StoreLocale';
+import { StoreLink as Link } from '@/components/international/StoreLocale';
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 
 export function CartMinimalHeader() {

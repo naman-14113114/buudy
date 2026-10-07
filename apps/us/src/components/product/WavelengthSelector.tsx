@@ -1,4 +1,6 @@
 "use client";
+import { StoreText, StoreButton } from '@/components/international/StoreLocale';
+
 
 import { useState } from "react";
 import { wavelengths } from "@/data/productSections";
@@ -18,10 +20,10 @@ export function WavelengthSelector() {
       />
       <div className="buudy-wrap relative z-10">
         <div className="max-w-full lg:max-w-5xl">
-          <p className="buudy-mono text-[var(--gold)]">Spectrum</p>
-          <h2 className="buudy-display mt-3 text-[2.5rem] leading-[1.06] text-[var(--cream)] md:text-6xl">
-            Change <em className="buudy-italic">7 light modes</em> with a tap.
-          </h2>
+          <p className="buudy-mono text-[var(--gold)]"><StoreText>Spectrum</StoreText></p>
+          <h2 className="buudy-display mt-3 text-[2.5rem] leading-[1.06] text-[var(--cream)] md:text-6xl"><StoreText>
+            Change </StoreText><em className="buudy-italic"><StoreText>7 light modes</StoreText></em><StoreText> with a tap.
+          </StoreText></h2>
         </div>
 
         <div className="mt-4 grid items-center gap-4 md:mt-6 md:gap-8 lg:grid-cols-[1fr_1.2fr]">
@@ -52,7 +54,7 @@ export function WavelengthSelector() {
               const isActive = active.name === wavelength.name;
               return (
                 <li key={wavelength.name} className="border-b border-[rgba(247,241,232,.1)]">
-                  <button
+                  <StoreButton
                     className={`flex w-full items-center gap-4 py-2 text-left transition-all duration-300 hover:pl-3 group ${
                       isActive ? "bg-[rgba(247,241,232,.03)] pl-3 border-l-2 border-l-[var(--gold)]" : ""
                     }`}
@@ -70,17 +72,17 @@ export function WavelengthSelector() {
                       }}
                     />
                     <span className="buudy-display w-20 uppercase text-[rgba(247,241,232,.6)]">
-                      {wavelength.nm}
+                      <StoreText>{wavelength.nm}</StoreText>
                     </span>
                     <span className={`buudy-display text-xl transition-colors duration-300 ${
                       isActive ? "text-[var(--gold)]" : "text-[var(--cream)] group-hover:text-[var(--gold)]"
                     }`}>
-                      {wavelength.name}
+                      <StoreText>{wavelength.name}</StoreText>
                     </span>
                     <span className="buudy-display ml-auto hidden text-sm text-[rgba(247,241,232,.6)] sm:block">
-                      {wavelength.description}
+                      <StoreText>{wavelength.description}</StoreText>
                     </span>
-                  </button>
+                  </StoreButton>
                   <div
                     className={`grid transition-all duration-300 ease-in-out sm:hidden ${
                       isActive ? "grid-rows-[1fr] opacity-100 bg-[rgba(247,241,232,.03)] border-l-2 border-l-[var(--gold)]" : "grid-rows-[0fr] opacity-0"
@@ -88,7 +90,7 @@ export function WavelengthSelector() {
                   >
                     <div className="overflow-hidden">
                       <p className="px-4 pb-3 pl-11 text-sm text-[rgba(247,241,232,.7)] buudy-display transition-all duration-300">
-                        {wavelength.description}
+                        <StoreText>{wavelength.description}</StoreText>
                       </p>
                     </div>
                   </div>

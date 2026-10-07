@@ -1,7 +1,9 @@
 "use client";
+import { StoreText, useStoreLocale } from '@/components/international/StoreLocale';
+
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import { StoreImage as Image } from '@/components/international/StoreLocale';
 import { useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
 import Lottie from "lottie-react";
@@ -17,6 +19,7 @@ import { Button } from "@/components/ui/Button";
 import { useCart } from "@/components/cart/CartProvider";
 
 export function StickyAddToCart({ product }: { product: Product }) {
+  const { path } = useStoreLocale();
   const { addProduct } = useCart();
   const router = useRouter();
   const [visible, setVisible] = useState(false);
@@ -115,11 +118,11 @@ export function StickyAddToCart({ product }: { product: Product }) {
           </div>
           <div className="min-w-0">
             <p className="truncate text-base font-semibold text-[var(--plum)]">
-              {product.name}
+              <StoreText>{product.name}</StoreText>
             </p>
             <p className="truncate text-sm text-[var(--muted)]">
               {product.template==='mask'?<NativePrice/>:formatMoney(product.priceCents, product.currency)}
-              {giftLabel}
+              <StoreText>{giftLabel}</StoreText>
             </p>
           </div>
         </div>
@@ -132,7 +135,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
             addProduct(product);
             router.push(
               appendAttributionToPath(
-                "/cart",
+                path("/cart"),
                 pickAttributionFromSearch(window.location.search),
               ),
             );
@@ -148,7 +151,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
                 ) : (
                   <ShoppingBag size={17} />
                 )}
-                <span>Add to cart{giftLabel}</span>
+                <span><StoreText>Add to cart</StoreText><StoreText>{giftLabel}</StoreText></span>
               </span>
               <span className="absolute inset-0 flex items-center justify-center">
                 <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
@@ -163,7 +166,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
               ) : (
                 <ShoppingBag size={17} />
               )}
-              <span>Add to cart{giftLabel}</span>
+              <span><StoreText>Add to cart</StoreText><StoreText>{giftLabel}</StoreText></span>
             </>
           )}
         </Button>

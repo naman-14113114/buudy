@@ -1,4 +1,6 @@
-import Image from "next/image";
+
+import { StoreImg, StoreText } from '@/components/international/StoreLocale';
+import { StoreImage as Image } from '@/components/international/StoreLocale';
 
 export function TrustBadges() {
   const badges = [
@@ -27,14 +29,14 @@ export function TrustBadges() {
           {badges.map((badge, idx) => (
             <div key={idx} className="flex flex-col md:flex-row items-center gap-3 md:gap-4 text-center md:text-left justify-center mx-auto w-full">
               <div className="relative w-12 h-12 md:w-14 md:h-14 shrink-0 flex-none opacity-90">
-                <img
+                <StoreImg
                   src={badge.icon}
                   alt={badge.title}
                   className="w-full h-full object-contain"
                 />
               </div>
               <p className="font-medium text-[var(--plum)] leading-snug text-sm md:text-base max-w-[180px]">
-                {badge.title}
+                <StoreText>{badge.title}</StoreText>
               </p>
             </div>
           ))}

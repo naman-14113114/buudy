@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { market } from "@/lib/market";
-import { languages, indexedPathsForLocale, localePath, languageAlternates, type Locale } from '@/lib/international/markets';
-import { localizedStorefrontEnabled } from '@/lib/international/rollout';
+import { indexedPathsForLocale, localePath, languageAlternates, type Locale } from '@/lib/international/markets';
+import { publishedLocalizedPaths } from '@/lib/international/rollout';
 
 const routes = [
   { path: "/", lastModified: "2026-06-16", changeFrequency: "weekly", priority: 1 },
@@ -31,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: route.changeFrequency as "weekly" | "monthly",
     priority: route.priority,
     ...(indexedPathsForLocale('en').some(path=>path===route.path)?{alternates:{languages:languageAlternates(route.path)}}:{}),
-  })), ...(localizedStorefrontEnabled?Object.keys(languages).filter(locale=>locale!=='en'):[]).flatMap(locale=>indexedPathsForLocale(locale).map(path=>({
+  })), ...Object.entries(publishedLocalizedPaths).flatMap(([locale,paths])=>paths.filter(path=>path!=='/cart').map(path=>({
     url:`${market.siteUrl}${localePath(locale as Locale,path)}`,
     alternates:{languages:languageAlternates(path)},
   })))];

@@ -1,4 +1,6 @@
 "use client";
+import { StoreText, StoreButton } from '@/components/international/StoreLocale';
+
 
 import { useState } from "react";
 import { Plus } from "lucide-react";
@@ -14,8 +16,8 @@ export function FAQSection({ faqs = maskFaqs }: { faqs?: FAQItem[] }) {
         <SectionHeading
           eyebrow="FAQ"
           title={
-            <>
-              Frequently asked <em className="buudy-italic">questions</em>.
+            <><StoreText>
+              Frequently asked </StoreText><em className="buudy-italic"><StoreText>questions</StoreText></em>.
             </>
           }
           copy="Everything you might want to know before bringing Buudy home."
@@ -26,14 +28,14 @@ export function FAQSection({ faqs = maskFaqs }: { faqs?: FAQItem[] }) {
 
             return (
               <li className="border-b border-[var(--border)]" key={faq.question}>
-                <button
+                <StoreButton
                   aria-expanded={isOpen}
                   className="flex w-full items-start justify-between gap-6 py-6 text-left"
                   onClick={() => setOpen(isOpen ? -1 : index)}
                   type="button"
                 >
                   <span className="buudy-display text-[1.35rem] leading-snug text-[var(--plum)]">
-                    {faq.question}
+                    <StoreText>{faq.question}</StoreText>
                   </span>
                   <Plus
                     className={`mt-1 flex-none text-[var(--gold)] transition ${
@@ -41,7 +43,7 @@ export function FAQSection({ faqs = maskFaqs }: { faqs?: FAQItem[] }) {
                     }`}
                     size={25}
                   />
-                </button>
+                </StoreButton>
                 <div
                   className={`grid transition-all duration-300 ${
                     isOpen ? "grid-rows-[1fr] pb-6 opacity-100" : "grid-rows-[0fr] opacity-0"
@@ -49,7 +51,7 @@ export function FAQSection({ faqs = maskFaqs }: { faqs?: FAQItem[] }) {
                 >
                   <div className="overflow-hidden">
                     <p className="max-w-3xl leading-7 text-[var(--muted)]">
-                      {faq.answer}
+                      <StoreText>{faq.answer}</StoreText>
                     </p>
                   </div>
                 </div>

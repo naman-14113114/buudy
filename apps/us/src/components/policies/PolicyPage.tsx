@@ -18,6 +18,7 @@ export type PolicyType =
 
 type PolicyPageProps = {
   policyType: PolicyType;
+  content?: {title: string; subtitle: string; html: string; eyebrow: string};
 };
 
 const policyDataMap = {
@@ -59,8 +60,8 @@ const policyDataMap = {
   }
 };
 
-export function PolicyPage({ policyType }: PolicyPageProps) {
-  const policy = policyDataMap[policyType];
+export function PolicyPage({ policyType, content }: PolicyPageProps) {
+  const policy = { ...policyDataMap[policyType], ...content };
   const IconComponent = policy.icon;
 
   return (
@@ -76,7 +77,7 @@ export function PolicyPage({ policyType }: PolicyPageProps) {
             <IconComponent size={24} className="stroke-[1.5]" />
           </span>
           <p className="buudy-mono text-[var(--gold)] tracking-[0.2em] uppercase text-xs font-semibold">
-            Store Policies
+            {content?.eyebrow || 'Store Policies'}
           </p>
           <h1 className="buudy-display mt-3 text-[2.5rem] leading-[1.08] text-[var(--plum)] sm:text-5xl md:text-6xl font-light">
             {policy.title}

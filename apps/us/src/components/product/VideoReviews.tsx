@@ -1,4 +1,6 @@
 "use client";
+import { StoreText } from '@/components/international/StoreLocale';
+
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { reviewVideos, type ReviewVideo } from "@/data/productSections";
@@ -82,9 +84,9 @@ function ReviewVideoCard({
         preload={shouldLoad ? "metadata" : "none"}
         ref={videoRef}
         src={shouldLoad ? src : undefined}
-      >
+      ><StoreText>
         Your browser does not support the video tag.
-      </video>
+      </StoreText></video>
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[rgba(18,9,20,.48)] to-transparent"
@@ -107,9 +109,9 @@ export function VideoReviews() {
           align="center"
           eyebrow="Real Customers"
           title={
-            <>
-              Buudy Mask <span className="buudy-italic text-[var(--gold)]">reviews</span> <span className="font-playfair italic text-[var(--plum)]">&</span> real results
-            </>
+            <><StoreText>
+              Buudy Mask </StoreText><span className="buudy-italic text-[var(--gold)]"><StoreText>reviews</StoreText></span> <span className="font-playfair italic text-[var(--plum)]">&</span><StoreText> real results
+            </StoreText></>
           }
         />
 

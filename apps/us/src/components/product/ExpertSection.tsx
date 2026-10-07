@@ -1,4 +1,6 @@
 "use client";
+import { StoreText, StoreButton } from '@/components/international/StoreLocale';
+
 
 import { useRef, useState } from "react";
 import { expertVideo } from "@/data/productSections";
@@ -35,12 +37,12 @@ export function ExpertSection() {
               onPause={() => setIsPlaying(false)}
               onClick={togglePlay}
             >
-              <source src={expertVideo.src} />
+              <source src={expertVideo.src} /><StoreText>
               Your browser does not support the video tag.
-            </video>
+            </StoreText></video>
 
             {/* Play/Pause Overlay Button */}
-            <button
+            <StoreButton
               onClick={togglePlay}
               className={`absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/25 transition-all duration-300 ${
                 isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
@@ -60,37 +62,37 @@ export function ExpertSection() {
                   </svg>
                 )}
               </div>
-            </button>
+            </StoreButton>
           </div>
         </div>
 
         <div>
-          <p className="buudy-eyebrow">Expert</p>
-          <h2 className="buudy-display mt-2 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl">
-            Dr. Gabriella <em className="buudy-italic">Vasili</em>, MD
-          </h2>
-          <p className="buudy-display mt-2 text-xl italic text-[var(--plum-soft)]">
+          <p className="buudy-eyebrow"><StoreText>Expert</StoreText></p>
+          <h2 className="buudy-display mt-2 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl"><StoreText>
+            Dr. Gabriella </StoreText><em className="buudy-italic"><StoreText>Vasili</StoreText></em><StoreText>, MD
+          </StoreText></h2>
+          <p className="buudy-display mt-2 text-xl italic text-[var(--plum-soft)]"><StoreText>
             Double Board-Certified Dermatologist
-          </p>
+          </StoreText></p>
           <div className="buudy-copy mt-4 space-y-3">
-            <p>
+            <p><StoreText>
               Dr. Gabriella Vasili is an esteemed, double board-certified
               dermatologist based in Atlanta, Georgia. With an expert focus on
               enhancing the efficacy of modern skincare, Dr. Vasili is a strong
               advocate for integrating clinical-grade technologies into daily
               routines.
-            </p>
-            <p>
+            </StoreText></p>
+            <p><StoreText>
               She is particularly recognized for her expertise in Light Emitting
               Diode (LED) therapy. Dr. Vasili&apos;s commitment to skin health extends
               beyond the face to often-neglected areas like the neck, ensuring
               her patients achieve a comprehensive and rejuvenated glow.
-            </p>
-            <p>
+            </StoreText></p>
+            <p><StoreText>
               Her professional mission is to bridge the gap between professional
               dermatological treatments and accessible, high-performance skincare
               at home.
-            </p>
+            </StoreText></p>
           </div>
         </div>
       </div>

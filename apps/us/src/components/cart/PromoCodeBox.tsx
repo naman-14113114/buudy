@@ -1,4 +1,6 @@
 "use client";
+import { StoreText, StoreButton, StoreInput } from '@/components/international/StoreLocale';
+
 
 import { useState, type FormEvent } from "react";
 import { CheckCircle2, X } from "lucide-react";
@@ -49,7 +51,7 @@ export function PromoCodeBox() {
         <div aria-live="polite" className="flex items-center justify-between gap-4">
           <span className="flex min-w-0 items-center gap-2 text-xs font-semibold text-[var(--gold)] sm:text-sm">
             <CheckCircle2 aria-hidden="true" className="shrink-0" size={16} />
-            <span>Code saved. Eligibility and discount are confirmed at checkout.</span>
+            <span><StoreText>Code saved. Eligibility and discount are confirmed at checkout.</StoreText></span>
           </span>
           {totals.promoDiscountCents>0&&<span className="buudy-display shrink-0 text-lg text-[var(--plum)]">
             -{formatMoney(totals.promoDiscountCents)}
@@ -57,15 +59,15 @@ export function PromoCodeBox() {
         </div>
 
         <div className="inline-flex min-w-[150px] items-center justify-between gap-4 rounded-md border border-[var(--border)] bg-[var(--cream)] py-1.5 pl-4 pr-1.5 text-[var(--plum)]">
-          <span className="buudy-display text-base uppercase">{appliedCode}</span>
-          <button
+          <span className="buudy-display text-base uppercase"><StoreText>{appliedCode}</StoreText></span>
+          <StoreButton
             aria-label={`Remove ${appliedCode} promo code`}
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[var(--muted)] transition hover:bg-[rgba(58,31,61,.08)] hover:text-[var(--plum)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
             onClick={handleRemove}
             type="button"
           >
             <X aria-hidden="true" size={18} strokeWidth={1.8} />
-          </button>
+          </StoreButton>
         </div>
       </div>
     );
@@ -74,7 +76,7 @@ export function PromoCodeBox() {
   return (
     <>
       <form className="flex gap-2 max-[420px]:flex-col" onSubmit={handleApply}>
-        <input
+        <StoreInput
           aria-label="Promo code"
           className="buudy-display h-10 min-w-0 flex-1 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 text-sm uppercase text-[var(--plum)] outline-none transition placeholder:text-[rgba(58,31,61,.45)] focus:border-[var(--gold)] disabled:opacity-50"
           disabled={!active}
@@ -88,13 +90,13 @@ export function PromoCodeBox() {
           placeholder="Enter Promo Code"
           value={active ? code : ""}
         />
-        <button
+        <StoreButton
           className="buudy-display h-10 rounded-full bg-[var(--plum)] px-6 text-sm uppercase text-[var(--cream)] transition hover:bg-[var(--ink)] disabled:cursor-not-allowed disabled:opacity-50 md:px-7"
           disabled={!active}
           type="submit"
-        >
+        ><StoreText>
           Apply
-        </button>
+        </StoreText></StoreButton>
       </form>
       {active && message ? (
         <p
@@ -104,7 +106,7 @@ export function PromoCodeBox() {
           }`}
         >
           {status === "success" ? <CheckCircle2 aria-hidden="true" size={15} /> : null}
-          {message}
+          <StoreText>{message}</StoreText>
         </p>
       ) : null}
     </>

@@ -1,4 +1,6 @@
 "use client";
+import { StoreImg, StoreText, StoreButton, useStoreLocale } from '@/components/international/StoreLocale';
+
 
 import { useCallback, useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
@@ -457,7 +459,7 @@ export function ProductGallery({
                     playsInline
                   />
                 ) : (
-                  <img
+                  <StoreImg
                     src={image.src}
                     id={isActive ? "buudyLED-23435t23-MainImg" : undefined}
                     className="buudyLED-23435t23-main_img"
@@ -477,7 +479,7 @@ export function ProductGallery({
             );
           })}
 
-          <button
+          <StoreButton
             className="buudyLED-23435t23-arrow buudyLED-23435t23-prev"
             aria-label="Previous Image"
             onClick={(e) => {
@@ -487,8 +489,8 @@ export function ProductGallery({
             }}
           >
             <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_left" />
-          </button>
-          <button
+          </StoreButton>
+          <StoreButton
             className="buudyLED-23435t23-arrow buudyLED-23435t23-next"
             aria-label="Next Image"
             onClick={(e) => {
@@ -498,7 +500,7 @@ export function ProductGallery({
             }}
           >
             <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_right" />
-          </button>
+          </StoreButton>
         </div>
 
         <div
@@ -511,7 +513,7 @@ export function ProductGallery({
           onTouchEnd={() => setIsPaused(false)}
         >
           {images.map((image, index) => (
-            <button
+            <StoreButton
               aria-label={`Magnify ${image.alt}`}
               key={image.src}
               className={`buudyLED-23435t23-thumb_item ${
@@ -533,7 +535,7 @@ export function ProductGallery({
                   playsInline
                 />
               ) : (
-                <img
+                <StoreImg
                   src={image.src}
                   className="buudyLED-23435t23-thumb_img"
                   alt={image.alt}
@@ -542,7 +544,7 @@ export function ProductGallery({
                   loading="lazy"
                 />
               )}
-            </button>
+            </StoreButton>
           ))}
         </div>
       </div>
@@ -571,7 +573,7 @@ export function ProductGallery({
                   }
                 }}
               >
-                <button
+                <StoreButton
                   className="buudyLED-23435t23-close"
                   id="buudyLED-23435t23-ModalClose"
                   aria-label="Close View"
@@ -579,8 +581,8 @@ export function ProductGallery({
                   ref={closeButtonRef}
                 >
                   <X aria-hidden="true" size={24} />
-                </button>
-                <button
+                </StoreButton>
+                <StoreButton
                   className="buudyLED-23435t23-arrow buudyLED-23435t23-modal_nav buudyLED-23435t23-prev"
                   id="buudyLED-23435t23-ModalPrev"
                   aria-label="Previous Image"
@@ -590,7 +592,7 @@ export function ProductGallery({
                   }}
                 >
                   <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_left" />
-                </button>
+                </StoreButton>
                 <div className="buudyLED-23435t23-lightbox_stage">
                   {images[currentIndex]?.src?.endsWith(".mp4") ||
                   images[currentIndex]?.src?.endsWith(".webm") ? (
@@ -604,7 +606,7 @@ export function ProductGallery({
                       playsInline
                     />
                   ) : (
-                    <img
+                    <StoreImg
                       className="buudyLED-23435t23-lightbox_img"
                       id="buudyLED-23435t23-ModalImg"
                       src={images[currentIndex]?.src}
@@ -618,7 +620,7 @@ export function ProductGallery({
                     </div>
                   )}
                 </div>
-                <button
+                <StoreButton
                   className="buudyLED-23435t23-arrow buudyLED-23435t23-modal_nav buudyLED-23435t23-next"
                   id="buudyLED-23435t23-ModalNext"
                   aria-label="Next Image"
@@ -628,7 +630,7 @@ export function ProductGallery({
                   }}
                 >
                   <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_right" />
-                </button>
+                </StoreButton>
               </div>
             </div>,
             document.body,
@@ -645,6 +647,7 @@ function GalleryImageBadge({
   badge: NonNullable<ProductImage["badge"]>;
   isLightbox?: boolean;
 }) {
+  const { text } = useStoreLocale();
   const positionClass = badge.position
     ? `buudy-gallery-badge--${badge.position}`
     : "buudy-gallery-badge--top-left";
@@ -657,16 +660,16 @@ function GalleryImageBadge({
     >
       <div className="buudy-gallery-badge__header">
         <span className="buudy-gallery-badge__title">
-          {badge.title.split("\n").map((line, idx, arr) => (
+          {text(badge.title).split("\n").map((line, idx, arr) => (
             <span key={idx}>
-              {line}
+              <StoreText>{line}</StoreText>
               {idx < arr.length - 1 && <br />}
             </span>
           ))}
         </span>
       </div>
       {badge.sub && (
-        <span className="buudy-gallery-badge__sub">{badge.sub}</span>
+        <span className="buudy-gallery-badge__sub"><StoreText>{badge.sub}</StoreText></span>
       )}
     </div>
   );

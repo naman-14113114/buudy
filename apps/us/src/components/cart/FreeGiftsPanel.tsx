@@ -1,6 +1,8 @@
 "use client";
+import { StoreText } from '@/components/international/StoreLocale';
 
-import Image from "next/image";
+
+import { StoreImage as Image } from '@/components/international/StoreLocale';
 import { Check } from "lucide-react";
 import { formatMoney } from "@/lib/money";
 import { useCart } from "./CartProvider";
@@ -26,14 +28,14 @@ export function FreeGiftsPanel({ compact = false }: { compact?: boolean }) {
     <section className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <p className="buudy-mono text-[var(--plum)]">Free Rewards</p>
+          <p className="buudy-mono text-[var(--plum)]"><StoreText>Free Rewards</StoreText></p>
           <p className="mt-1 text-sm text-[var(--muted)]">
-            {giftLines.length}/{giftLines.length} gifts unlocked
-          </p>
+            <StoreText>{giftLines.length}</StoreText>/<StoreText>{giftLines.length}</StoreText><StoreText> gifts unlocked
+          </StoreText></p>
         </div>
         <span className="rounded-full bg-[var(--plum)] px-3 py-1.5 text-xs font-semibold text-[var(--cream)]">
-          {formatMoney(totals.giftValueCents)} value
-        </span>
+          {formatMoney(totals.giftValueCents)}<StoreText> value
+        </StoreText></span>
       </div>
 
       <div className="relative mt-6 grid grid-cols-3 gap-3">
@@ -45,9 +47,9 @@ export function FreeGiftsPanel({ compact = false }: { compact?: boolean }) {
               <Check size={16} />
             </span>
             <p className="mt-3 text-[0.64rem] font-semibold uppercase tracking-[.16em] text-[var(--plum)]">
-              {giftLine.id.includes("skincare-ebook")
+              <StoreText>{giftLine.id.includes("skincare-ebook")
                 ? "Skincare guide"
-                : giftLine.title}
+                : giftLine.title}</StoreText>
             </p>
           </div>
         ))}
@@ -70,11 +72,11 @@ export function FreeGiftsPanel({ compact = false }: { compact?: boolean }) {
                 />
               </div>
               <div className="flex-1">
-                <p className="font-semibold text-[var(--plum)]">{giftLine.title}</p>
-                <p className="text-sm text-[var(--muted)]">{giftLine.subtitle}</p>
+                <p className="font-semibold text-[var(--plum)]"><StoreText>{giftLine.title}</StoreText></p>
+                <p className="text-sm text-[var(--muted)]"><StoreText>{giftLine.subtitle}</StoreText></p>
               </div>
               <div className="text-right">
-                <p className="text-sm font-semibold text-[var(--gold)]">Free</p>
+                <p className="text-sm font-semibold text-[var(--gold)]"><StoreText>Free</StoreText></p>
                 <p className="text-xs text-[var(--muted)] line-through">
                   {formatMoney(giftLine.compareAtCents ?? 0)}
                 </p>

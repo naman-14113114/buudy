@@ -1,6 +1,8 @@
 "use client";
+import { StoreText, StoreButton } from '@/components/international/StoreLocale';
 
-import Link from "next/link";
+
+import { StoreLink as Link } from '@/components/international/StoreLocale';
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
@@ -21,7 +23,7 @@ export function CartDrawer() {
         isOpen ? "pointer-events-auto" : "pointer-events-none"
       }`}
     >
-      <button
+      <StoreButton
         aria-label="Close cart overlay"
         className={`absolute inset-0 bg-[rgba(24,15,24,.42)] transition-opacity ${
           isOpen ? "opacity-100" : "opacity-0"
@@ -37,19 +39,19 @@ export function CartDrawer() {
       >
         <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
           <div>
-            <p className="buudy-mono text-[var(--gold)]">Cart</p>
-            <h2 className="buudy-display text-2xl text-[var(--plum)]">
+            <p className="buudy-mono text-[var(--gold)]"><StoreText>Cart</StoreText></p>
+            <h2 className="buudy-display text-2xl text-[var(--plum)]"><StoreText>
               Your Buudy bag
-            </h2>
+            </StoreText></h2>
           </div>
-          <button
+          <StoreButton
             aria-label="Close cart"
             className="grid h-10 w-10 place-items-center rounded-full border border-[var(--border)] text-[var(--plum)]"
             onClick={closeCart}
             type="button"
           >
             <X size={18} />
-          </button>
+          </StoreButton>
         </div>
 
         <div className="flex-1 overflow-y-auto px-5">
@@ -59,12 +61,12 @@ export function CartDrawer() {
               aria-live="polite"
               className="flex h-full flex-col items-center justify-center text-center"
             >
-              <p className="buudy-display text-3xl text-[var(--plum)]">
+              <p className="buudy-display text-3xl text-[var(--plum)]"><StoreText>
                 Restoring your bag...
-              </p>
-              <p className="buudy-copy mt-3 max-w-xs text-sm">
+              </StoreText></p>
+              <p className="buudy-copy mt-3 max-w-xs text-sm"><StoreText>
                 Bringing your Buudy selections back into view.
-              </p>
+              </StoreText></p>
             </div>
           ) : hasItems ? (
             <>
@@ -74,15 +76,15 @@ export function CartDrawer() {
             </>
           ) : (
             <div className="flex h-full flex-col items-center justify-center text-center">
-              <p className="buudy-display text-3xl text-[var(--plum)]">
+              <p className="buudy-display text-3xl text-[var(--plum)]"><StoreText>
                 Your bag is waiting.
-              </p>
-              <p className="buudy-copy mt-3 max-w-xs text-sm">
+              </StoreText></p>
+              <p className="buudy-copy mt-3 max-w-xs text-sm"><StoreText>
                 Add the Buudy LED Mask or Red Torch to unlock current offers
                 and free shipping.
-              </p>
+              </StoreText></p>
               <Button asChild className="mt-6" onClick={closeCart}>
-                <Link href="/">Shop Buudy</Link>
+                <Link href="/"><StoreText>Shop Buudy</StoreText></Link>
               </Button>
             </div>
           )}

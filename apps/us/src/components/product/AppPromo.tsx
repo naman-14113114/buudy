@@ -1,4 +1,6 @@
-import Image from "next/image";
+
+import { StoreText, StoreButton, StoreAnchor } from '@/components/international/StoreLocale';
+import { StoreImage as Image } from '@/components/international/StoreLocale';
 import { Play, Smartphone } from "lucide-react";
 import { touchTech } from "@/data/productSections";
 import { productAsset, productMediaAsset } from "@/lib/media";
@@ -18,33 +20,33 @@ export function RitualSection() {
             src={productAsset("08-buudy-led-mask-lifestyle-use.webp")}
           />
           <div className="absolute inset-0 grid place-items-center">
-            <button
+            <StoreButton
               aria-label="Play how Buudy works"
               className="relative grid h-20 w-20 place-items-center rounded-full bg-[var(--cream)] text-[var(--plum)]"
               type="button"
             >
               <span className="absolute inset-0 rounded-full bg-[var(--cream)] [animation:buudy-ping_1.8s_infinite]" />
               <Play className="relative ml-1" fill="currentColor" size={24} />
-            </button>
+            </StoreButton>
           </div>
-          <p className="buudy-mono absolute bottom-5 left-5 text-[var(--cream)]">
+          <p className="buudy-mono absolute bottom-5 left-5 text-[var(--cream)]"><StoreText>
             How Buudy works - 0:48
-          </p>
+          </StoreText></p>
         </div>
         <div>
-          <p className="buudy-eyebrow">New to Buudy?</p>
-          <h2 className="buudy-display mt-3 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl">
-            Discover how <em className="buudy-italic">10 minutes</em> become a
+          <p className="buudy-eyebrow"><StoreText>New to Buudy?</StoreText></p>
+          <h2 className="buudy-display mt-3 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl"><StoreText>
+            Discover how </StoreText><em className="buudy-italic"><StoreText>10 minutes</StoreText></em><StoreText> become a
             ritual.
-          </h2>
-          <p className="buudy-copy mt-5">
+          </StoreText></h2>
+          <p className="buudy-copy mt-5"><StoreText>
             Discover how Buudy&apos;s 7 wavelengths plus 830nm near-infrared,
             flexible silicone fit, and simple 10-minute routine make at-home
             light therapy feel easy, consistent, and beautifully wearable.
-          </p>
-          <Button className="mt-7" variant="ghost">
+          </StoreText></p>
+          <Button className="mt-7" variant="ghost"><StoreText>
             Learn more
-          </Button>
+          </StoreText></Button>
         </div>
       </div>
     </section>
@@ -56,22 +58,22 @@ export function TouchTechSection() {
     <section className="buudy-section border-y border-[var(--border)] bg-[var(--plum)] text-[var(--cream)] md: md: py-14 md:py-24">
       <div className="buudy-wrap grid items-center gap-8 md:gap-14 lg:grid-cols-2">
         <div>
-          <p className="buudy-mono text-[var(--gold)]">Intuitive Touch</p>
-          <h2 className="buudy-display mt-3 text-[2.5rem] leading-tight text-[var(--cream)] md:text-5xl">
-            Skincare should be <em className="buudy-italic">an escape</em>, not a
+          <p className="buudy-mono text-[var(--gold)]"><StoreText>Intuitive Touch</StoreText></p>
+          <h2 className="buudy-display mt-3 text-[2.5rem] leading-tight text-[var(--cream)] md:text-5xl"><StoreText>
+            Skincare should be </StoreText><em className="buudy-italic"><StoreText>an escape</StoreText></em><StoreText>, not a
             hassle.
-          </h2>
-          <p className="mt-5 max-w-lg leading-7 text-[rgba(247,241,232,.72)]">
+          </StoreText></h2>
+          <p className="mt-5 max-w-lg leading-7 text-[rgba(247,241,232,.72)]"><StoreText>
             We engineered the Buudy LED Mask to be as smart as it is effective,
             replacing frustrating wires and heavy controllers with a sleek,
             wearable design.
-          </p>
+          </StoreText></p>
           <ul className="mt-10 grid gap-6">
             {touchTech.map((item) => (
               <li className="border-l border-[rgba(184,149,86,.42)] pl-6" key={item.title}>
-                <p className="buudy-display text-2xl text-[var(--cream)]">{item.title}</p>
+                <p className="buudy-display text-2xl text-[var(--cream)]"><StoreText>{item.title}</StoreText></p>
                 <p className="mt-1 text-sm leading-6 text-[rgba(247,241,232,.72)]">
-                  {item.body}
+                  <StoreText>{item.body}</StoreText>
                 </p>
               </li>
             ))}
@@ -85,8 +87,8 @@ export function TouchTechSection() {
             src={productMediaAsset("7 colors muted.mp4", "buudy-led-mask", "videos")}
           />
           <div className="absolute bottom-6 right-6 rounded-2xl bg-[rgba(247,241,232,.94)] p-4 text-[var(--plum)] backdrop-blur">
-            <p className="buudy-mono">Tap to cycle</p>
-            <p className="buudy-display mt-1 text-xl">7 LED Colours + NIR - 1 gesture</p>
+            <p className="buudy-mono"><StoreText>Tap to cycle</StoreText></p>
+            <p className="buudy-display mt-1 text-xl"><StoreText>7 LED Colours + NIR - 1 gesture</StoreText></p>
           </div>
         </div>
       </div>
@@ -106,37 +108,37 @@ export function AppPromo() {
             sizes="(min-width: 1024px) 55vw, 100vw"
             src={productMediaAsset("ChatGPT Image May 31, 2026, 11_35_03 PM (2).png")}
           />
-          <span className="buudy-mono absolute left-5 top-5 rounded-full bg-[rgba(247,241,232,.9)] px-4 py-2 text-[var(--plum)] backdrop-blur">
+          <span className="buudy-mono absolute left-5 top-5 rounded-full bg-[rgba(247,241,232,.9)] px-4 py-2 text-[var(--plum)] backdrop-blur"><StoreText>
             Free with Buudy
-          </span>
+          </StoreText></span>
         </div>
         <div>
-          <p className="buudy-eyebrow">Companion App</p>
-          <h2 className="buudy-display mt-2 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl">
-            Buudy <span className="text-[var(--gold)]">AI App</span>.
+          <p className="buudy-eyebrow"><StoreText>Companion App</StoreText></p>
+          <h2 className="buudy-display mt-2 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl"><StoreText>
+            Buudy </StoreText><span className="text-[var(--gold)]"><StoreText>AI App</StoreText></span>.
           </h2>
-          <p className="buudy-copy mt-3 text-sm leading-6">
+          <p className="buudy-copy mt-3 text-sm leading-6"><StoreText>
             Buudy Glow Coach is the AI Skincare app for Buudy LED Mask
             customers. It helps customers plan, time, and track their
             personalised LED mask sessions using the 7 wavelengths plus
             near-infrared available on the mask.
-          </p>
+          </StoreText></p>
           <div className="mt-4 grid grid-cols-3 gap-2">
             {["Plan", "Time", "Track"].map((step) => (
               <div
                 className="rounded-lg border border-[rgba(58,31,61,.12)] bg-[var(--card)] px-3 py-2 text-center"
                 key={step}
               >
-                <p className="buudy-mono text-[var(--plum)] font-semibold">{step}</p>
+                <p className="buudy-mono text-[var(--plum)] font-semibold"><StoreText>{step}</StoreText></p>
               </div>
             ))}
           </div>
           <div className="mt-5 flex justify-center md:justify-start">
             <Button asChild>
-              <a href="https://app.buudy.com" target="_blank" rel="noopener noreferrer">
-                <Smartphone size={17} />
+              <StoreAnchor href="https://app.buudy.com" target="_blank" rel="noopener noreferrer">
+                <Smartphone size={17} /><StoreText>
                 Try the app now
-              </a>
+              </StoreText></StoreAnchor>
             </Button>
           </div>
         </div>
@@ -160,25 +162,25 @@ export function BlueLightSection() {
           />
         </div>
         <div>
-          <p className="buudy-mono text-[var(--gold)]">Expert insight</p>
-          <h2 className="buudy-display mt-3 text-[2.5rem] leading-tight text-[var(--cream)] md:text-5xl">
+          <p className="buudy-mono text-[var(--gold)]"><StoreText>Expert insight</StoreText></p>
+          <h2 className="buudy-display mt-3 text-[2.5rem] leading-tight text-[var(--cream)] md:text-5xl"><StoreText>
             Blue light therapy.
-          </h2>
-          <blockquote className="buudy-display mt-8 text-2xl italic leading-snug text-[var(--cream)] md:text-3xl">
+          </StoreText></h2>
+          <blockquote className="buudy-display mt-8 text-2xl italic leading-snug text-[var(--cream)] md:text-3xl"><StoreText>
             &quot;One of my other favourite LED colours as you can see here is going
             to be the blue light therapy. Blue light specifically is going to be
             for combatting acne, killing any bacteria that&apos;s going to be sitting
             on the surface of the skin contributing to that acne breakout.&quot;
-          </blockquote>
+          </StoreText></blockquote>
           <div className="mt-8 border-t border-[rgba(247,241,232,.15)] pt-5">
-            <p className="buudy-display text-xl text-[var(--cream)]">Shannon</p>
-            <p className="buudy-mono mt-1 text-[var(--gold)]">
+            <p className="buudy-display text-xl text-[var(--cream)]"><StoreText>Shannon</StoreText></p>
+            <p className="buudy-mono mt-1 text-[var(--gold)]"><StoreText>
               Licensed Medical Aesthetician
-            </p>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-[rgba(247,241,232,.72)]">
+            </StoreText></p>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-[rgba(247,241,232,.72)]"><StoreText>
               Expert insight on how blue light therapy supports clearer-looking
               skin when breakouts are part of the concern.
-            </p>
+            </StoreText></p>
           </div>
         </div>
       </div>

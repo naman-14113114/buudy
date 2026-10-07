@@ -1,3 +1,5 @@
+
+import { StoreText } from '@/components/international/StoreLocale';
 import { formatMoney, percentOff } from "@/lib/money";
 import { market } from "@/lib/market";
 
@@ -43,8 +45,8 @@ export function Price({
           className={`buudy-mono rounded-full bg-[rgba(184,149,86,.26)] px-3 py-2 ${
             invert ? "text-[var(--cream)]" : "text-[var(--plum)]"
           }`}
-        >
-          Save {off}%
+        ><StoreText>
+          Save </StoreText><StoreText>{off}</StoreText>%
         </span>
       ) : null}
     </div>

@@ -1,6 +1,8 @@
 "use client";
+import { StoreText, StoreButton } from '@/components/international/StoreLocale';
 
-import Link from "next/link";
+
+import { StoreLink as Link } from '@/components/international/StoreLocale';
 import { ArrowRight, ChevronDown, Tag } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { formatMoney } from "@/lib/money";
@@ -42,16 +44,16 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
     <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
       {totalSavingsCents > 0 ? (
         <>
-          <button
+          <StoreButton
             aria-controls="cart-price-breakdown"
             aria-expanded={detailsOpen}
             className="flex w-full items-center justify-between gap-4 py-2 text-sm transition"
             onClick={() => setDetailsOpen((current) => !current)}
             type="button"
           >
-            <span className="flex items-center gap-2 font-medium text-[var(--plum)]">
+            <span className="flex items-center gap-2 font-medium text-[var(--plum)]"><StoreText>
               Total discount
-              <ChevronDown
+              </StoreText><ChevronDown
                 aria-hidden="true"
                 className={`transition-transform duration-300 ${
                   detailsOpen ? "rotate-180" : ""
@@ -62,7 +64,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
             <span className="font-bold text-[var(--plum)]">
               -{money(totalSavingsCents)}
             </span>
-          </button>
+          </StoreButton>
 
           <div
             className={`grid transition-[grid-template-rows] duration-300 ease-out ${
@@ -75,8 +77,8 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                 {!hasMask&&giftLines.map((line) => (
                   <div className="flex justify-between gap-4" key={line.id}>
                     <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
-                      <Tag aria-hidden="true" size={14} />
-                      Free {line.title}
+                      <Tag aria-hidden="true" size={14} /><StoreText>
+                      Free </StoreText><StoreText>{line.title}</StoreText>
                     </span>
                     <span className="font-semibold text-[var(--muted)]">
                       -{formatMoney((line.compareAtCents ?? 0) * line.quantity)}
@@ -87,7 +89,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                   <div className="flex justify-between gap-4">
                     <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
                       <Tag aria-hidden="true" size={14} />
-                      {manualPromoCode}
+                      <StoreText>{manualPromoCode}</StoreText>
                     </span>
                     <span className="font-semibold text-[var(--muted)]">
                       -{money(promoDiscountCents)}
@@ -107,23 +109,23 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
       ) : null}
 
       <div className="mt-4 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-5">
-        <span className="buudy-display block text-xl uppercase text-[var(--plum)]">
+        <span className="buudy-display block text-xl uppercase text-[var(--plum)]"><StoreText>
           Sub Total
-        </span>
+        </StoreText></span>
         <span className="buudy-display block text-right text-4xl text-[var(--plum)]">
-          {mixed?'—':subtotal===null?'…':money(subtotal)}
+          <StoreText>{mixed?'—':subtotal===null?'…':money(subtotal)}</StoreText>
         </span>
       </div>
 
-      {mixed&&<p role="alert" className="mt-3 text-sm text-[var(--muted)]">The mask bundle uses a separate checkout. Remove the other products to continue with the mask.</p>}
+      {mixed&&<p role="alert" className="mt-3 text-sm text-[var(--muted)]"><StoreText>The mask bundle uses a separate checkout. Remove the other products to continue with the mask.</StoreText></p>}
 
-      {children ? <div className="mt-4">{children}</div> : null}
+      {children ? <div className="mt-4"><StoreText>{children}</StoreText></div> : null}
 
       {action === "cart" ? (
         <Button asChild className="mt-5 w-full" onClick={closeCart}>
-          <Link href="/cart">
+          <Link href="/cart"><StoreText>
             Go to cart
-            <ArrowRight aria-hidden="true" size={17} />
+            </StoreText><ArrowRight aria-hidden="true" size={17} />
           </Link>
         </Button>
       ) : null}

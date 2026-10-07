@@ -1,3 +1,5 @@
+
+import { StoreText } from '@/components/international/StoreLocale';
 import { announcementItems } from "@/data/navigation";
 
 export function AnnouncementBar() {
@@ -8,7 +10,7 @@ export function AnnouncementBar() {
       <div className="buudy-marquee buudy-marquee-slow flex items-center gap-6">
         {items.map((item, index) => (
           <span className="font-sans text-xs font-bold uppercase tracking-[0.15em] whitespace-nowrap flex items-center gap-6" key={`${item}-${index}`}>
-            {item}
+            <StoreText>{item}</StoreText>
             <span>✦</span>
           </span>
         ))}

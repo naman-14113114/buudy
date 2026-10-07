@@ -1,7 +1,9 @@
 "use client";
+import { StoreText, StoreButton } from '@/components/international/StoreLocale';
+
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { StoreImage as Image } from '@/components/international/StoreLocale';
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { transformations, type Transformation } from "@/data/productSections";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -295,15 +297,15 @@ export function BeforeAfterGrid() {
           <SectionHeading
             eyebrow="Real users / Real results"
             title={
-              <>
-                Eight stories, <em className="buudy-italic">one device</em>.
+              <><StoreText>
+                Eight stories, </StoreText><em className="buudy-italic"><StoreText>one device</StoreText></em>.
               </>
             }
           />
-          <p className="max-w-sm text-sm leading-7 text-[var(--muted)]">
+          <p className="max-w-sm text-sm leading-7 text-[var(--muted)]"><StoreText>
             Verified customer transformations, photographed in their own homes
             after consistent use of the Buudy LED Mask.
-          </p>
+          </StoreText></p>
         </div>
       </div>
 
@@ -332,7 +334,7 @@ export function BeforeAfterGrid() {
           }}
         >
           {loopedStories.map((story, index) => (
-            <button
+            <StoreButton
               aria-label={`Open ${story.fullName}'s ${story.concern} story`}
               className="flex w-[min(82vw,21rem)] flex-none flex-col overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--card)] text-left transition duration-300 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)]"
               data-story-card
@@ -358,29 +360,29 @@ export function BeforeAfterGrid() {
               <div className="flex flex-1 flex-col justify-between p-5">
                 <div>
                   <div className="flex items-center justify-between gap-3">
-                    <p className="buudy-mono text-[var(--gold)]">{story.concern}</p>
+                    <p className="buudy-mono text-[var(--gold)]"><StoreText>{story.concern}</StoreText></p>
                     <span className="buudy-mono text-[var(--plum-soft)]">5.0</span>
                   </div>
                   <h3 className="buudy-display mt-3 text-xl text-[var(--plum)]">
-                    {story.title}
+                    <StoreText>{story.title}</StoreText>
                   </h3>
                   <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
-                    {story.quote}
+                    <StoreText>{story.quote}</StoreText>
                   </p>
                 </div>
                 <div className="mt-4 flex items-center justify-between border-t border-[var(--border)] pt-3">
                   <span className="buudy-display text-sm text-[var(--plum)]">
-                    {story.name}
+                    <StoreText>{story.name}</StoreText>
                   </span>
-                  <span className="buudy-mono text-[var(--plum-soft)]">Verified</span>
+                  <span className="buudy-mono text-[var(--plum-soft)]"><StoreText>Verified</StoreText></span>
                 </div>
               </div>
-            </button>
+            </StoreButton>
           ))}
         </div>
 
         <div className="buudy-wrap mt-6 flex items-center justify-center gap-5">
-          <button
+          <StoreButton
             aria-label="Previous transformation story"
             className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.3)] text-[var(--plum)] transition hover:bg-[var(--plum)] hover:text-[var(--cream)]"
             onClick={() => {
@@ -390,9 +392,9 @@ export function BeforeAfterGrid() {
             type="button"
           >
             <ChevronLeft aria-hidden="true" size={20} />
-          </button>
-          <span className="buudy-mono text-[var(--plum)]">customer stories</span>
-          <button
+          </StoreButton>
+          <span className="buudy-mono text-[var(--plum)]"><StoreText>customer stories</StoreText></span>
+          <StoreButton
             aria-label="Next transformation story"
             className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.3)] text-[var(--plum)] transition hover:bg-[var(--plum)] hover:text-[var(--cream)]"
             onClick={() => {
@@ -402,7 +404,7 @@ export function BeforeAfterGrid() {
             type="button"
           >
             <ChevronRight aria-hidden="true" size={20} />
-          </button>
+          </StoreButton>
         </div>
       </div>
 
@@ -421,14 +423,14 @@ export function BeforeAfterGrid() {
           }}
           role="dialog"
         >
-          <button
+          <StoreButton
             aria-label="Previous story"
             className="absolute left-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-md transition hover:scale-105 hover:bg-[var(--cream)] md:flex xl:left-8"
             onClick={handlePrevStory}
             type="button"
           >
             <ChevronLeft aria-hidden="true" size={28} />
-          </button>
+          </StoreButton>
 
           <div
             className="relative flex max-h-[94vh] w-full max-w-4xl flex-col overflow-y-auto rounded-[18px] bg-[var(--card)] shadow-2xl md:max-h-[90vh] md:flex-row md:overflow-hidden"
@@ -441,7 +443,7 @@ export function BeforeAfterGrid() {
               touchEndX.current = null;
             }}
           >
-            <button
+            <StoreButton
               aria-label="Close transformation details"
               className="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-sm transition hover:scale-105 hover:bg-[var(--cream)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
               onClick={closeStory}
@@ -449,7 +451,7 @@ export function BeforeAfterGrid() {
               type="button"
             >
               <X aria-hidden="true" size={22} />
-            </button>
+            </StoreButton>
 
             <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-[var(--blush)] md:min-h-[500px] md:w-1/2 md:self-stretch">
               <Image
@@ -461,81 +463,81 @@ export function BeforeAfterGrid() {
                 src={selectedStory.image}
               />
               <div className="absolute inset-x-3 bottom-3 flex justify-between md:hidden">
-                <button
+                <StoreButton
                   aria-label="Previous story"
                   className="grid h-11 w-11 place-items-center rounded-full bg-[var(--cream)] text-[var(--plum)] shadow-lg"
                   onClick={handlePrevStory}
                   type="button"
                 >
                   <ChevronLeft aria-hidden="true" size={22} />
-                </button>
-                <button
+                </StoreButton>
+                <StoreButton
                   aria-label="Next story"
                   className="grid h-11 w-11 place-items-center rounded-full bg-[var(--cream)] text-[var(--plum)] shadow-lg"
                   onClick={handleNextStory}
                   type="button"
                 >
                   <ChevronRight aria-hidden="true" size={22} />
-                </button>
+                </StoreButton>
               </div>
             </div>
 
             <div className="flex w-full flex-col justify-center p-6 md:w-1/2 md:p-8">
               <p className="buudy-mono mb-2 text-sm uppercase text-[var(--gold)]">
-                {selectedStory.concern}
+                <StoreText>{selectedStory.concern}</StoreText>
               </p>
               <h3
                 className="buudy-display mb-4 text-2xl leading-tight text-[var(--plum)] md:text-3xl"
                 id="transformation-dialog-title"
               >
-                {selectedStory.title}
+                <StoreText>{selectedStory.title}</StoreText>
               </h3>
               <p className="mb-5 text-sm italic leading-7 text-[var(--muted)]">
-                {selectedStory.quote}
+                <StoreText>{selectedStory.quote}</StoreText>
               </p>
 
               <div className="mb-5 flex items-center gap-2 border-b border-[var(--border)] pb-5">
                 <span className="buudy-display text-lg text-[var(--plum)]">
-                  {selectedStory.fullName}, {selectedStory.age}
+                  <StoreText>{selectedStory.fullName}</StoreText>, <StoreText>{selectedStory.age}</StoreText>
                 </span>
-                <span className="buudy-mono ml-auto rounded bg-[var(--cream)] px-2 py-1 text-xs text-[var(--plum-soft)]">
+                <span className="buudy-mono ml-auto rounded bg-[var(--cream)] px-2 py-1 text-xs text-[var(--plum-soft)]"><StoreText>
                   Verified
-                </span>
+                </StoreText></span>
               </div>
 
               <div className="mb-4">
-                <h4 className="buudy-mono mb-1.5 text-xs font-bold uppercase text-[var(--plum)]">
+                <h4 className="buudy-mono mb-1.5 text-xs font-bold uppercase text-[var(--plum)]"><StoreText>
                   Skin type
-                </h4>
-                <p className="text-sm text-[var(--muted)]">{selectedStory.skinType}</p>
+                </StoreText></h4>
+                <p className="text-sm text-[var(--muted)]"><StoreText>{selectedStory.skinType}</StoreText></p>
               </div>
               <div className="mb-4">
-                <h4 className="buudy-mono mb-1.5 text-xs font-bold uppercase text-[var(--plum)]">
+                <h4 className="buudy-mono mb-1.5 text-xs font-bold uppercase text-[var(--plum)]"><StoreText>
                   Skincare routine
-                </h4>
+                </StoreText></h4>
                 <p className="text-sm leading-6 text-[var(--muted)]">
-                  {selectedStory.routine}
+                  <StoreText>{selectedStory.routine}</StoreText>
                 </p>
               </div>
               <div>
-                <h4 className="buudy-mono mb-1.5 text-xs font-bold uppercase text-[var(--plum)]">
+                <h4 className="buudy-mono mb-1.5 text-xs font-bold uppercase text-[var(--plum)]"><StoreText>
                   Experience
-                </h4>
+                </StoreText></h4>
                 <p className="text-sm leading-6 text-[var(--muted)]">
-                  {selectedStory.experience}
+                  <StoreText>{selectedStory.experience}</StoreText>
                 </p>
               </div>
             </div>
           </div>
 
-          <button
+          <StoreButton
             aria-label="Next story"
             className="absolute right-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-md transition hover:scale-105 hover:bg-[var(--cream)] md:flex xl:right-8"
             onClick={handleNextStory}
             type="button"
           >
             <ChevronRight aria-hidden="true" size={28} />
-          </button>
+          </StoreButton>
         </div>
       ) : null}
     </section>

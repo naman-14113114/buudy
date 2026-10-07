@@ -1,4 +1,6 @@
 "use client";
+import { StoreText } from '@/components/international/StoreLocale';
+
 
 import { useState } from "react";
 import {
@@ -107,9 +109,9 @@ function AccordionPanel({
         }}
       >
         <span>
-          <span className="font-sans text-xs font-bold uppercase tracking-widest text-[var(--gold)]">{item.eyebrow}</span>
+          <span className="font-sans text-xs font-bold uppercase tracking-widest text-[var(--gold)]"><StoreText>{item.eyebrow}</StoreText></span>
           <span className="font-playfair mt-1 block text-xl text-[var(--plum)]">
-            {item.title}
+            <StoreText>{item.title}</StoreText>
           </span>
         </span>
         <ChevronDown
@@ -126,7 +128,7 @@ function AccordionPanel({
         id={contentId}
       >
         <div className="overflow-hidden">
-          <div className="pb-5">{item.content}</div>
+          <div className="pb-5"><StoreText>{item.content}</StoreText></div>
         </div>
       </div>
     </div>
@@ -169,10 +171,10 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
                   </span>
                   <div>
                     <p className="font-sans text-sm font-bold text-[var(--plum)]">
-                      {feature.title}
+                      <StoreText>{feature.title}</StoreText>
                     </p>
                     <p className="font-sans mt-0.5 text-xs italic font-semibold text-[var(--gold)]">
-                      {feature.kicker}
+                      <StoreText>{feature.kicker}</StoreText>
                     </p>
                   </div>
                 </div>
@@ -181,7 +183,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
                 </span>
               </div>
               <p className="font-sans mt-1 text-xs leading-5 text-[var(--muted)]">
-                {feature.body}
+                <StoreText>{feature.body}</StoreText>
               </p>
             </li>
           );
@@ -203,10 +205,10 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[var(--gold)]">
                     <Icon size={15} strokeWidth={2} />
                   </span>
-                  <span className="font-sans text-sm font-medium text-[var(--muted)]">{spec.label}</span>
+                  <span className="font-sans text-sm font-medium text-[var(--muted)]"><StoreText>{spec.label}</StoreText></span>
                 </dt>
                 <dd className="font-sans text-right text-sm font-semibold leading-5 text-[var(--plum)]">
-                  {spec.value}
+                  <StoreText>{spec.value}</StoreText>
                 </dd>
               </div>
             );
@@ -248,14 +250,14 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
               key={`${item.quantity}-${item.label}`}
             >
               <span className="flex items-center gap-3">
-                <span className="buudy-mono text-[var(--gold)]">{item.quantity}</span>
+                <span className="buudy-mono text-[var(--gold)]"><StoreText>{item.quantity}</StoreText></span>
                 <span className="text-sm font-semibold text-[var(--plum)]">
-                  {item.label}
+                  <StoreText>{item.label}</StoreText>
                 </span>
               </span>
               {item.tag ? (
                 <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.18)] px-3 py-1 text-[var(--plum)]">
-                  {item.tag}
+                  <StoreText>{item.tag}</StoreText>
                 </span>
               ) : null}
             </li>
@@ -274,7 +276,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
               className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-sm font-semibold leading-5 text-[var(--plum)]"
               key={badge}
             >
-              {badge}
+              <StoreText>{badge}</StoreText>
             </li>
           ))}
         </ul>

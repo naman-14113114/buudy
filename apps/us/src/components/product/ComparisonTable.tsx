@@ -1,3 +1,5 @@
+
+import { StoreImg, StoreText } from '@/components/international/StoreLocale';
 import React from "react";
 import { NativePrice } from '@/components/international/NativePrice';
 import { productMediaAsset } from "@/lib/media";
@@ -62,11 +64,11 @@ function ComparisonRow({ title, subtitle, values, isLast = false }: ComparisonRo
         {/* Feature Info */}
         <div className="w-full md:w-1/3 pr-4 py-2.5 md:py-3.5 flex flex-col justify-center">
           <p className="buudy-display font-semibold text-[var(--plum)] text-base md:text-lg leading-tight">
-            {title}
+            <StoreText>{title}</StoreText>
           </p>
           {subtitle && (
             <p className="buudy-display text-[var(--plum-soft)] text-xs md:text-sm font-medium italic mt-0.5 leading-tight">
-              {subtitle}
+              <StoreText>{subtitle}</StoreText>
             </p>
           )}
         </div>
@@ -83,7 +85,7 @@ function ComparisonRow({ title, subtitle, values, isLast = false }: ComparisonRo
                     : "text-[var(--muted)]"
                 }`}
               >
-                {val}
+                <StoreText>{val}</StoreText>
               </div>
             ))}
           </div>
@@ -112,10 +114,10 @@ function ColorRow({ colorName, colorCode, description, values, borderBottom = fa
               className="buudy-mono inline-flex items-center justify-center font-bold text-[9px] uppercase text-white rounded-lg h-[18px] w-[81px] tracking-wider shrink-0"
               style={{ backgroundColor: colorCode }}
             >
-              {colorName}
+              <StoreText>{colorName}</StoreText>
             </span>
             <span className="buudy-display text-[var(--plum)] text-sm md:text-base font-normal">
-              {description}
+              <StoreText>{description}</StoreText>
             </span>
           </div>
         </div>
@@ -132,7 +134,7 @@ function ColorRow({ colorName, colorCode, description, values, borderBottom = fa
                     : "text-[var(--muted)]"
                 }`}
               >
-                {val}
+                <StoreText>{val}</StoreText>
               </div>
             ))}
           </div>
@@ -148,15 +150,15 @@ export function ComparisonTable() {
       <div className="buudy-wrap max-w-[1144px]">
         {/* Section Header */}
         <div className="mb-8 px-4 text-center md:mb-12">
-          <h2 className="buudy-heading hidden md:block pb-2">
+          <h2 className="buudy-heading hidden md:block pb-2"><StoreText>
             What makes Buudy right for you?
-          </h2>
-          <h2 className="buudy-heading block md:hidden pb-2 text-[2.2rem]">
+          </StoreText></h2>
+          <h2 className="buudy-heading block md:hidden pb-2 text-[2.2rem]"><StoreText>
             Why is Buudy right for you?
-          </h2>
-          <h3 className="buudy-display text-xl md:text-2xl text-[var(--plum-soft)] italic mt-3">
+          </StoreText></h2>
+          <h3 className="buudy-display text-xl md:text-2xl text-[var(--plum-soft)] italic mt-3"><StoreText>
             (Here is a comparison, but there is really no comparison)
-          </h3>
+          </StoreText></h3>
         </div>
 
         <div className="mt-8 flex flex-col md:mt-12">
@@ -173,7 +175,7 @@ export function ComparisonTable() {
               <div className="w-full md:w-2/3">
                 <div className="flex items-center h-full">
                   <div className="-mb-px w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-0 md:mb-0 md:pb-2">
-                    <img
+                    <StoreImg
                       src={productMediaAsset("ChatGPT Image May 31, 2026, 12_10_21 AM.png")}
                       alt="Buudy Logo"
                       className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
@@ -182,7 +184,7 @@ export function ComparisonTable() {
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
-                    <img
+                    <StoreImg
                       src={productMediaAsset("OmniLux_Logo.png")}
                       alt="Omnilux"
                       className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
@@ -191,7 +193,7 @@ export function ComparisonTable() {
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
-                    <img
+                    <StoreImg
                       src={productMediaAsset("current_body_logo.png")}
                       alt="CurrentBody"
                       className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
@@ -200,7 +202,7 @@ export function ComparisonTable() {
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
-                    <img
+                    <StoreImg
                       src={productMediaAsset("kala_logo.png")}
                       alt="Kala"
                       className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
@@ -220,7 +222,7 @@ export function ComparisonTable() {
               <div className="w-full md:w-2/3">
                 <div className="flex items-center h-full">
                   <div className="-mt-px w-1/4 flex justify-center items-center h-full pb-4 md:mt-0 md:pb-5 px-2 overflow-visible">
-                    <img
+                    <StoreImg
                       src={productMediaAsset("ChatGPT Image May 31, 2026, 11_38_29 PM.png")}
                       alt="Buudy Mask"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain scale-[1.3] md:scale-[1.4] transform origin-center transition-transform"
@@ -229,7 +231,7 @@ export function ComparisonTable() {
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
-                    <img
+                    <StoreImg
                       src={productMediaAsset("omnilux.png")}
                       alt="Omnilux Contour Face Mask"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain"
@@ -238,7 +240,7 @@ export function ComparisonTable() {
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
-                    <img
+                    <StoreImg
                       src={productMediaAsset("current Body.png")}
                       alt="CurrentBody Mask"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain"
@@ -247,7 +249,7 @@ export function ComparisonTable() {
                     />
                   </div>
                   <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
-                    <img
+                    <StoreImg
                       src={productMediaAsset("kala.png")}
                       alt="Kala Mask"
                       className="h-24 sm:h-28 md:h-32 w-auto object-contain"
@@ -272,10 +274,10 @@ export function ComparisonTable() {
             title="Light Colours"
             subtitle="Each with specific skin benefits"
             values={[
-              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">7 LED Colours + NIR</strong>,
-              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">2 TOTAL</strong>,
-              <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">1 TOTAL</strong>,
-              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">3 TOTAL</strong>,
+              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]"><StoreText>7 LED Colours + NIR</StoreText></strong>,
+              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>2 TOTAL</StoreText></strong>,
+              <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>1 TOTAL</StoreText></strong>,
+              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>3 TOTAL</StoreText></strong>,
             ]}
           />
 
@@ -364,10 +366,10 @@ export function ComparisonTable() {
             title="Treatment Time"
             subtitle="Full Face + Neck"
             values={[
-              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">3 MINS</strong>,
-              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
-              <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
-              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
+              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]"><StoreText>3 MINS</StoreText></strong>,
+              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>10 MINS</StoreText></strong>,
+              <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>10 MINS</StoreText></strong>,
+              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>10 MINS</StoreText></strong>,
             ]}
           />
 

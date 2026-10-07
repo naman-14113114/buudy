@@ -1,7 +1,7 @@
 import { currencyByCountry } from './provider-markets.ts';
 import { plannedCountryLanguage } from './country-languages.ts';
 import { additionalLegalPaths, hasCompleteLegalTranslation } from './legal-registry.ts';
-import { localizedStorefrontEnabled } from './rollout.ts';
+import { localizedStorefrontEnabled, publishedLocalizedPaths } from './rollout.ts';
 
 // Add a language here only when its complete public dictionary passes validation.
 export const languages = {"en":"English","fr":"Français","de":"Deutsch","nl":"Nederlands","da":"Dansk","sv":"Svenska","es":"Español","it":"Italiano","pt":"Português","ca":"Català","pl":"Polski","nb":"Norsk bokmål","fi":"Suomi","cs":"Čeština","sk":"Slovenčina","hu":"Magyar","ro":"Română","bg":"Български","el":"Ελληνικά","hr":"Hrvatski","sl":"Slovenščina","et":"Eesti","lv":"Latviešu","lt":"Lietuvių","is":"Íslenska","sq":"Shqip","sr":"Српски","mk":"Македонски","bs":"Bosanski","mt":"Malti","ar":"العربية","he":"עברית","tr":"Türkçe","ru":"Русский","uk":"Українська","ka":"ქართული","hy":"Հայերեն","az":"Azərbaycan","kk":"Қазақша","uz":"O‘zbekcha","fa":"فارسی","sw":"Kiswahili","af":"Afrikaans","am":"አማርኛ","zh":"简体中文","zh-Hant":"繁體中文","ja":"日本語","ko":"한국어","id":"Bahasa Indonesia","ms":"Bahasa Melayu","th":"ไทย","vi":"Tiếng Việt","tl":"Filipino","hi":"हिन्दी","bn":"বাংলা","ta":"தமிழ்","te":"తెలుగు","ur":"اردو","ne":"नेपाली","si":"සිංහල","km":"ខ្មែរ","lo":"ລາວ","my":"မြန်မာ","mn":"Монгол","so":"Soomaali","tg":"Тоҷикӣ","ky":"Кыргызча"} as const;
@@ -41,6 +41,6 @@ export function resolveCurrency(explicit?: string | null, country?: string | nul
   return code && currencies.includes(code) ? code : currencyByCountry[country?.toUpperCase() || ''] || 'GBP';
 }
 export function languageAlternates(path: string) {
-  if(!localizedStorefrontEnabled)return {'en':`https://www.buudy.com${path==='/'?'':path}`,'x-default':`https://www.buudy.com${path==='/'?'':path}`};
+  if(!localizedStorefrontEnabled)return Object.fromEntries([['en',`https://www.buudy.com${path==='/'?'':path}`],...Object.entries(publishedLocalizedPaths).filter(([,paths])=>paths.includes(path)).map(([locale])=>[locale,`https://www.buudy.com${localePath(locale as Locale,path)}`]),['x-default',`https://www.buudy.com${path==='/'?'':path}`]]);
   return Object.fromEntries([...Object.keys(languages).filter(locale=>pathsForLocale(locale).includes(path)).map(locale=>[locale,`https://www.buudy.com${localePath(locale as Locale,path)}`]), ['x-default',`https://www.buudy.com${path === '/' ? '' : path}`]]);
 }

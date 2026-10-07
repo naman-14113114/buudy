@@ -1,3 +1,5 @@
+
+import { StoreText } from '@/components/international/StoreLocale';
 import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
 
 export function GuaranteeSection({ showVideo = true }: { showVideo?: boolean }) {
@@ -18,15 +20,15 @@ export function GuaranteeSection({ showVideo = true }: { showVideo?: boolean }) 
       />
 
       <div className="buudy-wrap relative z-20 max-w-5xl">
-        <p className="buudy-eyebrow">Promise</p>
-        <h2 className="buudy-display mx-auto mt-3 max-w-4xl text-[2rem] leading-[1.05] text-[var(--cream)] sm:text-[2.35rem] md:mt-4 md:text-6xl">
-          Our <em className="buudy-italic text-[var(--gold)]">Buudy</em>
-          <br />
+        <p className="buudy-eyebrow"><StoreText>Promise</StoreText></p>
+        <h2 className="buudy-display mx-auto mt-3 max-w-4xl text-[2rem] leading-[1.05] text-[var(--cream)] sm:text-[2.35rem] md:mt-4 md:text-6xl"><StoreText>
+          Our </StoreText><em className="buudy-italic text-[var(--gold)]"><StoreText>Buudy</StoreText></em>
+          <br /><StoreText>
           easy return & refund policy.
-        </h2>
-        <p className="mx-auto mt-6 hidden max-w-xl text-sm font-medium leading-7 text-white md:block md:text-base">
+        </StoreText></h2>
+        <p className="mx-auto mt-6 hidden max-w-xl text-sm font-medium leading-7 text-white md:block md:text-base"><StoreText>
           Bring clinical-inspired skincare into your daily routine with Buudy. Designed for visible glow, smoother-looking skin, and effortless at-home use, Buudy gives you a premium treatment experience you can trust every time.
-        </p>
+        </StoreText></p>
       </div>
     </section>
   );

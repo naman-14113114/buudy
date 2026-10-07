@@ -1,3 +1,5 @@
+
+import { StoreText } from '@/components/international/StoreLocale';
 import type { ReactNode } from "react";
 
 type SectionHeadingProps = {
@@ -20,14 +22,14 @@ export function SectionHeading({
   return (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
       <p className={invert ? "buudy-mono text-[var(--gold)]" : "buudy-eyebrow"}>
-        {eyebrow}
+        <StoreText>{eyebrow}</StoreText>
       </p>
       <Heading
         className={`buudy-display mt-4 text-[2.5rem] leading-[1.06] md:text-5xl ${
           invert ? "text-[var(--cream)]" : "text-[var(--plum)]"
         }`}
       >
-        {title}
+        <StoreText>{title}</StoreText>
       </Heading>
       {copy ? (
         <p
@@ -35,7 +37,7 @@ export function SectionHeading({
             invert ? "text-[rgba(247,241,232,.7)]" : "text-[var(--muted)]"
           }`}
         >
-          {copy}
+          <StoreText>{copy}</StoreText>
         </p>
       ) : null}
     </div>

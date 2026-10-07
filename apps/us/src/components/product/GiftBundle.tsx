@@ -1,8 +1,10 @@
 "use client";
+import { StoreText, StoreAnchor, StoreButton, useStoreLocale } from '@/components/international/StoreLocale';
+
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { StoreImage as Image } from '@/components/international/StoreLocale';
+import { StoreLink as Link } from '@/components/international/StoreLocale';
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 import loadingLottie from "@/components/cart/loading-lottie.json";
@@ -21,7 +23,6 @@ import {
   Droplets,
 } from "lucide-react";
 import type { Product } from "@/data/products";
-import { market } from "@/lib/market";
 import { formatMoney } from "@/lib/money";
 import {
   appendAttributionToPath,
@@ -51,6 +52,7 @@ function useCountdown(seconds: number) {
 }
 
 function useDeliveryDate(daysFromToday: number) {
+  const { dateLocale } = useStoreLocale();
   const [dateLabel, setDateLabel] = useState("");
 
   useEffect(() => {
@@ -58,15 +60,15 @@ function useDeliveryDate(daysFromToday: number) {
       const date = new Date();
       date.setDate(date.getDate() + daysFromToday);
 
-      const weekday = date.toLocaleString(market.locale, { weekday: "long" });
+      const weekday = date.toLocaleString(dateLocale, { weekday: "long" });
       const day = date.getDate();
-      const month = date.toLocaleString(market.locale, { month: "long" });
+      const month = date.toLocaleString(dateLocale, { month: "long" });
 
       setDateLabel(`${weekday} ${day} ${month}`);
     }, 0);
 
     return () => window.clearTimeout(timeout);
-  }, [daysFromToday]);
+  }, [daysFromToday, dateLocale]);
 
   return dateLabel;
 }
@@ -103,6 +105,7 @@ const keyBenefitIcons = [
 ];
 
 export function GiftBundle({ product }: { product: Product }) {
+  const { path } = useStoreLocale();
   const { addProduct } = useCart();
   const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
@@ -171,7 +174,7 @@ export function GiftBundle({ product }: { product: Product }) {
   const hasGifts = product.gifts.length > 0;
   return (
     <div>
-      <a
+      <StoreAnchor
         href="#reviews"
         className="flex flex-wrap items-center gap-3 no-underline hover:no-underline cursor-pointer"
       >
@@ -182,13 +185,13 @@ export function GiftBundle({ product }: { product: Product }) {
           ✦
         </div>
         <span className="font-sans text-sm sm:text-base font-medium text-[var(--plum)] bg-[rgba(184,149,86,.18)] px-2.5 py-0.5 rounded-md">
-          {product.id === 'buudy-led-mask' ? '192 LEDs · FACE + NECK COVERAGE' : 'PRODUCT DETAILS & USE INSTRUCTIONS'}
+          <StoreText>{product.id === 'buudy-led-mask' ? '192 LEDs · FACE + NECK COVERAGE' : 'PRODUCT DETAILS & USE INSTRUCTIONS'}</StoreText>
         </span>
-      </a>
+      </StoreAnchor>
 
       <h1 className="font-playfair mt-3 whitespace-nowrap text-[2rem] leading-[1.02] text-[var(--plum)] sm:text-[2.55rem] md:text-[3.25rem] xl:text-[4rem] 2xl:text-[4.45rem]">
-        {product.heroTitle}{" "}
-        <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
+        <StoreText>{product.heroTitle}</StoreText>{" "}
+        <em className="italic text-[var(--gold)]"><StoreText>{product.heroEmphasis}</StoreText></em>
       </h1>
 
       {/* Product feature badges retain the original compact presentation. */}
@@ -200,7 +203,7 @@ export function GiftBundle({ product }: { product: Product }) {
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
           <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            {product.template === "mask" ? "192 LEDs" : product.badges[0]}
+            <StoreText>{product.template === "mask" ? "192 LEDs" : product.badges[0]}</StoreText>
           </span>
         </span>
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
@@ -210,7 +213,7 @@ export function GiftBundle({ product }: { product: Product }) {
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
           <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            {product.template === "mask" ? "Cordless design" : product.badges[1]}
+            <StoreText>{product.template === "mask" ? "Cordless design" : product.badges[1]}</StoreText>
           </span>
         </span>
         <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
@@ -220,7 +223,7 @@ export function GiftBundle({ product }: { product: Product }) {
             className="hidden sm:block shrink-0 text-[var(--gold)]"
           />
           <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            {product.template === "mask" ? "7 visible colours" : product.badges[2]}
+            <StoreText>{product.template === "mask" ? "7 visible colours" : product.badges[2]}</StoreText>
           </span>
         </span>
       </div>
@@ -232,12 +235,12 @@ export function GiftBundle({ product }: { product: Product }) {
           priceCents={product.priceCents}
         />}
         {product.template!=='mask'&&<div className="flex flex-nowrap items-center gap-x-1 sm:gap-x-1.5 text-[9.5px] sm:text-[13px] text-[var(--muted)]">
-          <span className="whitespace-nowrap tracking-tight sm:tracking-normal">
-            or{" "}
+          <span className="whitespace-nowrap tracking-tight sm:tracking-normal"><StoreText>
+            or</StoreText>{" "}
             <strong className="buudy-display text-[10px] sm:text-[14px] font-medium text-[var(--plum)]">
               4
-            </strong>{" "}
-            interest-free payments of{" "}
+            </strong>{" "}<StoreText>
+            interest-free payments of</StoreText>{" "}
             <strong className="buudy-display text-[10px] sm:text-[14px] font-semibold text-[var(--plum)]">
               {formatMoney(product.priceCents / 4, product.currency)}
             </strong>
@@ -257,7 +260,7 @@ export function GiftBundle({ product }: { product: Product }) {
               <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[var(--gold)]">
                 <Icon size={18} strokeWidth={1.5} />
               </span>
-              <span>{benefit}</span>
+              <span><StoreText>{benefit}</StoreText></span>
             </li>
           );
         })}
@@ -272,27 +275,27 @@ export function GiftBundle({ product }: { product: Product }) {
                   <Lottie animationData={deliveryIconData} loop={true} />
                 </div>
               )}
-              <p className="buudy-eyebrow text-[var(--gold)] m-0 leading-none flex items-center h-5 sm:h-7 font-bold text-[10px] sm:text-xs">
+              <p className="buudy-eyebrow text-[var(--gold)] m-0 leading-none flex items-center h-5 sm:h-7 font-bold text-[10px] sm:text-xs"><StoreText>
                 FREE DELIVERY
-              </p>
+              </StoreText></p>
             </div>
             <p className="buudy-display mt-1.5 text-base sm:text-2xl text-[var(--plum)] font-normal leading-none whitespace-nowrap">
-              {deliveryDate || "soon"}
+              <StoreText>{deliveryDate || "soon"}</StoreText>
             </p>
           </div>
           <div className="text-right">
             <p className="buudy-eyebrow text-[var(--gold)] whitespace-nowrap text-[9px] sm:text-[11px] tracking-tight sm:tracking-normal">
-              {hasGifts ? "ORDER WITHIN" : "ORDER TODAY"}
+              <StoreText>{hasGifts ? "ORDER WITHIN" : "ORDER TODAY"}</StoreText>
             </p>
             <p className="buudy-display mt-1.5 text-xl sm:text-[2.2rem] font-normal text-[var(--plum)] leading-none">
-              {timer}
+              <StoreText>{timer}</StoreText>
             </p>
           </div>
         </div>
 
         {/* Question mark info button on top right */}
         <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3.5 z-20" ref={shippingTooltipRef}>
-          <button
+          <StoreButton
             type="button"
             onClick={(e) => {
               e.stopPropagation();
@@ -304,7 +307,7 @@ export function GiftBundle({ product }: { product: Product }) {
             className="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[var(--gold)] bg-transparent font-medium text-[var(--gold)] transition hover:opacity-80 active:scale-95 cursor-pointer"
           >
             ?
-          </button>
+          </StoreButton>
 
           {showShippingInfo && (
             <div
@@ -312,19 +315,19 @@ export function GiftBundle({ product }: { product: Product }) {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between gap-2 mb-1.5">
-                <span className="font-semibold text-[var(--plum)] text-xs">Delivery Estimate</span>
-                <button
+                <span className="font-semibold text-[var(--plum)] text-xs"><StoreText>Delivery Estimate</StoreText></span>
+                <StoreButton
                   type="button"
                   onClick={() => setShowShippingInfo(false)}
                   className="text-[var(--muted)] hover:text-[var(--plum)] text-sm leading-none p-0.5 cursor-pointer"
                   aria-label="Close"
                 >
                   ✕
-                </button>
+                </StoreButton>
               </div>
-              <p className="text-[11.5px] leading-relaxed text-[var(--plum)]/90 m-0">
+              <p className="text-[11.5px] leading-relaxed text-[var(--plum)]/90 m-0"><StoreText>
                 This is the earliest date you can receive your order, but standard delivery transit is 7–20 business days. For more information, please visit our shipping policy page.
-              </p>
+              </StoreText></p>
             </div>
           )}
         </div>
@@ -339,7 +342,7 @@ export function GiftBundle({ product }: { product: Product }) {
           addProduct(product);
           router.push(
             appendAttributionToPath(
-              "/cart",
+              path("/cart"),
               pickAttributionFromSearch(window.location.search),
             ),
           );
@@ -348,9 +351,9 @@ export function GiftBundle({ product }: { product: Product }) {
         {isAdding ? (
           <>
             <span style={{ visibility: "hidden" }} className="relative z-20 whitespace-nowrap">
-              {hasGifts
+              <StoreText>{hasGifts
                 ? "ADD TO CART + FREE GIFTS"
-                : "ADD TO CART + FREE SHIPPING"}
+                : "ADD TO CART + FREE SHIPPING"}</StoreText>
             </span>
             <span className="absolute inset-0 flex items-center justify-center">
               <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
@@ -358,9 +361,9 @@ export function GiftBundle({ product }: { product: Product }) {
           </>
         ) : (
           <span className="relative z-20 whitespace-nowrap">
-            {hasGifts
+            <StoreText>{hasGifts
               ? "ADD TO CART + FREE GIFTS"
-              : "ADD TO CART + FREE SHIPPING"}
+              : "ADD TO CART + FREE SHIPPING"}</StoreText>
           </span>
         )}
       </Button>
@@ -376,10 +379,10 @@ export function GiftBundle({ product }: { product: Product }) {
               height={60}
               className="object-contain"
             />
-            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
-              Full-Face &<br />
+            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase"><StoreText>
+              Full-Face &</StoreText><br /><StoreText>
               Neck Coverage
-            </p>
+            </StoreText></p>
           </div>
           <div className="flex flex-col items-center gap-2">
             <Image
@@ -389,10 +392,10 @@ export function GiftBundle({ product }: { product: Product }) {
               height={60}
               className="object-contain"
             />
-            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
-              Wireless &<br />
+            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase"><StoreText>
+              Wireless &</StoreText><br /><StoreText>
               Rechargeable
-            </p>
+            </StoreText></p>
           </div>
           <div className="flex flex-col items-center gap-2">
             <Image
@@ -402,11 +405,11 @@ export function GiftBundle({ product }: { product: Product }) {
               height={60}
               className="object-contain"
             />
-            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
+            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase"><StoreText>
               Easy Returns
-              <br />
+              </StoreText><br /><StoreText>
               & Refunds
-            </p>
+            </StoreText></p>
           </div>
           <div className="flex flex-col items-center gap-2">
             <Image
@@ -416,11 +419,11 @@ export function GiftBundle({ product }: { product: Product }) {
               height={60}
               className="object-contain"
             />
-            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase">
+            <p className="buudy-display text-[10px] font-bold leading-tight text-[var(--plum-soft)] tracking-wider uppercase"><StoreText>
               Science-Backed
-              <br />
+              </StoreText><br /><StoreText>
               Light
-            </p>
+            </StoreText></p>
           </div>
         </div>
       )}
@@ -428,14 +431,14 @@ export function GiftBundle({ product }: { product: Product }) {
       {hasGifts ? (
         <section className="mt-8" id="free-gifts">
           <div className="text-center mb-8 flex flex-col items-center">
-            <h3 className="buudy-display text-3xl font-medium text-[var(--plum)]">
+            <h3 className="buudy-display text-3xl font-medium text-[var(--plum)]"><StoreText>
               Big Summer Savings
-            </h3>
+            </StoreText></h3>
             <p className="buudy-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded bg-[rgba(184,149,86,.15)] px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--plum)]">
               <span className="buudy-display text-sm sm:text-base font-extrabold normal-case text-[var(--plum)]">
                 {formatMoney(giftValue, product.currency)}
               </span>
-              <span>VALUE OF FREE GIFTS FOR TODAY ONLY</span>
+              <span><StoreText>VALUE OF FREE GIFTS FOR TODAY ONLY</StoreText></span>
             </p>
           </div>
           <div className="grid grid-cols-3 gap-2 md:gap-4">
@@ -448,9 +451,9 @@ export function GiftBundle({ product }: { product: Product }) {
               >
                 {/* Single absolute overlapping badge: FREE (bold & clear) + price strikethrough (no nested container) */}
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-2 sm:px-3 py-1 bg-[var(--card)] border border-[rgba(58,31,61,.22)] rounded-full flex items-center gap-1 sm:gap-1.5 shadow-[0_2px_8px_rgba(58,31,61,0.06)] whitespace-nowrap">
-                  <span className="text-black text-[11px] sm:text-[13px] font-bold tracking-wider uppercase font-sans">
+                  <span className="text-black text-[11px] sm:text-[13px] font-bold tracking-wider uppercase font-sans"><StoreText>
                     FREE
-                  </span>
+                  </StoreText></span>
                   <span className="line-through text-xs sm:text-sm text-[var(--muted)] buudy-display font-semibold leading-none">
                     {formatMoney(gift.valueCents, product.currency)}
                   </span>
@@ -469,7 +472,7 @@ export function GiftBundle({ product }: { product: Product }) {
 
                 {/* Gift Label / Title */}
                 <p className="buudy-display mt-0.5 md:mt-1 text-base md:text-lg font-semibold text-[var(--plum)] leading-snug">
-                  {gift.name}
+                  <StoreText>{gift.name}</StoreText>
                 </p>
               </Link>
             ))}

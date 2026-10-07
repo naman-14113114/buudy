@@ -1,8 +1,22 @@
-# Buudy international draft and storefront restoration, 7 October 2026
+# Buudy original storefront translation, 7 October 2026
 
-## Current direction: preserve the original conversion page
+## French release using the original components
 
-The owner rejected the separate, simplified localized layout and the added currency forms and payment/bank-fee copy on 7 October. That design is not approved for publication. `localizedStorefrontEnabled` is false: automatic language routing is disabled, language URLs temporarily redirect to the existing corresponding English page, and localized drafts are excluded from sitemap/hreflang. The added header language row and currency forms are removed. The original large sale/compare price component and cart summary layout are reused.
+French product, cart and six policy routes now use the original storefront components, fonts, classes, assets, gallery, gift blocks, app section, comparison, FAQ and cart interactions. `StoreText` returns text only; translation wrappers retain the existing element and its props. English remains the context default. No additional language/currency form or payment/bank-fee warning is added.
+
+Only `/fr/products/buudy-led-mask`, `/fr/cart` and six `/fr/policies/...` routes are published. French browser preferences or the country fallback select the French product route; an explicit English language cookie takes precedence. Homepage and other languages remain unfinished. Existing customer review text, embedded videos and text baked into images retain their source language.
+
+Product/policy HTML, metadata, self canonicals and reciprocal hreflang are translated. Sitemap contains 25 indexable URLs, including seven French routes. The French cart is private, dynamic and noindex. The separate simplified template remains disabled; the older 67-language/500-URL validation below is historical draft evidence and must not be represented as live coverage.
+
+Local evidence: production build and TypeScript passed; scoped lint has zero errors and existing warnings; 21 routing/provider tests, 214 storefront preservation assertions and 73 French route assertions passed. Browser QA confirmed the original sections, 320px fit and the French cart add/quantity/free-torch behavior. Commit/deployment and production checks are recorded after release.
+
+Pricing is not fully complete: native unit prices come from XPage, but the existing cart subtotal remains GBP and gift reference values remain USD. Do not claim native basket rounding or full currency alignment is solved. XPage configuration, the UK storefront and shared packages are untouched. No paid translation API was used.
+
+## Historical draft evidence below
+
+## Restoration before the French implementation
+
+The owner rejected the separate, simplified localized layout and the added currency forms and payment/bank-fee copy on 7 October. It was restored before the French implementation above. The general `localizedStorefrontEnabled` flag remains false; only the specifically published original-template routes bypass the draft redirect.
 
 The translation files remain saved for an implementation that translates the existing storefront in place. The 67-language and 500-URL results below document the rejected draft's validation, not current live translation coverage. Do not re-enable the flag until the existing sections, imagery, conversion CTAs, controls and cart appearance have been retained and translated. Currency remains automatically selected from the existing provider-backed service; no XPage settings change is required.
 
