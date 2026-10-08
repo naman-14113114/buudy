@@ -212,7 +212,7 @@ export function IplBeforeAfterGrid() {
         }}
       >
         <div
-          className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto pb-8"
+          className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto pt-4 pb-8"
           ref={trackRef}
         >
           {loopedStories.map((story, i) => (

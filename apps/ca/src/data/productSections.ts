@@ -416,12 +416,6 @@ export const reviewVideos: ReviewVideo[] = [
     src: "https://cdn2.videowise.com/converted/videos/1686511754055_118a8958-9318-41c7-a32d-7274fcd00e1f_h264q6clip.mp4#t=0.1",
   },
   {
-    id: "review-24",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486148762_77c98016-f2cb-4ac8-ace0-858d47fa077f.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511755900_b02e84dc-b238-4083-8adc-bf1e03031116_h264q6clip.mp4#t=0.1",
-  },
-  {
     id: "review-25",
     poster:
       "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486133236_7778286b-f568-4290-9e0d-dbc77c7c059b.webp",
@@ -647,10 +641,10 @@ export const expertVideo = {
 export const comparison = {
   intro: "Here is a comparison, but really, there is no comparison.",
   columns: [
-    { label: "Buudy", price: "$335", featured: true },
-    { label: "Brand A", price: "$399" },
-    { label: "Brand B", price: "$499" },
-    { label: "Brand C", price: "$472" },
+    { label: "Buudy", price: "$279", featured: true },
+    { label: "Brand A", price: "$490" },
+    { label: "Brand B", price: "$530" },
+    { label: "Brand C", price: "$359" },
   ],
   rows: [
     ["Portable", "Hands-free, cordless and rechargeable", "-", "-", "-"],
@@ -659,13 +653,6 @@ export const comparison = {
     ["Customizable treatments", "Yes", "-", "-", "Yes"],
     ["Hands-free, cordless, rechargeable", "Yes", "Yes", "-", "-"],
     ["App companion (iPhone/Android)", "Yes", "-", "-", "-"],
-    [
-      "Treatment Time (Full Face + Neck)",
-      "3 mins",
-      "10 mins",
-      "10 mins",
-      "3 mins",
-    ],
   ],
 };
 
@@ -684,7 +671,12 @@ export const touchTech = [
   },
 ];
 
-export const faqs: FAQItem[] = [
+export const standardMaskFaqs: FAQItem[] = [
+  {
+    question: "Is Buudy the best LED face mask for Canadian buyers?",
+    answer:
+      "Buudy is designed for Canadian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Canada launch offer is CA$279 with a CA$559 compare-at price, free tracked Canada shipping, a free glow kit while available, and an easy return and refund policy.",
+  },
   {
     question: "Does this cover the neck?",
     answer:
@@ -721,6 +713,56 @@ export const faqs: FAQItem[] = [
       "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
   },
 ];
+
+export const buudyLedMaskFaqs: FAQItem[] = [
+  {
+    question: "Is Buudy the best LED face mask for Canadian buyers?",
+    answer:
+      "Buudy is designed for Canadian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Canada launch offer is CA$279 with a CA$559 compare-at price, free tracked Canada shipping, a free glow kit while available, and an easy return and refund policy.",
+  },
+  {
+    question: "Does this cover the neck?",
+    answer:
+      "Yes, one of the best things about the Buudy LED Mask is that it covers your neck as well! So many LED masks neglect the neck entirely or do not include it.",
+  },
+  {
+    question: "How many LEDs does the Buudy LED Mask have?",
+    answer: "The Buudy LED Mask has 192 LEDs.",
+  },
+  {
+    question: "What are the wavelengths? Irradiance / Power Density?",
+    answer:
+      "Infra-red: 830nm. Red: 633nm. Blue: 415nm. Green: 525nm. Cyan: 490nm. Yellow: 590nm. Purple: 390nm. White: 510nm. Irradiance / Power Density: 32mW/cm2.",
+  },
+  {
+    question: "Can I use it in my country?",
+    answer:
+      "Yes! The Buudy LED Mask is dual voltage which means it can be used worldwide without any issues.",
+  },
+  {
+    question:
+      "What if I am pregnant, sensitive to light, have epilepsy, or taking light sensitive medication?",
+    answer:
+      "We always recommend that you consult with your physician or other qualified health care professional before using LED products. Anyone who is potentially sensitive to light should take caution before using LED products. For example, women who are pregnant, people with epilepsy, or people who are taking certain medications such as tetracycline, steroids, or cortisone injections (which may cause light sensitivity) should not use LED products and must consult with their physician or healthcare provider.",
+  },
+  {
+    question: "Do you sell this anywhere else?",
+    answer:
+      "The Buudy LED Mask is exclusively sold through ca.buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
+  },
+  {
+    question: "Why is Cleopatra written on the mask?",
+    answer:
+      "This is the genuine Cleopatra Edition LED Face Mask, supplied and distributed exclusively by Buudy in Canada. When you order from Buudy, you receive the authentic clinical multi-spectrum mask, backed by our official Canada warranty, fast tracked Canada delivery, and dedicated local customer support.",
+  },
+  {
+    question: "How do I track my order?",
+    answer:
+      "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
+  },
+];
+
+export const faqs: FAQItem[] = buudyLedMaskFaqs;
 
 export const iplFaqs: FAQItem[] = [
   {

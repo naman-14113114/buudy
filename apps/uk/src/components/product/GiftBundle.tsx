@@ -8,6 +8,7 @@ import Lottie from "lottie-react";
 import loadingLottie from "@/components/cart/loading-lottie.json";
 import {
   BatteryCharging,
+  Clock,
   ShieldCheck,
   Sparkles,
   Truck,
@@ -168,6 +169,9 @@ export function GiftBundle({ product }: { product: Product }) {
     0,
   );
   const hasGifts = product.gifts.length > 0;
+  const giftButtonLabel = hasGifts
+    ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
+    : "ADD TO CART + FREE SHIPPING";
   return (
     <div>
       <a
@@ -189,6 +193,15 @@ export function GiftBundle({ product }: { product: Product }) {
         {product.heroTitle}{" "}
         <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
       </h1>
+
+      {/* Cleopatra Edition Ribbon on all mask pages */}
+      {product.template === "mask" && (
+        <div className="mt-2 mb-1 flex items-center">
+          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--plum)] bg-[rgba(184,149,86,.18)] px-2.5 py-0.5 rounded-md">
+            Cleopatra Edition
+          </span>
+        </div>
+      )}
 
       {/* Clinically Proven Badges */}
       <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
@@ -230,18 +243,6 @@ export function GiftBundle({ product }: { product: Product }) {
           currency={product.currency}
           priceCents={product.priceCents}
         />
-        <div className="flex flex-nowrap items-center gap-x-1 sm:gap-x-1.5 text-[9.5px] sm:text-[13px] text-[var(--muted)]">
-          <span className="whitespace-nowrap tracking-tight sm:tracking-normal">
-            or{" "}
-            <strong className="buudy-display text-[10px] sm:text-[14px] font-medium text-[var(--plum)]">
-              4
-            </strong>{" "}
-            interest-free payments of{" "}
-            <strong className="buudy-display text-[10px] sm:text-[14px] font-semibold text-[var(--plum)]">
-              {formatMoney(product.priceCents / 4, product.currency)}
-            </strong>
-          </span>
-        </div>
       </div>
 
       {/* Premium Compact Bullet Points List */}
@@ -262,35 +263,16 @@ export function GiftBundle({ product }: { product: Product }) {
         })}
       </ul>
 
-      <div className="relative mt-4 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] p-3 sm:p-5">
-        <div className="flex items-center justify-between gap-2 sm:gap-5 pr-7 sm:pr-8">
-          <div>
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              {deliveryIconData && (
-                <div className="w-5 h-5 sm:w-7 sm:h-7 flex-shrink-0 flex items-center justify-center">
-                  <Lottie animationData={deliveryIconData} loop={true} />
-                </div>
-              )}
-              <p className="buudy-eyebrow text-[var(--gold)] m-0 leading-none flex items-center h-5 sm:h-7 font-bold text-[10px] sm:text-xs">
-                FREE DELIVERY
-              </p>
-            </div>
-            <p className="buudy-display mt-1.5 text-base sm:text-2xl text-[var(--plum)] font-normal leading-none whitespace-nowrap">
-              {deliveryDate || "soon"}
-            </p>
-          </div>
-          <div className="text-right">
-            <p className="buudy-eyebrow text-[var(--gold)] whitespace-nowrap text-[9px] sm:text-[11px] tracking-tight sm:tracking-normal">
-              {hasGifts ? "ORDER WITHIN" : "ORDER TODAY"}
-            </p>
-            <p className="buudy-display mt-1.5 text-xl sm:text-[2.2rem] font-normal text-[var(--plum)] leading-none">
-              {timer}
-            </p>
-          </div>
+      <div className="relative mt-4 flex items-center justify-between gap-2.5 rounded-xl border border-[rgba(58,31,61,.15)] bg-[rgba(247,241,232,.55)] px-3.5 py-2.5 text-xs sm:text-[13.5px] text-[var(--plum)]">
+        <div className="flex items-center gap-2 min-w-0">
+          <Clock className="h-4 w-4 shrink-0 text-[var(--gold)]" />
+          <p className="m-0 leading-snug">
+            Free delivery: Order within <span className="font-semibold text-[var(--plum)]">{timer}</span> to receive it by <span className="font-semibold text-[var(--plum)]">{deliveryDate || "soon"}</span>
+          </p>
         </div>
 
-        {/* Question mark info button on top right */}
-        <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3.5 z-20" ref={shippingTooltipRef}>
+        {/* Question mark info button */}
+        <div className="relative shrink-0" ref={shippingTooltipRef}>
           <button
             type="button"
             onClick={(e) => {
@@ -299,15 +281,14 @@ export function GiftBundle({ product }: { product: Product }) {
             }}
             aria-label="Shipping information"
             aria-expanded={showShippingInfo}
-            style={{ fontSize: "8px", lineHeight: 1 }}
-            className="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[var(--gold)] bg-transparent font-medium text-[var(--gold)] transition hover:opacity-80 active:scale-95 cursor-pointer"
+            className="flex h-4 w-4 items-center justify-center rounded-full border border-[var(--gold)] bg-transparent text-[9.5px] font-medium text-[var(--gold)] transition hover:opacity-80 active:scale-95 cursor-pointer"
           >
             ?
           </button>
 
           {showShippingInfo && (
             <div
-              className="absolute right-0 top-full mt-2 z-40 w-64 sm:w-72 rounded-xl border border-[rgba(58,31,61,.16)] bg-[var(--card)] p-3.5 shadow-xl text-left text-xs leading-relaxed text-[var(--plum)]"
+              className="absolute right-0 bottom-full mb-2 z-40 w-64 sm:w-72 rounded-xl border border-[rgba(58,31,61,.16)] bg-[var(--card)] p-3.5 shadow-xl text-left text-xs leading-relaxed text-[var(--plum)]"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between gap-2 mb-1.5">
@@ -347,9 +328,7 @@ export function GiftBundle({ product }: { product: Product }) {
         {isAdding ? (
           <>
             <span style={{ visibility: "hidden" }} className="relative z-20 whitespace-nowrap">
-              {hasGifts
-                ? "ADD TO CART + FREE GIFTS"
-                : "ADD TO CART + FREE SHIPPING"}
+              {giftButtonLabel}
             </span>
             <span className="absolute inset-0 flex items-center justify-center">
               <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
@@ -357,9 +336,7 @@ export function GiftBundle({ product }: { product: Product }) {
           </>
         ) : (
           <span className="relative z-20 whitespace-nowrap">
-            {hasGifts
-              ? "ADD TO CART + FREE GIFTS"
-              : "ADD TO CART + FREE SHIPPING"}
+            {giftButtonLabel}
           </span>
         )}
       </Button>
@@ -428,7 +405,7 @@ export function GiftBundle({ product }: { product: Product }) {
         <section className="mt-8" id="free-gifts">
           <div className="text-center mb-8 flex flex-col items-center">
             <h3 className="buudy-display text-3xl font-medium text-[var(--plum)]">
-              Big Summer Savings
+              Autumn Glow Sale
             </h3>
             <p className="buudy-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded bg-[rgba(184,149,86,.15)] px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--plum)]">
               <span className="buudy-display text-sm sm:text-base font-extrabold normal-case text-[var(--plum)]">
@@ -463,6 +440,7 @@ export function GiftBundle({ product }: { product: Product }) {
                     fill
                     sizes="120px"
                     src={gift.image}
+                    unoptimized
                   />
                 </div>
 

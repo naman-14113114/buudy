@@ -1,6 +1,4 @@
 "use client";
-import { StoreText, StoreButton } from '@/components/international/StoreLocale';
-
 
 import { useRef, useState } from "react";
 import { expertVideo } from "@/data/productSections";
@@ -23,26 +21,26 @@ export function ExpertSection() {
   };
 
   return (
-    <section className="buudy-section bg-[var(--cream)] md: md: py-14 md:py-24" id="expert">
+    <section className="buudy-section bg-[var(--cream)] py-14 md:py-24" id="expert">
       <div className="buudy-wrap grid items-center gap-6 md:gap-8 lg:grid-cols-[1fr_1.3fr]">
-        <div className="relative mx-auto w-full max-w-[360px] lg:max-w-[400px]">
+        <div className="relative mx-auto w-full max-w-[360px] lg:max-w-[400px] lg:order-1">
           <div className="relative overflow-hidden rounded-[18px] border border-[rgba(58,31,61,.12)] bg-[var(--ink)]">
             <video
               className="w-full aspect-[2/3] object-cover object-center block"
               playsInline
               poster={expertVideo.poster}
-              preload="metadata"
+              preload="none"
               ref={videoRef}
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
               onClick={togglePlay}
             >
-              <source src={expertVideo.src} /><StoreText>
+              <source src={expertVideo.src} />
               Your browser does not support the video tag.
-            </StoreText></video>
+            </video>
 
             {/* Play/Pause Overlay Button */}
-            <StoreButton
+            <button
               onClick={togglePlay}
               className={`absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/25 transition-all duration-300 ${
                 isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
@@ -62,37 +60,37 @@ export function ExpertSection() {
                   </svg>
                 )}
               </div>
-            </StoreButton>
+            </button>
           </div>
         </div>
 
-        <div>
-          <p className="buudy-eyebrow"><StoreText>Expert</StoreText></p>
-          <h2 className="buudy-display mt-2 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl"><StoreText>
-            Dr. Gabriella </StoreText><em className="buudy-italic"><StoreText>Vasili</StoreText></em><StoreText>, MD
-          </StoreText></h2>
-          <p className="buudy-display mt-2 text-xl italic text-[var(--plum-soft)]"><StoreText>
+        <div className="lg:order-2">
+          <p className="buudy-eyebrow">Expert</p>
+          <h2 className="buudy-display mt-2 text-[2.5rem] leading-tight text-[var(--plum)] md:text-5xl">
+            Dr. Gabriella <em className="buudy-italic">Vasili</em>, MD
+          </h2>
+          <p className="buudy-display mt-2 text-xl italic text-[var(--plum-soft)]">
             Double Board-Certified Dermatologist
-          </StoreText></p>
+          </p>
           <div className="buudy-copy mt-4 space-y-3">
-            <p><StoreText>
+            <p>
               Dr. Gabriella Vasili is an esteemed, double board-certified
               dermatologist based in Atlanta, Georgia. With an expert focus on
               enhancing the efficacy of modern skincare, Dr. Vasili is a strong
               advocate for integrating clinical-grade technologies into daily
               routines.
-            </StoreText></p>
-            <p><StoreText>
+            </p>
+            <p>
               She is particularly recognized for her expertise in Light Emitting
               Diode (LED) therapy. Dr. Vasili&apos;s commitment to skin health extends
               beyond the face to often-neglected areas like the neck, ensuring
               her patients achieve a comprehensive and rejuvenated glow.
-            </StoreText></p>
-            <p><StoreText>
+            </p>
+            <p>
               Her professional mission is to bridge the gap between professional
               dermatological treatments and accessible, high-performance skincare
               at home.
-            </StoreText></p>
+            </p>
           </div>
         </div>
       </div>

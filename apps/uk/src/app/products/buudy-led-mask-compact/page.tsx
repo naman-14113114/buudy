@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product/ProductPage";
-import { buudyMask } from "@/data/products";
+import { buudyMask, fullLedMaskGallery, standardMaskFaqs } from "@/data/products";
 import { ledMaskSeoFaqs } from "@/data/seoFaqs";
 import {
   breadcrumbJsonLd,
@@ -11,6 +11,14 @@ import {
 } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
+const pagePath = "/products/buudy-led-mask-compact";
+const pageProduct = {
+  ...buudyMask,
+  slug: "buudy-led-mask-compact",
+  gallery: fullLedMaskGallery,
+  faqs: standardMaskFaqs,
+};
+
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
@@ -20,7 +28,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/products/buudy-led-mask",
     languages: {
-      "en-GB": "/products/buudy-led-mask-compact",
+      "en-GB": pagePath,
     },
   },
   robots: {
@@ -30,31 +38,31 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Buudy LED Mask | Compact UK Product Page",
     description: buudyMask.description,
-    url: absoluteUrl("/products/buudy-led-mask-compact"),
+    url: absoluteUrl(pagePath),
     type: "website",
     images: [
       {
-        url: buudyMask.gallery[0].src,
+        url: pageProduct.gallery[0].src,
         width: 1200,
         height: 1500,
-        alt: buudyMask.gallery[0].alt,
+        alt: pageProduct.gallery[0].alt,
       },
     ],
   },
 };
 
 export default function CompactBuudyMaskProductRoute() {
-  const productFaqs = [...ledMaskSeoFaqs, ...buudyMask.faqs];
+  const productFaqs = [...ledMaskSeoFaqs, ...pageProduct.faqs];
 
   return (
     <>
       {[
         organizationJsonLd(),
         websiteJsonLd(),
-        productJsonLd(buudyMask),
+        productJsonLd(pageProduct),
         breadcrumbJsonLd([
           { name: "Home", url: "/" },
-          { name: buudyMask.name, url: "/products/buudy-led-mask-compact" },
+          { name: buudyMask.name, url: pagePath },
         ]),
         faqJsonLd(productFaqs),
       ].map((schema, index) => (
@@ -64,7 +72,7 @@ export default function CompactBuudyMaskProductRoute() {
           type="application/ld+json"
         />
       ))}
-      <ProductPage product={buudyMask} variant="compact" />
+      <ProductPage product={pageProduct} variant="compact" />
     </>
   );
 }

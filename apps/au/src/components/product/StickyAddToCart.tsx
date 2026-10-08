@@ -56,8 +56,8 @@ export function StickyAddToCart({ product }: { product: Product }) {
   }, [product.template]);
 
   useEffect(() => {
-    const button = document.getElementById("hero-cta");
-    if (!button) {
+    const heroSection = document.getElementById("product-hero") || document.getElementById("hero-cta");
+    if (!heroSection) {
       return;
     }
 
@@ -65,8 +65,8 @@ export function StickyAddToCart({ product }: { product: Product }) {
     const updateVisibility = () => {
       window.cancelAnimationFrame(frame);
       frame = window.requestAnimationFrame(() => {
-        const rect = button.getBoundingClientRect();
-        setVisible(rect.bottom < 0);
+        const rect = heroSection.getBoundingClientRect();
+        setVisible(rect.bottom <= 0);
       });
     };
 
@@ -77,7 +77,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
       { threshold: [0, 1] },
     );
 
-    observer.observe(button);
+    observer.observe(heroSection);
     updateVisibility();
     window.addEventListener("scroll", updateVisibility, { passive: true });
     window.addEventListener("resize", updateVisibility);

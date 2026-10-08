@@ -2,21 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import type { CartLine } from "@/lib/cart";
 import { formatMoney } from "@/lib/money";
 import { useCart } from "./CartProvider";
 
 export function CartLineItem({ line }: { line: CartLine }) {
-  const { setQuantity, removeProduct } = useCart();
+  const { setQuantity } = useCart();
 
   return (
     <div className="flex gap-4 border-b border-[var(--border)] py-5">
-      {((line.type === "product" && line.slug) || line.title === "Buudy Red Light Torch") ? (
+      {((line.type === "product" && line.slug) || line.title === "Buudy LED Torch" || line.title === "Buudy Red Light Torch") ? (
         <Link
           aria-label={`View ${line.title}`}
           className="relative h-24 w-20 flex-none overflow-hidden rounded-lg bg-[var(--blush)] transition hover:opacity-90"
-          href={line.title === "Buudy Red Light Torch" ? "/products/red-light-torch" : `/products/${line.slug}`}
+          href={line.title.includes("Torch") ? "/products/red-light-torch" : `/products/${line.slug}`}
         >
           <Image
             alt={line.title}
@@ -61,13 +61,13 @@ export function CartLineItem({ line }: { line: CartLine }) {
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-between gap-3">
+        <div className="mt-1.5 flex items-center justify-between gap-3">
           {line.locked ? (
             <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-3 py-1 text-[var(--gold)]">
               Unlocked x {line.quantity}
             </span>
           ) : (
-            <div className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--card)]">
+            <div className="ml-auto inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--card)]">
               <button
                 aria-label="Decrease quantity"
                 className="grid h-9 w-9 place-items-center"
@@ -91,18 +91,6 @@ export function CartLineItem({ line }: { line: CartLine }) {
               </button>
             </div>
           )}
-          {!line.locked ? (
-            <button
-              aria-label={`Remove ${line.title}`}
-              className="inline-flex items-center gap-2 text-xs text-[var(--muted)] transition hover:text-[var(--plum)]"
-              data-testid={`remove-${line.productId}`}
-              onClick={() => removeProduct(line.productId)}
-              type="button"
-            >
-              <Trash2 size={14} />
-              Remove
-            </button>
-          ) : null}
         </div>
       </div>
     </div>

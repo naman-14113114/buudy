@@ -1,11 +1,9 @@
 export type QuizQuestionId =
   | "concern"
-  | "eyes"
   | "skinType"
   | "pregnant"
   | "sensitivity"
-  | "routineTime"
-  | "age";
+  | "routineTime";
 
 export type QuizOption = {
   value: string;
@@ -24,12 +22,10 @@ export type QuizQuestion = {
 
 export type QuizAnswers = {
   concern: string[];
-  eyes: string[];
   skinType: string;
   pregnant: string;
   sensitivity: string[];
   routineTime: string;
-  age: string;
 };
 
 export type QuizLightModeId =
@@ -86,165 +82,129 @@ export type QuizResult = {
 
 export const emptyQuizAnswers: QuizAnswers = {
   concern: [],
-  eyes: [],
   skinType: "",
   pregnant: "",
   sensitivity: [],
   routineTime: "",
-  age: "",
 };
 
 export const skincareQuizQuestions: QuizQuestion[] = [
   {
     id: "concern",
-    title: "What would you most like to improve?",
-    subtitle: "Select every concern that matters to you. We use the full mix in your plan.",
+    title: "What matters most to your skin right now?",
+    subtitle: "Select your main concern first. You can add others, but we will keep your starting plan focused.",
     selection: "multiple",
     options: [
       { value: "Acne-Prone", label: "Breakouts and blemishes" },
       {
         value: "Dryness and Dehydration",
-        label: "Dryness and dehydration",
+        label: "Dryness and comfortable hydration",
       },
-      { value: "Dullness", label: "Dull or tired-looking skin" },
-      { value: "Early Signs of Aging", label: "Early signs of ageing" },
-      { value: "Hyperpigmentation", label: "Uneven tone and dark marks" },
-      { value: "Mature Skin", label: "Loss of firmness" },
-      { value: "Oily Skin / Blackheads", label: "Oiliness and blackheads" },
+      { value: "Dullness", label: "Dull-looking skin and radiance" },
+      { value: "Early Signs of Aging", label: "Early fine lines and smoothing" },
+      {
+        value: "Hyperpigmentation",
+        label: "Uneven-looking tone and sun spots",
+      },
+      { value: "Mature Skin", label: "Firmness and elasticity support" },
+      { value: "Oily Skin / Blackheads", label: "Oiliness and congestion" },
       {
         value: "Sensitive / Rosacea-prone",
-        label: "Redness-prone or reactive skin",
-      },
-    ],
-  },
-  {
-    id: "eyes",
-    title: "What does your eye area need?",
-    subtitle: "Select any that apply so the routine includes the right recovery habits.",
-    selection: "multiple",
-    options: [
-      { value: "Dark Circles", label: "Dark circles" },
-      {
-        value: "Fine Lines and Wrinkles",
-        label: "Fine lines",
-      },
-      { value: "Puffiness", label: "Puffiness" },
-      {
-        value: "No Eye Concern",
-        label: "No specific eye concern",
-        exclusive: true,
+        label: "Reactive or redness-prone skin",
       },
     ],
   },
   {
     id: "skinType",
-    title: "How does your skin usually behave?",
-    subtitle: "Choose the closest match. This changes cleansing and aftercare.",
+    title: "How does your skin feel most days?",
+    subtitle: "This helps frame how you cleanse and moisturise around light sessions.",
     selection: "single",
     options: [
       {
-        value: "Combination Skin",
-        label: "Combination skin",
-        description:
-          "Oilier through the forehead, nose or chin, with cheeks that may feel normal or dry.",
+        value: "Normal Skin",
+        label: "Balanced",
+        description: "Generally comfortable without feeling tight or very oily.",
       },
       {
         value: "Dry Skin",
-        label: "Dry skin",
-        description:
-          "Often feels tight, looks dull or develops flaky patches.",
-      },
-      {
-        value: "Normal Skin",
-        label: "Balanced skin",
-        description:
-          "Generally comfortable with occasional changes rather than persistent oiliness or dryness.",
+        label: "Dry or tight",
+        description: "Needs rich hydration and can feel rough or flaky.",
       },
       {
         value: "Oily Skin",
-        label: "Oily skin",
-        description:
-          "Frequent shine, congestion or enlarged-looking pores.",
+        label: "Oily or shiny",
+        description: "Prone to shine and visible congestion through the day.",
+      },
+      {
+        value: "Combination Skin",
+        label: "Combination",
+        description: "Oily through the T-zone with drier cheeks.",
       },
       {
         value: "Sensitive Skin",
-        label: "Sensitive skin",
-        description:
-          "Easily feels hot, tight, itchy or uncomfortable when products change.",
+        label: "Sensitive",
+        description: "Easily flushes, stings, or reacts to new products.",
       },
     ],
   },
   {
     id: "pregnant",
-    title: "Are you pregnant or breastfeeding?",
-    subtitle: "This adds the appropriate safety pause to your programme.",
+    title: "Are you pregnant or nursing?",
+    subtitle: "LED light safety is not established for pregnancy, so we recommend caution first.",
     selection: "single",
     options: [
-      { value: "Yes", label: "Yes" },
       { value: "No", label: "No" },
+      { value: "Yes", label: "Yes" },
+      { value: "Prefer not to say", label: "Prefer not to say" },
     ],
   },
   {
     id: "sensitivity",
     title: "Do any light-sensitivity flags apply?",
-    subtitle: "Select every relevant item. Safety takes priority over a recommendation.",
+    subtitle: "Select anything that applies. If none do, choose that option to continue.",
     selection: "multiple",
     options: [
-      {
-        value: "Photosensitising medication",
-        label: "I use medication or skincare that can increase light sensitivity",
-      },
-      {
-        value: "Epilepsy or seizure history",
-        label: "I have epilepsy or a seizure history",
-      },
-      {
-        value: "Light-triggered reaction",
-        label: "Bright light can trigger headaches or skin reactions",
-      },
       {
         value: "No sensitivity flag",
         label: "None of these apply",
         exclusive: true,
       },
+      {
+        value: "Light-sensitising medication",
+        label: "Taking medication that causes light sensitivity",
+        description: "Examples include certain antibiotics, retinoids, or steroids.",
+      },
+      {
+        value: "History of seizures or epilepsy",
+        label: "History of seizures or light-triggered epilepsy",
+      },
+      {
+        value: "Active rash, wound, or unknown skin condition",
+        label: "Active rash, broken skin, or unassessed lesion",
+      },
     ],
   },
   {
     id: "routineTime",
-    title: "When can you consistently make ten minutes?",
-    subtitle: "Your answer sets the exact times in the first five days.",
+    title: "When is it easiest to take five minutes?",
+    subtitle: "Consistency matters far more than the exact time of day.",
     selection: "single",
     options: [
       {
         value: "Morning",
-        label: "Morning, between 7am and 9am",
-        description: "Best if you prefer to finish treatment before SPF and the day begins.",
+        label: "Morning",
+        description: "A calm start before makeup or sunscreen.",
       },
       {
         value: "Evening",
-        label: "Evening, between 7pm and 10pm",
-        description: "Best if you want to cleanse, use the mask and complete aftercare together.",
+        label: "Evening",
+        description: "Part of winding down before sleep.",
       },
       {
         value: "Flexible",
-        label: "My schedule changes",
-        description: "We will use a flexible evening anchor that can move by up to one hour.",
+        label: "Whenever fits the day",
+        description: "Ready to adapt as time allows.",
       },
-    ],
-  },
-  {
-    id: "age",
-    title: "Which age range should the plan consider?",
-    subtitle: "This adjusts recovery, firmness and consistency guidance.",
-    selection: "single",
-    options: [
-      { value: "18 - 24", label: "18 to 24" },
-      { value: "25 - 34", label: "25 to 34" },
-      { value: "35 - 44", label: "35 to 44" },
-      { value: "45 - 54", label: "45 to 54" },
-      { value: "55 - 64", label: "55 to 64" },
-      { value: "65 - 74", label: "65 to 74" },
-      { value: "75+", label: "75+" },
     ],
   },
 ];

@@ -51,9 +51,9 @@ export function WavelengthSelector() {
             {wavelengths.map((wavelength) => {
               const isActive = active.name === wavelength.name;
               return (
-                <li key={wavelength.name} className="border-b border-[rgba(247,241,232,.1)]">
+                <li key={wavelength.name}>
                   <button
-                    className={`flex w-full items-center gap-4 py-2 text-left transition-all duration-300 hover:pl-3 group ${
+                    className={`flex w-full items-center gap-4 border-b border-[rgba(247,241,232,.1)] py-2 text-left transition-all duration-300 hover:pl-3 group ${
                       isActive ? "bg-[rgba(247,241,232,.03)] pl-3 border-l-2 border-l-[var(--gold)]" : ""
                     }`}
                     onClick={() => setActive(wavelength)}
@@ -69,28 +69,26 @@ export function WavelengthSelector() {
                         boxShadow: isActive ? `0 0 10px ${wavelength.color}` : "none",
                       }}
                     />
-                    <span className="buudy-display w-20 uppercase text-[rgba(247,241,232,.6)]">
+                    <span className="buudy-mono w-20 uppercase text-[rgba(247,241,232,.6)] text-xs tracking-wider">
                       {wavelength.nm}
                     </span>
-                    <span className={`buudy-display text-xl transition-colors duration-300 ${
+                    <span className={`font-sans text-base sm:text-lg font-bold uppercase tracking-wide transition-colors duration-300 ${
                       isActive ? "text-[var(--gold)]" : "text-[var(--cream)] group-hover:text-[var(--gold)]"
                     }`}>
                       {wavelength.name}
                     </span>
-                    <span className="buudy-display ml-auto hidden text-sm text-[rgba(247,241,232,.6)] sm:block">
+                    <span className="font-sans ml-auto hidden text-xs sm:text-sm font-normal text-[rgba(247,241,232,.65)] sm:block">
                       {wavelength.description}
                     </span>
                   </button>
                   <div
-                    className={`grid transition-all duration-300 ease-in-out sm:hidden ${
-                      isActive ? "grid-rows-[1fr] opacity-100 bg-[rgba(247,241,232,.03)] border-l-2 border-l-[var(--gold)]" : "grid-rows-[0fr] opacity-0"
+                    className={`overflow-hidden transition-all duration-300 sm:hidden ${
+                      isActive ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
-                    <div className="overflow-hidden">
-                      <p className="px-4 pb-3 pl-11 text-sm text-[rgba(247,241,232,.7)] buudy-display transition-all duration-300">
-                        {wavelength.description}
-                      </p>
-                    </div>
+                    <p className="font-sans px-4 pb-3 pl-[3.25rem] text-xs leading-relaxed text-[rgba(247,241,232,.75)]">
+                      {wavelength.description}
+                    </p>
                   </div>
                 </li>
               );

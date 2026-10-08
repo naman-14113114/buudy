@@ -1,11 +1,8 @@
 "use client";
-import { StoreText, StoreButton } from '@/components/international/StoreLocale';
-
 
 import { useState } from "react";
 import { wavelengths } from "@/data/productSections";
 import { productMediaAsset } from "@/lib/media";
-
 
 export function WavelengthSelector() {
   const [active, setActive] = useState(
@@ -20,10 +17,10 @@ export function WavelengthSelector() {
       />
       <div className="buudy-wrap relative z-10">
         <div className="max-w-full lg:max-w-5xl">
-          <p className="buudy-mono text-[var(--gold)]"><StoreText>Spectrum</StoreText></p>
-          <h2 className="buudy-display mt-3 text-[2.5rem] leading-[1.06] text-[var(--cream)] md:text-6xl"><StoreText>
-            Change </StoreText><em className="buudy-italic"><StoreText>7 light modes</StoreText></em><StoreText> with a tap.
-          </StoreText></h2>
+          <p className="buudy-mono text-[var(--gold)]">Spectrum</p>
+          <h2 className="buudy-display mt-3 text-[2.5rem] leading-[1.06] text-[var(--cream)] md:text-6xl">
+            Change <em className="buudy-italic">7 light modes</em> with a tap.
+          </h2>
         </div>
 
         <div className="mt-4 grid items-center gap-4 md:mt-6 md:gap-8 lg:grid-cols-[1fr_1.2fr]">
@@ -53,9 +50,9 @@ export function WavelengthSelector() {
             {wavelengths.map((wavelength) => {
               const isActive = active.name === wavelength.name;
               return (
-                <li key={wavelength.name} className="border-b border-[rgba(247,241,232,.1)]">
-                  <StoreButton
-                    className={`flex w-full items-center gap-4 py-2 text-left transition-all duration-300 hover:pl-3 group ${
+                <li key={wavelength.name}>
+                  <button
+                    className={`flex w-full items-center gap-4 border-b border-[rgba(247,241,232,.1)] py-2 text-left transition-all duration-300 hover:pl-3 group cursor-pointer ${
                       isActive ? "bg-[rgba(247,241,232,.03)] pl-3 border-l-2 border-l-[var(--gold)]" : ""
                     }`}
                     onClick={() => setActive(wavelength)}
@@ -71,28 +68,26 @@ export function WavelengthSelector() {
                         boxShadow: isActive ? `0 0 10px ${wavelength.color}` : "none",
                       }}
                     />
-                    <span className="buudy-display w-20 uppercase text-[rgba(247,241,232,.6)]">
-                      <StoreText>{wavelength.nm}</StoreText>
+                    <span className="buudy-mono w-20 uppercase text-[rgba(247,241,232,.6)] text-xs tracking-wider">
+                      {wavelength.nm}
                     </span>
-                    <span className={`buudy-display text-xl transition-colors duration-300 ${
+                    <span className={`font-sans text-base sm:text-lg font-bold uppercase tracking-wide transition-colors duration-300 ${
                       isActive ? "text-[var(--gold)]" : "text-[var(--cream)] group-hover:text-[var(--gold)]"
                     }`}>
-                      <StoreText>{wavelength.name}</StoreText>
+                      {wavelength.name}
                     </span>
-                    <span className="buudy-display ml-auto hidden text-sm text-[rgba(247,241,232,.6)] sm:block">
-                      <StoreText>{wavelength.description}</StoreText>
+                    <span className="font-sans ml-auto hidden text-xs sm:text-sm font-normal text-[rgba(247,241,232,.65)] sm:block">
+                      {wavelength.description}
                     </span>
-                  </StoreButton>
+                  </button>
                   <div
-                    className={`grid transition-all duration-300 ease-in-out sm:hidden ${
-                      isActive ? "grid-rows-[1fr] opacity-100 bg-[rgba(247,241,232,.03)] border-l-2 border-l-[var(--gold)]" : "grid-rows-[0fr] opacity-0"
+                    className={`overflow-hidden transition-all duration-300 sm:hidden ${
+                      isActive ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
-                    <div className="overflow-hidden">
-                      <p className="px-4 pb-3 pl-11 text-sm text-[rgba(247,241,232,.7)] buudy-display transition-all duration-300">
-                        <StoreText>{wavelength.description}</StoreText>
-                      </p>
-                    </div>
+                    <p className="font-sans px-4 pb-3 pl-[3.25rem] text-xs leading-relaxed text-[rgba(247,241,232,.75)]">
+                      {wavelength.description}
+                    </p>
                   </div>
                 </li>
               );

@@ -1,17 +1,14 @@
 "use client";
-import { StoreText, StoreButton } from '@/components/international/StoreLocale';
 
-
-import { StoreImage as Image } from '@/components/international/StoreLocale';
-import { StoreLink as Link } from '@/components/international/StoreLocale';
-import { Minus, Plus, Trash2 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Minus, Plus } from "lucide-react";
 import type { CartLine } from "@/lib/cart";
 import { formatMoney } from "@/lib/money";
 import { useCart } from "./CartProvider";
-import { NativePrice } from '@/components/international/NativePrice';
 
 export function CartLineItem({ line }: { line: CartLine }) {
-  const { setQuantity, removeProduct } = useCart();
+  const { setQuantity } = useCart();
 
   return (
     <div className="flex gap-4 border-b border-[var(--border)] py-5">
@@ -46,17 +43,17 @@ export function CartLineItem({ line }: { line: CartLine }) {
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="buudy-display text-lg leading-tight text-[var(--plum)]">
-              <StoreText>{line.title}</StoreText>
+              {line.title}
             </p>
-            <p className="mt-1 text-xs leading-5 text-[var(--muted)]"><StoreText>{line.subtitle}</StoreText></p>
+            <p className="mt-1 text-xs leading-5 text-[var(--muted)]">{line.subtitle}</p>
           </div>
           <div className="text-right">
             <p className="buudy-display text-lg text-[var(--plum)]">
               {line.unitPriceCents === 0
-                ? <StoreText>Free</StoreText>
-                : line.productId==='buudy-led-mask'?<NativePrice/>:formatMoney(line.unitPriceCents)}
+                ? "Free"
+                : formatMoney(line.unitPriceCents)}
             </p>
-            {line.compareAtCents && line.productId!=='buudy-led-mask' ? (
+            {line.compareAtCents ? (
               <p className="text-xs text-[var(--muted)] line-through">
                 {formatMoney(line.compareAtCents)}
               </p>
@@ -64,48 +61,36 @@ export function CartLineItem({ line }: { line: CartLine }) {
           </div>
         </div>
 
-        <div className="mt-4 flex items-center justify-between gap-3">
+        <div className="mt-1.5 flex items-center justify-between gap-3">
           {line.locked ? (
-            <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-3 py-1 text-[var(--gold)]"><StoreText>
-              Unlocked x </StoreText><StoreText>{line.quantity}</StoreText>
+            <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-3 py-1 text-[var(--gold)]">
+              Unlocked x {line.quantity}
             </span>
           ) : (
-            <div className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--card)]">
-              <StoreButton
+            <div className="ml-auto inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--card)]">
+              <button
                 aria-label="Decrease quantity"
-                className="grid h-9 w-9 place-items-center"
+                className="grid h-9 w-9 place-items-center cursor-pointer"
                 data-testid={`quantity-decrease-${line.productId}`}
                 onClick={() => setQuantity(line.productId, line.quantity - 1)}
                 type="button"
               >
                 <Minus size={14} />
-              </StoreButton>
+              </button>
               <span className="buudy-mono min-w-8 text-center text-[var(--plum)]">
-                <StoreText>{line.quantity}</StoreText>
+                {line.quantity}
               </span>
-              <StoreButton
+              <button
                 aria-label="Increase quantity"
-                className="grid h-9 w-9 place-items-center"
+                className="grid h-9 w-9 place-items-center cursor-pointer"
                 data-testid={`quantity-increase-${line.productId}`}
                 onClick={() => setQuantity(line.productId, line.quantity + 1)}
                 type="button"
               >
                 <Plus size={14} />
-              </StoreButton>
+              </button>
             </div>
           )}
-          {!line.locked ? (
-            <StoreButton
-              aria-label={`Remove ${line.title}`}
-              className="inline-flex items-center gap-2 text-xs text-[var(--muted)] transition hover:text-[var(--plum)]"
-              data-testid={`remove-${line.productId}`}
-              onClick={() => removeProduct(line.productId)}
-              type="button"
-            >
-              <Trash2 size={14} /><StoreText>
-              Remove
-            </StoreText></StoreButton>
-          ) : null}
         </div>
       </div>
     </div>

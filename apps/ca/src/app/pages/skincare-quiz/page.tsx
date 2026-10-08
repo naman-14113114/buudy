@@ -3,16 +3,16 @@ import { SkincareQuizPage } from "@/components/quiz/SkincareQuizPage";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Personalised Skincare Quiz and 5-Day Plan",
+  title: "Skincare Quiz and Simple Five-Day Plan",
   description:
-    "Build a personalised five-day Buudy LED mask calendar with timed light sessions, skincare, food, movement and recovery guidance.",
+    "Answer five short questions for a clear Buudy LED mask starting point, a simple first-week routine, and a free customer skincare guide.",
   alternates: {
     canonical: "/pages/skincare-quiz",
   },
   openGraph: {
-    title: "Personalised Skincare Quiz and 5-Day Plan | Buudy",
+    title: "Skincare Quiz and Simple Five-Day Plan | Buudy",
     description:
-      "Unlock a detailed five-day LED mask calendar shaped around your skin concerns, schedule and safety profile.",
+      "Find one clear starting mode and a manageable first-week skincare routine. Read the Buudy customer guide free.",
     url: absoluteUrl("/pages/skincare-quiz"),
   },
 };

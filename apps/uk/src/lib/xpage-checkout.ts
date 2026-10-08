@@ -12,7 +12,7 @@ export const XPAGE = {
   torchVariantId: "a2bd4db9-992d-4f1a-84b8-472d1e173efd",
 } as const;
 
-type Variant = { id: string; price: number; is_visible: boolean };
+type Variant = { id: string; price: number | string; is_visible: boolean };
 type BundleItem = {
   id: string;
   quantity: number;
@@ -61,6 +61,13 @@ export function parsePublishedOffer(html: string): PublishedOffer {
   return { bundle, csrf, landingPageId };
 }
 
+function numericPrice(value: unknown) {
+  // Native store-currency prices are decimal strings; converted prices can be numbers.
+  if (typeof value !== "number" &&
+      (typeof value !== "string" || !/^\d+(?:\.\d+)?$/.test(value))) return NaN;
+  return Number(value);
+}
+
 export function selectOffer(published: PublishedOffer, promo: boolean) {
   const option = published.bundle.options.find(
     (item) => item.id === (promo ? XPAGE.promoOptionId : XPAGE.regularOptionId),
@@ -69,15 +76,17 @@ export function selectOffer(published: PublishedOffer, promo: boolean) {
   const torch = option?.offered?.find((item) => item.product?.id === XPAGE.torchProductId);
   const maskVariant = mask?.product.variants.find((variant) => variant.id === XPAGE.maskVariantId);
   const torchVariant = torch?.product.variants.find((variant) => variant.id === XPAGE.torchVariantId);
+  const maskPrice = numericPrice(maskVariant?.price);
+  const torchPrice = numericPrice(torchVariant?.price);
   if (!option || option.conditions.length !== 1 || option.offered.length !== 1 ||
       !mask || !torch || mask.quantity !== 1 || torch.quantity !== 1 ||
       mask.product.status !== "ACTIVE" || torch.product.status !== "ACTIVE" ||
       !maskVariant?.is_visible || !torchVariant?.is_visible ||
-      !Number.isFinite(maskVariant.price) || maskVariant.price <= 0 ||
-      !Number.isFinite(torchVariant.price) || torchVariant.price < 0 ||
+      !Number.isFinite(maskPrice) || maskPrice <= 0 ||
+      !Number.isFinite(torchPrice) || torchPrice < 0 ||
       torch.discount_type !== "PERCENTAGE" || Number(torch.discount_amount) !== 100 ||
-      (promo ? option.discount_type !== "PERCENTAGE" || option.discount_target !== "TOTAL" ||
-        Number(option.discount_amount) !== 5.59 : Number(option.discount_amount) !== 0)) {
+      (promo ? option.discount_type !== "FIXED" || option.discount_target !== "TOTAL" ||
+        Number(option.discount_amount) !== 10 : Number(option.discount_amount) !== 0)) {
     throw new Error("XPage's mask or free-torch offer has changed. Checkout was not created.");
   }
   return { option, mask, torch, maskVariant, torchVariant };

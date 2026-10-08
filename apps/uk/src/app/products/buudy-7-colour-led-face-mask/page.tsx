@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product/ProductPage";
-import { buudyMask } from "@/data/products";
+import { buudyMask, fullLedMaskGallery, standardMaskFaqs } from "@/data/products";
 import { ledMaskSeoFaqs } from "@/data/seoFaqs";
 import {
   breadcrumbJsonLd,
@@ -16,6 +16,8 @@ const pagePath = "/products/buudy-7-colour-led-face-mask";
 const pageProduct = {
   ...buudyMask,
   slug: "buudy-7-colour-led-face-mask",
+  gallery: fullLedMaskGallery,
+  faqs: standardMaskFaqs,
 };
 
 export const revalidate = 86400;
@@ -56,10 +58,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: buudyMask.gallery[0].src,
+        url: pageProduct.gallery[0].src,
         width: 1200,
         height: 1500,
-        alt: buudyMask.gallery[0].alt,
+        alt: pageProduct.gallery[0].alt,
       },
     ],
   },
@@ -67,12 +69,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: buudyMask.seoTitle,
     description: buudyMask.seoDescription,
-    images: [buudyMask.gallery[0].src],
+    images: [pageProduct.gallery[0].src],
   },
 };
 
 export default function Buudy7ColourMaskProductRoute() {
-  const productFaqs = [...ledMaskSeoFaqs, ...buudyMask.faqs];
+  const productFaqs = [...ledMaskSeoFaqs, ...pageProduct.faqs];
 
   return (
     <>
@@ -93,7 +95,7 @@ export default function Buudy7ColourMaskProductRoute() {
           type="application/ld+json"
         />
       ))}
-      <ProductPage product={buudyMask} />
+      <ProductPage product={pageProduct} />
     </>
   );
 }

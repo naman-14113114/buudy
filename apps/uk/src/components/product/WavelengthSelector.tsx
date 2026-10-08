@@ -69,15 +69,15 @@ export function WavelengthSelector() {
                         boxShadow: isActive ? `0 0 10px ${wavelength.color}` : "none",
                       }}
                     />
-                    <span className="buudy-display w-20 uppercase text-[rgba(247,241,232,.6)]">
+                    <span className="buudy-mono w-20 uppercase text-[rgba(247,241,232,.6)] text-xs tracking-wider">
                       {wavelength.nm}
                     </span>
-                    <span className={`buudy-display text-xl transition-colors duration-300 ${
+                    <span className={`font-sans text-base sm:text-lg font-bold uppercase tracking-wide transition-colors duration-300 ${
                       isActive ? "text-[var(--gold)]" : "text-[var(--cream)] group-hover:text-[var(--gold)]"
                     }`}>
                       {wavelength.name}
                     </span>
-                    <span className="buudy-display ml-auto hidden text-sm text-[rgba(247,241,232,.6)] sm:block">
+                    <span className="font-sans ml-auto hidden text-xs sm:text-sm font-normal text-[rgba(247,241,232,.65)] sm:block">
                       {wavelength.description}
                     </span>
                   </button>
@@ -86,7 +86,7 @@ export function WavelengthSelector() {
                       isActive ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
-                    <p className="buudy-display px-4 pb-3 pl-[3.25rem] text-sm leading-relaxed text-[rgba(247,241,232,.7)]">
+                    <p className="font-sans px-4 pb-3 pl-[3.25rem] text-xs leading-relaxed text-[rgba(247,241,232,.75)]">
                       {wavelength.description}
                     </p>
                   </div>

@@ -92,54 +92,6 @@ function ComparisonRow({ title, subtitle, values, isLast = false }: ComparisonRo
   );
 }
 
-interface ColorRowProps {
-  colorName: string;
-  colorCode: string;
-  description: string;
-  values: BrandValues;
-  borderBottom?: boolean;
-}
-
-function ColorRow({ colorName, colorCode, description, values, borderBottom = false }: ColorRowProps) {
-  return (
-    <div className={`${borderBottom ? "border-b border-[rgba(194,188,177,0.4)]" : ""}`}>
-      <div className="flex flex-col md:flex-row md:items-stretch">
-        {/* Color Badge & Info */}
-        <div className="w-full md:w-1/3 pr-4 py-2 md:py-2.5 flex items-center">
-          <div className="flex items-center gap-2">
-            <span
-              className="buudy-mono inline-flex items-center justify-center font-bold text-[9px] uppercase text-white rounded-lg h-[18px] w-[81px] tracking-wider shrink-0"
-              style={{ backgroundColor: colorCode }}
-            >
-              {colorName}
-            </span>
-            <span className="buudy-display text-[var(--plum)] text-sm md:text-base font-normal">
-              {description}
-            </span>
-          </div>
-        </div>
-
-        {/* Brand Values */}
-        <div className="w-full md:w-2/3">
-          <div className="flex h-full items-stretch">
-            {values.map((val, idx) => (
-              <div
-                key={idx}
-                className={`w-1/4 py-2 md:py-2.5 flex items-center justify-center text-center px-2 min-h-[42px] ${
-                  idx === 0
-                    ? "bg-[rgba(58,31,61,0.05)] font-semibold text-[var(--plum)]"
-                    : "text-[var(--muted)]"
-                }`}
-              >
-                {val}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function ComparisonTable() {
   return (
@@ -264,112 +216,94 @@ export function ComparisonTable() {
 
           {/* Features */}
           <ComparisonRow
+            title="Neck Coverage"
+            subtitle="Full face & neck coverage in one"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+          />
+
+          <ComparisonRow
+            title="Light Colours"
+            subtitle="Specific wavelengths for targeted skin concerns"
+            values={[
+              <div key="1" className="flex flex-col items-center">
+                <strong className="buudy-display font-bold text-xs md:text-sm text-[var(--plum)]">
+                  7 LED Colours + NIR
+                </strong>
+                <div className="flex flex-wrap items-center justify-center gap-1 md:gap-1.5 mt-1.5">
+                  <span title="Red (633nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#F00202" }} />
+                  <span title="Near-Infrared (830nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#8B0000" }} />
+                  <span title="Blue (415nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#0231F0" }} />
+                  <span title="Green (525nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#05CF1D" }} />
+                  <span title="Cyan (490nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#02E1F0" }} />
+                  <span title="Yellow (590nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#F0E602" }} />
+                  <span title="Purple (390nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#DE02F0" }} />
+                </div>
+              </div>,
+              <div key="2" className="flex flex-col items-center">
+                <strong className="buudy-display font-bold text-xs md:text-sm text-[var(--muted)]">
+                  2 TOTAL
+                </strong>
+                <div className="flex items-center justify-center gap-1 md:gap-1.5 mt-1.5">
+                  <span title="Red (633nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#F00202" }} />
+                  <span title="Near-Infrared (830nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#8B0000" }} />
+                </div>
+              </div>,
+              <div key="3" className="flex flex-col items-center">
+                <strong className="buudy-display font-bold text-xs md:text-sm text-[var(--muted)]">
+                  2 TOTAL
+                </strong>
+                <div className="flex items-center justify-center gap-1 md:gap-1.5 mt-1.5">
+                  <span title="Red (633nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#F00202" }} />
+                  <span title="Near-Infrared (830nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#8B0000" }} />
+                </div>
+              </div>,
+              <div key="4" className="flex flex-col items-center">
+                <strong className="buudy-display font-bold text-xs md:text-sm text-[var(--muted)]">
+                  3 TOTAL
+                </strong>
+                <div className="flex items-center justify-center gap-1 md:gap-1.5 mt-1.5">
+                  <span title="Red" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#F00202" }} />
+                  <span title="Blue" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#0231F0" }} />
+                  <span title="Purple" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#DE02F0" }} />
+                </div>
+              </div>,
+            ]}
+          />
+
+          <ComparisonRow
             title="Portable"
             subtitle="Hands-free, cordless and rechargeable"
             values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
-            title="Light Colours"
-            subtitle="Each with specific skin benefits"
-            values={[
-              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">7 LED Colours + NIR</strong>,
-              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">2 TOTAL</strong>,
-              <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">1 TOTAL</strong>,
-              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">3 TOTAL</strong>,
-            ]}
-          />
-
-          {/* Color Sub-rows */}
-          <ColorRow
-            colorName="Infrared"
-            colorCode="#8B0000"
-            description="Deep tissue repair and healing"
-            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CrossIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Red"
-            colorCode="#F00202"
-            description="Anti-ageing and Revitalisation"
-            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CheckIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Blue"
-            colorCode="#0231F0"
-            description="Anti-acne Fighter"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Green"
-            colorCode="#05CF1D"
-            description="Reduces dark spots"
+            title="Free UK Delivery"
+            subtitle="Fast, tracked next-day dispatch"
             values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Cyan"
-            colorCode="#02E1F0"
-            description="Reduces Swollen capillaries"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Yellow"
-            colorCode="#F0E602"
-            description="Balances skin texture"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Purple"
-            colorCode="#DE02F0"
-            description="Red and Blue in one"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="White"
-            colorCode="#D2D2D2"
-            description="Speed up skin metabolism"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-            borderBottom={true}
           />
 
           <ComparisonRow
-            title="Neck Coverage"
+            title="Free £70 Torch Included"
+            subtitle="Targeted red light device with order"
             values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
             title="Eye Protection"
-            subtitle="Integrated eye support"
+            subtitle="Integrated protective eye cushions"
             values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
           />
 
           <ComparisonRow
             title="Customizable treatments"
-            subtitle="Hands-free, cordless and rechargeable"
+            subtitle="Targeted modes & session control"
             values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
             title="App companion"
-            subtitle="iPhone/Android"
+            subtitle="Free guided sessions on iOS & Android"
             values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-          />
-
-          <ComparisonRow
-            title="Treatment Time"
-            subtitle="Full Face + Neck"
-            values={[
-              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]">3 MINS</strong>,
-              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
-              <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
-              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]">10 MINS</strong>,
-            ]}
           />
 
           <ComparisonRow
@@ -380,7 +314,7 @@ export function ComparisonTable() {
               </span>,
               <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">£348</span>,
               <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">£399</span>,
-              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£299</span>,
+              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">£259</span>,
             ]}
             isLast={true}
           />

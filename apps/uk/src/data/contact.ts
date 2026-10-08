@@ -45,7 +45,5 @@ export const contactSocialLinks = [
 ];
 
 export const contactRecipientEmail = "support@buudy.co.uk";
-export const contactRecipientEmails = [
-  "support@buudy.co.uk",
-];
+export const contactRecipientEmails = ["support@buudy.co.uk"];
 export const publicSupportEmail = "support@buudy.co.uk";

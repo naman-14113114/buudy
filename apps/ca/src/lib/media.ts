@@ -1,5 +1,6 @@
 export function productAsset(fileName: string, productSlug = "buudy-led-mask") {
-  return `/images/products/${productSlug}/${fileName}`;
+  const encoded = fileName.includes("%") ? fileName : encodeURIComponent(fileName).replace(/%2F/g, "/");
+  return `/images/products/${productSlug}/${encoded}`;
 }
 
 export function productMediaAsset(
@@ -7,11 +8,13 @@ export function productMediaAsset(
   productSlug = "buudy-led-mask",
   kind: "images" | "videos" = "images",
 ) {
-  return `/media/products/${productSlug}/${kind}/${fileName}`;
+  const encoded = fileName.includes("%") ? fileName : encodeURIComponent(fileName).replace(/%2F/g, "/");
+  return `/media/products/${productSlug}/${kind}/${encoded}`;
 }
 
 export function homeAsset(fileName: string) {
-  return `/images/home/${fileName}`;
+  const encoded = fileName.includes("%") ? fileName : encodeURIComponent(fileName).replace(/%2F/g, "/");
+  return `/images/home/${encoded}`;
 }
 
 export type ProductImageBadge = {

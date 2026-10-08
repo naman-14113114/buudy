@@ -97,8 +97,8 @@ export function TouchTechSection() {
 export function AppPromo() {
   return (
     <section className="buudy-section bg-[var(--cream)] md: md: py-14 md:py-24" id="buudy-ai">
-      <div className="buudy-wrap grid items-center gap-8 md:gap-12 lg:grid-cols-[1fr_1.2fr]">
-        <div className="relative aspect-[1200/799] w-full overflow-hidden rounded-[18px] bg-[var(--blush)] lg:order-last">
+      <div className="buudy-wrap grid items-center gap-8 md:gap-12 lg:grid-cols-[1.2fr_1fr]">
+        <div className="relative aspect-[1200/799] w-full overflow-hidden rounded-[18px] bg-[var(--blush)]">
           <Image
             alt="Buudy AI companion app"
             className="object-cover"

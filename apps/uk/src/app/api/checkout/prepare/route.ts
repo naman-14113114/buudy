@@ -3,6 +3,7 @@ import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
 import { getAppliedManualPromoCode } from "@/lib/cart";
 import { z } from "zod";
 import { createXpageCheckout } from "@/lib/xpage-checkout";
+import { normalizeCheckoutProductIds } from "@/lib/maskLandingPages";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -263,9 +264,7 @@ export async function POST(request: NextRequest) {
   if (
     clientCountry &&
     (clientCountry.trim().toUpperCase() === "MA" ||
-      clientCountry.trim().toUpperCase() === "MOROCCO" ||
-      clientCountry.trim().toUpperCase() === "ES" ||
-      clientCountry.trim().toUpperCase() === "SPAIN")
+      clientCountry.trim().toUpperCase() === "MOROCCO")
   ) {
     return NextResponse.json(
       { error: "The checkout has not been connected, and no order has been placed." },
@@ -277,7 +276,15 @@ export async function POST(request: NextRequest) {
   if (!parsed.success) {
     return NextResponse.json({ error: "Please check your cart quantities and try again." }, { status: 400 });
   }
-  const body = parsed.data;
+  const body = {
+    ...parsed.data,
+    cart: parsed.data.cart
+      ? {
+          ...parsed.data.cart,
+          lines: normalizeCheckoutProductIds(parsed.data.cart.lines),
+        }
+      : undefined,
+  };
   const productLines = body.cart?.lines.filter((line) => line.type !== "gift");
   if (productLines && (!productLines.length || productLines.some((line) => !PLUSBASE_PRODUCTS[line.productId]))) {
     return NextResponse.json({ error: "One of these products is not available for checkout." }, { status: 400 });

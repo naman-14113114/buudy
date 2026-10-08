@@ -6,12 +6,16 @@ import {
 import { market, type StoreCurrency } from "@/lib/market";
 import {
   faqs,
+  standardMaskFaqs,
+  buudyLedMaskFaqs,
   torchFaqs,
   iplFaqs,
   torchWavelengths,
   type FAQItem,
   type Wavelength,
 } from "./productSections";
+
+export { standardMaskFaqs, buudyLedMaskFaqs };
 
 export type ProductGift = {
   id: string;
@@ -66,6 +70,390 @@ export type Product = {
   badges: string[];
 };
 
+export const fullLedMaskGallery: ProductImage[] = [
+  {
+    src: productAsset("buudy-7-colour-led-mask-ce-certified-red-light-therapy-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask CE certified for red light therapy and skin rejuvenation Canada",
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-cleopatra-edition-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask worn at home in red light therapy mode for anti-ageing in Canada",
+    badge: {
+      title: "FULL FACE & NECK\nCOVERAGE",
+      sub: "Targeted firming & smoothing\nfor jawline & neck",
+      position: "bottom-right",
+      theme: "white",
+    },
+  },
+  {
+    src: productMediaAsset(
+      "buudy-7-colour-led-mask-7-light-modes-showcase-uk.mp4",
+      "buudy-led-mask",
+      "videos",
+    ),
+    alt: "Buudy 7 Colour LED Face Mask 7 clinical light wavelengths and modes video showcase Canada",
+    badge: {
+      title: "7 CLINICAL\nWAVELENGTHS",
+      sub: "Complete spectrum for\nrejuvenation, clarity & glow",
+      position: "bottom-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-with-free-red-light-torch-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask with included complimentary Red Light Torch treatment Canada",
+    badge: {
+      title: "FREE BUUDY\nLED TORCH",
+      sub: "CA$99 targeted red light device\nincluded free with your order",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy_purple.jpeg"),
+    alt: "Buudy 7 Colour LED Face Mask with 192 high-density clinical LEDs across face and neck Canada",
+    badge: {
+      title: "192 HIGH-DENSITY\nCLINICAL LEDS",
+      sub: "Maximum coverage & optical\npower across face & neck",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("02-buudy-led-mask-side-profile.webp"),
+    alt: "Buudy LED Mask side profile with built-in touch controls and cordless design",
+    badge: {
+      title: "100% CORDLESS &\nPORTABLE",
+      sub: "Built-in touch controls on mask —\nno remote needed to carry or charge",
+      position: "bottom-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-skin-rejuvenation-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask dermatologist approved for full skin rejuvenation Canada",
+    badge: {
+      title: "DERMATOLOGIST\nRECOMMENDED",
+      sub: "Trusted by skincare specialists\nfor everyday at-home routines",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("07-buudy-led-mask-controller.webp"),
+    alt: "Buudy LED Mask tap controller",
+    badge: {
+      title: "SMART BUUDY\nAPP COMPANION",
+      sub: "Personalised guided routines\n& progress tracking",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("09-buudy-led-mask-home-spa.webp"),
+    alt: "Buudy LED Mask home spa",
+  },
+  {
+    src: productAsset("05-buudy-led-mask-packaging.webp"),
+    alt: "Buudy LED Mask packaging",
+    badge: {
+      title: "830NM DEEP NEAR\nINFRARED LIGHT",
+      sub: "Deep dermal penetration\nboosts collagen & elasticity",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("04-buudy-led-mask-blue-light-acne.webp"),
+    alt: "Buudy LED Mask blue light acne mode",
+    badge: {
+      title: "415NM TARGETED\nBLUE LIGHT",
+      sub: "Purifies active blemishes\n& eliminates acne bacteria",
+      position: "bottom-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
+    alt: "Buudy LED Mask red light therapy mode for anti-ageing and collagen stimulation",
+    badge: {
+      title: "633NM RED LIGHT\nTHERAPY",
+      sub: "Stimulates collagen production\n& reduces fine lines and wrinkles",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-uk-anti-ageing-red-light-therapy.webp"),
+    alt: "Buudy 7 Colour LED Mask purple light mode for skin rejuvenation in Canada",
+    badge: {
+      title: "390NM PURPLE\nLIGHT THERAPY",
+      sub: "Combines red & blue wavelengths\nfor deep repair & blemish control",
+      position: "bottom-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
+    alt: "Buudy LED Mask green light mode for dark spots and even skin tone",
+    badge: {
+      title: "525NM GREEN LIGHT\nTHERAPY",
+      sub: "Fades dark spots, calms\nredness & evens skin tone",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("06-buudy-led-mask-results.webp"),
+    alt: "Buudy LED Mask yellow light mode for balanced skin texture and tone",
+    badge: {
+      title: "590NM YELLOW\nLIGHT THERAPY",
+      sub: "Balances skin texture, soothes\nsensitivity & boosts radiance",
+      position: "top-right",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-cyan-light-therapy-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask white light therapy mode for accelerating skin metabolism and renewal Canada",
+    badge: {
+      title: "510NM WHITE\nLIGHT THERAPY",
+      sub: "Accelerates skin metabolism,\ntightens skin & boosts cellular repair",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("13-buudy-led-mask-starter-kit.webp"),
+    alt: "Buudy LED Mask starter kit in cyan light therapy mode for calming capillaries and redness",
+    badge: {
+      title: "490NM CYAN\nLIGHT THERAPY",
+      sub: "Calms swollen capillaries,\nreduces inflammation & redness",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
+    alt: "Buudy LED Mask easy to use 3 minute daily skincare session",
+    badge: {
+      title: "FAST 3-MIN\nDAILY SESSIONS",
+      sub: "Quick, effortless & easy to use —\njust 3 minutes a day for visible results",
+      position: "bottom-right",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-unisex-skincare-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask unisex skincare treatment for men and women Canada",
+    badge: {
+      title: "UNIVERSAL UNISEX\nDESIGN",
+      sub: "Ergonomic fit designed for all\nskin types, both men & women",
+      position: "bottom-right",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-lifestyle-red-light-therapy-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask lifestyle red light therapy routine in Canada",
+  },
+  {
+    src: productAsset("11-buudy-led-mask-flexible-silicone.webp"),
+    alt: "Buudy LED Mask flexible silicone",
+  },
+  {
+    src: productMediaAsset("O3-w.webp"),
+    alt: "Buudy LED Mask O3",
+  },
+  {
+    src: productAsset("01-buudy-led-mask-front.webp"),
+    alt: "Buudy LED Mask front view",
+  },
+];
+
+export const buudyLedMaskGallery: ProductImage[] = [
+  {
+    src: productAsset("buudy-7-colour-led-mask-cleopatra-edition-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask worn at home in red light therapy mode for anti-ageing in Canada",
+    badge: {
+      title: "FULL FACE & NECK\nCOVERAGE",
+      sub: "Targeted firming & smoothing\nfor jawline & neck",
+      position: "bottom-right",
+      theme: "white",
+    },
+  },
+  {
+    src: productMediaAsset(
+      "buudy-7-colour-led-mask-7-light-modes-showcase-uk.mp4",
+      "buudy-led-mask",
+      "videos",
+    ),
+    alt: "Buudy 7 Colour LED Face Mask 7 clinical light wavelengths and modes video showcase Canada",
+    badge: {
+      title: "7 CLINICAL\nWAVELENGTHS",
+      sub: "Complete spectrum for\nrejuvenation, clarity & glow",
+      position: "bottom-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-with-free-red-light-torch-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask with included complimentary Red Light Torch treatment Canada",
+    badge: {
+      title: "FREE BUUDY\nLED TORCH",
+      sub: "CA$99 targeted red light device\nincluded free with your order",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy_purple.jpeg"),
+    alt: "Buudy 7 Colour LED Face Mask with 192 high-density clinical LEDs across face and neck Canada",
+    badge: {
+      title: "192 HIGH-DENSITY\nCLINICAL LEDS",
+      sub: "Maximum coverage & optical\npower across face & neck",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("02-buudy-led-mask-side-profile.webp"),
+    alt: "Buudy LED Mask side profile with built-in touch controls and cordless design",
+    badge: {
+      title: "100% CORDLESS &\nPORTABLE",
+      sub: "Built-in touch controls on mask —\nno remote needed to carry or charge",
+      position: "bottom-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("07-buudy-led-mask-controller.webp"),
+    alt: "Buudy LED Mask tap controller",
+    badge: {
+      title: "SMART BUUDY\nAPP COMPANION",
+      sub: "Personalised guided routines\n& progress tracking",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("09-buudy-led-mask-home-spa.webp"),
+    alt: "Buudy LED Mask home spa",
+  },
+  {
+    src: productAsset("05-buudy-led-mask-packaging.webp"),
+    alt: "Buudy LED Mask packaging",
+    badge: {
+      title: "830NM DEEP NEAR\nINFRARED LIGHT",
+      sub: "Deep dermal penetration\nboosts collagen & elasticity",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("04-buudy-led-mask-blue-light-acne.webp"),
+    alt: "Buudy LED Mask blue light acne mode",
+    badge: {
+      title: "415NM TARGETED\nBLUE LIGHT",
+      sub: "Purifies active blemishes\n& eliminates acne bacteria",
+      position: "bottom-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
+    alt: "Buudy LED Mask red light therapy mode for anti-ageing and collagen stimulation",
+    badge: {
+      title: "633NM RED LIGHT\nTHERAPY",
+      sub: "Stimulates collagen production\n& reduces fine lines and wrinkles",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-purple-light-therapy-cleopatra-uk.jpg"),
+    alt: "Buudy 7 Colour LED Mask purple light therapy mode for skin rejuvenation in Canada",
+    badge: {
+      title: "390NM PURPLE\nLIGHT THERAPY",
+      sub: "Combines red & blue wavelengths\nfor deep repair & blemish control",
+      position: "bottom-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
+    alt: "Buudy LED Mask green light mode for dark spots and even skin tone",
+    badge: {
+      title: "525NM GREEN LIGHT\nTHERAPY",
+      sub: "Fades dark spots, calms\nredness & evens skin tone",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("06-buudy-led-mask-results.webp"),
+    alt: "Buudy LED Mask yellow light mode for balanced skin texture and tone",
+    badge: {
+      title: "590NM YELLOW\nLIGHT THERAPY",
+      sub: "Balances skin texture, soothes\nsensitivity & boosts radiance",
+      position: "top-right",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-cyan-light-therapy-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask white light therapy mode for accelerating skin metabolism and renewal Canada",
+    badge: {
+      title: "510NM WHITE\nLIGHT THERAPY",
+      sub: "Accelerates skin metabolism,\ntightens skin & boosts cellular repair",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("13-buudy-led-mask-starter-kit.webp"),
+    alt: "Buudy LED Mask starter kit in cyan light therapy mode for calming capillaries and redness",
+    badge: {
+      title: "490NM CYAN\nLIGHT THERAPY",
+      sub: "Calms swollen capillaries,\nreduces inflammation & redness",
+      position: "top-left",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
+    alt: "Buudy LED Mask easy to use 3 minute daily skincare session",
+    badge: {
+      title: "FAST 3-MIN\nDAILY SESSIONS",
+      sub: "Quick, effortless & easy to use —\njust 3 minutes a day for visible results",
+      position: "bottom-right",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-unisex-skincare-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask unisex skincare treatment for men and women Canada",
+    badge: {
+      title: "UNIVERSAL UNISEX\nDESIGN",
+      sub: "Ergonomic fit designed for all\nskin types, both men & women",
+      position: "bottom-right",
+      theme: "white",
+    },
+  },
+  {
+    src: productAsset("11-buudy-led-mask-flexible-silicone.webp"),
+    alt: "Buudy LED Mask flexible silicone",
+  },
+  {
+    src: productMediaAsset("O3-w.webp"),
+    alt: "Buudy LED Mask O3",
+  },
+  {
+    src: productAsset("01-buudy-led-mask-front.webp"),
+    alt: "Buudy LED Mask front view",
+  },
+];
+
 export const buudyMask: Product = {
   id: "buudy-led-mask",
   sku: "BUUDY-LED-MASK-7W",
@@ -80,161 +468,22 @@ export const buudyMask: Product = {
     "Salon-grade light therapy reimagined for Canadian homes. The Buudy LED Mask combines 192 high-density LEDs, 7 visible light colours plus a dedicated 830nm near-infrared mode, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
   seoTitle: "Best LED Face Mask Canada | Buudy Red Light Therapy Mask",
   seoDescription:
-    "Shop the Buudy LED Face Mask in Canada: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, easy returns, and free glow kit.",
+    "Shop the Buudy LED Face Mask in Canada: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, easy returns and refunds, and free glow kit.",
   currency: market.currency,
-  priceCents: 33500,
-  compareAtCents: 83750,
+  priceCents: 27900,
+  compareAtCents: 55900,
   rating: 4.9,
   reviewCount: 16000,
   customerCount: "16,000+",
   promoCode: "GLOWKIT",
   promoLabel: "Glow kit promo applied",
-  cartImage: productAsset("01-buudy-led-mask-front.webp"),
-  gallery: [
-    {
-      src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
-      alt: "Cleopatra LED Red Light Mask",
-      badge: {
-        title: "FULL FACE & NECK\nCOVERAGE",
-        sub: "Targeted firming & smoothing for jawline & neck",
-        position: "top-left",
-        theme: "white",
-      },
-    },
-    {
-      src: productAsset("02-buudy-led-mask-side-profile.webp"),
-      alt: "Buudy LED Mask side profile",
-      badge: {
-        title: "7 CLINICAL\nWAVELENGTHS",
-        sub: "Complete spectrum for rejuvenation, clarity & glow",
-        position: "bottom-left",
-        theme: "white",
-      },
-    },
-    {
-      src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
-      alt: "Buudy LED Mask anti-ageing mode",
-      badge: {
-        title: "FAST 3-MIN\nTREATMENTS",
-        sub: "Green light helps fade dark spots & evens skin tone",
-        position: "top-left",
-        theme: "white",
-      },
-    },
-    {
-      src: productAsset("04-buudy-led-mask-blue-light-acne.webp"),
-      alt: "Buudy LED Mask blue light acne mode",
-      badge: {
-        title: "415NM TARGETED\nBLUE LIGHT",
-        sub: "Purifies active blemishes & eliminates acne bacteria",
-        position: "bottom-left",
-        theme: "white",
-      },
-    },
-    {
-      src: productAsset("05-buudy-led-mask-packaging.webp"),
-      alt: "Buudy LED Mask packaging",
-      badge: {
-        title: "830NM DEEP NEAR\nINFRARED LIGHT",
-        sub: "Deep dermal penetration boosts collagen & elasticity",
-        position: "top-left",
-        theme: "white",
-      },
-    },
-    {
-      src: productAsset("06-buudy-led-mask-results.webp"),
-      alt: "Buudy LED Mask results",
-      badge: {
-        title: "PROVEN CLINICAL\nRESULTS",
-        sub: "Noticeable collagen boost & radiant skin in 4 weeks",
-        position: "top-right",
-        theme: "white",
-      },
-    },
-    {
-      src: productAsset("07-buudy-led-mask-controller.webp"),
-      alt: "Buudy LED Mask tap controller",
-      badge: {
-        title: "SMART BUUDY\nAPP COMPANION",
-        sub: "Personalised guided routines & progress tracking",
-        position: "top-left",
-        theme: "white",
-      },
-    },
-    {
-      src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
-      alt: "Buudy LED Mask lifestyle use",
-      badge: {
-        title: "100% CORDLESS &\nPORTABLE",
-        sub: "Hands-free cordless design to read, relax & multitask",
-        position: "top-right",
-        theme: "dark",
-      },
-    },
-    {
-      src: productAsset("09-buudy-led-mask-home-spa.webp"),
-      alt: "Buudy LED Mask home spa",
-    },
-    {
-      src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
-      alt: "Buudy LED Mask dermatologist recommended",
-      badge: {
-        title: "DERMATOLOGIST\nRECOMMENDED",
-        sub: "Expert-approved non-invasive skincare for all skin types",
-        position: "bottom-right",
-        theme: "dark",
-      },
-    },
-    {
-      src: productAsset("11-buudy-led-mask-flexible-silicone.webp"),
-      alt: "Buudy LED Mask flexible silicone",
-    },
-    {
-      src: productAsset("13-buudy-led-mask-starter-kit.webp"),
-      alt: "Buudy LED Mask starter kit",
-      badge: {
-        title: "SAFETY & CLINICALLY\nCERTIFIED",
-        sub: "CE, RoHS & FCC certified for safe everyday home use",
-        position: "top-left",
-        theme: "white",
-      },
-    },
-    {
-      src: productMediaAsset("O3-w.webp"),
-      alt: "Buudy LED Mask O3",
-      badge: {
-        title: "FREE BUUDY\nLED TORCH",
-        sub: "$131 targeted red light device included free with your order",
-        position: "top-left",
-        theme: "white",
-      },
-    },
-    {
-      src: productAsset("buudy_purple.jpeg"),
-      alt: "Buudy LED Mask Purple",
-      badge: {
-        title: "FREE PREMIUM\nTRAVEL CASE",
-        sub: "Custom luxury hard-shell box included with every order",
-        position: "top-left",
-        theme: "white",
-      },
-    },
-    {
-      src: productAsset("01-buudy-led-mask-front.webp"),
-      alt: "Buudy LED Mask front view",
-      badge: {
-        title: "633NM DEEP RED\nLIGHT THERAPY",
-        sub: "Stimulates natural collagen production & smooths fine lines",
-        position: "top-right",
-        theme: "white",
-      },
-    },
-  ],
+  cartImage: productAsset("buudy-7-colour-led-mask-ce-certified-red-light-therapy-uk.webp"),
+  gallery: buudyLedMaskGallery,
   gifts: [
     {
       id: "premium-travel-box",
       name: "Premium Travel Box",
-      valueCents: 3900,
+      valueCents: 4900,
       image: productMediaAsset("ChatGPT Image May 31, 2026, 11_53_13 PM.png"),
       label: "Exclusive item",
       href: "/pages/premium-travel-box",
@@ -242,7 +491,7 @@ export const buudyMask: Product = {
     {
       id: "buudy-led-torch",
       name: "Buudy LED Torch",
-      valueCents: 13100,
+      valueCents: 9900,
       image: productAsset("01-buudy-red-light-therapy-torch-main.webp", "buudy-red-torch"),
       label: "Limited edition",
       href: "/products/red-light-torch",
@@ -250,7 +499,7 @@ export const buudyMask: Product = {
     {
       id: "skincare-ebook",
       name: "Skincare E-Book",
-      valueCents: 1900,
+      valueCents: 2500,
       image: productMediaAsset("free_guide-v2.webp"),
       label: "Digital copy",
       href: "/pages/skincare-guide",
@@ -311,6 +560,14 @@ export const buudyMask: Product = {
   ],
 };
 
+export const buudy7ColourMask: Product = {
+  ...buudyMask,
+  id: "buudy-7-colour-led-mask",
+  slug: "buudy-7-colour-led-mask",
+  gallery: fullLedMaskGallery,
+  faqs: standardMaskFaqs,
+};
+
 const torchAsset = (fileName: string) =>
   productAsset(fileName, "buudy-red-torch");
 
@@ -330,8 +587,8 @@ export const buudyRedTorch: Product = {
   seoDescription:
     "Portable red light therapy torch with 3 wavelengths, near infrared support, rechargeable battery, and targeted body and skin relief.",
   currency: market.currency,
-  priceCents: 13100,
-  compareAtCents: 32750,
+  priceCents: 9900,
+  compareAtCents: 19900,
   rating: 4.8,
   reviewCount: 16000,
   customerCount: "16,000+",
@@ -366,18 +623,18 @@ export const buudyRedTorch: Product = {
   ],
   gifts: [],
   specs: [
+    { label: "Dimensions", value: "2.5cm × 12cm (0.98 in × 4.72 in)" },
     { label: "Model", value: "H100-3H" },
-    {
-      label: "Wavelengths",
-      value: "630nm, 660nm, 850nm (3 precision wavelengths)",
-    },
-    { label: "Power", value: "7W high-power output" },
+    { label: "Wavelength", value: "630nm, 660nm, 850nm" },
+    { label: "Power", value: "7W" },
     { label: "Operating Voltage", value: "3.7V" },
-    { label: "Protection Level", value: "IPX5 (living waterproof)" },
+    { label: "Protection Level", value: "IPX5 (Living Waterproof)" },
     { label: "Battery", value: "18650 Ricoh Lithium (2x included)" },
-    { label: "Material", value: "Aluminum alloy (74g / 2.61 oz)" },
-    { label: "Dimensions", value: "2.5cm x 12cm (0.98 in x 4.72 in)" },
+    { label: "Material", value: "Aluminum alloy" },
     { label: "Charging Method", value: "USB battery dock charger" },
+    { label: "Weight", value: "74g" },
+    { label: "Warranty", value: "24 months" },
+    { label: "Lifespan", value: "50,000+ hours" },
   ],
   included: [
     { quantity: "1x", label: "Buudy LED Torch (3-Core Red Light Flashlight)" },
@@ -389,52 +646,41 @@ export const buudyRedTorch: Product = {
     { quantity: "1x", label: "USB Charger (Dock Charger)" },
   ],
   highlights: [
-    "3 precision wavelengths (630nm, 660nm, 850nm)",
-    "Portable 74g aluminum alloy design",
-    "Includes 2x 18650 rechargeable batteries and travel case",
-    "IPX5 living waterproof protection",
-  ],
-  keyBenefits: [
-    "Targeted skin rejuvenation & collagen support",
-    "Localized muscle & joint relief",
-    "Compact travel-ready design",
-    "Simple one-button operation",
-  ],
-  differentiators: [
-    "3-core optical lens for concentrated irradiance",
-    "7W high-power light output",
-    "Dual rechargeable batteries included",
-    "Multi-angle triangular tripod stand",
-    "Protective hard-shell travel case",
+    "Stimulate collagen production",
+    "Smooths skin & fine lines",
+    "Assist with anti-ageing and healing",
+    "Enhances overall skin health",
+    "Portable, safe, and easy to use",
+    "Minimize wrinkles and lines",
   ],
   faqs: torchFaqs,
   wavelengths: torchWavelengths,
   badges: [
-    "3 Precision Wavelengths",
-    "7W High-Power Output",
-    "IPX5 Waterproof",
-    "24 Month Warranty",
+    "3 precision wavelengths",
+    "7W high-power output",
+    "IPX5 waterproof",
+    "24 month warranty",
   ],
 };
 
 export const buudyIplDevice: Product = {
   id: "buudy-ipl-device",
-  sku: "1000020579664199",
+  sku: "BUUDY-IPL-ICE",
   slug: "buudy-ipl-hair-removal-device",
   template: "ipl",
-  name: "Buudy IPL Device",
+  name: "Buudy IPL Hair Removal Device",
   heroTitle: "Buudy IPL",
   heroEmphasis: "Device",
   shortDescription:
-    "Sapphire Ice Cooling IPL laser hair removal with 999,999 flashes for virtually painless, permanent results.",
+    "Painless at-home laser hair removal with Ice Cooling technology and 999,999 flashes for smooth skin.",
   description:
     "Experience professional-grade, painless hair removal at home. The Buudy IPL Device features an advanced ice-cooling head that stays at 5-8°C to soothe your skin while treating hair follicles. With 9 intensity levels and 999,999 flashes, it's a lifetime solution for smooth, hair-free skin.",
   seoTitle: "Buudy IPL Hair Removal Device | Painless Ice Cooling Laser",
   seoDescription:
     "Shop the Buudy IPL Hair Removal Device in Canada: 999,999 flashes, Ice Cooling technology, 9 intensity levels, painless hair removal at home.",
   currency: market.currency,
-  priceCents: 12900,
-  compareAtCents: 24900,
+  priceCents: 17900,
+  compareAtCents: 36000,
   rating: 4.9,
   reviewCount: 450,
   customerCount: "1,000+",
@@ -507,9 +753,11 @@ export const productsById = Object.fromEntries(
 ) as Record<string, Product>;
 
 export function getProductBySlug(slug: string) {
+  if (slug === "buudy-7-colour-led-mask") return buudy7ColourMask;
   return products.find((product) => product.slug === slug);
 }
 
 export function getProductById(id: string) {
+  if (id === "buudy-7-colour-led-mask") return buudy7ColourMask;
   return productsById[id];
 }

@@ -1,16 +1,13 @@
 "use client";
-import { StoreText, useStoreLocale } from '@/components/international/StoreLocale';
-
 
 import { useEffect, useState } from "react";
-import { StoreImage as Image } from '@/components/international/StoreLocale';
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
 import Lottie from "lottie-react";
 import loadingLottie from "@/components/cart/loading-lottie.json";
 import type { Product } from "@/data/products";
 import { formatMoney } from "@/lib/money";
-import { NativePrice } from '@/components/international/NativePrice';
 import {
   appendAttributionToPath,
   pickAttributionFromSearch,
@@ -19,7 +16,6 @@ import { Button } from "@/components/ui/Button";
 import { useCart } from "@/components/cart/CartProvider";
 
 export function StickyAddToCart({ product }: { product: Product }) {
-  const { path } = useStoreLocale();
   const { addProduct } = useCart();
   const router = useRouter();
   const [visible, setVisible] = useState(false);
@@ -51,6 +47,11 @@ export function StickyAddToCart({ product }: { product: Product }) {
       ? ` + ${product.gifts.length} free gifts`
       : " + free shipping";
 
+  const thumbnailSrc =
+    product.template === "mask"
+      ? "/images/products/buudy-led-mask/buudy-7-colour-led-mask-ce-certified-red-light-therapy-uk.webp"
+      : product.cartImage;
+
   useEffect(() => {
     document.documentElement.classList.add("buudy-mask-sticky-cta");
 
@@ -60,8 +61,8 @@ export function StickyAddToCart({ product }: { product: Product }) {
   }, [product.template]);
 
   useEffect(() => {
-    const button = document.getElementById("hero-cta");
-    if (!button) {
+    const heroSection = document.getElementById("product-hero") || document.getElementById("hero-cta");
+    if (!heroSection) {
       return;
     }
 
@@ -69,8 +70,8 @@ export function StickyAddToCart({ product }: { product: Product }) {
     const updateVisibility = () => {
       window.cancelAnimationFrame(frame);
       frame = window.requestAnimationFrame(() => {
-        const rect = button.getBoundingClientRect();
-        setVisible(rect.bottom < 0);
+        const rect = heroSection.getBoundingClientRect();
+        setVisible(rect.bottom <= 0);
       });
     };
 
@@ -81,7 +82,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
       { threshold: [0, 1] },
     );
 
-    observer.observe(button);
+    observer.observe(heroSection);
     updateVisibility();
     window.addEventListener("scroll", updateVisibility, { passive: true });
     window.addEventListener("resize", updateVisibility);
@@ -113,16 +114,16 @@ export function StickyAddToCart({ product }: { product: Product }) {
               fill
               loading="eager"
               sizes="56px"
-              src={product.cartImage}
+              src={thumbnailSrc}
             />
           </div>
           <div className="min-w-0">
             <p className="truncate text-base font-semibold text-[var(--plum)]">
-              <StoreText>{product.name}</StoreText>
+              {product.name}
             </p>
             <p className="truncate text-sm text-[var(--muted)]">
-              {product.template==='mask'?<NativePrice/>:formatMoney(product.priceCents, product.currency)}
-              <StoreText>{giftLabel}</StoreText>
+              {formatMoney(product.priceCents, product.currency)}
+              {giftLabel}
             </p>
           </div>
         </div>
@@ -135,7 +136,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
             addProduct(product);
             router.push(
               appendAttributionToPath(
-                path("/cart"),
+                "/cart",
                 pickAttributionFromSearch(window.location.search),
               ),
             );
@@ -151,7 +152,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
                 ) : (
                   <ShoppingBag size={17} />
                 )}
-                <span><StoreText>Add to cart</StoreText><StoreText>{giftLabel}</StoreText></span>
+                <span>Add to cart{giftLabel}</span>
               </span>
               <span className="absolute inset-0 flex items-center justify-center">
                 <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
@@ -166,7 +167,7 @@ export function StickyAddToCart({ product }: { product: Product }) {
               ) : (
                 <ShoppingBag size={17} />
               )}
-              <span><StoreText>Add to cart</StoreText><StoreText>{giftLabel}</StoreText></span>
+              <span>Add to cart{giftLabel}</span>
             </>
           )}
         </Button>

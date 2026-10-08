@@ -8,7 +8,7 @@ export const faqsData: FaqItem[] = [
     question: "What is a return policy?",
     answerHtml: `
       <ul class="list-disc pl-5 space-y-2 text-sm leading-6">
-        <li>Returns are accepted within 30 days of delivery strictly for damaged, defective, incorrect, or missing products with photo or video evidence and prior written return authorization from <a href="mailto:support@buudy.co.uk" class="underline text-[var(--plum)] font-semibold">support@buudy.co.uk</a>.</li>
+        <li>Returns are accepted within 30 days of delivery strictly for damaged, defective, incorrect, or missing products with photo or video evidence and prior written return authorization from <a href="mailto:support@buudy.com" class="underline text-[var(--plum)] font-semibold">support@buudy.com</a>.</li>
         <li>Change-of-mind or personal-preference returns are not accepted. Items must never be returned to the package or sender address without written authorization.</li>
         <li>Once an authorized return is received and inspected, approved refunds are initiated within 5–10 business days to the original payment method. Read our complete <a href="/policies/return-policy" class="underline text-[var(--plum)] font-semibold">Return Policy</a>.</li>
       </ul>
@@ -52,13 +52,13 @@ export const faqsData: FaqItem[] = [
   {
     question: "How can I contact customer service?",
     answerHtml: `
-      <p class="text-sm leading-6">You can reach our customer service through our <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">Contact Us</a> page or by emailing <a href="mailto:support@buudy.co.uk" class="underline text-[var(--plum)] font-semibold">support@buudy.co.uk</a>.</p>
+      <p class="text-sm leading-6">You can reach our customer service through our <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">Contact Us</a> page or by emailing <a href="mailto:support@buudy.com" class="underline text-[var(--plum)] font-semibold">support@buudy.com</a>.</p>
     `
   },
   {
     question: "My tracking number isn't working",
     answerHtml: `
-      <p class="text-sm leading-6">Tracking updates can take 24–72 hours to appear in the shipping carrier's system after dispatch. If your tracking number is still not updating after that window, please email <a href="mailto:support@buudy.co.uk" class="underline text-[var(--plum)] font-semibold">support@buudy.co.uk</a> or use our <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">Contact Form</a>.</p>
+      <p class="text-sm leading-6">Tracking updates can take 24–72 hours to appear in the shipping carrier's system after dispatch. If your tracking number is still not updating after that window, please email <a href="mailto:support@buudy.com" class="underline text-[var(--plum)] font-semibold">support@buudy.com</a> or use our <a href="/pages/contact-us#contact-form" class="underline text-[var(--plum)] font-semibold">Contact Form</a>.</p>
     `
   },
   {
@@ -71,6 +71,12 @@ export const faqsData: FaqItem[] = [
     question: "When will my card be charged?",
     answerHtml: `
       <p class="text-sm leading-6">Just after your order has been successfully placed.</p>
+    `
+  },
+  {
+    question: "Why is Cleopatra written on the mask?",
+    answerHtml: `
+      <p class="text-sm leading-6">This is the genuine Cleopatra Edition LED Face Mask, supplied and distributed exclusively by Buudy in the US. When you order from Buudy, you receive the authentic clinical multi-spectrum mask, backed by our official US warranty, fast tracked US delivery, and dedicated local customer support.</p>
     `
   },
   {

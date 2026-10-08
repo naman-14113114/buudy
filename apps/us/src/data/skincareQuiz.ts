@@ -1,11 +1,9 @@
 export type QuizQuestionId =
   | "concern"
-  | "eyes"
   | "skinType"
   | "pregnant"
   | "sensitivity"
-  | "routineTime"
-  | "age";
+  | "routineTime";
 
 export type QuizOption = {
   value: string;
@@ -24,12 +22,10 @@ export type QuizQuestion = {
 
 export type QuizAnswers = {
   concern: string[];
-  eyes: string[];
   skinType: string;
   pregnant: string;
   sensitivity: string[];
   routineTime: string;
-  age: string;
 };
 
 export type QuizLightModeId =
@@ -86,19 +82,17 @@ export type QuizResult = {
 
 export const emptyQuizAnswers: QuizAnswers = {
   concern: [],
-  eyes: [],
   skinType: "",
   pregnant: "",
   sensitivity: [],
   routineTime: "",
-  age: "",
 };
 
 export const skincareQuizQuestions: QuizQuestion[] = [
   {
     id: "concern",
-    title: "What would you most like to improve?",
-    subtitle: "Select every concern that matters to you. We use the full mix in your plan.",
+    title: "What matters most to your skin right now?",
+    subtitle: "Select your main concern first. You can add others, but we will keep your starting plan focused.",
     selection: "multiple",
     options: [
       { value: "Acne-Prone", label: "Breakouts and blemishes" },
@@ -114,25 +108,6 @@ export const skincareQuizQuestions: QuizQuestion[] = [
       {
         value: "Sensitive / Rosacea-prone",
         label: "Redness-prone or reactive skin",
-      },
-    ],
-  },
-  {
-    id: "eyes",
-    title: "What does your eye area need?",
-    subtitle: "Select any that apply so the routine includes the right recovery habits.",
-    selection: "multiple",
-    options: [
-      { value: "Dark Circles", label: "Dark circles" },
-      {
-        value: "Fine Lines and Wrinkles",
-        label: "Fine lines",
-      },
-      { value: "Puffiness", label: "Puffiness" },
-      {
-        value: "No Eye Concern",
-        label: "No specific eye concern",
-        exclusive: true,
       },
     ],
   },
@@ -177,7 +152,7 @@ export const skincareQuizQuestions: QuizQuestion[] = [
   {
     id: "pregnant",
     title: "Are you pregnant or breastfeeding?",
-    subtitle: "This adds the appropriate safety pause to your programme.",
+    subtitle: "We ask so the result can pause LED use and point you to professional advice when needed.",
     selection: "single",
     options: [
       { value: "Yes", label: "Yes" },
@@ -211,40 +186,25 @@ export const skincareQuizQuestions: QuizQuestion[] = [
   },
   {
     id: "routineTime",
-    title: "When can you consistently make ten minutes?",
-    subtitle: "Your answer sets the exact times in the first five days.",
+    title: "When does a short routine fit your day?",
+    subtitle: "We will use this as a reminder, not an exact appointment. Follow your device manual for session length.",
     selection: "single",
     options: [
       {
         value: "Morning",
-        label: "Morning, between 7am and 9am",
-        description: "Best if you prefer to finish treatment before SPF and the day begins.",
+        label: "Morning",
+        description: "Before your usual daytime skincare and sun protection.",
       },
       {
         value: "Evening",
-        label: "Evening, between 7pm and 10pm",
-        description: "Best if you want to cleanse, use the mask and complete aftercare together.",
+        label: "Evening",
+        description: "After cleansing and before your usual moisturiser.",
       },
       {
         value: "Flexible",
         label: "My schedule changes",
-        description: "We will use a flexible evening anchor that can move by up to one hour.",
+        description: "Choose a comfortable time on each session day.",
       },
-    ],
-  },
-  {
-    id: "age",
-    title: "Which age range should the plan consider?",
-    subtitle: "This adjusts recovery, firmness and consistency guidance.",
-    selection: "single",
-    options: [
-      { value: "18 - 24", label: "18 to 24" },
-      { value: "25 - 34", label: "25 to 34" },
-      { value: "35 - 44", label: "35 to 44" },
-      { value: "45 - 54", label: "45 to 54" },
-      { value: "55 - 64", label: "55 to 64" },
-      { value: "65 - 74", label: "65 to 74" },
-      { value: "75+", label: "75+" },
     ],
   },
 ];

@@ -124,7 +124,7 @@ export function organizationJsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer support",
-      email: "support@buudy.co.uk",
+      email: "support@buudy.com",
       availableLanguage: [market.locale, "English"],
     },
   };

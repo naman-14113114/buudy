@@ -1,7 +1,4 @@
-
-import { StoreImg, StoreText } from '@/components/international/StoreLocale';
 import React from "react";
-import { NativePrice } from '@/components/international/NativePrice';
 import { productMediaAsset } from "@/lib/media";
 
 function CheckIcon() {
@@ -64,11 +61,11 @@ function ComparisonRow({ title, subtitle, values, isLast = false }: ComparisonRo
         {/* Feature Info */}
         <div className="w-full md:w-1/3 pr-4 py-2.5 md:py-3.5 flex flex-col justify-center">
           <p className="buudy-display font-semibold text-[var(--plum)] text-base md:text-lg leading-tight">
-            <StoreText>{title}</StoreText>
+            {title}
           </p>
           {subtitle && (
             <p className="buudy-display text-[var(--plum-soft)] text-xs md:text-sm font-medium italic mt-0.5 leading-tight">
-              <StoreText>{subtitle}</StoreText>
+              {subtitle}
             </p>
           )}
         </div>
@@ -85,56 +82,7 @@ function ComparisonRow({ title, subtitle, values, isLast = false }: ComparisonRo
                     : "text-[var(--muted)]"
                 }`}
               >
-                <StoreText>{val}</StoreText>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-interface ColorRowProps {
-  colorName: string;
-  colorCode: string;
-  description: string;
-  values: BrandValues;
-  borderBottom?: boolean;
-}
-
-function ColorRow({ colorName, colorCode, description, values, borderBottom = false }: ColorRowProps) {
-  return (
-    <div className={`${borderBottom ? "border-b border-[rgba(194,188,177,0.4)]" : ""}`}>
-      <div className="flex flex-col md:flex-row md:items-stretch">
-        {/* Color Badge & Info */}
-        <div className="w-full md:w-1/3 pr-4 py-2 md:py-2.5 flex items-center">
-          <div className="flex items-center gap-2">
-            <span
-              className="buudy-mono inline-flex items-center justify-center font-bold text-[9px] uppercase text-white rounded-lg h-[18px] w-[81px] tracking-wider shrink-0"
-              style={{ backgroundColor: colorCode }}
-            >
-              <StoreText>{colorName}</StoreText>
-            </span>
-            <span className="buudy-display text-[var(--plum)] text-sm md:text-base font-normal">
-              <StoreText>{description}</StoreText>
-            </span>
-          </div>
-        </div>
-
-        {/* Brand Values */}
-        <div className="w-full md:w-2/3">
-          <div className="flex h-full items-stretch">
-            {values.map((val, idx) => (
-              <div
-                key={idx}
-                className={`w-1/4 py-2 md:py-2.5 flex items-center justify-center text-center px-2 min-h-[42px] ${
-                  idx === 0
-                    ? "bg-[rgba(58,31,61,0.05)] font-semibold text-[var(--plum)]"
-                    : "text-[var(--muted)]"
-                }`}
-              >
-                <StoreText>{val}</StoreText>
+                {val}
               </div>
             ))}
           </div>
@@ -146,19 +94,19 @@ function ColorRow({ colorName, colorCode, description, values, borderBottom = fa
 
 export function ComparisonTable() {
   return (
-    <section className="buudy-section bg-[var(--cream)] md: md: py-14 md:py-24">
+    <section className="buudy-section bg-[var(--cream)] py-14 md:py-24">
       <div className="buudy-wrap max-w-[1144px]">
         {/* Section Header */}
         <div className="mb-8 px-4 text-center md:mb-12">
-          <h2 className="buudy-heading hidden md:block pb-2"><StoreText>
+          <h2 className="buudy-heading hidden md:block pb-2">
             What makes Buudy right for you?
-          </StoreText></h2>
-          <h2 className="buudy-heading block md:hidden pb-2 text-[2.2rem]"><StoreText>
+          </h2>
+          <h2 className="buudy-heading block md:hidden pb-2 text-[2.2rem]">
             Why is Buudy right for you?
-          </StoreText></h2>
-          <h3 className="buudy-display text-xl md:text-2xl text-[var(--plum-soft)] italic mt-3"><StoreText>
+          </h2>
+          <h3 className="buudy-display text-xl md:text-2xl text-[var(--plum-soft)] italic mt-3">
             (Here is a comparison, but there is really no comparison)
-          </StoreText></h3>
+          </h3>
         </div>
 
         <div className="mt-8 flex flex-col md:mt-12">
@@ -170,100 +118,157 @@ export function ComparisonTable() {
 
             {/* Header Comp Row */}
             <div className="relative border-0">
-            <div className="flex flex-col md:flex-row md:items-stretch">
-              <div className="hidden md:block md:w-1/3"></div>
-              <div className="w-full md:w-2/3">
-                <div className="flex items-center h-full">
-                  <div className="-mb-px w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-0 md:mb-0 md:pb-2">
-                    <StoreImg
-                      src={productMediaAsset("ChatGPT Image May 31, 2026, 12_10_21 AM.png")}
-                      alt="Buudy Logo"
-                      className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
-                      decoding="async"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
-                    <StoreImg
-                      src={productMediaAsset("OmniLux_Logo.png")}
-                      alt="Omnilux"
-                      className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
-                      decoding="async"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
-                    <StoreImg
-                      src={productMediaAsset("current_body_logo.png")}
-                      alt="CurrentBody"
-                      className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
-                      decoding="async"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
-                    <StoreImg
-                      src={productMediaAsset("kala_logo.png")}
-                      alt="Kala"
-                      className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
-                      decoding="async"
-                      loading="lazy"
-                    />
+              <div className="flex flex-col md:flex-row md:items-stretch">
+                <div className="hidden md:block md:w-1/3"></div>
+                <div className="w-full md:w-2/3">
+                  <div className="flex items-center h-full">
+                    <div className="-mb-px w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-0 md:mb-0 md:pb-2">
+                      <img
+                        src={productMediaAsset("ChatGPT Image May 31, 2026, 12_10_21 AM.png")}
+                        alt="Buudy Logo"
+                        className="h-8 md:h-10 w-auto object-contain max-w-[90%]"
+                        decoding="async"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
+                      <img
+                        src={productMediaAsset("OmniLux_Logo.png")}
+                        alt="Omnilux"
+                        className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
+                        decoding="async"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
+                      <img
+                        src={productMediaAsset("current_body_logo.png")}
+                        alt="CurrentBody"
+                        className="h-7 md:h-10 w-auto object-contain max-w-[90%]"
+                        decoding="async"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="w-1/4 flex justify-center items-center h-full pt-4 px-2 pb-1 md:pb-2">
+                      <img
+                        src={productMediaAsset("shark_logo.png")}
+                        alt="Shark"
+                        className="w-auto object-contain"
+                        style={{ maxHeight: "28px", maxWidth: "70%" }}
+                        decoding="async"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
             {/* Mask Images Row */}
             <div className="relative border-b border-[rgba(194,188,177,0.4)]">
-            <div className="flex flex-col md:flex-row md:items-stretch h-full">
-              <div className="hidden md:block md:w-1/3"></div>
-              <div className="w-full md:w-2/3">
-                <div className="flex items-center h-full">
-                  <div className="-mt-px w-1/4 flex justify-center items-center h-full pb-4 md:mt-0 md:pb-5 px-2 overflow-visible">
-                    <StoreImg
-                      src={productMediaAsset("ChatGPT Image May 31, 2026, 11_38_29 PM.png")}
-                      alt="Buudy Mask"
-                      className="h-24 sm:h-28 md:h-32 w-auto object-contain scale-[1.3] md:scale-[1.4] transform origin-center transition-transform"
-                      decoding="async"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
-                    <StoreImg
-                      src={productMediaAsset("omnilux.png")}
-                      alt="Omnilux Contour Face Mask"
-                      className="h-24 sm:h-28 md:h-32 w-auto object-contain"
-                      decoding="async"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
-                    <StoreImg
-                      src={productMediaAsset("current Body.png")}
-                      alt="CurrentBody Mask"
-                      className="h-24 sm:h-28 md:h-32 w-auto object-contain"
-                      decoding="async"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
-                    <StoreImg
-                      src={productMediaAsset("kala.png")}
-                      alt="Kala Mask"
-                      className="h-24 sm:h-28 md:h-32 w-auto object-contain"
-                      decoding="async"
-                      loading="lazy"
-                    />
+              <div className="flex flex-col md:flex-row md:items-stretch h-full">
+                <div className="hidden md:block md:w-1/3"></div>
+                <div className="w-full md:w-2/3">
+                  <div className="flex items-center h-full">
+                    <div className="-mt-px w-1/4 flex justify-center items-center h-full pb-4 md:mt-0 md:pb-5 px-2 overflow-visible">
+                      <img
+                        src={productMediaAsset("ChatGPT Image May 31, 2026, 11_38_29 PM.png")}
+                        alt="Buudy Mask"
+                        className="h-24 sm:h-28 md:h-32 w-auto object-contain scale-[1.3] md:scale-[1.4] transform origin-center transition-transform"
+                        decoding="async"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
+                      <img
+                        src={productMediaAsset("omnilux.png")}
+                        alt="Omnilux Contour Face Mask"
+                        className="h-24 sm:h-28 md:h-32 w-auto object-contain"
+                        decoding="async"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
+                      <img
+                        src={productMediaAsset("current Body.png")}
+                        alt="CurrentBody Mask"
+                        className="h-24 sm:h-28 md:h-32 w-auto object-contain"
+                        decoding="async"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="w-1/4 flex justify-center items-center h-full pb-4 md:pb-5 px-2">
+                      <img
+                        src={productMediaAsset("shark-2.png")}
+                        alt="Shark Mask"
+                        className="w-auto object-contain"
+                        style={{ maxHeight: "150px" }}
+                        decoding="async"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          </div>
 
           {/* Features */}
+          <ComparisonRow
+            title="Neck Coverage"
+            subtitle="Full face & neck coverage in one"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+          />
+
+          <ComparisonRow
+            title="Light Colours"
+            subtitle="Specific wavelengths for targeted skin concerns"
+            values={[
+              <div key="1" className="flex flex-col items-center">
+                <strong className="buudy-display font-bold text-xs md:text-sm text-[var(--plum)]">
+                  7 LED Colours + NIR
+                </strong>
+                <div className="flex flex-wrap items-center justify-center gap-1 md:gap-1.5 mt-1.5">
+                  <span title="Red (633nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#F00202" }} />
+                  <span title="Near-Infrared (830nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#8B0000" }} />
+                  <span title="Blue (415nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#0231F0" }} />
+                  <span title="Green (525nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#05CF1D" }} />
+                  <span title="Cyan (490nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#02E1F0" }} />
+                  <span title="Yellow (590nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#F0E602" }} />
+                  <span title="Purple (390nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#DE02F0" }} />
+                </div>
+              </div>,
+              <div key="2" className="flex flex-col items-center">
+                <strong className="buudy-display font-bold text-xs md:text-sm text-[var(--muted)]">
+                  2 TOTAL
+                </strong>
+                <div className="flex items-center justify-center gap-1 md:gap-1.5 mt-1.5">
+                  <span title="Red (633nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#F00202" }} />
+                  <span title="Near-Infrared (830nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#8B0000" }} />
+                </div>
+              </div>,
+              <div key="3" className="flex flex-col items-center">
+                <strong className="buudy-display font-bold text-xs md:text-sm text-[var(--muted)]">
+                  2 TOTAL
+                </strong>
+                <div className="flex items-center justify-center gap-1 md:gap-1.5 mt-1.5">
+                  <span title="Red (633nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#F00202" }} />
+                  <span title="Near-Infrared (830nm)" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#8B0000" }} />
+                </div>
+              </div>,
+              <div key="4" className="flex flex-col items-center">
+                <strong className="buudy-display font-bold text-xs md:text-sm text-[var(--muted)]">
+                  3 TOTAL
+                </strong>
+                <div className="flex items-center justify-center gap-1 md:gap-1.5 mt-1.5">
+                  <span title="Red" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#F00202" }} />
+                  <span title="Blue" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#0231F0" }} />
+                  <span title="Purple" className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 rounded-full inline-block shadow-sm border border-black/10 shrink-0" style={{ backgroundColor: "#DE02F0" }} />
+                </div>
+              </div>,
+            ]}
+          />
+
           <ComparisonRow
             title="Portable"
             subtitle="Hands-free, cordless and rechargeable"
@@ -271,117 +276,44 @@ export function ComparisonTable() {
           />
 
           <ComparisonRow
-            title="Light Colours"
-            subtitle="Each with specific skin benefits"
-            values={[
-              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]"><StoreText>7 LED Colours + NIR</StoreText></strong>,
-              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>2 TOTAL</StoreText></strong>,
-              <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>1 TOTAL</StoreText></strong>,
-              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>3 TOTAL</StoreText></strong>,
-            ]}
-          />
-
-          {/* Color Sub-rows */}
-          <ColorRow
-            colorName="Infrared"
-            colorCode="#8B0000"
-            description="Deep tissue repair and healing"
-            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CheckIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Red"
-            colorCode="#F00202"
-            description="Anti-ageing and Revitalisation"
-            values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CheckIcon key="3" />, <CheckIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Blue"
-            colorCode="#0231F0"
-            description="Anti-acne Fighter"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Green"
-            colorCode="#05CF1D"
-            description="Reduces dark spots"
+            title="Free US Delivery"
+            subtitle="Fast, tracked next-day dispatch"
             values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Cyan"
-            colorCode="#02E1F0"
-            description="Reduces Swollen capillaries"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Yellow"
-            colorCode="#F0E602"
-            description="Balances skin texture"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="Purple"
-            colorCode="#DE02F0"
-            description="Red and Blue in one"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-          />
-
-          <ColorRow
-            colorName="White"
-            colorCode="#D2D2D2"
-            description="Speed up skin metabolism"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-            borderBottom={true}
           />
 
           <ComparisonRow
-            title="Neck Coverage"
+            title="Free $79 Torch Included"
+            subtitle="Targeted red light device with order"
             values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
             title="Eye Protection"
-            subtitle="Integrated eye support"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
+            subtitle="Integrated protective eye cushions"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
           />
 
           <ComparisonRow
             title="Customizable treatments"
-            subtitle="Hands-free, cordless and rechargeable"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
+            subtitle="Targeted modes & session control"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
             title="App companion"
-            subtitle="iPhone/Android"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CheckIcon key="4" />]}
-          />
-
-          <ComparisonRow
-            title="Treatment Time"
-            subtitle="Full Face + Neck"
-            values={[
-              <strong key="1" className="buudy-display font-bold text-sm md:text-base text-[var(--plum)]"><StoreText>3 MINS</StoreText></strong>,
-              <strong key="2" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>10 MINS</StoreText></strong>,
-              <strong key="3" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>10 MINS</StoreText></strong>,
-              <strong key="4" className="buudy-display font-bold text-sm md:text-base text-[var(--muted)]"><StoreText>10 MINS</StoreText></strong>,
-            ]}
+            subtitle="Free guided sessions on iOS & Android"
+            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
           <ComparisonRow
             title="Price"
             values={[
               <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">
-                <NativePrice/>
+                <span className="line-through mr-1.5 opacity-60">$399</span>$199
               </span>,
               <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">$395</span>,
               <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">$380</span>,
-              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">$382.49</span>,
+              <span key="4" className="buudy-display text-base md:text-lg text-[var(--muted)]">$259</span>,
             ]}
             isLast={true}
           />

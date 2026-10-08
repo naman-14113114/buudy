@@ -45,10 +45,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     keywords:
       product.template === "mask"
         ? [
-            "Buudy LED face and neck mask",
-            "seven colour LED mask",
-            "red light skincare mask",
-            "830 nm near infrared mask",
+            "best LED face mask US",
+            "LED face mask US",
+            "red light therapy mask US",
+            "LED face mask for acne US",
             "anti ageing LED mask",
             "LED mask with neck coverage",
             "near infrared LED face mask",
@@ -61,14 +61,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
               "IPL hair removal handset",
             ]
           : [
+              "Buudy LED Torch",
+              "buudy led torch US",
               "red light torch US",
               "handheld red light therapy",
               "near infrared torch",
-              "blue red light therapy device",
             ],
     alternates: {
       canonical: `/products/${product.slug}`,
-      ...(product.slug==='buudy-led-mask'?{languages:languageAlternates('/products/buudy-led-mask')}:{}),
+      languages: {
+        "en-US": `/products/${product.slug}`,
+      },
     },
     robots: {
       index: true,

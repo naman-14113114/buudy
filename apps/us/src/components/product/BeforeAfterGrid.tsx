@@ -1,9 +1,7 @@
 "use client";
-import { StoreText, StoreButton } from '@/components/international/StoreLocale';
-
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { StoreImage as Image } from '@/components/international/StoreLocale';
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { transformations, type Transformation } from "@/data/productSections";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -297,15 +295,15 @@ export function BeforeAfterGrid() {
           <SectionHeading
             eyebrow="Real users / Real results"
             title={
-              <><StoreText>
-                Eight stories, </StoreText><em className="buudy-italic"><StoreText>one device</StoreText></em>.
+              <>
+                Eight stories, <em className="buudy-italic">one device</em>.
               </>
             }
           />
-          <p className="max-w-sm text-sm leading-7 text-[var(--muted)]"><StoreText>
+          <p className="max-w-sm text-sm leading-7 text-[var(--muted)]">
             Verified customer transformations, photographed in their own homes
             after consistent use of the Buudy LED Mask.
-          </StoreText></p>
+          </p>
         </div>
       </div>
 
@@ -316,7 +314,7 @@ export function BeforeAfterGrid() {
       >
         <div
           aria-label="Customer transformation stories"
-          className="no-scrollbar flex gap-5 overflow-x-auto px-4 pb-4 md:px-10 cursor-grab active:cursor-grabbing select-none"
+          className="no-scrollbar flex gap-5 overflow-x-auto px-4 pt-4 pb-6 md:px-10 md:pt-5 md:pb-7 cursor-grab active:cursor-grabbing select-none"
           onMouseDown={handleMouseDown}
           onMouseLeave={handleMouseUpOrLeave}
           onMouseMove={handleMouseMove}
@@ -334,9 +332,9 @@ export function BeforeAfterGrid() {
           }}
         >
           {loopedStories.map((story, index) => (
-            <StoreButton
+            <button
               aria-label={`Open ${story.fullName}'s ${story.concern} story`}
-              className="flex w-[min(82vw,21rem)] flex-none flex-col overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--card)] text-left transition duration-300 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)]"
+              className="flex w-[min(85vw,23rem)] flex-none flex-col overflow-hidden rounded-[18px] border border-[var(--border)] bg-[var(--card)] text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)] cursor-pointer"
               data-story-card
               key={`${story.id}-${index}`}
               onClick={(e) => {
@@ -353,38 +351,38 @@ export function BeforeAfterGrid() {
                   alt={story.concern}
                   className="object-cover pointer-events-none select-none"
                   fill
-                  sizes="(min-width: 1024px) 336px, 82vw"
+                  sizes="(min-width: 1024px) 368px, 85vw"
                   src={story.image}
                 />
               </div>
               <div className="flex flex-1 flex-col justify-between p-5">
                 <div>
                   <div className="flex items-center justify-between gap-3">
-                    <p className="buudy-mono text-[var(--gold)]"><StoreText>{story.concern}</StoreText></p>
+                    <p className="buudy-mono text-[var(--gold)]">{story.concern}</p>
                     <span className="buudy-mono text-[var(--plum-soft)]">5.0</span>
                   </div>
                   <h3 className="buudy-display mt-3 text-xl text-[var(--plum)]">
-                    <StoreText>{story.title}</StoreText>
+                    {story.title}
                   </h3>
                   <p className="mt-2 text-sm leading-7 text-[var(--muted)]">
-                    <StoreText>{story.quote}</StoreText>
+                    {story.quote}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center justify-between border-t border-[var(--border)] pt-3">
                   <span className="buudy-display text-sm text-[var(--plum)]">
-                    <StoreText>{story.name}</StoreText>
+                    {story.name}
                   </span>
-                  <span className="buudy-mono text-[var(--plum-soft)]"><StoreText>Verified</StoreText></span>
+                  <span className="buudy-mono text-[var(--plum-soft)]">Verified</span>
                 </div>
               </div>
-            </StoreButton>
+            </button>
           ))}
         </div>
 
         <div className="buudy-wrap mt-6 flex items-center justify-center gap-5">
-          <StoreButton
+          <button
             aria-label="Previous transformation story"
-            className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.3)] text-[var(--plum)] transition hover:bg-[var(--plum)] hover:text-[var(--cream)]"
+            className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.3)] text-[var(--plum)] transition hover:bg-[var(--plum)] hover:text-[var(--cream)] cursor-pointer"
             onClick={() => {
               setUserInteracted(true);
               smoothScroll(-stepRef.current);
@@ -392,11 +390,11 @@ export function BeforeAfterGrid() {
             type="button"
           >
             <ChevronLeft aria-hidden="true" size={20} />
-          </StoreButton>
-          <span className="buudy-mono text-[var(--plum)]"><StoreText>customer stories</StoreText></span>
-          <StoreButton
+          </button>
+          <span className="buudy-mono text-[var(--plum)]">customer stories</span>
+          <button
             aria-label="Next transformation story"
-            className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.3)] text-[var(--plum)] transition hover:bg-[var(--plum)] hover:text-[var(--cream)]"
+            className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.3)] text-[var(--plum)] transition hover:bg-[var(--plum)] hover:text-[var(--cream)] cursor-pointer"
             onClick={() => {
               setUserInteracted(true);
               smoothScroll(stepRef.current);
@@ -404,7 +402,7 @@ export function BeforeAfterGrid() {
             type="button"
           >
             <ChevronRight aria-hidden="true" size={20} />
-          </StoreButton>
+          </button>
         </div>
       </div>
 
@@ -412,7 +410,7 @@ export function BeforeAfterGrid() {
         <div
           aria-labelledby="transformation-dialog-title"
           aria-modal="true"
-          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8"
           style={{
             backgroundColor: "rgba(255, 255, 255, 0.75)",
             backdropFilter: "blur(12px)",
@@ -423,17 +421,17 @@ export function BeforeAfterGrid() {
           }}
           role="dialog"
         >
-          <StoreButton
+          <button
             aria-label="Previous story"
-            className="absolute left-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-md transition hover:scale-105 hover:bg-[var(--cream)] md:flex xl:left-8"
+            className="absolute left-3 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-md transition hover:scale-105 hover:bg-[var(--cream)] md:flex lg:left-6 xl:left-8 cursor-pointer"
             onClick={handlePrevStory}
             type="button"
           >
             <ChevronLeft aria-hidden="true" size={28} />
-          </StoreButton>
+          </button>
 
           <div
-            className="relative flex max-h-[94vh] w-full max-w-4xl flex-col overflow-y-auto rounded-[18px] bg-[var(--card)] shadow-2xl md:max-h-[90vh] md:flex-row md:overflow-hidden"
+            className="relative flex max-h-[92vh] w-full max-w-[1160px] flex-col overflow-y-auto rounded-[20px] border border-[var(--border)] bg-[var(--card)] shadow-2xl md:flex-row md:overflow-hidden"
             onTouchEnd={handleTouchEnd}
             onTouchMove={(event) => {
               touchEndX.current = event.targetTouches[0].clientX;
@@ -443,101 +441,110 @@ export function BeforeAfterGrid() {
               touchEndX.current = null;
             }}
           >
-            <StoreButton
+            <button
               aria-label="Close transformation details"
-              className="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-sm transition hover:scale-105 hover:bg-[var(--cream)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
+              className="absolute right-4 top-4 z-30 grid h-10 w-10 place-items-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-sm transition hover:scale-105 hover:bg-[var(--cream)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)] cursor-pointer"
               onClick={closeStory}
               ref={closeButtonRef}
               type="button"
             >
               <X aria-hidden="true" size={22} />
-            </StoreButton>
+            </button>
 
-            <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-[var(--blush)] md:min-h-[500px] md:w-1/2 md:self-stretch">
+            {/* Left Image Section: Exact 4:3 aspect ratio, touching top, bottom, and left borders end-to-end */}
+            <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-[var(--blush)] md:w-1/2">
               <Image
                 alt={`${selectedStory.fullName}'s ${selectedStory.concern} transformation`}
-                className="object-cover"
+                className="object-cover pointer-events-none select-none"
                 fill
                 key={selectedStory.id}
-                sizes="(min-width: 768px) 448px, 100vw"
+                sizes="(min-width: 1024px) 540px, (min-width: 768px) 50vw, 100vw"
+                priority
                 src={selectedStory.image}
               />
               <div className="absolute inset-x-3 bottom-3 flex justify-between md:hidden">
-                <StoreButton
+                <button
                   aria-label="Previous story"
-                  className="grid h-11 w-11 place-items-center rounded-full bg-[var(--cream)] text-[var(--plum)] shadow-lg"
+                  className="grid h-11 w-11 place-items-center rounded-full bg-[var(--cream)] text-[var(--plum)] shadow-lg cursor-pointer"
                   onClick={handlePrevStory}
                   type="button"
                 >
                   <ChevronLeft aria-hidden="true" size={22} />
-                </StoreButton>
-                <StoreButton
+                </button>
+                <button
                   aria-label="Next story"
-                  className="grid h-11 w-11 place-items-center rounded-full bg-[var(--cream)] text-[var(--plum)] shadow-lg"
+                  className="grid h-11 w-11 place-items-center rounded-full bg-[var(--cream)] text-[var(--plum)] shadow-lg cursor-pointer"
                   onClick={handleNextStory}
                   type="button"
                 >
                   <ChevronRight aria-hidden="true" size={22} />
-                </StoreButton>
+                </button>
               </div>
             </div>
 
-            <div className="flex w-full flex-col justify-center p-6 md:w-1/2 md:p-8">
-              <p className="buudy-mono mb-2 text-sm uppercase text-[var(--gold)]">
-                <StoreText>{selectedStory.concern}</StoreText>
+            {/* Right Content Section: Spans height of image on desktop with independent smooth scroll */}
+            <div
+              className="flex w-full flex-col p-6 md:absolute md:inset-y-0 md:right-0 md:w-1/2 md:overflow-y-auto md:p-8 md:pr-16 lg:p-9 lg:pr-18"
+              style={{
+                scrollbarWidth: "thin",
+                scrollbarColor: "rgba(58, 31, 61, 0.25) transparent",
+              }}
+            >
+              <p className="buudy-mono mb-2 text-xs uppercase tracking-wider text-[var(--gold)] md:text-sm">
+                {selectedStory.concern}
               </p>
               <h3
-                className="buudy-display mb-4 text-2xl leading-tight text-[var(--plum)] md:text-3xl"
+                className="buudy-display mb-3 text-2xl leading-tight text-[var(--plum)] md:text-3xl lg:text-[2rem]"
                 id="transformation-dialog-title"
               >
-                <StoreText>{selectedStory.title}</StoreText>
+                {selectedStory.title}
               </h3>
-              <p className="mb-5 text-sm italic leading-7 text-[var(--muted)]">
-                <StoreText>{selectedStory.quote}</StoreText>
+              <p className="mb-5 text-sm italic leading-relaxed text-[var(--muted)] md:text-[15px]">
+                {selectedStory.quote}
               </p>
 
-              <div className="mb-5 flex items-center gap-2 border-b border-[var(--border)] pb-5">
-                <span className="buudy-display text-lg text-[var(--plum)]">
-                  <StoreText>{selectedStory.fullName}</StoreText>, <StoreText>{selectedStory.age}</StoreText>
+              <div className="mb-5 flex items-center gap-2 border-b border-[var(--border)] pb-4">
+                <span className="buudy-display text-lg text-[var(--plum)] md:text-xl">
+                  {selectedStory.fullName}, {selectedStory.age}
                 </span>
-                <span className="buudy-mono ml-auto rounded bg-[var(--cream)] px-2 py-1 text-xs text-[var(--plum-soft)]"><StoreText>
+                <span className="buudy-mono ml-auto rounded bg-[var(--cream)] px-2.5 py-1 text-xs text-[var(--plum-soft)]">
                   Verified
-                </StoreText></span>
+                </span>
               </div>
 
               <div className="mb-4">
-                <h4 className="buudy-mono mb-1.5 text-xs font-bold uppercase text-[var(--plum)]"><StoreText>
+                <h4 className="buudy-mono mb-1 text-xs font-bold uppercase text-[var(--plum)]">
                   Skin type
-                </StoreText></h4>
-                <p className="text-sm text-[var(--muted)]"><StoreText>{selectedStory.skinType}</StoreText></p>
+                </h4>
+                <p className="text-sm text-[var(--muted)] md:text-[15px]">{selectedStory.skinType}</p>
               </div>
               <div className="mb-4">
-                <h4 className="buudy-mono mb-1.5 text-xs font-bold uppercase text-[var(--plum)]"><StoreText>
+                <h4 className="buudy-mono mb-1 text-xs font-bold uppercase text-[var(--plum)]">
                   Skincare routine
-                </StoreText></h4>
-                <p className="text-sm leading-6 text-[var(--muted)]">
-                  <StoreText>{selectedStory.routine}</StoreText>
+                </h4>
+                <p className="text-sm leading-relaxed text-[var(--muted)] md:text-[15px]">
+                  {selectedStory.routine}
                 </p>
               </div>
               <div>
-                <h4 className="buudy-mono mb-1.5 text-xs font-bold uppercase text-[var(--plum)]"><StoreText>
+                <h4 className="buudy-mono mb-1 text-xs font-bold uppercase text-[var(--plum)]">
                   Experience
-                </StoreText></h4>
-                <p className="text-sm leading-6 text-[var(--muted)]">
-                  <StoreText>{selectedStory.experience}</StoreText>
+                </h4>
+                <p className="text-sm leading-relaxed text-[var(--muted)] md:text-[15px]">
+                  {selectedStory.experience}
                 </p>
               </div>
             </div>
           </div>
 
-          <StoreButton
+          <button
             aria-label="Next story"
-            className="absolute right-4 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-md transition hover:scale-105 hover:bg-[var(--cream)] md:flex xl:right-8"
+            className="absolute right-3 top-1/2 z-10 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(58,31,61,.18)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] shadow-md transition hover:scale-105 hover:bg-[var(--cream)] md:flex lg:right-6 xl:right-8 cursor-pointer"
             onClick={handleNextStory}
             type="button"
           >
             <ChevronRight aria-hidden="true" size={28} />
-          </StoreButton>
+          </button>
         </div>
       ) : null}
     </section>

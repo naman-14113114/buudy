@@ -22,6 +22,11 @@ const ExpertSection = dynamic(
   { ssr: false },
 );
 
+const HowToUseSection = dynamic(
+  () => import("./HowToUseSection").then((mod) => mod.HowToUseSection),
+  { ssr: false },
+);
+
 export function DeferredVideoReviews() {
   return <VideoReviews />;
 }
@@ -36,4 +41,8 @@ export function DeferredWavelengthSelector() {
 
 export function DeferredExpertSection() {
   return <ExpertSection />;
+}
+
+export function DeferredHowToUseSection() {
+  return <HowToUseSection />;
 }

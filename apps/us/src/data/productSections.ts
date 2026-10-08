@@ -626,7 +626,7 @@ export const torchFaqs: FAQItem[] = [
   {
     question: "Do you sell this anywhere else?",
     answer:
-      "The Buudy LED Torch is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
+      "The Buudy LED Torch is exclusively sold through us.buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
   },
   {
     question: "How do I track my order?",
@@ -647,7 +647,7 @@ export const expertVideo = {
 export const comparison = {
   intro: "Here is a comparison, but really, there is no comparison.",
   columns: [
-    { label: "Buudy", price: "$236.40", featured: true },
+    { label: "Buudy", price: "$199", featured: true },
     { label: "Brand A", price: "$299" },
     { label: "Brand B", price: "$399" },
     { label: "Brand C", price: "$372" },
@@ -684,7 +684,12 @@ export const touchTech = [
   },
 ];
 
-export const faqs: FAQItem[] = [
+export const standardMaskFaqs: FAQItem[] = [
+  {
+    question: "Is Buudy the best LED face mask for US buyers?",
+    answer:
+      "Buudy is designed for US shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current US launch offer is $199 with a $399 compare-at price, free tracked US shipping, a free glow kit while available, and an easy return and refund policy.",
+  },
   {
     question: "Does this cover the neck?",
     answer:
@@ -713,7 +718,7 @@ export const faqs: FAQItem[] = [
   {
     question: "Do you sell this anywhere else?",
     answer:
-      "You can buy the Buudy LED Mask from this official website at www.buudy.com. If you are unsure about a seller or need help with an order, use our Contact Us page to reach Buudy support.",
+      "The Buudy LED Mask is exclusively sold through us.buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
   },
   {
     question: "How do I track my order?",
@@ -721,6 +726,56 @@ export const faqs: FAQItem[] = [
       "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
   },
 ];
+
+export const buudyLedMaskFaqs: FAQItem[] = [
+  {
+    question: "Is Buudy the best LED face mask for US buyers?",
+    answer:
+      "Buudy is designed for US shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current US launch offer is $199 with a $399 compare-at price, free tracked US shipping, a free glow kit while available, and an easy return and refund policy.",
+  },
+  {
+    question: "Does this cover the neck?",
+    answer:
+      "Yes, one of the best things about the Buudy LED Mask is that it covers your neck as well! So many LED masks neglect the neck entirely or do not include it.",
+  },
+  {
+    question: "How many LEDs does the Buudy LED Mask have?",
+    answer: "The Buudy LED Mask has 192 LEDs.",
+  },
+  {
+    question: "What are the wavelengths? Irradiance / Power Density?",
+    answer:
+      "Infra-red: 830nm. Red: 633nm. Blue: 415nm. Green: 525nm. Cyan: 490nm. Yellow: 590nm. Purple: 390nm. White: 510nm. Irradiance / Power Density: 32mW/cm2.",
+  },
+  {
+    question: "Can I use it in my country?",
+    answer:
+      "Yes! The Buudy LED Mask is dual voltage which means it can be used worldwide without any issues.",
+  },
+  {
+    question:
+      "What if I am pregnant, sensitive to light, have epilepsy, or taking light sensitive medication?",
+    answer:
+      "We always recommend that you consult with your physician or other qualified health care professional before using LED products. Anyone who is potentially sensitive to light should take caution before using LED products. For example, women who are pregnant, people with epilepsy, or people who are taking certain medications such as tetracycline, steroids, or cortisone injections (which may cause light sensitivity) should not use LED products and must consult with their physician or healthcare provider.",
+  },
+  {
+    question: "Do you sell this anywhere else?",
+    answer:
+      "The Buudy LED Mask is exclusively sold through us.buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
+  },
+  {
+    question: "Why is Cleopatra written on the mask?",
+    answer:
+      "This is the genuine Cleopatra Edition LED Face Mask, supplied and distributed exclusively by Buudy in the US. When you order from Buudy, you receive the authentic clinical multi-spectrum mask, backed by our official US warranty, fast tracked US delivery, and dedicated local customer support.",
+  },
+  {
+    question: "How do I track my order?",
+    answer:
+      "Once your order has been dispatched, you will receive a shipping confirmation email containing your tracking number and a link to track your parcel.",
+  },
+];
+
+export const faqs: FAQItem[] = buudyLedMaskFaqs;
 
 export const iplFaqs: FAQItem[] = [
   {

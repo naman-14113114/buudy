@@ -74,6 +74,12 @@ export const faqsData: FaqItem[] = [
     `
   },
   {
+    question: "Why is Cleopatra written on the mask?",
+    answerHtml: `
+      <p class="text-sm leading-6">This is the genuine Cleopatra Edition LED Face Mask, supplied and distributed exclusively by Buudy in the UK. When you order from Buudy, you receive the authentic clinical multi-spectrum mask, backed by our official UK warranty, fast tracked UK delivery, and dedicated local customer support.</p>
+    `
+  },
+  {
     question: "How secure is my personal information?",
     answerHtml: `
       <p class="text-sm leading-6">We adhere to the highest industry standards to protect your personal information when you checkout and purchase.</p>

@@ -456,7 +456,7 @@ export const ebookData = {
     {
       question: "What should I do if I have specific questions not covered in the guide?",
       answerHtml:
-        "Our dedicated customer support team is always here to help. You can reach us anytime at <a href='mailto:support@buudy.com' class='text-[var(--gold)] underline hover:text-[var(--plum)]'>support@buudy.com</a> or visit our <a href='/pages/contact-us' class='text-[var(--gold)] underline hover:text-[var(--plum)]'>Contact Us</a> page for personalized guidance.",
+        "Our dedicated customer support team is always here to help. You can reach us anytime at <a href='mailto:support@buudy.co.uk' class='text-[var(--gold)] underline hover:text-[var(--plum)]'>support@buudy.co.uk</a> or visit our <a href='/pages/contact-us' class='text-[var(--gold)] underline hover:text-[var(--plum)]'>Contact Us</a> page for personalized guidance.",
     },
   ],
 };

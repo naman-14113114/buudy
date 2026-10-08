@@ -1,60 +1,91 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product/ProductPage";
-import { buudyMask } from "@/data/products";
+import { buudyMask, fullLedMaskGallery, standardMaskFaqs } from "@/data/products";
 import { ledMaskSeoFaqs } from "@/data/seoFaqs";
 import {
   breadcrumbJsonLd,
   faqJsonLd,
   organizationJsonLd,
   productJsonLd,
+  productWebPageJsonLd,
   websiteJsonLd,
 } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
+const pagePath = "/products/buudy-led-mask-compact";
+const pageProduct = {
+  ...buudyMask,
+  slug: "buudy-led-mask-compact",
+  gallery: fullLedMaskGallery,
+  faqs: standardMaskFaqs,
+};
+
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
-  title: "Buudy LED Mask | Compact Australia Product Page",
-  description:
-    "A tighter Buudy LED Mask Australia product page with reviews earlier, compact expert video, and a faster path through the main buying sections.",
+  title: buudyMask.seoTitle,
+  description: buudyMask.seoDescription,
+  keywords: [
+    "Best LED Face Mask Australia",
+    "LED face mask Australia",
+    "red light therapy mask Australia",
+    "LED face mask for acne Australia",
+    "anti ageing LED mask",
+    "LED mask with neck coverage",
+    "near infrared LED face mask",
+  ],
   alternates: {
-    canonical: "/products/buudy-led-mask",
+    canonical: pagePath,
     languages: {
-      "en-AU": "/products/buudy-led-mask-compact",
+      "en-AU": pagePath,
     },
   },
   robots: {
-    index: false,
+    index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   openGraph: {
-    title: "Buudy LED Mask | Compact Australia Product Page",
+    title: buudyMask.seoTitle,
     description: buudyMask.description,
-    url: absoluteUrl("/products/buudy-led-mask-compact"),
+    url: absoluteUrl(pagePath),
     type: "website",
     images: [
       {
-        url: buudyMask.gallery[0].src,
+        url: pageProduct.gallery[0].src,
         width: 1200,
         height: 1500,
-        alt: buudyMask.gallery[0].alt,
+        alt: pageProduct.gallery[0].alt,
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: buudyMask.seoTitle,
+    description: buudyMask.seoDescription,
+    images: [pageProduct.gallery[0].src],
+  },
 };
 
-export default function CompactBuudyMaskProductRoute() {
-  const productFaqs = [...ledMaskSeoFaqs, ...buudyMask.faqs];
+export default function BuudyLedMaskCompactProductRoute() {
+  const productFaqs = [...ledMaskSeoFaqs, ...pageProduct.faqs];
 
   return (
     <>
       {[
         organizationJsonLd(),
         websiteJsonLd(),
-        productJsonLd(buudyMask),
+        productWebPageJsonLd(pageProduct),
+        productJsonLd(pageProduct),
         breadcrumbJsonLd([
           { name: "Home", url: "/" },
-          { name: buudyMask.name, url: "/products/buudy-led-mask-compact" },
+          { name: buudyMask.name, url: pagePath },
         ]),
         faqJsonLd(productFaqs),
       ].map((schema, index) => (
@@ -64,7 +95,7 @@ export default function CompactBuudyMaskProductRoute() {
           type="application/ld+json"
         />
       ))}
-      <ProductPage product={buudyMask} variant="compact" />
+      <ProductPage product={pageProduct} />
     </>
   );
 }

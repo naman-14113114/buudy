@@ -1,6 +1,4 @@
 "use client";
-import { StoreImg, StoreText, StoreButton, useStoreLocale } from '@/components/international/StoreLocale';
-
 
 import { useCallback, useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
@@ -16,7 +14,6 @@ export function ProductGallery({
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
 
   const thumbsRef = useRef<HTMLDivElement>(null);
   const touchStartXRef = useRef(0);
@@ -39,18 +36,7 @@ export function ProductGallery({
     [currentIndex],
   );
 
-  // 3. Auto-rotate effect
-  useEffect(() => {
-    if (isLightboxOpen || isPaused) return;
-
-    const interval = setInterval(() => {
-      goNext();
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [goNext, isLightboxOpen, isPaused]);
-
-  // 4. Center active thumbnail only in the stacked gallery strip.
+  // 3. Center active thumbnail only in the stacked gallery strip.
   useEffect(() => {
     if (thumbsRef.current && window.innerWidth < 1024) {
       const activeThumb = thumbsRef.current.children[
@@ -107,14 +93,12 @@ export function ProductGallery({
     };
   }, [goNext, goPrev, isLightboxOpen]);
 
-  // 6. Mobile swipe gesture handlers on main wrapper
+  // 5. Mobile swipe gesture handlers on main wrapper
   const handleTouchStart = (e: React.TouchEvent) => {
-    setIsPaused(true);
     touchStartXRef.current = e.changedTouches[0].screenX;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    setIsPaused(false);
     const touchEndX = e.changedTouches[0].screenX;
     const swipeThreshold = 50;
     if (window.innerWidth < 768) {
@@ -133,7 +117,7 @@ export function ProductGallery({
           __html: `
         /* --- CSS STYLES --- */
         /* 1. CONTAINER */
-        .buudyLED-23435t23-container { max-width: 900px; margin: 0 auto; padding: 10px 10px 10px 10px !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
+        .buudyLED-23435t23-container { max-width: 520px; margin: 0 auto; padding: 0 !important; box-sizing: border-box; width: 100%; display: block; position: relative; z-index: 1; }
         /* 2. MAIN IMAGE */
         .buudyLED-23435t23-main_wrapper { position: relative; width: 100%; padding-bottom: 100%; background-color: transparent; margin-bottom: 20px; border-radius: 25px; overflow: hidden; cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); box-sizing: border-box; }
         .buudyLED-23435t23-main_img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
@@ -222,10 +206,10 @@ export function ProductGallery({
           padding: 0;
         }
         .buudy-gallery-badge__title {
-          font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-          font-size: clamp(16px, 2.2vw, 20px);
-          font-weight: 800;
-          line-height: 1.18;
+          font-family: var(--font-fraunces), var(--font-serif), ui-serif, Georgia, serif;
+          font-size: clamp(15.5px, 2.1vw, 19.5px);
+          font-weight: 700;
+          line-height: 1.15;
           letter-spacing: 0.01em;
           text-transform: uppercase;
           color: #111111;
@@ -391,22 +375,21 @@ export function ProductGallery({
                 padding-bottom: 4px;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
-                scrollbar-width: none; /* Firefox */
-                -ms-overflow-style: none; /* IE/Edge */
+                scrollbar-width: none;
+                -ms-overflow-style: none;
             } 
-            /* Hide scrollbar for Chrome/Safari/Opera */
             .buudyLED-23435t23-grid::-webkit-scrollbar {
                 display: none;
             }
             .buudyLED-23435t23-thumb_item {
-                flex: 0 0 28%; /* Show ~3.5 items to hint at scrolling */
+                flex: 0 0 28%;
                 min-width: 80px; 
-                padding: 0; /* Override desktop padding hack */
-                aspect-ratio: 1 / 1; /* Maintain perfect square */
+                padding: 0;
+                aspect-ratio: 1 / 1;
                 scroll-snap-align: start;
             }
             .buudyLED-23435t23-thumb_img {
-                height: 100%; /* Reset the 100.5% height to exact fit */
+                height: 100%;
             }
         }
       `,
@@ -419,8 +402,6 @@ export function ProductGallery({
       >
         <div
           className="buudyLED-23435t23-main_wrapper"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
@@ -449,17 +430,14 @@ export function ProductGallery({
                 onClick={() => openLightbox(index)}
               >
                 {isVideo ? (
-                  <video
+                  <GalleryVideo
                     src={image.src}
+                    isActive={isActive}
                     id={isActive ? "buudyLED-23435t23-MainImg" : undefined}
                     className="buudyLED-23435t23-main_img"
-                    autoPlay={isActive}
-                    muted
-                    loop
-                    playsInline
                   />
                 ) : (
-                  <StoreImg
+                  <img
                     src={image.src}
                     id={isActive ? "buudyLED-23435t23-MainImg" : undefined}
                     className="buudyLED-23435t23-main_img"
@@ -479,7 +457,7 @@ export function ProductGallery({
             );
           })}
 
-          <StoreButton
+          <button
             className="buudyLED-23435t23-arrow buudyLED-23435t23-prev"
             aria-label="Previous Image"
             onClick={(e) => {
@@ -489,8 +467,8 @@ export function ProductGallery({
             }}
           >
             <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_left" />
-          </StoreButton>
-          <StoreButton
+          </button>
+          <button
             className="buudyLED-23435t23-arrow buudyLED-23435t23-next"
             aria-label="Next Image"
             onClick={(e) => {
@@ -500,28 +478,24 @@ export function ProductGallery({
             }}
           >
             <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_right" />
-          </StoreButton>
+          </button>
         </div>
 
         <div
           className="buudyLED-23435t23-grid"
           id="buudyLED-23435t23-Thumbs"
           ref={thumbsRef}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onTouchStart={() => setIsPaused(true)}
-          onTouchEnd={() => setIsPaused(false)}
         >
           {images.map((image, index) => (
-            <StoreButton
-              aria-label={`Magnify ${image.alt}`}
+            <button
+              aria-label={`Select ${image.alt}`}
               key={image.src}
               className={`buudyLED-23435t23-thumb_item ${
                 index === currentIndex ? "buudyLED-23435t23-active" : ""
               }`}
               onClick={(e) => {
                 e.stopPropagation();
-                openLightbox(index);
+                setCurrentIndex(index);
               }}
               type="button"
             >
@@ -535,7 +509,7 @@ export function ProductGallery({
                   playsInline
                 />
               ) : (
-                <StoreImg
+                <img
                   src={image.src}
                   className="buudyLED-23435t23-thumb_img"
                   alt={image.alt}
@@ -544,7 +518,7 @@ export function ProductGallery({
                   loading="lazy"
                 />
               )}
-            </StoreButton>
+            </button>
           ))}
         </div>
       </div>
@@ -573,7 +547,7 @@ export function ProductGallery({
                   }
                 }}
               >
-                <StoreButton
+                <button
                   className="buudyLED-23435t23-close"
                   id="buudyLED-23435t23-ModalClose"
                   aria-label="Close View"
@@ -581,8 +555,8 @@ export function ProductGallery({
                   ref={closeButtonRef}
                 >
                   <X aria-hidden="true" size={24} />
-                </StoreButton>
-                <StoreButton
+                </button>
+                <button
                   className="buudyLED-23435t23-arrow buudyLED-23435t23-modal_nav buudyLED-23435t23-prev"
                   id="buudyLED-23435t23-ModalPrev"
                   aria-label="Previous Image"
@@ -592,7 +566,7 @@ export function ProductGallery({
                   }}
                 >
                   <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_left" />
-                </StoreButton>
+                </button>
                 <div className="buudyLED-23435t23-lightbox_stage">
                   {images[currentIndex]?.src?.endsWith(".mp4") ||
                   images[currentIndex]?.src?.endsWith(".webm") ? (
@@ -604,9 +578,10 @@ export function ProductGallery({
                       muted
                       loop
                       playsInline
+                      controls
                     />
                   ) : (
-                    <StoreImg
+                    <img
                       className="buudyLED-23435t23-lightbox_img"
                       id="buudyLED-23435t23-ModalImg"
                       src={images[currentIndex]?.src}
@@ -620,7 +595,7 @@ export function ProductGallery({
                     </div>
                   )}
                 </div>
-                <StoreButton
+                <button
                   className="buudyLED-23435t23-arrow buudyLED-23435t23-modal_nav buudyLED-23435t23-next"
                   id="buudyLED-23435t23-ModalNext"
                   aria-label="Next Image"
@@ -630,7 +605,7 @@ export function ProductGallery({
                   }}
                 >
                   <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_right" />
-                </StoreButton>
+                </button>
               </div>
             </div>,
             document.body,
@@ -647,7 +622,6 @@ function GalleryImageBadge({
   badge: NonNullable<ProductImage["badge"]>;
   isLightbox?: boolean;
 }) {
-  const { text } = useStoreLocale();
   const positionClass = badge.position
     ? `buudy-gallery-badge--${badge.position}`
     : "buudy-gallery-badge--top-left";
@@ -660,17 +634,71 @@ function GalleryImageBadge({
     >
       <div className="buudy-gallery-badge__header">
         <span className="buudy-gallery-badge__title">
-          {text(badge.title).split("\n").map((line, idx, arr) => (
+          {badge.title.split("\n").map((line, idx, arr) => (
             <span key={idx}>
-              <StoreText>{line}</StoreText>
+              {line}
               {idx < arr.length - 1 && <br />}
             </span>
           ))}
         </span>
       </div>
       {badge.sub && (
-        <span className="buudy-gallery-badge__sub"><StoreText>{badge.sub}</StoreText></span>
+        <span className="buudy-gallery-badge__sub">
+          {badge.sub.split("\n").map((line, idx, arr) => (
+            <span key={idx}>
+              {line}
+              {idx < arr.length - 1 && <br />}
+            </span>
+          ))}
+        </span>
       )}
     </div>
+  );
+}
+
+function GalleryVideo({
+  src,
+  isActive,
+  id,
+  className,
+}: {
+  src: string;
+  isActive: boolean;
+  id?: string;
+  className?: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isActive) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.currentTime = 0;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      video.pause();
+    }
+  }, [isActive]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      id={id}
+      className={className}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+    />
   );
 }

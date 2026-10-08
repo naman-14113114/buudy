@@ -14,6 +14,8 @@ const routes = [
   { path: "/pages/buudy-led-torch", lastModified: "2026-06-16" },
   { path: "/pages/skincare-ebook", lastModified: "2026-09-29" },
   { path: "/ebook", lastModified: "2026-09-29" },
+  { path: "/pages/press", lastModified: "2026-09-29" },
+  { path: "/press", lastModified: "2026-09-29" },
   { path: "/policies/shipping-policy", lastModified: "2026-06-16" },
   { path: "/policies/return-policy", lastModified: "2026-06-16" },
   { path: "/policies/refund-policy", lastModified: "2026-06-16" },
