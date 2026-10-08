@@ -197,7 +197,7 @@ export function GiftBundle({ product }: { product: Product }) {
       {/* Cleopatra Edition Ribbon on all mask pages */}
       {product.template === "mask" && (
         <div className="mt-2 mb-1 flex items-center">
-          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--plum)] bg-[rgba(184,149,86,.18)] px-2.5 py-0.5 rounded-md">
+          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--cream)] bg-[var(--ink)] px-2.5 py-0.5 rounded-md">
             Cleopatra Edition
           </span>
         </div>

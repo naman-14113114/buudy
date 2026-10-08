@@ -33,7 +33,7 @@ interface BeforeAfterItem {
 const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-dark-spots-pigmentation-uk.webp",
-    alt: "Buudy 7 Colour LED Face Mask before and after results: fades dark spots and sun-induced hyperpigmentation Australia",
+    alt: "Buudy 7 Colour LED Face Mask before and after results: fades dark spots and sun-induced hyperpigmentation UK",
     concern: "Fades Dark Spots & Pigmentation",
     pills: [
       { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -43,7 +43,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-acne-breakouts-complexion-uk.webp",
-    alt: "Buudy 7 Colour LED Mask before and after clinical results: clears active acne breakouts and calms inflamed complexion Australia",
+    alt: "Buudy 7 Colour LED Mask before and after clinical results: clears active acne breakouts and calms inflamed complexion UK",
     concern: "Clears Acne & Blemishes",
     pills: [
       { text: "2-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -53,7 +53,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-blemish-clarity-radiance-uk.webp",
-    alt: "Buudy 7 Colour LED Face Mask before and after transformation: clears post-acne marks and enhances skin radiance Australia",
+    alt: "Buudy 7 Colour LED Face Mask before and after transformation: clears post-acne marks and enhances skin radiance UK",
     concern: "Improves Skin Texture & Radiance",
     pills: [
       { text: "3-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -63,7 +63,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-anti-ageing-eye-wrinkles-uk.webp",
-    alt: "Buudy 7 Colour LED Mask before and after anti-ageing results: visibly reduces crow's feet and eye-area fine lines Australia",
+    alt: "Buudy 7 Colour LED Mask before and after anti-ageing results: visibly reduces crow's feet and eye-area fine lines UK",
     concern: "Smooths Fine Lines & Wrinkles",
     pills: [
       { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -73,7 +73,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-cystic-acne-jawline-uk.webp",
-    alt: "Buudy 7 Colour LED Mask before and after results: eliminates persistent cystic acne and smooths lower cheek and jawline Australia",
+    alt: "Buudy 7 Colour LED Mask before and after results: eliminates persistent cystic acne and smooths lower cheek and jawline UK",
     concern: "Targets Cystic Acne & Breakouts",
     pills: [
       { text: "3-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -83,7 +83,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-calms-redness-rosacea-uk.webp",
-    alt: "Buudy 7 Colour LED Face Mask before and after: calms facial redness, sensitivity and rosacea flush Australia",
+    alt: "Buudy 7 Colour LED Face Mask before and after: calms facial redness, sensitivity and rosacea flush UK",
     concern: "Calms Redness & Rosacea",
     pills: [
       { text: "2-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -93,7 +93,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-evens-skin-tone-smoothing-uk.webp",
-    alt: "Buudy 7 Colour LED Mask before and after clinical comparison: evens mottled skin tone and smooths fine texture Australia",
+    alt: "Buudy 7 Colour LED Mask before and after clinical comparison: evens mottled skin tone and smooths fine texture UK",
     concern: "Evens Skin Tone & Smoothing",
     pills: [
       { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -136,12 +136,14 @@ export function OmniluxProductGallery({
 }) {
   // Build unified continuous array: Gallery + 7 Before & After + 2 Videos in sequence
   const allMediaItems: MediaItem[] = useMemo(() => {
-    const galleryItems: MediaItem[] = images.map((img) => ({
-      type: "gallery",
-      src: img.src,
-      alt: img.alt,
-      badge: img.badge,
-    }));
+    const galleryItems: MediaItem[] = images
+      .filter((img) => !img.pills)
+      .map((img) => ({
+        type: "gallery",
+        src: img.src,
+        alt: img.alt,
+        badge: img.badge,
+      }));
 
     const beforeAfterItems: MediaItem[] = GALLERY_BEFORE_AFTER_ITEMS.map((item) => ({
       type: "before-after",
@@ -160,18 +162,23 @@ export function OmniluxProductGallery({
       {
         type: "video",
         src: HOW_TO_USE_VIDEO_SRC,
-        alt: "Buudy 7 Colour LED Face Mask how to use guide and 4-step daily ritual video Australia",
+        alt: "Buudy 7 Colour LED Face Mask how to use guide and 4-step daily ritual video UK",
       },
     ];
 
     return [...galleryItems, ...beforeAfterItems, ...videoItems];
   }, [images]);
 
-  const galleryStartIndex = 0;
-  const beforeAfterStartIndex = images.length;
-  const videoStartIndex = images.length + GALLERY_BEFORE_AFTER_ITEMS.length;
+  const nonPillImagesCount = useMemo(
+    () => images.filter((img) => !img.pills).length,
+    [images],
+  );
 
-  // Current global media index (0..23). By default always starts on first gallery image (0)
+  const galleryStartIndex = 0;
+  const beforeAfterStartIndex = nonPillImagesCount;
+  const videoStartIndex = nonPillImagesCount + GALLERY_BEFORE_AFTER_ITEMS.length;
+
+  // Current global media index. By default always starts on first gallery image (0)
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hoverSide, setHoverSide] = useState<"left" | "right">("right");
 
@@ -231,7 +238,7 @@ export function OmniluxProductGallery({
     }
   }, [goNext, goPrev]);
 
-  // Dynamic Thumbnail Centering Scroll: centers active thumbnail vertically on desktop & horizontally on mobile
+  // Dynamic Thumbnail Centering Scroll (1:1 from Miroooo): centers active thumbnail vertically on desktop & horizontally on mobile
   useEffect(() => {
     const track = thumbsTrackRef.current;
     if (!track) return;
@@ -617,7 +624,7 @@ export function OmniluxProductGallery({
           transform: scale(1.08);
         }
 
-        /* 4. EDITORIAL INFOGRAPHIC BADGES */
+        /* 4. EDITORIAL INFOGRAPHIC BADGES (RESTORED SLIDE-IN MOTION ANIMATIONS) */
         .buudy-gallery-badge {
           position: absolute;
           z-index: 6;
@@ -796,7 +803,7 @@ export function OmniluxProductGallery({
           font-size: clamp(12px, 1.3vw, 15px);
         }
 
-        /* 5. LIGHTBOX OVERLAY */
+        /* 5. LIGHTBOX OVERLAY (1:1 IDENTICAL WITH BUUDY-LED-MASK PRODUCTGALLERY) */
         .buudyLED-23435t23-lightbox {
           position: fixed;
           top: 0;
@@ -1259,7 +1266,7 @@ export function OmniluxProductGallery({
         </div>
       </div>
 
-      {/* FULLSCREEN LIGHTBOX MODAL */}
+      {/* FULLSCREEN LIGHTBOX MODAL (1:1 IDENTICAL WITH BUUDY-LED-MASK PRODUCTGALLERY) */}
       {isLightboxOpen && typeof document !== "undefined"
         ? createPortal(
             <div

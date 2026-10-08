@@ -21,7 +21,7 @@ import { TrustBadges } from "./TrustBadges";
 export function ProductPage({
   product,
   variant,
-  galleryVariant = "default",
+  galleryVariant = product.template === "mask" ? "omnilux" : "default",
 }: {
   product: Product;
   variant?: string;

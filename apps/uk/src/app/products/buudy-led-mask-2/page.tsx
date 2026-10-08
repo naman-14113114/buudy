@@ -93,7 +93,7 @@ export default function BuudyMaskProductRouteTwo() {
           type="application/ld+json"
         />
       ))}
-      <ProductPage product={pageProduct} />
+      <ProductPage product={pageProduct} galleryVariant="omnilux" />
     </>
   );
 }

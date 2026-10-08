@@ -365,7 +365,58 @@ export function ProductGallery({
           }
         }
 
-        /* 7. STACKED RESPONSIVENESS */
+        /* 7. BEFORE & AFTER 3 BOTTOM OVAL PILLS */
+        .omni-ba-pills-row {
+          position: absolute;
+          bottom: clamp(12px, 1.8vw, 18px);
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: clamp(6px, 1vw, 10px);
+          width: auto;
+          max-width: calc(100% - 24px);
+          z-index: 10;
+          pointer-events: none;
+        }
+        .omni-ba-pill {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: clamp(4px, 0.6vw, 6.5px) clamp(10px, 1.2vw, 15px);
+          border-radius: 9999px;
+          font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          font-size: clamp(10.5px, 1.15vw, 12.5px);
+          font-weight: 600;
+          letter-spacing: 0.01em;
+          white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+          border-width: 1px;
+          border-style: solid;
+          animation: buudyBadgeSlideInUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+          will-change: opacity, transform;
+        }
+        @keyframes buudyBadgeSlideInUp {
+          0% {
+            opacity: 0;
+            transform: translate3d(0, 18px, 0);
+          }
+          100% {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        .omni-ba-pills-row--lightbox {
+          bottom: clamp(20px, 3vw, 32px);
+          gap: clamp(8px, 1.5vw, 14px);
+        }
+        .omni-ba-pill--lightbox {
+          padding: clamp(6px, 0.9vw, 9px) clamp(14px, 1.8vw, 20px);
+          font-size: clamp(12px, 1.3vw, 15px);
+        }
+
+        /* 8. STACKED RESPONSIVENESS */
         @media (max-width: 1023px) { 
             .buudyLED-23435t23-grid { 
                 display: flex; 
@@ -452,6 +503,28 @@ export function ProductGallery({
                 {isActive && image.badge && (
                   <div key={`badge-${index}-${image.src}`}>
                     <GalleryImageBadge badge={image.badge} />
+                  </div>
+                )}
+
+                {isActive && image.pills && (
+                  <div
+                    key={`ba-pills-${index}-${image.src}`}
+                    className="omni-ba-pills-row"
+                  >
+                    {image.pills.map((pill, pIdx) => (
+                      <span
+                        key={pIdx}
+                        className="omni-ba-pill"
+                        style={{
+                          backgroundColor: pill.bg,
+                          color: pill.textColor,
+                          borderColor: pill.borderColor || "transparent",
+                          animationDelay: `${0.08 + pIdx * 0.08}s`,
+                        }}
+                      >
+                        {pill.text}
+                      </span>
+                    ))}
                   </div>
                 )}
               </div>
@@ -593,6 +666,27 @@ export function ProductGallery({
                   {images[currentIndex]?.badge && (
                     <div key={`modal-badge-${currentIndex}-${images[currentIndex]?.src}`}>
                       <GalleryImageBadge badge={images[currentIndex].badge!} isLightbox />
+                    </div>
+                  )}
+                  {images[currentIndex]?.pills && (
+                    <div
+                      key={`modal-ba-pills-${currentIndex}-${images[currentIndex]?.src}`}
+                      className="omni-ba-pills-row omni-ba-pills-row--lightbox"
+                    >
+                      {images[currentIndex].pills!.map((pill, pIdx) => (
+                        <span
+                          key={pIdx}
+                          className="omni-ba-pill omni-ba-pill--lightbox"
+                          style={{
+                            backgroundColor: pill.bg,
+                            color: pill.textColor,
+                            borderColor: pill.borderColor || "transparent",
+                            animationDelay: `${0.08 + pIdx * 0.08}s`,
+                          }}
+                        >
+                          {pill.text}
+                        </span>
+                      ))}
                     </div>
                   )}
                 </div>

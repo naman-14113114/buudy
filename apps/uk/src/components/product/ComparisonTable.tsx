@@ -276,11 +276,6 @@ export function ComparisonTable() {
             values={[<CheckIcon key="1" />, <CheckIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
 
-          <ComparisonRow
-            title="Free UK Delivery"
-            subtitle="Fast, tracked next-day dispatch"
-            values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
-          />
 
           <ComparisonRow
             title="Free £70 Torch Included"

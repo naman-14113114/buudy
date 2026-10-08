@@ -15,7 +15,6 @@ import {
   X,
 } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
-
 interface BeforeAfterPill {
   text: string;
   bg: string;
@@ -34,7 +33,7 @@ interface BeforeAfterItem {
 const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-dark-spots-pigmentation-uk.webp",
-    alt: "Buudy 7 Colour LED Face Mask before and after results: fades dark spots and sun-induced hyperpigmentation Canada",
+    alt: "Buudy 7 Colour LED Face Mask before and after results: fades dark spots and sun-induced hyperpigmentation UK",
     concern: "Fades Dark Spots & Pigmentation",
     pills: [
       { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -44,7 +43,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-acne-breakouts-complexion-uk.webp",
-    alt: "Buudy 7 Colour LED Mask before and after clinical results: clears active acne breakouts and calms inflamed complexion Canada",
+    alt: "Buudy 7 Colour LED Mask before and after clinical results: clears active acne breakouts and calms inflamed complexion UK",
     concern: "Clears Acne & Blemishes",
     pills: [
       { text: "2-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -54,7 +53,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-blemish-clarity-radiance-uk.webp",
-    alt: "Buudy 7 Colour LED Face Mask before and after transformation: clears post-acne marks and enhances skin radiance Canada",
+    alt: "Buudy 7 Colour LED Face Mask before and after transformation: clears post-acne marks and enhances skin radiance UK",
     concern: "Improves Skin Texture & Radiance",
     pills: [
       { text: "3-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -64,7 +63,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-anti-ageing-eye-wrinkles-uk.webp",
-    alt: "Buudy 7 Colour LED Mask before and after anti-ageing results: visibly reduces crow's feet and eye-area fine lines Canada",
+    alt: "Buudy 7 Colour LED Mask before and after anti-ageing results: visibly reduces crow's feet and eye-area fine lines UK",
     concern: "Smooths Fine Lines & Wrinkles",
     pills: [
       { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -74,7 +73,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-cystic-acne-jawline-uk.webp",
-    alt: "Buudy 7 Colour LED Mask before and after results: eliminates persistent cystic acne and smooths lower cheek and jawline Canada",
+    alt: "Buudy 7 Colour LED Mask before and after results: eliminates persistent cystic acne and smooths lower cheek and jawline UK",
     concern: "Targets Cystic Acne & Breakouts",
     pills: [
       { text: "3-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -84,7 +83,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-calms-redness-rosacea-uk.webp",
-    alt: "Buudy 7 Colour LED Face Mask before and after: calms facial redness, sensitivity and rosacea flush Canada",
+    alt: "Buudy 7 Colour LED Face Mask before and after: calms facial redness, sensitivity and rosacea flush UK",
     concern: "Calms Redness & Rosacea",
     pills: [
       { text: "2-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -94,7 +93,7 @@ const GALLERY_BEFORE_AFTER_ITEMS: BeforeAfterItem[] = [
   },
   {
     src: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-before-after-evens-skin-tone-smoothing-uk.webp",
-    alt: "Buudy 7 Colour LED Mask before and after clinical comparison: evens mottled skin tone and smooths fine texture Canada",
+    alt: "Buudy 7 Colour LED Mask before and after clinical comparison: evens mottled skin tone and smooths fine texture UK",
     concern: "Evens Skin Tone & Smoothing",
     pills: [
       { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
@@ -137,12 +136,14 @@ export function OmniluxProductGallery({
 }) {
   // Build unified continuous array: Gallery + 7 Before & After + 2 Videos in sequence
   const allMediaItems: MediaItem[] = useMemo(() => {
-    const galleryItems: MediaItem[] = images.map((img) => ({
-      type: "gallery",
-      src: img.src,
-      alt: img.alt,
-      badge: img.badge,
-    }));
+    const galleryItems: MediaItem[] = images
+      .filter((img) => !img.pills)
+      .map((img) => ({
+        type: "gallery",
+        src: img.src,
+        alt: img.alt,
+        badge: img.badge,
+      }));
 
     const beforeAfterItems: MediaItem[] = GALLERY_BEFORE_AFTER_ITEMS.map((item) => ({
       type: "before-after",
@@ -161,18 +162,23 @@ export function OmniluxProductGallery({
       {
         type: "video",
         src: HOW_TO_USE_VIDEO_SRC,
-        alt: "Buudy 7 Colour LED Face Mask how to use guide and 4-step daily ritual video Canada",
+        alt: "Buudy 7 Colour LED Face Mask how to use guide and 4-step daily ritual video UK",
       },
     ];
 
     return [...galleryItems, ...beforeAfterItems, ...videoItems];
   }, [images]);
 
-  const galleryStartIndex = 0;
-  const beforeAfterStartIndex = images.length; // e.g. 17
-  const videoStartIndex = images.length + GALLERY_BEFORE_AFTER_ITEMS.length; // e.g. 21
+  const nonPillImagesCount = useMemo(
+    () => images.filter((img) => !img.pills).length,
+    [images],
+  );
 
-  // Current global media index (0..23). By default always starts on first gallery image (0)
+  const galleryStartIndex = 0;
+  const beforeAfterStartIndex = nonPillImagesCount;
+  const videoStartIndex = nonPillImagesCount + GALLERY_BEFORE_AFTER_ITEMS.length;
+
+  // Current global media index. By default always starts on first gallery image (0)
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hoverSide, setHoverSide] = useState<"left" | "right">("right");
 
@@ -232,7 +238,7 @@ export function OmniluxProductGallery({
     }
   }, [goNext, goPrev]);
 
-  // Dynamic Thumbnail Centering Scroll: centers active thumbnail vertically on desktop & horizontally on mobile
+  // Dynamic Thumbnail Centering Scroll (1:1 from Miroooo): centers active thumbnail vertically on desktop & horizontally on mobile
   useEffect(() => {
     const track = thumbsTrackRef.current;
     if (!track) return;
@@ -503,7 +509,7 @@ export function OmniluxProductGallery({
           object-fit: contain !important;
         }
 
-        /* 2. TABS SELECTOR ROW DIRECTLY BELOW MAIN IMAGE */
+        /* 2. TABS SELECTOR ROW DIRECTLY BELOW MAIN IMAGE (TIGHT PADDING, SINGLE LINE) */
         .omni-tabs-row {
           display: flex;
           align-items: center;
@@ -618,7 +624,7 @@ export function OmniluxProductGallery({
           transform: scale(1.08);
         }
 
-        /* 4. EDITORIAL INFOGRAPHIC BADGES */
+        /* 4. EDITORIAL INFOGRAPHIC BADGES (RESTORED SLIDE-IN MOTION ANIMATIONS) */
         .buudy-gallery-badge {
           position: absolute;
           z-index: 6;
@@ -797,7 +803,7 @@ export function OmniluxProductGallery({
           font-size: clamp(12px, 1.3vw, 15px);
         }
 
-        /* 5. LIGHTBOX OVERLAY */
+        /* 5. LIGHTBOX OVERLAY (1:1 IDENTICAL WITH BUUDY-LED-MASK PRODUCTGALLERY) */
         .buudyLED-23435t23-lightbox {
           position: fixed;
           top: 0;
@@ -1004,8 +1010,9 @@ export function OmniluxProductGallery({
       />
 
       <div className="omni-gallery-container" id="buudyOmniluxGallery">
-        {/* LEFT VERTICAL THUMBNAIL TRACK */}
+        {/* LEFT VERTICAL THUMBNAIL TRACK WITH MIROOOO ARROW NAVIGATION */}
         <div className="omni-thumbs-wrapper">
+          {/* Top / Prev Thumbnail Arrow */}
           <button
             type="button"
             aria-label="Previous thumbnail"
@@ -1057,6 +1064,7 @@ export function OmniluxProductGallery({
             ))}
           </div>
 
+          {/* Bottom / Next Thumbnail Arrow */}
           <button
             type="button"
             aria-label="Next thumbnail"
@@ -1070,7 +1078,9 @@ export function OmniluxProductGallery({
 
         {/* RIGHT MAIN GALLERY COLUMN (STAGE + TABS) */}
         <div className="omni-gallery-main-col">
+          {/* TOP MAIN DISPLAY STAGE ROW */}
           <div className="omni-stage-row">
+            {/* MAIN DISPLAY STAGE WITH DYNAMIC < AND > HOVER CURSORS */}
             <div
               className={`omni-main-stage ${
                 hoverSide === "left"
@@ -1109,7 +1119,7 @@ export function OmniluxProductGallery({
                 </div>
               )}
 
-              {/* 2. BEFORE & AFTER DISPLAY */}
+              {/* 2. BEFORE & AFTER DISPLAY (With 3 Bottom Treatment Pills) */}
               {currentItem.type === "before-after" && (
                 <div className="omni-main-img-wrap">
                   <img
@@ -1143,7 +1153,7 @@ export function OmniluxProductGallery({
                 </div>
               )}
 
-              {/* 3. DEDICATED VIDEO DISPLAY */}
+              {/* 3. DEDICATED VIDEO DISPLAY (Footer Guarantee Video & How-To-Use Video) */}
               {currentItem.type === "video" && (
                 <div className="omni-video-wrapper">
                   <video
@@ -1160,6 +1170,7 @@ export function OmniluxProductGallery({
                     onPause={() => setIsVideoPlaying(false)}
                   />
 
+                  {/* Centered Play / Pause Button Overlay */}
                   <button
                     type="button"
                     aria-label={isVideoPlaying ? "Pause video" : "Play video"}
@@ -1178,6 +1189,7 @@ export function OmniluxProductGallery({
                     )}
                   </button>
 
+                  {/* Bottom Right Controls: Mute + Enlarge/Expand Lightbox */}
                   <div className="omni-video-controls-bottom-right">
                     <button
                       type="button"
@@ -1207,8 +1219,9 @@ export function OmniluxProductGallery({
             </div>
           </div>
 
-          {/* 3 TABS SELECTOR ROW */}
+          {/* 3 OPTIONS / TABS SELECTOR ROW DIRECTLY BELOW MAIN IMAGE (Beige/Gold Star Dot) */}
           <div className="omni-tabs-row" role="tablist" aria-label="Product Media Options">
+            {/* TAB 1: GALLERY */}
             <button
               type="button"
               role="tab"
@@ -1222,6 +1235,7 @@ export function OmniluxProductGallery({
               Gallery
             </button>
 
+            {/* TAB 2: BEFORE & AFTER */}
             <button
               type="button"
               role="tab"
@@ -1235,6 +1249,7 @@ export function OmniluxProductGallery({
               Before & After
             </button>
 
+            {/* TAB 3: VIDEO */}
             <button
               type="button"
               role="tab"
@@ -1251,7 +1266,7 @@ export function OmniluxProductGallery({
         </div>
       </div>
 
-      {/* FULLSCREEN LIGHTBOX MODAL */}
+      {/* FULLSCREEN LIGHTBOX MODAL (1:1 IDENTICAL WITH BUUDY-LED-MASK PRODUCTGALLERY) */}
       {isLightboxOpen && typeof document !== "undefined"
         ? createPortal(
             <div

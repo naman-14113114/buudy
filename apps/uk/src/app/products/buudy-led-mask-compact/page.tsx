@@ -72,7 +72,7 @@ export default function CompactBuudyMaskProductRoute() {
           type="application/ld+json"
         />
       ))}
-      <ProductPage product={pageProduct} variant="compact" />
+      <ProductPage product={pageProduct} variant="compact" galleryVariant="omnilux" />
     </>
   );
 }

@@ -136,12 +136,14 @@ export function OmniluxProductGallery({
 }) {
   // Build unified continuous array: Gallery + 7 Before & After + 2 Videos in sequence
   const allMediaItems: MediaItem[] = useMemo(() => {
-    const galleryItems: MediaItem[] = images.map((img) => ({
-      type: "gallery",
-      src: img.src,
-      alt: img.alt,
-      badge: img.badge,
-    }));
+    const galleryItems: MediaItem[] = images
+      .filter((img) => !img.pills)
+      .map((img) => ({
+        type: "gallery",
+        src: img.src,
+        alt: img.alt,
+        badge: img.badge,
+      }));
 
     const beforeAfterItems: MediaItem[] = GALLERY_BEFORE_AFTER_ITEMS.map((item) => ({
       type: "before-after",
@@ -167,11 +169,16 @@ export function OmniluxProductGallery({
     return [...galleryItems, ...beforeAfterItems, ...videoItems];
   }, [images]);
 
-  const galleryStartIndex = 0;
-  const beforeAfterStartIndex = images.length; // e.g. 17
-  const videoStartIndex = images.length + GALLERY_BEFORE_AFTER_ITEMS.length; // e.g. 21
+  const nonPillImagesCount = useMemo(
+    () => images.filter((img) => !img.pills).length,
+    [images],
+  );
 
-  // Current global media index (0..23). By default always starts on first gallery image (0)
+  const galleryStartIndex = 0;
+  const beforeAfterStartIndex = nonPillImagesCount;
+  const videoStartIndex = nonPillImagesCount + GALLERY_BEFORE_AFTER_ITEMS.length;
+
+  // Current global media index. By default always starts on first gallery image (0)
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hoverSide, setHoverSide] = useState<"left" | "right">("right");
 

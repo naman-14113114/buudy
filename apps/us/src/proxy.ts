@@ -2,45 +2,26 @@ import { type NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import type { Database } from "@/types/database";
 import { getSupabaseConfig, isSupabaseConfigured } from "@/lib/supabase/config";
-import { resolveLanguage, localePath, hasLocale } from '@/lib/international/markets';
-import { localizedStorefrontEnabled, isPublishedLocalizedPath } from '@/lib/international/rollout';
+import { getMaskLandingPage, MASK_CHECKOUT_PRODUCT_ID } from "@/lib/maskLandingPages";
 
 export async function proxy(request: NextRequest) {
-  const prefix=request.nextUrl.pathname.split('/')[1];
-  const unprefixedPath=request.nextUrl.pathname.slice(prefix.length+1)||'/';
-  if(!localizedStorefrontEnabled&&prefix!=='en'&&hasLocale(prefix)&&!isPublishedLocalizedPath(prefix,unprefixedPath)){
-    const target=request.nextUrl.clone();
-    target.pathname=request.nextUrl.pathname.slice(prefix.length+1)||'/';
-    const response=NextResponse.redirect(target,307);
-    response.headers.set('Cache-Control','private, no-store');
-    return response;
+  const country = request.headers.get("x-vercel-ip-country");
+
+  // Redirect visitors from specific countries
+  const blockedCountries = ["VN", "HK", "CN", "SG"];
+  if (country && blockedCountries.includes(country)) {
+    return NextResponse.redirect("https://buudy.com", 308);
   }
-  // Select only a complete original-template translation; unfinished routes stay English.
-  if(request.nextUrl.pathname==='/products/buudy-led-mask') {
-    const locale=resolveLanguage(request.cookies.get('buudy_language')?.value,request.headers.get('accept-language') || undefined,request.headers.get('x-vercel-ip-country') || undefined);
-    if(isPublishedLocalizedPath(locale,request.nextUrl.pathname)) {
-      const target=request.nextUrl.clone();target.pathname=localePath(locale,request.nextUrl.pathname);
-      const redirect=NextResponse.redirect(target,307);
-      redirect.headers.set('Cache-Control','private, no-store');
-      redirect.headers.set('Vary','Accept-Language, Cookie, X-Vercel-IP-Country');
-      return redirect;
+  const landingPage = getMaskLandingPage(request.nextUrl.pathname);
+  function createResponse() {
+    const nextResponse = NextResponse.next({ request });
+    if (landingPage) {
+      nextResponse.headers.set("X-Buudy-Landing-Id", landingPage.id);
+      nextResponse.headers.set("X-Buudy-Checkout-Product", MASK_CHECKOUT_PRODUCT_ID);
     }
+    return nextResponse;
   }
-  // Only the neutral homepage chooses a first-visit language. Deep links,
-  // APIs and explicit language URLs always keep their URL-defined content.
-  if(localizedStorefrontEnabled&&request.nextUrl.pathname==='/') {
-    const locale=resolveLanguage(request.cookies.get('buudy_language')?.value,request.headers.get('accept-language') || undefined,request.headers.get('x-vercel-ip-country') || undefined);
-    if(locale!=='en') {
-      const target=request.nextUrl.clone();target.pathname=localePath(locale);
-      const redirect=NextResponse.redirect(target,307);
-      redirect.headers.set('Cache-Control','private, no-store');
-      redirect.headers.set('Vary','Accept-Language, Cookie, X-Vercel-IP-Country');
-      return redirect;
-    }
-  }
-  let response = NextResponse.next({
-    request,
-  });
+  let response = createResponse();
 
   if (!isSupabaseConfigured()) {
     return response;
@@ -62,9 +43,7 @@ export async function proxy(request: NextRequest) {
           request.cookies.set(name, value);
         });
 
-        response = NextResponse.next({
-          request,
-        });
+        response = createResponse();
 
         cookiesToSet.forEach(({ name, value, options }) => {
           response.cookies.set(name, value, options);

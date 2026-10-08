@@ -174,6 +174,15 @@ export const fullLedMaskGallery: ProductImage[] = [
     },
   },
   {
+    src: productAsset("buudy-7-colour-led-mask-before-after-acne-breakouts-complexion-uk.webp"),
+    alt: "Buudy 7 Colour LED Mask before and after clinical results: clears active acne breakouts and calms inflamed complexion UK",
+    pills: [
+      { text: "2-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Blue 7-min", bg: "#2563EB", textColor: "#FFFFFF" },
+      { text: "Yellow 3-min", bg: "#EAB308", textColor: "#1C1917" },
+    ],
+  },
+  {
     src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
     alt: "Buudy LED Mask red light therapy mode for anti-ageing and collagen stimulation",
     badge: {
@@ -182,6 +191,15 @@ export const fullLedMaskGallery: ProductImage[] = [
       position: "top-left",
       theme: "white",
     },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-before-after-anti-ageing-eye-wrinkles-uk.webp"),
+    alt: "Buudy 7 Colour LED Mask before and after anti-ageing results: visibly reduces crow's feet and eye-area fine lines UK",
+    pills: [
+      { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Red 6-min", bg: "#DC2626", textColor: "#FFFFFF" },
+      { text: "White 4-min", bg: "#FFFFFF", textColor: "#1C1917", borderColor: "rgba(0, 0, 0, 0.18)" },
+    ],
   },
   {
     src: productAsset("buudy-7-colour-led-mask-uk-anti-ageing-red-light-therapy.webp"),
@@ -194,6 +212,15 @@ export const fullLedMaskGallery: ProductImage[] = [
     },
   },
   {
+    src: productAsset("buudy-7-colour-led-mask-before-after-blemish-clarity-radiance-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask before and after transformation: clears post-acne marks and enhances skin radiance UK",
+    pills: [
+      { text: "3-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Purple 3-min", bg: "#9333EA", textColor: "#FFFFFF" },
+      { text: "Blue 7-min", bg: "#2563EB", textColor: "#FFFFFF" },
+    ],
+  },
+  {
     src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
     alt: "Buudy LED Mask green light mode for dark spots and even skin tone",
     badge: {
@@ -202,6 +229,15 @@ export const fullLedMaskGallery: ProductImage[] = [
       position: "top-left",
       theme: "white",
     },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-before-after-dark-spots-pigmentation-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask before and after results: fades dark spots and sun-induced hyperpigmentation UK",
+    pills: [
+      { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Green 7-min", bg: "#16A34A", textColor: "#FFFFFF" },
+      { text: "Red 3-min", bg: "#DC2626", textColor: "#FFFFFF" },
+    ],
   },
   {
     src: productAsset("06-buudy-led-mask-results.webp"),
@@ -214,6 +250,15 @@ export const fullLedMaskGallery: ProductImage[] = [
     },
   },
   {
+    src: productAsset("buudy-7-colour-led-mask-before-after-evens-skin-tone-smoothing-uk.webp"),
+    alt: "Buudy 7 Colour LED Mask before and after clinical comparison: evens mottled skin tone and smooths fine texture UK",
+    pills: [
+      { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Green 6-min", bg: "#16A34A", textColor: "#FFFFFF" },
+      { text: "Yellow 4-min", bg: "#EAB308", textColor: "#1C1917" },
+    ],
+  },
+  {
     src: productAsset("buudy-7-colour-led-mask-cyan-light-therapy-uk.webp"),
     alt: "Buudy 7 Colour LED Face Mask white light therapy mode for accelerating skin metabolism and renewal UK",
     badge: {
@@ -224,6 +269,15 @@ export const fullLedMaskGallery: ProductImage[] = [
     },
   },
   {
+    src: productAsset("buudy-7-colour-led-mask-before-after-cystic-acne-jawline-uk.webp"),
+    alt: "Buudy 7 Colour LED Mask before and after results: eliminates persistent cystic acne and smooths lower cheek and jawline UK",
+    pills: [
+      { text: "3-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Blue 6-min", bg: "#2563EB", textColor: "#FFFFFF" },
+      { text: "Purple 4-min", bg: "#9333EA", textColor: "#FFFFFF" },
+    ],
+  },
+  {
     src: productAsset("13-buudy-led-mask-starter-kit.webp"),
     alt: "Buudy LED Mask starter kit in cyan light therapy mode for calming capillaries and redness",
     badge: {
@@ -232,6 +286,15 @@ export const fullLedMaskGallery: ProductImage[] = [
       position: "top-left",
       theme: "white",
     },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-before-after-calms-redness-rosacea-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask before and after: calms facial redness, sensitivity and rosacea flush UK",
+    pills: [
+      { text: "2-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Cyan 7-min", bg: "#0891B2", textColor: "#FFFFFF" },
+      { text: "Yellow 3-min", bg: "#EAB308", textColor: "#1C1917" },
+    ],
   },
   {
     src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),
@@ -361,6 +424,15 @@ export const buudyLedMaskGallery: ProductImage[] = [
     },
   },
   {
+    src: productAsset("buudy-7-colour-led-mask-before-after-acne-breakouts-complexion-uk.webp"),
+    alt: "Buudy 7 Colour LED Mask before and after clinical results: clears active acne breakouts and calms inflamed complexion UK",
+    pills: [
+      { text: "2-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Blue 7-min", bg: "#2563EB", textColor: "#FFFFFF" },
+      { text: "Yellow 3-min", bg: "#EAB308", textColor: "#1C1917" },
+    ],
+  },
+  {
     src: productMediaAsset("Cleopatra-LED-Red-Light-Mask.webp"),
     alt: "Buudy LED Mask red light therapy mode for anti-ageing and collagen stimulation",
     badge: {
@@ -369,6 +441,15 @@ export const buudyLedMaskGallery: ProductImage[] = [
       position: "top-left",
       theme: "white",
     },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-before-after-anti-ageing-eye-wrinkles-uk.webp"),
+    alt: "Buudy 7 Colour LED Mask before and after anti-ageing results: visibly reduces crow's feet and eye-area fine lines UK",
+    pills: [
+      { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Red 6-min", bg: "#DC2626", textColor: "#FFFFFF" },
+      { text: "White 4-min", bg: "#FFFFFF", textColor: "#1C1917", borderColor: "rgba(0, 0, 0, 0.18)" },
+    ],
   },
   {
     src: productAsset("buudy-7-colour-led-mask-purple-light-therapy-cleopatra-uk.jpg"),
@@ -381,6 +462,15 @@ export const buudyLedMaskGallery: ProductImage[] = [
     },
   },
   {
+    src: productAsset("buudy-7-colour-led-mask-before-after-blemish-clarity-radiance-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask before and after transformation: clears post-acne marks and enhances skin radiance UK",
+    pills: [
+      { text: "3-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Purple 3-min", bg: "#9333EA", textColor: "#FFFFFF" },
+      { text: "Blue 7-min", bg: "#2563EB", textColor: "#FFFFFF" },
+    ],
+  },
+  {
     src: productAsset("03-buudy-led-mask-anti-ageing-mode.webp"),
     alt: "Buudy LED Mask green light mode for dark spots and even skin tone",
     badge: {
@@ -389,6 +479,15 @@ export const buudyLedMaskGallery: ProductImage[] = [
       position: "top-left",
       theme: "white",
     },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-before-after-dark-spots-pigmentation-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask before and after results: fades dark spots and sun-induced hyperpigmentation UK",
+    pills: [
+      { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Green 7-min", bg: "#16A34A", textColor: "#FFFFFF" },
+      { text: "Red 3-min", bg: "#DC2626", textColor: "#FFFFFF" },
+    ],
   },
   {
     src: productAsset("06-buudy-led-mask-results.webp"),
@@ -401,6 +500,15 @@ export const buudyLedMaskGallery: ProductImage[] = [
     },
   },
   {
+    src: productAsset("buudy-7-colour-led-mask-before-after-evens-skin-tone-smoothing-uk.webp"),
+    alt: "Buudy 7 Colour LED Mask before and after clinical comparison: evens mottled skin tone and smooths fine texture UK",
+    pills: [
+      { text: "4-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Green 6-min", bg: "#16A34A", textColor: "#FFFFFF" },
+      { text: "Yellow 4-min", bg: "#EAB308", textColor: "#1C1917" },
+    ],
+  },
+  {
     src: productAsset("buudy-7-colour-led-mask-cyan-light-therapy-uk.webp"),
     alt: "Buudy 7 Colour LED Face Mask white light therapy mode for accelerating skin metabolism and renewal UK",
     badge: {
@@ -411,6 +519,15 @@ export const buudyLedMaskGallery: ProductImage[] = [
     },
   },
   {
+    src: productAsset("buudy-7-colour-led-mask-before-after-cystic-acne-jawline-uk.webp"),
+    alt: "Buudy 7 Colour LED Mask before and after results: eliminates persistent cystic acne and smooths lower cheek and jawline UK",
+    pills: [
+      { text: "3-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Blue 6-min", bg: "#2563EB", textColor: "#FFFFFF" },
+      { text: "Purple 4-min", bg: "#9333EA", textColor: "#FFFFFF" },
+    ],
+  },
+  {
     src: productAsset("13-buudy-led-mask-starter-kit.webp"),
     alt: "Buudy LED Mask starter kit in cyan light therapy mode for calming capillaries and redness",
     badge: {
@@ -419,6 +536,15 @@ export const buudyLedMaskGallery: ProductImage[] = [
       position: "top-left",
       theme: "white",
     },
+  },
+  {
+    src: productAsset("buudy-7-colour-led-mask-before-after-calms-redness-rosacea-uk.webp"),
+    alt: "Buudy 7 Colour LED Face Mask before and after: calms facial redness, sensitivity and rosacea flush UK",
+    pills: [
+      { text: "2-Weeks", bg: "#F7F1E8", textColor: "#2E102F", borderColor: "rgba(58, 31, 61, 0.18)" },
+      { text: "Cyan 7-min", bg: "#0891B2", textColor: "#FFFFFF" },
+      { text: "Yellow 3-min", bg: "#EAB308", textColor: "#1C1917" },
+    ],
   },
   {
     src: productAsset("08-buudy-led-mask-lifestyle-use.webp"),

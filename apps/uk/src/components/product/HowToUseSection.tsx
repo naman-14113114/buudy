@@ -20,29 +20,6 @@ export function HowToUseSection() {
     }
   };
 
-  const steps = [
-    {
-      num: "1",
-      title: "Cleanse & Dry",
-      desc: "Wash and thoroughly dry your face and neck before use.",
-    },
-    {
-      num: "2",
-      title: "Fit & Fasten",
-      desc: "Place the silicone mask and neck piece on, securing the straps.",
-    },
-    {
-      num: "3",
-      title: "Select Light Mode",
-      desc: "Tap the touch button to choose your target light therapy colour.",
-    },
-    {
-      num: "4",
-      title: "Relax (3–10 Mins)",
-      desc: "Wear comfortably; the mask powers off automatically when done.",
-    },
-  ];
-
   return (
     <section className="buudy-section bg-[var(--cream)] py-12 md:py-16" id="how-to-use">
       <div className="buudy-wrap grid items-center gap-8 lg:grid-cols-2 lg:gap-10">
@@ -90,26 +67,28 @@ export function HowToUseSection() {
             Buudy unboxing &amp; <em className="buudy-italic">review</em>
           </h2>
 
-          {/* Compact Steps Matching Video Height */}
-          <div className="mt-4 space-y-2">
-            {steps.map((step) => (
-              <div
-                key={step.num}
-                className="flex items-center gap-3.5 rounded-xl border border-[rgba(58,31,61,.08)] bg-white/70 px-3.5 py-2 transition-colors hover:bg-white"
-              >
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] text-xs font-bold text-white font-mono">
-                  {step.num}
-                </span>
-                <div className="min-w-0">
-                  <span className="font-sans text-xs sm:text-sm font-bold text-[var(--plum)] mr-2">
-                    {step.title}:
-                  </span>
-                  <span className="text-xs text-[var(--muted)] leading-relaxed">
-                    {step.desc}
-                  </span>
-                </div>
-              </div>
-            ))}
+          <div className="mt-3.5 sm:mt-4 space-y-3 max-w-xl">
+            <p className="font-sans text-sm sm:text-base text-[var(--muted)] leading-relaxed">
+              Curious about how to get started, charge your device, navigate the smart touch sensors, or customise your light therapy colours and intensity levels?
+            </p>
+            <p className="font-sans text-sm sm:text-base text-[var(--muted)] leading-relaxed">
+              Watch our complete unboxing and walkthrough video to see the Buudy LED Mask in action, explore every feature in detail, and learn how to fit it effortlessly into your daily skincare routine.
+            </p>
+          </div>
+
+          <div className="mt-4 sm:mt-5 flex flex-wrap gap-2 pt-1">
+            <span className="inline-flex items-center rounded-full bg-white/80 border border-[rgba(58,31,61,.1)] px-3 py-1 text-xs font-medium text-[var(--plum)] shadow-xs">
+              ⚡ Setup &amp; Charging
+            </span>
+            <span className="inline-flex items-center rounded-full bg-white/80 border border-[rgba(58,31,61,.1)] px-3 py-1 text-xs font-medium text-[var(--plum)] shadow-xs">
+              👆 Touch Sensor Controls
+            </span>
+            <span className="inline-flex items-center rounded-full bg-white/80 border border-[rgba(58,31,61,.1)] px-3 py-1 text-xs font-medium text-[var(--plum)] shadow-xs">
+              🌈 7 Light Modes &amp; Intensity
+            </span>
+            <span className="inline-flex items-center rounded-full bg-white/80 border border-[rgba(58,31,61,.1)] px-3 py-1 text-xs font-medium text-[var(--plum)] shadow-xs">
+              💆 Face &amp; Neck Fitting
+            </span>
           </div>
         </div>
       </div>

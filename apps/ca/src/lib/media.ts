@@ -24,6 +24,13 @@ export type ProductImageBadge = {
   theme?: "dark" | "white";
 };
 
+export type BeforeAfterPill = {
+  text: string;
+  bg: string;
+  textColor: string;
+  borderColor?: string;
+};
+
 export type ProductImage = {
   src: string;
   fallbackSrc?: string;
@@ -32,4 +39,5 @@ export type ProductImage = {
   width?: number;
   height?: number;
   badge?: ProductImageBadge;
+  pills?: [BeforeAfterPill, BeforeAfterPill, BeforeAfterPill];
 };

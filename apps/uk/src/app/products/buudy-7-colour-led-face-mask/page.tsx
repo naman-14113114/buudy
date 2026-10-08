@@ -95,7 +95,7 @@ export default function Buudy7ColourMaskProductRoute() {
           type="application/ld+json"
         />
       ))}
-      <ProductPage product={pageProduct} />
+      <ProductPage product={pageProduct} galleryVariant="omnilux" />
     </>
   );
 }
