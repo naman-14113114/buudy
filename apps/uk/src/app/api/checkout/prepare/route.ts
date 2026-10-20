@@ -24,6 +24,7 @@ type CheckoutPrepareBody = {
   cart?: {
     lines: Array<{ productId: string; quantity: number; type?: string }>;
     manualPromoCode?: string;
+    manualPromoCodes?: string[];
     promoCodes?: string[];
   };
   attribution?: Record<string, string | null | undefined>;
@@ -50,6 +51,7 @@ const prepareSchema = z.object({
       type: z.enum(["product", "gift"]).optional(),
     })).min(1).max(100),
     manualPromoCode: z.string().max(60).optional(),
+    manualPromoCodes: z.array(z.string().max(60)).max(20).optional(),
     promoCodes: z.array(z.string().max(60)).max(20).optional(),
   }).optional(),
   attribution: z.record(z.string(), z.union([z.string().max(2000), z.null()])).optional(),
@@ -84,6 +86,7 @@ function cleanAttribution(attribution: CheckoutPrepareBody["attribution"]) {
 function getManualPromoFromCart(cart: CheckoutPrepareBody["cart"]) {
   return getAppliedManualPromoCode(
     cart?.manualPromoCode ??
+      cart?.manualPromoCodes?.[0] ??
       cart?.promoCodes?.find((code) => getAppliedManualPromoCode(code)),
   );
 }
@@ -285,32 +288,98 @@ export async function POST(request: NextRequest) {
         }
       : undefined,
   };
-  const productLines = body.cart?.lines.filter((line) => line.type !== "gift");
-  if (productLines && (!productLines.length || productLines.some((line) => !PLUSBASE_PRODUCTS[line.productId]))) {
-    return NextResponse.json({ error: "One of these products is not available for checkout." }, { status: 400 });
-  }
-  const maskLines = productLines?.filter((line) =>
-    line.productId === "buudy-led-mask" || line.productId === "buudy-7-colour-led-mask");
-  const quantity = maskLines?.reduce((total, line) => total + line.quantity, 0) || body.quantity || 1;
-  const appliedManualPromoCode = getManualPromoFromCart(body.cart);
+  const isMaskId = (id: string) =>
+    id === "buudy-led-mask" || id === "buudy-7-colour-led-mask";
+  const isProtectionId = (id: string) =>
+    id === "buudy-package-protection" || id === "package-protection";
+  const isGiftCardId = (id: string) =>
+    id === "buudy-gift-card" || id === "gift-card";
+  const isEbookId = (id: string) =>
+    id === "buudy-skincare-ebook" || id === "skincare-ebook";
+  const isDigitalOrAddonId = (id: string) =>
+    isProtectionId(id) || isGiftCardId(id) || isEbookId(id);
 
-  if (maskLines?.length && maskLines.length !== productLines?.length) {
-    return NextResponse.json({ error: "Please check out the LED Mask separately from your other products. Your cart has been kept." }, { status: 422 });
-  }
-  if (quantity > 100) {
-    return NextResponse.json({ error: "Please contact us for orders of more than 100 masks." }, { status: 400 });
-  }
-  if (!body.cart || maskLines?.length) {
+  const productLines = body.cart?.lines.filter((line) => line.type !== "gift");
+  const maskLines = productLines?.filter((line) => isMaskId(line.productId));
+
+  if (!body.cart || (maskLines && maskLines.length > 0)) {
+    const otherPhysicalProducts = productLines?.filter(
+      (line) => !isMaskId(line.productId) && !isDigitalOrAddonId(line.productId),
+    );
+    if (otherPhysicalProducts && otherPhysicalProducts.length > 0) {
+      return NextResponse.json(
+        {
+          error:
+            "Please check out the LED Mask separately from your other products. Your cart has been kept.",
+        },
+        { status: 422 },
+      );
+    }
+
+    const quantity =
+      maskLines?.reduce((total, line) => total + line.quantity, 0) ||
+      body.quantity ||
+      1;
+    if (quantity > 100) {
+      return NextResponse.json(
+        { error: "Please contact us for orders of more than 100 masks." },
+        { status: 400 },
+      );
+    }
+
+    const allPromoCodes = [
+      ...(body.cart?.manualPromoCodes || []),
+      ...(body.cart?.promoCodes || []),
+      ...(body.cart?.manualPromoCode ? [body.cart.manualPromoCode] : []),
+    ].map((c) => c.trim().toUpperCase());
+
+    const hasPromo = allPromoCodes.some(
+      (c) => c === "BUUDY10" || c === "BUUDY",
+    );
+    const hasGiftCard =
+      allPromoCodes.includes("9PQ28ENBLJ") ||
+      Boolean(productLines?.some((line) => isGiftCardId(line.productId)));
+    const hasProtection = Boolean(
+      productLines?.some((line) => isProtectionId(line.productId)),
+    );
+
     try {
-      const checkout = await createXpageCheckout(quantity, Boolean(appliedManualPromoCode));
-      return NextResponse.json(checkout, { headers: { "Cache-Control": "no-store" } });
+      const checkout = await createXpageCheckout(quantity, {
+        hasPromo,
+        hasGiftCard,
+        hasProtection,
+      });
+      return NextResponse.json(checkout, {
+        headers: { "Cache-Control": "no-store" },
+      });
     } catch (error) {
       // Never log session cookies, CSRF tokens, checkout URLs or customer data.
-      console.error("XPage checkout preparation failed", error instanceof Error ? error.message : "Unknown error");
-      return NextResponse.json({ error: "Could not prepare the mask offer. Please try again; your cart has been kept." },
-        { status: 502, headers: { "Cache-Control": "no-store" } });
+      console.error(
+        "XPage checkout preparation failed",
+        error instanceof Error ? error.message : "Unknown error",
+      );
+      return NextResponse.json(
+        {
+          error:
+            "Could not prepare the mask offer. Please try again; your cart has been kept.",
+        },
+        { status: 502, headers: { "Cache-Control": "no-store" } },
+      );
     }
   }
+
+  if (
+    productLines &&
+    (!productLines.length ||
+      productLines.some((line) => !PLUSBASE_PRODUCTS[line.productId]))
+  ) {
+    return NextResponse.json(
+      { error: "One of these products is not available for checkout." },
+      { status: 400 },
+    );
+  }
+  const quantity = body.quantity || 1;
+  const appliedManualPromoCode = getManualPromoFromCart(body.cart);
 
   const clientHeaders = {
     forwardedFor: request.headers.get("x-forwarded-for"),

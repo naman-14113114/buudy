@@ -41,7 +41,7 @@ export type Product = {
   id: string;
   sku: string;
   slug: string;
-  template: "mask" | "torch" | "ipl";
+  template: "mask" | "torch" | "ipl" | "minimal";
   name: string;
   heroTitle: string;
   heroEmphasis: string;
@@ -626,9 +626,9 @@ export const buudyMask: Product = {
       id: "skincare-ebook",
       name: "Skincare E-Book",
       valueCents: 1900,
-      image: productMediaAsset("free_guide-v2.webp"),
+      image: "/images/products/skincare-ebook/skincare-ebook.png",
       label: "Digital copy",
-      href: "/pages/skincare-guide",
+      href: "/products/skincare-ebook",
     },
   ],
   specs: [
@@ -719,24 +719,96 @@ export const buudyRedTorch: Product = {
       alt: "Buudy LED Torch held by a woman applying targeted 630nm and 660nm red light to her cheek for facial skin rejuvenation and collagen stimulation",
     },
     {
-      src: torchAsset("02-buudy-red-light-torch-product-travel-case.webp"),
-      alt: "Buudy LED Torch with sleek aluminium body and red LED emitter alongside its protective black zippered travel storage case",
+      src: torchAsset("buudy-led-torch-premium-gift-set.webp"),
+      alt: "Buudy LED Torch complete gift set with 2x rechargeable batteries, dock charger, tripod and travel case",
     },
     {
-      src: torchAsset("03-buudy-red-light-torch-handheld-ergonomics.webp"),
-      alt: "Compact and ergonomic Buudy LED Torch held in hand with safety wrist strap demonstrating portable travel-ready size",
+      src: torchAsset("buudy-led-torch-sculptural-warm-stone.webp"),
+      alt: "Buudy LED Torch in precision-crafted aircraft-grade aluminum alloy on warm stone",
+      badge: {
+        title: "AIRCRAFT-GRADE\nALUMINUM ALLOY",
+        sub: "Precision-milled metal body engineered\nfor durability & rapid heat dissipation",
+        position: "top-left",
+        theme: "white",
+      },
+    },
+    {
+      src: torchAsset("buudy-led-torch-silver-black-on-blush.webp"),
+      alt: "Buudy LED Torch precision silver and black aesthetic with 3 clinical wavelengths",
+      badge: {
+        title: "3 CLINICAL\nWAVELENGTHS",
+        sub: "630nm, 660nm visible red light\nplus 850nm deep near-infrared",
+        position: "top-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: torchAsset("buudy-led-torch-mini-tripod-red-glow.webp"),
+      alt: "Buudy LED Torch emitting active red and near-infrared light on mini tripod stand",
+      badge: {
+        title: "HANDS-FREE\nTRIPOD STAND",
+        sub: "Stationary targeted treatment with\nincluded adjustable bracket",
+        position: "bottom-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: torchAsset("buudy-led-torch-handheld-ergonomics.webp"),
+      alt: "Buudy LED Torch held in hand demonstrating portable compact ergonomics",
+      badge: {
+        title: "ULTRA-LIGHTWEIGHT\n& ERGONOMIC",
+        sub: "Only 74g with one-button control\nand anti-drop lanyard",
+        position: "top-right",
+        theme: "dark",
+      },
+    },
+    {
+      src: torchAsset("buudy-led-torch-travel-case-scale.webp"),
+      alt: "Buudy LED Torch beside custom zipper travel case demonstrating portable scale",
+      badge: {
+        title: "TRAVEL-READY\nPROTECTION",
+        sub: "Compact 12cm form factor fits\nsecurely in dedicated zipper case",
+        position: "top-left",
+        theme: "dark",
+      },
     },
     {
       src: torchAsset("04-buudy-red-light-torch-neck-shoulder-treatment.webp"),
       alt: "Woman using the Buudy LED Torch for targeted red and near-infrared light therapy on her neck and shoulder for skin smoothing and tension relief",
+      badge: {
+        title: "NECK & SHOULDER\nRELIEF",
+        sub: "Targeted soothing warmth & light\nfor everyday muscle tension",
+        position: "bottom-left",
+        theme: "white",
+      },
     },
     {
       src: torchAsset("05-buudy-red-light-torch-arm-joint-pain-relief.webp"),
       alt: "Targeted application of the Buudy LED Torch on forearm and wrist joint for localized pain relief and cellular repair",
+      badge: {
+        title: "LOCALIZED JOINT\nRECOVERY",
+        sub: "Direct deep-tissue light therapy\nfor joints, wrists & elbows",
+        position: "bottom-left",
+        theme: "white",
+      },
     },
     {
       src: torchAsset("06-buudy-red-light-torch-deep-tissue-muscle-recovery.webp"),
       alt: "Close-up of Buudy LED Torch emitting concentrated 630nm, 660nm, and 850nm wavelengths for deep tissue muscle recovery and elbow joint relief",
+      badge: {
+        title: "DEEP TISSUE\nRECOVERY",
+        sub: "850nm near-infrared light penetrates\ndeep into tired muscles",
+        position: "top-left",
+        theme: "dark",
+      },
+    },
+    {
+      src: torchAsset("07-buudy-red-light-torch-lifestyle-portable-relief.webp"),
+      alt: "Buudy LED Torch held by a woman for portable on-the-go body and skin wellness",
+    },
+    {
+      src: torchAsset("11-buudy-red-light-torch-multi-body-treatment-grid.webp"),
+      alt: "Buudy LED Torch multi-zone application guide for elbow, hand, back, and knee relief",
     },
   ],
   gifts: [],
@@ -864,16 +936,279 @@ export const buudyIplDevice: Product = {
   ],
 };
 
-export const products = [buudyMask, buudyRedTorch, buudyIplDevice];
+export const ebookFaqs: FAQItem[] = [
+  {
+    question: "How do I receive the e-book after purchasing?",
+    answer:
+      "Your e-book download link is dispatched instantly to your email inbox immediately upon checkout completion. You can download and access the PDF right away on any device.",
+  },
+  {
+    question: "What devices can I read the e-book on?",
+    answer:
+      "The guide is provided as a universal, high-resolution PDF compatible with Apple iPhones, iPads, Android smartphones and tablets, Kindle e-readers, MacBooks, and Windows PCs.",
+  },
+  {
+    question: "What topics and wavelengths are covered in the guide?",
+    answer:
+      "The guide spans 38 chapters covering red (630nm), near-infrared (830nm), blue (460nm), green (525nm), yellow (590nm), purple, and cyan wavelengths, cellular mitochondrial ATP synthesis, and tailored routines for anti-ageing, acne, hyperpigmentation, and redness.",
+  },
+];
+
+export const giftCardFaqs: FAQItem[] = [
+  {
+    question: "How will the recipient receive the gift card?",
+    answer:
+      "The digital gift card is delivered instantly via email to you (or directly to the recipient if specified) containing a secure 16-digit voucher code, redemption instructions, and a printable gift certificate.",
+  },
+  {
+    question: "Does the Buudy Gift Card expire?",
+    answer:
+      "Yes, the Buudy Gift Card expires 3 months from the day you receive it. The recipient can redeem their £20 balance site-wide anytime within this 3-month validity period.",
+  },
+  {
+    question: "Can the gift card balance be used across multiple orders?",
+    answer:
+      "Yes. If your total order amount is less than the £20 gift card balance, any remaining balance stays on the voucher code for future purchases within the 3-month validity window.",
+  },
+];
+
+export const packageProtectionFaqs: FAQItem[] = [
+  {
+    question: "What does Buudy Package Protection cover?",
+    answer:
+      "Package Protection covers 100% of the replacement value if your order is damaged during transit, lost by the courier, or stolen from your doorstep (porch piracy).",
+  },
+  {
+    question: "How quickly are replacement claims processed?",
+    answer:
+      "Claims are reviewed and processed within 24 hours. Once verified, a brand-new replacement unit is immediately dispatched via tracked express courier.",
+  },
+  {
+    question: "How do I file a claim if my package is lost or damaged?",
+    answer:
+      "Simply email our dedicated priority claims team at support@buudy.co.uk with your order number and brief details (or photos if damaged). We handle carrier investigations on your behalf.",
+  },
+];
+
+export const buudySkincareEbook: Product = {
+  id: "buudy-skincare-ebook",
+  sku: "BUUDY-EBOOK-SKINCARE",
+  slug: "skincare-ebook",
+  template: "minimal",
+  name: "The Clinical Light Masterclass E-Book",
+  heroTitle: "Clinical Skincare",
+  heroEmphasis: "Masterclass",
+  shortDescription:
+    "The definitive 40+ page clinical guide to 7-colour photobiomodulation, multi-device synergy, and active skincare chemistry.",
+  description:
+    "The official Buudy Clinical Light Masterclass E-Book. 40+ comprehensive clinical pages and 38 chapters covering photobiomodulation physics, mitochondrial activation, wavelength depth penetration maps, 5 bespoke clinical pathways, active ingredient pairings, and printable 90-day progress trackers. Delivered instantly in high-resolution PDF format.",
+  seoTitle: "The Clinical Light Masterclass E-Book (Digital PDF) | Buudy",
+  seoDescription:
+    "Download the official 40+ page Clinical Light Masterclass E-Book by Buudy: 7-colour photobiomodulation protocols, 830nm NIR guide, and active skincare chemistry.",
+  currency: market.currency,
+  priceCents: 1900,
+  compareAtCents: 1900,
+  rating: 0,
+  reviewCount: 0,
+  customerCount: "",
+  promoCode: "",
+  promoLabel: "",
+  cartImage: "/images/products/skincare-ebook/skincare-ebook.png",
+  gallery: [
+    {
+      src: "/images/products/skincare-ebook/skincare-ebook.png",
+      alt: "The Clinical Light Masterclass E-Book by Buudy",
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Format", value: "Instant Digital Download (PDF)" },
+    { label: "Length", value: "40+ Clinical Pages (38 Chapters)" },
+    { label: "Compatibility", value: "iPhone, iPad, Android, Mac, PC, Kindle" },
+    { label: "Delivery", value: "Instant Email Link + Direct Access" },
+    { label: "Language", value: "English (UK / US)" },
+    { label: "Publisher", value: "Buudy Clinical Editorial Board" },
+  ],
+  included: [
+    { quantity: "1x", label: "Full Clinical Light Masterclass E-Book (High-Res PDF)" },
+    { quantity: "5x", label: "Bespoke Wavelength Routine Cards" },
+    { quantity: "1x", label: "Active Skincare Ingredient Pairing Guide" },
+    { quantity: "1x", label: "Printable 90-Day Weekly Session Tracker" },
+  ],
+  highlights: [
+    "38 in-depth clinical chapters covering all 7 therapeutic wavelengths & 830nm NIR",
+    "5 bespoke condition pathways for anti-ageing, acne, redness, pigmentation & radiance",
+    "Active ingredient pairing cheat sheets (Vitamin C, Niacinamide, Retinoids, Peptides)",
+    "Printable 90-day treatment calendar and weekly tracking sheets",
+    "Instant digital delivery to your inbox with lifetime access & free future updates",
+  ],
+  keyBenefits: [
+    "Maximize your LED Mask & Torch results with clinical protocols",
+    "Prevent active skincare contraindications & ingredient pilling",
+    "Track your progress with structured 90-day milestone templates",
+    "Read anytime on your smartphone, tablet, e-reader, or laptop",
+  ],
+  badges: [
+    "Instant PDF Download",
+    "40+ Clinical Pages",
+    "Official Companion",
+    "Lifetime Access",
+  ],
+  faqs: ebookFaqs,
+};
+
+export const buudyGiftCard: Product = {
+  id: "buudy-gift-card",
+  sku: "BUUDY-GIFT-CARD",
+  slug: "buudy-gift-card",
+  template: "minimal",
+  name: "Buudy Official Digital Gift Card",
+  heroTitle: "Buudy Official",
+  heroEmphasis: "Gift Card",
+  shortDescription:
+    "The ultimate gift of radiant glow. Instant electronic voucher delivery directly to your inbox. Valid for 3 months from date of receipt.",
+  description:
+    "Give the gift of clinical wellness and radiant skin. The Buudy Official £20 Digital Gift Card is delivered instantly via email and is valid for 3 months from the date you receive it. Valid site-wide across the Buudy 7 Colour LED Face Mask, Buudy LED Torch, IPL Hair Removal, and all beauty accessories.",
+  seoTitle: "Buudy Official £20 Digital Gift Card | Instant Voucher Delivery",
+  seoDescription:
+    "Give the gift of glowing skin. The Buudy £20 digital gift card is delivered instantly via email and valid for 3 months from receipt. Site-wide redemption.",
+  currency: market.currency,
+  priceCents: 2000,
+  compareAtCents: 2000,
+  rating: 0,
+  reviewCount: 0,
+  customerCount: "",
+  promoCode: "",
+  promoLabel: "",
+  cartImage: "/images/products/buudy-gift-card/buudy-gift-card-with-gold-ribbon.webp",
+  gallery: [
+    {
+      src: "/images/products/buudy-gift-card/buudy-gift-card-with-gold-ribbon.webp",
+      alt: "Buudy Official Digital Gift Card with Gold Ribbon",
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Delivery", value: "Instant Digital Email Delivery" },
+    { label: "Expiry Date", value: "Expires 3 months from day received" },
+    { label: "Redemption", value: "Site-wide on all Buudy products & kits" },
+    { label: "Format", value: "16-Digit Secure Electronic Voucher Code" },
+    { label: "Value", value: "£20.00 Fixed Voucher Amount" },
+    { label: "Currency", value: "GBP (£)" },
+  ],
+  included: [
+    { quantity: "1x", label: "Official Buudy Digital Gift Voucher Code" },
+    { quantity: "1x", label: "Instant Email Presentation with Custom Message" },
+    { quantity: "1x", label: "Printable Gift Certificate PDF" },
+  ],
+  highlights: [
+    "Instant digital delivery dispatched directly to your inbox within seconds",
+    "Valid for 3 months from the date you receive it",
+    "Valid site-wide on all LED masks, torches, IPL devices, and skincare accessories",
+    "Personalized gift note option to include your heartfelt message",
+    "Simple zero-friction redemption during checkout",
+  ],
+  keyBenefits: [
+    "Gifting made effortless for birthdays, anniversaries, and holidays",
+    "Allows recipient to choose their ideal light therapy device",
+    "Fixed £20 voucher amount for quick, easy checkout",
+    "3-month validity window for flexible redemption",
+  ],
+  badges: [
+    "Instant Email Delivery",
+    "Valid for 3 Months",
+    "Site-Wide Valid",
+    "100% Satisfaction",
+  ],
+  faqs: giftCardFaqs,
+};
+
+export const buudyPackageProtection: Product = {
+  id: "buudy-package-protection",
+  sku: "BUUDY-PKG-PROTECTION",
+  slug: "buudy-package-protection",
+  template: "minimal",
+  name: "Buudy Complete Package Protection",
+  heroTitle: "Complete Package",
+  heroEmphasis: "Protection",
+  shortDescription:
+    "Complete transit damage, loss, and theft guarantee for your order with expedited zero-cost unit replacement.",
+  description:
+    "Secure your order for pennies. Buudy Package Protection provides 100% peace of mind against accidental transit damage, lost courier shipments, defective deliveries, and doorstep theft. Includes fast-track 24-hour claims processing and immediate brand-new unit reshipment at zero additional charge.",
+  seoTitle: "Buudy Complete Package Protection | Transit & Theft Guarantee",
+  seoDescription:
+    "Protect your Buudy delivery against courier damage, loss, and theft. Instant zero-cost replacement and priority dispatch.",
+  currency: market.currency,
+  priceCents: 300,
+  compareAtCents: 300,
+  rating: 0,
+  reviewCount: 0,
+  customerCount: "",
+  promoCode: "",
+  promoLabel: "",
+  cartImage: "/images/products/buudy-package-protection/buudy-package-protection.webp",
+  gallery: [
+    {
+      src: "/images/products/buudy-package-protection/buudy-package-protection.webp",
+      alt: "Buudy Complete Package Protection Transit Guarantee",
+    },
+  ],
+  gifts: [],
+  specs: [
+    { label: "Coverage Type", value: "Full Transit Damage, Loss & Doorstep Theft" },
+    { label: "Claims Processing", value: "Fast-Track within 24 Hours" },
+    { label: "Replacement Cost", value: "£0 (Zero Deductible, Brand New Unit)" },
+    { label: "Underwriting", value: "Direct Buudy Official Guarantee" },
+    { label: "Courier Support", value: "Royal Mail, DPD, EVRi & Express Couriers" },
+  ],
+  included: [
+    { quantity: "1x", label: "Full Order Transit Insurance Coverage" },
+    { quantity: "1x", label: "Expedited Zero-Cost Replacement Guarantee" },
+    { quantity: "1x", label: "Priority 24/7 VIP Customer Support Fast-Track" },
+  ],
+  highlights: [
+    "100% complete coverage against courier damage, lost parcels & porch piracy",
+    "Fast-track 24-hour claims response with zero paperwork hassle",
+    "Immediate brand-new unit replacement dispatched via tracked express courier",
+    "Covers your entire order from dispatch until safely in your hands",
+    "Dedicated claims specialist handles carrier investigations for you"
+  ],
+  keyBenefits: [
+    "Total peace of mind from our warehouse to your doorstep",
+    "Skip lengthy postal courier investigation waiting periods",
+    "Brand new replacement dispatched with zero deductible fees",
+    "Priority queue status with dedicated resolution liaison",
+  ],
+  badges: [
+    "100% Transit Coverage",
+    "Zero Deductible",
+    "24h Express Replacement",
+    "Doorstep Theft Protection",
+  ],
+  faqs: packageProtectionFaqs,
+};
+
+export const products = [
+  buudyMask,
+  buudyRedTorch,
+  buudyIplDevice,
+  buudySkincareEbook,
+  buudyGiftCard,
+  buudyPackageProtection,
+];
 
 export const productsById = Object.fromEntries(
   products.map((product) => [product.id, product]),
 ) as Record<string, Product>;
 
 export function getProductBySlug(slug: string) {
+  if (slug === "buudy-gift-card" || slug === "gift-card" || slug === "buudygiftcard") return buudyGiftCard;
+  if (slug === "buudy-package-protection" || slug === "package-protection" || slug === "buudypackageprotection") return buudyPackageProtection;
+  if (slug === "skincare-ebook" || slug === "buudy-skincare-ebook") return buudySkincareEbook;
   return products.find((product) => product.slug === slug);
 }
 
 export function getProductById(id: string) {
   return productsById[id];
 }
+

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronDown, Tag } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { formatMoney } from "@/lib/money";
-import { getDisplayLines } from "@/lib/cart";
+import { getDisplayLines, getPromoDiscountCents } from "@/lib/cart";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
 import { PromoCodeBox } from "./PromoCodeBox";
@@ -15,8 +15,14 @@ type CartSummaryProps = {
 };
 
 export function CartSummary({ action = "summary", children }: CartSummaryProps) {
-  const { lines, totals, closeCart, manualPromoCode } = useCart();
+  const { lines, totals, closeCart, manualPromoCode, manualPromoCodes } = useCart();
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const appliedCodes =
+    manualPromoCodes && manualPromoCodes.length > 0
+      ? manualPromoCodes
+      : manualPromoCode
+      ? [manualPromoCode]
+      : [];
   const giftLines = getDisplayLines(lines).filter(
     (line) =>
       line.type === "gift" &&
@@ -75,15 +81,29 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                   </div>
                 ))}
                 {totals.promoDiscountCents > 0 ? (
-                  <div className="flex justify-between gap-4">
-                    <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
-                      <Tag aria-hidden="true" size={14} />
-                      {manualPromoCode}
-                    </span>
-                    <span className="font-semibold text-[var(--muted)]">
-                      -{formatMoney(totals.promoDiscountCents)}
-                    </span>
-                  </div>
+                  appliedCodes.length > 0 ? (
+                    appliedCodes.map((code) => (
+                      <div className="flex justify-between gap-4" key={code}>
+                        <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
+                          <Tag aria-hidden="true" size={14} />
+                          {code.length > 4 ? `${code.slice(0, 4)}...` : code}
+                        </span>
+                        <span className="font-semibold text-[var(--muted)]">
+                          -{formatMoney(getPromoDiscountCents(code))}
+                        </span>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="flex justify-between gap-4">
+                      <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
+                        <Tag aria-hidden="true" size={14} />
+                        Promo Discount
+                      </span>
+                      <span className="font-semibold text-[var(--muted)]">
+                        -{formatMoney(totals.promoDiscountCents)}
+                      </span>
+                    </div>
+                  )
                 ) : null}
               </div>
             </div>

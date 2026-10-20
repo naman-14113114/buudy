@@ -5,13 +5,6 @@ import { getSupabaseConfig, isSupabaseConfigured } from "@/lib/supabase/config";
 import { getMaskLandingPage, MASK_CHECKOUT_PRODUCT_ID } from "@/lib/maskLandingPages";
 
 export async function proxy(request: NextRequest) {
-  const country = request.headers.get("x-vercel-ip-country");
-
-  // Redirect visitors from specific countries
-  const blockedCountries = ["VN", "HK", "CN", "SG"];
-  if (country && blockedCountries.includes(country)) {
-    return NextResponse.redirect("https://buudy.com", 308);
-  }
   const landingPage = getMaskLandingPage(request.nextUrl.pathname);
   function createResponse() {
     const nextResponse = NextResponse.next({ request });

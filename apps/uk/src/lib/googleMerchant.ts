@@ -167,9 +167,6 @@ export const googleMerchantProducts: MerchantProduct[] = [
     ),
     additionalImageLinks: [
       productImage(
-        "/images/products/buudy-red-torch/02-buudy-red-light-torch-product-travel-case.webp",
-      ),
-      productImage(
         "/images/products/buudy-red-torch/03-buudy-red-light-torch-handheld-ergonomics.webp",
       ),
       productImage(

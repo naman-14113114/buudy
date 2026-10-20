@@ -30,7 +30,7 @@ type CheckoutFormProps = {
 };
 
 export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
-  const { totals, lines, giftMessage, activePromoCodes, manualPromoCode } =
+  const { totals, lines, giftMessage, activePromoCodes, manualPromoCode, manualPromoCodes } =
     useCart();
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [error, setError] = useState("");
@@ -98,7 +98,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
     }
 
     const attribution = readAttribution();
-    writeCheckoutSnapshot({ lines, giftMessage, promoCode, manualPromoCode });
+    writeCheckoutSnapshot({ lines, giftMessage, promoCode, manualPromoCode, manualPromoCodes });
     setError("");
     setIsRedirecting(true);
     window.dispatchEvent(
@@ -124,6 +124,7 @@ export function CheckoutForm({ initialCustomer }: CheckoutFormProps) {
             giftMessage,
             promoCodes: activePromoCodes,
             manualPromoCode,
+            manualPromoCodes,
           },
           totals,
           attribution,

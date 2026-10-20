@@ -2,7 +2,7 @@ import type { Product } from "@/data/products";
 import type { FAQItem } from "@/data/productSections";
 import { absoluteUrl } from "@/lib/site";
 import { market } from "@/lib/market";
-import type { XpageQuote } from '@/lib/xpage-checkout';
+import type { XpageQuote } from "@/lib/xpage-checkout";
 
 export function productJsonLd(product: Product, nativeQuote?: XpageQuote | null) {
   const productUrl = absoluteUrl(`/products/${product.slug}`);
@@ -21,11 +21,24 @@ export function productJsonLd(product: Product, nativeQuote?: XpageQuote | null)
     category:
       product.template === "mask"
         ? "LED light therapy face mask"
+        : product.template === "torch"
+        ? "Handheld red light therapy device"
         : product.template === "ipl"
-          ? "IPL hair removal device"
-          : "Handheld red light therapy device",
+        ? "IPL hair removal device"
+        : product.name,
     sku: product.sku,
-    ...(product.template === 'mask' && !nativeQuote ? {} : { offers: {
+    ...(product.reviewCount > 0 && product.rating > 0
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: product.rating,
+            reviewCount: product.reviewCount,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }
+      : {}),
+    offers: {
       "@type": "Offer",
       url: productUrl,
       priceCurrency: nativeQuote?.currency || product.currency,
@@ -36,7 +49,34 @@ export function productJsonLd(product: Product, nativeQuote?: XpageQuote | null)
         "@type": "Organization",
         name: "Buudy",
       },
-    }}),
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: {
+          "@type": "MonetaryAmount",
+          value: "0.00",
+          currency: product.currency,
+        },
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "US",
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: {
+            "@type": "QuantitativeValue",
+            minValue: 1,
+            maxValue: 3,
+            unitCode: "DAY",
+          },
+          transitTime: {
+            "@type": "QuantitativeValue",
+            minValue: 3,
+            maxValue: 10,
+            unitCode: "DAY",
+          },
+        },
+      },
+    },
     additionalProperty: product.specs.map((spec) => ({
       "@type": "PropertyValue",
       name: spec.label,
@@ -139,6 +179,11 @@ export function websiteJsonLd() {
     url: absoluteUrl("/"),
     publisher: {
       "@id": `${absoluteUrl("/")}#organization`,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${absoluteUrl("/products/buudy-led-mask")}?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
     },
   };
 }

@@ -36,7 +36,7 @@ export function FreeGiftDetailPage({ gift }: { gift: FreeGiftDetail }) {
                     </a>
                   </Button>
                   <Button variant="ghost" asChild>
-                    <Link href="/pages/skincare-ebook">
+                    <Link href="/products/skincare-ebook">
                       View Masterclass Syllabus
                     </Link>
                   </Button>

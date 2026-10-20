@@ -30,7 +30,7 @@ export function HowToUseSection() {
               className="w-full aspect-video object-cover object-center block"
               playsInline
               controls={isPlaying}
-              poster={productAsset("buudy-7-colour-led-mask-how-to-use-poster-uk.webp")}
+              poster={productAsset("buudy-7-colour-led-mask-unboxing-video-poster-16s-uk.webp")}
               preload="metadata"
               ref={videoRef}
               onPlay={() => setIsPlaying(true)}
@@ -48,7 +48,7 @@ export function HowToUseSection() {
             {!isPlaying && (
               <button
                 onClick={togglePlay}
-                className="absolute inset-0 flex items-center justify-center bg-black/15 hover:bg-black/30 transition-all duration-300 cursor-pointer"
+                className="absolute inset-0 flex items-center justify-center bg-transparent transition-all duration-300 cursor-pointer"
                 aria-label="Play video"
               >
                 <div className="flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full bg-white/95 text-[var(--plum)] shadow-xl transition-transform duration-200 hover:scale-110 active:scale-95">

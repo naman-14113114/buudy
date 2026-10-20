@@ -12,7 +12,6 @@ import {
   websiteJsonLd,
 } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
-import { languageAlternates } from '@/lib/international/markets';
 import { getInitialOffer } from '@/lib/international/server-offer';
 
 type PageProps = {
@@ -24,9 +23,15 @@ type PageProps = {
 export const revalidate = 86400;
 
 export function generateStaticParams() {
-  return products.map((product) => ({
+  const baseParams = products.map((product) => ({
     slug: product.slug,
   }));
+  const aliases = [
+    { slug: "buudy-skincare-ebook" },
+    { slug: "gift-card" },
+    { slug: "package-protection" },
+  ];
+  return [...baseParams, ...aliases];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -91,10 +96,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "website",
       images: [
         {
-          url: product.gallery[0].src,
+          url: product.gallery[0]?.src || product.cartImage,
           width: 1200,
           height: 1500,
-          alt: product.gallery[0].alt,
+          alt: product.gallery[0]?.alt || product.name,
         },
       ],
     },
@@ -102,7 +107,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: product.seoTitle,
       description: product.seoDescription,
-      images: [product.gallery[0].src],
+      images: [product.gallery[0]?.src || product.cartImage],
     },
   };
 }
@@ -118,7 +123,7 @@ export default async function ProductRoute({ params }: PageProps) {
   const productFaqs = product.template === "mask"
     ? [...ledMaskSeoFaqs, ...product.faqs]
     : product.faqs;
-  const nativeQuote=product.template==='mask'?(await getInitialOffer())?.base:null;
+  const nativeQuote = product.template === 'mask' ? (await getInitialOffer())?.base : null;
 
   return (
     <>
@@ -126,7 +131,7 @@ export default async function ProductRoute({ params }: PageProps) {
         organizationJsonLd(),
         websiteJsonLd(),
         productWebPageJsonLd(product),
-        productJsonLd(product,nativeQuote),
+        productJsonLd(product, nativeQuote),
         breadcrumbJsonLd([
           { name: "Home", url: "/" },
           { name: product.name, url: `/products/${product.slug}` },

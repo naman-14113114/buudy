@@ -136,6 +136,37 @@ const nextConfig: NextConfig = {
         destination: "/policies/cookies-policy",
         permanent: true,
       },
+      {
+        source: "/policies/order-tracking",
+        destination: "/order-tracking",
+        permanent: true,
+      },
+      // E-Book product page redirects
+      {
+        source: "/pages/skincare-guide",
+        destination: "/products/skincare-ebook",
+        permanent: true,
+      },
+      {
+        source: "/pages/skincare-ebook",
+        destination: "/products/skincare-ebook",
+        permanent: true,
+      },
+      {
+        source: "/skincare-ebook",
+        destination: "/products/skincare-ebook",
+        permanent: true,
+      },
+      {
+        source: "/ebook",
+        destination: "/products/skincare-ebook",
+        permanent: true,
+      },
+      {
+        source: "/pages/ebook",
+        destination: "/products/skincare-ebook",
+        permanent: true,
+      },
     ];
   },
 };

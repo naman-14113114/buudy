@@ -234,6 +234,7 @@ export const refundPolicyHtml = `
 
 <h2>12. Partial Refunds and Replacements</h2>
 <p>A partial refund may be offered if you choose to keep a product with a minor issue.</p>
+<p>If you request a refund on an order that included a promotional Buudy LED Torch, the original cost of the torch will be deducted and only the remaining amount will be refunded, where applicable.</p>
 <p>A replacement may be offered for defective, damaged, incorrect, missing or lost products. A materially different replacement will not be sent without your approval.</p>
 <p>A partial refund or replacement will not replace a remedy that applicable law requires.</p>
 

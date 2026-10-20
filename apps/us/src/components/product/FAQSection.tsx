@@ -5,11 +5,17 @@ import { Plus } from "lucide-react";
 import { faqs as maskFaqs, type FAQItem } from "@/data/productSections";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function FAQSection({ faqs = maskFaqs }: { faqs?: FAQItem[] }) {
+export function FAQSection({
+  faqs = maskFaqs,
+  className,
+}: {
+  faqs?: FAQItem[];
+  className?: string;
+}) {
   const [open, setOpen] = useState(-1);
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-14 md:py-24" id="faq">
+    <section className={`buudy-section bg-[var(--cream)] ${className || "py-14 md:py-24"}`} id="faq">
       <div className="buudy-wrap max-w-3xl">
         <SectionHeading
           align="center"

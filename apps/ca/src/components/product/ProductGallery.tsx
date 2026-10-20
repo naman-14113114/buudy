@@ -207,35 +207,41 @@ export function ProductGallery({
         }
         .buudy-gallery-badge__title {
           font-family: var(--font-fraunces), var(--font-serif), ui-serif, Georgia, serif;
-          font-size: clamp(15.5px, 2.1vw, 19.5px);
-          font-weight: 700;
+          font-size: clamp(14px, 1.7vw, 17.5px);
+          font-weight: 800;
           line-height: 1.15;
           letter-spacing: 0.01em;
           text-transform: uppercase;
-          color: #111111;
-          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95), 0 0 12px rgba(255, 255, 255, 0.85);
+          color: #000000;
+          text-shadow: none !important;
           white-space: normal !important;
           word-wrap: break-word;
           overflow-wrap: break-word;
           margin: 0;
           display: block;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
         }
         .buudy-gallery-badge__sub {
           font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-          font-size: clamp(11.5px, 1.4vw, 13.5px);
-          font-weight: 500;
+          font-size: clamp(11px, 1.15vw, 13px);
+          font-weight: 600;
           line-height: 1.35;
           letter-spacing: -0.01em;
-          color: #374151;
-          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+          color: #111111;
+          text-shadow: none !important;
           white-space: normal !important;
           word-wrap: break-word;
           overflow-wrap: break-word;
           margin: 0;
-          margin-top: 2px;
+          margin-top: 3px;
           display: block;
           animation: buudySubSlideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
           will-change: opacity, transform;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
         }
         .buudy-gallery-badge--top-right .buudy-gallery-badge__sub,
         .buudy-gallery-badge--bottom-right .buudy-gallery-badge__sub {
@@ -243,11 +249,11 @@ export function ProductGallery({
         }
         .buudy-gallery-badge--white .buudy-gallery-badge__title {
           color: #ffffff !important;
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85), 0 0 16px rgba(0, 0, 0, 0.75) !important;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
         }
         .buudy-gallery-badge--white .buudy-gallery-badge__sub {
-          color: rgba(255, 255, 255, 0.92) !important;
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+          color: #ffffff !important;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
         }
         .buudy-gallery-badge--lightbox {
           max-width: clamp(150px, 35vw, 240px);

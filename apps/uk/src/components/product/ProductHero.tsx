@@ -5,7 +5,9 @@ import { GiftBundle } from "./GiftBundle";
 
 export function ProductHero({
   product,
-  galleryVariant = product.template === "mask" ? "omnilux" : "default",
+  galleryVariant = product.template === "mask" || product.template === "torch"
+    ? "omnilux"
+    : "default",
 }: {
   product: Product;
   galleryVariant?: "default" | "omnilux";
@@ -31,12 +33,16 @@ export function ProductHero({
       >
         <div className="lg:sticky lg:top-6 lg:self-start w-full">
           {galleryVariant === "omnilux" ? (
-            <OmniluxProductGallery images={product.gallery} hasGifts={product.gifts.length > 0} />
+            <OmniluxProductGallery
+              images={product.gallery}
+              hasGifts={product.gifts.length > 0}
+              isMask={product.template === "mask"}
+            />
           ) : (
             <ProductGallery images={product.gallery} hasGifts={product.gifts.length > 0} />
           )}
         </div>
-        <div className="lg:sticky lg:top-6 lg:self-start w-full [overflow-anchor:none]">
+        <div className="w-full [overflow-anchor:none]">
           <GiftBundle product={product} />
         </div>
       </div>

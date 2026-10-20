@@ -1,16 +1,13 @@
 "use client";
-import { StoreText, StoreButton } from '@/components/international/StoreLocale';
 
-
-import { StoreLink as Link } from '@/components/international/StoreLocale';
+import { StoreText, StoreButton, StoreLink as Link } from "@/components/international/StoreLocale";
 import { ArrowRight, ChevronDown, Tag } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { formatMoney } from "@/lib/money";
-import { getDisplayLines } from "@/lib/cart";
+import { getDisplayLines, getPromoDiscountCents } from "@/lib/cart";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
 import { PromoCodeBox } from "./PromoCodeBox";
-import { useOffer } from '@/components/international/OfferProvider';
 
 type CartSummaryProps = {
   action?: "cart" | "summary";
@@ -18,27 +15,25 @@ type CartSummaryProps = {
 };
 
 export function CartSummary({ action = "summary", children }: CartSummaryProps) {
-  const { lines, totals, closeCart, manualPromoCode } = useCart();
-  const {offer}=useOffer();
-  const products=lines.filter(line=>line.type==='product');
-  const hasMask=products.some(line=>line.productId==='buudy-led-mask');
-  const mixed=hasMask&&products.some(line=>line.productId!=='buudy-led-mask');
-  const quantity=products.filter(line=>line.productId==='buudy-led-mask').reduce((n,line)=>n+line.quantity,0);
-  const promoDiscountCents=hasMask?(manualPromoCode&&offer?Math.round(offer.base.discount*100):0):totals.promoDiscountCents;
-  const subtotal=hasMask?(offer?Math.round((offer.base.unitPrice*quantity-(manualPromoCode?offer.base.discount:0))*100):null):totals.totalCents;
-  const money=(cents:number)=>formatMoney(cents,hasMask?'GBP':undefined);
+  const { lines, totals, closeCart, manualPromoCode, manualPromoCodes } = useCart();
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const appliedCodes =
+    manualPromoCodes && manualPromoCodes.length > 0
+      ? manualPromoCodes
+      : manualPromoCode
+      ? [manualPromoCode]
+      : [];
   const giftLines = getDisplayLines(lines).filter(
     (line) =>
       line.type === "gift" &&
       line.quantity > 0 &&
       (line.compareAtCents ?? 0) > 0,
   );
-  const giftOfferDiscountCents = hasMask?0:giftLines.reduce(
+  const giftOfferDiscountCents = giftLines.reduce(
     (total, line) => total + (line.compareAtCents ?? 0) * line.quantity,
     0,
   );
-  const totalSavingsCents = giftOfferDiscountCents + promoDiscountCents;
+  const totalSavingsCents = giftOfferDiscountCents + totals.promoDiscountCents;
 
   return (
     <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
@@ -51,9 +46,9 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
             onClick={() => setDetailsOpen((current) => !current)}
             type="button"
           >
-            <span className="flex items-center gap-2 font-medium text-[var(--plum)]"><StoreText>
-              Total discount
-              </StoreText><ChevronDown
+            <span className="flex items-center gap-2 font-medium text-[var(--plum)]">
+              <StoreText>Total discount</StoreText>
+              <ChevronDown
                 aria-hidden="true"
                 className={`transition-transform duration-300 ${
                   detailsOpen ? "rotate-180" : ""
@@ -62,7 +57,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
               />
             </span>
             <span className="font-bold text-[var(--plum)]">
-              -{money(totalSavingsCents)}
+              -{formatMoney(totalSavingsCents)}
             </span>
           </StoreButton>
 
@@ -74,27 +69,42 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
           >
             <div className="overflow-hidden">
               <div className="space-y-3 pb-3 pt-2 text-sm">
-                {!hasMask&&giftLines.map((line) => (
+                {giftLines.map((line) => (
                   <div className="flex justify-between gap-4" key={line.id}>
                     <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
-                      <Tag aria-hidden="true" size={14} /><StoreText>
-                      Free </StoreText><StoreText>{line.title}</StoreText>
+                      <Tag aria-hidden="true" size={14} />
+                      <StoreText>Free </StoreText>
+                      <StoreText>{line.title}</StoreText>
                     </span>
                     <span className="font-semibold text-[var(--muted)]">
                       -{formatMoney((line.compareAtCents ?? 0) * line.quantity)}
                     </span>
                   </div>
                 ))}
-                {promoDiscountCents > 0 ? (
-                  <div className="flex justify-between gap-4">
-                    <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
-                      <Tag aria-hidden="true" size={14} />
-                      <StoreText>{manualPromoCode}</StoreText>
-                    </span>
-                    <span className="font-semibold text-[var(--muted)]">
-                      -{money(promoDiscountCents)}
-                    </span>
-                  </div>
+                {totals.promoDiscountCents > 0 ? (
+                  appliedCodes.length > 0 ? (
+                    appliedCodes.map((code) => (
+                      <div className="flex justify-between gap-4" key={code}>
+                        <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
+                          <Tag aria-hidden="true" size={14} />
+                          <StoreText>{code.length > 4 ? `${code.slice(0, 4)}...` : code}</StoreText>
+                        </span>
+                        <span className="font-semibold text-[var(--muted)]">
+                          -{formatMoney(getPromoDiscountCents(code))}
+                        </span>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="flex justify-between gap-4">
+                      <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
+                        <Tag aria-hidden="true" size={14} />
+                        <StoreText>Promo Discount</StoreText>
+                      </span>
+                      <span className="font-semibold text-[var(--muted)]">
+                        -{formatMoney(totals.promoDiscountCents)}
+                      </span>
+                    </div>
+                  )
                 ) : null}
               </div>
             </div>
@@ -109,23 +119,21 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
       ) : null}
 
       <div className="mt-4 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-5">
-        <span className="buudy-display block text-xl uppercase text-[var(--plum)]"><StoreText>
-          Sub Total
-        </StoreText></span>
+        <span className="buudy-display block text-xl uppercase text-[var(--plum)]">
+          <StoreText>Sub Total</StoreText>
+        </span>
         <span className="buudy-display block text-right text-4xl text-[var(--plum)]">
-          <StoreText>{mixed?'—':subtotal===null?'…':money(subtotal)}</StoreText>
+          <StoreText>{formatMoney(totals.totalCents)}</StoreText>
         </span>
       </div>
-
-      {mixed&&<p role="alert" className="mt-3 text-sm text-[var(--muted)]"><StoreText>The mask bundle uses a separate checkout. Remove the other products to continue with the mask.</StoreText></p>}
 
       {children ? <div className="mt-4"><StoreText>{children}</StoreText></div> : null}
 
       {action === "cart" ? (
         <Button asChild className="mt-5 w-full" onClick={closeCart}>
-          <Link href="/cart"><StoreText>
-            Go to cart
-            </StoreText><ArrowRight aria-hidden="true" size={17} />
+          <Link href="/cart">
+            <StoreText>Go to cart</StoreText>
+            <ArrowRight aria-hidden="true" size={17} />
           </Link>
         </Button>
       ) : null}

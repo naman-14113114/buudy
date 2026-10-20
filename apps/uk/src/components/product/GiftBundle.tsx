@@ -189,19 +189,19 @@ export function GiftBundle({ product }: { product: Product }) {
         </span>
       </a>
 
-      <h1 className="font-playfair mt-3 whitespace-nowrap text-[2rem] leading-[1.02] text-[var(--plum)] sm:text-[2.55rem] md:text-[3.25rem] xl:text-[4rem] 2xl:text-[4.45rem]">
-        {product.heroTitle}{" "}
-        <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
-      </h1>
+      <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 sm:gap-x-3.5">
+        <h1 className="font-playfair whitespace-nowrap text-[1.85rem] leading-[1.05] text-[var(--plum)] sm:text-[2.2rem] md:text-[2.4rem] lg:text-[2.5rem] xl:text-[2.85rem]">
+          {product.heroTitle}{" "}
+          <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
+        </h1>
 
-      {/* Cleopatra Edition Ribbon on all mask pages */}
-      {product.template === "mask" && (
-        <div className="mt-2 mb-1 flex items-center">
-          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--cream)] bg-[var(--ink)] px-2.5 py-0.5 rounded-md">
+        {/* Cleopatra Edition Ribbon on all mask pages beside title on desktop */}
+        {product.template === "mask" && (
+          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--cream)] bg-[var(--plum)] px-2.5 py-0.5 rounded-md inline-flex items-center shrink-0">
             Cleopatra Edition
           </span>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Clinically Proven Badges */}
       <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
@@ -267,7 +267,7 @@ export function GiftBundle({ product }: { product: Product }) {
         <div className="flex items-center gap-2 min-w-0">
           <Clock className="h-4 w-4 shrink-0 text-[var(--gold)]" />
           <p className="m-0 leading-snug">
-            Free delivery: Order within <span className="font-semibold text-[var(--plum)]">{timer}</span> to receive it by <span className="font-semibold text-[var(--plum)]">{deliveryDate || "soon"}</span>
+            Free delivery: Order within <span className="font-semibold text-[var(--plum)]">{timer}</span> to get as fast as <span className="font-semibold text-[var(--plum)]">{deliveryDate || "soon"}</span>
           </p>
         </div>
 
@@ -311,7 +311,7 @@ export function GiftBundle({ product }: { product: Product }) {
       </div>
 
       <Button
-        className={`proxy-bundle-btn relative overflow-hidden mt-5 w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px] ${isAdding ? "disabled:!opacity-100" : ""}`}
+        className={`proxy-bundle-btn relative overflow-hidden mt-5 w-full rounded-[30px] border border-[var(--plum)] bg-[var(--plum)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--plum)] active:scale-[0.98] sm:text-[22px] ${isAdding ? "disabled:!opacity-100" : ""}`}
         disabled={isAdding}
         id="hero-cta"
         onClick={() => {
@@ -427,9 +427,11 @@ export function GiftBundle({ product }: { product: Product }) {
                   <span className="text-black text-[11px] sm:text-[13px] font-bold tracking-wider uppercase font-sans">
                     FREE
                   </span>
-                  <span className="line-through text-xs sm:text-sm text-[var(--muted)] buudy-display font-semibold leading-none">
-                    {formatMoney(gift.valueCents, product.currency)}
-                  </span>
+                  {gift.valueCents > 0 && (
+                    <span className="line-through text-xs sm:text-sm text-[var(--muted)] buudy-display font-semibold leading-none">
+                      {formatMoney(gift.valueCents, product.currency)}
+                    </span>
+                  )}
                 </div>
 
                 {/* Gift Image (No inner box container, directly given standard even border-radius) */}

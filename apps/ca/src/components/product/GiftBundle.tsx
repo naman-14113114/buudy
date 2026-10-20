@@ -84,6 +84,7 @@ function FaceNeckIcon({ size = 22 }: { size?: number }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
+      {/* Symmetrical outline of head and neck representing full collar wrap */}
       <path d="M12 2a6.5 6.5 0 0 0-6.5 6.5c0 3 1.5 5 4.5 6v3.5a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3.5c3-1 4.5-3 4.5-6A6.5 6.5 0 0 0 12 2z" />
       <path d="M7.5 17.5c2.5 1 6.5 1 9 0" />
       <path d="M6.5 21h11" />
@@ -188,19 +189,19 @@ export function GiftBundle({ product }: { product: Product }) {
         </span>
       </a>
 
-      <h1 className="font-playfair mt-3 whitespace-nowrap text-[2rem] leading-[1.02] text-[var(--plum)] sm:text-[2.55rem] md:text-[3.25rem] xl:text-[4rem] 2xl:text-[4.45rem]">
-        {product.heroTitle}{" "}
-        <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
-      </h1>
+      <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 sm:gap-x-3.5">
+        <h1 className="font-playfair whitespace-nowrap text-[1.85rem] leading-[1.05] text-[var(--plum)] sm:text-[2.2rem] md:text-[2.4rem] lg:text-[2.5rem] xl:text-[2.85rem]">
+          {product.heroTitle}{" "}
+          <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
+        </h1>
 
-      {/* Cleopatra Edition Ribbon on all mask pages */}
-      {product.template === "mask" && (
-        <div className="mt-2 mb-1 flex items-center">
-          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--plum)] bg-[rgba(184,149,86,.18)] px-2.5 py-0.5 rounded-md">
+        {/* Cleopatra Edition Ribbon on all mask pages beside title on desktop */}
+        {product.template === "mask" && (
+          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--cream)] bg-[var(--plum)] px-2.5 py-0.5 rounded-md inline-flex items-center shrink-0">
             Cleopatra Edition
           </span>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Clinically Proven Badges */}
       <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
@@ -266,7 +267,7 @@ export function GiftBundle({ product }: { product: Product }) {
         <div className="flex items-center gap-2 min-w-0">
           <Clock className="h-4 w-4 shrink-0 text-[var(--gold)]" />
           <p className="m-0 leading-snug">
-            Free delivery: Order within <span className="font-semibold text-[var(--plum)]">{timer}</span> to receive it by <span className="font-semibold text-[var(--plum)]">{deliveryDate || "soon"}</span>
+            Free delivery: Order within <span className="font-semibold text-[var(--plum)]">{timer}</span> to get as fast as <span className="font-semibold text-[var(--plum)]">{deliveryDate || "soon"}</span>
           </p>
         </div>
 
@@ -310,7 +311,7 @@ export function GiftBundle({ product }: { product: Product }) {
       </div>
 
       <Button
-        className={`proxy-bundle-btn relative overflow-hidden mt-5 w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--ink)] active:scale-[0.98] sm:text-[22px] ${isAdding ? "disabled:!opacity-100" : ""}`}
+        className={`proxy-bundle-btn relative overflow-hidden mt-5 w-full rounded-[30px] border border-[var(--plum)] bg-[var(--plum)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--plum)] active:scale-[0.98] sm:text-[22px] ${isAdding ? "disabled:!opacity-100" : ""}`}
         disabled={isAdding}
         id="hero-cta"
         onClick={() => {
@@ -421,17 +422,19 @@ export function GiftBundle({ product }: { product: Product }) {
                 href={gift.href}
                 key={gift.id}
               >
-                {/* Single absolute overlapping badge */}
+                {/* Single absolute overlapping badge: FREE (bold & clear) + price strikethrough (no nested container) */}
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-2 sm:px-3 py-1 bg-[var(--card)] border border-[rgba(58,31,61,.22)] rounded-full flex items-center gap-1 sm:gap-1.5 shadow-[0_2px_8px_rgba(58,31,61,0.06)] whitespace-nowrap">
                   <span className="text-black text-[11px] sm:text-[13px] font-bold tracking-wider uppercase font-sans">
                     FREE
                   </span>
-                  <span className="line-through text-xs sm:text-sm text-[var(--muted)] buudy-display font-semibold leading-none">
-                    {formatMoney(gift.valueCents, product.currency)}
-                  </span>
+                  {gift.valueCents > 0 && (
+                    <span className="line-through text-xs sm:text-sm text-[var(--muted)] buudy-display font-semibold leading-none">
+                      {formatMoney(gift.valueCents, product.currency)}
+                    </span>
+                  )}
                 </div>
 
-                {/* Gift Image */}
+                {/* Gift Image (No inner box container, directly given standard even border-radius) */}
                 <div className="relative mt-1 md:mt-2 aspect-square w-full overflow-hidden rounded-[20px] p-0.5 md:p-1 flex items-center justify-center">
                   <Image
                     alt={gift.name}
@@ -452,6 +455,20 @@ export function GiftBundle({ product }: { product: Product }) {
           </div>
         </section>
       ) : null}
+      {/* <section
+          className="mt-8 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[var(--card)] p-5"
+          id="torch-offer"
+        >
+          <p className="buudy-eyebrow">{product.promoLabel}</p>
+          <p className="buudy-display mt-2 text-2xl text-[var(--plum)]">
+            60% off, free shipping, and a rechargeable wellness kit.
+          </p>
+          <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+            Includes the torch, rechargeable battery, charger, USB cable,
+            glasses, and user manual for a complete targeted light therapy
+            routine.
+          </p>
+        </section> */}
 
       <ProductDetailsAccordion product={product} />
     </div>

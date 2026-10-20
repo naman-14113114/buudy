@@ -52,6 +52,11 @@ function parseCart(cartJson: string): CartState | null {
       lines: Array.isArray(parsed.lines) ? (parsed.lines as CartLine[]) : [],
       promoCode: typeof parsed.promoCode === "string" ? parsed.promoCode : "AUTO",
       manualPromoCode: getAppliedManualPromoCode(parsed.manualPromoCode),
+      manualPromoCodes: Array.isArray(parsed.manualPromoCodes)
+        ? parsed.manualPromoCodes.map((c) => getAppliedManualPromoCode(c)).filter(Boolean)
+        : parsed.manualPromoCode
+        ? [getAppliedManualPromoCode(parsed.manualPromoCode)]
+        : [],
       giftMessage:
         typeof parsed.giftMessage === "string" ? parsed.giftMessage.slice(0, 300) : "",
     };
@@ -114,7 +119,12 @@ export async function recordCheckoutAction(
     };
   }
 
-  const totals = calculateCartTotals(lines, cart.manualPromoCode);
+  const appliedPromoCodes = cart.manualPromoCodes && cart.manualPromoCodes.length > 0
+    ? cart.manualPromoCodes
+    : cart.manualPromoCode
+    ? [cart.manualPromoCode]
+    : [];
+  const totals = calculateCartTotals(lines, appliedPromoCodes);
   const userId = await getSignedInUserId();
   const admin = createSupabaseAdminClient();
   const productPromoCodes = productLines
@@ -123,7 +133,7 @@ export async function recordCheckoutAction(
   const promoCodes = Array.from(
     new Set([
       ...productPromoCodes,
-      ...(cart.manualPromoCode ? [cart.manualPromoCode] : []),
+      ...appliedPromoCodes,
     ]),
   );
   const orderNumber = generateOrderNumber();

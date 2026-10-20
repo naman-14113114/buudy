@@ -1,11 +1,8 @@
 "use client";
-import { StoreText, StoreButton, StoreTextarea, useStoreLocale } from '@/components/international/StoreLocale';
 
-
-import { StoreImage as Image } from '@/components/international/StoreLocale';
-import { StoreLink as Link } from '@/components/international/StoreLocale';
+import { StoreText, StoreButton, StoreTextarea, useStoreLocale } from "@/components/international/StoreLocale";
+import { StoreLink as Link } from "@/components/international/StoreLocale";
 import {
-  BookOpen,
   Check,
   ChevronDown,
   Gift,
@@ -21,11 +18,7 @@ import { useCart } from "./CartProvider";
 import { CartLineItem } from "./CartLineItem";
 import { CartSummary } from "./CartSummary";
 import { CheckoutForm, type CheckoutCustomer } from "./CheckoutForm";
-import { FreeGiftsPanel } from "./FreeGiftsPanel";
-import { getDisplayLines, type CartLine } from "@/lib/cart";
-import { useOffer } from '@/components/international/OfferProvider';
-
-const digitalGiftId = "skincare-ebook";
+import { getDisplayLines } from "@/lib/cart";
 
 function useCheckoutCountdown(seconds: number) {
   const [remaining, setRemaining] = useState(seconds);
@@ -121,10 +114,6 @@ export function CartPageContent({
 
   const visibleLines = useMemo(
     () => getDisplayLines(lines),
-    [lines],
-  );
-  const digitalGift = useMemo(
-    () => lines.find((line) => line.id.includes(digitalGiftId)),
     [lines],
   );
   const hasItems = totals.itemCount > 0;
@@ -231,14 +220,12 @@ export function CartPageContent({
                 <CartLineItem key={line.id} line={line} />
               ))}
             </div>
-            {digitalGift ? <DigitalGiftNotice line={digitalGift} /> : null}
           </div>
 
           <aside className="space-y-5 lg:sticky lg:top-6 lg:self-start">
             <CartSummary>
               <CheckoutForm initialCustomer={initialCustomer} />
             </CartSummary>
-            <FreeGiftsPanel compact />
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
               <StoreButton
                 aria-controls="gift-message-panel"
@@ -316,10 +303,6 @@ export function CartPageContent({
 }
 
 function MobileStickyCheckout() {
-  const {lines,totals}=useCart();
-  const {offer,loading}=useOffer();
-  const hasMask=lines.some(line=>line.type==='product'&&line.productId==='buudy-led-mask');
-  const mixed=hasMask&&lines.some(line=>line.type==='product'&&line.productId!=='buudy-led-mask');
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [isMainBtnVisible, setIsMainBtnVisible] = useState(false);
 
@@ -368,7 +351,7 @@ function MobileStickyCheckout() {
       <StoreButton
         className={`pointer-events-auto buudy-cart-wipe buudy-display relative flex h-14 w-full max-w-[400px] items-center justify-center overflow-hidden rounded-[35px] border border-[var(--plum)] bg-[var(--plum)] px-6 py-3 text-[15px] font-bold uppercase leading-none tracking-wide text-[var(--cream)] shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] ${!isRedirecting ? "proxy-bundle-btn" : ""}`}
         type="button"
-        disabled={isRedirecting||totals.itemCount===0||mixed||(hasMask&&(!offer||loading))}
+        disabled={isRedirecting}
         onClick={() => {
           const btn = document.getElementById('main-checkout-btn') as HTMLButtonElement;
           btn?.click();
@@ -413,44 +396,5 @@ function CartRestoringState() {
         </StoreText></p>
       </div>
     </section>
-  );
-}
-
-function DigitalGiftNotice({ line }: { line: CartLine }) {
-  return (
-    <div className="relative overflow-hidden rounded-[1.5rem] border border-[rgba(184,149,86,.25)] bg-[rgba(184,149,86,.09)] p-5 md:pl-6 md:pr-36">
-      <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-start md:gap-4 md:text-left">
-        <div className="flex items-center justify-center gap-3 md:w-auto">
-          <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-[var(--card)] text-[var(--gold)] shadow-sm">
-            <BookOpen size={22} />
-          </span>
-          <span className="buudy-mono rounded-full bg-[var(--card)] px-4 py-2 text-[var(--plum)] md:hidden"><StoreText>
-            Free digital reward
-          </StoreText></span>
-        </div>
-        <div className="flex flex-col items-center md:items-start">
-          <span className="buudy-mono hidden rounded-full bg-[var(--card)] px-4 py-2 text-[var(--plum)] md:block"><StoreText>
-            Free digital reward
-          </StoreText></span>
-          <p className="mt-2 buudy-display text-2xl leading-tight text-[var(--plum)]">
-            <StoreText>{line.title}</StoreText><StoreText> is sent by email after checkout.
-          </StoreText></p>
-          <p className="mt-2 text-sm leading-6 text-[var(--muted)]"><StoreText>
-            It will not appear as a shipped cart item, but it stays unlocked with
-            your mask order so your routine starts the moment your confirmation
-            email arrives.
-          </StoreText></p>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute bottom-[-24px] right-3 hidden h-32 w-24 rotate-[-7deg] overflow-hidden rounded-xl border border-[rgba(58,31,61,.14)] bg-[var(--card)] shadow-xl md:block">
-        <Image
-          alt={line.title}
-          className="object-contain p-2"
-          fill
-          sizes="96px"
-          src={line.image}
-        />
-      </div>
-    </div>
   );
 }

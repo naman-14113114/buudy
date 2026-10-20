@@ -42,7 +42,7 @@ export function ExpertSection() {
             {/* Play/Pause Overlay Button */}
             <button
               onClick={togglePlay}
-              className={`absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/25 transition-all duration-300 ${
+              className={`absolute inset-0 flex items-center justify-center bg-transparent transition-all duration-300 ${
                 isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
               }`}
               aria-label={isPlaying ? "Pause video" : "Play video"}

@@ -9,6 +9,7 @@ import { ProductReviewsSection } from "./ProductReviewsSection";
 import { StickyAddToCart } from "./StickyAddToCart";
 import { TorchProductPage } from "./TorchProductPage";
 import { IplProductPage } from "./IplProductPage";
+import { MinimalProductPage } from "./MinimalProductPage";
 import {
   DeferredBeforeAfterGrid,
   DeferredExpertSection,
@@ -22,10 +23,12 @@ export function ProductPage({
   product,
   variant,
   galleryVariant = product.template === "mask" ? "omnilux" : "default",
+  comparisonPosition = "default",
 }: {
   product: Product;
   variant?: string;
   galleryVariant?: "default" | "omnilux";
+  comparisonPosition?: "default" | "below-app";
 }) {
   if (product.template === "torch") {
     return <TorchProductPage product={product} />;
@@ -33,6 +36,10 @@ export function ProductPage({
 
   if (product.template === "ipl") {
     return <IplProductPage product={product} />;
+  }
+
+  if (product.template === "minimal") {
+    return <MinimalProductPage product={product} />;
   }
 
   return (
@@ -45,10 +52,11 @@ export function ProductPage({
       <DeferredWavelengthSelector />
       <DeferredHowToUseSection />
       <DeferredExpertSection />
-      <ComparisonTable />
+      {comparisonPosition === "default" && <ComparisonTable />}
       {/* <TouchTechSection /> */}
       <ProductReviewsSection />
       <AppPromo />
+      {comparisonPosition === "below-app" && <ComparisonTable />}
       <BlueLightSection />
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />

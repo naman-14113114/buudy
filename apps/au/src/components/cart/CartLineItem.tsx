@@ -10,13 +10,30 @@ import { useCart } from "./CartProvider";
 export function CartLineItem({ line }: { line: CartLine }) {
   const { setQuantity } = useCart();
 
+  const isTorch =
+    line.title === "Buudy LED Torch" || line.id.includes("buudy-led-torch");
+  const isEbook =
+    line.id.includes("skincare-ebook") ||
+    line.slug === "skincare-ebook" ||
+    line.productId === "buudy-skincare-ebook" ||
+    line.title.toLowerCase().includes("ebook") ||
+    line.title.toLowerCase().includes("e-book");
+
+  const itemHref = isTorch
+    ? "/products/red-light-torch"
+    : isEbook
+    ? "/products/skincare-ebook"
+    : line.type === "product" && line.slug
+    ? `/products/${line.slug}`
+    : undefined;
+
   return (
     <div className="flex gap-4 border-b border-[var(--border)] py-5">
-      {((line.type === "product" && line.slug) || line.title === "Buudy LED Torch") ? (
+      {itemHref ? (
         <Link
           aria-label={`View ${line.title}`}
           className="relative h-24 w-20 flex-none overflow-hidden rounded-lg bg-[var(--blush)] transition hover:opacity-90"
-          href={line.title === "Buudy LED Torch" ? "/products/red-light-torch" : `/products/${line.slug}`}
+          href={itemHref}
         >
           <Image
             alt={line.title}
@@ -42,9 +59,20 @@ export function CartLineItem({ line }: { line: CartLine }) {
       <div className="min-w-0 flex-1">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="buudy-display text-lg leading-tight text-[var(--plum)]">
-              {line.title}
-            </p>
+            {itemHref ? (
+              <Link
+                href={itemHref}
+                className="transition hover:text-[var(--gold)]"
+              >
+                <p className="buudy-display text-lg leading-tight text-[var(--plum)]">
+                  {line.title}
+                </p>
+              </Link>
+            ) : (
+              <p className="buudy-display text-lg leading-tight text-[var(--plum)]">
+                {line.title}
+              </p>
+            )}
             <p className="mt-1 text-xs leading-5 text-[var(--muted)]">{line.subtitle}</p>
           </div>
           <div className="text-right">
@@ -53,7 +81,7 @@ export function CartLineItem({ line }: { line: CartLine }) {
                 ? "Free"
                 : formatMoney(line.unitPriceCents)}
             </p>
-            {line.compareAtCents ? (
+            {line.compareAtCents && line.compareAtCents > line.unitPriceCents ? (
               <p className="text-xs text-[var(--muted)] line-through">
                 {formatMoney(line.compareAtCents)}
               </p>

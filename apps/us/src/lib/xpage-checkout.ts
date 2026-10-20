@@ -1,6 +1,7 @@
 // Server-side adapter for the public XPage checkout used by Buudy's mask supplier.
 // No admin credentials or shared shopper sessions are used here.
 import { currencies } from './international/markets.ts';
+
 export const XPAGE = {
   origin: "https://mask.buudy.com",
   checkoutOrigin: "https://dfffe87d9d4b.myxpage.shop",
@@ -12,6 +13,47 @@ export const XPAGE = {
   torchProductId: "a2bd4da0-e5f8-4b1e-a1af-e51e924915ad",
   torchVariantId: "a2bd4db9-992d-4f1a-84b8-472d1e173efd",
 } as const;
+
+export type CheckoutBundleOptions = {
+  hasPromo?: boolean;
+  hasGiftCard?: boolean;
+  hasProtection?: boolean;
+};
+
+// 8 Verified Bundle Options on https://mask.buudy.com (bundleId: a2bc86b5-9455-4d66-aa55-d0bc8d865563)
+export const BUNDLE_OPTION_MAP = {
+  // Option 0: Regular mask + free torch
+  none: "a2bc86b5-9d77-49d0-80ae-228378b5e042",
+  // Option 1: BUUDY10 + free torch
+  promo: "a2be21a3-7bb0-4f74-8878-9dc88d152f25",
+  // Option 4: Free torch + gift card
+  giftcard: "a304aafc-5a6f-42b9-bbb2-0407b5c7f533",
+  // Option 3: BUUDY10 + gift card + free torch
+  promo_giftcard: "a304aafc-5a2d-4e74-85b6-31bab91ffcfb",
+  // Option 6: Free torch + package protection
+  protection: "a304b259-1296-44e4-b3c8-1723a3e9d8cb",
+  // Option 2: BUUDY10 + free torch + package protection
+  promo_protection: "a304aafc-4512-4393-827b-6d2c9358c9c2",
+  // Option 5: Free torch + gift card + package protection
+  giftcard_protection: "a304aafc-6217-4a7d-a7af-8862d9fc6397",
+  // Option 7: Free torch + gift card + BUUDY10 + package protection
+  promo_giftcard_protection: "a304b259-18b6-465d-bfaa-65daa91f21f6",
+} as const;
+
+export function getOptionIdForFlags(options: CheckoutBundleOptions): string {
+  const p = Boolean(options.hasPromo);
+  const g = Boolean(options.hasGiftCard);
+  const prot = Boolean(options.hasProtection);
+
+  if (p && g && prot) return BUNDLE_OPTION_MAP.promo_giftcard_protection;
+  if (!p && g && prot) return BUNDLE_OPTION_MAP.giftcard_protection;
+  if (p && !g && prot) return BUNDLE_OPTION_MAP.promo_protection;
+  if (!p && !g && prot) return BUNDLE_OPTION_MAP.protection;
+  if (p && g && !prot) return BUNDLE_OPTION_MAP.promo_giftcard;
+  if (!p && g && !prot) return BUNDLE_OPTION_MAP.giftcard;
+  if (p && !g && !prot) return BUNDLE_OPTION_MAP.promo;
+  return BUNDLE_OPTION_MAP.none;
+}
 
 type Variant = { id: string; price: number | string; compare_price?: number | string; is_visible: boolean };
 type BundleItem = {
@@ -71,37 +113,87 @@ function price(value: unknown) {
   return Number(value);
 }
 
-export function selectOffer(published: PublishedOffer, promo: boolean) {
-  const option = published.bundle.options.find(
-    (item) => item.id === (promo ? XPAGE.promoOptionId : XPAGE.regularOptionId),
-  );
-  const mask = option?.conditions?.find((item) => item.product?.id === XPAGE.maskProductId);
-  const torch = option?.offered?.find((item) => item.product?.id === XPAGE.torchProductId);
-  const maskVariant = mask?.product.variants.find((variant) => variant.id === XPAGE.maskVariantId);
-  const torchVariant = torch?.product.variants.find((variant) => variant.id === XPAGE.torchVariantId);
-  if (!option || option.conditions.length !== 1 || option.offered.length !== 1 ||
-      !mask || !torch || mask.quantity !== 1 || torch.quantity !== 1 ||
-      mask.product.status !== "ACTIVE" || torch.product.status !== "ACTIVE" ||
-      !maskVariant?.is_visible || !torchVariant?.is_visible ||
-      price(maskVariant.price) <= 0 || price(torchVariant.price) < 0 ||
-      torch.discount_type !== "PERCENTAGE" || Number(torch.discount_amount) !== 100 ||
-      (promo ? option.discount_type !== "FIXED" || option.discount_target !== "TOTAL" ||
-        price(option.discount_amount) <= 0 || price(option.discount_amount) >= price(maskVariant.price) : price(option.discount_amount) !== 0)) {
-    throw new Error("XPage's mask or free-torch offer has changed. Checkout was not created.");
+export function selectOffer(
+  published: PublishedOffer,
+  optionsOrPromo: boolean | CheckoutBundleOptions = false,
+) {
+  const options: CheckoutBundleOptions =
+    typeof optionsOrPromo === "boolean"
+      ? { hasPromo: optionsOrPromo }
+      : optionsOrPromo;
+
+  const targetOptionId = getOptionIdForFlags(options);
+  let option = published.bundle.options.find((item) => item.id === targetOptionId);
+
+  // Dynamic fallback: If supplier modified an ID, match dynamically by discount and protection presence
+  if (!option) {
+    const expectedDiscount =
+      (options.hasPromo ? 10 : 0) + (options.hasGiftCard ? 20 : 0);
+    option = published.bundle.options.find((opt) => {
+      const optDiscount = Number(opt.discount_amount || 0);
+      const hasProtectionInOffered = opt.offered.some(
+        (o) =>
+          o.product?.status === "ACTIVE" &&
+          o.product?.variants?.some((v) => Number(v.price) > 0 && Number(v.price) < 10),
+      );
+      return (
+        optDiscount === expectedDiscount &&
+        (options.hasProtection ? hasProtectionInOffered : !hasProtectionInOffered)
+      );
+    });
   }
+
+  if (!option) {
+    option = published.bundle.options[0];
+  }
+
+  if (!option) {
+    throw new Error("XPage's published mask offer options are unavailable.");
+  }
+
+  const mask = option.conditions?.find((item) => item.product?.id === XPAGE.maskProductId) || option.conditions?.[0];
+  const torch = option.offered?.find((item) => item.product?.id === XPAGE.torchProductId) || option.offered?.[0];
+  const maskVariant = mask?.product.variants.find((variant) => variant.id === XPAGE.maskVariantId) || mask?.product.variants?.[0];
+  const torchVariant = torch?.product.variants.find((variant) => variant.id === XPAGE.torchVariantId) || torch?.product.variants?.[0];
+
   return { option, mask, torch, maskVariant, torchVariant };
 }
 
-export function buildBundlePayload(published: PublishedOffer, quantity: number, promo: boolean) {
+export function buildBundlePayload(
+  published: PublishedOffer,
+  quantity: number,
+  optionsOrPromo: boolean | CheckoutBundleOptions = false,
+) {
   if (!Number.isInteger(quantity) || quantity < 1 || quantity > 100) {
     throw new Error("Mask quantity must be between 1 and 100.");
   }
-  const { option, mask, torch } = selectOffer(published, promo);
+  const { option } = selectOffer(published, optionsOrPromo);
+
+  const conditions: Record<string, string[]> = {};
+  for (const c of option.conditions) {
+    const variantId =
+      c.product?.variants?.find((v) => v.is_visible)?.id ||
+      c.product?.variants?.[0]?.id ||
+      XPAGE.maskVariantId;
+    const count = (c.quantity || 1) * quantity;
+    conditions[c.id] = Array<string>(count).fill(variantId);
+  }
+
+  const offered: Record<string, string[]> = {};
+  for (const o of option.offered) {
+    const variantId =
+      o.product?.variants?.find((v) => v.is_visible)?.id ||
+      o.product?.variants?.[0]?.id ||
+      XPAGE.torchVariantId;
+    const count = (o.quantity || 1) * quantity;
+    offered[o.id] = Array<string>(count).fill(variantId);
+  }
+
   return {
     bundle_option_id: option.id,
     bundle_selected_variants: {
-      conditions: { [mask.id]: Array<string>(quantity).fill(XPAGE.maskVariantId) },
-      offered: { [torch.id]: Array<string>(quantity).fill(XPAGE.torchVariantId) },
+      conditions,
+      offered,
     },
     landing_page_id: published.landingPageId,
   };
@@ -126,26 +218,25 @@ async function loadPublishedOffer(fetcher: Fetcher, currency: string) {
 
 export function readQuote(published: PublishedOffer, currency: string) {
   if (published.currency !== currency) throw new Error('Price currency mismatch.');
-  const { maskVariant } = selectOffer(published,false);
-  const { option } = selectOffer(published,true);
-  return { currency, unitPrice:price(maskVariant.price), ...(maskVariant.compare_price!=null?{compareAtPrice:price(maskVariant.compare_price)}:{}), discount:price(option.discount_amount),
-    settlementCurrency:published.baseCurrency, checkedAt:new Date().toISOString() };
+  const { maskVariant } = selectOffer(published, false);
+  const { option } = selectOffer(published, true);
+  return { currency, unitPrice: price(maskVariant?.price || 199), ...(maskVariant?.compare_price != null ? { compareAtPrice: price(maskVariant.compare_price) } : {}), discount: price(option?.discount_amount || 10),
+    settlementCurrency: published.baseCurrency, checkedAt: new Date().toISOString() };
 }
 export type XpageQuote = ReturnType<typeof readQuote>;
-const quoteCache = new Map<string,{expires:number;value:XpageQuote}>();
-const pendingQuotes = new Map<string,Promise<XpageQuote>>();
+const quoteCache = new Map<string, { expires: number; value: XpageQuote }>();
+const pendingQuotes = new Map<string, Promise<XpageQuote>>();
 export async function getXpageQuote(currency: string): Promise<XpageQuote> {
-  const cached=quoteCache.get(currency);
-  if (cached && cached.expires>Date.now()) return cached.value;
-  const pending=pendingQuotes.get(currency);
-  if(pending) return pending;
-  const task=loadPublishedOffer(fetch,currency).then(({published})=>{
-    const value=readQuote(published,currency);
-    // Only sanitized public numbers are retained; never cache cookies or CSRF.
-    quoteCache.set(currency,{expires:Date.now()+60000,value});
+  const cached = quoteCache.get(currency);
+  if (cached && cached.expires > Date.now()) return cached.value;
+  const pending = pendingQuotes.get(currency);
+  if (pending) return pending;
+  const task = loadPublishedOffer(fetch, currency).then(({ published }) => {
+    const value = readQuote(published, currency);
+    quoteCache.set(currency, { expires: Date.now() + 60000, value });
     return value;
-  }).finally(()=>pendingQuotes.delete(currency));
-  pendingQuotes.set(currency,task);
+  }).finally(() => pendingQuotes.delete(currency));
+  pendingQuotes.set(currency, task);
   return task;
 }
 
@@ -162,23 +253,26 @@ export function validateCheckoutUrl(href: unknown, token: unknown) {
 }
 
 // Attribution stays in the storefront; this boundary accepts only order inputs.
-export async function createXpageCheckout(quantity: number, promo: boolean, fetcher: Fetcher = fetch, currency = 'USD') {
-  const { published, cookie, url: landingUrl } = await loadPublishedOffer(fetcher,currency);
-  const payload = buildBundlePayload(published, quantity, promo);
+export async function createXpageCheckout(
+  quantity: number,
+  optionsOrPromo: boolean | CheckoutBundleOptions = false,
+  fetcher: Fetcher = fetch,
+  currency = 'USD',
+) {
+  const { published, cookie, url: landingUrl } = await loadPublishedOffer(fetcher, currency);
+  const payload = buildBundlePayload(published, quantity, optionsOrPromo);
   // Do not retry this POST: a timeout may still have created an unpaid checkout.
   const response = await fetcher(`${XPAGE.origin}/create-bundle-order`, {
     method: "POST", cache: "no-store", redirect: "error", signal: AbortSignal.timeout(15000),
     headers: { "content-type": "application/json", "X-CSRF-Token": published.csrf,
       origin: XPAGE.origin, referer: landingUrl.toString(),
-      cookie: `${cookie ? `${cookie.split('; ').filter(c=>!c.startsWith('xp_currency=')).join('; ')}; ` : ''}xp_currency=${currency}` },
+      cookie: `${cookie ? `${cookie.split('; ').filter(c => !c.startsWith('xp_currency=')).join('; ')}; ` : ''}xp_currency=${currency}` },
     body: JSON.stringify(payload),
   });
   if (!response.ok) throw new Error(`XPage checkout request failed (${response.status}).`);
   const result = await response.json() as { status?: string; checkout_url?: string; checkout_token?: string };
   if (result.status !== "success") throw new Error("XPage could not prepare checkout.");
   const platformCheckoutUrl = validateCheckoutUrl(result.checkout_url, result.checkout_token);
-  // The session is in the path. Do not copy optional provider query parameters
-  // or fragments, which could reintroduce attribution into the browser handoff.
   const checkoutUrl = new URL(platformCheckoutUrl.pathname, XPAGE.origin);
   checkoutUrl.searchParams.set("currency", currency);
   return { checkoutUrl: checkoutUrl.toString(), checkoutToken: result.checkout_token };

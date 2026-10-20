@@ -21,7 +21,7 @@ export function ExpertSection() {
   };
 
   return (
-    <section className="buudy-section bg-[var(--cream)] md: py-14 md:py-24" id="expert">
+    <section className="buudy-section bg-[var(--cream)] md: md: py-14 md:py-24" id="expert">
       <div className="buudy-wrap grid items-center gap-6 md:gap-8 lg:grid-cols-[1fr_1.3fr]">
         <div className="relative mx-auto w-full max-w-[360px] lg:max-w-[400px] lg:order-1">
           <div className="relative overflow-hidden rounded-[18px] border border-[rgba(58,31,61,.12)] bg-[var(--ink)]">
@@ -42,7 +42,7 @@ export function ExpertSection() {
             {/* Play/Pause Overlay Button */}
             <button
               onClick={togglePlay}
-              className={`absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/25 transition-all duration-300 ${
+              className={`absolute inset-0 flex items-center justify-center bg-transparent transition-all duration-300 ${
                 isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
               }`}
               aria-label={isPlaying ? "Pause video" : "Play video"}

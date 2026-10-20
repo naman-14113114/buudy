@@ -95,7 +95,11 @@ export default function BuudyLedFaceMaskProductRoute() {
           type="application/ld+json"
         />
       ))}
-      <ProductPage product={pageProduct} galleryVariant="omnilux" />
+      <ProductPage
+        product={pageProduct}
+        galleryVariant="omnilux"
+        comparisonPosition="below-app"
+      />
     </>
   );
 }

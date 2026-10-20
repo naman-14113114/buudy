@@ -22,9 +22,15 @@ type PageProps = {
 export const revalidate = 86400;
 
 export function generateStaticParams() {
-  return products.map((product) => ({
+  const baseParams = products.map((product) => ({
     slug: product.slug,
   }));
+  const aliases = [
+    { slug: "buudy-skincare-ebook" },
+    { slug: "gift-card" },
+    { slug: "package-protection" },
+  ];
+  return [...baseParams, ...aliases];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -36,6 +42,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: "Product not found",
     };
   }
+
+  const primaryImage = product.gallery[0]?.src || product.cartImage;
+  const primaryImageAlt = product.gallery[0]?.alt || product.name;
 
   return {
     title: product.seoTitle,
@@ -52,18 +61,43 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             "near infrared LED face mask",
           ]
         : product.template === "ipl"
-        ? [
-            "IPL hair removal device Australia",
-            "at home IPL laser hair removal",
-            "ice cooling IPL device",
-            "painless laser hair removal",
-          ]
-        : [
-            "red light torch Australia",
-            "handheld red light therapy",
-            "near infrared torch",
-            "blue red light therapy device",
-          ],
+          ? [
+              "IPL hair removal device Australia",
+              "laser hair removal Australia",
+              "painless IPL hair removal",
+              "at home laser hair removal",
+            ]
+          : product.slug === "skincare-ebook" || product.id === "buudy-skincare-ebook"
+            ? [
+                "clinical light masterclass ebook",
+                "skincare ebook Australia",
+                "photobiomodulation guide",
+                "LED face mask routine guide",
+                "Buudy skincare PDF",
+                "red light therapy guide",
+              ]
+            : product.slug === "buudy-gift-card" || product.id === "buudy-gift-card"
+              ? [
+                  "Buudy digital gift card",
+                  "skincare gift voucher Australia",
+                  "beauty gift card instant delivery",
+                  "LED mask gift certificate",
+                  "Buudy official gift card",
+                ]
+              : product.slug === "buudy-package-protection" || product.id === "buudy-package-protection"
+                ? [
+                    "Buudy package protection",
+                    "order transit insurance Australia",
+                    "delivery protection guarantee",
+                    "shipping insurance",
+                    "package theft protection",
+                  ]
+                : [
+                    "red light torch Australia",
+                    "handheld red light therapy",
+                    "near infrared torch",
+                    "blue red light therapy device",
+                  ],
     alternates: {
       canonical: `/products/${product.slug}`,
       languages: {
@@ -83,15 +117,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     openGraph: {
       title: product.seoTitle,
-      description: product.description,
+      description: product.seoDescription,
       url: absoluteUrl(`/products/${product.slug}`),
       type: "website",
       images: [
         {
-          url: product.gallery[0].src,
+          url: primaryImage,
           width: 1200,
           height: 1500,
-          alt: product.gallery[0].alt,
+          alt: primaryImageAlt,
         },
       ],
     },
@@ -99,7 +133,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: product.seoTitle,
       description: product.seoDescription,
-      images: [product.gallery[0].src],
+      images: [primaryImage],
     },
   };
 }

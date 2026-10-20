@@ -130,9 +130,11 @@ type MediaItem =
 export function OmniluxProductGallery({
   images,
   hasGifts = true,
+  isMask = true,
 }: {
   images: ProductImage[];
   hasGifts?: boolean;
+  isMask?: boolean;
 }) {
   // Build unified continuous array: Gallery + 7 Before & After + 2 Videos in sequence
   const allMediaItems: MediaItem[] = useMemo(() => {
@@ -144,6 +146,10 @@ export function OmniluxProductGallery({
         alt: img.alt,
         badge: img.badge,
       }));
+
+    if (!isMask) {
+      return galleryItems;
+    }
 
     const beforeAfterItems: MediaItem[] = GALLERY_BEFORE_AFTER_ITEMS.map((item) => ({
       type: "before-after",
@@ -167,7 +173,7 @@ export function OmniluxProductGallery({
     ];
 
     return [...galleryItems, ...beforeAfterItems, ...videoItems];
-  }, [images]);
+  }, [images, isMask]);
 
   const nonPillImagesCount = useMemo(
     () => images.filter((img) => !img.pills).length,
@@ -175,8 +181,8 @@ export function OmniluxProductGallery({
   );
 
   const galleryStartIndex = 0;
-  const beforeAfterStartIndex = nonPillImagesCount;
-  const videoStartIndex = nonPillImagesCount + GALLERY_BEFORE_AFTER_ITEMS.length;
+  const beforeAfterStartIndex = isMask ? nonPillImagesCount : 0;
+  const videoStartIndex = isMask ? nonPillImagesCount + GALLERY_BEFORE_AFTER_ITEMS.length : 0;
 
   // Current global media index. By default always starts on first gallery image (0)
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -195,10 +201,11 @@ export function OmniluxProductGallery({
 
   // Derive active tab from currentIndex in the continuous line
   const activeTab = useMemo(() => {
+    if (!isMask) return "gallery";
     if (currentIndex >= videoStartIndex) return "video";
     if (currentIndex >= beforeAfterStartIndex) return "before-after";
     return "gallery";
-  }, [currentIndex, beforeAfterStartIndex, videoStartIndex]);
+  }, [currentIndex, beforeAfterStartIndex, videoStartIndex, isMask]);
 
   // Tab click jumps directly to the start of that section
   const handleTabClick = (tab: "gallery" | "before-after" | "video") => {
@@ -675,29 +682,35 @@ export function OmniluxProductGallery({
         }
         .buudy-gallery-badge__title {
           font-family: var(--font-fraunces), var(--font-serif), ui-serif, Georgia, serif;
-          font-size: clamp(13.5px, 1.6vw, 16.5px);
-          font-weight: 700;
+          font-size: clamp(14px, 1.7vw, 17.5px);
+          font-weight: 800;
           line-height: 1.15;
           letter-spacing: 0.01em;
           text-transform: uppercase;
-          color: #111111;
-          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95), 0 0 12px rgba(255, 255, 255, 0.85);
+          color: #000000;
+          text-shadow: none !important;
           margin: 0;
           display: block;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
         }
         .buudy-gallery-badge__sub {
           font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-          font-size: clamp(10px, 1.1vw, 12px);
-          font-weight: 500;
-          line-height: 1.3;
+          font-size: clamp(11px, 1.15vw, 13px);
+          font-weight: 600;
+          line-height: 1.35;
           letter-spacing: -0.01em;
-          color: #374151;
-          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+          color: #111111;
+          text-shadow: none !important;
           margin: 0;
-          margin-top: 2px;
+          margin-top: 3px;
           display: block;
           animation: buudySubSlideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
           will-change: opacity, transform;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
         }
         .buudy-gallery-badge--top-right .buudy-gallery-badge__sub,
         .buudy-gallery-badge--bottom-right .buudy-gallery-badge__sub {
@@ -705,11 +718,11 @@ export function OmniluxProductGallery({
         }
         .buudy-gallery-badge--white .buudy-gallery-badge__title {
           color: #ffffff !important;
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85), 0 0 16px rgba(0, 0, 0, 0.75) !important;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
         }
         .buudy-gallery-badge--white .buudy-gallery-badge__sub {
-          color: rgba(255, 255, 255, 0.92) !important;
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85) !important;
+          color: #ffffff !important;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
         }
         @keyframes buudyBadgeSlideInLeft {
           0% {
@@ -1164,6 +1177,11 @@ export function OmniluxProductGallery({
                     autoPlay
                     muted={isVideoMuted}
                     preload="auto"
+                    poster={
+                      currentItem.src.includes("how-to-use")
+                        ? "/images/products/buudy-led-mask/buudy-7-colour-led-mask-unboxing-video-poster-16s-uk.webp"
+                        : undefined
+                    }
                     ref={videoPlayerRef}
                     src={currentItem.src}
                     onPlay={() => setIsVideoPlaying(true)}
@@ -1219,50 +1237,52 @@ export function OmniluxProductGallery({
             </div>
           </div>
 
-          {/* 3 OPTIONS / TABS SELECTOR ROW DIRECTLY BELOW MAIN IMAGE (Beige/Gold Star Dot) */}
-          <div className="omni-tabs-row" role="tablist" aria-label="Product Media Options">
-            {/* TAB 1: GALLERY */}
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeTab === "gallery"}
-              className={`omni-tab-btn ${
-                activeTab === "gallery" ? "omni-tab-btn--active" : ""
-              }`}
-              onClick={() => handleTabClick("gallery")}
-            >
-              {activeTab === "gallery" && <span className="omni-tab-indicator" />}
-              Gallery
-            </button>
+          {/* 3 OPTIONS / TABS SELECTOR ROW DIRECTLY BELOW MAIN IMAGE (Only for products with Before & After or Videos) */}
+          {isMask && (
+            <div className="omni-tabs-row" role="tablist" aria-label="Product Media Options">
+              {/* TAB 1: GALLERY */}
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeTab === "gallery"}
+                className={`omni-tab-btn ${
+                  activeTab === "gallery" ? "omni-tab-btn--active" : ""
+                }`}
+                onClick={() => handleTabClick("gallery")}
+              >
+                {activeTab === "gallery" && <span className="omni-tab-indicator" />}
+                Gallery
+              </button>
 
-            {/* TAB 2: BEFORE & AFTER */}
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeTab === "before-after"}
-              className={`omni-tab-btn ${
-                activeTab === "before-after" ? "omni-tab-btn--active" : ""
-              }`}
-              onClick={() => handleTabClick("before-after")}
-            >
-              {activeTab === "before-after" && <span className="omni-tab-indicator" />}
-              Before & After
-            </button>
+              {/* TAB 2: BEFORE & AFTER */}
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeTab === "before-after"}
+                className={`omni-tab-btn ${
+                  activeTab === "before-after" ? "omni-tab-btn--active" : ""
+                }`}
+                onClick={() => handleTabClick("before-after")}
+              >
+                {activeTab === "before-after" && <span className="omni-tab-indicator" />}
+                Before & After
+              </button>
 
-            {/* TAB 3: VIDEO */}
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeTab === "video"}
-              className={`omni-tab-btn ${
-                activeTab === "video" ? "omni-tab-btn--active" : ""
-              }`}
-              onClick={() => handleTabClick("video")}
-            >
-              {activeTab === "video" && <span className="omni-tab-indicator" />}
-              Video
-            </button>
-          </div>
+              {/* TAB 3: VIDEO */}
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeTab === "video"}
+                className={`omni-tab-btn ${
+                  activeTab === "video" ? "omni-tab-btn--active" : ""
+                }`}
+                onClick={() => handleTabClick("video")}
+              >
+                {activeTab === "video" && <span className="omni-tab-indicator" />}
+                Video
+              </button>
+            </div>
+          )}
         </div>
       </div>
 

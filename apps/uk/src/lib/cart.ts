@@ -20,6 +20,7 @@ export type CartState = {
   lines: CartLine[];
   promoCode: string;
   manualPromoCode: string;
+  manualPromoCodes?: string[];
   giftMessage: string;
 };
 
@@ -27,10 +28,20 @@ export const promoCode = "AUTO";
 export const manualPromoCode = "BUUDY10";
 export const manualPromoDiscountCents = 1000;
 
+export const VALID_PROMO_CODES: Record<
+  string,
+  { code: string; discountCents: number; type: "promo" | "gift_card" }
+> = {
+  BUUDY10: { code: "BUUDY10", discountCents: 1000, type: "promo" },
+  BUUDY: { code: "BUUDY10", discountCents: 1000, type: "promo" },
+  "9PQ28ENBLJ": { code: "9PQ28ENBLJ", discountCents: 2000, type: "gift_card" },
+};
+
 export const emptyCart: CartState = {
   lines: [],
   promoCode,
   manualPromoCode: "",
+  manualPromoCodes: [],
   giftMessage: "",
 };
 
@@ -38,12 +49,23 @@ export function normalizeManualPromoCode(code: string | null | undefined) {
   return (code ?? "").trim().toUpperCase();
 }
 
+export function getPromoCodeConfig(code: string | null | undefined) {
+  const normalized = normalizeManualPromoCode(code);
+  return VALID_PROMO_CODES[normalized] || null;
+}
+
 export function isValidManualPromoCode(code: string | null | undefined) {
-  return normalizeManualPromoCode(code) === manualPromoCode;
+  return Boolean(getPromoCodeConfig(code));
 }
 
 export function getAppliedManualPromoCode(code: string | null | undefined) {
-  return isValidManualPromoCode(code) ? manualPromoCode : "";
+  const config = getPromoCodeConfig(code);
+  return config ? config.code : "";
+}
+
+export function getPromoDiscountCents(code: string | null | undefined): number {
+  const config = getPromoCodeConfig(code);
+  return config ? config.discountCents : 0;
 }
 
 export function buildProductCartLines(product: Product, quantity = 1): CartLine[] {
@@ -62,23 +84,32 @@ export function buildProductCartLines(product: Product, quantity = 1): CartLine[
     subtitle: product.shortDescription,
     image: product.cartImage,
     unitPriceCents: product.priceCents,
-    compareAtCents: product.compareAtCents,
+    compareAtCents:
+      product.compareAtCents && product.compareAtCents > product.priceCents
+        ? product.compareAtCents
+        : undefined,
     quantity: normalizedQuantity,
   };
 
-  const gifts = product.gifts.map<CartLine>((gift) => ({
-    id: `${product.id}:${gift.id}`,
-    productId: product.id,
-    slug: product.slug,
-    type: "gift",
-    title: gift.name,
-    subtitle: `${product.name} free gift unlocked`,
-    image: gift.image,
-    unitPriceCents: 0,
-    compareAtCents: gift.valueCents,
-    quantity: normalizedQuantity,
-    locked: true,
-  }));
+  const gifts = product.gifts.map<CartLine>((gift) => {
+    const isEbook = gift.id === "skincare-ebook";
+    return {
+      id: `${product.id}:${gift.id}`,
+      productId: product.id,
+      slug: isEbook ? "skincare-ebook" : product.slug,
+      type: "gift",
+      title: gift.name,
+      subtitle: isEbook
+        ? "Delivered digitally via email after checkout"
+        : `${product.name} free gift unlocked`,
+      image: gift.image,
+      unitPriceCents: 0,
+      compareAtCents:
+        gift.valueCents > 0 ? gift.valueCents : undefined,
+      quantity: normalizedQuantity,
+      locked: true,
+    };
+  });
 
   return [productLine, ...gifts];
 }
@@ -114,7 +145,16 @@ export function upsertProductCartLines(
   return [...withoutProduct, ...buildProductCartLines(product, quantity)];
 }
 
-export function calculateCartTotals(lines: CartLine[], appliedManualPromo = "") {
+export function calculateCartTotals(
+  lines: CartLine[],
+  appliedManualPromo: string | string[] = "",
+) {
+  const promoCodesList = Array.isArray(appliedManualPromo)
+    ? appliedManualPromo
+    : appliedManualPromo
+    ? [appliedManualPromo]
+    : [];
+
   const productLines = lines.filter((line) => line.type === "product");
   const giftLines = lines.filter((line) => line.type === "gift");
   const subtotalCents = productLines.reduce(
@@ -131,9 +171,15 @@ export function calculateCartTotals(lines: CartLine[], appliedManualPromo = "") 
     0,
   );
   const savingsCents = Math.max(compareAtCents - subtotalCents, 0);
-  const promoDiscountCents = isValidManualPromoCode(appliedManualPromo)
-    ? Math.min(manualPromoDiscountCents, subtotalCents)
-    : 0;
+
+  // Sum unique applied promo code discounts
+  const uniqueAppliedCodes = Array.from(
+    new Set(promoCodesList.map((c) => getAppliedManualPromoCode(c)).filter(Boolean)),
+  );
+  const totalPromoDiscountCents = uniqueAppliedCodes.reduce((acc, code) => {
+    return acc + getPromoDiscountCents(code);
+  }, 0);
+  const promoDiscountCents = Math.min(totalPromoDiscountCents, subtotalCents);
 
   return {
     itemCount: productLines.reduce((total, line) => total + line.quantity, 0),
@@ -152,28 +198,39 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
     (line) => line.productId === "buudy-led-mask" && line.type === "product"
   );
 
-  if (!hasMaskProduct) {
-    return lines;
-  }
+  const formattedLines = lines.map((line) => {
+    if (hasMaskProduct && line.productId === "buudy-led-mask" && line.type === "product") {
+      return {
+        ...line,
+        title: "Buudy LED Mask + Premium Travel Box",
+        image: "/media/products/buudy-led-mask/images/84-w.webp",
+      };
+    }
+    if (
+      line.id.includes("skincare-ebook") ||
+      line.productId === "buudy-skincare-ebook" ||
+      line.slug === "skincare-ebook"
+    ) {
+      return {
+        ...line,
+        title: "Skincare E-Book",
+        subtitle: "Delivered digitally via email after checkout",
+        compareAtCents:
+          line.type === "gift"
+            ? line.compareAtCents || 1900
+            : line.compareAtCents,
+      };
+    }
+    return line;
+  });
 
-  return lines
-    .map((line) => {
-      if (line.productId === "buudy-led-mask" && line.type === "product") {
-        return {
-          ...line,
-          title: "Buudy LED Mask + Premium Travel Box",
-          image: "/media/products/buudy-led-mask/images/84-w.webp",
-        };
+  return formattedLines.filter((line) => {
+    if (hasMaskProduct && line.productId === "buudy-led-mask" && line.type === "gift") {
+      const giftId = line.id.split(":")[1];
+      if (giftId === "premium-travel-box") {
+        return false;
       }
-      return line;
-    })
-    .filter((line) => {
-      if (line.productId === "buudy-led-mask" && line.type === "gift") {
-        const giftId = line.id.split(":")[1];
-        if (giftId === "premium-travel-box" || giftId === "skincare-ebook") {
-          return false;
-        }
-      }
-      return true;
-    });
+    }
+    return true;
+  });
 }

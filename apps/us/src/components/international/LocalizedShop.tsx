@@ -56,7 +56,7 @@ export function LocalizedShop({locale,d,cart=false}:{locale:Locale;d:Dictionary;
       {mixed&&<p role="alert">{d.mixedCart} <Link href="/cart">{d.englishCart}</Link></p>}
       <button className="intl-button" type="button" disabled={!offer||loading||busy||mixed} onClick={checkout}>{busy?d.loading:d.checkout}</button>
     </> : <>
-      <button className="intl-button" type="button" disabled={!offer||loading} onClick={()=>{if(offer)state.addProduct(buudyMask,{currency:offer.quote.currency,unitPrice:offer.quote.unitPrice,quantity:1,locale,checkoutUrl:localePath(locale,'/cart'),productUrl:localePath(locale,'/products/buudy-led-mask')});setAdded(true);}}>{d.add}</button>
+      <button className="intl-button" type="button" disabled={!offer||loading} onClick={()=>{if(offer)state.addProduct(buudyMask);setAdded(true);}}>{d.add}</button>
       {added&&<p role="status">{d.added} · <a href={localePath(locale,'/cart')}>{d.cart}</a></p>}
     </>}
     {error&&<p role="alert">{error}</p>}

@@ -19,15 +19,23 @@ export function productJsonLd(product: Product) {
     category:
       product.template === "mask"
         ? "LED light therapy face mask"
-        : "Handheld red light therapy device",
+        : product.template === "torch"
+        ? "Handheld red light therapy device"
+        : product.template === "ipl"
+        ? "IPL hair removal device"
+        : product.name,
     sku: product.sku,
-    aggregateRating: {
+    ...(product.reviewCount > 0 && product.rating > 0
+      ? {
+          aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: product.rating,
       reviewCount: product.reviewCount,
       bestRating: 5,
       worstRating: 1,
-    },
+          },
+        }
+      : {}),
     offers: {
       "@type": "Offer",
       url: productUrl,

@@ -1,35 +1,46 @@
 "use client";
-import { StoreText, StoreButton, StoreInput } from '@/components/international/StoreLocale';
-
 
 import { useState, type FormEvent } from "react";
 import { CheckCircle2, X } from "lucide-react";
-import { formatMoney } from "@/lib/money";
+import { getAppliedManualPromoCode } from "@/lib/cart";
 import { useCart } from "./CartProvider";
 
 export function PromoCodeBox() {
   const {
     applyManualPromoCode,
-    clearManualPromoCode,
-    manualPromoCode: appliedCode,
+    removeManualPromoCode,
+    manualPromoCodes,
+    manualPromoCode,
     totals,
   } = useCart();
   const [code, setCode] = useState("");
-  const [message, setMessage] = useState(
-    appliedCode ? "Code saved. Eligibility and discount are confirmed at checkout." : "",
-  );
-  const [status, setStatus] = useState<"idle" | "success" | "error">(
-    appliedCode ? "success" : "idle",
-  );
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const active = totals.itemCount > 0;
+
+  const appliedCodes =
+    manualPromoCodes && manualPromoCodes.length > 0
+      ? manualPromoCodes
+      : manualPromoCode
+      ? [manualPromoCode]
+      : [];
 
   function handleApply(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const trimmed = code.trim().toUpperCase();
+    if (!trimmed) return;
 
-    const applied = applyManualPromoCode(code);
+    const canonical = getAppliedManualPromoCode(trimmed);
+    if (canonical && appliedCodes.includes(canonical)) {
+      setMessage("Code already applied.");
+      setStatus("error");
+      return;
+    }
+
+    const applied = applyManualPromoCode(trimmed);
     if (applied) {
       setCode("");
-      setMessage("Code saved. Eligibility and discount are confirmed at checkout.");
+      setMessage("Code applied successfully.");
       setStatus("success");
       return;
     }
@@ -38,45 +49,17 @@ export function PromoCodeBox() {
     setStatus("error");
   }
 
-  function handleRemove() {
-    clearManualPromoCode();
-    setCode("");
+  function handleRemove(codeToRemove: string) {
+    removeManualPromoCode(codeToRemove);
     setMessage("");
     setStatus("idle");
   }
 
-  if (active && appliedCode) {
-    return (
-      <div className="space-y-3">
-        <div aria-live="polite" className="flex items-center justify-between gap-4">
-          <span className="flex min-w-0 items-center gap-2 text-xs font-semibold text-[var(--gold)] sm:text-sm">
-            <CheckCircle2 aria-hidden="true" className="shrink-0" size={16} />
-            <span><StoreText>Code saved. Eligibility and discount are confirmed at checkout.</StoreText></span>
-          </span>
-          {totals.promoDiscountCents>0&&<span className="buudy-display shrink-0 text-lg text-[var(--plum)]">
-            -{formatMoney(totals.promoDiscountCents)}
-          </span>}
-        </div>
-
-        <div className="inline-flex min-w-[150px] items-center justify-between gap-4 rounded-md border border-[var(--border)] bg-[var(--cream)] py-1.5 pl-4 pr-1.5 text-[var(--plum)]">
-          <span className="buudy-display text-base uppercase"><StoreText>{appliedCode}</StoreText></span>
-          <StoreButton
-            aria-label={`Remove ${appliedCode} promo code`}
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[var(--muted)] transition hover:bg-[rgba(58,31,61,.08)] hover:text-[var(--plum)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
-            onClick={handleRemove}
-            type="button"
-          >
-            <X aria-hidden="true" size={18} strokeWidth={1.8} />
-          </StoreButton>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <>
+    <div className="space-y-2.5">
+      {/* Promo Code Input Form (Always Visible) */}
       <form className="flex gap-2 max-[420px]:flex-col" onSubmit={handleApply}>
-        <StoreInput
+        <input
           aria-label="Promo code"
           className="buudy-display h-10 min-w-0 flex-1 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 text-sm uppercase text-[var(--plum)] outline-none transition placeholder:text-[rgba(58,31,61,.45)] focus:border-[var(--gold)] disabled:opacity-50"
           disabled={!active}
@@ -90,25 +73,54 @@ export function PromoCodeBox() {
           placeholder="Enter Promo Code"
           value={active ? code : ""}
         />
-        <StoreButton
+        <button
           className="buudy-display h-10 rounded-full bg-[var(--plum)] px-6 text-sm uppercase text-[var(--cream)] transition hover:bg-[var(--ink)] disabled:cursor-not-allowed disabled:opacity-50 md:px-7"
           disabled={!active}
           type="submit"
-        ><StoreText>
+        >
           Apply
-        </StoreText></StoreButton>
+        </button>
       </form>
+
+      {/* Status / Error Message */}
       {active && message ? (
         <p
           aria-live="polite"
-          className={`mt-2 flex items-center gap-2 text-xs font-semibold ${
+          className={`flex items-center gap-1.5 text-xs font-semibold ${
             status === "success" ? "text-[var(--gold)]" : "text-red-600"
           }`}
         >
-          {status === "success" ? <CheckCircle2 aria-hidden="true" size={15} /> : null}
-          <StoreText>{message}</StoreText>
+          {status === "success" ? <CheckCircle2 aria-hidden="true" size={14} /> : null}
+          {message}
         </p>
       ) : null}
-    </>
+
+      {/* Applied Promo Code Pills (4 chars + ... with cross on right end) */}
+      {appliedCodes.length > 0 && (
+        <div className="flex flex-wrap gap-2 pt-1">
+          {appliedCodes.map((applied) => {
+            const displayCode = applied.length > 4 ? `${applied.slice(0, 4)}...` : applied;
+            return (
+              <div
+                key={applied}
+                className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--cream)] py-1 pl-3.5 pr-1.5 text-xs text-[var(--plum)] shadow-sm"
+              >
+                <span className="font-semibold uppercase tracking-wider font-mono text-xs">
+                  {displayCode}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => handleRemove(applied)}
+                  className="flex h-5 w-5 items-center justify-center rounded-full text-[var(--muted)] hover:bg-[rgba(58,31,61,.12)] hover:text-[var(--plum)] transition focus-visible:outline-2 focus-visible:outline-[var(--gold)]"
+                  aria-label={`Remove ${applied} promo code`}
+                >
+                  <X size={13} strokeWidth={2.5} />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
   );
 }

@@ -192,7 +192,7 @@ import { ProductReviewsSection } from "./ProductReviewsSection";
 export function TorchProductPage({ product }: { product: Product }) {
   return (
     <>
-      <ProductHero product={product} />
+      <ProductHero product={product} galleryVariant="omnilux" />
       <TorchFeatureTabs />
       <TorchStorySection />
       {/* <TorchDetailSection /> */}
