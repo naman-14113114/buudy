@@ -1,63 +1,76 @@
 export const shippingPolicyHtml = `
-<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 1.0</p>
+<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 2.0</p>
 
-<h2>1. About This Policy</h2>
-<p>This Policy explains shipping and delivery terms for purchases from Buudy.</p>
-<p>In this Policy:</p>
-<ul>
-  <li><strong>Store</strong> means Buudy.</li>
-  <li><strong>xPage Drop</strong> means xPage Drop LLC.</li>
-  <li><strong>Seller</strong> means the independent merchant operating the Store.</li>
-  <li><strong>Fulfillment Partner</strong> means a supplier, manufacturer, warehouse or carrier.</li>
-  <li><strong>You</strong> means the buyer.</li>
-  <li><strong>We, us and our</strong> mean the Store and xPage Drop where it coordinates fulfillment.</li>
-</ul>
+<h2>1. Scope and Agreement</h2>
+<p>This Shipping and Delivery Policy governs the purchase, dispatch, transit, and delivery of products sold by Buudy via our online storefront (<a href="https://ca.buudy.com">ca.buudy.com</a>) and our checkout platform hosted on Whop. By completing a purchase, the customer agrees to the fulfilment timelines, international logistics terms, and delivery protocols described below.</p>
 
-<h2>2. Shipping Destinations</h2>
-<p>We ship to the destinations listed during checkout.</p>
-<p>We may restrict delivery to remote areas, military destinations, forwarding addresses, PO boxes or territories affected by trade or courier restrictions.</p>
+<h2>2. Order Processing and Delivery Timelines</h2>
+<p>Orders are fulfilled directly from our specialized international distribution facility. Every unit undergoes physical inspection, battery safety testing, serial allocation, and protective packaging prior to export.</p>
 
-<h2>3. Free Shipping</h2>
-<p>Free shipping rules are shown at checkout or on the product page:</p>
-<p><strong>Free shipping:</strong> Free shipping is available on all qualifying orders, subject to the conditions displayed at checkout.</p>
-<p>Where paid shipping applies, the cost is displayed before payment.</p>
+<div class="buudy-policy-table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Fulfilment Stage</th>
+        <th>Operational Window</th>
+        <th>Logistics Process</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Order Processing &amp; Quality Verification</strong></td>
+        <td>1 to 2 business days</td>
+        <td>Payment settlement, fraud screening, serial allocation, electrical safety checks, protective packaging, and sorting.</td>
+      </tr>
+      <tr>
+        <td><strong>Air Linehaul Transit</strong></td>
+        <td>4 to 6 business days</td>
+        <td>Dedicated priority air freight direct to Canadian international customs gateways (including Toronto Pearson YYZ, Vancouver YVR, and Montreal YUL).</td>
+      </tr>
+      <tr>
+        <td><strong>Customs Inward Processing (DDP)</strong></td>
+        <td>1 to 2 business days</td>
+        <td>Electronic pre-clearance under Delivered Duty Paid (DDP) protocols with the Canada Border Services Agency (CBSA).</td>
+      </tr>
+      <tr>
+        <td><strong>Final-Mile Courier Delivery</strong></td>
+        <td>2 to 4 business days</td>
+        <td>Canada Post Tracked or Purolator with delivery tracking and confirmation.</td>
+      </tr>
+      <tr>
+        <td><strong>Total Estimated Delivery Window</strong></td>
+        <td><strong>7 to 12 business days</strong></td>
+        <td>End-to-end tracked transit from our international distribution facility to Canadian doorstep.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<h2>4. Processing and Transit Times</h2>
-<p>Estimated timelines are:</p>
-<ul>
-  <li><strong>Order processing:</strong> 1–3 business days</li>
-  <li><strong>Standard delivery:</strong> 7–20 business days</li>
-</ul>
-<p>Delivery estimates begin after the order is processed and handed to the carrier. Business days exclude weekends and public holidays.</p>
-<p>Estimates are guidelines unless expressly stated as guaranteed.</p>
+<p>Business days are defined as Monday through Friday, excluding Canadian federal and provincial statutory holidays and internationally recognized national holidays. Standard transit estimates commence immediately upon the issuance of the carrier dispatch scan.</p>
 
-<h2>5. Order Tracking</h2>
-<p>A tracking reference or link will be provided by email after dispatch where available from the carrier.</p>
-<p>Tracking information may take 24–72 hours to update after dispatch.</p>
+<h2>3. Delivered Duty Paid (DDP) Terms</h2>
+<p>All consignments shipped to customers in Canada are delivered strictly under <strong>Delivered Duty Paid (DDP)</strong> terms. The total price charged at checkout in Canadian Dollars (CAD / CA$) is inclusive of all applicable Canadian federal Goods and Services Tax (GST), Harmonized Sales Tax (HST), provincial sales taxes where applicable, customs clearance, and linehaul documentation charges.</p>
+<p>Customers will not be subjected to surprise doorstep collection surcharges, customs broker fees, or postal clearance handling fees upon arrival. If an unexpected customs fee is presented by a carrier, please contact <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> for immediate administrative resolution.</p>
 
-<h2>6. Address Accuracy</h2>
-<p>You must provide an accurate and complete delivery address, including any apartment, suite or unit number, and a reachable phone number.</p>
-<p>Address changes may be requested within:</p>
-<p><strong>Address change period:</strong> Delivery address changes must be requested within 2 hours of order placement. Requests submitted within this period are not guaranteed once an order has entered processing.</p>
-<p>We cannot guarantee address corrections after fulfillment begins.</p>
-<p>Additional carrier fees or losses resulting from an incorrect address provided by the buyer may be the buyer's responsibility where legally permitted.</p>
+<h2>4. Shipment Tracking and Delivery Verification</h2>
+<p>Upon parcel dispatch from our export facility, an automated Dispatch Confirmation email will be delivered to the customer containing a live tracking link. International linehaul tracking numbers synchronize with domestic Canadian couriers (Canada Post Tracked or Purolator) once arrival processing is completed.</p>
+<p>Delivery is deemed legally concluded when the carrier marks the parcel as delivered at the customer's nominated shipping address, substantiated by carrier electronic scanning data, GPS coordinate logging, or digital delivery confirmation.</p>
 
-<h2>7. Delivery Issues</h2>
-<p>Contact support promptly if your order is delayed, damaged or marked delivered but not received.</p>
-<p>For missing or damaged packages, we may ask for photos of the packaging and product, carrier confirmation or a written non-receipt statement to investigate with the carrier.</p>
-<p>We will arrange a replacement, refund or other lawful remedy if a package is confirmed lost in transit.</p>
+<h2>5. Customer Address Obligations</h2>
+<p>The customer is responsible for providing an accurate and deliverable shipping address, including any unit, suite, or apartment number, and a functioning Canadian mobile telephone number for courier delivery updates.</p>
+<p>Address amendment requests must be submitted to <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> within <strong>two (2) hours</strong> of order placement. Address changes cannot be processed once the warehouse has initiated picking and packing.</p>
+<p>If an order is returned to our international logistics depot due to an inaccurate address, customer absence, or failure to collect from a local courier depot or postal outlet, the customer may be liable for actual carrier return charges and re-shipment expenses where legally permitted.</p>
 
-<h2>8. Customs and Import Taxes</h2>
-<p>Import rules are shown before purchase:</p>
-<p><strong>Customs and duties:</strong> Orders above €150 may be subject to customs duties and import taxes, payable by the customer upon delivery.</p>
-<p>Where duties or taxes apply, they are the buyer's responsibility unless the checkout specifically states that taxes and duties are included.</p>
+<h2>6. Delays, Transit Damage, and Missing Shipments</h2>
+<p>If tracking shows no movement for more than <strong>fifteen (15) consecutive business days</strong>, or if the shipment exceeds <strong>twenty-one (21) business days</strong> in transit, a carrier investigation will be initiated. If confirmed lost in transit, Buudy will provide an immediate replacement or issue a full refund via the original payment method through Whop.</p>
+<p>In the event of shipping carton or product damage, the customer must notify <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> within <strong>forty-eight (48) hours</strong> of receipt, supplying clear photographs of the external packaging, courier label, and contents.</p>
 
-<h2>9. Contact</h2>
-<p>For shipping questions, support or delivery issues, contact:</p>
-<h3>xPage Drop LLC</h3>
+<h2>7. Administrative Contact</h2>
+<p>For shipping questions, tracking support, or delivery inquiries, contact our customer service team:</p>
+<h3>Buudy Operations / xPage Drop LLC</h3>
 <p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
 <p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
 <p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
 <p>Customer service hours: Monday to Friday, 9:00 AM to 5:00 PM EST</p>
-<p>This is a corporate address only. It is not a warehouse, fulfillment center or return address.</p>
+<p><strong>Please note:</strong> This is a corporate administrative address only. It is not a warehouse, fulfilment center, or return depot. Customer returns sent to this address cannot be processed.</p>
 `;

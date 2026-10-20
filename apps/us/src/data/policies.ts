@@ -1,372 +1,180 @@
-// Structured policy data compiled from live mask.buudy.com xPage Drop policies
+// US Production Legal Policies for Buudy on Whop Platform
 
 export const privacyPolicyHtml = `
-<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 1.0</p>
+<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 2.0</p>
 
-<h2>1. About This Policy</h2>
-<p>This Privacy Policy explains how personal information is handled when you visit or purchase from Buudy.</p>
-<p>In this Policy:</p>
+<h2>1. Data Controller and Principles</h2>
+<p>Buudy respects consumer privacy and processes personal information in accordance with applicable United States federal and state privacy statutes, including the California Consumer Privacy Act as amended by the California Privacy Rights Act (CCPA/CPRA). This notice details our data collection, management, and storage protocols when you interact with <a href="https://us.buudy.com">us.buudy.com</a> and complete orders through our Merchant of Record and payment infrastructure partner, Whop Inc.</p>
+
+<h2>2. Personal Information Collected</h2>
+<p>We collect and process the following categories of personal information:</p>
 <ul>
-  <li><strong>Store</strong> means Buudy.</li>
-  <li><strong>xPage Drop</strong> means xPage Drop LLC.</li>
-  <li><strong>Seller</strong> means the independent merchant operating the Store.</li>
-  <li><strong>Service Provider</strong> includes payment providers, suppliers, warehouses, carriers, analytics services and fraud-prevention providers.</li>
-  <li><strong>You</strong> means the visitor or buyer.</li>
-  <li><strong>We, us and our</strong> mean the Store and xPage Drop for the relevant processing activity.</li>
+  <li><strong>Identity &amp; Contact Details:</strong> Full name, billing address, physical shipping address, email address, and telephone number.</li>
+  <li><strong>Payment Telemetry:</strong> Whop Inc. processes and encrypts card credentials under PCI-DSS standards; Buudy retains transaction IDs, payment method metadata, and risk ratings, but never stores raw payment card numbers.</li>
+  <li><strong>Order Logistics:</strong> Dispatch records, airway bills, carrier tracking codes, and proof of delivery images.</li>
+  <li><strong>Technical Footprint:</strong> IP address, geolocation tags, browser user-agents, device fingerprints, and checkout timestamps collected for fraud monitoring and platform security.</li>
 </ul>
-<p>xPage Drop handles customer support and may process personal information for checkout, payments, fraud prevention, order administration, refunds and fulfillment coordination.</p>
 
-<h2>2. Information We Collect</h2>
-<p>We may collect:</p>
+<h2>3. Commercial Purposes for Processing</h2>
+<p>Personal information is processed for specific legitimate business purposes:</p>
 <ol>
-  <li>Your name, email address, phone number and delivery address.</li>
-  <li>Billing, order, product, currency, tax and shipping information.</li>
-  <li>Payment status, payment method, transaction references and limited payment details.</li>
-  <li>Device, browser, IP address, approximate location and usage information.</li>
-  <li>Cart activity, Store visits and referral information.</li>
-  <li>Cookies and similar technologies.</li>
-  <li>Support messages, attachments, complaints and refund requests.</li>
-  <li>Tracking, delivery and return information.</li>
-  <li>Fraud, identity, age or sanctions-verification information where necessary.</li>
+  <li><strong>Contractual Performance:</strong> Fulfilling customer orders, printing international airway bills, providing courier updates, and handling warranty claims.</li>
+  <li><strong>Legal &amp; Tax Obligations:</strong> Satisfying customs declarations, accounting standards, and tax record retention requirements.</li>
+  <li><strong>Fraud Prevention &amp; Dispute Defense:</strong> Preventing fraudulent transactions, managing business security, and defending against payment disputes.</li>
+  <li><strong>Direct Communications:</strong> Sending order confirmations, shipping notifications, and routine recommendations where explicitly opted-in.</li>
 </ol>
-<p>Full payment credentials may be collected directly by the payment provider rather than by the Store or xPage Drop.</p>
 
-<h2>3. How We Use Information</h2>
-<p>Information may be used to:</p>
-<ol>
-  <li>Operate the Store and checkout.</li>
-  <li>Process payments and orders.</li>
-  <li>Arrange fulfillment and delivery.</li>
-  <li>Send order and tracking updates.</li>
-  <li>Provide customer support.</li>
-  <li>Process cancellations, returns and refunds.</li>
-  <li>Prevent fraud, abuse and unauthorized transactions.</li>
-  <li>Investigate delivery and payment disputes.</li>
-  <li>Comply with tax, customs, sanctions, safety and legal obligations.</li>
-  <li>Maintain Store and payment security.</li>
-  <li>Measure and improve Store performance.</li>
-  <li>Send marketing where permitted.</li>
-</ol>
-<p>Where required, processing will rely on your consent, performance of the purchase contract, legal obligations or legitimate business and security interests.</p>
+<h2>4. Cross-Border Data Transfers</h2>
+<p>To fulfill purchases, customer delivery data (name, shipping address, contact phone) is transferred to our international warehousing and logistics partners in China, as well as to Whop Inc. systems in the United States. All cross-border transfers are conducted under strict commercial safeguards ensuring equivalent protection for your personal data.</p>
 
-<h2>4. Cookies and Analytics</h2>
-<p>The Store may use cookies and similar technologies for:</p>
-<ol>
-  <li>Cart and checkout functions.</li>
-  <li>Security and fraud prevention.</li>
-  <li>Language and session preferences.</li>
-  <li>Analytics and Store improvement.</li>
-  <li>Marketing where permitted.</li>
-</ol>
-<p>Non-essential cookies will be subject to consent or opt-out controls where required by law. Blocking essential cookies may affect Store functionality.</p>
+<h2>5. Data Retention</h2>
+<p>Order records, communications, and invoice data are retained for up to six (6) years following transaction completion to satisfy statutory tax obligations, accounting compliance, and potential contractual dispute periods. After this retention window, data is permanently deleted or anonymized.</p>
 
-<h2>5. How Information Is Shared</h2>
-<p>Information may be shared with:</p>
-<ol>
-  <li>The Seller, where necessary to operate the Store.</li>
-  <li>Suppliers and warehouses preparing products.</li>
-  <li>Carriers delivering orders.</li>
-  <li>Payment providers and financial institutions.</li>
-  <li>Fraud-prevention and identity-verification providers.</li>
-  <li>Customer-support and technology providers.</li>
-  <li>Analytics and marketing providers where legally permitted.</li>
-  <li>Regulators, courts or government authorities where legally required.</li>
-</ol>
-<p>Only information reasonably necessary for the relevant service should be shared.</p>
-<p>We do not sell personal information for money. Certain advertising or analytics disclosures may be legally classified as a sale, sharing or targeted advertising in some jurisdictions. Required opt-out rights will be provided where applicable.</p>
+<h2>6. United States Consumer Privacy Rights (CCPA/CPRA)</h2>
+<p>Depending on your state of residence (including California, Colorado, Connecticut, Virginia, and Utah), you may possess specific statutory privacy rights:</p>
+<ul>
+  <li><strong>Right to Know &amp; Access:</strong> The right to request the categories and specific pieces of personal information collected about you.</li>
+  <li><strong>Right to Correction:</strong> The right to request the correction of inaccurate personal information.</li>
+  <li><strong>Right to Deletion:</strong> The right to request deletion of personal information, subject to statutory exceptions (such as order fulfillment, tax compliance, or fraud defense).</li>
+  <li><strong>Right to Opt-Out of Sale or Sharing:</strong> Buudy does not sell personal information for monetary consideration. If any data transfer qualifies as "sharing" for cross-context behavioral advertising, you have the right to opt out.</li>
+  <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you in pricing, service quality, or goods availability for exercising any statutory privacy rights.</li>
+</ul>
+<p>To submit a privacy request, contact our privacy compliance desk at <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a>.</p>
 
-<h2>6. International Processing</h2>
-<p>Your information may be processed in the United States, your country, the Seller's country, a fulfillment country or another location used by Service Providers.</p>
-<p>Where required, lawful safeguards will be used for international transfers.</p>
+<h2>7. Children's Privacy</h2>
+<p>Our website and products are intended for adult consumers and are not directed to children under 13 years of age. We do not knowingly collect personal information from children under 13.</p>
 
-<h2>7. Retention</h2>
-<p>Information is retained only for as long as reasonably necessary for:</p>
-<ol>
-  <li>Order fulfillment and support.</li>
-  <li>Refunds, warranties and chargebacks.</li>
-  <li>Tax, accounting and customs requirements.</li>
-  <li>Fraud prevention and security.</li>
-  <li>Product recalls and safety obligations.</li>
-  <li>Legal claims and regulatory compliance.</li>
-</ol>
-<p>Information may then be deleted, anonymized or restricted.</p>
-
-<h2>8. Security</h2>
-<p>Reasonable technical, administrative and organizational measures are used to protect personal information.</p>
-<p>No online system is completely secure. You must protect your device, account and payment credentials and report suspected unauthorized activity promptly.</p>
-
-<h2>9. Marketing</h2>
-<p>Marketing messages will be sent only where legally permitted.</p>
-<p>You may unsubscribe through the link in the message or by contacting support at <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a>.</p>
-<p>Order confirmations, security messages, recall notices and other necessary service communications are not marketing.</p>
-
-<h2>10. Your Privacy Rights</h2>
-<p>Depending on your location, you may have the right to:</p>
-<ol>
-  <li>Access your personal information.</li>
-  <li>Correct inaccurate information.</li>
-  <li>Request deletion.</li>
-  <li>Restrict or object to processing.</li>
-  <li>Request portable data.</li>
-  <li>Withdraw consent.</li>
-  <li>Opt out of certain marketing, profiling, sale or sharing activities.</li>
-  <li>Appeal a privacy-request decision.</li>
-  <li>Complain to a data-protection authority.</li>
-</ol>
-<p>Legal exceptions may apply where information is required for orders, fraud prevention, safety, accounting or legal claims.</p>
-
-<h2>11. Privacy Requests</h2>
-<p>Submit privacy requests through:</p>
-<p><a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a></p>
-<p>We may request reasonable information to verify your identity and protect your data. Requests will be handled within the period required by applicable law.</p>
-
-<h2>12. Children</h2>
-<p>The Store is not intended for children who lack legal capacity to make purchases.</p>
-<p>If you believe a child submitted personal information without required authorization, contact Buudy support.</p>
-
-<h2>13. Legal Disclosures</h2>
-<p>Information may be preserved or disclosed where reasonably necessary to comply with law, respond to lawful government requests, investigate fraud, protect legal rights, address security threats or manage a product recall.</p>
-
-<h2>14. Mandatory Rights</h2>
-<p>Mandatory privacy and consumer rights in your jurisdiction remain applicable and prevail over conflicting parts of this Policy.</p>
-
-<h2>15. Contact</h2>
-<p>For questions regarding privacy, contact:</p>
-<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
-<p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
-<h3>xPage Drop LLC</h3>
+<h2>8. Contact</h2>
+<p>For questions or requests regarding your personal information, contact:</p>
+<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a><br />
+Contact form: <a href="/pages/contact-us">Contact Us</a><br />
+Customer service hours: Monday to Friday, 9:00 AM to 5:00 PM EST</p>
+<h3>Buudy Operations / xPage Drop LLC</h3>
 <p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
-<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
-<p>This is a corporate address only. It is not a warehouse, fulfillment center or return address.</p>
 `;
 
 export const refundPolicyHtml = `
-<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 1.0</p>
+<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 2.0</p>
 
-<h2>1. About This Policy</h2>
-<p>This Policy applies to purchases from Buudy.</p>
-<p>In this Policy:</p>
+<h2>1. Statutory Framework and Consumer Rights</h2>
+<p>This Return, Refund, and Cancellation Policy complies with United States Federal Trade Commission (FTC) guidelines, the Uniform Commercial Code (UCC) regarding express and implied warranties of merchantability and fitness, and applicable state consumer protection laws. Nothing in this policy limits or excludes your non-waivable statutory legal rights under federal or state law.</p>
+
+<h2>2. 14-Day Cancellation Right &amp; Skincare Hygiene Exemption</h2>
+<p>Distance buyers retain the right to cancel their contract and return purchased merchandise within fourteen (14) calendar days of delivery without penalty, subject to the hygiene protection standards below.</p>
+<h3>Intimate Skincare Appliance Hygiene Exemption</h3>
+<p>The Buudy LED Face Mask, Buudy LED Torch, and associated skin-contact accessories are classified as intimate personal wellness and hygiene appliances that contact facial skin, biological secretions, and tissue. Under health, sanitation, and hygiene protections, products designed for direct skin contact cannot be accepted for return or resale once unsealed:</p>
 <ul>
-  <li><strong>Store</strong> means Buudy.</li>
-  <li><strong>xPage Drop</strong> means xPage Drop LLC.</li>
-  <li><strong>Seller</strong> means the independent merchant operating the Store.</li>
-  <li><strong>Fulfillment Partner</strong> means a supplier, manufacturer, warehouse or carrier.</li>
-  <li><strong>You</strong> means the buyer.</li>
-  <li><strong>We, us and our</strong> mean the Store and xPage Drop where it handles the request.</li>
+  <li><strong>Intact Hygiene Seal (Eligible):</strong> If the protective packaging, holographic security seal, and shrink-wrap remain completely intact, unopened, and unhandled beyond external retail inspection, you may exercise your right to return or cancel within fourteen (14) calendar days of delivery.</li>
+  <li><strong>Broken Hygiene Seal (Permanently Ineligible):</strong> Once the external protective shrink-wrap, box seal, or security sticker has been broken, peeled, opened, or tampered with, the product is permanently ineligible for return under change-of-mind rules due to personal health, sanitation, and hygiene protections, unless verified as defective or non-conforming under statutory warranty rules.</li>
 </ul>
 
-<h2>2. Contact Support First</h2>
-<p>Before cancelling or returning an order, contact:</p>
-<p><a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a></p>
-<p>You must receive written return authorization before sending a product. The approved return address may differ from:</p>
+<h2>3. Defective, Damaged, or Non-Conforming Products</h2>
+<p>If your Buudy device develops an electrical fault, fails to charge, or fails to operate in accordance with published technical specifications, you are entitled to comprehensive warranty remedies under our commercial terms and state warranty statutes.</p>
+
+<div class="buudy-policy-table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Product Issue Window</th>
+        <th>Warranty &amp; Statutory Entitlement</th>
+        <th>Resolution Protocol</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>0 to 30 Days from Delivery</strong></td>
+        <td>100% full refund or replacement.</td>
+        <td>Contact customer support with video documentation demonstrating the electrical or physical failure.</td>
+      </tr>
+      <tr>
+        <td><strong>31 Days to 6 Months</strong></td>
+        <td>Free repair or replacement.</td>
+        <td>If the unit cannot be repaired or an equivalent replacement cannot be provided, a full refund without deduction will be issued.</td>
+      </tr>
+      <tr>
+        <td><strong>6 Months to 12 Months</strong></td>
+        <td>Free service or replacement under Buudy 1-Year Limited Warranty.</td>
+        <td>Covers manufacturing defects, abnormal battery degradation, and LED hardware failure.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Fault remedies do not cover user-inflicted damage, dropping, water ingress, cosmetic wear, unauthorized disassembly, or the use of incompatible high-voltage power adapters.</p>
+
+<h2>4. Promotional Bundles &amp; Free Gift Returns</h2>
+<p>If you received a complimentary promotional gift (such as the Buudy LED Torch) as part of a qualifying promotional bundle and request a refund on the primary device, the promotional item must also be returned unopened in its original sealed condition. If retained or opened, its retail value ($69 USD) will be deducted from any final refund where permitted by law.</p>
+
+<h2>5. Return Logistics Protocol and RMA Procedure</h2>
+<p>Returns will not be accepted without prior written authorization. Unauthorized packages delivered to administrative addresses will be rejected.</p>
 <ol>
-  <li>The shipping origin.</li>
-  <li>The address printed on the package.</li>
-  <li>The Fulfillment Partner's address.</li>
-  <li>The xPage Drop corporate address.</li>
+  <li>Submit a return request to <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or open an inquiry in the Whop Resolution Center within the relevant eligibility window.</li>
+  <li>For change-of-mind returns (unopened items), provide photographs showing the unbroken, pristine condition of all factory seals and shrink-wrap.</li>
+  <li>For fault claims, provide a detailed description and a video showing the device failing to function.</li>
+  <li>Upon approval, an official Return Merchandise Authorization (RMA) Number and our designated return consolidation address will be provided.</li>
 </ol>
-<p>Do not return products to any address without written authorization.</p>
+<p><strong>Shipping Costs:</strong> For verified defective or misdescribed items, Buudy provides a prepaid domestic return shipping label. For unopened change-of-mind cancellations, the customer is responsible for tracked return postage.</p>
 
-<h2>3. Order Cancellations</h2>
-<p>Cancellation requests may be submitted within:</p>
-<p><strong>Cancellation period:</strong> Cancellation requests must be submitted within 12 hours of placing the order. Cancellation is only possible if fulfillment has not started. Requests submitted within this period are not guaranteed once the order has entered processing.</p>
-<p>We will try to stop the order, but cancellation cannot be guaranteed after payment review, preparation, customization, packaging or fulfillment begins.</p>
-<p>If cancellation succeeds, the cancelled amount will be refunded to the original payment method. After fulfillment begins, you may need to receive the order and request a return.</p>
+<h2>6. Refund Settlement</h2>
+<p>Approved refunds are issued to the original payment method through Whop within fourteen (14) days of our warehouse receiving the returned item or receiving verifiable tracking proof of return delivery. Standard outbound shipping fees paid at checkout are refunded for timely statutory cancellations; express shipping add-ons are non-refundable.</p>
 
-<h2>4. Change-of-Mind Returns</h2>
-<p>Change-of-mind returns may be requested within:</p>
-<p><strong>Return window:</strong> Within 30 days of delivery</p>
-<p>Returned products must meet these conditions:</p>
-<p><strong>Return condition:</strong> Returns are accepted only for damaged, defective, incorrect or missing products. Customers must provide clear photo or video evidence and obtain return authorization before sending anything back. Items must not be returned to the address shown on the package. Change-of-mind, incorrect-size or personal-preference returns are not generally accepted.</p>
-<p>You may inspect a product as reasonably necessary, but you may be responsible for reduced value caused by use, damage or handling beyond normal inspection where permitted by law.</p>
+<h2>7. Order Cancellations Prior to Dispatch</h2>
+<p>Cancellation requests submitted within two (2) hours of placing an order will be processed if the order has not entered warehouse picking and export sorting. Once an order has entered fulfillment or dispatch, cancellation is no longer possible and the customer must follow the standard return procedure upon delivery.</p>
 
-<h2>5. Defective, Damaged or Incorrect Products</h2>
-<p>Contact support promptly if a product:</p>
-<ol>
-  <li>Is defective or unsafe.</li>
-  <li>Arrives damaged.</li>
-  <li>Is materially different from its description.</li>
-  <li>Is the wrong item, size, color or model.</li>
-  <li>Is missing parts or quantities.</li>
-  <li>Does not function as reasonably advertised.</li>
-</ol>
-<p>We may request reasonable evidence such as photographs, measurements, packaging information or a short video showing the issue.</p>
-<p>An unboxing video is not the only accepted evidence.</p>
-<p>Depending on the issue and applicable law, the remedy may include replacement, missing parts, repair, partial refund or full refund.</p>
-
-<h2>6. Missing Items and Lost Shipments</h2>
-<p>Check whether your order was divided into separate packages before reporting a missing item.</p>
-<p>For a missing item, provide photographs of the received package, label and contents where reasonably available.</p>
-<p>If an item was omitted or a shipment is confirmed lost, we will provide a replacement, refund or other remedy required by law.</p>
-
-<h2>7. Delayed Shipments</h2>
-<p>Delivery estimates are not guarantees unless expressly stated otherwise.</p>
-<p>A reasonable delay does not automatically qualify for a refund. However, if delivery materially exceeds the promised period, you may receive a revised delivery option, cancellation or refund as required by law.</p>
-<p>You are not required to accept an indefinite delay.</p>
-
-<h2>8. Return Shipping Costs</h2>
-<p>The applicable return-cost rule is:</p>
-<p><strong>Return shipping:</strong> Return shipping costs are the customer's responsibility unless Buudy confirms otherwise in writing. Products must not be returned without prior authorization and return instructions.</p>
-<p>For validated defective, damaged, incorrect or materially misdescribed products, we will provide a prepaid method, reimburse reasonable authorized return costs or provide another remedy required by law.</p>
-<p>Unauthorized or unnecessarily expensive return shipping may not be reimbursed.</p>
-
-<h2>9. Return Inspection</h2>
-<p>Returned products may be inspected before a refund is approved. The inspection may confirm:</p>
-<ol>
-  <li>The correct product was returned.</li>
-  <li>The product is complete.</li>
-  <li>The reported defect exists.</li>
-  <li>The product was not intentionally damaged or replaced.</li>
-  <li>The return conditions were followed.</li>
-</ol>
-<p>A lawful deduction may be made for missing parts, unauthorized damage or excessive use. Normal inspection will not remove mandatory return rights.</p>
-
-<h2>10. Non-Returnable Products</h2>
-<p>Subject to mandatory law, the following products may not qualify for change-of-mind returns:</p>
-<p><strong>Non-returnable products:</strong> Products are non-returnable when the request is based on a change of mind, personal preference, an incorrectly selected product, variant or size, an incorrect shipping address, minor cosmetic imperfections, packaging damage without product damage, or failure to complete customs clearance.</p>
-<p>This may include personalized, perishable, hygiene-sensitive or opened sealed products where legally permitted.</p>
-<p>A non-returnable classification does not remove rights relating to defective, unsafe, incorrect or materially misdescribed products.</p>
-
-<h2>11. Refunds</h2>
-<p>Approved refunds will normally be sent to the original payment method.</p>
-<p><strong>Refund initiation time:</strong> 5–10 business days</p>
-<p>Your bank or payment provider may require additional time to display the refund.</p>
-<p>Where the original payment method cannot receive the refund, another lawful method may be requested.</p>
-<p>Original delivery fees will be refunded where required by applicable law.</p>
-
-<h2>12. Partial Refunds and Replacements</h2>
-<p>A partial refund may be offered if you choose to keep a product with a minor issue.</p>
-<p>If you request a refund on an order that included a promotional Buudy LED Torch, the original cost of the torch will be deducted and only the remaining amount will be refunded, where applicable.</p>
-<p>A replacement may be offered for defective, damaged, incorrect, missing or lost products. A materially different replacement will not be sent without your approval.</p>
-<p>A partial refund or replacement will not replace a remedy that applicable law requires.</p>
-
-<h2>13. Refused and Unauthorized Returns</h2>
-<p>Do not refuse a package or send a return without contacting support.</p>
-<p>Unauthorized returns may be refused, lost or delayed. You may be responsible for avoidable costs resulting from failure to follow reasonable return instructions.</p>
-<p>This does not remove mandatory consumer rights.</p>
-
-<h2>14. Fraudulent or Abusive Claims</h2>
-<p>We may reject a claim involving materially false or misleading information, intentional damage, substitution of products, false non-delivery statements or duplicate recovery attempts.</p>
-<p>Exercising a legitimate refund, consumer-protection or chargeback right is not abuse.</p>
-<p>We may provide relevant order, delivery, refund and communication records to payment providers or competent authorities when fraud is reasonably suspected.</p>
-
-<h2>15. Chargebacks</h2>
-<p>Contact Buudy support before opening a chargeback so the issue can be reviewed directly. This does not restrict legitimate chargeback rights.</p>
-<p>Do not seek both a completed refund and a chargeback for the same amount. An active chargeback may pause a separate refund while the payment provider controls the disputed funds.</p>
-
-<h2>16. Mandatory Rights</h2>
-<p>Mandatory cancellation, return, conformity, warranty and refund rights in your jurisdiction remain applicable.</p>
-<p>Where local law grants a longer return period, free return, legal guarantee or stronger remedy, that law prevails over conflicting parts of this Policy.</p>
-
-<h2>17. Contact and Return Warning</h2>
+<h2>8. Contact and Corporate Return Warning</h2>
 <p>For questions or assistance with returns, contact:</p>
-<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
-<p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
-<h3>xPage Drop LLC</h3>
+<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a><br />
+Contact form: <a href="/pages/contact-us">Contact Us</a><br />
+Customer service hours: Monday to Friday, 9:00 AM to 5:00 PM EST</p>
+<h3>Buudy Operations / xPage Drop LLC</h3>
 <p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
-<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
-<p>This is a corporate address only. It is not a warehouse, fulfillment center or standard return address. Do not send a return here or to the address printed on a package unless Buudy expressly provides that address in writing.</p>
+<p><em>Warning: This is a corporate administrative office only. It is not a warehouse, fulfillment center, or return depot. Do not send returns to this address or to the return address printed on shipping labels without an official RMA number and designated return instructions from Buudy customer support.</em></p>
 `;
 
 export const returnPolicyHtml = refundPolicyHtml;
 export const refundReturnPolicyHtml = refundPolicyHtml;
 
 export const termsOfServiceHtml = `
-<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 1.0</p>
+<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 2.0</p>
 
-<h2>1. About These Terms</h2>
-<p>These Terms apply when you visit or purchase from Buudy.</p>
-<p>In these Terms:</p>
+<h2>1. Contract Structure and Governing Law</h2>
+<p>These Terms of Service govern the access, browsing, and purchase of goods from Buudy through our online storefront (<a href="https://us.buudy.com">us.buudy.com</a>) and payment infrastructure hosted on Whop Inc. The commercial contract is formed in the English language and governed by the laws of the State of Delaware, United States, without regard to principles of conflicts of law. The state and federal courts located in Delaware retain exclusive jurisdiction over any disputes arising under this agreement, subject to applicable non-waivable federal consumer rights. By completing a purchase, you agree to these Terms, the Shipping Policy, and the Return Policy.</p>
+
+<h2>2. Commercial Identity Disclosures</h2>
+<p>Our trading and administrative details are:</p>
 <ul>
-  <li><strong>Store</strong> means Buudy.</li>
-  <li><strong>xPage Drop</strong> means xPage Drop LLC.</li>
-  <li><strong>Seller</strong> means the independent merchant operating the Store.</li>
-  <li><strong>Fulfillment Partner</strong> means a third-party supplier, manufacturer, warehouse or carrier.</li>
-  <li><strong>You</strong> means the buyer.</li>
-  <li><strong>We, us and our</strong> mean the Store and, where it handles the transaction, xPage Drop.</li>
+  <li><strong>Trading Brand:</strong> Buudy</li>
+  <li><strong>Web Domain:</strong> <a href="https://us.buudy.com">us.buudy.com</a> (and <a href="https://buudy.com">buudy.com</a>)</li>
+  <li><strong>Checkout &amp; MoR Platform:</strong> Whop Inc.</li>
+  <li><strong>Customer Support Desk:</strong> <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></li>
+  <li><strong>Support Hours:</strong> Monday to Friday, 9:00 AM to 5:00 PM EST</li>
+  <li><strong>Administrative Corporate Address:</strong> Buudy Operations / xPage Drop LLC, 131 Continental Dr Suite 305, Newark, DE 19713, United States. (Corporate administrative office only; customer returns sent to this address cannot be processed).</li>
 </ul>
-<p>The Store is operated by an independent Seller. xPage Drop provides customer support and may handle checkout, payments, fraud screening, refunds, order administration and fulfillment coordination.</p>
-<p>The party identified as the merchant at checkout or in your order confirmation is your contractual seller. Where no separate merchant is identified, xPage Drop is the merchant of record for the transaction.</p>
 
-<h2>2. Eligibility and Store Use</h2>
-<p>You must have the legal capacity to place an order. Age-restricted products may only be purchased by buyers who meet the applicable age requirements. You must not:</p>
-<ol>
-  <li>Use false identity, payment or delivery information.</li>
-  <li>Place fraudulent or unauthorized orders.</li>
-  <li>Interfere with the Store's operation or security.</li>
-  <li>Use the Store for unlawful activity.</li>
-  <li>Evade geographic, age, sanctions or product restrictions.</li>
-  <li>Copy, scrape or commercially reuse Store content without permission.</li>
-</ol>
-<p>We may restrict access or cancel orders where fraud, abuse or unlawful activity is reasonably suspected.</p>
+<h2>3. Orders, Pricing, and Formation</h2>
+<p>Order submissions through the Whop checkout represent a binding offer to purchase. Legal contract formation occurs upon parcel dispatch and the issuance of a Dispatch Confirmation email containing carrier tracking data. Displayed prices are in United States Dollars (USD), inclusive of Delivered Duty Paid (DDP) clearance terms. Applicable state and local sales taxes are calculated and collected at checkout. We reserve the right to cancel orders arising from clerical, server, or typographical pricing errors prior to dispatch.</p>
 
-<h2>3. Products</h2>
-<p>We aim to present product descriptions, photographs, sizes, colors and specifications accurately. Minor differences may occur because of screen settings, lighting, manufacturing batches, packaging changes or manual measurements. These differences do not affect your rights where a product is defective, unsafe, incorrect or materially different from its description.</p>
-<p>You are responsible for reviewing product dimensions, compatibility, warnings and usage instructions before ordering.</p>
-<p>Product reviews and promotional content do not create guarantees beyond the product description, any express warranty and rights provided by law.</p>
+<h2>4. Product Intended Use and Explicit Non-Medical Disclaimer</h2>
+<p>The Buudy LED Face Mask and Buudy LED Torch are personal cosmetic wellness appliances designed solely to support aesthetic skin appearance, smoothness, and tone.</p>
+<p>The products sold by Buudy are not medical devices under United States Food and Drug Administration (FDA) regulations. They are not engineered, licensed, or intended to diagnose, treat, prevent, or cure any disease, dermatological pathology, clinical acne, or medical disorder. The Skincare Quiz, AI companion tools, and website content provide general cosmetic guidance, not professional healthcare or medical advice. Always consult a qualified physician or dermatologist before using light therapy if you are pregnant, experience photosensitive epilepsy, take photosensitizing medications, or have suspicious skin conditions.</p>
 
-<h2>4. Prices, Currency and Taxes</h2>
-<p>The display currency may be selected on the storefront. Display prices are read from the current checkout offer. The payment provider currently settles in GBP; review the final payment amount and currency before paying.</p>
-<p>Your bank or payment provider may apply currency-conversion or international transaction fees if your funding account is in another currency. These charges are not controlled by the Store or xPage Drop.</p>
-<p>Applicable sales taxes may be collected at checkout. Customs duties, import taxes or brokerage charges will be handled according to the rule shown before purchase:</p>
-<p><strong>Customs and duties:</strong> Import duties and taxes depend on the destination and order. Review the current checkout disclosure before payment.</p>
+<h2>5. Limitation of Liability</h2>
+<p>To the maximum extent permitted under applicable United States federal and state law, Buudy's aggregate commercial liability relating to any order shall not exceed the total purchase price paid for the product. In no event shall Buudy, xPage Drop LLC, or its suppliers be liable for indirect, incidental, consequential, special, or exemplary damages arising out of or in connection with the purchase, use, or performance of products.</p>
 
-<h2>5. Orders</h2>
-<p>Submitting an order is an offer to purchase. Receiving an order-confirmation email means that the order was received, not necessarily that it was finally accepted. Orders may be reviewed for:</p>
-<ol>
-  <li>Payment authorization.</li>
-  <li>Fraud or chargeback risk.</li>
-  <li>Product availability.</li>
-  <li>Pricing or technical errors.</li>
-  <li>Delivery restrictions.</li>
-  <li>Sanctions or legal restrictions.</li>
-</ol>
-<p>We may reject or cancel an order for a legitimate reason. If payment has already been collected for a cancelled order, the affected amount will be refunded.</p>
-<p>A materially different replacement will not be sent without your approval.</p>
+<h2>6. Dispute Resolution and Chargeback Abuse</h2>
+<p>Customers agree to submit any billing, delivery, or product disputes to <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or open an inquiry in the Whop Resolution Center prior to approaching their payment card issuer. Both parties commit to an amicable resolution window of seven (7) business days before initiating payment claims or chargebacks.</p>
+<p>Submitting a payment dispute claiming non-delivery after verifiable carrier tracking establishes successful doorstep delivery, or claiming a refund while retaining unsealed, used hardware, constitutes an abusive dispute. In such events, Buudy reserves the right to provide transaction logs, IP history, signed proof of delivery, photographic courier records, and assent logs to card schemes, payment networks, and recovery agencies.</p>
 
-<h2>6. Pricing Errors and Availability</h2>
-<p>We may correct obvious pricing, product or availability errors before accepting an order. If a product becomes unavailable, we may:</p>
-<ol>
-  <li>Cancel and refund the affected item.</li>
-  <li>Offer an alternative for your approval.</li>
-  <li>Ask whether you accept a revised fulfillment date.</li>
-</ol>
+<h2>7. Intellectual Property</h2>
+<p>All storefront software, branding, imagery, visual media, text, trademarks, and design assets are the exclusive property of Buudy, xPage Drop LLC, or their licensors. You may access storefront content solely for personal, non-commercial shopping purposes. Any unauthorized scraping, copying, reproduction, or redistribution is strictly prohibited.</p>
 
-<h2>7. Payments</h2>
-<p>By placing an order, you authorize the displayed amount to be charged through the selected payment method.</p>
-<p>Payment authorization or capture does not guarantee order acceptance.</p>
-
-<h2>8. Shipping, Returns and Refunds</h2>
-<p>Processing and delivery estimates are shown on the product page, at checkout or in the Shipping and Delivery Policy.</p>
-<p>Returns, cancellations and refunds are governed by the Returns, Refunds and Cancellations Policy. You must contact Buudy support and receive written authorization before returning a product.</p>
-
-<h2>9. Intellectual Property</h2>
-<p>Store software, branding, photographs, designs, text and other content may belong to the Store, xPage Drop, manufacturers or licensors.</p>
-<p>You may use Store content only for personal shopping purposes.</p>
-<p>Intellectual-property complaints must be sent to <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a> and include sufficient information to identify the protected work and disputed content.</p>
-
-<h2>10. Liability</h2>
-<p>Nothing in these Terms excludes liability or consumer rights that cannot legally be excluded.</p>
-<p>To the maximum extent permitted by law, we are not responsible for indirect or unforeseeable losses arising from a consumer purchase.</p>
-<p>For claims that may legally be limited, total liability relating to an order will not exceed the amount paid for the affected product and its associated shipping charge.</p>
-
-<h2>11. Governing Law and Complaints</h2>
-<p>These Terms are governed by Delaware law, except where mandatory law in your country or state provides protections or dispute rights that cannot be removed by contract.</p>
-<p>Before starting a formal dispute, contact:</p>
-<p><a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a></p>
-<p>This does not prevent you from contacting a payment provider, regulator, consumer authority or court where permitted by law.</p>
-
-<h2>12. Mandatory Rights</h2>
-<p>Mandatory consumer rights in your jurisdiction remain applicable. If these Terms conflict with a right that cannot legally be waived, the mandatory right will prevail.</p>
-
-<h2>13. Contact</h2>
-<p>Customer support for this Store is administered by Buudy and xPage Drop.</p>
-<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
-<p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
-<h3>xPage Drop LLC</h3>
+<h2>8. Contact</h2>
+<p>For questions regarding these Terms of Service, contact:</p>
+<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a><br />
+Contact form: <a href="/pages/contact-us">Contact Us</a><br />
+Customer service hours: Monday to Friday, 9:00 AM to 5:00 PM EST</p>
+<h3>Buudy Operations / xPage Drop LLC</h3>
 <p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
-<p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
-<p>This is a corporate address only. It is not a warehouse, fulfillment center or return address. Do not send products to this address unless expressly authorized in writing.</p>
 `;
 
 export const cookiesPolicyHtml = `

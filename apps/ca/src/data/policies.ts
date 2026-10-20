@@ -1,390 +1,212 @@
-// Structured policy data compiled from live mask.buudy.com xPage Drop policies
+// Structured production legal policies for Buudy Canada (ca.buudy.com) on Whop
+// Complies with Canadian statutory framework: PIPEDA, provincial Consumer Protection Acts, and Canadian e-commerce standards.
 
 export const privacyPolicyHtml = `
-<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 1.0</p>
+<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 2.0</p>
 
-<h2>1. About This Policy</h2>
-<p>This Privacy Policy explains how personal information is handled when you visit or purchase from Buudy.</p>
-<p>In this Policy:</p>
+<h2>1. Data Controller and Statutory Framework</h2>
+<p>Buudy respects consumer privacy and processes personal information in accordance with the <strong>Personal Information Protection and Electronic Documents Act (PIPEDA)</strong> and applicable provincial private-sector privacy legislation (including the Alberta Personal Information Protection Act, the British Columbia Personal Information Protection Act, and Quebec's Act Respecting the Protection of Personal Information in the Private Sector &mdash; Law 25), overseen by the <strong>Office of the Privacy Commissioner of Canada (OPC)</strong>.</p>
+<p>This Privacy Policy explains how personal information is collected, managed, used, and safeguarded when you visit or make a purchase from <a href="https://ca.buudy.com">ca.buudy.com</a> and complete orders through our checkout platform hosted on Whop.</p>
+
+<h2>2. Personal Information Collected</h2>
+<p>We collect and process the following categories of information:</p>
 <ul>
-  <li><strong>Store</strong> means Buudy.</li>
-  <li><strong>xPage Drop</strong> means xPage Drop LLC.</li>
-  <li><strong>Seller</strong> means the independent merchant operating the Store.</li>
-  <li><strong>Service Provider</strong> includes payment providers, suppliers, warehouses, carriers, analytics services and fraud-prevention providers.</li>
-  <li><strong>You</strong> means the visitor or buyer.</li>
-  <li><strong>We, us and our</strong> mean the Store and xPage Drop for the relevant processing activity.</li>
+  <li><strong>Identity &amp; Contact Details:</strong> Full legal name, billing address, Canadian physical delivery address, email address, and mobile telephone number.</li>
+  <li><strong>Payment Telemetry:</strong> Whop Inc. processes and encrypts payment card credentials under Level 1 PCI-DSS compliance standards. Buudy retains transaction IDs, payment method metadata, and risk ratings, but never stores raw payment card numbers.</li>
+  <li><strong>Order Logistics:</strong> International airway bills, dispatch records, Canadian domestic carrier tracking numbers (Canada Post Tracked or Purolator), and proof of delivery confirmations.</li>
+  <li><strong>Technical Footprint:</strong> IP address, geolocation tags, browser user-agents, device telemetry, and checkout timestamps collected for fraud monitoring, security, and dispute resolution.</li>
+  <li><strong>Customer Service Records:</strong> Inquiries, correspondence, photographs, or video documentation submitted to our support desk or the Whop Resolution Center.</li>
 </ul>
-<p>xPage Drop handles customer support and may process personal information for checkout, payments, fraud prevention, order administration, refunds and fulfillment coordination.</p>
 
-<h2>2. Information We Collect</h2>
-<p>We may collect:</p>
+<h2>3. Purposes and Principles of Processing</h2>
+<p>In accordance with the 10 Fair Information Principles of PIPEDA, personal data is processed solely for specified, legitimate commercial purposes with meaningful consent:</p>
 <ol>
-  <li>Your name, email address, phone number and delivery address.</li>
-  <li>Billing, order, product, currency, tax and shipping information.</li>
-  <li>Payment status, payment method, transaction references and limited payment details.</li>
-  <li>Device, browser, IP address, approximate location and usage information.</li>
-  <li>Cart activity, Store visits and referral information.</li>
-  <li>Cookies and similar technologies.</li>
-  <li>Support messages, attachments, complaints and refund requests.</li>
-  <li>Tracking, delivery and return information.</li>
-  <li>Fraud, identity, age or sanctions-verification information where necessary.</li>
+  <li><strong>Contractual Fulfilment:</strong> Fulfilling customer orders, arranging international air freight and customs clearance, providing domestic courier tracking, and servicing warranty requests.</li>
+  <li><strong>Legal &amp; Tax Compliance:</strong> Satisfying Canada Revenue Agency (CRA) record-keeping rules, customs declarations with the Canada Border Services Agency (CBSA), and mandatory tax reporting.</li>
+  <li><strong>Legitimate Business Interests &amp; Fraud Prevention:</strong> Protecting against fraudulent transactions, securing web infrastructure, and defending against unwarranted payment disputes.</li>
+  <li><strong>Consent &amp; Marketing:</strong> Sending promotional communications or skincare routine guidance only where explicit opt-in consent is provided, in strict compliance with Canada's Anti-Spam Legislation (CASL), with an easy one-click unsubscribe mechanism.</li>
 </ol>
-<p>Full payment credentials may be collected directly by the payment provider rather than by the Store or xPage Drop.</p>
 
-<h2>3. How We Use Information</h2>
-<p>Information may be used to:</p>
-<ol>
-  <li>Operate the Store and checkout.</li>
-  <li>Process payments and orders.</li>
-  <li>Arrange fulfillment and delivery.</li>
-  <li>Send order and tracking updates.</li>
-  <li>Provide customer support.</li>
-  <li>Process cancellations, returns and refunds.</li>
-  <li>Prevent fraud, abuse and unauthorized transactions.</li>
-  <li>Investigate delivery and payment disputes.</li>
-  <li>Comply with tax, customs, sanctions, safety and legal obligations.</li>
-  <li>Maintain Store and payment security.</li>
-  <li>Measure and improve Store performance.</li>
-  <li>Send marketing where permitted.</li>
-</ol>
-<p>Where required, processing will rely on your consent, performance of the purchase contract, legal obligations or legitimate business and security interests.</p>
+<h2>4. Cross-Border Data Transfers</h2>
+<p>To fulfil customer purchases, delivery data (name, shipping address, contact phone) is transferred outside of Canada to our specialized international warehousing and logistics partners in China, as well as to Whop Inc. systems in the United States. All cross-border transfers are conducted under robust contractual safeguards ensuring a comparable level of protection for personal information as required under Canadian privacy legislation.</p>
 
-<h2>4. Cookies and Analytics</h2>
-<p>The Store may use cookies and similar technologies for:</p>
-<ol>
-  <li>Cart and checkout functions.</li>
-  <li>Security and fraud prevention.</li>
-  <li>Language and session preferences.</li>
-  <li>Analytics and Store improvement.</li>
-  <li>Marketing where permitted.</li>
-</ol>
-<p>Non-essential cookies will be subject to consent or opt-out controls where required by law. Blocking essential cookies may affect Store functionality.</p>
+<h2>5. Data Retention and Accuracy</h2>
+<p>Order records, communications, and invoice data are retained for up to <strong>six (6) years</strong> following transaction completion to satisfy statutory tax obligations under the Income Tax Act and resolve potential contractual or warranty claims. Data is maintained accurately and securely destroyed or anonymized once retention periods expire.</p>
 
-<h2>5. How Information Is Shared</h2>
-<p>Information may be shared with:</p>
-<ol>
-  <li>The Seller, where necessary to operate the Store.</li>
-  <li>Suppliers and warehouses preparing products.</li>
-  <li>Carriers delivering orders.</li>
-  <li>Payment providers and financial institutions.</li>
-  <li>Fraud-prevention and identity-verification providers.</li>
-  <li>Customer-support and technology providers.</li>
-  <li>Analytics and marketing providers where legally permitted.</li>
-  <li>Regulators, courts or government authorities where legally required.</li>
-</ol>
-<p>Only information reasonably necessary for the relevant service should be shared.</p>
-<p>We do not sell personal information for money. Certain advertising or analytics disclosures may be legally classified as a sale, sharing or targeted advertising in some jurisdictions. Required opt-out rights will be provided where applicable.</p>
+<h2>6. Consumer Privacy Rights</h2>
+<p>Under PIPEDA and applicable provincial privacy laws, Canadian consumers have the right to:</p>
+<ul>
+  <li>Request access to personal information held about them.</li>
+  <li>Request correction of inaccurate, incomplete, or outdated personal information.</li>
+  <li>Withdraw consent for secondary processing activities or marketing communications at any time.</li>
+  <li>Lodge an inquiry or complaint with the Office of the Privacy Commissioner of Canada (OPC) or the relevant provincial privacy commissioner.</li>
+</ul>
+<p>Privacy inquiries and requests may be submitted directly to <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a>.</p>
 
-<h2>6. International Processing</h2>
-<p>Your information may be processed in the United States, your country, the Seller's country, a fulfillment country or another location used by Service Providers.</p>
-<p>Where required, lawful safeguards will be used for international transfers.</p>
-
-<h2>7. Retention</h2>
-<p>Information is retained only for as long as reasonably necessary for:</p>
-<ol>
-  <li>Order fulfillment and support.</li>
-  <li>Refunds, warranties and chargebacks.</li>
-  <li>Tax, accounting and customs requirements.</li>
-  <li>Fraud prevention and security.</li>
-  <li>Product recalls and safety obligations.</li>
-  <li>Legal claims and regulatory compliance.</li>
-</ol>
-<p>Information may then be deleted, anonymized or restricted.</p>
-
-<h2>8. Security</h2>
-<p>Reasonable technical, administrative and organizational measures are used to protect personal information.</p>
-<p>No online system is completely secure. You must protect your device, account and payment credentials and report suspected unauthorized activity promptly.</p>
-
-<h2>9. Marketing</h2>
-<p>Marketing messages will be sent only where legally permitted.</p>
-<p>You may unsubscribe through the link in the message or by contacting support.</p>
-<p>Order confirmations, security messages, recall notices and other necessary service communications are not marketing.</p>
-
-<h2>10. Your Privacy Rights</h2>
-<p>Depending on your location, you may have the right to:</p>
-<ol>
-  <li>Access your personal information.</li>
-  <li>Correct inaccurate information.</li>
-  <li>Request deletion.</li>
-  <li>Restrict or object to processing.</li>
-  <li>Request portable data.</li>
-  <li>Withdraw consent.</li>
-  <li>Opt out of certain marketing, profiling, sale or sharing activities.</li>
-  <li>Appeal a privacy-request decision.</li>
-  <li>Complain to a data-protection authority.</li>
-</ol>
-<p>Legal exceptions may apply where information is required for orders, fraud prevention, safety, accounting or legal claims.</p>
-
-<h2>11. Privacy Requests</h2>
-<p>Submit privacy requests through:</p>
-<p><a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a></p>
-<p>We may request reasonable information to verify your identity and protect your data. Requests will be handled within the period required by applicable law.</p>
-
-<h2>12. Children</h2>
-<p>The Store is not intended for children who lack legal capacity to make purchases.</p>
-<p>If you believe a child submitted personal information without required authorization, contact xPage Drop support.</p>
-
-<h2>13. Legal Disclosures</h2>
-<p>Information may be preserved or disclosed where reasonably necessary to comply with law, respond to lawful government requests, investigate fraud, protect legal rights, address security threats or manage a product recall.</p>
-
-<h2>14. Mandatory Rights</h2>
-<p>Mandatory privacy and consumer rights in your jurisdiction remain applicable and prevail over conflicting parts of this Policy.</p>
-
-<h2>15. Contact</h2>
-<h3>xPage Drop LLC</h3>
+<h2>7. Administrative Contact</h2>
+<p>For questions regarding our privacy practices or data governance, contact:</p>
+<h3>Buudy Operations / xPage Drop LLC</h3>
 <p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
 <p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
 <p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
-<p>This is a corporate address only. It is not a warehouse, fulfillment center or return address.</p>
+<p>Customer service hours: Monday to Friday, 9:00 AM to 5:00 PM EST</p>
+<p><strong>Please note:</strong> This is a corporate administrative address only. It is not a warehouse, fulfilment center, or return depot.</p>
 `;
 
 export const refundPolicyHtml = `
-<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 1.0</p>
+<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 2.0</p>
 
-<h2>1. About This Policy</h2>
-<p>This Policy applies to purchases from Buudy.</p>
-<p>In this Policy:</p>
+<h2>1. Statutory Framework</h2>
+<p>This Return, Refund, and Cancellation Policy complies with Canadian provincial Consumer Protection Acts (including the Ontario Consumer Protection Act, British Columbia Business Practices and Consumer Protection Act, Alberta Consumer Protection Act, and applicable provincial consumer legislation) as well as the federal Competition Act. Nothing in this policy limits or excludes your non-waivable statutory legal rights under Canadian law.</p>
+
+<h2>2. 14-Day Cancellation Right &amp; Skincare Hygiene Exemption</h2>
+<p>Under distance selling and e-commerce standards, buyers generally retain the right to cancel their purchase and return items within <strong>fourteen (14) calendar days</strong> of physical delivery without providing a reason.</p>
+
+<h3>Hygiene and Health Protection Exemption for Sealed Personal Skincare Appliances</h3>
+<p>The Buudy LED Face Mask, Buudy LED Torch, and associated skin-contact accessories are classified as intimate personal wellness and hygiene appliances that make direct contact with facial skin, biological secretions, and tissue.</p>
+<p>Under Canadian health, sanitation, and consumer safety standards, personal care appliances that touch the skin are <strong>not suitable for return if unsealed after delivery</strong> due to health protection and sanitation reasons.</p>
 <ul>
-  <li><strong>Store</strong> means Buudy.</li>
-  <li><strong>xPage Drop</strong> means xPage Drop LLC.</li>
-  <li><strong>Seller</strong> means the independent merchant operating the Store.</li>
-  <li><strong>Fulfillment Partner</strong> means a supplier, manufacturer, warehouse or carrier.</li>
-  <li><strong>You</strong> means the buyer.</li>
-  <li><strong>We, us and our</strong> mean the Store and xPage Drop where it handles the request.</li>
+  <li><strong>Intact Hygiene Seal (Eligible):</strong> If the protective packaging, holographic security seal, and shrink-wrap remain intact, unopened, and unhandled beyond retail inspection, you may exercise your right to cancel and return the item within <strong>fourteen (14) calendar days</strong> of delivery.</li>
+  <li><strong>Broken Hygiene Seal (Permanently Ineligible):</strong> Once the external protective shrink-wrap, box seal, or security sticker has been broken, peeled, opened, or tampered with, the product is <strong>permanently ineligible for return or refund</strong> under change-of-mind rules due to personal health, sanitation, and hygiene safety, unless verified as defective under our warranty terms.</li>
 </ul>
 
-<h2>2. Contact Support First</h2>
-<p>Before cancelling or returning an order, contact:</p>
-<p><a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a></p>
-<p>You must receive written return authorization before sending a product. The approved return address may differ from:</p>
+<h2>3. Defective, Damaged, or Non-Conforming Products</h2>
+<p>If your Buudy device develops an electrical fault, fails to charge, or fails to operate in accordance with published technical specifications, you are entitled to statutory remedies and our manufacturer warranty.</p>
+
+<div class="buudy-policy-table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Product Issue Window</th>
+        <th>Statutory Entitlement</th>
+        <th>Resolution Protocol</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>0 to 30 Days from Delivery</strong></td>
+        <td>Right to reject for a 100% full refund or immediate replacement.</td>
+        <td>Contact customer support at <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> with video documentation demonstrating the electrical or physical failure.</td>
+      </tr>
+      <tr>
+        <td><strong>31 Days to 6 Months</strong></td>
+        <td>Right to a free repair or replacement.</td>
+        <td>If the unit cannot be repaired or an equivalent replacement cannot be provided, you may receive a full refund without deductions.</td>
+      </tr>
+      <tr>
+        <td><strong>6 Months to 12 Months</strong></td>
+        <td>Free service or replacement under Buudy 1-Year Limited Warranty.</td>
+        <td>Covers manufacturing flaws, battery degradation exceeding normal operating limits, and LED emitter failure.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Fault remedies do not cover user-inflicted damage, dropping, water ingress, cosmetic wear, unauthorized disassembly, improper cleaning, or the use of incompatible high-voltage power adaptors.</p>
+
+<h2>4. Return Logistics Protocol</h2>
+<p>Returns will not be accepted without prior written authorisation. Unauthorized packages delivered to administrative addresses will be rejected.</p>
 <ol>
-  <li>The shipping origin.</li>
-  <li>The address printed on the package.</li>
-  <li>The Fulfillment Partner's address.</li>
-  <li>The xPage Drop corporate address.</li>
+  <li><strong>Submit a Request:</strong> Submit a return request to <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or open an inquiry in the Whop Resolution Center within the relevant statutory window.</li>
+  <li><strong>Evidence Submission:</strong> For change-of-mind returns (unopened items), provide photographs showing the unbroken condition of all factory seals and shrink-wrap. For fault claims, provide a detailed description and a video showing the device failing to function.</li>
+  <li><strong>RMA Issuance:</strong> Upon approval, an official Return Merchandise Authorisation (RMA) Number and designated Canadian consolidation returns depot address will be provided.</li>
+  <li><strong>Shipping Costs:</strong> For verified defective or misdescribed items, Buudy provides a prepaid Canadian return shipping label. For unopened change-of-mind cancellations, the customer is responsible for tracked return postage.</li>
 </ol>
-<p>Do not return products to any address without written authorization.</p>
 
-<h2>3. Order Cancellations</h2>
-<p>Cancellation requests may be submitted within:</p>
-<p><strong>Cancellation period:</strong> Cancellation requests must be submitted within 12 hours of placing the order. Cancellation is only possible if fulfillment has not started. Requests submitted within this period are not guaranteed once the order has entered processing.</p>
-<p>We will try to stop the order, but cancellation cannot be guaranteed after payment review, preparation, customization, packaging or fulfillment begins.</p>
-<p>If cancellation succeeds, the cancelled amount will be refunded to the original payment method. After fulfillment begins, you may need to receive the order and request a return.</p>
+<h2>5. Refund Settlement</h2>
+<p>Approved refunds are issued to the original payment method through Whop within <strong>fourteen (14) days</strong> of our depot receiving the returned item or receiving verifiable tracking proof of return delivery. Standard outbound shipping costs paid at checkout are refunded for statutory cancellations; express shipping add-ons are non-refundable.</p>
 
-<h2>4. Change-of-Mind Returns</h2>
-<p>Change-of-mind returns may be requested within:</p>
-<p><strong>Return window:</strong> Within 30 days of delivery</p>
-<p>Returned products must meet these conditions:</p>
-<p><strong>Return condition:</strong> Returns are accepted only for damaged, defective, incorrect or missing products. Customers must provide clear photo or video evidence and obtain return authorization before sending anything back. Items must not be returned to the address shown on the package. Change-of-mind, incorrect-size or personal-preference returns are not generally accepted.</p>
-<p>You may inspect a product as reasonably necessary, but you may be responsible for reduced value caused by use, damage or handling beyond normal inspection where permitted by law.</p>
+<h2>6. Order Cancellations Prior to Dispatch</h2>
+<p>Cancellation requests must be submitted to <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> within <strong>two (2) hours</strong> of placing the order. Once an order enters automated picking, testing, and packaging at the distribution facility, the dispatch process cannot be halted, and the order must be delivered before initiating an authorized unopened return.</p>
 
-<h2>5. Defective, Damaged or Incorrect Products</h2>
-<p>Contact support promptly if a product:</p>
-<ol>
-  <li>Is defective or unsafe.</li>
-  <li>Arrives damaged.</li>
-  <li>Is materially different from its description.</li>
-  <li>Is the wrong item, size, color or model.</li>
-  <li>Is missing parts or quantities.</li>
-  <li>Does not function as reasonably advertised.</li>
-</ol>
-<p>We may request reasonable evidence such as photographs, measurements, packaging information or a short video showing the issue.</p>
-<p>An unboxing video is not the only accepted evidence.</p>
-<p>Depending on the issue and applicable law, the remedy may include replacement, missing parts, repair, partial refund or full refund.</p>
+<h2>7. Dispute Resolution and Chargeback Abuse</h2>
+<p>Customers agree to submit billing, delivery, or product disputes to <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or open an inquiry in the Whop Resolution Center prior to approaching their payment card issuer. Both parties commit to an amicable resolution window of <strong>seven (7) business days</strong> before initiating payment claims.</p>
+<p>Submitting a payment dispute claiming non-delivery after verifiable carrier tracking establishes successful doorstep delivery, or claiming a refund while retaining unsealed, used hardware, constitutes an abusive dispute. In such events, Buudy reserves the right to provide transaction logs, IP history, signed proof of delivery, and signed terms to card schemes and recovery agencies.</p>
 
-<h2>6. Missing Items and Lost Shipments</h2>
-<p>Check whether your order was divided into separate packages before reporting a missing item.</p>
-<p>For a missing item, provide photographs of the received package, label and contents where reasonably available.</p>
-<p>If an item was omitted or a shipment is confirmed lost, we will provide a replacement, refund or other remedy required by law.</p>
-
-<h2>7. Delayed Shipments</h2>
-<p>Delivery estimates are not guarantees unless expressly stated otherwise.</p>
-<p>A reasonable delay does not automatically qualify for a refund. However, if delivery materially exceeds the promised period, you may receive a revised delivery option, cancellation or refund as required by law.</p>
-<p>You are not required to accept an indefinite delay.</p>
-
-<h2>8. Return Shipping Costs</h2>
-<p>The applicable return-cost rule is:</p>
-<p><strong>Return shipping:</strong> Return shipping costs are the customer's responsibility unless xPage Drop LLC confirms otherwise in writing. Products must not be returned without prior authorization and return instructions.</p>
-<p>For validated defective, damaged, incorrect or materially misdescribed products, we will provide a prepaid method, reimburse reasonable authorized return costs or provide another remedy required by law.</p>
-<p>Unauthorized or unnecessarily expensive return shipping may not be reimbursed.</p>
-
-<h2>9. Return Inspection</h2>
-<p>Returned products may be inspected before a refund is approved. The inspection may confirm:</p>
-<ol>
-  <li>The correct product was returned.</li>
-  <li>The product is complete.</li>
-  <li>The reported defect exists.</li>
-  <li>The product was not intentionally damaged or replaced.</li>
-  <li>The return conditions were followed.</li>
-</ol>
-<p>A lawful deduction may be made for missing parts, unauthorized damage or excessive use. Normal inspection will not remove mandatory return rights.</p>
-
-<h2>10. Non-Returnable Products</h2>
-<p>Subject to mandatory law, the following products may not qualify for change-of-mind returns:</p>
-<p><strong>Non-returnable products:</strong> Products are non-returnable when the request is based on a change of mind, personal preference, an incorrectly selected product, variant or size, an incorrect shipping address, minor cosmetic imperfections, packaging damage without product damage, or failure to complete customs clearance.</p>
-<p>This may include personalized, perishable, hygiene-sensitive or opened sealed products where legally permitted.</p>
-<p>A non-returnable classification does not remove rights relating to defective, unsafe, incorrect or materially misdescribed products.</p>
-
-<h2>11. Refunds</h2>
-<p>Approved refunds will normally be sent to the original payment method.</p>
-<p><strong>Refund initiation time:</strong> 5–10 business days</p>
-<p>Your bank or payment provider may require additional time to display the refund.</p>
-<p>Where the original payment method cannot receive the refund, another lawful method may be requested.</p>
-<p>Original delivery fees will be refunded where required by applicable law.</p>
-
-<h2>12. Partial Refunds and Replacements</h2>
-<p>A partial refund may be offered if you choose to keep a product with a minor issue.</p>
-<p>A replacement may be offered for defective, damaged, incorrect, missing or lost products. A materially different replacement will not be sent without your approval.</p>
-<p>A partial refund or replacement will not replace a remedy that applicable law requires.</p>
-
-<h2>13. Refused and Unauthorized Returns</h2>
-<p>Do not refuse a package or send a return without contacting support.</p>
-<p>Unauthorized returns may be refused, lost or delayed. You may be responsible for avoidable costs resulting from failure to follow reasonable return instructions.</p>
-<p>This does not remove mandatory consumer rights.</p>
-
-<h2>14. Fraudulent or Abusive Claims</h2>
-<p>We may reject a claim involving materially false or misleading information, intentional damage, substitution of products, false non-delivery statements or duplicate recovery attempts.</p>
-<p>Exercising a legitimate refund, consumer-protection or chargeback right is not abuse.</p>
-<p>We may provide relevant order, delivery, refund and communication records to payment providers or competent authorities when fraud is reasonably suspected.</p>
-
-<h2>15. Chargebacks</h2>
-<p>Contact xPage Drop support before opening a chargeback so the issue can be reviewed directly. This does not restrict legitimate chargeback rights.</p>
-<p>Do not seek both a completed refund and a chargeback for the same amount. An active chargeback may pause a separate refund while the payment provider controls the disputed funds.</p>
-
-<h2>16. Mandatory Rights</h2>
-<p>Mandatory cancellation, return, conformity, warranty and refund rights in your jurisdiction remain applicable.</p>
-<p>Where local law grants a longer return period, free return, legal guarantee or stronger remedy, that law prevails over conflicting parts of this Policy.</p>
-
-<h2>17. Contact and Return Warning</h2>
-<h3>xPage Drop LLC</h3>
+<h2>8. Administrative Corporate Warning</h2>
+<p>For return inquiries and customer support, contact:</p>
+<h3>Buudy Operations / xPage Drop LLC</h3>
 <p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
 <p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
 <p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
-<p>This is a corporate address only. It is not a warehouse, fulfillment center or standard return address. Do not send a return here or to the address printed on a package unless xPage Drop expressly provides that address in writing.</p>
+<p>Customer service hours: Monday to Friday, 9:00 AM to 5:00 PM EST</p>
+<p><strong>Please note:</strong> This is a corporate administrative address only. It is not a warehouse, fulfilment center, or return depot. Do not send products to this address unless expressly instructed in writing with an official RMA number.</p>
 `;
 
 export const returnPolicyHtml = refundPolicyHtml;
 export const refundReturnPolicyHtml = refundPolicyHtml;
 
 export const termsOfServiceHtml = `
-<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 1.0</p>
+<p><strong>Effective date:</strong> January 2026<br /><strong>Last updated:</strong> January 2026<br /><strong>Version:</strong> 2.0</p>
 
-<h2>1. About These Terms</h2>
-<p>These Terms apply when you visit or purchase from Buudy.</p>
-<p>In these Terms:</p>
+<h2>1. Contract Structure and Governing Law</h2>
+<p>These Terms of Service govern the access, browsing, and purchase of goods from Buudy through our online storefront (<a href="https://ca.buudy.com">ca.buudy.com</a>) and payment infrastructure hosted on Whop. The commercial contract is formed in the English language and governed by the laws of the <strong>Province of Ontario</strong> and the federal laws of Canada applicable therein. The courts of the Province of Ontario retain non-exclusive jurisdiction over any disputes arising under this agreement. By completing a purchase, you agree to these Terms, the Shipping Policy, and the Return, Refund, and Cancellation Policy.</p>
+
+<h2>2. Commercial Identity Disclosures</h2>
+<p>In compliance with Canadian commercial disclosure standards and e-commerce best practices, our trading details are:</p>
 <ul>
-  <li><strong>Store</strong> means Buudy.</li>
-  <li><strong>xPage Drop</strong> means xPage Drop LLC.</li>
-  <li><strong>Seller</strong> means the independent merchant operating the Store.</li>
-  <li><strong>Fulfillment Partner</strong> means a third-party supplier, manufacturer, warehouse or carrier.</li>
-  <li><strong>You</strong> means the buyer.</li>
-  <li><strong>We, us and our</strong> mean the Store and, where it handles the transaction, xPage Drop.</li>
+  <li><strong>Trading Brand:</strong> Buudy</li>
+  <li><strong>Web Domain:</strong> ca.buudy.com (or buudy.com)</li>
+  <li><strong>Checkout &amp; MoR Platform:</strong> Whop Inc.</li>
+  <li><strong>Customer Support Desk:</strong> <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></li>
+  <li><strong>Support Hours:</strong> Monday to Friday, 9:00 AM &ndash; 5:00 PM EST</li>
+  <li><strong>Administrative Corporate Address:</strong> Buudy Operations / xPage Drop LLC, 131 Continental Dr Suite 305, Newark, DE 19713, United States. (Corporate administrative office only; customer returns sent to this address cannot be processed).</li>
 </ul>
-<p>The Store is operated by an independent Seller. xPage Drop provides customer support and may handle checkout, payments, fraud screening, refunds, order administration and fulfillment coordination.</p>
-<p>The party identified as the merchant at checkout or in your order confirmation is your contractual seller. Where no separate merchant is identified, xPage Drop is the merchant of record for the transaction.</p>
 
-<h2>2. Eligibility and Store Use</h2>
-<p>You must have the legal capacity to place an order. Age-restricted products may only be purchased by buyers who meet the applicable age requirements. You must not:</p>
-<ol>
-  <li>Use false identity, payment or delivery information.</li>
-  <li>Place fraudulent or unauthorized orders.</li>
-  <li>Interfere with the Store's operation or security.</li>
-  <li>Use the Store for unlawful activity.</li>
-  <li>Evade geographic, age, sanctions or product restrictions.</li>
-  <li>Copy, scrape or commercially reuse Store content without permission.</li>
-</ol>
-<p>We may restrict access or cancel orders where fraud, abuse or unlawful activity is reasonably suspected.</p>
+<h2>3. Orders, Pricing, and Formation</h2>
+<p>Order submissions through the Whop checkout represent a binding offer to buy. Legal contract formation occurs upon parcel dispatch and the issuance of a Dispatch Confirmation containing carrier tracking data.</p>
+<p>Displayed prices are in <strong>Canadian Dollars (CAD / CA$)</strong>, inclusive of applicable Canadian GST/HST and import clearance under <strong>Delivered Duty Paid (DDP)</strong> terms. We reserve the right to cancel orders arising from clerical, server, or typographical pricing errors prior to dispatch.</p>
 
-<h2>3. Products</h2>
-<p>We aim to present product descriptions, photographs, sizes, colors and specifications accurately. Minor differences may occur because of screen settings, lighting, manufacturing batches, packaging changes or manual measurements. These differences do not affect your rights where a product is defective, unsafe, incorrect or materially different from its description.</p>
-<p>You are responsible for reviewing product dimensions, compatibility, warnings and usage instructions before ordering.</p>
-<p>Product reviews and promotional content do not create guarantees beyond the product description, any express warranty and rights provided by law.</p>
+<h2>4. Product Intended Use and Non-Medical Disclaimer</h2>
+<p>The Buudy LED Face Mask and Buudy LED Torch are personal cosmetic wellness appliances designed solely to support aesthetic skin appearance, smoothness, and tone.</p>
+<p><strong>Explicit Non-Medical Disclaimer:</strong> The products sold by Buudy are <strong>not medical devices</strong> as defined under the Health Canada Medical Devices Regulations. They are not engineered, licensed, or intended to diagnose, treat, prevent, or cure any dermatological pathology, illness, clinical acne, or medical disorder. The Skincare Quiz, mobile companion tools, and website content provide general cosmetic guidance, not professional healthcare or medical advice. Consult a licensed medical practitioner before using light therapy if you are pregnant, experience photosensitive epilepsy, or take light-sensitizing medication.</p>
 
-<h2>4. Prices, Currency and Taxes</h2>
-<p>Prices and the transaction currency are shown before checkout.</p>
-<p>Your bank or payment provider may apply currency-conversion or international transaction fees. These charges are not controlled by the Store or xPage Drop.</p>
-<p>Applicable sales taxes may be collected at checkout. Customs duties, import taxes or brokerage charges will be handled according to the rule shown before purchase:</p>
-<p><strong>Customs and duties:</strong> Orders above €150 may be subject to customs duties and import taxes, payable by the customer upon delivery.</p>
+<h2>5. Limitation of Liability</h2>
+<p>To the maximum extent permitted under Canadian law, Buudy's aggregate commercial liability relating to any order shall not exceed the total purchase price paid for the product. Nothing in these Terms shall limit or exclude liability for gross negligence, intentional misconduct, fraudulent misrepresentation, or any statutory consumer right protected under Canadian provincial consumer protection legislation that cannot be waived by contract.</p>
 
-<h2>5. Orders</h2>
-<p>Submitting an order is an offer to purchase. Receiving an order-confirmation email means that the order was received, not necessarily that it was finally accepted. Orders may be reviewed for:</p>
-<ol>
-  <li>Payment authorization.</li>
-  <li>Fraud or chargeback risk.</li>
-  <li>Product availability.</li>
-  <li>Pricing or technical errors.</li>
-  <li>Delivery restrictions.</li>
-  <li>Sanctions or legal restrictions.</li>
-</ol>
-<p>We may reject or cancel an order for a legitimate reason. If payment has already been collected for a cancelled order, the affected amount will be refunded.</p>
-<p>A materially different replacement will not be sent without your approval.</p>
+<h2>6. Dispute Resolution and Chargeback Abuse</h2>
+<p>Customers agree to submit billing, delivery, or product disputes to <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or open an inquiry in the Whop Resolution Center prior to approaching their payment card issuer. Both parties commit to an amicable resolution window of <strong>seven (7) business days</strong> before initiating payment claims.</p>
+<p>Submitting a payment dispute claiming non-delivery after verifiable carrier tracking establishes successful doorstep delivery, or claiming a refund while retaining unsealed, used hardware, constitutes an abusive dispute. In such events, Buudy reserves the right to provide transaction logs, IP history, signed proof of delivery, and signed terms to card schemes and recovery agencies.</p>
 
-<h2>6. Pricing Errors and Availability</h2>
-<p>We may correct obvious pricing, product or availability errors before accepting an order. If a product becomes unavailable, we may:</p>
-<ol>
-  <li>Cancel and refund the affected item.</li>
-  <li>Offer an alternative for your approval.</li>
-  <li>Ask whether you accept a revised fulfillment date.</li>
-</ol>
+<h2>7. Mandatory Consumer Rights</h2>
+<p>Mandatory consumer rights under Canadian provincial and federal legislation remain applicable. If any term in this agreement conflicts with a statutory right that cannot legally be waived, the mandatory Canadian statutory provision will prevail.</p>
 
-<h2>7. Payments</h2>
-<p>By placing an order, you authorize the displayed amount to be charged through the selected payment method.</p>
-<p>Payment authorization or capture does not guarantee order acceptance.</p>
-<p>Payment processing is governed by the Payment and Billing Policy.</p>
+<h2>8. Intellectual Property &amp; Permitted Use</h2>
+<p>All storefront software, branding, imagery, visual design, and written content belong to Buudy and its licensors. Content is provided solely for personal, non-commercial shopping purposes.</p>
 
-<h2>8. Shipping, Returns and Refunds</h2>
-<p>Processing and delivery estimates are shown on the product page, at checkout or in the Shipping and Delivery Policy.</p>
-<p>Returns, cancellations and refunds are governed by the Returns, Refunds and Cancellations Policy. You must contact xPage Drop support and receive written authorization before returning a product.</p>
-
-<h2>9. Intellectual Property</h2>
-<p>Store software, branding, photographs, designs, text and other content may belong to the Store, xPage Drop, manufacturers or licensors.</p>
-<p>You may use Store content only for personal shopping purposes.</p>
-<p>Intellectual-property complaints must be sent to <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a> and include sufficient information to identify the protected work and disputed content.</p>
-
-<h2>10. Liability</h2>
-<p>Nothing in these Terms excludes liability or consumer rights that cannot legally be excluded.</p>
-<p>To the maximum extent permitted by law, we are not responsible for indirect or unforeseeable losses arising from a consumer purchase.</p>
-<p>For claims that may legally be limited, total liability relating to an order will not exceed the amount paid for the affected product and its associated shipping charge.</p>
-
-<h2>11. Governing Law and Complaints</h2>
-<p>These Terms are governed by Delaware law, except where mandatory law in your country or state provides protections or dispute rights that cannot be removed by contract.</p>
-<p>Before starting a formal dispute, contact:</p>
-<p><a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a> or <a href="/pages/contact-us">Contact Us</a></p>
-<p>This does not prevent you from contacting a payment provider, regulator, consumer authority or court where permitted by law.</p>
-
-<h2>12. Mandatory Rights</h2>
-<p>Mandatory consumer rights in your jurisdiction remain applicable. If these Terms conflict with a right that cannot legally be waived, the mandatory right will prevail.</p>
-
-<h2>13. Contact</h2>
-<p>Customer support for this Store is administered by xPage Drop.</p>
-<h3>xPage Drop LLC</h3>
+<h2>9. Administrative Contact</h2>
+<p>For questions or support regarding these Terms of Service, contact:</p>
+<h3>Buudy Operations / xPage Drop LLC</h3>
 <p>131 Continental Dr Suite 305, Newark, DE 19713, United States</p>
 <p>Email: <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a></p>
 <p>Contact form: <a href="/pages/contact-us">Contact Us</a></p>
-<p>This is a corporate address only. It is not a warehouse, fulfillment center or return address. Do not send products to this address unless xPage Drop expressly authorizes it in writing.</p>
+<p>Customer service hours: Monday to Friday, 9:00 AM to 5:00 PM EST</p>
+<p><strong>Please note:</strong> This is a corporate administrative address only. It is not a warehouse, fulfilment center, or return depot. Customer returns sent to this address cannot be processed.</p>
 `;
 
 export const cookiesPolicyHtml = `
 <p><strong>What are cookies?</strong></p>
-<p>Cookies are small text files that are placed on your computer by websites that you visit. Our site and our partners use cookies to enhance your experience, analyze traffic and for ad personalization and measurement. You can restrict or block cookies using your browser settings.</p>
+<p>Cookies are small text files that are placed on your computer or mobile device by websites that you visit. Our website (<a href="https://ca.buudy.com">ca.buudy.com</a>) and our authorized service partners use cookies to enhance your browsing experience, remember your preferences, analyse web traffic, and support advertising measurement. You can manage or disable cookies using your browser settings.</p>
 
 <h2>How to manage cookies</h2>
-<p>Some cookies are strictly necessary to allow you to use the website and its features, such as storing items in your basket. Without these cookies these features cannot be provided which may impair the functionality of the website.</p>
-<p>You can select the cookies you would like this website to store on your device by changing your browser settings. Details on how to do this in each browser can be found on the ICO website:</p>
-<p><a href="https://ico.org.uk/your-data-matters/online/cookies/">https://ico.org.uk/your-data-matters/online/cookies/</a></p>
-<p>You can install a browser add-on to opt-out of Google Analytics across all websites:</p>
-<p><a href="https://tools.google.com/dlpage/gaoptout">https://tools.google.com/dlpage/gaoptout</a></p>
+<p>Some cookies are strictly necessary to allow you to navigate the website and use essential features, such as maintaining items in your shopping bag and securely completing checkout through Whop. Without these essential cookies, core e-commerce functions cannot be provided.</p>
+<p>You can adjust the cookies this website stores on your device by modifying your browser settings. You can also opt out of Google Analytics measurement across all websites by installing the Google Analytics Opt-out Browser Add-on:</p>
+<p><a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a></p>
 
-<h2>Types of cookies</h2>
+<h2>Types of cookies we use</h2>
 <ul>
-  <li><strong>First-party cookies:</strong> Set by the website you have accessed to remember your preferences.</li>
-  <li><strong>Third-party cookies:</strong> Set by a website other than the one you are accessing.</li>
-  <li><strong>Session cookies:</strong> Temporary cookies deleted when you close your browser.</li>
-  <li><strong>Persistent cookies:</strong> Remain on your device until erased or expired.</li>
+  <li><strong>First-party cookies:</strong> Set directly by our website to maintain session security, shopping basket state, and currency preferences.</li>
+  <li><strong>Third-party cookies:</strong> Set by trusted technology partners (such as Whop, Google, and security providers) for payment processing, analytics, and fraud detection.</li>
+  <li><strong>Session cookies:</strong> Temporary cookies that expire and are automatically deleted when you close your browser.</li>
+  <li><strong>Persistent cookies:</strong> Remain on your device for a defined duration or until manually deleted to preserve preferences across return visits.</li>
 </ul>
 
-<h2>Cookies used on our website</h2>
-<p><strong>Google Analytics:</strong> Collects information in anonymous form about how visitors use our site.</p>
-<p><strong>Google Ads:</strong> Improves advertising relevancy and reporting.</p>
-<p><strong>Google reCAPTCHA:</strong> Enhances security and fraud prevention.</p>
+<h2>Specific services used on our storefront</h2>
+<p><strong>Whop Checkout &amp; Security:</strong> Facilitates secure, encrypted payment processing, fraud screening, and session state during checkout.</p>
+<p><strong>Google Analytics:</strong> Aggregates anonymized statistical data concerning visitor behaviour, browsing pathways, and site performance.</p>
+<p><strong>Google Ads:</strong> Measures campaign efficacy and supports relevant advertising delivery.</p>
+<p><strong>Google reCAPTCHA:</strong> Protects our storefront against automated spam, malicious bots, and credential stuffing attacks.</p>
+
+<h2>Contact Us</h2>
+<p>For inquiries regarding our use of cookies or privacy practices, please contact our support desk at <a href="mailto:support@buudy.co.uk">support@buudy.co.uk</a>.</p>
 `;
