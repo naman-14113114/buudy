@@ -8,9 +8,11 @@ export function ProductHero({
   galleryVariant = product.template === "mask" || product.template === "torch"
     ? "omnilux"
     : "default",
+  isHalloween = false,
 }: {
   product: Product;
   galleryVariant?: "default" | "omnilux";
+  isHalloween?: boolean;
 }) {
   return (
     <section
@@ -43,7 +45,7 @@ export function ProductHero({
           )}
         </div>
         <div className="w-full [overflow-anchor:none]">
-          <GiftBundle product={product} />
+          <GiftBundle product={product} isHalloween={isHalloween} />
         </div>
       </div>
     </section>

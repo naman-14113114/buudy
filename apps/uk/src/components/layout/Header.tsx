@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import { primaryNavigation, secondaryNavigation } from "@/data/navigation";
@@ -12,6 +13,8 @@ export function Header() {
   const { totals, openCart } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuMounted, setMobileMenuMounted] = useState(false);
+  const pathname = usePathname();
+  const isHalloween = pathname === "/products/buudy-7-colour-led-mask" || pathname === "/products/buudy-7-colour-led-mask/";
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const openMobileMenu = () => {
@@ -121,8 +124,9 @@ export function Header() {
             height={74}
             priority
             sizes="(min-width: 1280px) 180px, 140px"
-            src="/media/products/buudy-led-mask/images/ChatGPT Image May 31, 2026, 12_10_21 AM.png"
+            src="/media/products/buudy-led-mask/images/ChatGPT%20Image%20May%2031%2C%202026%2C%2012_10_21%20AM.png"
             width={220}
+            style={{ maxHeight: "46px", width: "auto" }}
           />
         </Link>
 
@@ -190,7 +194,7 @@ export function Header() {
                     height={74}
                     priority
                     sizes="150px"
-                    src="/media/products/buudy-led-mask/images/ChatGPT Image May 31, 2026, 12_10_21 AM.png"
+                    src="/media/products/buudy-led-mask/images/ChatGPT%20Image%20May%2031%2C%202026%2C%2012_10_21%20AM.png"
                     width={220}
                   />
                   <button

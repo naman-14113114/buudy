@@ -195,7 +195,7 @@ export function OrderTrackingPage() {
                   <AlertCircle size={18} />
                 </div>
                 <div className="space-y-0.5">
-                  <p className="text-sm font-bold text-[var(--plum)]">Tracking Notice</p>
+                  <p className="text-sm font-bold text-[var(--plum)]">Order Not Found</p>
                   <p className="text-xs sm:text-sm font-light text-[var(--muted)] leading-relaxed">
                     {error}
                   </p>

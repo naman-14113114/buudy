@@ -87,7 +87,7 @@ export function OrderTrackingPage() {
             setTrackingData(null);
             setError(
               json.message ||
-                "Unable to retrieve tracking information. Please check your tracking number and try again.",
+                "No Buudy order found matching this tracking number. Please check your tracking number and try again.",
             );
           }
         }
@@ -195,7 +195,7 @@ export function OrderTrackingPage() {
                   <AlertCircle size={18} />
                 </div>
                 <div className="space-y-0.5">
-                  <p className="text-sm font-bold text-[var(--plum)]">Tracking Notice</p>
+                  <p className="text-sm font-bold text-[var(--plum)]">Order Not Found</p>
                   <p className="text-xs sm:text-sm font-light text-[var(--muted)] leading-relaxed">
                     {error}
                   </p>

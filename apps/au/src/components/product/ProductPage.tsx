@@ -17,15 +17,18 @@ import {
   DeferredWavelengthSelector,
 } from "./DeferredClientSections";
 import { TrustBadges } from "./TrustBadges";
+import { HalloweenOverlay } from "./HalloweenOverlay";
 
 export function ProductPage({
   product,
   variant,
   galleryVariant = "default",
+  isHalloween = false,
 }: {
   product: Product;
   variant?: string;
   galleryVariant?: "default" | "omnilux";
+  isHalloween?: boolean;
 }) {
   if (product.template === "torch") {
     return <TorchProductPage product={product} />;
@@ -36,8 +39,9 @@ export function ProductPage({
   }
 
   return (
-    <>
-      <ProductHero product={product} galleryVariant={galleryVariant} />
+    <div className="relative">
+      {isHalloween && <HalloweenOverlay />}
+      <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} />
       <DeferredVideoReviews />
       <TrustBadges />
       {/* <FeatureGrid /> */}
@@ -53,6 +57,6 @@ export function ProductPage({
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
       <StickyAddToCart product={product} />
-    </>
+    </div>
   );
 }

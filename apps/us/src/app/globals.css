@@ -351,6 +351,60 @@ img[data-buudy-image-loading="true"] {
   }
 }
 
+/* ── Halloween Theme Animations ── */
+
+/* Spider dangle animation */
+@keyframes halloween-spider-dangle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(4px) rotate(2deg); }
+  75% { transform: translateY(-2px) rotate(-1deg); }
+}
+
+.halloween-spider-dangle {
+  animation: halloween-spider-dangle 4s ease-in-out infinite;
+}
+
+/* Bat floating animations */
+@keyframes halloween-bat-float-1 {
+  0%, 100% { transform: translate(0, 0) scaleX(1); }
+  25% { transform: translate(15px, -8px) scaleX(-1); }
+  50% { transform: translate(30px, 3px) scaleX(-1); }
+  75% { transform: translate(10px, -5px) scaleX(1); }
+}
+
+@keyframes halloween-bat-float-2 {
+  0%, 100% { transform: translate(0, 0); }
+  30% { transform: translate(-12px, -6px); }
+  60% { transform: translate(-25px, 4px); }
+  80% { transform: translate(-8px, -3px); }
+}
+
+@keyframes halloween-bat-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(8px, -10px) scale(1.1); }
+  66% { transform: translate(-5px, 5px) scale(0.95); }
+}
+
+.halloween-bat-float-1 { animation: halloween-bat-float-1 6s ease-in-out infinite; }
+.halloween-bat-float-2 { animation: halloween-bat-float-2 7s ease-in-out infinite; }
+.halloween-bat-float-3 { animation: halloween-bat-float-3 5s ease-in-out infinite; }
+
+/* Ghost floating */
+@keyframes halloween-ghost-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.18; }
+  50% { transform: translateY(-15px) rotate(5deg); opacity: 0.25; }
+}
+
+.halloween-ghost-float { animation: halloween-ghost-float 5s ease-in-out infinite; }
+
+/* Pumpkin pulse - crisp scale without blur filters */
+@keyframes halloween-pumpkin-glow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+.halloween-pumpkin-glow { animation: halloween-pumpkin-glow 3s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

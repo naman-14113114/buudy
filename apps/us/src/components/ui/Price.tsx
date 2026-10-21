@@ -9,6 +9,7 @@ type PriceProps = {
   currency?: string;
   size?: "sm" | "lg";
   invert?: boolean;
+  hideDiscount?: boolean;
 };
 
 export function Price({
@@ -17,6 +18,7 @@ export function Price({
   currency = market.currency,
   size = "lg",
   invert,
+  hideDiscount,
 }: PriceProps) {
   const off = compareAtCents ? percentOff(priceCents, compareAtCents) : 0;
 
@@ -40,7 +42,7 @@ export function Price({
           {formatMoney(compareAtCents, currency)}
         </span>
       ) : null}
-      {off > 0 ? (
+      {off > 0 && !hideDiscount ? (
         <span
           className={`buudy-mono rounded-full bg-[rgba(184,149,86,.26)] px-3 py-2 ${
             invert ? "text-[var(--cream)]" : "text-[var(--plum)]"

@@ -32,6 +32,7 @@ import { Button } from "@/components/ui/Button";
 import { Price } from "@/components/ui/Price";
 import { useCart } from "@/components/cart/CartProvider";
 import { ProductDetailsAccordion } from "./ProductDetailsAccordion";
+import { HalloweenSaleBadge } from "./HalloweenOverlay";
 
 function useCountdown(seconds: number) {
   const [remaining, setRemaining] = useState(seconds);
@@ -102,7 +103,7 @@ const keyBenefitIcons = [
   Waves,
 ];
 
-export function GiftBundle({ product }: { product: Product }) {
+export function GiftBundle({ product, isHalloween = false }: { product: Product; isHalloween?: boolean }) {
   const { addProduct } = useCart();
   const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
@@ -237,12 +238,14 @@ export function GiftBundle({ product }: { product: Product }) {
         </span>
       </div>
 
-      <div className="mt-4 flex flex-col gap-2.5">
+      <div className="mt-4 flex flex-wrap items-center gap-3">
         <Price
           compareAtCents={product.compareAtCents}
           currency={product.currency}
           priceCents={product.priceCents}
+          hideDiscount={isHalloween}
         />
+        {isHalloween && <HalloweenSaleBadge />}
       </div>
 
       {/* Premium Compact Bullet Points List */}
@@ -405,7 +408,7 @@ export function GiftBundle({ product }: { product: Product }) {
         <section className="mt-8" id="free-gifts">
           <div className="text-center mb-8 flex flex-col items-center">
             <h3 className="buudy-display text-3xl font-medium text-[var(--plum)]">
-              Autumn Glow Sale
+              {isHalloween ? "Halloween Free Gifts" : "Autumn Glow Sale"}
             </h3>
             <p className="buudy-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded bg-[rgba(184,149,86,.15)] px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--plum)]">
               <span className="buudy-display text-sm sm:text-base font-extrabold normal-case text-[var(--plum)]">
