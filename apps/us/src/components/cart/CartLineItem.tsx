@@ -2,10 +2,101 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Minus, Plus } from "lucide-react";
+import { ChevronDown, Minus, Plus } from "lucide-react";
+import { useState } from "react";
 import type { CartLine } from "@/lib/cart";
 import { formatMoney } from "@/lib/money";
 import { useCart } from "./CartProvider";
+
+const MASK_INCLUDED_ITEMS = [
+  {
+    name: "Premium Travel Box",
+    image: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-premium-travel-box-uk.webp",
+    alt: "Buudy 7 Colour LED Mask Premium Travel Box UK",
+  },
+  {
+    name: "Eyes Protection",
+    image: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-eyes-protection-uk.webp",
+    alt: "Buudy 7 Colour LED Mask Eyes Protection UK",
+  },
+  {
+    name: "USB-cable",
+    image: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-usb-cable-uk.webp",
+    alt: "Buudy 7 Colour LED Mask USB Cable UK",
+  },
+];
+
+function IncludedInTheBox({
+  items,
+}: {
+  items: { name: string; image: string; alt: string }[];
+}) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <div className="cart-line-included">
+      <button
+        type="button"
+        className="cart-line-included__btn"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+      >
+        <span>Included in the box</span>
+        <ChevronDown
+          size={14}
+          strokeWidth={2}
+          className={`cart-line-included__chevron${isOpen ? " is-open" : ""}`}
+        />
+      </button>
+
+      {isOpen && (
+        <div className="cart-line-included__grid">
+          {items.map((includedItem) => (
+            <div
+              key={includedItem.name}
+              className="cart-line-included__card"
+            >
+              <div
+                className="cart-line-included__thumb"
+                style={{
+                  width: "100%",
+                  aspectRatio: "1 / 1",
+                  background: "#ffffff",
+                  border: "1px solid var(--border)",
+                  borderRadius: "10px",
+                  padding: 0,
+                  overflow: "hidden",
+                  boxSizing: "border-box",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img
+                  src={includedItem.image}
+                  alt={includedItem.alt}
+                  loading="lazy"
+                  width={76}
+                  height={76}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                    borderRadius: "9px",
+                  }}
+                />
+              </div>
+              <span className="cart-line-included__label">
+                {includedItem.name}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function CartLineItem({ line }: { line: CartLine }) {
   const { setQuantity } = useCart();
@@ -19,6 +110,15 @@ export function CartLineItem({ line }: { line: CartLine }) {
     line.title.toLowerCase().includes("ebook") ||
     line.title.toLowerCase().includes("e-book");
 
+  const isMask =
+    line.type === "product" &&
+    !isTorch &&
+    !isEbook &&
+    (line.productId === "buudy-led-mask" ||
+      line.id === "buudy-led-mask" ||
+      line.slug === "buudy-led-mask" ||
+      line.title.toLowerCase().includes("mask"));
+
   const itemHref = isTorch
     ? "/products/red-light-torch"
     : isEbook
@@ -28,7 +128,7 @@ export function CartLineItem({ line }: { line: CartLine }) {
     : undefined;
 
   return (
-    <div className="flex gap-4 border-b border-[var(--border)] py-5">
+    <div className="flex items-start gap-4 border-b border-[var(--border)] py-5">
       {itemHref ? (
         <Link
           aria-label={`View ${line.title}`}
@@ -120,6 +220,8 @@ export function CartLineItem({ line }: { line: CartLine }) {
             </div>
           )}
         </div>
+
+        {isMask ? <IncludedInTheBox items={MASK_INCLUDED_ITEMS} /> : null}
       </div>
     </div>
   );

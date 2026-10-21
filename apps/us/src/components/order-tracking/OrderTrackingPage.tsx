@@ -17,6 +17,58 @@ import {
 } from "lucide-react";
 import type { TrackingData } from "@/lib/order-tracking";
 
+// Client-side text sanitizer ensuring no origin country codes (CN / China) are visible to customers
+function cleanTrackingText(text?: string): string {
+  if (!text) return "";
+  let cleaned = text;
+
+  // 1. Remove parenthesized or bracketed CN / China / PRC / HK references
+  cleaned = cleaned.replace(/\s*\(\s*(?:CN|China|PRC|HK|Hong Kong)\s*\)/gi, "");
+  cleaned = cleaned.replace(/\s*\[\s*(?:CN|China|PRC|HK|Hong Kong)\s*\]/gi, "");
+
+  // 2. Remove common Chinese logistics cities / hubs parenthesized or bracketed
+  cleaned = cleaned.replace(
+    /\s*\(\s*(?:Shenzhen|Guangzhou|Yiwu|Hangzhou|Shanghai|Beijing|Dongguan|Foshan|Ningbo|Zhejiang|Guangdong)\s*\)/gi,
+    "",
+  );
+  cleaned = cleaned.replace(
+    /\s*\[\s*(?:Shenzhen|Guangzhou|Yiwu|Hangzhou|Shanghai|Beijing|Dongguan|Foshan|Ningbo|Zhejiang|Guangdong)\s*\]/gi,
+    "",
+  );
+
+  // 3. Remove trailing/leading or hyphenated ', CN', ' - CN', '/ CN', ' CN,'
+  cleaned = cleaned.replace(/\s*[,/-]\s*(?:CN|China|PRC)\b/gi, "");
+  cleaned = cleaned.replace(/\b(?:CN|China|PRC)\s*[,/-]\s*/gi, "");
+
+  // 4. Clean phrases like 'hub CN', 'facility CN', etc.
+  cleaned = cleaned.replace(/\b(?:hub|facility|center|terminal|depot|airport)\s+CN\b/gi, (m) =>
+    m.replace(/\s+CN\b/i, ""),
+  );
+
+  // 5. Replace Chinese cities with 'International'
+  cleaned = cleaned.replace(
+    /\b(?:Shenzhen|Guangzhou|Yiwu|Hangzhou|Shanghai|Beijing|Dongguan|Foshan|Ningbo|Zhejiang|Guangdong)\b/gi,
+    "International",
+  );
+
+  // 6. Replace phrases with China/PRC
+  cleaned = cleaned.replace(/\b(?:in|from|to|at)\s+China\b/gi, "at international facility");
+  cleaned = cleaned.replace(/\bChina\b/gi, "International Hub");
+  cleaned = cleaned.replace(/\bChinese\b/gi, "International");
+
+  // 7. Clean standalone CN (isolated uppercase word)
+  cleaned = cleaned.replace(/(?<=\s|^|\b)CN(?=\s|$|\b|[.,;:!?])/g, "");
+
+  // 8. Clean up extra punctuation/spacing
+  cleaned = cleaned.replace(/\(\s*\)/g, "");
+  cleaned = cleaned.replace(/\[\s*\]/g, "");
+  cleaned = cleaned.replace(/\s{2,}/g, " ");
+  cleaned = cleaned.replace(/\s+([.,;:!?])/g, "$1");
+  cleaned = cleaned.replace(/,\s*,/g, ",");
+
+  return cleaned.trim();
+}
+
 export function OrderTrackingPage() {
   const [query, setQuery] = useState("");
   const [trackingData, setTrackingData] = useState<TrackingData | null>(null);
@@ -433,14 +485,14 @@ export function OrderTrackingPage() {
                               event.completed ? "text-[var(--plum)]" : "text-[var(--muted)]"
                             }`}
                           >
-                            {event.title}
+                            {cleanTrackingText(event.title)}
                           </h4>
                           <span className="text-xs font-semibold text-[var(--gold)]">
                             {event.date}
                           </span>
                         </div>
                         <p className="mt-1 text-xs font-light leading-relaxed text-[var(--muted)] sm:text-sm">
-                          {event.description}
+                          {cleanTrackingText(event.description)}
                         </p>
                       </div>
                     </div>

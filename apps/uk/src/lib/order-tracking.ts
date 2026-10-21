@@ -278,7 +278,7 @@ for (const ord of INITIAL_BUUDY_ORDERS) {
       {
         title: "Free Buudy Red Light Torch",
         quantity: 1,
-        variant: "Targeted Therapy Gift (£69 Value)",
+        variant: "Targeted Therapy Gift (£70 Value)",
         image: "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
       },
     ],
@@ -386,7 +386,7 @@ async function fetchFromXPageLive(query: string, orderId?: string): Promise<Cach
                 {
                   title: "Free Buudy Red Light Torch",
                   quantity: 1,
-                  variant: "Targeted Therapy Gift (£69 Value)",
+                  variant: "Targeted Therapy Gift (£70 Value)",
                   image: "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
                 },
               ];
@@ -491,6 +491,60 @@ function formatUKOrderDate(timestampInSeconds?: number | null, fallbackDateStr?:
   return "Verified";
 }
 
+// -----------------------------------------------------------------------------
+// TEXT SANITIZATION (Removes origin country codes like CN/China for customer privacy)
+// -----------------------------------------------------------------------------
+export function sanitizeTrackingText(text: string): string {
+  if (!text) return "";
+  let cleaned = text;
+
+  // 1. Remove parenthesized or bracketed CN / China / PRC / HK references
+  cleaned = cleaned.replace(/\s*\(\s*(?:CN|China|PRC|HK|Hong Kong)\s*\)/gi, "");
+  cleaned = cleaned.replace(/\s*\[\s*(?:CN|China|PRC|HK|Hong Kong)\s*\]/gi, "");
+
+  // 2. Remove common Chinese logistics cities / hubs parenthesized or bracketed
+  cleaned = cleaned.replace(
+    /\s*\(\s*(?:Shenzhen|Guangzhou|Yiwu|Hangzhou|Shanghai|Beijing|Dongguan|Foshan|Ningbo|Zhejiang|Guangdong)\s*\)/gi,
+    "",
+  );
+  cleaned = cleaned.replace(
+    /\s*\[\s*(?:Shenzhen|Guangzhou|Yiwu|Hangzhou|Shanghai|Beijing|Dongguan|Foshan|Ningbo|Zhejiang|Guangdong)\s*\]/gi,
+    "",
+  );
+
+  // 3. Remove trailing/leading or hyphenated ', CN', ' - CN', '/ CN', ' CN,'
+  cleaned = cleaned.replace(/\s*[,/-]\s*(?:CN|China|PRC)\b/gi, "");
+  cleaned = cleaned.replace(/\b(?:CN|China|PRC)\s*[,/-]\s*/gi, "");
+
+  // 4. Clean phrases like 'hub CN', 'facility CN', etc.
+  cleaned = cleaned.replace(/\b(?:hub|facility|center|terminal|depot|airport)\s+CN\b/gi, (m) =>
+    m.replace(/\s+CN\b/i, ""),
+  );
+
+  // 5. Replace Chinese cities with 'International'
+  cleaned = cleaned.replace(
+    /\b(?:Shenzhen|Guangzhou|Yiwu|Hangzhou|Shanghai|Beijing|Dongguan|Foshan|Ningbo|Zhejiang|Guangdong)\b/gi,
+    "International",
+  );
+
+  // 6. Replace phrases with China/PRC
+  cleaned = cleaned.replace(/\b(?:in|from|to|at)\s+China\b/gi, "at international facility");
+  cleaned = cleaned.replace(/\bChina\b/gi, "International Hub");
+  cleaned = cleaned.replace(/\bChinese\b/gi, "International");
+
+  // 7. Clean standalone CN (isolated uppercase word)
+  cleaned = cleaned.replace(/(?<=\s|^|\b)CN(?=\s|$|\b|[.,;:!?])/g, "");
+
+  // 8. Clean up extra punctuation/spacing
+  cleaned = cleaned.replace(/\(\s*\)/g, "");
+  cleaned = cleaned.replace(/\[\s*\]/g, "");
+  cleaned = cleaned.replace(/\s{2,}/g, " ");
+  cleaned = cleaned.replace(/\s+([.,;:!?])/g, "$1");
+  cleaned = cleaned.replace(/,\s*,/g, ",");
+
+  return cleaned.trim();
+}
+
 function mapCJEvent(
   activity: string,
   location: string,
@@ -498,7 +552,10 @@ function mapCJEvent(
   lastMileNumber?: string,
   destinationCity?: string,
 ): { title: string; description: string; stage: TrackingStage } {
-  const loc = location ? ` (${location.trim().toUpperCase()})` : "";
+  const isChinaLoc = /^(CN|CHINA|PRC|HK|HONG KONG|SHENZHEN|GUANGZHOU|YIWU|HANGZHOU|SHANGHAI|BEIJING|DONGGUAN|FOSHAN|NINGBO|ZHEJIANG|GUANGDONG)$/i.test(
+    (location || "").trim(),
+  );
+  const loc = location && !isChinaLoc ? ` (${location.trim().toUpperCase()})` : "";
   const act = activity.trim();
   const dest = destinationCity || "UK Regional";
 
@@ -529,7 +586,7 @@ function mapCJEvent(
   if (/arrive at the destination airport/i.test(act)) {
     return {
       title: "Arrived at UK Destination Airport",
-      description: `Flight landed in the United Kingdom${loc}. Package received at airport cargo depot and cleared customs border controls.`,
+      description: `Flight landed in the United Kingdom. Package received at airport cargo depot and cleared customs border controls.`,
       stage: "IN_TRANSIT",
     };
   }
@@ -537,7 +594,7 @@ function mapCJEvent(
   if (/depart from the original airport/i.test(act)) {
     return {
       title: "In Transit via International Air Cargo",
-      description: `Air freight flight departed international logistics hub${loc} bound for the United Kingdom.`,
+      description: `Air freight flight departed international logistics hub bound for the United Kingdom.`,
       stage: "IN_TRANSIT",
     };
   }
@@ -545,7 +602,7 @@ function mapCJEvent(
   if (/export customs declaration completed/i.test(act)) {
     return {
       title: "Export Customs & Security Clearance Completed",
-      description: `Package completed international export inspection and airport security clearance${loc}.`,
+      description: `Package completed international export inspection and airport security clearance.`,
       stage: "IN_TRANSIT",
     };
   }
@@ -553,7 +610,7 @@ function mapCJEvent(
   if (/parcel is in transit/i.test(act)) {
     return {
       title: "In Transit to International Departure Hub",
-      description: `Package en route to cargo terminal for international air flight dispatch${loc}.`,
+      description: `Package en route to cargo terminal for international air flight dispatch.`,
       stage: "IN_TRANSIT",
     };
   }
@@ -561,7 +618,7 @@ function mapCJEvent(
   if (/departed from the original facility/i.test(act)) {
     return {
       title: "Dispatched from Logistics Center",
-      description: `Package sorted and dispatched from regional processing center${loc}.`,
+      description: `Package sorted and dispatched from regional processing center.`,
       stage: "IN_TRANSIT",
     };
   }
@@ -599,8 +656,8 @@ function mapCJEvent(
   }
 
   return {
-    title: act,
-    description: `Package status: ${act}${loc}.`,
+    title: sanitizeTrackingText(act),
+    description: sanitizeTrackingText(`Package status: ${act}${loc}.`),
     stage: "IN_TRANSIT",
   };
 }
@@ -707,8 +764,8 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
         }
 
         timelineEvents.push({
-          title: mapped.title,
-          description: mapped.description,
+          title: sanitizeTrackingText(mapped.title),
+          description: sanitizeTrackingText(mapped.description),
           date: formatCJEventDate(ev.eventTime),
           completed: true,
           stage: mapped.stage,
@@ -794,7 +851,7 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
         {
           title: "Free Buudy Red Light Torch",
           quantity: 1,
-          variant: "Targeted Therapy Gift (£69 Value)",
+          variant: "Targeted Therapy Gift (£70 Value)",
           image: "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
         },
       ],
