@@ -278,7 +278,7 @@ for (const ord of INITIAL_BUUDY_ORDERS) {
       {
         title: "Free Buudy Red Light Torch",
         quantity: 1,
-        variant: "Targeted Therapy Gift (AU$109 Value)",
+        variant: "Targeted Therapy Gift (AU$112 Value)",
         image: "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
       },
     ],
@@ -386,7 +386,7 @@ async function fetchFromXPageLive(query: string, orderId?: string): Promise<Cach
                 {
                   title: "Free Buudy Red Light Torch",
                   quantity: 1,
-                  variant: "Targeted Therapy Gift (AU$109 Value)",
+                  variant: "Targeted Therapy Gift (AU$112 Value)",
                   image: "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
                 },
               ];
@@ -882,7 +882,7 @@ export async function lookupOrderTracking(rawQuery: string): Promise<TrackingDat
         {
           title: "Free Buudy Red Light Torch",
           quantity: 1,
-          variant: "Targeted Therapy Gift (AU$109 Value)",
+          variant: "Targeted Therapy Gift (AU$112 Value)",
           image: "/images/products/buudy-red-torch/01-buudy-red-light-therapy-torch-main.webp",
         },
       ],

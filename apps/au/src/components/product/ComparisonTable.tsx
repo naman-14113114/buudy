@@ -282,7 +282,7 @@ export function ComparisonTable() {
           />
 
           <ComparisonRow
-            title="Free AU$109 Torch Included"
+            title="Free AU$112 Torch Included"
             subtitle="Targeted red light device with order"
             values={[<CheckIcon key="1" />, <CrossIcon key="2" />, <CrossIcon key="3" />, <CrossIcon key="4" />]}
           />
@@ -309,7 +309,7 @@ export function ComparisonTable() {
             title="Price"
             values={[
               <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">
-                <span className="line-through mr-1.5 opacity-60">AU$599</span>AU$299
+                <span className="line-through mr-1.5 opacity-60">AU$568</span>AU$283
               </span>,
               <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">AU$540</span>,
               <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">AU$580</span>,

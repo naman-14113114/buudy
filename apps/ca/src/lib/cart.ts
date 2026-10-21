@@ -26,15 +26,15 @@ export type CartState = {
 
 export const promoCode = "AUTO";
 export const manualPromoCode = "BUUDY10";
-export const manualPromoDiscountCents = 1000;
+export const manualPromoDiscountCents = 1400;
 
 export const VALID_PROMO_CODES: Record<
   string,
   { code: string; discountCents: number; type: "promo" | "gift_card" }
 > = {
-  BUUDY10: { code: "BUUDY10", discountCents: 1000, type: "promo" },
-  BUUDY: { code: "BUUDY10", discountCents: 1000, type: "promo" },
-  "9PQ28ENBLJ": { code: "9PQ28ENBLJ", discountCents: 2500, type: "gift_card" },
+  BUUDY10: { code: "BUUDY10", discountCents: 1400, type: "promo" },
+  BUUDY: { code: "BUUDY10", discountCents: 1400, type: "promo" },
+  "9PQ28ENBLJ": { code: "9PQ28ENBLJ", discountCents: 2800, type: "gift_card" },
 };
 
 export const emptyCart: CartState = {
@@ -217,7 +217,7 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
         subtitle: "Delivered digitally via email after checkout",
         compareAtCents:
           line.type === "gift"
-            ? line.compareAtCents || 2500
+            ? line.compareAtCents || 2700
             : line.compareAtCents,
       };
     }

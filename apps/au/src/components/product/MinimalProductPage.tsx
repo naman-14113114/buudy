@@ -386,7 +386,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
                             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] text-[var(--cream)] font-mono text-[11px] font-bold">
                               1
                             </span>
-                            <span>Select your AU$30 digital gift card.</span>
+                            <span>Select your AU$28 digital gift card.</span>
                           </li>
                           <li className="flex items-start gap-2.5">
                             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] text-[var(--cream)] font-mono text-[11px] font-bold">
@@ -404,7 +404,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
                             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] text-[var(--cream)] font-mono text-[11px] font-bold">
                               4
                             </span>
-                            <span>Recipient redeems the AU$30 voucher at checkout on any Buudy light therapy device or skincare accessory within 3 months of receipt.</span>
+                            <span>Recipient redeems the AU$28 voucher at checkout on any Buudy light therapy device or skincare accessory within 3 months of receipt.</span>
                           </li>
                         </ol>
                       ) : isPackageProtection ? (

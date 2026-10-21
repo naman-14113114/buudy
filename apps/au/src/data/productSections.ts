@@ -641,7 +641,7 @@ export const expertVideo = {
 export const comparison = {
   intro: "Here is a comparison, but really, there is no comparison.",
   columns: [
-    { label: "Buudy", price: "AU$299", featured: true },
+    { label: "Buudy", price: "AU$283", featured: true },
     { label: "Brand A", price: "AU$540" },
     { label: "Brand B", price: "AU$580" },
     { label: "Brand C", price: "AU$389" },
@@ -675,7 +675,7 @@ export const standardMaskFaqs: FAQItem[] = [
   {
     question: "Is Buudy the best LED face mask for Australian buyers?",
     answer:
-      "Buudy is designed for Australian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Australian launch offer is AU$299 with an AU$599 compare-at price, free tracked Australia delivery, a free glow kit while available, and an easy return and refund policy.",
+      "Buudy is designed for Australian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Australian launch offer is AU$283 with an AU$568 compare-at price, free tracked Australia delivery, a free glow kit while available, and an easy return and refund policy.",
   },
   {
     question: "Does this cover the neck?",
@@ -718,7 +718,7 @@ export const buudyLedMaskFaqs: FAQItem[] = [
   {
     question: "Is Buudy the best LED face mask for Australian buyers?",
     answer:
-      "Buudy is designed for Australian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Australian launch offer is AU$299 with an AU$599 compare-at price, free tracked Australia delivery, a free glow kit while available, and an easy return and refund policy.",
+      "Buudy is designed for Australian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Australian launch offer is AU$283 with an AU$568 compare-at price, free tracked Australia delivery, a free glow kit while available, and an easy return and refund policy.",
   },
   {
     question: "Does this cover the neck?",

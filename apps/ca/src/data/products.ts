@@ -104,7 +104,7 @@ export const fullLedMaskGallery: ProductImage[] = [
     alt: "Buudy 7 Colour LED Face Mask with included complimentary Red Light Torch treatment UK",
     badge: {
       title: "FREE BUUDY\nLED TORCH",
-      sub: "CA$99 targeted red light device\nincluded free with your order",
+      sub: "CA$111 targeted red light device\nincluded free with your order",
       position: "top-left",
       theme: "white",
     },
@@ -364,7 +364,7 @@ export const buudyLedMaskGallery: ProductImage[] = [
     alt: "Buudy 7 Colour LED Face Mask with included complimentary Red Light Torch treatment UK",
     badge: {
       title: "FREE BUUDY\nLED TORCH",
-      sub: "CA$99 targeted red light device\nincluded free with your order",
+      sub: "CA$111 targeted red light device\nincluded free with your order",
       position: "top-left",
       theme: "white",
     },
@@ -596,8 +596,8 @@ export const buudyMask: Product = {
   seoDescription:
     "Shop the Buudy LED Face Mask in Canada: 192 LEDs, red and blue light therapy, 830nm near-infrared mode, face plus neck coverage, cordless design, easy returns and refunds, and free glow kit.",
   currency: market.currency,
-  priceCents: 33700,
-  compareAtCents: 59900,
+  priceCents: 28000,
+  compareAtCents: 56100,
   rating: 4.9,
   reviewCount: 16000,
   customerCount: "16,000+",
@@ -617,7 +617,7 @@ export const buudyMask: Product = {
     {
       id: "buudy-led-torch",
       name: "Buudy LED Torch",
-      valueCents: 9900,
+      valueCents: 11100,
       image: productAsset("01-buudy-red-light-therapy-torch-main.webp", "buudy-red-torch"),
       label: "Limited edition",
       href: "/products/red-light-torch",
@@ -625,7 +625,7 @@ export const buudyMask: Product = {
     {
       id: "skincare-ebook",
       name: "Skincare E-Book",
-      valueCents: 2500,
+      valueCents: 2700,
       image: "/images/products/skincare-ebook/skincare-ebook.png",
       label: "Digital copy",
       href: "/products/skincare-ebook",
@@ -705,8 +705,8 @@ export const buudyRedTorch: Product = {
   seoDescription:
     "Portable red light therapy torch with 3 wavelengths, near infrared support, rechargeable battery, and targeted body and skin relief.",
   currency: market.currency,
-  priceCents: 9900,
-  compareAtCents: 19900,
+  priceCents: 11100,
+  compareAtCents: 22400,
   rating: 4.8,
   reviewCount: 16000,
   customerCount: "16,000+",
@@ -963,12 +963,12 @@ export const giftCardFaqs: FAQItem[] = [
   {
     question: "Does the Buudy Gift Card expire?",
     answer:
-      "Yes, the Buudy Gift Card expires 3 months from the day you receive it. The recipient can redeem their CA$25 balance site-wide anytime within this 3-month validity period.",
+      "Yes, the Buudy Gift Card expires 3 months from the day you receive it. The recipient can redeem their CA$28 balance site-wide anytime within this 3-month validity period.",
   },
   {
     question: "Can the gift card balance be used across multiple orders?",
     answer:
-      "Yes. If your total order amount is less than the CA$25 gift card balance, any remaining balance stays on the voucher code for future purchases within the 3-month validity window.",
+      "Yes. If your total order amount is less than the CA$28 gift card balance, any remaining balance stays on the voucher code for future purchases within the 3-month validity window.",
   },
 ];
 
@@ -1006,8 +1006,8 @@ export const buudySkincareEbook: Product = {
   seoDescription:
     "Download the official 40+ page Clinical Light Masterclass E-Book by Buudy: 7-colour photobiomodulation protocols, 830nm NIR guide, and active skincare chemistry.",
   currency: market.currency,
-  priceCents: 2500,
-  compareAtCents: 4900,
+  priceCents: 2700,
+  compareAtCents: 5400,
   rating: 0,
   reviewCount: 0,
   customerCount: "",
@@ -1068,13 +1068,13 @@ export const buudyGiftCard: Product = {
   shortDescription:
     "The ultimate gift of radiant glow. Instant electronic voucher delivery directly to your inbox. Valid for 3 months from date of receipt.",
   description:
-    "Give the gift of clinical wellness and radiant skin. The Buudy Official CA$25 Digital Gift Card is delivered instantly via email and is valid for 3 months from the date you receive it. Valid site-wide across the Buudy 7 Colour LED Face Mask, Buudy LED Torch, IPL Hair Removal, and all beauty accessories.",
-  seoTitle: "Buudy Official CA$25 Digital Gift Card | Instant Voucher Delivery",
+    "Give the gift of clinical wellness and radiant skin. The Buudy Official CA$28 Digital Gift Card is delivered instantly via email and is valid for 3 months from the date you receive it. Valid site-wide across the Buudy 7 Colour LED Face Mask, Buudy LED Torch, IPL Hair Removal, and all beauty accessories.",
+  seoTitle: "Buudy Official CA$28 Digital Gift Card | Instant Voucher Delivery",
   seoDescription:
-    "Give the gift of glowing skin. The Buudy CA$25 digital gift card is delivered instantly via email and valid for 3 months from receipt. Site-wide redemption.",
+    "Give the gift of glowing skin. The Buudy CA$28 digital gift card is delivered instantly via email and valid for 3 months from receipt. Site-wide redemption.",
   currency: market.currency,
-  priceCents: 2500,
-  compareAtCents: 5000,
+  priceCents: 2800,
+  compareAtCents: 5600,
   rating: 0,
   reviewCount: 0,
   customerCount: "",
@@ -1093,7 +1093,7 @@ export const buudyGiftCard: Product = {
     { label: "Expiry Date", value: "Expires 3 months from day received" },
     { label: "Redemption", value: "Site-wide on all Buudy products & kits" },
     { label: "Format", value: "16-Digit Secure Electronic Voucher Code" },
-    { label: "Value", value: "CA$25.00 Fixed Voucher Amount" },
+    { label: "Value", value: "CA$28.00 Fixed Voucher Amount" },
     { label: "Currency", value: "CAD ($)" },
   ],
   included: [
@@ -1111,7 +1111,7 @@ export const buudyGiftCard: Product = {
   keyBenefits: [
     "Gifting made effortless for birthdays, anniversaries, and holidays",
     "Allows recipient to choose their ideal light therapy device",
-    "Fixed CA$25 voucher amount for quick, easy checkout",
+    "Fixed CA$28 voucher amount for quick, easy checkout",
     "3-month validity window for flexible redemption",
   ],
   badges: [
@@ -1139,8 +1139,8 @@ export const buudyPackageProtection: Product = {
   seoDescription:
     "Protect your Buudy delivery against courier damage, loss, and theft. Instant zero-cost replacement and priority dispatch.",
   currency: market.currency,
-  priceCents: 400,
-  compareAtCents: 400,
+  priceCents: 600,
+  compareAtCents: 600,
   rating: 0,
   reviewCount: 0,
   customerCount: "",

@@ -1,15 +1,13 @@
 // Server-side adapter for the public XPage checkout used by Buudy's mask supplier.
 // No admin credentials or shared shopper sessions are used here.
 export const XPAGE = {
-  origin: "https://mask.buudy.com",
+  landingPageUrl:
+    "https://dfffe87d9d4b.myxpage.shop/landing-page/usbuudyled-en-MTc5MjU4NjMxMDM1MTc5NjIwOQ==?currency=AUD",
+  origin: "https://us.buudy.com",
   checkoutOrigin: "https://dfffe87d9d4b.myxpage.shop",
-  bundleId: "a2bc86b5-9455-4d66-aa55-d0bc8d865563",
-  regularOptionId: "a2bc86b5-9d77-49d0-80ae-228378b5e042",
-  promoOptionId: "a2be21a3-7bb0-4f74-8878-9dc88d152f25",
-  maskProductId: "a2c07c2a-bf3e-4b92-b7a3-0abd9217195b",
-  maskVariantId: "a2c07c3b-1aa2-457e-96ba-b2ae0bf2d3f7",
-  torchProductId: "a2bd4da0-e5f8-4b1e-a1af-e51e924915ad",
-  torchVariantId: "a2bd4db9-992d-4f1a-84b8-472d1e173efd",
+  bundleId: "a308e3c3-e85c-4d7a-ba75-380a9e2777cc",
+  regularOptionId: "a308e3c3-ef3b-40a4-9d17-ea12dbb256f5",
+  promoOptionId: "a308e3c4-09c7-4cbf-a226-59800cc5843e",
 } as const;
 
 export type CheckoutBundleOptions = {
@@ -18,24 +16,25 @@ export type CheckoutBundleOptions = {
   hasProtection?: boolean;
 };
 
-// 8 Verified Bundle Options on https://mask.buudy.com (bundleId: a2bc86b5-9455-4d66-aa55-d0bc8d865563)
+// 8 Verified Bundle Options on https://dfffe87d9d4b.myxpage.shop/landing-page/usbuudyled-en-MTc5MjU4NjMxMDM1MTc5NjIwOQ==?currency=AUD
+// bundleId: a308e3c3-e85c-4d7a-ba75-380a9e2777cc
 export const BUNDLE_OPTION_MAP = {
-  // Option 0: GET FREE BUUDY TORCH
-  none: "a2bc86b5-9d77-49d0-80ae-228378b5e042",
-  // Option 1: BUUDY10 + FREE TORCH
-  promo: "a2be21a3-7bb0-4f74-8878-9dc88d152f25",
-  // Option 4: BUUDY TORCH + FREE GIFT CARD
-  giftcard: "a304aafc-5a6f-42b9-bbb2-0407b5c7f533",
-  // Option 3: BUUDY10 + FREE GIFT CARD + FREE GIFTS
-  promo_giftcard: "a304aafc-5a2d-4e74-85b6-31bab91ffcfb",
-  // Option 6: FREE GIFTS + PACKAGE PROTECTION
-  protection: "a304b259-1296-44e4-b3c8-1723a3e9d8cb",
-  // Option 2: BUUDY10 + FREE GIFTS + PACKAGE PROTECTION
-  promo_protection: "a304aafc-4512-4393-827b-6d2c9358c9c2",
-  // Option 5: FREE GIFTS + GIFT CARD + PACKAGE PROTECTION
-  giftcard_protection: "a304aafc-6217-4a7d-a7af-8862d9fc6397",
-  // Option 7: FREE GIFTS + GIFT CARD + BUUDY10 + PACKAGE PROTECTION
-  promo_giftcard_protection: "a304b259-18b6-465d-bfaa-65daa91f21f6",
+  // Option 0: Regular (Mask + Torch + Ebook)
+  none: "a308e3c3-ef3b-40a4-9d17-ea12dbb256f5",
+  // Option 1: BUUDY10 promo (5% / AU$14)
+  promo: "a308e3c4-09c7-4cbf-a226-59800cc5843e",
+  // Option 2: BUUDY10 + Protection
+  promo_protection: "a308e3c4-18b0-410b-9391-cb6181fcb2e3",
+  // Option 3: BUUDY10 + Gift Card (15% / AU$42)
+  promo_giftcard: "a308e3c4-41e9-4027-9bda-53836340ca39",
+  // Option 4: Gift Card (10% / AU$28)
+  giftcard: "a308e3c4-55ec-4331-b42a-388ee8a6eb3c",
+  // Option 5: Gift Card + Protection
+  giftcard_protection: "a308e3c4-6faa-4f0a-804f-48d156337bfa",
+  // Option 6: Protection
+  protection: "a308e3c4-84d2-4852-8a99-f1ea0a0977ac",
+  // Option 7: BUUDY10 + Gift Card + Protection
+  promo_giftcard_protection: "a308e3c4-979b-4a4b-a69a-2ac8782fcd28",
 } as const;
 
 export function getOptionIdForFlags(options: CheckoutBundleOptions): string {
@@ -124,7 +123,7 @@ export function selectOffer(
   // Dynamic fallback: If supplier modified an ID, match dynamically by discount and protection presence
   if (!option) {
     const expectedDiscount =
-      (options.hasPromo ? 10 : 0) + (options.hasGiftCard ? 20 : 0);
+      (options.hasPromo ? 5 : 0) + (options.hasGiftCard ? 10 : 0);
     option = published.bundle.options.find((opt) => {
       const optDiscount = Number(opt.discount_amount || 0);
       const hasProtectionInOffered = opt.offered.some(
@@ -165,8 +164,10 @@ export function buildBundlePayload(
   for (const c of option.conditions) {
     const variantId =
       c.product?.variants?.find((v) => v.is_visible)?.id ||
-      c.product?.variants?.[0]?.id ||
-      XPAGE.maskVariantId;
+      c.product?.variants?.[0]?.id;
+    if (!variantId) {
+      throw new Error(`Variant missing for condition item ${c.id}`);
+    }
     const count = (c.quantity || 1) * quantity;
     conditions[c.id] = Array<string>(count).fill(variantId);
   }
@@ -175,8 +176,10 @@ export function buildBundlePayload(
   for (const o of option.offered) {
     const variantId =
       o.product?.variants?.find((v) => v.is_visible)?.id ||
-      o.product?.variants?.[0]?.id ||
-      XPAGE.torchVariantId;
+      o.product?.variants?.[0]?.id;
+    if (!variantId) {
+      throw new Error(`Variant missing for offered item ${o.id}`);
+    }
     const count = (o.quantity || 1) * quantity;
     offered[o.id] = Array<string>(count).fill(variantId);
   }
@@ -196,7 +199,7 @@ function cookieHeader(response: Response) {
 }
 
 async function loadPublishedOffer(fetcher: Fetcher) {
-  const url = new URL("/?currency=AUD", XPAGE.origin);
+  const url = new URL(XPAGE.landingPageUrl);
   const response = await fetcher(url, {
     cache: "no-store",
     redirect: "error",
@@ -207,13 +210,19 @@ async function loadPublishedOffer(fetcher: Fetcher) {
   return { published: parsePublishedOffer(await response.text()), cookie: cookieHeader(response), url };
 }
 
+const ALLOWED_ORIGINS = [
+  "https://us.buudy.com",
+  "https://dfffe87d9d4b.myxpage.shop",
+  "https://mask.buudy.com",
+];
+
 export function validateCheckoutUrl(href: unknown, token: unknown) {
   if (typeof href !== "string" || typeof token !== "string" || !/^[\da-f]{64}$/.test(token)) {
     throw new Error("XPage did not return a checkout session.");
   }
   const url = new URL(href);
   if (
-    (url.origin !== XPAGE.checkoutOrigin && url.origin !== XPAGE.origin) ||
+    !ALLOWED_ORIGINS.includes(url.origin) ||
     url.username ||
     url.password ||
     !url.pathname.endsWith(`/checkout/${token}`)
@@ -232,7 +241,7 @@ export async function createXpageCheckout(
   const { published, cookie, url: landingUrl } = await loadPublishedOffer(fetcher);
   const payload = buildBundlePayload(published, quantity, optionsOrPromo);
   // Do not retry this POST: a timeout may still have created an unpaid checkout.
-  const response = await fetcher(`${XPAGE.origin}/create-bundle-order`, {
+  const response = await fetcher(`${XPAGE.checkoutOrigin}/create-bundle-order`, {
     method: "POST",
     cache: "no-store",
     redirect: "error",
@@ -240,7 +249,7 @@ export async function createXpageCheckout(
     headers: {
       "content-type": "application/json",
       "X-CSRF-Token": published.csrf,
-      origin: XPAGE.origin,
+      origin: XPAGE.checkoutOrigin,
       referer: landingUrl.toString(),
       cookie: `xp_currency=AUD${cookie ? `; ${cookie}` : ""}`,
     },
@@ -256,7 +265,7 @@ export async function createXpageCheckout(
   const platformCheckoutUrl = validateCheckoutUrl(result.checkout_url, result.checkout_token);
   // The session is in the path. Do not copy optional provider query parameters
   // or fragments, which could reintroduce attribution into the browser handoff.
-  const checkoutUrl = new URL(platformCheckoutUrl.pathname, XPAGE.origin);
+  const checkoutUrl = new URL(platformCheckoutUrl.pathname, platformCheckoutUrl.origin);
   checkoutUrl.searchParams.set("currency", "AUD");
   return { checkoutUrl: checkoutUrl.toString(), checkoutToken: result.checkout_token };
 }
