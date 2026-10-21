@@ -641,7 +641,7 @@ export const expertVideo = {
 export const comparison = {
   intro: "Here is a comparison, but really, there is no comparison.",
   columns: [
-    { label: "Buudy", price: "$279", featured: true },
+    { label: "Buudy", price: "$337", featured: true },
     { label: "Brand A", price: "$490" },
     { label: "Brand B", price: "$530" },
     { label: "Brand C", price: "$359" },
@@ -675,7 +675,7 @@ export const standardMaskFaqs: FAQItem[] = [
   {
     question: "Is Buudy the best LED face mask for Canadian buyers?",
     answer:
-      "Buudy is designed for Canadian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Canada launch offer is CA$279 with a CA$559 compare-at price, free tracked Canada shipping, a free glow kit while available, and an easy return and refund policy.",
+      "Buudy is designed for Canadian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Canada launch offer is CA$337 with a CA$559 compare-at price, free tracked Canada shipping, a free glow kit while available, and an easy return and refund policy.",
   },
   {
     question: "Does this cover the neck?",
@@ -718,7 +718,7 @@ export const buudyLedMaskFaqs: FAQItem[] = [
   {
     question: "Is Buudy the best LED face mask for Canadian buyers?",
     answer:
-      "Buudy is designed for Canadian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Canada launch offer is CA$279 with a CA$559 compare-at price, free tracked Canada shipping, a free glow kit while available, and an easy return and refund policy.",
+      "Buudy is designed for Canadian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Canada launch offer is CA$337 with a CA$559 compare-at price, free tracked Canada shipping, a free glow kit while available, and an easy return and refund policy.",
   },
   {
     question: "Does this cover the neck?",

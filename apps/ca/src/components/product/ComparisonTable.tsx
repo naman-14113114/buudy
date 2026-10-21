@@ -309,7 +309,7 @@ export function ComparisonTable() {
             title="Price"
             values={[
               <span key="1" className="buudy-display font-bold text-base md:text-lg text-[var(--plum)]">
-                <span className="line-through mr-1.5 opacity-60">CA$559</span>CA$279
+                <span className="line-through mr-1.5 opacity-60">CA$559</span>CA$337
               </span>,
               <span key="2" className="buudy-display text-base md:text-lg text-[var(--muted)]">CA$490</span>,
               <span key="3" className="buudy-display text-base md:text-lg text-[var(--muted)]">CA$530</span>,
