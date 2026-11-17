@@ -63,7 +63,7 @@ export const features: Feature[] = [
   {
     title: "Certified Safety",
     kicker: "Expert Approved",
-    body: "Your safety is our priority. The Buudy LED Mask is Health Canada Approved and carries CE, FCC, and ROHS certifications. It is also endorsed by Dermatologists and Licensed Aestheticians who recognize it as a superior way to boost the efficacy of your existing skincare routine at home.",
+    body: "Your safety is our priority. The Buudy LED Mask carries CE, FCC, and ROHS certifications. It is also endorsed by Dermatologists and Licensed Aestheticians who recognize it as a superior way to boost the efficacy of your existing skincare routine at home.",
   },
   {
     title: "Buudy AI Companion App",
@@ -97,6 +97,138 @@ export const iplFeatures: Feature[] = [
     title: "Visible Results in 4 Weeks",
     kicker: "Clinically Proven",
     body: "Our high-energy IPL targets the hair follicle at the root, breaking the cycle of hair growth. With consistent use, you will see a noticeable reduction in hair growth in just 4 weeks, leading to permanently smooth, hair-free skin.",
+  },
+];
+
+export const serumFeatures: Feature[] = [
+  {
+    title: "100% Optical Permeability",
+    kicker: "Zero-Scattering Hydrogel Matrix",
+    body: "Unlike traditional serums loaded with silicones and oils that reflect up to 34% of therapeutic light, Buudy's 100% water-based matrix matches the refractive index of skin moisture (n ~ 1.33), allowing Red (630nm) and NIR (830nm) photons to penetrate directly into dermal fibroblasts.",
+  },
+  {
+    title: "Multi-Molecular Hyaluronic Acid (2%)",
+    kicker: "Deep Multi-Depth Dermal Plumping",
+    body: "Combines low, medium, and high molecular weight hyaluronic acids. Low weights penetrate deep into extracellular matrices to bind water, while high weights protect the stratum corneum from warmth dehydration during 10-minute phototherapy sessions.",
+  },
+  {
+    title: "Provitamin B5 & Sodium PCA",
+    kicker: "72-Hour Moisture Reservoir",
+    body: "Synergistic humectant complex draws in moisture from the air and locks it into intercellular lipid layers, relieving tight, dehydrated barriers and restoring supple elasticity without oiliness.",
+  },
+  {
+    title: "Organic White Tea & Sage",
+    kicker: "Antioxidant Barrier Defence",
+    body: "Enriched with certified organic White Tea and Sage botanical extracts to defend against environmental oxidative stress, soothe micro-inflammation, and keep skin calm and luminous.",
+  },
+  {
+    title: "Device & Diode Safe",
+    kicker: "Zero Diode Clouding",
+    body: "Completely oil-free, non-comedogenic, and non-sticky. Leaves zero greasy film on medical-grade silicone LED diodes and wipes clean in seconds with a damp cloth, safeguarding your LED mask investment.",
+  },
+  {
+    title: "ECOCERT COSMOS Certified",
+    kicker: "100% Natural Origin Formulation",
+    body: "Free from parabens, synthetic fragrances, silicones, and mineral oils. Formulated in Europe under strict ECOCERT COSMOS standards to calm sensitive skin barriers and prevent thermal redness flush.",
+  },
+];
+
+export const peptideSerumFeatures: Feature[] = [
+  {
+    title: "Bio-Fermented Hexapeptide-11",
+    kicker: "Cellular Collagen Synthesis",
+    body: "Powered by bio-fermented Hexapeptide-11, this advanced peptide communicates directly with dermal fibroblasts during the critical post-light window, accelerating structural collagen type I and III synthesis and smoothing expression lines.",
+  },
+  {
+    title: "Dipalmitoyl Hydroxyproline",
+    kicker: "Deep Wrinkle Remodelling & Firmness",
+    body: "A plant-derived hydroxyproline amino acid vector that penetrates deep into dermal architecture. It reinforces collagen fibres, inhibits enzymatic degradation of elastin, and visibly lifts and tightens facial contours.",
+  },
+  {
+    title: "Dual-Action Multi-Molecular HA",
+    kicker: "Multi-Depth Hydration Reservoir",
+    body: "Combines low and high molecular weight hyaluronic acids with Sodium PCA to draw moisture deep into intercellular matrices, replenishing volume and delivering immediate bouncy plumpness.",
+  },
+  {
+    title: "Organic Blueberry & Ginkgo Biloba",
+    kicker: "Antioxidant Barrier Defence",
+    body: "Rich in anthocyanins and flavonoids from certified organic Blueberry fruit and Ginkgo Biloba extracts. Neutralises environmental free radicals, boosts microcirculation, and protects newly formed collagen fibres.",
+  },
+  {
+    title: "Nourishing Jojoba & Strawberry Seed",
+    kicker: "Lightweight Barrier Lipid Restoration",
+    body: "Cold-pressed organic Jojoba and Strawberry seed oils restore vital skin lipids without heavy greasiness or pore congestion, locking in hydration and leaving a silky, velvet finish.",
+  },
+  {
+    title: "ECOCERT COSMOS Natural Certified",
+    kicker: "100% Natural Origin European Standard",
+    body: "Formulated under Europe's most stringent organic cosmetics standards. 100% cruelty-free, vegan, and free from synthetic parabens, artificial fragrances, silicones, and mineral oils.",
+  },
+];
+
+export const cleanserFeatures: Feature[] = [
+  {
+    title: "Sulphate-Free Micellar Cleansing",
+    kicker: "Zero-Strip Moisture Balance",
+    body: "Gentle plant-derived Coco-Glucoside and Cocamidopropyl Betaine surfactants create a delicate micro-foam that effortlessly dissolves excess sebum, environmental pollutants, and daily impurities without stripping the vital acid mantle.",
+  },
+  {
+    title: "Organic Mate Leaf Extract",
+    kicker: "Antioxidant & Blemish Soothing",
+    body: "Rich in bioactive polyphenols and caffeine, organic Ilex Paraguariensis (Mate) leaf extract actively calms micro-inflammation, defends against oxidative cellular stress, and clarifies congested pores for a noticeably calmer complexion.",
+  },
+  {
+    title: "Arctic Iceland Moss & Lichen",
+    kicker: "Natural Antimicrobial Defence",
+    body: "Sourced from pristine Nordic ecosystems, Cetraria Islandica and Usnea Barbata provide potent natural antibacterial lichen acids that help purge acne-triggering bacteria while establishing a protective, soothing moisture film.",
+  },
+  {
+    title: "Alpine Juniper Callus Stem Cells",
+    kicker: "Sebum & Pore Refining Matrix",
+    body: "Cultivated using sustainable plant biotechnology, Juniperus Communis callus extract delivers concentrated secondary metabolites that help regulate overactive sebaceous glands and visibly tighten enlarged, congested pores.",
+  },
+  {
+    title: "Natural Osmolytes (Glycerin & Sodium PCA)",
+    kicker: "Deep Intercellular Hydration",
+    body: "Infused with skin-identical physiological humectants that draw moisture deep into stratum corneum layers, ensuring skin emerges remarkably soft, supple, and hydrated after rinsing with zero tight, squeaky after-feel.",
+  },
+  {
+    title: "415nm Blue Light & LED Primer",
+    kicker: "Optimised Photon Penetration",
+    body: "Formulated specifically as the essential pre-light cleansing step. By clearing light-scattering surface lipids, dead cells, and cosmetic residues, it ensures 100% of 415nm blue and 630nm red therapeutic photons penetrate unimpeded into target dermal tissue.",
+  },
+];
+
+export const prebioticSerumFeatures: Feature[] = [
+  {
+    title: "2% Bioactive Prebiotics",
+    kicker: "Microbiome Barrier Fortification",
+    body: "Infused with a cosmeceutical-grade 2% concentration of Lactobacillus Ferment Lysate. Prebiotics nourish and balance beneficial skin microflora, reinforcing the natural cutaneous moisture barrier and calming reactivity against environmental aggressors.",
+  },
+  {
+    title: "Dual Multi-Molecular Hyaluronic Acid",
+    kicker: "Multi-Depth Weightless Plumping",
+    body: "Combines hydrolyzed low-molecular and high-molecular sodium hyaluronate. Deeply hydrates cellular matrices to plump fine lines, soothe tightness, and lock in all-day moisture without heaviness or sticky residue.",
+  },
+  {
+    title: "Physiological Osmolytes (Sodium PCA & Glycerin)",
+    kicker: "72-Hour Moisture Reservoir",
+    body: "Formulated with skin-identical natural moisturising factors (NMF) that bind environmental moisture into stratum corneum lipid bilayers, leaving sensitive and dehydrated skin feeling supple, soft, and refreshed.",
+  },
+  {
+    title: "100% Optical Transparency",
+    kicker: "Zero-Scattering LED Phototherapy Synergy",
+    body: "100% water-based fluid jelly matrix matches the natural refractive index of skin moisture (n ~ 1.33). Free of light-scattering silicones and heavy oils, allowing 100% of 630nm Red, 415nm Blue, and 830nm Near-Infrared photons to reach dermal targets unhindered.",
+  },
+  {
+    title: "Skin-Calibrated pH 4.5–5.1",
+    kicker: "Acid Mantle & Barrier Defence",
+    body: "Buffered to the physiological pH of healthy skin to sustain optimal microflora diversity, soothe redness, prevent moisture flaking, and maintain the protective lipid mantle.",
+  },
+  {
+    title: "ECOCERT COSMOS Natural Certified",
+    kicker: "99% Natural Origin European Standard",
+    body: "Formulated under Europe's most stringent organic cosmetics standards. 99% natural origin, 10% organic ingredients, 100% vegan, cruelty-free, and packaged in recyclable heavy glass with a precision PP #5 dropper.",
   },
 ];
 
@@ -263,6 +395,274 @@ export const transformations: Transformation[] = [
       "Use red light for 10 minutes four times a week after cleansing, followed by a barrier serum and non-comedogenic moisturiser.",
     experience:
       "After six weeks, Jennifer felt that her skin looked smoother and more even and felt noticeably softer.",
+  },
+];
+
+export const serumTransformations: Transformation[] = [
+  {
+    id: "serum-result-01",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-01.webp",
+    concern: "Dermal Hydration & Fine Line Smoothing",
+    title: "Remarkable hydration and line smoothing",
+    quote:
+      '"My skin felt parched and dull with noticeable surface creases. Within 4 weeks of pairing this gel with red light, the dry lines completely flattened out."',
+    name: "Clare M.",
+    fullName: "Clare Mitchell",
+    age: 46,
+    skinType: "Dehydrated, fine-lined mature skin",
+    routine:
+      "Apply 2 pumps of Double Hydration Boost Gel to clean skin morning and evening; pre-treat skin before 10-minute Buudy Red Light (630nm) sessions 4x weekly.",
+    experience:
+      "Clinical photographic evaluation at day 28 demonstrated significant stratum corneum rehydration, visual softening of perioral and forehead micro-creases, and restored cellular plumpness.",
+  },
+  {
+    id: "serum-result-02",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-02.webp",
+    concern: "Cheek Turgor & Plumpness",
+    title: "Visibly plumper cheeks and restored bounce",
+    quote:
+      '"The multi-molecular hyaluronic acid combined with red light therapy gave my cheek area back its youthful cushion and bounce."',
+    name: "Hannah S.",
+    fullName: "Hannah Scott",
+    age: 42,
+    skinType: "Normal to dry skin with loss of moisture cushion",
+    routine:
+      "2 pumps applied evenly over face and neck, followed by 10 minutes of Red & Near-Infrared phototherapy.",
+    experience:
+      "Lateral facial profiling revealed noticeable dermal redensification and improved surface turgor across the malar cheek area after 4 weeks of consistent application.",
+  },
+  {
+    id: "serum-result-03",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-03.webp",
+    concern: "Moisture Barrier Restoration & Deep Radiance",
+    title: "Deep moisture glow with zero congestion",
+    quote:
+      '"Finding a hydrating gel that doesn\'t pill or cause breakouts under phototherapy was impossible until this. My skin barrier feels completely renewed."',
+    name: "Amara D.",
+    fullName: "Amara Davies",
+    age: 38,
+    skinType: "Fitzpatrick Type V, moisture-depleted combination skin",
+    routine:
+      "Daily AM & PM application on damp skin followed by lightweight barrier cream, plus 4x weekly Buudy 630nm/830nm LED sessions.",
+    experience:
+      "8-week serial photography demonstrated substantial restoration of epidermal moisture retention, unified tone clarity, and a healthy lit-from-within radiant glow.",
+  },
+  {
+    id: "serum-result-04",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-04.webp",
+    concern: "Periorbital Hydration & Under-Eye Smoothing",
+    title: "Crow's feet look softer and deeply hydrated",
+    quote:
+      '"The fine crepiness under and around my eyes improved dramatically. The optical-grade gel lets every ray of red light sink in without reflection."',
+    name: "Rachel T.",
+    fullName: "Rachel Thompson",
+    age: 50,
+    skinType: "Dry, sensitive periorbital skin",
+    routine:
+      "Gentle press of 1 pump around eye contour and smile lines prior to 10-minute LED session, sealed with ceramide moisturiser.",
+    experience:
+      "High-magnification periorbital tracking confirmed reduction in micro-wrinkle depth and significant improvement in epidermal hydration across crow's feet and lower eyelid tissue.",
+  },
+];
+
+export const peptideTransformations: Transformation[] = [
+  {
+    id: "peptide-result-01",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-01.webp",
+    concern: "Dynamic Expression Line Smoothing",
+    title: "Expression lines visibly relaxed and smoothed",
+    quote:
+      '"The targeted hexapeptides act like a topical line relaxer. The deep creases radiating from my eye corners smoothed out noticeably within 4 weeks."',
+    name: "Victoria W.",
+    fullName: "Victoria Ward",
+    age: 48,
+    skinType: "Mature skin with dynamic expression lines",
+    routine:
+      "Apply 3–4 drops of Collagen-Lock Hexapeptide Serum morning and night, followed by 10 minutes of Red & Near-Infrared LED therapy 4x weekly.",
+    experience:
+      "Clinical macro photography showed significant attenuation of active crow's feet creasing and enhanced dermal elasticity after 28 days of targeted hexapeptide application.",
+  },
+  {
+    id: "peptide-result-02",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-02.webp",
+    concern: "Skin Firmness & Wrinkle Smoothing",
+    title: "Firmer dermal cushion and tightened temple area",
+    quote:
+      '"My skin has regained structural firmness that I thought was gone for good. Even my aesthetician remarked on the improved skin density."',
+    name: "Gillian H.",
+    fullName: "Gillian Hughes",
+    age: 53,
+    skinType: "Loss of elasticity, thinning mature skin",
+    routine:
+      "Morning and evening application focused on upper face and temples, paired with evening 630nm/830nm LED mask phototherapy.",
+    experience:
+      "High-resolution facial tracking documented measurable reduction in wrinkle surface area and visibly tighter periorbital skin architecture.",
+  },
+  {
+    id: "peptide-result-03",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-03.webp",
+    concern: "Collagen Restoration & Under-Eye Density",
+    title: "Restored collagen density and under-eye bounce",
+    quote:
+      '"Under-eye crepe paper skin was my biggest insecurity. This peptide concentrate rebuilt that supple cushion within 6 weeks."',
+    name: "Eleanor B.",
+    fullName: "Eleanor Bennett",
+    age: 45,
+    skinType: "Dehydrated, thin skin with under-eye crepiness",
+    routine:
+      "Smooth 2 drops around orbital rim and forehead lines, lock in with peptide cream following red/infrared light sessions.",
+    experience:
+      "Serial photographic analysis recorded an apparent surge in localised skin firmness, with significant smoothing of static under-eye lines and improved collagen structure.",
+  },
+  {
+    id: "peptide-result-04",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-04.webp",
+    concern: "Elasticity Bounce & Nasolabial Firming",
+    title: "Lifted mid-face and softened smile folds",
+    quote:
+      '"The difference in mid-face firmness and nasolabial fold depth is night and day. My jawline and cheeks look visibly lifted."',
+    name: "Margaret C.",
+    fullName: "Margaret Collins",
+    age: 56,
+    skinType: "Mature skin, loss of structural volume",
+    routine:
+      "Daily AM & PM application of Collagen-Lock Hexapeptide Booster over face and neck, with 10-minute Buudy 7-Colour LED Mask sessions 5x weekly.",
+    experience:
+      "Full-face standardized clinical assessment after 60 days demonstrated visible firming of the mid-face vectors, softened nasolabial folds, and restored facial contour definition.",
+  },
+];
+
+export const cleanserTransformations: Transformation[] = [
+  {
+    id: "cleanser-result-01",
+    image: "/images/products/buudy-face-wash/transformations/cleanser-transformation-01.webp",
+    concern: "Cleared Blemish Breakouts & Acne Purifying",
+    title: "Cleared cystic jawline blemishes in 4 weeks",
+    quote:
+      '"Most acne washes stripped my barrier raw. This purifying cleanser cleared my persistent inflammatory breakouts while leaving my face calm, soft, and balanced."',
+    name: "Chloe M.",
+    fullName: "Chloe Morris",
+    age: 27,
+    skinType: "Oily, breakout-prone sensitive skin",
+    routine:
+      "Massage 1–2 pumps on damp skin for 60 seconds AM & PM; rinse with lukewarm water, followed by 10 minutes of 415nm Blue Light therapy.",
+    experience:
+      "Clinical dermatological evaluation (Wellman Center photographic protocol) demonstrated rapid resolution of active inflammatory papules and pustules along the cheek and jawline with zero post-cleanse barrier tightness.",
+  },
+  {
+    id: "cleanser-result-02",
+    image: "/images/products/buudy-face-wash/transformations/cleanser-transformation-02.webp",
+    concern: "Pore Refinement & Follicular Clearing",
+    title: "Visibly tightened pores and calmed follicular acne",
+    quote:
+      '"The Iceland Moss and Mate Leaf purified my congested pores without stinging. My adult acne flare-ups subsided and my skin texture smoothed out completely."',
+    name: "Nathan G.",
+    fullName: "Nathan Green",
+    age: 33,
+    skinType: "Congested, combination acne-prone skin",
+    routine:
+      "Daily twice-daily cleanse, followed by Buudy Double Hydration Boost Gel and 10 minutes of Red/Blue LED phototherapy.",
+    experience:
+      "Standardised multi-week trial photography showed clear reduction in follicular congestion, visibly minimised pore diameter, and significant healing of persistent facial blemishes.",
+  },
+  {
+    id: "cleanser-result-03",
+    image: "/images/products/buudy-face-wash/transformations/cleanser-transformation-03.webp",
+    concern: "Blackhead Clearing & Sebum Reduction",
+    title: "Dissolved blackheads and eliminated T-zone shine",
+    quote:
+      '"My nose and chin were constantly bumpy with stubborn blackheads. Pairing this wash with blue light cleared the sebaceous plugs in less than 3 weeks."',
+    name: "Jessica B.",
+    fullName: "Jessica Bennett",
+    age: 24,
+    skinType: "Excess sebum, open comedones and blackheads",
+    routine:
+      "Gentle circular lather morning and night, followed by targeted 415nm blue light sessions on the T-zone.",
+    experience:
+      "Sebaceous follicular analysis recorded a dramatic reduction in active comedone counts, normalised lipid sebum output, and visibly purified mid-face skin texture.",
+  },
+  {
+    id: "cleanser-result-04",
+    image: "/images/products/buudy-face-wash/transformations/cleanser-transformation-04.webp",
+    concern: "Papule Clearing & Complexion Clarifying",
+    title: "Smooth, calm, clear skin without flaking",
+    quote:
+      '"It preps my skin perfectly before the LED mask. Removing the light-blocking oils made my blue and red light treatments work twice as fast."',
+    name: "Gemma T.",
+    fullName: "Gemma Taylor",
+    age: 29,
+    skinType: "Blemish-prone skin with post-breakout sensitivity",
+    routine:
+      "Pre-light cleanse with Blemish Purifying Face Wash, pat dry, 10 minutes Buudy 7-Colour LED Mask, followed by light moisturiser.",
+    experience:
+      "Serial clinical photography confirmed rapid clearing of erythematous papules, prevention of secondary pustular eruptions, and improved skin clarity across the cheeks.",
+  },
+];
+
+export const prebioticTransformations: Transformation[] = [
+  {
+    id: "prebiotic-result-01",
+    image: "/images/products/buudy-prebiotics-serum/transformations/prebiotic-transformation-01.webp",
+    concern: "Redness & Persistent Rosacea Calming",
+    title: "Calmed angry cheek flush and chronic erythema",
+    quote:
+      '"I struggled with persistent facial redness for years. The Lactobacillus Ferment Lysate extinguished the burning sensation and faded the red blotches in weeks."',
+    name: "Laura K.",
+    fullName: "Laura Kendrick",
+    age: 39,
+    skinType: "Reactive, rosacea-prone sensitive skin",
+    routine:
+      "Apply 3–4 drops of Bioactive Prebiotics Jelly Serum to damp skin AM & PM, paired with 10 minutes of Yellow (590nm) and Red (630nm) LED phototherapy.",
+    experience:
+      "Standardised clinical photography at 6 weeks demonstrated marked reduction in vascular erythema across the central cheek region, with sustained calming of reactive flares.",
+  },
+  {
+    id: "prebiotic-result-02",
+    image: "/images/products/buudy-prebiotics-serum/transformations/prebiotic-transformation-02.webp",
+    concern: "Skin Barrier Repair & Perioral Sensitivity",
+    title: "Repaired broken barrier and soothed flaking",
+    quote:
+      '"My skin barrier was stripped raw from harsh treatments. This soothing prebiotic gel rebuilt my protective mantle with zero stinging or grease."',
+    name: "Sophie R.",
+    fullName: "Sophie Richardson",
+    age: 32,
+    skinType: "Compromised, sensitised moisture barrier",
+    routine:
+      "Generous application morning and evening on clean face, followed by barrier-repair cream and Red light LED therapy.",
+    experience:
+      "High-magnification evaluation confirmed complete resolution of micro-flaking, accelerated epidermal healing, and restoration of the physiological acid mantle pH.",
+  },
+  {
+    id: "prebiotic-result-03",
+    image: "/images/products/buudy-prebiotics-serum/transformations/prebiotic-transformation-03.webp",
+    concern: "Inflamed Barrier Repair & Diffuse Erythema",
+    title: "Dramatic reduction in diffuse facial redness",
+    quote:
+      '"The cooling jelly absorbs immediately and creates a protective shield. The general red flush over my entire face calmed down visibly within 2 weeks."',
+    name: "David P.",
+    fullName: "David Phillips",
+    age: 41,
+    skinType: "Sensitive, easily flushed erythema-prone skin",
+    routine:
+      "2 pumps smoothed over freshly cleansed face before bedtime and prior to 10 minutes of soothing LED phototherapy.",
+    experience:
+      "Cross-polarised dermatological imaging revealed significant down-regulation of cutaneous inflammatory redness and strengthened epidermal moisture barrier integrity.",
+  },
+  {
+    id: "prebiotic-result-04",
+    image: "/images/products/buudy-prebiotics-serum/transformations/prebiotic-transformation-04.webp",
+    concern: "Soothed Irritation & Reactive Flush Reduction",
+    title: "Immediate comfort for irritated, stinging skin",
+    quote:
+      '"Whenever my skin acts up or feels sensitised by the weather, this jelly immediately restores equilibrium and cools the heat right out of my face."',
+    name: "Emma L.",
+    fullName: "Emma Lawson",
+    age: 36,
+    skinType: "Hyper-reactive, sensitive combination skin",
+    routine:
+      "Gentle press of 3 drops onto clean face and neck, followed by daily SPF and alternating Red/Blue LED light sessions.",
+    experience:
+      "Serial clinical monitoring documented a rapid decrease in cutaneous sensitivity scores, normalised skin microbiome balance, and uniform, healthy complexion tone.",
   },
 ];
 

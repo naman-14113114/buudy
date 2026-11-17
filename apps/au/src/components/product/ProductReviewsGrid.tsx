@@ -1316,6 +1316,10 @@ export function ProductReviewsGrid({
                 <>
                   Buudy LED Torch <em className="buudy-italic">reviews</em>.
                 </>
+              ) : productHandle.includes("serum") || productHandle.includes("gel") ? (
+                <>
+                  Buudy Clinical Serum <em className="buudy-italic">customer reviews</em>.
+                </>
               ) : (
                 <>
                   Buudy Mask <em className="buudy-italic">customer reviews</em>.
@@ -1325,6 +1329,8 @@ export function ProductReviewsGrid({
             copy={
               productHandle === "buudy-red-torch"
                 ? "Real feedback from customers who made the Buudy LED Torch part of their daily wellness ritual."
+                : productHandle.includes("serum") || productHandle.includes("gel")
+                ? "Real feedback from customers who paired Buudy Clinical Formulations with their phototherapy ritual."
                 : "Real feedback from customers who made Buudy part of their at-home skincare ritual."
             }
           />

@@ -1,10 +1,10 @@
 "use client";
 
-import { StoreText, StoreButton, StoreLink as Link } from "@/components/international/StoreLocale";
+import Link from "next/link";
 import { ArrowRight, ChevronDown, Tag } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { formatMoney } from "@/lib/money";
-import { getDisplayLines, getPromoDiscountCents } from "@/lib/cart";
+import { getDisplayLines } from "@/lib/cart";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
 import { PromoCodeBox } from "./PromoCodeBox";
@@ -17,12 +17,29 @@ type CartSummaryProps = {
 export function CartSummary({ action = "summary", children }: CartSummaryProps) {
   const { lines, totals, closeCart, manualPromoCode, manualPromoCodes } = useCart();
   const [detailsOpen, setDetailsOpen] = useState(false);
-  const appliedCodes =
+  const [isPriceUpdated, setIsPriceUpdated] = useState(false);
+  const prevTotalRef = useRef(totals.totalCents);
+
+  useEffect(() => {
+    if (prevTotalRef.current !== totals.totalCents) {
+      prevTotalRef.current = totals.totalCents;
+      setIsPriceUpdated(true);
+      const timer = setTimeout(() => setIsPriceUpdated(false), 350);
+      return () => clearTimeout(timer);
+    }
+  }, [totals.totalCents]);
+
+  const activeCodes =
     manualPromoCodes && manualPromoCodes.length > 0
       ? manualPromoCodes
       : manualPromoCode
       ? [manualPromoCode]
       : [];
+  const activePromoCode =
+    activeCodes.length > 1
+      ? activeCodes.join(" + ")
+      : activeCodes[0] || "";
+
   const giftLines = getDisplayLines(lines).filter(
     (line) =>
       line.type === "gift" &&
@@ -39,7 +56,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
     <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
       {totalSavingsCents > 0 ? (
         <>
-          <StoreButton
+          <button
             aria-controls="cart-price-breakdown"
             aria-expanded={detailsOpen}
             className="flex w-full items-center justify-between gap-4 py-2 text-sm transition"
@@ -47,7 +64,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
             type="button"
           >
             <span className="flex items-center gap-2 font-medium text-[var(--plum)]">
-              <StoreText>Total discount</StoreText>
+              Total discount
               <ChevronDown
                 aria-hidden="true"
                 className={`transition-transform duration-300 ${
@@ -59,7 +76,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
             <span className="font-bold text-[var(--plum)]">
               -{formatMoney(totalSavingsCents)}
             </span>
-          </StoreButton>
+          </button>
 
           <div
             className={`grid transition-[grid-template-rows] duration-300 ease-out ${
@@ -73,8 +90,7 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                   <div className="flex justify-between gap-4" key={line.id}>
                     <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
                       <Tag aria-hidden="true" size={14} />
-                      <StoreText>Free </StoreText>
-                      <StoreText>{line.title}</StoreText>
+                      Free {line.title}
                     </span>
                     <span className="font-semibold text-[var(--muted)]">
                       -{formatMoney((line.compareAtCents ?? 0) * line.quantity)}
@@ -82,29 +98,15 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                   </div>
                 ))}
                 {totals.promoDiscountCents > 0 ? (
-                  appliedCodes.length > 0 ? (
-                    appliedCodes.map((code) => (
-                      <div className="flex justify-between gap-4" key={code}>
-                        <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
-                          <Tag aria-hidden="true" size={14} />
-                          <StoreText>{code.length > 4 ? `${code.slice(0, 4)}...` : code}</StoreText>
-                        </span>
-                        <span className="font-semibold text-[var(--muted)]">
-                          -{formatMoney(getPromoDiscountCents(code))}
-                        </span>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="flex justify-between gap-4">
-                      <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
-                        <Tag aria-hidden="true" size={14} />
-                        <StoreText>Promo Discount</StoreText>
-                      </span>
-                      <span className="font-semibold text-[var(--muted)]">
-                        -{formatMoney(totals.promoDiscountCents)}
-                      </span>
-                    </div>
-                  )
+                  <div className="flex justify-between gap-4">
+                    <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
+                      <Tag aria-hidden="true" size={14} />
+                      {activePromoCode || "Promo Discount"}
+                    </span>
+                    <span className="font-semibold text-[var(--muted)]">
+                      -{formatMoney(totals.promoDiscountCents)}
+                    </span>
+                  </div>
                 ) : null}
               </div>
             </div>
@@ -120,19 +122,23 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
 
       <div className="mt-4 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-5">
         <span className="buudy-display block text-xl uppercase text-[var(--plum)]">
-          <StoreText>Sub Total</StoreText>
+          Sub Total
         </span>
-        <span className="buudy-display block text-right text-4xl text-[var(--plum)]">
-          <StoreText>{formatMoney(totals.totalCents)}</StoreText>
+        <span
+          className={`buudy-display block text-right text-4xl transition-all duration-300 ease-out ${
+            isPriceUpdated ? "opacity-60 text-[var(--gold)]" : "opacity-100 text-[var(--plum)]"
+          }`}
+        >
+          {formatMoney(totals.totalCents)}
         </span>
       </div>
 
-      {children ? <div className="mt-4"><StoreText>{children}</StoreText></div> : null}
+      {children ? <div className="mt-4">{children}</div> : null}
 
       {action === "cart" ? (
         <Button asChild className="mt-5 w-full" onClick={closeCart}>
           <Link href="/cart">
-            <StoreText>Go to cart</StoreText>
+            Go to cart
             <ArrowRight aria-hidden="true" size={17} />
           </Link>
         </Button>

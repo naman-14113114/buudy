@@ -4,6 +4,7 @@ import { useState } from "react";
 import { wavelengths } from "@/data/productSections";
 import { productMediaAsset } from "@/lib/media";
 
+
 export function WavelengthSelector() {
   const [active, setActive] = useState(
     wavelengths.find((wavelength) => wavelength.name === "RED") ?? wavelengths[0],
@@ -42,6 +43,12 @@ export function WavelengthSelector() {
                 muted
                 loop
                 playsInline
+                ref={(el) => {
+                  if (el) {
+                    el.defaultMuted = true;
+                    el.muted = true;
+                  }
+                }}
               />
             </div>
           </div>

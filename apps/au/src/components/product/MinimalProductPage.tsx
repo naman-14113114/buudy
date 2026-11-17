@@ -54,6 +54,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
   const unitPriceCents = product.priceCents;
   const compareAtCents = product.compareAtCents;
   const showCompareAt = !isDigital && compareAtCents > unitPriceCents;
+  const totalPriceCents = unitPriceCents * quantity;
 
   // Floating top-left badge
   const floatingBadge = isGiftCard
@@ -71,9 +72,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
   const handleAddToCart = () => {
     setIsAdding(true);
 
-    for (let i = 0; i < quantity; i++) {
-      addProduct(product);
-    }
+    addProduct(product, quantity);
 
     router.push(
       appendAttributionToPath(
@@ -162,16 +161,15 @@ export function MinimalProductPage({ product }: { product: Product }) {
 
               {/* Title with serif Playfair + italic gold emphasis */}
               <h1 className="font-playfair buudy-display text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[var(--plum)] leading-[1.12] mt-2">
-                {product.heroTitle ? (
+                {product.heroTitle || product.name}
+                {product.heroEmphasis ? (
                   <>
-                    {product.heroTitle}{" "}
+                    {" "}
                     <em className="buudy-italic font-normal text-[var(--gold)]">
                       {product.heroEmphasis}
                     </em>
                   </>
-                ) : (
-                  product.name
-                )}
+                ) : null}
               </h1>
 
               {/* Star Rating & Customer Count Pill (Hidden on Digital Products) */}
@@ -207,6 +205,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
                   </>
                 )}
               </div>
+
 
               {/* Short Description */}
               <p className="mt-4 text-sm sm:text-base leading-relaxed text-[var(--muted)] buudy-copy">
@@ -386,7 +385,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
                             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] text-[var(--cream)] font-mono text-[11px] font-bold">
                               1
                             </span>
-                            <span>Select your AU$28 digital gift card.</span>
+                            <span>Select your £20 digital gift card.</span>
                           </li>
                           <li className="flex items-start gap-2.5">
                             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] text-[var(--cream)] font-mono text-[11px] font-bold">
@@ -404,7 +403,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
                             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] text-[var(--cream)] font-mono text-[11px] font-bold">
                               4
                             </span>
-                            <span>Recipient redeems the AU$28 voucher at checkout on any Buudy light therapy device or skincare accessory within 3 months of receipt.</span>
+                            <span>Recipient redeems the £20 voucher at checkout on any Buudy light therapy device or skincare accessory within 3 months of receipt.</span>
                           </li>
                         </ol>
                       ) : isPackageProtection ? (
@@ -419,13 +418,13 @@ export function MinimalProductPage({ product }: { product: Product }) {
                             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] text-[var(--cream)] font-mono text-[11px] font-bold">
                               2
                             </span>
-                            <span>Comprehensive transit insurance attaches automatically when dispatched from our Australian fulfillment center.</span>
+                            <span>Comprehensive transit insurance attaches automatically when dispatched from our UK fulfillment center.</span>
                           </li>
                           <li className="flex items-start gap-2.5">
                             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] text-[var(--cream)] font-mono text-[11px] font-bold">
                               3
                             </span>
-                            <span>In the rare event of transit damage, parcel loss, or doorstep theft, simply email support@buudy.com.</span>
+                            <span>In the rare event of transit damage, parcel loss, or doorstep theft, simply email support@buudy.co.uk.</span>
                           </li>
                           <li className="flex items-start gap-2.5">
                             <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--plum)] text-[var(--cream)] font-mono text-[11px] font-bold">
@@ -500,7 +499,7 @@ export function MinimalProductPage({ product }: { product: Product }) {
                         Every Buudy item is backed by our Official 30-Day Money-Back Guarantee. We are committed to clinical-grade quality and complete customer delight.
                       </p>
                       <p>
-                        If you are not completely satisfied with your purchase, our dedicated Australian support team is here to assist with hassle-free returns, zero-friction exchanges, or full refunds.
+                        If you are not completely satisfied with your purchase, our London-based support team is here to assist with hassle-free returns, zero-friction exchanges, or full refunds.
                       </p>
                     </div>
                   </div>

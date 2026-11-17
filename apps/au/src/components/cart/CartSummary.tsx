@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { ArrowRight, ChevronDown, Tag } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { formatMoney } from "@/lib/money";
-import { getDisplayLines, getPromoDiscountCents } from "@/lib/cart";
+import { getDisplayLines } from "@/lib/cart";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "./CartProvider";
 import { PromoCodeBox } from "./PromoCodeBox";
@@ -17,12 +17,29 @@ type CartSummaryProps = {
 export function CartSummary({ action = "summary", children }: CartSummaryProps) {
   const { lines, totals, closeCart, manualPromoCode, manualPromoCodes } = useCart();
   const [detailsOpen, setDetailsOpen] = useState(false);
-  const appliedCodes =
+  const [isPriceUpdated, setIsPriceUpdated] = useState(false);
+  const prevTotalRef = useRef(totals.totalCents);
+
+  useEffect(() => {
+    if (prevTotalRef.current !== totals.totalCents) {
+      prevTotalRef.current = totals.totalCents;
+      setIsPriceUpdated(true);
+      const timer = setTimeout(() => setIsPriceUpdated(false), 350);
+      return () => clearTimeout(timer);
+    }
+  }, [totals.totalCents]);
+
+  const activeCodes =
     manualPromoCodes && manualPromoCodes.length > 0
       ? manualPromoCodes
       : manualPromoCode
       ? [manualPromoCode]
       : [];
+  const activePromoCode =
+    activeCodes.length > 1
+      ? activeCodes.join(" + ")
+      : activeCodes[0] || "";
+
   const giftLines = getDisplayLines(lines).filter(
     (line) =>
       line.type === "gift" &&
@@ -81,29 +98,15 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
                   </div>
                 ))}
                 {totals.promoDiscountCents > 0 ? (
-                  appliedCodes.length > 0 ? (
-                    appliedCodes.map((code) => (
-                      <div className="flex justify-between gap-4" key={code}>
-                        <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
-                          <Tag aria-hidden="true" size={14} />
-                          {code.length > 4 ? `${code.slice(0, 4)}...` : code}
-                        </span>
-                        <span className="font-semibold text-[var(--muted)]">
-                          -{formatMoney(getPromoDiscountCents(code))}
-                        </span>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="flex justify-between gap-4">
-                      <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
-                        <Tag aria-hidden="true" size={14} />
-                        Promo Discount
-                      </span>
-                      <span className="font-semibold text-[var(--muted)]">
-                        -{formatMoney(totals.promoDiscountCents)}
-                      </span>
-                    </div>
-                  )
+                  <div className="flex justify-between gap-4">
+                    <span className="flex items-center gap-1.5 uppercase text-[var(--muted)]">
+                      <Tag aria-hidden="true" size={14} />
+                      {activePromoCode || "Promo Discount"}
+                    </span>
+                    <span className="font-semibold text-[var(--muted)]">
+                      -{formatMoney(totals.promoDiscountCents)}
+                    </span>
+                  </div>
                 ) : null}
               </div>
             </div>
@@ -121,7 +124,11 @@ export function CartSummary({ action = "summary", children }: CartSummaryProps) 
         <span className="buudy-display block text-xl uppercase text-[var(--plum)]">
           Sub Total
         </span>
-        <span className="buudy-display block text-right text-4xl text-[var(--plum)]">
+        <span
+          className={`buudy-display block text-right text-4xl transition-all duration-300 ease-out ${
+            isPriceUpdated ? "opacity-60 text-[var(--gold)]" : "opacity-100 text-[var(--plum)]"
+          }`}
+        >
           {formatMoney(totals.totalCents)}
         </span>
       </div>

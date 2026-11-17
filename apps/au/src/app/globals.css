@@ -63,6 +63,11 @@ select {
 
 button {
   cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+}
+
+button:active {
+  transform: scale(0.95);
 }
 
 img,
@@ -405,6 +410,18 @@ img[data-buudy-image-loading="true"] {
 
 .halloween-pumpkin-glow { animation: halloween-pumpkin-glow 3s ease-in-out infinite; }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+
 /* ==========================================================================
    CART LINE: INCLUDED IN THE BOX (What's included)
    ========================================================================== */
@@ -494,15 +511,4 @@ img[data-buudy-image-loading="true"] {
   text-align: center;
   margin-top: 6px;
   word-break: break-word;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-  }
 }

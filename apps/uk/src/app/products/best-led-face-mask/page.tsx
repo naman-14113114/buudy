@@ -95,7 +95,7 @@ export default function BestLedFaceMaskProductRoute() {
           type="application/ld+json"
         />
       ))}
-      <ProductPage product={pageProduct} galleryVariant="omnilux" />
+      <ProductPage product={pageProduct} galleryVariant="omnilux" isHalloween={false} isEarlyBlackFriday={true} />
     </>
   );
 }

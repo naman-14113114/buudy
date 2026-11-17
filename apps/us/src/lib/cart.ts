@@ -25,15 +25,19 @@ export type CartState = {
 };
 
 export const promoCode = "AUTO";
-export const manualPromoCode = "BUUDY10";
+export const manualPromoCode = "";
 export const manualPromoDiscountCents = 1000;
 
 export const VALID_PROMO_CODES: Record<
   string,
   { code: string; discountCents: number; type: "promo" | "gift_card" }
 > = {
+  BLACKFRIDAY10: { code: "BLACKFRIDAY10", discountCents: 1000, type: "promo" },
   BUUDY10: { code: "BUUDY10", discountCents: 1000, type: "promo" },
   BUUDY: { code: "BUUDY10", discountCents: 1000, type: "promo" },
+  SAVE10: { code: "SAVE10", discountCents: 1000, type: "promo" },
+  BUUDYBF20: { code: "BUUDYBF20", discountCents: 2000, type: "promo" },
+  BUUDY10BLACKFRIDAY10: { code: "BUUDY10BLACKFRIDAY10", discountCents: 2000, type: "promo" },
   "9PQ28ENBLJ": { code: "9PQ28ENBLJ", discountCents: 2000, type: "gift_card" },
 };
 
@@ -46,7 +50,7 @@ export const emptyCart: CartState = {
 };
 
 export function normalizeManualPromoCode(code: string | null | undefined) {
-  return (code ?? "").trim().toUpperCase();
+  return (code ?? "").trim().toUpperCase().replace(/\s+/g, "");
 }
 
 export function getPromoCodeConfig(code: string | null | undefined) {
@@ -93,14 +97,17 @@ export function buildProductCartLines(product: Product, quantity = 1): CartLine[
 
   const gifts = product.gifts.map<CartLine>((gift) => {
     const isEbook = gift.id === "skincare-ebook";
+    const isTravelBox = gift.id === "premium-travel-box";
     return {
       id: `${product.id}:${gift.id}`,
       productId: product.id,
-      slug: isEbook ? "skincare-ebook" : product.slug,
+      slug: isEbook ? "skincare-ebook" : isTravelBox ? "premium-travel-box" : product.slug,
       type: "gift",
-      title: gift.name,
+      title: isTravelBox ? "Premium Travel Case" : gift.name,
       subtitle: isEbook
         ? "Delivered digitally via email after checkout"
+        : isTravelBox
+        ? "Luxury protective hard travel case"
         : `${product.name} free gift unlocked`,
       image: gift.image,
       unitPriceCents: 0,
@@ -145,16 +152,34 @@ export function upsertProductCartLines(
   return [...withoutProduct, ...buildProductCartLines(product, quantity)];
 }
 
+// Product CTAs express "put this in my bag", rather than an instruction to
+// increment an existing quantity. The cart controls own explicit increments.
+export function ensureProductInCart(
+  state: CartState,
+  product: Product,
+  requestedQuantity = 1,
+): CartState {
+  if (!Number.isSafeInteger(requestedQuantity) || requestedQuantity < 1) return state;
+  const existing = state.lines.find(
+    (line) => line.type === "product" && line.productId === product.id,
+  );
+  if (existing && existing.quantity >= requestedQuantity) return state;
+  return { ...state, lines: upsertProductCartLines(state.lines, product, requestedQuantity) };
+}
+
 export function calculateCartTotals(
   lines: CartLine[],
   appliedManualPromo: string | string[] = "",
-  nativePromoDiscountCents = 0,
 ) {
   const promoCodesList = Array.isArray(appliedManualPromo)
     ? appliedManualPromo
     : appliedManualPromo
     ? [appliedManualPromo]
     : [];
+
+  const uniqueAppliedCodes = Array.from(
+    new Set(promoCodesList.map((c) => getAppliedManualPromoCode(c)).filter(Boolean)),
+  );
 
   const productLines = lines.filter((line) => line.type === "product");
   const giftLines = lines.filter((line) => line.type === "gift");
@@ -173,17 +198,11 @@ export function calculateCartTotals(
   );
   const savingsCents = Math.max(compareAtCents - subtotalCents, 0);
 
-  // Sum unique applied promo code discounts
-  const uniqueAppliedCodes = Array.from(
-    new Set(promoCodesList.map((c) => getAppliedManualPromoCode(c)).filter(Boolean)),
-  );
-  const calculatedPromoDiscountCents = uniqueAppliedCodes.reduce((acc, code) => {
+  // Sum unique applied promo code discounts (allows both BUUDY10 and BLACKFRIDAY10)
+  const totalPromoDiscountCents = uniqueAppliedCodes.reduce((acc, code) => {
     return acc + getPromoDiscountCents(code);
   }, 0);
-  const promoDiscountCents = Math.min(
-    calculatedPromoDiscountCents > 0 ? calculatedPromoDiscountCents : Math.max(nativePromoDiscountCents, 0),
-    subtotalCents,
-  );
+  const promoDiscountCents = Math.min(totalPromoDiscountCents, subtotalCents);
 
   return {
     itemCount: productLines.reduce((total, line) => total + line.quantity, 0),
@@ -199,15 +218,30 @@ export function calculateCartTotals(
 
 export function getDisplayLines(lines: CartLine[]): CartLine[] {
   const hasMaskProduct = lines.some(
-    (line) => line.productId === "buudy-led-mask" && line.type === "product"
+    (line) => line.productId === "buudy-led-mask" && line.type === "product",
   );
 
-  const formattedLines = lines.map((line) => {
+  const formatted = lines.map((line) => {
     if (hasMaskProduct && line.productId === "buudy-led-mask" && line.type === "product") {
       return {
         ...line,
-        title: "Buudy LED Mask + Premium Travel Box",
-        image: "/media/products/buudy-led-mask/images/84-w.webp",
+        title: "Buudy LED Mask",
+        image: getProductById("buudy-led-mask")?.cartImage ?? line.image,
+      };
+    }
+    if (
+      line.id.includes("premium-travel-box") ||
+      line.productId === "premium-travel-box" ||
+      line.title.toLowerCase().includes("travel")
+    ) {
+      return {
+        ...line,
+        title: "Premium Travel Case",
+        subtitle: "Luxury protective hard travel case",
+        compareAtCents:
+          line.type === "gift"
+            ? line.compareAtCents || 3900
+            : line.compareAtCents,
       };
     }
     if (
@@ -228,13 +262,18 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
     return line;
   });
 
-  return formattedLines.filter((line) => {
-    if (hasMaskProduct && line.productId === "buudy-led-mask" && line.type === "gift") {
-      const giftId = line.id.split(":")[1];
-      if (giftId === "premium-travel-box") {
-        return false;
-      }
-    }
-    return true;
-  });
+  const lineOrder = (line: CartLine) => {
+    if (line.type === "product") return 0;
+    if (line.id.includes("buudy-led-torch") || line.title.toLowerCase().includes("torch")) return 1;
+    if (line.id.includes("premium-travel-box") || line.title.toLowerCase().includes("travel")) return 2;
+    if (
+      line.id.includes("skincare-ebook") ||
+      line.title.toLowerCase().includes("ebook") ||
+      line.title.toLowerCase().includes("e-book")
+    )
+      return 3;
+    return 4;
+  };
+
+  return [...formatted].sort((a, b) => lineOrder(a) - lineOrder(b));
 }

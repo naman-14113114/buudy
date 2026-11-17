@@ -1,11 +1,9 @@
 "use client";
-import { StoreText, StoreButton, StoreInput, StoreTextarea } from '@/components/international/StoreLocale';
-
 
 import type { ChangeEvent, FormEvent, RefObject } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { StoreImage as Image } from '@/components/international/StoreLocale';
+import Image from "next/image";
 import {
   BadgeCheck,
   Check,
@@ -143,10 +141,10 @@ function RatingStars({ rating, size = 17 }: { rating: number; size?: number }) {
       role="img"
       style={{ fontSize: size }}
     >
-      <span aria-hidden="true"><StoreText>{filledStars}</StoreText></span>
+      <span aria-hidden="true">{filledStars}</span>
       {emptyStars ? (
         <span aria-hidden="true" className="opacity-25">
-          <StoreText>{emptyStars}</StoreText>
+          {emptyStars}
         </span>
       ) : null}
     </span>
@@ -168,7 +166,7 @@ function RatingBreakdown({
 }) {
   return (
     <div className="mt-6 space-y-2">
-      <StoreButton
+      <button
         aria-pressed={activeRating === null}
         className={cn(
           "flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left transition hover:bg-[rgba(180,145,76,.1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]",
@@ -178,18 +176,18 @@ function RatingBreakdown({
         onClick={() => onSelect(null)}
         type="button"
       >
-        <span className="buudy-mono text-[var(--plum-soft)]"><StoreText>All reviews</StoreText></span>
+        <span className="buudy-mono text-[var(--plum-soft)]">All reviews</span>
         <span className="buudy-mono text-[var(--plum-soft)]">
           {total.toLocaleString(market.locale)}
         </span>
-      </StoreButton>
+      </button>
 
       {[5, 4, 3, 2, 1].map((rating) => {
         const count = distribution[String(rating)] ?? 0;
         const width = total ? `${(count / total) * 100}%` : "0%";
 
         return (
-          <StoreButton
+          <button
             aria-label={`Show only ${rating}-star reviews`}
             aria-pressed={activeRating === rating}
             className={cn(
@@ -203,7 +201,7 @@ function RatingBreakdown({
           >
             <span className="inline-flex items-center gap-1 text-[var(--gold)]">
               <span aria-hidden="true" className="text-sm leading-none">★</span>
-              <span className="buudy-mono text-[var(--plum-soft)]"><StoreText>{rating}</StoreText><StoreText> star</StoreText></span>
+              <span className="buudy-mono text-[var(--plum-soft)]">{rating} star</span>
             </span>
             <span className="h-2 overflow-hidden rounded-full bg-[rgba(58,31,61,.1)]">
               <span
@@ -214,7 +212,7 @@ function RatingBreakdown({
             <span className="buudy-mono text-right text-[var(--plum-soft)]">
               {count.toLocaleString(market.locale)}
             </span>
-          </StoreButton>
+          </button>
         );
       })}
     </div>
@@ -233,7 +231,7 @@ function ReviewFilterCheckbox({
   onToggle: () => void;
 }) {
   return (
-    <StoreButton
+    <button
       aria-checked={checked}
       className={cn(
         "inline-flex items-center gap-1 sm:gap-3 whitespace-nowrap rounded-full border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.72)] px-1.5 sm:px-4 py-1.5 sm:py-3 text-[10px] sm:text-sm font-semibold text-[var(--plum)] transition hover:border-[rgba(180,145,76,.5)] hover:bg-[rgba(180,145,76,.1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)] disabled:cursor-not-allowed disabled:opacity-60",
@@ -252,8 +250,8 @@ function ReviewFilterCheckbox({
       >
         <Check aria-hidden="true" size={14} strokeWidth={2.6} />
       </span>
-      <StoreText>{label}</StoreText>
-    </StoreButton>
+      {label}
+    </button>
   );
 }
 
@@ -289,9 +287,9 @@ function ReviewFiltersToolbar({
 
   return (
     <div className="flex flex-nowrap items-center gap-1.5 sm:gap-3 mb-8" ref={toolbarRef}>
-      <span className="buudy-display text-sm sm:text-xl text-[var(--plum)]"><StoreText>Filters</StoreText></span>
+      <span className="buudy-display text-sm sm:text-xl text-[var(--plum)]">Filters</span>
       <div className="relative">
-        <StoreButton
+        <button
           aria-controls="buudy-review-stars-menu"
           aria-expanded={openMenu === "stars"}
           className={dropdownButtonClass}
@@ -299,20 +297,20 @@ function ReviewFiltersToolbar({
           onClick={() => setOpenMenu(openMenu === "stars" ? null : "stars")}
           type="button"
         >
-          <span><StoreText>{activeStarsLabel}</StoreText></span>
+          <span>{activeStarsLabel}</span>
           <ChevronDown
             aria-hidden="true"
             className={cn("transition", openMenu === "stars" && "rotate-180")}
             size={17}
           />
-        </StoreButton>
+        </button>
         {openMenu === "stars" ? (
           <div className={menuClass} id="buudy-review-stars-menu" role="menu">
             {starFilterOptions.map((option) => {
               const isActive = filters.rating === option.value;
 
               return (
-                <StoreButton
+                <button
                   className={menuItemClass}
                   key={option.label}
                   onClick={() => {
@@ -323,13 +321,13 @@ function ReviewFiltersToolbar({
                   aria-checked={isActive}
                   type="button"
                 >
-                  <span><StoreText>{option.label}</StoreText></span>
+                  <span>{option.label}</span>
                   {isActive ? <Check aria-hidden="true" size={16} /> : null}
-                </StoreButton>
+                </button>
               );
             })}
             <div className="sm:hidden mt-2 pt-2 border-t border-[rgba(58,31,61,.1)]">
-              <StoreButton
+              <button
                 className={menuItemClass}
                 onClick={() => {
                   onTogglePhotos();
@@ -339,10 +337,10 @@ function ReviewFiltersToolbar({
                 aria-checked={filters.withPhotos}
                 type="button"
               >
-                <span><StoreText>With photos</StoreText></span>
+                <span>With photos</span>
                 {filters.withPhotos ? <Check aria-hidden="true" size={16} /> : null}
-              </StoreButton>
-              <StoreButton
+              </button>
+              <button
                 className={menuItemClass}
                 onClick={() => {
                   onToggleVerified();
@@ -352,9 +350,9 @@ function ReviewFiltersToolbar({
                 aria-checked={filters.verifiedOnly}
                 type="button"
               >
-                <span><StoreText>Verified purchase</StoreText></span>
+                <span>Verified purchase</span>
                 {filters.verifiedOnly ? <Check aria-hidden="true" size={16} /> : null}
-              </StoreButton>
+              </button>
             </div>
           </div>
         ) : null}
@@ -439,7 +437,7 @@ function ReviewCard({
   review: AnimatableProductReview;
 }) {
   return (
-    <StoreButton
+    <button
       aria-label={`Open full review from ${review.customerName}`}
       className={cn(
         "w-full min-w-0 rounded-[18px] border border-[rgba(58,31,61,.14)] bg-[var(--card)] p-5 text-left shadow-[0_18px_44px_-34px_rgba(58,31,61,.45)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(180,145,76,.5)] hover:shadow-[0_24px_48px_-32px_rgba(58,31,61,.58)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--gold)]",
@@ -466,11 +464,11 @@ function ReviewCard({
 
       {review.title ? (
         <h3 className="buudy-display mt-4 text-[1.3rem] sm:text-xl leading-snug text-[var(--plum)]">
-          <StoreText>{review.title}</StoreText>
+          {review.title}
         </h3>
       ) : null}
 
-      <p className="mt-3 text-sm leading-7 text-[var(--muted)] line-clamp-4"><StoreText>{review.body}</StoreText></p>
+      <p className="mt-3 text-sm leading-7 text-[var(--muted)] line-clamp-4">{review.body}</p>
 
       <div className="mt-6 flex items-center justify-between gap-1.5 sm:gap-2 border-t border-[rgba(58,31,61,.12)] pt-4">
         <span className="buudy-display min-w-0 text-sm text-[var(--plum)] whitespace-nowrap overflow-hidden text-ellipsis">
@@ -482,14 +480,14 @@ function ReviewCard({
                 : parts[0];
             })()}
           </span>
-          <span className="hidden sm:inline"><StoreText>{review.customerName}</StoreText></span>
+          <span className="hidden sm:inline">{review.customerName}</span>
         </span>
         <span className="inline-flex flex-none items-center gap-1 rounded-full bg-[rgba(180,145,76,.12)] px-1.5 py-1 sm:px-2 text-[0.6rem] font-semibold uppercase tracking-[0.08em] text-[var(--plum-soft)]">
           <BadgeCheck aria-hidden="true" size={12} />
-          <span className="hidden sm:inline"><StoreText>Verified</StoreText></span>
+          <span className="hidden sm:inline">Verified</span>
         </span>
       </div>
-    </StoreButton>
+    </button>
   );
 }
 
@@ -588,7 +586,7 @@ function ReviewModal({
         ref={dialogRef}
         role="dialog"
       >
-        <StoreButton
+        <button
           aria-label="Close full review"
           className="absolute right-4 top-4 z-20 grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.16)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] transition hover:scale-105 hover:bg-[var(--cream)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
           onClick={onClose}
@@ -596,7 +594,7 @@ function ReviewModal({
           type="button"
         >
           <X aria-hidden="true" size={22} />
-        </StoreButton>
+        </button>
 
         {activeImage ? (
           <div className="relative flex w-fit max-w-full flex-none self-center items-center justify-center overflow-hidden bg-[var(--card)] p-3 lg:p-4">
@@ -610,29 +608,29 @@ function ReviewModal({
             />
             {hasMultipleImages ? (
               <>
-                <StoreButton
+                <button
                   aria-label="Previous review image"
                   className="absolute left-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-[rgba(247,241,232,.9)] text-[var(--plum)] shadow transition hover:scale-105"
                   onClick={goPreviousImage}
                   type="button"
                 >
                   <ChevronLeft aria-hidden="true" size={22} />
-                </StoreButton>
-                <StoreButton
+                </button>
+                <button
                   aria-label="Next review image"
                   className="absolute right-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-[rgba(247,241,232,.9)] text-[var(--plum)] shadow transition hover:scale-105"
                   onClick={goNextImage}
                   type="button"
                 >
                   <ChevronRight aria-hidden="true" size={22} />
-                </StoreButton>
+                </button>
               </>
             ) : null}
           </div>
         ) : null}
 
         <div className="w-full overflow-y-auto px-6 pb-7 pt-20 sm:px-8 lg:w-[min(34vw,28rem)] lg:flex-none lg:px-9">
-          <p className="buudy-mono text-[var(--gold)]"><StoreText>Verified customer review</StoreText></p>
+          <p className="buudy-mono text-[var(--gold)]">Verified customer review</p>
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
             <RatingStars rating={review.rating} size={20} />
             <span className="buudy-mono text-[var(--plum-soft)]">
@@ -641,15 +639,15 @@ function ReviewModal({
           </div>
           {review.title ? (
             <h3 className="buudy-display mt-6 text-3xl leading-tight text-[var(--plum)]">
-              <StoreText>{review.title}</StoreText>
+              {review.title}
             </h3>
           ) : null}
           <p className="mt-5 whitespace-pre-wrap text-base leading-8 text-[var(--muted)]">
-            <StoreText>{review.body}</StoreText>
+            {review.body}
           </p>
           <div className="mt-8 flex items-center gap-2 border-t border-[rgba(58,31,61,.12)] pt-5 text-[var(--plum)]">
             <BadgeCheck aria-hidden="true" className="text-[var(--gold)]" size={18} />
-            <span className="buudy-display text-lg"><StoreText>{review.customerName}</StoreText></span>
+            <span className="buudy-display text-lg">{review.customerName}</span>
           </div>
         </div>
       </div>
@@ -818,7 +816,7 @@ function WriteReviewModal({
         ref={dialogRef}
         role="dialog"
       >
-        <StoreButton
+        <button
           aria-label="Close review form"
           className="absolute right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.16)] bg-[rgba(247,241,232,.94)] text-[var(--plum)] transition hover:scale-105 hover:bg-[var(--cream)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
           onClick={onClose}
@@ -826,33 +824,33 @@ function WriteReviewModal({
           type="button"
         >
           <X aria-hidden="true" size={22} />
-        </StoreButton>
+        </button>
 
         {isPublished ? (
           <div className="grid min-h-[24rem] place-items-center text-center">
             <div>
-              <p className="buudy-mono text-[var(--gold)]"><StoreText>Review published</StoreText></p>
-              <h3 className="buudy-display mt-4 text-4xl text-[var(--plum)]"><StoreText>
+              <p className="buudy-mono text-[var(--gold)]">Review published</p>
+              <h3 className="buudy-display mt-4 text-4xl text-[var(--plum)]">
                 Thank you for sharing your glow.
-              </StoreText></h3>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-[var(--muted)]"><StoreText>
+              </h3>
+              <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-[var(--muted)]">
                 Your review is live in the Buudy archive now.
-              </StoreText></p>
-              <Button className="mt-7" onClick={onClose}><StoreText>
+              </p>
+              <Button className="mt-7" onClick={onClose}>
                 Close
-              </StoreText></Button>
+              </Button>
             </div>
           </div>
         ) : (
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="max-w-2xl">
-              <p className="buudy-mono text-[var(--gold)]"><StoreText>Customer review</StoreText></p>
-              <h3 className="buudy-display mt-3 text-4xl leading-tight text-[var(--plum)]"><StoreText>
+              <p className="buudy-mono text-[var(--gold)]">Customer review</p>
+              <h3 className="buudy-display mt-3 text-4xl leading-tight text-[var(--plum)]">
                 Write a review and rate product
-              </StoreText></h3>
+              </h3>
             </div>
 
-            <StoreInput
+            <input
               aria-hidden="true"
               autoComplete="off"
               className="hidden"
@@ -863,12 +861,12 @@ function WriteReviewModal({
             />
 
             <div>
-              <label className="buudy-mono mb-3 block text-[var(--plum-soft)]"><StoreText>
+              <label className="buudy-mono mb-3 block text-[var(--plum-soft)]">
                 Your rating
-              </StoreText></label>
+              </label>
               <div className="flex gap-2">
                 {[1, 2, 3, 4, 5].map((rating) => (
-                  <StoreButton
+                  <button
                     aria-label={`${rating} out of 5 stars`}
                     aria-pressed={form.rating === rating}
                     className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(180,145,76,.32)] bg-[rgba(255,252,245,.84)] text-[var(--gold)] transition hover:-translate-y-0.5 hover:border-[var(--gold)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
@@ -881,18 +879,18 @@ function WriteReviewModal({
                       fill={rating <= form.rating ? "currentColor" : "none"}
                       size={22}
                     />
-                  </StoreButton>
+                  </button>
                 ))}
               </div>
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="block">
-                <span className="buudy-mono mb-2 flex justify-between text-[var(--plum-soft)]"><StoreText>
+                <span className="buudy-mono mb-2 flex justify-between text-[var(--plum-soft)]">
                   Title of review
-                  </StoreText><span><StoreText>{form.title.length}</StoreText>/70</span>
+                  <span>{form.title.length}/70</span>
                 </span>
-                <StoreInput
+                <input
                   className="w-full rounded-[14px] border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.78)] px-4 py-3 text-[var(--plum)] outline-none transition focus:border-[var(--gold)]"
                   maxLength={70}
                   onChange={(event) => updateField("title", event.target.value)}
@@ -902,11 +900,11 @@ function WriteReviewModal({
                 />
               </label>
               <label className="block">
-                <span className="buudy-mono mb-2 flex justify-between text-[var(--plum-soft)]"><StoreText>
+                <span className="buudy-mono mb-2 flex justify-between text-[var(--plum-soft)]">
                   Your name
-                  </StoreText><span><StoreText>{form.customerName.length}</StoreText>/50</span>
+                  <span>{form.customerName.length}/50</span>
                 </span>
-                <StoreInput
+                <input
                   className="w-full rounded-[14px] border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.78)] px-4 py-3 text-[var(--plum)] outline-none transition focus:border-[var(--gold)]"
                   maxLength={50}
                   onChange={(event) => updateField("customerName", event.target.value)}
@@ -918,11 +916,11 @@ function WriteReviewModal({
             </div>
 
             <label className="block">
-              <span className="buudy-mono mb-2 flex justify-between text-[var(--plum-soft)]"><StoreText>
+              <span className="buudy-mono mb-2 flex justify-between text-[var(--plum-soft)]">
                 Content
-                </StoreText><span><StoreText>{form.body.length}</StoreText>/1000</span>
+                <span>{form.body.length}/1000</span>
               </span>
-              <StoreTextarea
+              <textarea
                 className="min-h-32 w-full resize-y rounded-[14px] border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.78)] px-4 py-3 text-[var(--plum)] outline-none transition focus:border-[var(--gold)]"
                 maxLength={1000}
                 onChange={(event) => updateField("body", event.target.value)}
@@ -938,13 +936,13 @@ function WriteReviewModal({
                   <UploadCloud aria-hidden="true" size={22} />
                 </span>
                 <span>
-                  <span className="block font-semibold"><StoreText>Upload up to 5 images</StoreText></span>
-                  <span className="text-sm text-[var(--muted)]"><StoreText>
+                  <span className="block font-semibold">Upload up to 5 images</span>
+                  <span className="text-sm text-[var(--muted)]">
                     JPG, PNG, WebP, or GIF. 5MB per image.
-                  </StoreText></span>
+                  </span>
                 </span>
               </span>
-              <StoreInput
+              <input
                 accept="image/gif,image/jpeg,image/png,image/webp"
                 className="mt-4 w-full text-sm text-[var(--muted)] file:mr-4 file:rounded-full file:border-0 file:bg-[var(--plum)] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-[var(--cream)]"
                 multiple
@@ -953,16 +951,16 @@ function WriteReviewModal({
               />
               {files.length ? (
                 <p className="mt-3 text-sm text-[var(--muted)]">
-                  <StoreText>{files.length}</StoreText><StoreText> image</StoreText><StoreText>{files.length === 1 ? "" : "s"}</StoreText><StoreText> selected
-                </StoreText></p>
+                  {files.length} image{files.length === 1 ? "" : "s"} selected
+                </p>
               ) : null}
             </label>
 
             <label className="block">
-              <span className="buudy-mono mb-2 block text-[var(--plum-soft)]"><StoreText>
+              <span className="buudy-mono mb-2 block text-[var(--plum-soft)]">
                 Your email
-              </StoreText></span>
-              <StoreInput
+              </span>
+              <input
                 className="w-full rounded-[14px] border border-[rgba(58,31,61,.16)] bg-[rgba(255,252,245,.78)] px-4 py-3 text-[var(--plum)] outline-none transition focus:border-[var(--gold)]"
                 onChange={(event) => updateField("customerEmail", event.target.value)}
                 placeholder="Your email"
@@ -970,37 +968,37 @@ function WriteReviewModal({
                 type="email"
                 value={form.customerEmail}
               />
-              <span className="mt-2 block text-xs text-[var(--muted)]"><StoreText>
+              <span className="mt-2 block text-xs text-[var(--muted)]">
                 Your email is stored privately for verification and is never shown publicly.
-              </StoreText></span>
+              </span>
             </label>
 
             {error ? (
               <p className="rounded-[14px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900">
-                <StoreText>{error}</StoreText>
+                {error}
               </p>
             ) : null}
 
             <div className="grid gap-3 sm:grid-cols-2">
-              <StoreButton
+              <button
                 className="rounded-full border border-[rgba(58,31,61,.22)] px-6 py-3 font-semibold text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--gold)]"
                 disabled={isSubmitting}
                 onClick={onClose}
                 type="button"
-              ><StoreText>
+              >
                 Cancel
-              </StoreText></StoreButton>
+              </button>
               <Button disabled={isSubmitting} type="submit">
                 {isSubmitting ? (
                   <>
-                    <LoaderCircle aria-hidden="true" className="animate-spin" size={18} /><StoreText>
+                    <LoaderCircle aria-hidden="true" className="animate-spin" size={18} />
                     Publishing
-                  </StoreText></>
+                  </>
                 ) : (
                   <>
-                    <Send aria-hidden="true" size={18} /><StoreText>
+                    <Send aria-hidden="true" size={18} />
                     Submit review
-                  </StoreText></>
+                  </>
                 )}
               </Button>
             </div>
@@ -1315,40 +1313,46 @@ export function ProductReviewsGrid({
             eyebrow="Product reviews"
             title={
               productHandle === "buudy-red-torch" ? (
-                <><StoreText>
-                  Buudy LED Torch </StoreText><em className="buudy-italic"><StoreText>reviews</StoreText></em>.
+                <>
+                  Buudy LED Torch <em className="buudy-italic">reviews</em>.
+                </>
+              ) : productHandle.includes("serum") || productHandle.includes("gel") ? (
+                <>
+                  Buudy Clinical Serum <em className="buudy-italic">customer reviews</em>.
                 </>
               ) : (
-                <><StoreText>
-                  Buudy Mask </StoreText><em className="buudy-italic"><StoreText>customer reviews</StoreText></em>.
+                <>
+                  Buudy Mask <em className="buudy-italic">customer reviews</em>.
                 </>
               )
             }
             copy={
               productHandle === "buudy-red-torch"
                 ? "Real feedback from customers who made the Buudy LED Torch part of their daily wellness ritual."
+                : productHandle.includes("serum") || productHandle.includes("gel")
+                ? "Real feedback from customers who paired Buudy Clinical Formulations with their phototherapy ritual."
                 : "Real feedback from customers who made Buudy part of their at-home skincare ritual."
             }
           />
           <Button className="mt-7" onClick={() => setIsWriteReviewOpen(true)}>
-            <PencilLine aria-hidden="true" size={18} /><StoreText>
+            <PencilLine aria-hidden="true" size={18} />
             Write a review
-          </StoreText></Button>
+          </Button>
         </div>
 
         <div className="rounded-[22px] border border-[rgba(58,31,61,.14)] bg-[rgba(255,252,245,.72)] p-6 shadow-[0_20px_52px_-42px_rgba(58,31,61,.55)]">
           <div className="flex flex-wrap items-end justify-between gap-5">
             <div>
-              <p className="buudy-mono text-[var(--gold)]"><StoreText>Average rating</StoreText></p>
+              <p className="buudy-mono text-[var(--gold)]">Average rating</p>
               <p className="buudy-display mt-2 text-6xl leading-none text-[var(--plum)]">
                 {currentAverageRating.toFixed(1)}
               </p>
             </div>
             <div className="text-right">
-              <p className="buudy-mono text-[var(--plum-soft)]"><StoreText>Verified archive</StoreText></p>
+              <p className="buudy-mono text-[var(--plum-soft)]">Verified archive</p>
               <p className="mt-2 text-2xl font-semibold text-[var(--plum)]">
-                {summaryTotal.toLocaleString(market.locale)}<StoreText> reviews
-              </StoreText></p>
+                {summaryTotal.toLocaleString(market.locale)} reviews
+              </p>
             </div>
           </div>
           <RatingBreakdown
@@ -1394,21 +1398,21 @@ export function ProductReviewsGrid({
           className="rounded-[22px] border border-[rgba(58,31,61,.12)] bg-[rgba(255,252,245,.68)] px-6 py-12 text-center shadow-[0_18px_46px_-38px_rgba(58,31,61,.55)]"
         >
           <p className="buudy-display text-2xl text-[var(--plum)]">
-            <StoreText>{isLoading ? "Finding matching reviews..." : "No reviews match these filters yet."}</StoreText>
+            {isLoading ? "Finding matching reviews..." : "No reviews match these filters yet."}
           </p>
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[var(--muted)]"><StoreText>
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[var(--muted)]">
             Try clearing one filter or choosing a different star rating to keep browsing the
             archive.
-          </StoreText></p>
+          </p>
         </div>
       )}
 
       <div className="mt-10 flex flex-col items-center gap-4 text-center">
-        <p className="buudy-mono text-[var(--plum-soft)]"><StoreText>
-          Showing </StoreText><StoreText>{progressLabel}</StoreText><StoreText> reviews
-          </StoreText><StoreText>{activeFilterSummary.length ? ` matching ${activeFilterSummary.join(", ")}` : ""}</StoreText>
+        <p className="buudy-mono text-[var(--plum-soft)]">
+          Showing {progressLabel} reviews
+          {activeFilterSummary.length ? ` matching ${activeFilterSummary.join(", ")}` : ""}
         </p>
-        {error ? <p className="text-sm text-red-900"><StoreText>{error}</StoreText></p> : null}
+        {error ? <p className="text-sm text-red-900">{error}</p> : null}
         {hasMore ? (
           <Button
             aria-label="Load 20 more Buudy LED Mask reviews"
@@ -1418,17 +1422,17 @@ export function ProductReviewsGrid({
           >
             {isLoading ? (
               <>
-                <LoaderCircle aria-hidden="true" className="animate-spin" size={18} /><StoreText>
+                <LoaderCircle aria-hidden="true" className="animate-spin" size={18} />
                 Loading
-              </StoreText></>
+              </>
             ) : (
               "Load more"
             )}
           </Button>
         ) : (
-          <p className="text-sm text-[var(--muted)]"><StoreText>
+          <p className="text-sm text-[var(--muted)]">
             You have reached the end of the review archive.
-          </StoreText></p>
+          </p>
         )}
       </div>
 

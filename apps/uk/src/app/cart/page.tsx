@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { CartPageContent } from "@/components/cart/CartPageContent";
-import { getCurrentAccount } from "@/lib/account";
 import { market } from "@/lib/market";
 
 export const metadata: Metadata = {
@@ -15,25 +14,27 @@ export const metadata: Metadata = {
   },
 };
 
-export const dynamic = "force-dynamic";
-
-export default async function CartPage() {
-  const account = await getCurrentAccount();
-
+// The cart comes from the browser; Whop collects the buyer details at checkout.
+// Keeping this shell static allows it to be cached and prefetched in full.
+export default function CartPage() {
   return (
-    <CartPageContent
-      initialCustomer={{
-        fullName: account.profile?.full_name ?? "",
-        email: account.user?.email ?? account.profile?.email ?? "",
-        phone: account.profile?.phone ?? "",
-        shippingLine1: account.profile?.shipping_line1 ?? "",
-        shippingLine2: account.profile?.shipping_line2 ?? "",
-        shippingCity: account.profile?.shipping_city ?? "",
-        shippingState: account.profile?.shipping_state ?? "",
-        shippingPostalCode: account.profile?.shipping_postal_code ?? "",
-        shippingCountry: account.profile?.shipping_country ?? market.country,
-        marketingOptIn: account.profile?.marketing_opt_in ?? false,
+    <>
+      <link rel="dns-prefetch" href="https://buudy.com" />
+      <link rel="preconnect" href="https://buudy.com" crossOrigin="anonymous" />
+      <CartPageContent
+        initialCustomer={{
+        fullName: "",
+        email: "",
+        phone: "",
+        shippingLine1: "",
+        shippingLine2: "",
+        shippingCity: "",
+        shippingState: "",
+        shippingPostalCode: "",
+        shippingCountry: market.country,
+        marketingOptIn: false,
       }}
     />
+    </>
   );
 }

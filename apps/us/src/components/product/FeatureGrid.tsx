@@ -13,6 +13,8 @@ import {
   IconDiamond,
 } from "@tabler/icons-react";
 
+import type { Feature } from "@/data/productSections";
+
 const featureIcons = [
   IconGrid4x4,
   IconShieldHeart,
@@ -22,26 +24,34 @@ const featureIcons = [
   IconDiamond,
 ];
 
-export function FeatureGrid() {
+export function FeatureGrid({
+  featuresList = features,
+  eyebrow = "Why Buudy",
+  title = (
+    <>
+      What makes our mask{" "}
+      <em className="buudy-italic text-[var(--gold)]">unique</em>?
+    </>
+  ),
+}: {
+  featuresList?: Feature[];
+  eyebrow?: string;
+  title?: React.ReactNode;
+} = {}) {
   const [open, setOpen] = useState(0);
 
   return (
-    <section className="buudy-section border-y border-[var(--border)] bg-[rgba(241,223,210,.42)] md: md: py-14 md:py-24">
+    <section className="buudy-section border-y border-[var(--border)] bg-[rgba(241,223,210,.42)] py-14 md:py-24">
       <div className="buudy-wrap">
         <SectionHeading
-          eyebrow="Why Buudy"
-          title={
-            <>
-              What makes our mask{" "}
-              <em className="buudy-italic text-[var(--gold)]">unique</em>?
-            </>
-          }
+          eyebrow={eyebrow}
+          title={title}
         />
 
         {/* Desktop View: Original Grid */}
         <div className="hidden mt-10 gap-px bg-[rgba(58,31,61,.15)] md:mt-16 md:grid md:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => {
-            const Icon = featureIcons[index];
+          {featuresList.map((feature, index) => {
+            const Icon = featureIcons[index % featureIcons.length];
             return (
               <article
                 className="bg-[var(--cream)] p-8 transition-all duration-300 hover:bg-[var(--card)] hover:shadow-xl md:p-10 group"
@@ -76,8 +86,8 @@ export function FeatureGrid() {
         {/* Mobile View: Accordion */}
         <div className="mt-10 md:hidden bg-[var(--cream)] border-y border-[var(--border)]">
           <ul>
-            {features.map((feature, index) => {
-              const Icon = featureIcons[index];
+            {featuresList.map((feature, index) => {
+              const Icon = featureIcons[index % featureIcons.length];
               const isOpen = open === index;
 
               return (

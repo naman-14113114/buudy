@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, useEffect, useCallback } from "react";
+import { useState, useTransition, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -17,10 +17,21 @@ import {
 } from "lucide-react";
 import type { TrackingData } from "@/lib/order-tracking";
 
-// Client-side text sanitizer ensuring no origin country codes (CN / China) are visible to customers
+// Client-side text sanitizer ensuring no origin country codes (CN / China) or "Origin Country" bracketed text are visible to customers
 function cleanTrackingText(text?: string): string {
   if (!text) return "";
   let cleaned = text;
+
+  // 0. Remove parenthesized or bracketed Origin Country / Origin references (e.g. " - (Origin Country)", "(Origin Country)")
+  cleaned = cleaned.replace(/\s*[-–—]?\s*\(\s*(?:origin\s*country|origin)\s*\)/gi, "");
+  cleaned = cleaned.replace(/\s*[-–—]?\s*\[\s*(?:origin\s*country|origin)\s*\]/gi, "");
+  cleaned = cleaned.replace(/\s*[-–—]?\s*\borigin\s+country\b/gi, "");
+  cleaned = cleaned.replace(/\bthe country of origin\b/gi, "international facility");
+  cleaned = cleaned.replace(/\bcountry of origin\b/gi, "international facility");
+  cleaned = cleaned.replace(/\borigin international airport\b/gi, "international departure airport");
+  cleaned = cleaned.replace(/\borigin facility\b/gi, "logistics processing hub");
+  cleaned = cleaned.replace(/\boriginal facility\b/gi, "logistics processing hub");
+  cleaned = cleaned.replace(/\boriginal airport\b/gi, "international departure airport");
 
   // 1. Remove parenthesized or bracketed CN / China / PRC / HK references
   cleaned = cleaned.replace(/\s*\(\s*(?:CN|China|PRC|HK|Hong Kong)\s*\)/gi, "");
@@ -76,83 +87,71 @@ export function OrderTrackingPage() {
   const [isPending, startTransition] = useTransition();
   const [copied, setCopied] = useState(false);
 
-  const handleSearch = useCallback((searchQuery: string) => {
+  const requestRef = useRef<AbortController | null>(null);
+  const activeQueryRef = useRef("");
+  const verifiedResultRef = useRef<TrackingData | null>(null);
+  const resultVersionRef = useRef("");
+
+  const handleSearch = useCallback((searchQuery: string, background = false) => {
     const q = searchQuery.trim();
     if (!q) {
-      setError("Please enter your tracking number or order number.");
-      return;
+      requestRef.current?.abort(); activeQueryRef.current = ""; verifiedResultRef.current = null; setTrackingData(null);
+      setError("Please enter your tracking number or order number."); return;
     }
-
+    if (background && requestRef.current) return;
+    requestRef.current?.abort();
+    const request = new AbortController();
+    requestRef.current = request;
+    if (activeQueryRef.current.toLowerCase() !== q.toLowerCase()) {
+      verifiedResultRef.current = null; resultVersionRef.current = ""; setTrackingData(null);
+    }
+    activeQueryRef.current = q;
     setError(null);
-
-    startTransition(async () => {
+    const search = async () => {
       try {
         const res = await fetch("/api/order-tracking", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: q }),
-        });
-
-        const json = await res.json();
-
-        if (res.ok && json.status === "found" && json.data) {
-          setTrackingData(json.data);
-          setError(null);
-        } else {
-          setTrackingData(null);
-          setError(
-            json.message ||
-              "No tracking record was found for this number. Please verify the code from your confirmation email.",
-          );
-        }
-      } catch {
-        setTrackingData(null);
-        setError("Unable to connect to the tracking network right now. Please try again shortly.");
-      }
-    });
-  }, []);
-
-  // Check URL query parameter on initial load (e.g. ?tracking=... or ?number=...)
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const rawQuery = params.get("tracking") || params.get("number") || params.get("order");
-    if (!rawQuery) return;
-    const initialQuery = rawQuery.trim();
-    if (!initialQuery) return;
-
-    let ignore = false;
-    async function loadInitial() {
-      try {
-        const res = await fetch("/api/order-tracking", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: initialQuery }),
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: q }), cache: "no-store", signal: request.signal,
         });
         const json = await res.json();
-        if (!ignore) {
-          setQuery(initialQuery);
-          if (res.ok && json.status === "found" && json.data) {
-            setTrackingData(json.data);
-            setError(null);
-          } else {
-            setTrackingData(null);
-            setError(
-              json.message ||
-                "Unable to retrieve tracking information. Please check your tracking number and try again.",
-            );
+        if (request.signal.aborted) return;
+        if (res.ok && json.status === "found" && json.data && json.data.statusCode !== "UNAVAILABLE") {
+          const data: TrackingData = json.data;
+          // Timestamps for a backend check are not a shipment update.
+          const version = JSON.stringify({ ...data, checkedAt: undefined, statusMessage: undefined });
+          if (version !== resultVersionRef.current) {
+            resultVersionRef.current = version; verifiedResultRef.current = data; setTrackingData(data);
           }
+          setError(null);
+        } else if (!verifiedResultRef.current) {
+          setError(res.status === 404 ? json.message : "Your tracking update is taking longer than usual. Please try again shortly.");
         }
       } catch {
-        // Ignore initial load network errors
+        if (!request.signal.aborted && !verifiedResultRef.current) {
+          setError("Your tracking update is taking longer than usual. Please try again shortly.");
+        }
+      } finally {
+        if (requestRef.current === request) requestRef.current = null;
       }
-    }
-
-    void loadInitial();
-    return () => {
-      ignore = true;
     };
+    if (background) void search(); else startTransition(search);
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const initialQuery = (params.get("tracking") || params.get("number") || params.get("order") || "").trim();
+    let mounted = true;
+    if (initialQuery) void Promise.resolve().then(() => {
+      if (mounted) { setQuery(initialQuery); handleSearch(initialQuery); }
+    });
+    const refresh = () => {
+      if (document.visibilityState === "visible" && activeQueryRef.current) handleSearch(activeQueryRef.current, true);
+    };
+    const timer = window.setInterval(refresh, 5 * 60 * 1000);
+    return () => {
+      mounted = false; requestRef.current?.abort(); window.clearInterval(timer);
+    };
+  }, [handleSearch]);
 
   const handleCopy = (text: string) => {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
@@ -172,7 +171,7 @@ export function OrderTrackingPage() {
           </h1>
 
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-            Enter your tracking number or Buudy order number below to check the real-time status of your delivery.
+            Enter your tracking number or Buudy order number below to see the latest carrier updates for your delivery.
           </p>
 
           {/* Search Box */}
@@ -193,13 +192,17 @@ export function OrderTrackingPage() {
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Enter tracking number (e.g. ZHPHD... or JJD...)"
+                  placeholder="Enter tracking number, order reference (e.g. pay_...), or UK postcode..."
                   className="h-14 w-full rounded-full border border-[var(--border)] bg-white/90 pl-11 pr-10 text-sm font-medium text-[var(--plum)] shadow-sm outline-none transition placeholder:text-[var(--muted)]/60 focus:border-[var(--plum)] focus:bg-white focus:ring-2 focus:ring-[var(--plum)]/10"
                 />
                 {query && (
                   <button
                     type="button"
-                    onClick={() => setQuery("")}
+                    onClick={() => {
+                      requestRef.current?.abort(); requestRef.current = null; activeQueryRef.current = "";
+                      verifiedResultRef.current = null; resultVersionRef.current = "";
+                      setQuery(""); setTrackingData(null); setError(null);
+                    }}
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-[var(--muted)] hover:text-[var(--plum)]"
                   >
                     Clear
@@ -247,7 +250,7 @@ export function OrderTrackingPage() {
                   <AlertCircle size={18} />
                 </div>
                 <div className="space-y-0.5">
-                  <p className="text-sm font-bold text-[var(--plum)]">Order Not Found</p>
+                  <p className="text-sm font-bold text-[var(--plum)]">Tracking Update</p>
                   <p className="text-xs sm:text-sm font-light text-[var(--muted)] leading-relaxed">
                     {error}
                   </p>
@@ -264,14 +267,16 @@ export function OrderTrackingPage() {
             <div className="overflow-hidden rounded-3xl border border-[var(--border)] bg-white/95 p-6 shadow-sm sm:p-8">
               <div className="flex flex-col justify-between gap-4 border-b border-[var(--border)]/60 pb-6 sm:flex-row sm:items-center">
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
-                      Order Reference
-                    </span>
-                    <span className="font-mono text-sm font-bold text-[var(--plum)]">
-                      {trackingData.orderRef}
-                    </span>
-                  </div>
+                  {trackingData.orderRef ? (
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
+                        Order Reference
+                      </span>
+                      <span className="font-mono text-sm font-bold text-[var(--plum)]">
+                        {trackingData.orderRef}
+                      </span>
+                    </div>
+                  ) : null}
                   <h2 className="mt-1 text-2xl font-bold text-[var(--plum)] sm:text-3xl">
                     {trackingData.status}
                   </h2>
@@ -303,7 +308,7 @@ export function OrderTrackingPage() {
               {/* Order Metadata Grid */}
               <div
                 className={`mt-6 grid grid-cols-2 gap-4 ${
-                  trackingData.statusCode === "DELIVERED" ? "sm:grid-cols-4" : "sm:grid-cols-3"
+                  trackingData.estimatedDelivery ? "sm:grid-cols-4" : "sm:grid-cols-3"
                 } sm:gap-6`}
               >
                 <div>
@@ -347,12 +352,18 @@ export function OrderTrackingPage() {
                   </span>
                 </div>
 
-                {trackingData.statusCode === "DELIVERED" && trackingData.estimatedDelivery && (
+                {trackingData.estimatedDelivery && (
                   <div>
                     <span className="block text-xs font-medium uppercase tracking-wider text-[var(--muted)]">
-                      Delivered Date
+                      {trackingData.statusCode === "DELIVERED" ? "Delivered Date" : "Estimated Delivery"}
                     </span>
-                    <span className="mt-1 block text-sm font-semibold text-emerald-700">
+                    <span
+                      className={`mt-1 block text-sm font-semibold ${
+                        trackingData.statusCode === "DELIVERED"
+                          ? "text-emerald-700"
+                          : "text-[var(--plum)]"
+                      }`}
+                    >
                       {trackingData.estimatedDelivery}
                     </span>
                   </div>
@@ -363,7 +374,7 @@ export function OrderTrackingPage() {
               <div className="mt-10 pt-6">
                 <div className="mb-3 flex items-center justify-between text-xs font-semibold text-[var(--muted)]">
                   <span>Delivery Journey</span>
-                  <span className="text-[var(--plum)]">{trackingData.progressPercentage}% Complete</span>
+                  <span className="text-[var(--plum)]">{trackingData.statusCode === "UNAVAILABLE" ? "Awaiting carrier update" : trackingData.status}</span>
                 </div>
 
                 {/* Linear Bar */}
@@ -375,37 +386,31 @@ export function OrderTrackingPage() {
                 </div>
 
                 {/* Step Icons & Labels */}
-                <div className="mt-6 grid grid-cols-5 gap-1.5 sm:gap-2">
+                <div className="mt-6 grid grid-cols-4 gap-1.5 sm:gap-2">
                   {[
                     {
-                      label: "Order Placed",
-                      desc: "Confirmed",
-                      icon: CheckCircle2,
-                      step: 0,
-                    },
-                    {
                       label: "Processing",
-                      desc: "Quality Check",
+                      desc: "Preparing order",
                       icon: Package,
-                      step: 1,
+                      step: 0,
                     },
                     {
                       label: "In Transit",
                       desc: "On the way",
                       icon: Truck,
-                      step: 2,
+                      step: 1,
                     },
                     {
                       label: "Out for Delivery",
                       desc: "With Courier",
                       icon: MapPin,
-                      step: 3,
+                      step: 2,
                     },
                     {
                       label: "Delivered",
                       desc: "Arrived",
                       icon: Home,
-                      step: 4,
+                      step: 3,
                     },
                   ].map((s) => {
                     const isCompleted = trackingData.activeStepIndex >= s.step;
@@ -445,6 +450,20 @@ export function OrderTrackingPage() {
                     );
                   })}
                 </div>
+
+                {trackingData.statusMessage && (
+                  <div className="mt-8 flex items-start gap-3 rounded-2xl border border-[rgba(58,31,61,0.12)] bg-[var(--cream)]/60 p-4 text-left">
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--plum)]/10 text-[var(--plum)]">
+                      <Truck size={15} />
+                    </div>
+                    <div className="space-y-0.5">
+                      <p className="text-xs font-bold uppercase tracking-wider text-[var(--plum)]">Logistics Update</p>
+                      <p className="text-xs sm:text-sm font-medium leading-relaxed text-[var(--muted)]">
+                        {trackingData.statusMessage}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -457,9 +476,11 @@ export function OrderTrackingPage() {
                     Shipment Timeline
                   </h3>
                 </div>
-                <span className="text-xs text-[var(--muted)]">Updates in Real-Time</span>
+                <span className="text-xs text-[var(--muted)]">Latest carrier scans</span>
               </div>
 
+              <p className="mt-4 text-xs text-[var(--muted)]">Carrier event times are shown as supplied by the tracking provider.</p>
+              {trackingData.timeline.length === 0 && <p className="mt-6 text-sm text-[var(--muted)]">No carrier checkpoints are available yet.</p>}
               <div className="relative mt-8 space-y-8 pl-6 before:absolute before:bottom-3 before:left-3 before:top-3 before:w-[2px] before:bg-[var(--border)] sm:pl-8 sm:before:left-4">
                 {trackingData.timeline.map((event, index) => {
                   return (
@@ -510,6 +531,7 @@ export function OrderTrackingPage() {
                   <h4 className="font-bold text-[var(--plum)]">Order Contents</h4>
                 </div>
                 <div className="mt-4 divide-y divide-[var(--border)]/40">
+                  {trackingData.items.length === 0 && <p className="text-sm text-[var(--muted)]">Order contents are currently unavailable.</p>}
                   {trackingData.items.map((item, idx) => (
                     <div key={idx} className="flex items-center justify-between py-3">
                       <div>
@@ -534,13 +556,13 @@ export function OrderTrackingPage() {
                     <h4 className="font-bold text-[var(--plum)]">Need Help With This Order?</h4>
                   </div>
                   <p className="mt-4 text-xs font-light leading-relaxed text-[var(--muted)] sm:text-sm">
-                    Have questions about delivery timing or need to request assistance? Our dedicated Australian customer care team is here to support you.
+                    Have questions about delivery timing or need to request assistance? Our dedicated UK customer care team is here to support you.
                   </p>
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a
-                    href="mailto:support@buudy.com"
+                    href="mailto:support@buudy.co.uk"
                     className="inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--plum)] bg-[var(--plum)] px-5 text-xs font-semibold text-[var(--cream)] transition hover:border-[var(--gold)]"
                   >
                     Contact Support

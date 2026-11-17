@@ -202,9 +202,6 @@ export function ProductGallery({
         }
         .buudy-gallery-badge__header {
           display: block;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-          text-rendering: optimizeLegibility;
           margin: 0;
           padding: 0;
         }
@@ -240,11 +237,11 @@ export function ProductGallery({
           margin: 0;
           margin-top: 3px;
           display: block;
+          animation: buudySubSlideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+          will-change: opacity, transform;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
           text-rendering: optimizeLegibility;
-          animation: buudySubSlideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
-          will-change: opacity, transform;
         }
         .buudy-gallery-badge--top-right .buudy-gallery-badge__sub,
         .buudy-gallery-badge--bottom-right .buudy-gallery-badge__sub {
@@ -590,6 +587,12 @@ export function ProductGallery({
                   muted
                   loop
                   playsInline
+                  ref={(el) => {
+                    if (el) {
+                      el.defaultMuted = true;
+                      el.muted = true;
+                    }
+                  }}
                 />
               ) : (
                 <img

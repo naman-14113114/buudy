@@ -7,7 +7,6 @@ import { transformations, type Transformation } from "@/data/productSections";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const NUM_SETS = 3;
-const loopedStories = Array(NUM_SETS).fill(transformations).flat();
 const storyImagePromises = new Map<string, Promise<void>>();
 
 function preloadStoryImage(src: string) {
@@ -43,7 +42,25 @@ function preloadStoryImage(src: string) {
   return promise;
 }
 
-export function BeforeAfterGrid() {
+export interface BeforeAfterGridProps {
+  items?: Transformation[];
+  eyebrow?: string;
+  title?: React.ReactNode;
+  description?: string;
+}
+
+export function BeforeAfterGrid({
+  items,
+  eyebrow = "Real users / Real results",
+  title = (
+    <>
+      Eight stories, <em className="buudy-italic">one device</em>.
+    </>
+  ),
+  description = "Verified customer transformations, photographed in their own homes after consistent use of the Buudy LED Mask.",
+}: BeforeAfterGridProps = {}) {
+  const activeStories = items && items.length > 0 ? items : transformations;
+  const loopedStories = Array(NUM_SETS).fill(activeStories).flat();
   const trackRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -83,14 +100,14 @@ export function BeforeAfterGrid() {
     (offset: number) => {
       if (!selectedStory) return;
 
-      const currentIndex = transformations.findIndex(
+      const currentIndex = activeStories.findIndex(
         (story) => story.id === selectedStory.id,
       );
       if (currentIndex < 0) return;
 
       const nextIndex =
-        (currentIndex + offset + transformations.length) % transformations.length;
-      const nextStory = transformations[nextIndex];
+        (currentIndex + offset + activeStories.length) % activeStories.length;
+      const nextStory = activeStories[nextIndex];
       const requestId = navigationRequestRef.current + 1;
       navigationRequestRef.current = requestId;
 
@@ -100,7 +117,7 @@ export function BeforeAfterGrid() {
         }
       });
     },
-    [selectedStory],
+    [activeStories, selectedStory],
   );
 
   const handleNextStory = useCallback(
@@ -253,13 +270,13 @@ export function BeforeAfterGrid() {
   useEffect(() => {
     if (!selectedStory) return;
 
-    const currentIndex = transformations.findIndex(
+    const currentIndex = activeStories.findIndex(
       (story) => story.id === selectedStory.id,
     );
-    const previous = transformations[
-      (currentIndex - 1 + transformations.length) % transformations.length
+    const previous = activeStories[
+      (currentIndex - 1 + activeStories.length) % activeStories.length
     ];
-    const next = transformations[(currentIndex + 1) % transformations.length];
+    const next = activeStories[(currentIndex + 1) % activeStories.length];
     void preloadStoryImage(previous.image);
     void preloadStoryImage(next.image);
 
@@ -276,7 +293,7 @@ export function BeforeAfterGrid() {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [closeStory, selectedStory]);
+  }, [activeStories, closeStory, selectedStory]);
 
   const handleTouchEnd = () => {
     if (touchStartX.current === null || touchEndX.current === null) return;
@@ -293,16 +310,11 @@ export function BeforeAfterGrid() {
       <div className="buudy-wrap">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-6 md:mb-12">
           <SectionHeading
-            eyebrow="Real users / Real results"
-            title={
-              <>
-                Eight stories, <em className="buudy-italic">one device</em>.
-              </>
-            }
+            eyebrow={eyebrow}
+            title={title}
           />
           <p className="max-w-sm text-sm leading-7 text-[var(--muted)]">
-            Verified customer transformations, photographed in their own homes
-            after consistent use of the Buudy LED Mask.
+            {description}
           </p>
         </div>
       </div>

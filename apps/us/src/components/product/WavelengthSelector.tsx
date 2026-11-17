@@ -4,6 +4,7 @@ import { useState } from "react";
 import { wavelengths } from "@/data/productSections";
 import { productMediaAsset } from "@/lib/media";
 
+
 export function WavelengthSelector() {
   const [active, setActive] = useState(
     wavelengths.find((wavelength) => wavelength.name === "RED") ?? wavelengths[0],
@@ -42,6 +43,12 @@ export function WavelengthSelector() {
                 muted
                 loop
                 playsInline
+                ref={(el) => {
+                  if (el) {
+                    el.defaultMuted = true;
+                    el.muted = true;
+                  }
+                }}
               />
             </div>
           </div>
@@ -52,7 +59,7 @@ export function WavelengthSelector() {
               return (
                 <li key={wavelength.name}>
                   <button
-                    className={`flex w-full items-center gap-4 border-b border-[rgba(247,241,232,.1)] py-2 text-left transition-all duration-300 hover:pl-3 group cursor-pointer ${
+                    className={`flex w-full items-center gap-4 border-b border-[rgba(247,241,232,.1)] py-2 text-left transition-all duration-300 hover:pl-3 group ${
                       isActive ? "bg-[rgba(247,241,232,.03)] pl-3 border-l-2 border-l-[var(--gold)]" : ""
                     }`}
                     onClick={() => setActive(wavelength)}

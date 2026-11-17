@@ -5,14 +5,16 @@ import { GiftBundle } from "./GiftBundle";
 
 export function ProductHero({
   product,
-  galleryVariant = product.template === "mask" || product.template === "torch"
+  galleryVariant = product.template === "mask" || product.template === "torch" || product.template === "serum" || product.template === "cleanser"
     ? "omnilux"
     : "default",
   isHalloween = false,
+  isEarlyBlackFriday = true,
 }: {
   product: Product;
   galleryVariant?: "default" | "omnilux";
   isHalloween?: boolean;
+  isEarlyBlackFriday?: boolean;
 }) {
   return (
     <section
@@ -45,7 +47,11 @@ export function ProductHero({
           )}
         </div>
         <div className="w-full [overflow-anchor:none]">
-          <GiftBundle product={product} isHalloween={isHalloween} />
+          <GiftBundle
+            product={product}
+            isHalloween={isHalloween}
+            isEarlyBlackFriday={isEarlyBlackFriday}
+          />
         </div>
       </div>
     </section>

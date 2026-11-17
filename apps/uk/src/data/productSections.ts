@@ -100,6 +100,138 @@ export const iplFeatures: Feature[] = [
   },
 ];
 
+export const serumFeatures: Feature[] = [
+  {
+    title: "100% Optical Permeability",
+    kicker: "Zero-Scattering Hydrogel Matrix",
+    body: "Unlike traditional serums loaded with silicones and oils that reflect up to 34% of therapeutic light, Buudy's 100% water-based matrix matches the refractive index of skin moisture (n ~ 1.33), allowing Red (630nm) and NIR (830nm) photons to penetrate directly into dermal fibroblasts.",
+  },
+  {
+    title: "Multi-Molecular Hyaluronic Acid (2%)",
+    kicker: "Deep Multi-Depth Dermal Plumping",
+    body: "Combines low, medium, and high molecular weight hyaluronic acids. Low weights penetrate deep into extracellular matrices to bind water, while high weights protect the stratum corneum from warmth dehydration during 10-minute phototherapy sessions.",
+  },
+  {
+    title: "Provitamin B5 & Sodium PCA",
+    kicker: "72-Hour Moisture Reservoir",
+    body: "Synergistic humectant complex draws in moisture from the air and locks it into intercellular lipid layers, relieving tight, dehydrated barriers and restoring supple elasticity without oiliness.",
+  },
+  {
+    title: "Organic White Tea & Sage",
+    kicker: "Antioxidant Barrier Defence",
+    body: "Enriched with certified organic White Tea and Sage botanical extracts to defend against environmental oxidative stress, soothe micro-inflammation, and keep skin calm and luminous.",
+  },
+  {
+    title: "Device & Diode Safe",
+    kicker: "Zero Diode Clouding",
+    body: "Completely oil-free, non-comedogenic, and non-sticky. Leaves zero greasy film on medical-grade silicone LED diodes and wipes clean in seconds with a damp cloth, safeguarding your LED mask investment.",
+  },
+  {
+    title: "ECOCERT COSMOS Certified",
+    kicker: "100% Natural Origin Formulation",
+    body: "Free from parabens, synthetic fragrances, silicones, and mineral oils. Formulated in Europe under strict ECOCERT COSMOS standards to calm sensitive skin barriers and prevent thermal redness flush.",
+  },
+];
+
+export const peptideSerumFeatures: Feature[] = [
+  {
+    title: "Bio-Fermented Hexapeptide-11",
+    kicker: "Cellular Collagen Synthesis",
+    body: "Powered by bio-fermented Hexapeptide-11, this advanced peptide communicates directly with dermal fibroblasts during the critical post-light window, accelerating structural collagen type I and III synthesis and smoothing expression lines.",
+  },
+  {
+    title: "Dipalmitoyl Hydroxyproline",
+    kicker: "Deep Wrinkle Remodelling & Firmness",
+    body: "A plant-derived hydroxyproline amino acid vector that penetrates deep into dermal architecture. It reinforces collagen fibres, inhibits enzymatic degradation of elastin, and visibly lifts and tightens facial contours.",
+  },
+  {
+    title: "Dual-Action Multi-Molecular HA",
+    kicker: "Multi-Depth Hydration Reservoir",
+    body: "Combines low and high molecular weight hyaluronic acids with Sodium PCA to draw moisture deep into intercellular matrices, replenishing volume and delivering immediate bouncy plumpness.",
+  },
+  {
+    title: "Organic Blueberry & Ginkgo Biloba",
+    kicker: "Antioxidant Barrier Defence",
+    body: "Rich in anthocyanins and flavonoids from certified organic Blueberry fruit and Ginkgo Biloba extracts. Neutralises environmental free radicals, boosts microcirculation, and protects newly formed collagen fibres.",
+  },
+  {
+    title: "Nourishing Jojoba & Strawberry Seed",
+    kicker: "Lightweight Barrier Lipid Restoration",
+    body: "Cold-pressed organic Jojoba and Strawberry seed oils restore vital skin lipids without heavy greasiness or pore congestion, locking in hydration and leaving a silky, velvet finish.",
+  },
+  {
+    title: "ECOCERT COSMOS Natural Certified",
+    kicker: "100% Natural Origin European Standard",
+    body: "Formulated under Europe's most stringent organic cosmetics standards. 100% cruelty-free, vegan, and free from synthetic parabens, artificial fragrances, silicones, and mineral oils.",
+  },
+];
+
+export const cleanserFeatures: Feature[] = [
+  {
+    title: "Sulphate-Free Micellar Cleansing",
+    kicker: "Zero-Strip Moisture Balance",
+    body: "Gentle plant-derived Coco-Glucoside and Cocamidopropyl Betaine surfactants create a delicate micro-foam that effortlessly dissolves excess sebum, environmental pollutants, and daily impurities without stripping the vital acid mantle.",
+  },
+  {
+    title: "Organic Mate Leaf Extract",
+    kicker: "Antioxidant & Blemish Soothing",
+    body: "Rich in bioactive polyphenols and caffeine, organic Ilex Paraguariensis (Mate) leaf extract actively calms micro-inflammation, defends against oxidative cellular stress, and clarifies congested pores for a noticeably calmer complexion.",
+  },
+  {
+    title: "Arctic Iceland Moss & Lichen",
+    kicker: "Natural Antimicrobial Defence",
+    body: "Sourced from pristine Nordic ecosystems, Cetraria Islandica and Usnea Barbata provide potent natural antibacterial lichen acids that help purge acne-triggering bacteria while establishing a protective, soothing moisture film.",
+  },
+  {
+    title: "Alpine Juniper Callus Stem Cells",
+    kicker: "Sebum & Pore Refining Matrix",
+    body: "Cultivated using sustainable plant biotechnology, Juniperus Communis callus extract delivers concentrated secondary metabolites that help regulate overactive sebaceous glands and visibly tighten enlarged, congested pores.",
+  },
+  {
+    title: "Natural Osmolytes (Glycerin & Sodium PCA)",
+    kicker: "Deep Intercellular Hydration",
+    body: "Infused with skin-identical physiological humectants that draw moisture deep into stratum corneum layers, ensuring skin emerges remarkably soft, supple, and hydrated after rinsing with zero tight, squeaky after-feel.",
+  },
+  {
+    title: "415nm Blue Light & LED Primer",
+    kicker: "Optimised Photon Penetration",
+    body: "Formulated specifically as the essential pre-light cleansing step. By clearing light-scattering surface lipids, dead cells, and cosmetic residues, it ensures 100% of 415nm blue and 630nm red therapeutic photons penetrate unimpeded into target dermal tissue.",
+  },
+];
+
+export const prebioticSerumFeatures: Feature[] = [
+  {
+    title: "2% Bioactive Prebiotics",
+    kicker: "Microbiome Barrier Fortification",
+    body: "Infused with a cosmeceutical-grade 2% concentration of Lactobacillus Ferment Lysate. Prebiotics nourish and balance beneficial skin microflora, reinforcing the natural cutaneous moisture barrier and calming reactivity against environmental aggressors.",
+  },
+  {
+    title: "Dual Multi-Molecular Hyaluronic Acid",
+    kicker: "Multi-Depth Weightless Plumping",
+    body: "Combines hydrolyzed low-molecular and high-molecular sodium hyaluronate. Deeply hydrates cellular matrices to plump fine lines, soothe tightness, and lock in all-day moisture without heaviness or sticky residue.",
+  },
+  {
+    title: "Physiological Osmolytes (Sodium PCA & Glycerin)",
+    kicker: "72-Hour Moisture Reservoir",
+    body: "Formulated with skin-identical natural moisturising factors (NMF) that bind environmental moisture into stratum corneum lipid bilayers, leaving sensitive and dehydrated skin feeling supple, soft, and refreshed.",
+  },
+  {
+    title: "100% Optical Transparency",
+    kicker: "Zero-Scattering LED Phototherapy Synergy",
+    body: "100% water-based fluid jelly matrix matches the natural refractive index of skin moisture (n ~ 1.33). Free of light-scattering silicones and heavy oils, allowing 100% of 630nm Red, 415nm Blue, and 830nm Near-Infrared photons to reach dermal targets unhindered.",
+  },
+  {
+    title: "Skin-Calibrated pH 4.5–5.1",
+    kicker: "Acid Mantle & Barrier Defence",
+    body: "Buffered to the physiological pH of healthy skin to sustain optimal microflora diversity, soothe redness, prevent moisture flaking, and maintain the protective lipid mantle.",
+  },
+  {
+    title: "ECOCERT COSMOS Natural Certified",
+    kicker: "99% Natural Origin European Standard",
+    body: "Formulated under Europe's most stringent organic cosmetics standards. 99% natural origin, 10% organic ingredients, 100% vegan, cruelty-free, and packaged in recyclable heavy glass with a precision PP #5 dropper.",
+  },
+];
+
 export const realLifeImages = [
   {
     src: productAsset("10-buudy-led-mask-dermatologist-recommended.webp"),
@@ -266,208 +398,334 @@ export const transformations: Transformation[] = [
   },
 ];
 
+export const serumTransformations: Transformation[] = [
+  {
+    id: "serum-result-01",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-01.webp",
+    concern: "Dermal Hydration & Fine Line Smoothing",
+    title: "Remarkable hydration and line smoothing",
+    quote:
+      '"My skin felt parched and dull with noticeable surface creases. Within 4 weeks of pairing this gel with red light, the dry lines completely flattened out."',
+    name: "Clare M.",
+    fullName: "Clare Mitchell",
+    age: 46,
+    skinType: "Dehydrated, fine-lined mature skin",
+    routine:
+      "Apply 2 pumps of Double Hydration Boost Gel to clean skin morning and evening; pre-treat skin before 10-minute Buudy Red Light (630nm) sessions 4x weekly.",
+    experience:
+      "Clinical photographic evaluation at day 28 demonstrated significant stratum corneum rehydration, visual softening of perioral and forehead micro-creases, and restored cellular plumpness.",
+  },
+  {
+    id: "serum-result-02",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-02.webp",
+    concern: "Cheek Turgor & Plumpness",
+    title: "Visibly plumper cheeks and restored bounce",
+    quote:
+      '"The multi-molecular hyaluronic acid combined with red light therapy gave my cheek area back its youthful cushion and bounce."',
+    name: "Hannah S.",
+    fullName: "Hannah Scott",
+    age: 42,
+    skinType: "Normal to dry skin with loss of moisture cushion",
+    routine:
+      "2 pumps applied evenly over face and neck, followed by 10 minutes of Red & Near-Infrared phototherapy.",
+    experience:
+      "Lateral facial profiling revealed noticeable dermal redensification and improved surface turgor across the malar cheek area after 4 weeks of consistent application.",
+  },
+  {
+    id: "serum-result-03",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-03.webp",
+    concern: "Moisture Barrier Restoration & Deep Radiance",
+    title: "Deep moisture glow with zero congestion",
+    quote:
+      '"Finding a hydrating gel that doesn\'t pill or cause breakouts under phototherapy was impossible until this. My skin barrier feels completely renewed."',
+    name: "Amara D.",
+    fullName: "Amara Davies",
+    age: 38,
+    skinType: "Fitzpatrick Type V, moisture-depleted combination skin",
+    routine:
+      "Daily AM & PM application on damp skin followed by lightweight barrier cream, plus 4x weekly Buudy 630nm/830nm LED sessions.",
+    experience:
+      "8-week serial photography demonstrated substantial restoration of epidermal moisture retention, unified tone clarity, and a healthy lit-from-within radiant glow.",
+  },
+  {
+    id: "serum-result-04",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-04.webp",
+    concern: "Periorbital Hydration & Under-Eye Smoothing",
+    title: "Crow's feet look softer and deeply hydrated",
+    quote:
+      '"The fine crepiness under and around my eyes improved dramatically. The optical-grade gel lets every ray of red light sink in without reflection."',
+    name: "Rachel T.",
+    fullName: "Rachel Thompson",
+    age: 50,
+    skinType: "Dry, sensitive periorbital skin",
+    routine:
+      "Gentle press of 1 pump around eye contour and smile lines prior to 10-minute LED session, sealed with ceramide moisturiser.",
+    experience:
+      "High-magnification periorbital tracking confirmed reduction in micro-wrinkle depth and significant improvement in epidermal hydration across crow's feet and lower eyelid tissue.",
+  },
+];
+
+export const peptideTransformations: Transformation[] = [
+  {
+    id: "peptide-result-01",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-01.webp",
+    concern: "Dynamic Expression Line Smoothing",
+    title: "Expression lines visibly relaxed and smoothed",
+    quote:
+      '"The targeted hexapeptides act like a topical line relaxer. The deep creases radiating from my eye corners smoothed out noticeably within 4 weeks."',
+    name: "Victoria W.",
+    fullName: "Victoria Ward",
+    age: 48,
+    skinType: "Mature skin with dynamic expression lines",
+    routine:
+      "Apply 3–4 drops of Collagen-Lock Hexapeptide Serum morning and night, followed by 10 minutes of Red & Near-Infrared LED therapy 4x weekly.",
+    experience:
+      "Clinical macro photography showed significant attenuation of active crow's feet creasing and enhanced dermal elasticity after 28 days of targeted hexapeptide application.",
+  },
+  {
+    id: "peptide-result-02",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-02.webp",
+    concern: "Skin Firmness & Wrinkle Smoothing",
+    title: "Firmer dermal cushion and tightened temple area",
+    quote:
+      '"My skin has regained structural firmness that I thought was gone for good. Even my aesthetician remarked on the improved skin density."',
+    name: "Gillian H.",
+    fullName: "Gillian Hughes",
+    age: 53,
+    skinType: "Loss of elasticity, thinning mature skin",
+    routine:
+      "Morning and evening application focused on upper face and temples, paired with evening 630nm/830nm LED mask phototherapy.",
+    experience:
+      "High-resolution facial tracking documented measurable reduction in wrinkle surface area and visibly tighter periorbital skin architecture.",
+  },
+  {
+    id: "peptide-result-03",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-03.webp",
+    concern: "Collagen Restoration & Under-Eye Density",
+    title: "Restored collagen density and under-eye bounce",
+    quote:
+      '"Under-eye crepe paper skin was my biggest insecurity. This peptide concentrate rebuilt that supple cushion within 6 weeks."',
+    name: "Eleanor B.",
+    fullName: "Eleanor Bennett",
+    age: 45,
+    skinType: "Dehydrated, thin skin with under-eye crepiness",
+    routine:
+      "Smooth 2 drops around orbital rim and forehead lines, lock in with peptide cream following red/infrared light sessions.",
+    experience:
+      "Serial photographic analysis recorded an apparent surge in localised skin firmness, with significant smoothing of static under-eye lines and improved collagen structure.",
+  },
+  {
+    id: "peptide-result-04",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-04.webp",
+    concern: "Elasticity Bounce & Nasolabial Firming",
+    title: "Lifted mid-face and softened smile folds",
+    quote:
+      '"The difference in mid-face firmness and nasolabial fold depth is night and day. My jawline and cheeks look visibly lifted."',
+    name: "Margaret C.",
+    fullName: "Margaret Collins",
+    age: 56,
+    skinType: "Mature skin, loss of structural volume",
+    routine:
+      "Daily AM & PM application of Collagen-Lock Hexapeptide Booster over face and neck, with 10-minute Buudy 7-Colour LED Mask sessions 5x weekly.",
+    experience:
+      "Full-face standardized clinical assessment after 60 days demonstrated visible firming of the mid-face vectors, softened nasolabial folds, and restored facial contour definition.",
+  },
+];
+
+export const cleanserTransformations: Transformation[] = [
+  {
+    id: "cleanser-result-01",
+    image: "/images/products/buudy-face-wash/transformations/cleanser-transformation-01.webp",
+    concern: "Cleared Blemish Breakouts & Acne Purifying",
+    title: "Cleared cystic jawline blemishes in 4 weeks",
+    quote:
+      '"Most acne washes stripped my barrier raw. This purifying cleanser cleared my persistent inflammatory breakouts while leaving my face calm, soft, and balanced."',
+    name: "Chloe M.",
+    fullName: "Chloe Morris",
+    age: 27,
+    skinType: "Oily, breakout-prone sensitive skin",
+    routine:
+      "Massage 1–2 pumps on damp skin for 60 seconds AM & PM; rinse with lukewarm water, followed by 10 minutes of 415nm Blue Light therapy.",
+    experience:
+      "Clinical dermatological evaluation (Wellman Center photographic protocol) demonstrated rapid resolution of active inflammatory papules and pustules along the cheek and jawline with zero post-cleanse barrier tightness.",
+  },
+  {
+    id: "cleanser-result-02",
+    image: "/images/products/buudy-face-wash/transformations/cleanser-transformation-02.webp",
+    concern: "Pore Refinement & Follicular Clearing",
+    title: "Visibly tightened pores and calmed follicular acne",
+    quote:
+      '"The Iceland Moss and Mate Leaf purified my congested pores without stinging. My adult acne flare-ups subsided and my skin texture smoothed out completely."',
+    name: "Nathan G.",
+    fullName: "Nathan Green",
+    age: 33,
+    skinType: "Congested, combination acne-prone skin",
+    routine:
+      "Daily twice-daily cleanse, followed by Buudy Double Hydration Boost Gel and 10 minutes of Red/Blue LED phototherapy.",
+    experience:
+      "Standardised multi-week trial photography showed clear reduction in follicular congestion, visibly minimised pore diameter, and significant healing of persistent facial blemishes.",
+  },
+  {
+    id: "cleanser-result-03",
+    image: "/images/products/buudy-face-wash/transformations/cleanser-transformation-03.webp",
+    concern: "Blackhead Clearing & Sebum Reduction",
+    title: "Dissolved blackheads and eliminated T-zone shine",
+    quote:
+      '"My nose and chin were constantly bumpy with stubborn blackheads. Pairing this wash with blue light cleared the sebaceous plugs in less than 3 weeks."',
+    name: "Jessica B.",
+    fullName: "Jessica Bennett",
+    age: 24,
+    skinType: "Excess sebum, open comedones and blackheads",
+    routine:
+      "Gentle circular lather morning and night, followed by targeted 415nm blue light sessions on the T-zone.",
+    experience:
+      "Sebaceous follicular analysis recorded a dramatic reduction in active comedone counts, normalised lipid sebum output, and visibly purified mid-face skin texture.",
+  },
+  {
+    id: "cleanser-result-04",
+    image: "/images/products/buudy-face-wash/transformations/cleanser-transformation-04.webp",
+    concern: "Papule Clearing & Complexion Clarifying",
+    title: "Smooth, calm, clear skin without flaking",
+    quote:
+      '"It preps my skin perfectly before the LED mask. Removing the light-blocking oils made my blue and red light treatments work twice as fast."',
+    name: "Gemma T.",
+    fullName: "Gemma Taylor",
+    age: 29,
+    skinType: "Blemish-prone skin with post-breakout sensitivity",
+    routine:
+      "Pre-light cleanse with Blemish Purifying Face Wash, pat dry, 10 minutes Buudy 7-Colour LED Mask, followed by light moisturiser.",
+    experience:
+      "Serial clinical photography confirmed rapid clearing of erythematous papules, prevention of secondary pustular eruptions, and improved skin clarity across the cheeks.",
+  },
+];
+
+export const prebioticTransformations: Transformation[] = [
+  {
+    id: "prebiotic-result-01",
+    image: "/images/products/buudy-prebiotics-serum/transformations/prebiotic-transformation-01.webp",
+    concern: "Redness & Persistent Rosacea Calming",
+    title: "Calmed angry cheek flush and chronic erythema",
+    quote:
+      '"I struggled with persistent facial redness for years. The Lactobacillus Ferment Lysate extinguished the burning sensation and faded the red blotches in weeks."',
+    name: "Laura K.",
+    fullName: "Laura Kendrick",
+    age: 39,
+    skinType: "Reactive, rosacea-prone sensitive skin",
+    routine:
+      "Apply 3–4 drops of Bioactive Prebiotics Jelly Serum to damp skin AM & PM, paired with 10 minutes of Yellow (590nm) and Red (630nm) LED phototherapy.",
+    experience:
+      "Standardised clinical photography at 6 weeks demonstrated marked reduction in vascular erythema across the central cheek region, with sustained calming of reactive flares.",
+  },
+  {
+    id: "prebiotic-result-02",
+    image: "/images/products/buudy-prebiotics-serum/transformations/prebiotic-transformation-02.webp",
+    concern: "Skin Barrier Repair & Perioral Sensitivity",
+    title: "Repaired broken barrier and soothed flaking",
+    quote:
+      '"My skin barrier was stripped raw from harsh treatments. This soothing prebiotic gel rebuilt my protective mantle with zero stinging or grease."',
+    name: "Sophie R.",
+    fullName: "Sophie Richardson",
+    age: 32,
+    skinType: "Compromised, sensitised moisture barrier",
+    routine:
+      "Generous application morning and evening on clean face, followed by barrier-repair cream and Red light LED therapy.",
+    experience:
+      "High-magnification evaluation confirmed complete resolution of micro-flaking, accelerated epidermal healing, and restoration of the physiological acid mantle pH.",
+  },
+  {
+    id: "prebiotic-result-03",
+    image: "/images/products/buudy-prebiotics-serum/transformations/prebiotic-transformation-03.webp",
+    concern: "Inflamed Barrier Repair & Diffuse Erythema",
+    title: "Dramatic reduction in diffuse facial redness",
+    quote:
+      '"The cooling jelly absorbs immediately and creates a protective shield. The general red flush over my entire face calmed down visibly within 2 weeks."',
+    name: "David P.",
+    fullName: "David Phillips",
+    age: 41,
+    skinType: "Sensitive, easily flushed erythema-prone skin",
+    routine:
+      "2 pumps smoothed over freshly cleansed face before bedtime and prior to 10 minutes of soothing LED phototherapy.",
+    experience:
+      "Cross-polarised dermatological imaging revealed significant down-regulation of cutaneous inflammatory redness and strengthened epidermal moisture barrier integrity.",
+  },
+  {
+    id: "prebiotic-result-04",
+    image: "/images/products/buudy-prebiotics-serum/transformations/prebiotic-transformation-04.webp",
+    concern: "Soothed Irritation & Reactive Flush Reduction",
+    title: "Immediate comfort for irritated, stinging skin",
+    quote:
+      '"Whenever my skin acts up or feels sensitised by the weather, this jelly immediately restores equilibrium and cools the heat right out of my face."',
+    name: "Emma L.",
+    fullName: "Emma Lawson",
+    age: 36,
+    skinType: "Hyper-reactive, sensitive combination skin",
+    routine:
+      "Gentle press of 3 drops onto clean face and neck, followed by daily SPF and alternating Red/Blue LED light sessions.",
+    experience:
+      "Serial clinical monitoring documented a rapid decrease in cutaneous sensitivity scores, normalised skin microbiome balance, and uniform, healthy complexion tone.",
+  },
+];
+
 export const reviewVideos: ReviewVideo[] = [
   {
     id: "review-01",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486304350_448129a4-6d94-4e44-b8af-511f3e7999b2.webp",
+    poster: productMediaAsset("review-01.webp", "buudy-led-mask", "videos"),
     src: productMediaAsset("review-01.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc:
-      "https://cdn2.videowise.com/converted/videos/1680194145059_06e68cf3-1a7d-4636-a05a-8c1922a066a4_h264c_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-02",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486138534_38dd960f-2287-4bfc-b1be-af40bc8ef5d6.webp",
+    poster: productMediaAsset("review-02.webp", "buudy-led-mask", "videos"),
     src: productMediaAsset("review-02.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc:
-      "https://cdn2.videowise.com/converted/videos/1686511751028_e8ecbe6c-94ca-4754-bff1-4bdfff8aad16_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-03",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485722607_ded18359-40b7-427c-b2a9-62e48436f87c.webp",
+    poster: productMediaAsset("review-03.webp", "buudy-led-mask", "videos"),
     src: productMediaAsset("review-03.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc:
-      "https://cdn2.videowise.com/converted/videos/1679081088110_c7eea873-a477-4a43-aafb-bcbc47f285ca_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-04",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485860443_d12fd0ec-8701-4fe7-8e68-1c801ff59f85.webp",
+    poster: productMediaAsset("review-04.webp", "buudy-led-mask", "videos"),
     src: productMediaAsset("review-04.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc:
-      "https://cdn2.videowise.com/converted/videos/1684780828045_7e4e871c-89be-45e4-9fb5-1d4c9ac1f30f_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-05",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485816239_f9dba8d1-d096-4067-aff8-eb4a72366122.webp",
+    poster: productMediaAsset("review-05.webp", "buudy-led-mask", "videos"),
     src: productMediaAsset("review-05.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc:
-      "https://cdn2.videowise.com/converted/videos/1679081092710_1bac0b63-1caf-46ec-8a9e-33981ec0d67c_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-06",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485713943_cdd6cc24-2387-470e-b124-abd3854c444a.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081090744_9551ac45-ed4a-43b8-b9ac-8213907377b3_h264c_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-06.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-06.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-07",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485680835_1fadaf66-e8f6-4c8b-aa7c-4396245b1faa.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081088709_a5c725fc-6f49-4c5b-a9df-fcc86e2f961c_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-07.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-07.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-08",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485637662_4fa63d64-8298-4f58-9f47-9adfa370720d.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081087361_1db3b2cc-7be9-4715-bb3f-0fefa4d95837_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-08.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-08.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-09",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485657649_d1f364b2-99cf-46f6-96f5-e4e7c804a5d9.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081086957_557b2d69-79d2-4cee-8ba8-63e316eff8c7_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-09.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-09.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-10",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485662907_1e32b62d-e59f-4f2e-abaf-aa9707c46121.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080157636_4c0c5485-0c6c-476f-bcd4-086de0efc4d1_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-10.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-10.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-11",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485718861_90220ac1-9cdb-473c-8c10-b35687131177.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081086115_9020e9ed-ef75-440f-abce-58841caacb36_h264c_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-11.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-11.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-12",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485624094_cecf6646-da77-4ac9-883e-7cf30e8e552f.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080526334_a0e26759-7e98-43bf-a8fe-040939abf286_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-13",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485613490_a1d783da-99e3-4a91-b8d0-79bcddf4abfe.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081085529_9c218c6e-a0e2-439b-81ff-c50a5407fda3_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-14",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486208158_29d80d75-e1ff-4e39-b80a-ab619343d7cd.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1680194146707_01323415-baa1-49fb-8fbe-8999c06b4f92_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-15",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485623797_ca63ba95-91e6-464b-aa69-c33b028a278e.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080560470_ddd1fcb3-c697-4b68-97b1-5f59c1785c9f_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-16",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485614738_57d086fc-b048-4943-80ba-2e48eb216f79.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080559256_14815e68-76c4-4f4c-8991-323dbaa4c875_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-17",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485864339_9ebd6aeb-50d4-4a65-bcf6-5e8375e300d3.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1680194146380_4a1dfd25-f7cb-4f36-99b3-9f347213bd09_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-18",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485607620_ce8129d0-16a2-403d-9ef6-15f2d31ca9fb.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080553322_9cc8ec50-1e9b-4003-a64b-b7e5ead46693_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-19",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485604796_4f40348a-0122-4862-9991-381075c11974.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080003371_048b58f6-6a7b-42b9-bcdf-3497fb4566c9_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-20",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485973867_0371638d-c985-4dc3-880a-201d20ff0843.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1685495777020_4be03046-1648-42e3-8d35-8cc2988703fd_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-21",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485966523_e259ced8-349a-4757-8484-cbbede120591.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1685495788646_9c258eff-7927-476a-b762-a80b0f06d9b6_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-22",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485968766_cf0be9a8-a1de-43df-ab1b-4e216bc5870f.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1685495790866_dc5a4963-5545-4605-a051-037126fa3441_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-23",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486127842_b494c98a-fffc-4212-a210-fa087c5557a5.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511754055_118a8958-9318-41c7-a32d-7274fcd00e1f_h264q6clip.mp4#t=0.1",
-  },
-  // {
-  //   id: "review-24",
-  //   poster:
-  //     "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486148762_77c98016-f2cb-4ac8-ace0-858d47fa077f.webp",
-  //   src: "https://cdn2.videowise.com/converted/videos/1686511755900_b02e84dc-b238-4083-8adc-bf1e03031116_h264q6clip.mp4#t=0.1",
-  // },
-  {
-    id: "review-25",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486133236_7778286b-f568-4290-9e0d-dbc77c7c059b.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511743499_33e12c2d-1a10-4f64-be09-d753d4993093_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-26",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486138545_f0794e86-5c68-4520-bf50-aab136b03516.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511747618_c7adc1a0-07e9-4168-b9a6-61ec3fa055dc_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-27",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486056792_591ed0b5-bfc7-4b3a-8157-697d2f003ee1.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511742070_88202514-7c65-4c97-91ea-6df0aa4491d5_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-28",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486143433_69a5ad16-e0be-41c5-80b5-2f984b593616.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511744702_3d725a4a-1a9b-4bfc-963b-687a7e9c1681_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-29",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486030997_e6361edb-97d6-4158-985a-5c39e242e738.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511740669_a9093ce7-c7f1-434f-92a0-663217393a67_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-30",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486133504_f0995a73-a08e-465b-b9dc-b6afd05afa47.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511736936_e8e21d3f-5411-4eae-9e30-6990bccbdb74_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-31",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486042898_a3733ea2-e5a4-4063-ab48-5969ea7c25fd.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511721203_4c27669b-75b8-4d66-b4db-014b87d8e851_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-32",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486031184_db6562f9-5414-468e-ab1e-2b3d3df446a9.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511718245_136b4b13-74af-4d7f-9a5b-202728b15358_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-12.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-12.mp4", "buudy-led-mask", "videos"),
   },
 ];
 

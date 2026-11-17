@@ -1,4 +1,12 @@
 import type { Product } from "@/data/products";
+import {
+  serumTransformations,
+  peptideTransformations,
+  prebioticTransformations,
+  cleanserTransformations,
+} from "@/data/productSections";
+import { SerumClinicalResults, SerumHowToUse } from "./SerumClinicalSections";
+import { CleanserClinicalResults, CleanserHowToUse } from "./CleanserClinicalSections";
 import { AppPromo, BlueLightSection, TouchTechSection } from "./AppPromo";
 import { ComparisonTable } from "./ComparisonTable";
 import { FAQSection } from "./FAQSection";
@@ -9,6 +17,7 @@ import { ProductReviewsSection } from "./ProductReviewsSection";
 import { StickyAddToCart } from "./StickyAddToCart";
 import { TorchProductPage } from "./TorchProductPage";
 import { IplProductPage } from "./IplProductPage";
+import { MinimalProductPage } from "./MinimalProductPage";
 import {
   DeferredBeforeAfterGrid,
   DeferredExpertSection,
@@ -17,46 +26,133 @@ import {
   DeferredWavelengthSelector,
 } from "./DeferredClientSections";
 import { TrustBadges } from "./TrustBadges";
-import { HalloweenOverlay } from "./HalloweenOverlay";
+import { SerumCertificationsRow } from "./SerumCertificationsRow";
+import { GiftBoxBundleSection } from "./GiftBoxBundleSection";
 
 export function ProductPage({
   product,
   variant,
-  galleryVariant = "default",
+  galleryVariant = product.template === "mask" || product.template === "serum" || product.template === "cleanser" ? "omnilux" : "default",
+  comparisonPosition = product.template === "mask" ? "below-app" : "default",
   isHalloween = false,
+  isEarlyBlackFriday = true,
 }: {
   product: Product;
   variant?: string;
   galleryVariant?: "default" | "omnilux";
+  comparisonPosition?: "default" | "below-app";
   isHalloween?: boolean;
+  isEarlyBlackFriday?: boolean;
 }) {
   if (product.template === "torch") {
-    return <TorchProductPage product={product} />;
+    return <TorchProductPage product={product} isHalloween={isHalloween} />;
   }
 
   if (product.template === "ipl") {
-    return <IplProductPage product={product} />;
+    return <IplProductPage product={product} isHalloween={isHalloween} />;
   }
+
+  if (product.template === "minimal") {
+    return <MinimalProductPage product={product} />;
+  }
+
+  const isPeptide =
+    product.id.includes("peptide") ||
+    product.slug.includes("peptide") ||
+    product.slug.includes("collagen");
+
+  const isPrebiotic =
+    product.id.includes("prebiotic") ||
+    product.slug.includes("prebiotic") ||
+    product.slug.includes("noni");
+
+  const isAha =
+    product.id.includes("aha") ||
+    product.slug.includes("aha");
+
+  const isSerumOrGift =
+    product.template === "serum" ||
+    product.template === "cleanser";
 
   return (
     <div className="relative">
-      {isHalloween && <HalloweenOverlay />}
-      <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} />
-      <DeferredVideoReviews />
-      <TrustBadges />
+      <ProductHero product={product} galleryVariant={galleryVariant} isHalloween={isHalloween} isEarlyBlackFriday={isEarlyBlackFriday} />
+      {product.template === "mask" && <DeferredVideoReviews />}
+      {product.template === "mask" && <TrustBadges />}
+      {isSerumOrGift && <SerumCertificationsRow />}
+      <GiftBoxBundleSection productSlug={product.slug} />
       {/* <FeatureGrid /> */}
-      <DeferredBeforeAfterGrid />
-      <DeferredWavelengthSelector />
-      <DeferredHowToUseSection />
-      <DeferredExpertSection />
-      <ComparisonTable />
+      {/* 1. Verified Clinical Before & After Grid - Placed ABOVE both the Percentage Grid and How-To-Use */}
+      {product.template === "serum" && isPrebiotic && (
+        <DeferredBeforeAfterGrid
+          items={prebioticTransformations}
+          title={
+            <>
+              Real users, <em className="buudy-italic">restored skin barrier</em>.
+            </>
+          }
+          description="Verified customer transformations after incorporating Buudy Bioactive Prebiotics Jelly Serum into their daily barrier-repair and light therapy ritual."
+        />
+      )}
+      {product.template === "serum" && isPeptide && (
+        <DeferredBeforeAfterGrid
+          items={peptideTransformations}
+          title={
+            <>
+              Real users, <em className="buudy-italic">firmer, lifted skin</em>.
+            </>
+          }
+          description={`Verified customer transformations after incorporating ${product.name} into their daily firming and light therapy ritual.`}
+        />
+      )}
+      {product.template === "serum" && !isPeptide && !isPrebiotic && (
+        <DeferredBeforeAfterGrid
+          items={serumTransformations}
+          title={
+            <>
+              Real users, <em className="buudy-italic">visible dermal renewal</em>.
+            </>
+          }
+          description={`Verified customer transformations after incorporating ${product.name} into their daily hydration and skincare ritual.`}
+        />
+      )}
+      {product.template === "cleanser" && (
+        <DeferredBeforeAfterGrid
+          items={cleanserTransformations}
+          title={
+            <>
+              Real users, <em className="buudy-italic">visibly clearer skin</em>.
+            </>
+          }
+          description="Verified customer results after incorporating Buudy Blemish Purifying Face Wash into their daily morning and evening cleansing ritual."
+        />
+      )}
+
+      {/* 2. Consumer Perception & Clinical Trial Stats - Split Grid with Image & Miroooo One-Time Circular Filling Animation */}
+      {product.template === "serum" && (
+        <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} productSlug={product.slug} />
+      )}
+      {product.template === "cleanser" && <CleanserClinicalResults />}
+
+      {/* 3. Daily Application / Cleansing Ritual - How To Use Section */}
+      {product.template === "mask" && <DeferredWavelengthSelector />}
+      {product.template === "mask" && <DeferredHowToUseSection />}
+      {product.template === "serum" && (
+        <SerumHowToUse isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} productSlug={product.slug} />
+      )}
+      {product.template === "cleanser" && <CleanserHowToUse />}
+      {product.template === "mask" && <DeferredExpertSection />}
+      {product.template === "mask" && comparisonPosition === "default" && <ComparisonTable />}
       {/* <TouchTechSection /> */}
-      <ProductReviewsSection />
-      <AppPromo />
-      <BlueLightSection />
+
+      {/* 4. Customer Reviews Section - After all the clinical, transformation, and ritual sections */}
+      <ProductReviewsSection productHandle={product.template === "mask" ? "buudy-led-mask" : product.slug} />
+      {product.template === "mask" && <AppPromo />}
+      {product.template === "mask" && comparisonPosition === "below-app" && <ComparisonTable />}
+      {product.template === "mask" && <BlueLightSection />}
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
-      <StickyAddToCart product={product} />
+      <StickyAddToCart product={product} isEarlyBlackFriday={isEarlyBlackFriday} />
     </div>
   );
 }

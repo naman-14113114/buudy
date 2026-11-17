@@ -1,16 +1,15 @@
 "use client";
 
-import { StoreText, StoreButton, StoreTextarea, useStoreLocale } from "@/components/international/StoreLocale";
-import { StoreLink as Link } from "@/components/international/StoreLocale";
+import Image from "next/image";
+import Link from "next/link";
 import {
   Check,
   ChevronDown,
   Gift,
   ShoppingBag,
-  Truck,
   Lock,
 } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Lottie from "lottie-react";
 import loadingLottie from "@/components/cart/loading-lottie.json";
 import { Button } from "@/components/ui/Button";
@@ -18,7 +17,8 @@ import { useCart } from "./CartProvider";
 import { CartLineItem } from "./CartLineItem";
 import { CartSummary } from "./CartSummary";
 import { CheckoutForm, type CheckoutCustomer } from "./CheckoutForm";
-import { getDisplayLines } from "@/lib/cart";
+import { FreeGiftsPanel } from "./FreeGiftsPanel";
+import { getDisplayLines, type CartLine } from "@/lib/cart";
 
 function useCheckoutCountdown(seconds: number) {
   const [remaining, setRemaining] = useState(seconds);
@@ -37,28 +37,6 @@ function useCheckoutCountdown(seconds: number) {
   return `${String(minutes).padStart(2, "0")}m : ${String(secs).padStart(2, "0")}s`;
 }
 
-function useDeliveryDate(daysFromToday: number) {
-  const { dateLocale } = useStoreLocale();
-  const [dateLabel, setDateLabel] = useState("");
-
-  useEffect(() => {
-    const timeout = window.setTimeout(() => {
-      const date = new Date();
-      date.setDate(date.getDate() + daysFromToday);
-
-      const weekday = date.toLocaleString(dateLocale, { weekday: "long" });
-      const day = date.getDate();
-      const month = date.toLocaleString(dateLocale, { month: "long" });
-
-      setDateLabel(`${weekday} ${day} ${month}`);
-    }, 0);
-
-    return () => window.clearTimeout(timeout);
-  }, [daysFromToday, dateLocale]);
-
-  return dateLabel;
-}
-
 export function CartPageContent({
   initialCustomer,
 }: {
@@ -71,37 +49,7 @@ export function CartPageContent({
     string,
     unknown
   > | null>(null);
-  const [showShippingInfo, setShowShippingInfo] = useState(false);
-  const shippingTooltipRef = useRef<HTMLDivElement>(null);
   const timer = useCheckoutCountdown(10 * 60 - 1);
-  const deliveryDate = useDeliveryDate(5);
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        shippingTooltipRef.current &&
-        !shippingTooltipRef.current.contains(event.target as Node)
-      ) {
-        setShowShippingInfo(false);
-      }
-    }
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setShowShippingInfo(false);
-      }
-    }
-
-    if (showShippingInfo) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [showShippingInfo]);
 
   useEffect(() => {
     fetch(
@@ -127,13 +75,13 @@ export function CartPageContent({
       <section className="buudy-section bg-[var(--cream)] py-28">
         <div className="buudy-wrap max-w-2xl text-center">
           <ShoppingBag className="mx-auto text-[var(--gold)]" size={42} />
-          <h1 className="buudy-heading mt-5"><StoreText>Your cart is empty.</StoreText></h1>
-          <p className="buudy-copy mx-auto mt-5 max-w-lg"><StoreText>
+          <h1 className="buudy-heading mt-5">Your cart is empty.</h1>
+          <p className="buudy-copy mx-auto mt-5 max-w-lg">
             Add the Buudy LED Mask or Buudy LED Torch to unlock current offers and
             free shipping.
-          </StoreText></p>
+          </p>
           <Button asChild className="mt-8">
-            <Link href="/"><StoreText>Shop Buudy</StoreText></Link>
+            <Link href="/">Shop Buudy</Link>
           </Button>
         </div>
       </section>
@@ -144,75 +92,6 @@ export function CartPageContent({
     <>
     <section className="buudy-section bg-[var(--cream)] pt-2 pb-8 md:pt-4 md:pb-12">
       <div className="buudy-wrap">
-        <div className="relative mb-8 rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] px-5 py-4 shadow-[0_18px_40px_-32px_rgba(58,31,61,.45)]">
-          <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
-            <div className="flex flex-col items-center gap-3.5 md:flex-row">
-              <span className="grid h-11 w-11 flex-none place-items-center rounded-full bg-[rgba(184,149,86,.12)] text-[var(--gold)] overflow-hidden">
-                {deliveryIconData ? (
-                  <div className="w-7 h-7 flex-shrink-0 flex items-center justify-center">
-                    <Lottie animationData={deliveryIconData} loop={true} />
-                  </div>
-                ) : (
-                  <Truck size={22} />
-                )}
-              </span>
-              <p className="buudy-display text-xl leading-snug text-[var(--plum)] md:text-2xl"><StoreText>
-                Order in next</StoreText>{" "}
-                <span className="font-semibold text-[var(--ink)]"><StoreText>{timer}</StoreText></span>{" "}<StoreText>
-                to get as early as</StoreText>{" "}
-                <span className="font-semibold text-[var(--plum)]">
-                  <StoreText>{deliveryDate || "soon"}</StoreText>
-                </span>
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2.5 shrink-0">
-              <span className="buudy-mono rounded-full bg-[rgba(184,149,86,.12)] px-4 py-2 text-[var(--plum)]"><StoreText>
-                Free tracked shipping
-              </StoreText></span>
-            </div>
-          </div>
-
-          {/* Question mark info button on top right */}
-          <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3.5 z-20" ref={shippingTooltipRef}>
-            <StoreButton
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowShippingInfo((prev) => !prev);
-              }}
-              aria-label="Shipping information"
-              aria-expanded={showShippingInfo}
-              style={{ fontSize: "8px", lineHeight: 1 }}
-              className="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[var(--gold)] bg-transparent font-medium text-[var(--gold)] transition hover:opacity-80 active:scale-95 cursor-pointer"
-            >
-              ?
-            </StoreButton>
-
-            {showShippingInfo && (
-              <div
-                className="absolute right-0 top-full mt-2 z-40 w-64 sm:w-72 rounded-xl border border-[rgba(58,31,61,.16)] bg-[var(--card)] p-3.5 shadow-xl text-left text-xs leading-relaxed text-[var(--plum)]"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex items-center justify-between gap-2 mb-1.5">
-                  <span className="font-semibold text-[var(--plum)] text-xs"><StoreText>Delivery Estimate</StoreText></span>
-                  <StoreButton
-                    type="button"
-                    onClick={() => setShowShippingInfo(false)}
-                    className="text-[var(--muted)] hover:text-[var(--plum)] text-sm leading-none p-0.5 cursor-pointer"
-                    aria-label="Close"
-                  >
-                    ✕
-                  </StoreButton>
-                </div>
-                <p className="text-[11.5px] leading-relaxed text-[var(--plum)]/90 m-0"><StoreText>
-                  This is the earliest date you can receive your order, but standard delivery transit is 7–20 business days. For more information, please visit our shipping policy page.
-                </StoreText></p>
-              </div>
-            )}
-          </div>
-        </div>
-
         <div className="grid items-start gap-8 lg:grid-cols-[1fr_430px]">
           <div className="space-y-5 lg:sticky lg:top-6 lg:self-start">
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] px-5">
@@ -224,10 +103,14 @@ export function CartPageContent({
 
           <aside className="space-y-5 lg:sticky lg:top-6 lg:self-start">
             <CartSummary>
-              <CheckoutForm initialCustomer={initialCustomer} />
+              <CheckoutForm
+                initialCustomer={initialCustomer}
+                timer={timer}
+                deliveryIconData={deliveryIconData}
+              />
             </CartSummary>
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
-              <StoreButton
+              <button
                 aria-controls="gift-message-panel"
                 aria-expanded={giftMessageOpen}
                 className="flex w-full items-center justify-between gap-4 text-left"
@@ -239,17 +122,17 @@ export function CartPageContent({
                     <Gift size={17} />
                   </span>
                   <span>
-                    <span className="buudy-mono block text-[var(--plum)]"><StoreText>
+                    <span className="buudy-mono block text-[var(--plum)]">
                       Add Gift Message
-                    </StoreText></span>
-                    <span className="mt-1 block text-sm text-[var(--muted)]"><StoreText>
+                    </span>
+                    <span className="mt-1 block text-sm text-[var(--muted)]">
                       Price will be hidden on packing slip.
-                    </StoreText></span>
+                    </span>
                   </span>
                 </span>
                 <span className="flex items-center gap-3">
                   <span className="buudy-mono hidden text-[var(--gold)] sm:inline">
-                    <StoreText>{giftMessage.length}</StoreText>/300
+                    {giftMessage.length}/300
                   </span>
                   <ChevronDown
                     className={`text-[var(--gold)] transition-transform duration-300 ${
@@ -258,7 +141,7 @@ export function CartPageContent({
                     size={18}
                   />
                 </span>
-              </StoreButton>
+              </button>
 
               <div
                 className={`grid transition-[grid-template-rows] duration-300 ease-out ${
@@ -269,10 +152,10 @@ export function CartPageContent({
                 <div className="overflow-hidden">
                   <div className="mt-4 flex justify-end sm:hidden">
                     <span className="buudy-mono text-[var(--gold)]">
-                      <StoreText>{giftMessage.length}</StoreText>/300
+                      {giftMessage.length}/300
                     </span>
                   </div>
-                  <StoreTextarea
+                  <textarea
                     className="mt-4 min-h-28 w-full resize-none rounded-xl border border-[var(--border)] bg-[var(--cream)] p-3 text-sm text-[var(--plum)] outline-none transition focus:border-[var(--plum)]"
                     maxLength={300}
                     onChange={(event) => {
@@ -282,14 +165,14 @@ export function CartPageContent({
                     placeholder="Write your warm wish..."
                     value={giftMessage}
                   />
-                  <StoreButton
+                  <button
                     className="mt-3 flex items-center gap-2 text-sm font-semibold text-[var(--plum)] transition hover:text-[var(--gold)]"
                     onClick={() => setShowSaved(true)}
                     type="button"
                   >
                     {showSaved ? <Check size={16} /> : null}
-                    <StoreText>{showSaved ? "Gift message saved" : "Save gift message"}</StoreText>
-                  </StoreButton>
+                    {showSaved ? "Gift message saved" : "Save gift message"}
+                  </button>
                 </div>
               </div>
             </div>
@@ -342,16 +225,26 @@ function MobileStickyCheckout() {
     };
   }, []);
 
+  const handleWarmup = () => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("buudy:warmup-checkout"));
+      const btn = document.getElementById("main-checkout-btn") as HTMLButtonElement | null;
+      btn?.dispatchEvent(new MouseEvent("mouseenter", { bubbles: true }));
+    }
+  };
+
   return (
     <div 
       className={`fixed bottom-0 left-0 right-0 z-50 p-4 pb-6 pointer-events-none flex justify-center lg:hidden transition-all duration-300 ${
         isMainBtnVisible ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
       }`}
     >
-      <StoreButton
+      <button
         className={`pointer-events-auto buudy-cart-wipe buudy-display relative flex h-14 w-full max-w-[400px] items-center justify-center overflow-hidden rounded-[35px] border border-[var(--plum)] bg-[var(--plum)] px-6 py-3 text-[15px] font-bold uppercase leading-none tracking-wide text-[var(--cream)] shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] ${!isRedirecting ? "proxy-bundle-btn" : ""}`}
         type="button"
         disabled={isRedirecting}
+        onMouseEnter={handleWarmup}
+        onTouchStart={handleWarmup}
         onClick={() => {
           const btn = document.getElementById('main-checkout-btn') as HTMLButtonElement;
           btn?.click();
@@ -361,7 +254,7 @@ function MobileStickyCheckout() {
           <>
             <span style={{ visibility: "hidden" }} className="inline-flex items-center gap-2">
               <Lock size={16} strokeWidth={1.8} />
-              <span><StoreText>Checkout Securely</StoreText></span>
+              <span>Checkout Securly</span>
             </span>
             <span style={{ position: "absolute", inset: 0 }} className="flex items-center justify-center">
               <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
@@ -370,10 +263,10 @@ function MobileStickyCheckout() {
         ) : (
           <span className="relative z-10 inline-flex items-center justify-center gap-2">
             <Lock size={16} strokeWidth={1.8} />
-            <span><StoreText>Checkout Securely</StoreText></span>
+            <span>Checkout Securly</span>
           </span>
         )}
-      </StoreButton>
+      </button>
     </div>
   );
 }
@@ -390,10 +283,10 @@ function CartRestoringState() {
           className="mx-auto animate-pulse text-[var(--gold)]"
           size={42}
         />
-        <h1 className="buudy-heading mt-5"><StoreText>Restoring your bag...</StoreText></h1>
-        <p className="buudy-copy mx-auto mt-5 max-w-lg"><StoreText>
+        <h1 className="buudy-heading mt-5">Restoring your bag...</h1>
+        <p className="buudy-copy mx-auto mt-5 max-w-lg">
           Bringing your Buudy selections back into view.
-        </StoreText></p>
+        </p>
       </div>
     </section>
   );

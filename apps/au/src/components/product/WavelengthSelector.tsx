@@ -43,6 +43,12 @@ export function WavelengthSelector() {
                 muted
                 loop
                 playsInline
+                ref={(el) => {
+                  if (el) {
+                    el.defaultMuted = true;
+                    el.muted = true;
+                  }
+                }}
               />
             </div>
           </div>

@@ -135,10 +135,16 @@ function IplSkinGuideSection() {
   );
 }
 
-export function IplProductPage({ product }: { product: Product }) {
+export function IplProductPage({
+  product,
+  isHalloween = false, isEarlyBlackFriday = true,
+}: {
+  product: Product;
+  isHalloween?: boolean; isEarlyBlackFriday?: boolean;
+}) {
   return (
-    <>
-      <ProductHero product={product} />
+    <div className="relative">
+      <ProductHero product={product} isHalloween={false} isEarlyBlackFriday={true} />
       <TrustBadges />
       <IplHeroVideo />
       <IplFeatureGrid />
@@ -152,6 +158,6 @@ export function IplProductPage({ product }: { product: Product }) {
       <FAQSection faqs={product.faqs} />
       <GuaranteeSection />
       <StickyAddToCart product={product} />
-    </>
+    </div>
   );
 }

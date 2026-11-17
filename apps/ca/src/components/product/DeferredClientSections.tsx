@@ -2,6 +2,8 @@
 
 import dynamic from "next/dynamic";
 
+import type { BeforeAfterGridProps } from "./BeforeAfterGrid";
+
 const VideoReviews = dynamic(
   () => import("./VideoReviews").then((mod) => mod.VideoReviews),
   { ssr: false },
@@ -31,8 +33,8 @@ export function DeferredVideoReviews() {
   return <VideoReviews />;
 }
 
-export function DeferredBeforeAfterGrid() {
-  return <BeforeAfterGrid />;
+export function DeferredBeforeAfterGrid(props: BeforeAfterGridProps = {}) {
+  return <BeforeAfterGrid {...props} />;
 }
 
 export function DeferredWavelengthSelector() {

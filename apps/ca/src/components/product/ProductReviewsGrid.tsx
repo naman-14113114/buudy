@@ -564,7 +564,12 @@ function ReviewModal({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[100000100] grid place-items-center bg-[rgba(30,12,31,.62)] p-4 backdrop-blur-md"
+      className="fixed inset-0 z-[100000100] grid place-items-center p-4"
+      style={{
+        backgroundColor: "rgba(255, 255, 255, 0.75)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+      }}
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
           onClose();
@@ -792,7 +797,12 @@ function WriteReviewModal({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[100000100] grid place-items-center bg-[rgba(30,12,31,.62)] p-4 backdrop-blur-md"
+      className="fixed inset-0 z-[100000100] grid place-items-center p-4"
+      style={{
+        backgroundColor: "rgba(255, 255, 255, 0.75)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+      }}
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
           onClose();
@@ -1304,7 +1314,11 @@ export function ProductReviewsGrid({
             title={
               productHandle === "buudy-red-torch" ? (
                 <>
-                  Buudy Red Torch <em className="buudy-italic">reviews</em>.
+                  Buudy LED Torch <em className="buudy-italic">reviews</em>.
+                </>
+              ) : productHandle.includes("serum") || productHandle.includes("gel") ? (
+                <>
+                  Buudy Clinical Serum <em className="buudy-italic">customer reviews</em>.
                 </>
               ) : (
                 <>
@@ -1314,7 +1328,9 @@ export function ProductReviewsGrid({
             }
             copy={
               productHandle === "buudy-red-torch"
-                ? "Real feedback from customers who made the Buudy Red Torch part of their daily wellness ritual."
+                ? "Real feedback from customers who made the Buudy LED Torch part of their daily wellness ritual."
+                : productHandle.includes("serum") || productHandle.includes("gel")
+                ? "Real feedback from customers who paired Buudy Clinical Formulations with their phototherapy ritual."
                 : "Real feedback from customers who made Buudy part of their at-home skincare ritual."
             }
           />

@@ -10,11 +10,6 @@ import { useCart } from "./CartProvider";
 
 const MASK_INCLUDED_ITEMS = [
   {
-    name: "Premium Travel Box",
-    image: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-premium-travel-box-uk.webp",
-    alt: "Buudy 7 Colour LED Mask Premium Travel Box UK",
-  },
-  {
     name: "Eyes Protection",
     image: "/images/products/buudy-led-mask/buudy-7-colour-led-mask-eyes-protection-uk.webp",
     alt: "Buudy 7 Colour LED Mask Eyes Protection UK",
@@ -31,7 +26,7 @@ function IncludedInTheBox({
 }: {
   items: { name: string; image: string; alt: string }[];
 }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="cart-line-included">
@@ -109,11 +104,15 @@ export function CartLineItem({ line }: { line: CartLine }) {
     line.productId === "buudy-skincare-ebook" ||
     line.title.toLowerCase().includes("ebook") ||
     line.title.toLowerCase().includes("e-book");
+  const isTravelBox =
+    line.id.includes("premium-travel-box") ||
+    line.title.toLowerCase().includes("travel");
 
   const isMask =
     line.type === "product" &&
     !isTorch &&
     !isEbook &&
+    !isTravelBox &&
     (line.productId === "buudy-led-mask" ||
       line.id === "buudy-led-mask" ||
       line.slug === "buudy-led-mask" ||
@@ -123,6 +122,8 @@ export function CartLineItem({ line }: { line: CartLine }) {
     ? "/products/red-light-torch"
     : isEbook
     ? "/products/skincare-ebook"
+    : isTravelBox
+    ? "/pages/premium-travel-box"
     : line.type === "product" && line.slug
     ? `/products/${line.slug}`
     : undefined;

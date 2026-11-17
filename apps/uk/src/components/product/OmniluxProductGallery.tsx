@@ -724,6 +724,14 @@ export function OmniluxProductGallery({
           color: #ffffff !important;
           text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
         }
+        .buudy-gallery-badge--dark .buudy-gallery-badge__title {
+          color: var(--plum, #2E102F) !important;
+          text-shadow: none !important;
+        }
+        .buudy-gallery-badge--dark .buudy-gallery-badge__sub {
+          color: rgba(46, 16, 47, 0.85) !important;
+          text-shadow: none !important;
+        }
         @keyframes buudyBadgeSlideInLeft {
           0% {
             opacity: 0;
@@ -1057,6 +1065,12 @@ export function OmniluxProductGallery({
                       autoPlay
                       loop
                       preload="metadata"
+                      ref={(el) => {
+                        if (el) {
+                          el.defaultMuted = true;
+                          el.muted = true;
+                        }
+                      }}
                     />
                     {item.type === "video" && (
                       <div className="omni-video-thumb-overlay">
@@ -1404,7 +1418,10 @@ function GalleryImageBadge({
   const positionClass = badge.position
     ? `buudy-gallery-badge--${badge.position}`
     : "buudy-gallery-badge--top-left";
-  const themeClass = badge.theme === "white" ? "buudy-gallery-badge--white" : "";
+  const themeClass =
+    badge.theme === "white"
+      ? "buudy-gallery-badge--white"
+      : "buudy-gallery-badge--dark";
   const lightboxClass = isLightbox ? "buudy-gallery-badge--lightbox" : "";
 
   return (

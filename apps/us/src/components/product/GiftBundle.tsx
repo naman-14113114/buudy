@@ -20,10 +20,14 @@ import {
   Bandage,
   Umbrella,
   Droplets,
+  Leaf,
+  Layers,
+  Heart,
+  Shield,
 } from "lucide-react";
 import type { Product } from "@/data/products";
 import { market } from "@/lib/market";
-import { formatMoney } from "@/lib/money";
+import { formatMoney, percentOff } from "@/lib/money";
 import {
   appendAttributionToPath,
   pickAttributionFromSearch,
@@ -33,6 +37,7 @@ import { Price } from "@/components/ui/Price";
 import { useCart } from "@/components/cart/CartProvider";
 import { ProductDetailsAccordion } from "./ProductDetailsAccordion";
 import { HalloweenSaleBadge } from "./HalloweenOverlay";
+import { EarlyBlackFridaySaleBadge } from "./EarlyBlackFridayElements";
 
 function useCountdown(seconds: number) {
   const [remaining, setRemaining] = useState(seconds);
@@ -85,11 +90,59 @@ function FaceNeckIcon({ size = 22 }: { size?: number }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
+      {/* Symmetrical outline of head and neck representing full collar wrap */}
       <path d="M12 2a6.5 6.5 0 0 0-6.5 6.5c0 3 1.5 5 4.5 6v3.5a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3.5c3-1 4.5-3 4.5-6A6.5 6.5 0 0 0 12 2z" />
       <path d="M7.5 17.5c2.5 1 6.5 1 9 0" />
       <path d="M6.5 21h11" />
     </svg>
   );
+}
+
+function getBenefitIcon(text: string, index: number) {
+  const norm = text.toLowerCase();
+  if (
+    norm.includes("peptide") ||
+    norm.includes("firm") ||
+    norm.includes("contour") ||
+    norm.includes("elasticity") ||
+    norm.includes("hydroxyproline")
+  ) {
+    return Sparkles;
+  }
+  if (
+    norm.includes("hydration") ||
+    norm.includes("hyaluronic") ||
+    norm.includes("pca") ||
+    norm.includes("moisture") ||
+    norm.includes("water")
+  ) {
+    return Droplets;
+  }
+  if (
+    norm.includes("butter") ||
+    norm.includes("lipid") ||
+    norm.includes("barrier") ||
+    norm.includes("mango") ||
+    norm.includes("blueberry") ||
+    norm.includes("seed") ||
+    norm.includes("oil")
+  ) {
+    return Leaf;
+  }
+  if (
+    norm.includes("am/pm") ||
+    norm.includes("day") ||
+    norm.includes("night") ||
+    norm.includes("seal") ||
+    norm.includes("rejuvenation") ||
+    norm.includes("led") ||
+    norm.includes("regimen") ||
+    norm.includes("ritual")
+  ) {
+    return Sun;
+  }
+  const fallbackIcons = [Sparkles, Droplets, Leaf, Sun, ShieldCheck];
+  return fallbackIcons[index % fallbackIcons.length];
 }
 
 const keyBenefitIcons = [
@@ -102,7 +155,15 @@ const keyBenefitIcons = [
   Waves,
 ];
 
-export function GiftBundle({ product, isHalloween = false }: { product: Product; isHalloween?: boolean }) {
+export function GiftBundle({
+  product,
+  isHalloween = false,
+  isEarlyBlackFriday = true,
+}: {
+  product: Product;
+  isHalloween?: boolean;
+  isEarlyBlackFriday?: boolean;
+}) {
   const { addProduct } = useCart();
   const router = useRouter();
   const timer = useCountdown(15 * 60 - 1);
@@ -169,7 +230,29 @@ export function GiftBundle({ product, isHalloween = false }: { product: Product;
     0,
   );
   const hasGifts = product.gifts.length > 0;
-  const giftButtonLabel = hasGifts
+  const isSimplifiedProduct =
+    product.template === "serum" ||
+    product.template === "cleanser" ||
+    product.slug === "double-hydration-boost-gel" ||
+    product.slug === "buudy-double-hydration-boost-gel" ||
+    product.id === "buudy-light-activating-hyaluronic-serum" ||
+    product.slug === "the-ultimate-renewal-collection-box" ||
+    product.id === "the-ultimate-renewal-collection-box" ||
+    product.slug.includes("aha") ||
+    product.id.includes("aha") ||
+    product.id.includes("peptide") ||
+    product.slug.includes("peptide") ||
+    product.slug.includes("eye") ||
+    product.id.includes("eye") ||
+    product.slug.includes("collagen");
+
+  const giftButtonLabel = isSimplifiedProduct
+    ? "Add to cart"
+    : isEarlyBlackFriday
+    ? hasGifts
+      ? `CLAIM EARLY ACCESS + ${product.gifts.length} FREE GIFTS`
+      : "CLAIM BLACK FRIDAY EARLY ACCESS"
+    : hasGifts
     ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
     : "ADD TO CART + FREE SHIPPING";
   return (
@@ -189,15 +272,20 @@ export function GiftBundle({ product, isHalloween = false }: { product: Product;
         </span>
       </a>
 
-      <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 sm:gap-x-3.5">
-        <h1 className="font-playfair whitespace-nowrap text-[1.85rem] leading-[1.05] text-[var(--plum)] sm:text-[2.2rem] md:text-[2.4rem] lg:text-[2.5rem] xl:text-[2.85rem]">
-          {product.heroTitle}{" "}
-          <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
+      <div className="mt-3 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+        <h1 className="font-playfair text-[1.85rem] leading-[1.05] text-[var(--plum)] sm:text-[2.2rem] md:text-[2.4rem] lg:text-[2.5rem] xl:text-[2.85rem] inline">
+          {product.heroTitle || product.name}
+          {product.heroEmphasis ? (
+            <>
+              {" "}
+              <em className="italic text-[var(--gold)]">{product.heroEmphasis}</em>
+            </>
+          ) : null}
         </h1>
 
-        {/* Cleopatra Edition Ribbon on all mask pages beside title on desktop */}
+        {/* Cleopatra Edition subtitle placed right beside heading aligned to text baseline */}
         {product.template === "mask" && (
-          <span className="font-sans text-xs sm:text-sm font-medium text-[var(--cream)] bg-[var(--plum)] px-2.5 py-0.5 rounded-md inline-flex items-center shrink-0">
+          <span className="font-sans text-[11px] sm:text-xs font-normal text-[var(--plum)]/70 bg-[rgba(58,31,61,.05)] border border-[rgba(58,31,61,.12)] px-2 py-0.5 rounded tracking-wide inline-flex items-center align-baseline">
             Cleopatra Edition
           </span>
         )}
@@ -237,20 +325,30 @@ export function GiftBundle({ product, isHalloween = false }: { product: Product;
         </span>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-2.5">
+      <div className="mt-4 flex flex-wrap items-center gap-3">
         <Price
           compareAtCents={product.compareAtCents}
           currency={product.currency}
           priceCents={product.priceCents}
-          hideDiscount={isHalloween}
+          hideDiscount={isHalloween || isEarlyBlackFriday}
         />
         {isHalloween && <HalloweenSaleBadge />}
+        {isEarlyBlackFriday && (
+          <EarlyBlackFridaySaleBadge
+            discountText={
+              product.compareAtCents && (product.template === "serum" || product.template === "cleanser")
+                ? `${percentOff(product.priceCents, product.compareAtCents)}% OFF`
+                : undefined
+            }
+          />
+        )}
       </div>
+
 
       {/* Premium Compact Bullet Points List */}
       <ul className="mt-4 mb-4 flex flex-col gap-1.5 pl-1.5">
         {(product.keyBenefits ?? product.highlights).map((benefit, index) => {
-          const Icon = keyBenefitIcons[index % keyBenefitIcons.length];
+          const Icon = getBenefitIcon(benefit, index);
           return (
             <li
               className="flex items-center gap-3 text-[14.5px] font-normal leading-normal text-[var(--plum)] buudy-display"
@@ -407,7 +505,7 @@ export function GiftBundle({ product, isHalloween = false }: { product: Product;
         <section className="mt-8" id="free-gifts">
           <div className="text-center mb-8 flex flex-col items-center">
             <h3 className="buudy-display text-3xl font-medium text-[var(--plum)]">
-              {isHalloween ? "Halloween Free Gifts" : "Autumn Glow Sale"}
+              {isEarlyBlackFriday ? "Black Friday FREE Gifts" : isHalloween ? "Halloween Free Gifts" : "Exclusive Free Gifts"}
             </h3>
             <p className="buudy-mono mt-2 inline-flex items-center justify-center gap-1.5 flex-wrap rounded bg-[rgba(184,149,86,.15)] px-3 py-1 text-xs sm:text-sm font-bold tracking-widest text-[var(--plum)]">
               <span className="buudy-display text-sm sm:text-base font-extrabold normal-case text-[var(--plum)]">
@@ -457,6 +555,20 @@ export function GiftBundle({ product, isHalloween = false }: { product: Product;
           </div>
         </section>
       ) : null}
+      {/* <section
+          className="mt-8 rounded-2xl border border-[rgba(58,31,61,.15)] bg-[var(--card)] p-5"
+          id="torch-offer"
+        >
+          <p className="buudy-eyebrow">{product.promoLabel}</p>
+          <p className="buudy-display mt-2 text-2xl text-[var(--plum)]">
+            60% off, free shipping, and a rechargeable wellness kit.
+          </p>
+          <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+            Includes the torch, rechargeable battery, charger, USB cable,
+            glasses, and user manual for a complete targeted light therapy
+            routine.
+          </p>
+        </section> */}
 
       <ProductDetailsAccordion product={product} />
     </div>

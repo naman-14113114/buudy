@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { reviewVideos, type ReviewVideo } from "@/data/productSections";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -10,56 +10,28 @@ const loopedVideos = Array(NUM_SETS).fill(reviewVideos).flat();
 function ReviewVideoCard({
   index,
   video,
+  isInSectionView,
 }: {
   index: number;
   video: ReviewVideo;
+  isInSectionView: boolean;
 }) {
-  const cardRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const shouldPlayRef = useRef(false);
-  const primarySrc = video.fallbackSrc ?? video.src;
-  const [src, setSrc] = useState(primarySrc);
-  const [shouldLoad, setShouldLoad] = useState(index < reviewVideos.length);
-
-  const playWhenReady = useCallback(() => {
-    if (!shouldPlayRef.current) return;
-
-    videoRef.current?.play().catch(() => undefined);
-  }, []);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    const card = cardRef.current;
-    const videoEl = videoRef.current;
-    if (!card || !videoEl) return;
+    const el = videoRef.current;
+    if (!el) return;
 
-    videoEl.muted = true;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        shouldPlayRef.current = entry.isIntersecting;
-
-        if (entry.isIntersecting) {
-          setShouldLoad(true);
-          videoEl.play().catch(() => undefined);
-        } else {
-          videoEl.pause();
-        }
-      },
-      { rootMargin: "1200px 0px", threshold: 0.01 },
-    );
-
-    observer.observe(card);
-
-    return () => {
-      shouldPlayRef.current = false;
-      observer.disconnect();
-    };
-  }, []);
+    if (isInSectionView) {
+      el.play().catch(() => undefined);
+    } else {
+      el.pause();
+    }
+  }, [isInSectionView]);
 
   return (
     <article
       className="relative aspect-[9/16] w-40 flex-none overflow-hidden rounded-[18px] bg-[var(--ink)] transition hover:-translate-y-1 md:w-52 cursor-pointer"
-      ref={cardRef}
       onClick={() => {
         window.location.href = "#reviews";
       }}
@@ -69,20 +41,29 @@ function ReviewVideoCard({
         className="h-full w-full object-cover"
         disablePictureInPicture
         loop
-        autoPlay={shouldLoad}
+        autoPlay
         muted
-        onCanPlay={playWhenReady}
-        onError={() => {
-          if (src !== video.src) {
-            setSrc(video.src);
-          }
-        }}
-        onLoadedData={playWhenReady}
         playsInline
         poster={video.poster}
-        preload={shouldLoad ? "metadata" : "none"}
-        ref={videoRef}
-        src={shouldLoad ? src : undefined}
+        preload="auto"
+        ref={(el) => {
+          if (el) {
+            el.defaultMuted = true;
+            el.muted = true;
+          }
+          videoRef.current = el;
+        }}
+        src={video.src}
+        onLoadedData={(e) => {
+          if (isInSectionView) {
+            e.currentTarget.play().catch(() => undefined);
+          }
+        }}
+        onCanPlay={(e) => {
+          if (isInSectionView) {
+            e.currentTarget.play().catch(() => undefined);
+          }
+        }}
       >
         Your browser does not support the video tag.
       </video>
@@ -95,8 +76,32 @@ function ReviewVideoCard({
 }
 
 export function VideoReviews() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { rootMargin: "400px 0px", threshold: 0.01 },
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <section className="buudy-section bg-[#f6ede2] pt-14 md:pt-24 pb-4 md:pb-6 overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="buudy-section bg-[#f6ede2] pt-14 md:pt-24 pb-4 md:pb-6 overflow-hidden"
+    >
       <style>{`
         @keyframes vr-css-auto-scroll {
           0% { transform: translateX(0); }
@@ -127,6 +132,7 @@ export function VideoReviews() {
                 index={index}
                 key={`${video.id}-${index}`}
                 video={video}
+                isInSectionView={isInView}
               />
             ))}
           </div>

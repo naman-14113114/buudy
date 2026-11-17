@@ -63,6 +63,11 @@ select {
 
 button {
   cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+}
+
+button:active {
+  transform: scale(0.95);
 }
 
 img,
@@ -415,6 +420,7 @@ img[data-buudy-image-loading="true"] {
     transition-duration: 0.001ms !important;
   }
 }
+
 
 /* ==========================================================================
    CART LINE: INCLUDED IN THE BOX (What's included)

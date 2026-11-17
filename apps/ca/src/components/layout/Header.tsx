@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import { primaryNavigation, secondaryNavigation } from "@/data/navigation";
@@ -12,6 +13,8 @@ export function Header() {
   const { totals, openCart } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuMounted, setMobileMenuMounted] = useState(false);
+  const pathname = usePathname();
+  const isHalloween = pathname === "/products/buudy-7-colour-led-mask" || pathname === "/products/buudy-7-colour-led-mask/";
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const openMobileMenu = () => {

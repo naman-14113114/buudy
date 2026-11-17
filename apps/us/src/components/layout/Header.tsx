@@ -1,10 +1,9 @@
 "use client";
-import { StoreText, StoreButton } from '@/components/international/StoreLocale';
 
-
-import { StoreLink as Link } from '@/components/international/StoreLocale';
-import { StoreImage as Image } from '@/components/international/StoreLocale';
+import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import { primaryNavigation, secondaryNavigation } from "@/data/navigation";
@@ -14,6 +13,8 @@ export function Header() {
   const { totals, openCart } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuMounted, setMobileMenuMounted] = useState(false);
+  const pathname = usePathname();
+  const isHalloween = pathname === "/products/buudy-7-colour-led-mask" || pathname === "/products/buudy-7-colour-led-mask/";
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const openMobileMenu = () => {
@@ -84,7 +85,7 @@ export function Header() {
     <header className="relative z-40 border-b border-[rgba(58,31,61,.14)] bg-[rgba(247,241,232,.88)] backdrop-blur-xl">
       <div className="buudy-wrap relative flex min-h-[64px] items-center justify-between gap-4 lg:min-h-[72px]">
         {/* Mobile Menu Trigger */}
-        <StoreButton
+        <button
           aria-controls="mobile-site-navigation"
           aria-expanded={mobileMenuOpen}
           aria-label="Open navigation menu"
@@ -93,7 +94,7 @@ export function Header() {
           type="button"
         >
           <Menu size={20} strokeWidth={1.8} />
-        </StoreButton>
+        </button>
 
         {/* Left Side: Primary Navigation */}
         <nav
@@ -106,7 +107,7 @@ export function Header() {
               href={item.href}
               key={item.label}
             >
-              <StoreText>{item.label}</StoreText>
+              {item.label}
             </Link>
           ))}
         </nav>
@@ -123,9 +124,9 @@ export function Header() {
             height={74}
             priority
             sizes="(min-width: 1280px) 180px, 140px"
-            style={{ maxHeight: "46px", width: "auto" }}
             src="/media/products/buudy-led-mask/images/ChatGPT%20Image%20May%2031%2C%202026%2C%2012_10_21%20AM.png"
             width={220}
+            style={{ maxHeight: "46px", width: "auto" }}
           />
         </Link>
 
@@ -141,11 +142,11 @@ export function Header() {
                 href={item.href}
                 key={item.label}
               >
-                <StoreText>{item.label}</StoreText>
+                {item.label}
               </Link>
             ))}
           </nav>
-          <StoreButton
+          <button
             aria-label={`Open cart with ${totals.itemCount} items`}
             className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[rgba(58,31,61,.18)] text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)] lg:h-12 lg:w-12"
             data-testid="cart-trigger"
@@ -155,10 +156,10 @@ export function Header() {
             <ShoppingBag size={18} strokeWidth={1.8} />
             {totals.itemCount > 0 ? (
               <span className="buudy-mono absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-[var(--plum)] px-1 text-[0.58rem] leading-none text-[var(--cream)]">
-                <StoreText>{totals.itemCount}</StoreText>
+                {totals.itemCount}
               </span>
             ) : null}
-          </StoreButton>
+          </button>
         </div>
       </div>
 
@@ -169,7 +170,7 @@ export function Header() {
                 mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
               }`}
             >
-              <StoreButton
+              <button
                 aria-label="Close navigation menu"
                 className={`absolute inset-0 bg-[rgba(18,9,20,.52)] backdrop-blur-sm transition-opacity duration-300 ease-out ${
                   mobileMenuOpen ? "opacity-100" : "opacity-0"
@@ -196,18 +197,18 @@ export function Header() {
                     src="/media/products/buudy-led-mask/images/ChatGPT%20Image%20May%2031%2C%202026%2C%2012_10_21%20AM.png"
                     width={220}
                   />
-                  <StoreButton
+                  <button
                     aria-label="Close navigation menu"
                     className="grid h-11 w-11 place-items-center rounded-full border border-[rgba(58,31,61,.18)] text-[var(--plum)] transition hover:bg-[rgba(58,31,61,.06)]"
                     onClick={closeMobileMenu}
                     type="button"
                   >
                     <X size={20} strokeWidth={1.8} />
-                  </StoreButton>
+                  </button>
                 </div>
 
                 <div className="flex-1 px-4 py-5">
-                  <p className="buudy-eyebrow px-2"><StoreText>Shop</StoreText></p>
+                  <p className="buudy-eyebrow px-2">Shop</p>
                   <nav className="mt-2" aria-label="Mobile shop">
                     {primaryNavigation.map((item) => (
                       <MobileMenuLink
@@ -219,7 +220,7 @@ export function Header() {
                     ))}
                   </nav>
 
-                  <p className="buudy-eyebrow mt-7 px-2"><StoreText>Help</StoreText></p>
+                  <p className="buudy-eyebrow mt-7 px-2">Help</p>
                   <nav className="mt-2" aria-label="Mobile help">
                     {secondaryNavigation.map((item) => (
                       <MobileMenuLink
@@ -255,7 +256,7 @@ function MobileMenuLink({
       href={href}
       onClick={onClick}
     >
-      <StoreText>{label}</StoreText>
+      {label}
     </Link>
   );
 }

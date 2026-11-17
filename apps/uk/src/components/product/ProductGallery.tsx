@@ -587,6 +587,12 @@ export function ProductGallery({
                   muted
                   loop
                   playsInline
+                  ref={(el) => {
+                    if (el) {
+                      el.defaultMuted = true;
+                      el.muted = true;
+                    }
+                  }}
                 />
               ) : (
                 <img

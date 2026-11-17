@@ -189,10 +189,16 @@ function TorchUseGuide() {
 import { TorchFeatureTabs } from "./TorchFeatureTabs";
 import { ProductReviewsSection } from "./ProductReviewsSection";
 
-export function TorchProductPage({ product }: { product: Product }) {
+export function TorchProductPage({
+  product,
+  isHalloween = false, isEarlyBlackFriday = true,
+}: {
+  product: Product;
+  isHalloween?: boolean; isEarlyBlackFriday?: boolean;
+}) {
   return (
-    <>
-      <ProductHero product={product} />
+    <div className="relative">
+      <ProductHero product={product} galleryVariant="omnilux" isHalloween={false} isEarlyBlackFriday={true} />
       <TorchFeatureTabs />
       <TorchStorySection />
       {/* <TorchDetailSection /> */}
@@ -201,6 +207,6 @@ export function TorchProductPage({ product }: { product: Product }) {
       <FAQSection faqs={product.faqs} />
       {/* <GuaranteeSection showVideo={false} /> */}
       <StickyAddToCart product={product} />
-    </>
+    </div>
   );
 }

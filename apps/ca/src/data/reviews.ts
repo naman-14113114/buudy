@@ -1,6 +1,9 @@
 import maskReviews from "./reviews/buudy-led-mask-reviews.json";
 import torchReviews from "./reviews/buudy-red-torch-reviews.json";
 import iplReviews from "./reviews/buudy-ipl-hair-removal-device-reviews.json";
+import serumReviews from "./reviews/buudy-hyaluronic-serum-reviews.json";
+import faceWashReviews from "./reviews/buudy-face-wash-reviews.json";
+import prebioticReviews from "./reviews/buudy-prebiotics-serum-reviews.json";
 import { market } from "@/lib/market";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { isSupabaseAdminConfigured } from "@/lib/supabase/config";
@@ -33,10 +36,39 @@ function normalizeStaticReview(r: ProductReview) {
   };
 }
 
+const maskReviewList = maskReviews.map(normalizeStaticReview) as ProductReview[];
+
 const reviewCollections = {
-  "buudy-led-mask": maskReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-led-mask": maskReviewList,
+  "buudy-led-face-mask": maskReviewList,
+  "best-led-face-mask": maskReviewList,
+  "best-led-mask-in-uk": maskReviewList,
+  "buudy-7-colour-led-face-mask": maskReviewList,
+  "buudy-7-colour-led-mask": maskReviewList,
+  "buudy-led-mask-2": maskReviewList,
+  "buudy-led-mask-compact": maskReviewList,
   "buudy-red-torch": torchReviews.map(normalizeStaticReview) as ProductReview[],
   "buudy-ipl-device": iplReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-light-activating-hyaluronic-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-collagen-boost-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "double-hydration-boost-gel": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-double-hydration-boost-gel": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-hyaluronic-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-peptide-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "peptide-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-peptide-anti-aging-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "collagen-boost-serum": serumReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-blemish-purifying-face-wash": faceWashReviews.map(normalizeStaticReview) as ProductReview[],
+  "blemish-purifying-face-wash": faceWashReviews.map(normalizeStaticReview) as ProductReview[],
+  "acne-purifying-face-wash": faceWashReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-acne-purifying-face-wash": faceWashReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-face-wash": faceWashReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-bioactive-prebiotics-serum": prebioticReviews.map(normalizeStaticReview) as ProductReview[],
+  "bioactive-prebiotics-jelly-serum": prebioticReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-prebiotics-serum": prebioticReviews.map(normalizeStaticReview) as ProductReview[],
+  "prebiotics-jelly-serum": prebioticReviews.map(normalizeStaticReview) as ProductReview[],
+  "buudy-noni-serum": prebioticReviews.map(normalizeStaticReview) as ProductReview[],
+  "noni-serum": prebioticReviews.map(normalizeStaticReview) as ProductReview[],
 } as const;
 
 export type ReviewProductHandle = keyof typeof reviewCollections;
