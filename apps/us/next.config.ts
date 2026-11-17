@@ -53,6 +53,26 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "m.media-amazon.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.selfnamed.com",
+      },
+      {
+        protocol: "https",
+        hostname: "static.selfnamed.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.shopify.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "prod-selfnamed-com.s3.eu-central-1.amazonaws.com",
+      },
     ],
   },
   async headers() {

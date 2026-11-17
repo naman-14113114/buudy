@@ -28,6 +28,10 @@ import {
 import { TrustBadges } from "./TrustBadges";
 import { SerumCertificationsRow } from "./SerumCertificationsRow";
 import { GiftBoxBundleSection } from "./GiftBoxBundleSection";
+import {
+  HyaluronicSerumSelfnamedSections,
+  RelatedProductsSection,
+} from "./HyaluronicSerumSelfnamedSections";
 
 export function ProductPage({
   product,
@@ -73,6 +77,13 @@ export function ProductPage({
   const isSerumOrGift =
     product.template === "serum" ||
     product.template === "cleanser";
+
+  const isHyaluronic =
+    product.id === "buudy-light-activating-hyaluronic-serum" ||
+    product.slug === "buudy-light-activating-hyaluronic-serum" ||
+    product.slug === "buudy-hyaluronic-serum" ||
+    product.slug.includes("hyaluronic") ||
+    product.slug.includes("double-hydration");
 
   return (
     <div className="relative">
@@ -128,16 +139,19 @@ export function ProductPage({
         />
       )}
 
-      {/* 2. Consumer Perception & Clinical Trial Stats - Split Grid with Image & Miroooo One-Time Circular Filling Animation */}
+      {/* 2. Selfnamed Rich Clinical Sections for Hyaluronic Serum */}
+      {isHyaluronic && <HyaluronicSerumSelfnamedSections />}
+
+      {/* 3. Consumer Perception & Clinical Trial Stats - Split Grid with Image & Miroooo One-Time Circular Filling Animation */}
       {product.template === "serum" && (
         <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} productSlug={product.slug} />
       )}
       {product.template === "cleanser" && <CleanserClinicalResults />}
 
-      {/* 3. Daily Application / Cleansing Ritual - How To Use Section */}
+      {/* 4. Daily Application / Cleansing Ritual - How To Use Section */}
       {product.template === "mask" && <DeferredWavelengthSelector />}
       {product.template === "mask" && <DeferredHowToUseSection />}
-      {product.template === "serum" && (
+      {product.template === "serum" && !isHyaluronic && (
         <SerumHowToUse isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} productSlug={product.slug} />
       )}
       {product.template === "cleanser" && <CleanserHowToUse />}
@@ -145,7 +159,10 @@ export function ProductPage({
       {product.template === "mask" && comparisonPosition === "default" && <ComparisonTable />}
       {/* <TouchTechSection /> */}
 
-      {/* 4. Customer Reviews Section - After all the clinical, transformation, and ritual sections */}
+      {/* 5. Related Products Section */}
+      {isSerumOrGift && <RelatedProductsSection currentProductId={product.id} />}
+
+      {/* 6. Customer Reviews Section - After all the clinical, transformation, and ritual sections */}
       <ProductReviewsSection productHandle={product.template === "mask" ? "buudy-led-mask" : product.slug} />
       {product.template === "mask" && <AppPromo />}
       {product.template === "mask" && comparisonPosition === "below-app" && <ComparisonTable />}

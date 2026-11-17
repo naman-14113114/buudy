@@ -93,7 +93,7 @@ function getSkincareFeatureIcon(feature: { title: string; kicker: string }, inde
 }
 
 type AccordionItem = {
-  id: "unique" | "specs" | "benefits" | "included" | "certifications";
+  id: "unique" | "specs" | "signals" | "benefits" | "included" | "certifications";
   eyebrow: string;
   title: string;
   content: ReactNode;
@@ -306,6 +306,37 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
         </ul>
       ),
     }, */
+    ...(product.productSignals && product.productSignals.length > 0
+      ? [
+          {
+            id: "signals" as const,
+            eyebrow: "Product Signals",
+            title: "Formula attributes & clean signals",
+            content: (
+              <ul
+                className={`grid gap-2.5 grid-cols-1 ${
+                  product.productSignals.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"
+                }`}
+              >
+                {product.productSignals.map((badge) => {
+                  const CertIcon = getCertificationIcon(badge);
+                  return (
+                    <li
+                      key={badge}
+                      className="flex items-center gap-2.5 rounded-xl border border-[rgba(58,31,61,0.08)] bg-[var(--card)] px-3.5 py-3 text-sm font-semibold leading-5 text-[var(--plum)] shadow-[0_1px_3px_rgba(58,31,61,0.02)] transition-all hover:border-[rgba(184,149,86,0.35)]"
+                    >
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[rgba(184,149,86,0.12)] text-[var(--gold)]">
+                        <CertIcon size={16} strokeWidth={2} />
+                      </span>
+                      <span className="font-sans text-sm tracking-tight">{badge}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            ),
+          },
+        ]
+      : []),
     {
       id: "included",
       eyebrow: "In the box",
@@ -338,7 +369,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
       eyebrow: "Certifications",
       title: "Safety and product signals",
       content: (
-        <ul className={`grid gap-2.5 grid-cols-1 ${product.badges.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
+        <ul className="grid gap-2.5 grid-cols-1 sm:grid-cols-2">
           {product.badges.map((badge) => {
             const CertIcon = getCertificationIcon(badge);
             return (

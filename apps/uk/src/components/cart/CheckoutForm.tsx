@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Lock, Truck } from "lucide-react";
 import Lottie from "lottie-react";
 import loadingLottie from "./loading-lottie.json";
@@ -91,7 +91,6 @@ export function CheckoutForm({
     )?.quantity ?? totals.itemCount;
 
   function readAttribution() {
-    if (typeof window === "undefined") return {};
     const current = pickAttributionFromSearch(window.location.search);
 
     try {
@@ -107,75 +106,6 @@ export function CheckoutForm({
       return current;
     }
   }
-
-  const getComputedCheckoutUrl = useCallback(() => {
-    const attribution = readAttribution();
-
-    let extraCode = "";
-    if (typeof document !== "undefined") {
-      const promoInput = document.querySelector('input[aria-label="Promo code"]') as HTMLInputElement | null;
-      if (promoInput?.value) {
-        const canonical = getAppliedManualPromoCode(promoInput.value);
-        if (canonical) {
-          extraCode = canonical;
-        }
-      }
-    }
-
-    const appliedCodesList = Array.from(
-      new Set(
-        [
-          ...(manualPromoCodes || []),
-          manualPromoCode,
-          extraCode,
-        ]
-          .map((c) => getAppliedManualPromoCode(c))
-          .filter(Boolean),
-      ),
-    );
-
-    return (
-      buildFastWhopCheckoutUrl(lines, appliedCodesList, attribution) ||
-      "https://buudy.com/checkout/plan_IY6bXASo3Gh15"
-    );
-  }, [lines, manualPromoCode, manualPromoCodes]);
-
-  const [preloadedUrl, setPreloadedUrl] = useState<string | null>(null);
-
-  const warmCheckout = useCallback(() => {
-    if (!hasItems) return;
-    const url = getComputedCheckoutUrl();
-    setPreloadedUrl((prev) => (prev === url ? prev : url));
-  }, [hasItems, getComputedCheckoutUrl]);
-
-  useEffect(() => {
-    if (!hasItems) return;
-
-    let timeoutId: ReturnType<typeof setTimeout> | undefined;
-    let idleId: number | undefined;
-
-    const runWarmup = () => {
-      warmCheckout();
-    };
-
-    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-      idleId = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(runWarmup, { timeout: 1000 });
-    }
-    timeoutId = setTimeout(runWarmup, 150);
-
-    const handleGlobalWarmup = () => {
-      warmCheckout();
-    };
-    window.addEventListener("buudy:warmup-checkout", handleGlobalWarmup);
-
-    return () => {
-      if (idleId !== undefined && typeof window !== "undefined" && "cancelIdleCallback" in window) {
-        (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
-      }
-      if (timeoutId) clearTimeout(timeoutId);
-      window.removeEventListener("buudy:warmup-checkout", handleGlobalWarmup);
-    };
-  }, [hasItems, warmCheckout]);
 
   async function handleCheckout() {
     if (!hasItems || redirectingRef.current) {
@@ -287,46 +217,11 @@ export function CheckoutForm({
         className={`relative overflow-hidden w-full rounded-[30px] border border-[var(--ink)] bg-[var(--ink)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-[0.98] buudy-display ${!isRedirecting ? "proxy-bundle-btn" : "disabled:!opacity-100"}`}
         disabled={!hasItems || isRedirecting}
         onClick={handleCheckout}
-        onMouseEnter={warmCheckout}
-        onTouchStart={warmCheckout}
         type="button"
       >
-        {isRedirecting ? (
-          <>
-            <span style={{ visibility: "hidden" }} className="flex items-center gap-2">
-              <Lock size={17} />
-              Checkout securely
-            </span>
-            <span className="absolute inset-0 flex items-center justify-center">
-              <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
-            </span>
-          </>
-        ) : (
-          <>
-            <Lock size={17} />
-            Checkout securely
-          </>
-        )}
+        <Lock size={17} />
+        {isRedirecting ? "Opening checkout…" : "Checkout securely"}
       </Button>
-      {preloadedUrl ? (
-        <>
-          <link rel="prefetch" href={preloadedUrl} as="document" />
-          <iframe
-            src={preloadedUrl}
-            title="Checkout Preloader"
-            tabIndex={-1}
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              width: "1px",
-              height: "1px",
-              border: 0,
-              opacity: 0,
-              pointerEvents: "none",
-            }}
-          />
-        </>
-      ) : null}
       {error ? (
         <p className="mt-3 text-center text-xs font-semibold text-[var(--plum)]">
           {error}
