@@ -24,6 +24,7 @@ import {
   Layers,
   Heart,
   Shield,
+  type LucideIcon,
 } from "lucide-react";
 import type { Product } from "@/data/products";
 import { market } from "@/lib/market";
@@ -98,51 +99,169 @@ function FaceNeckIcon({ size = 22 }: { size?: number }) {
   );
 }
 
-function getBenefitIcon(text: string, index: number) {
+const luxuryFallbackRing: LucideIcon[] = [
+  Droplets,
+  ShieldCheck,
+  Sun,
+  Leaf,
+  Sparkles,
+  Waves,
+  Layers,
+  Heart,
+  Hourglass,
+  CircleDot,
+  Bandage,
+];
+
+function getBenefitIcon(
+  text: string,
+  index: number,
+  seenIcons?: Set<LucideIcon>,
+): LucideIcon {
   const norm = text.toLowerCase();
+  const candidates: LucideIcon[] = [];
+
+  // 1. Organic, botanical, natural certified, botanicals (Leaf)
+  if (
+    norm.includes("ecocert") ||
+    norm.includes("certified") ||
+    norm.includes("organic") ||
+    norm.includes("botanical") ||
+    norm.includes("natural") ||
+    norm.includes("aloe") ||
+    norm.includes("tea") ||
+    norm.includes("sage") ||
+    norm.includes("butter") ||
+    norm.includes("mango") ||
+    norm.includes("blueberry") ||
+    norm.includes("rosehip") ||
+    norm.includes("seed")
+  ) {
+    candidates.push(Leaf);
+  }
+
+  // 2. Firming, peptides, collagen, cellular turnover, glow, smoothing (Sparkles)
   if (
     norm.includes("peptide") ||
     norm.includes("firm") ||
     norm.includes("contour") ||
     norm.includes("elasticity") ||
-    norm.includes("hydroxyproline")
+    norm.includes("hydroxyproline") ||
+    norm.includes("collagen") ||
+    norm.includes("glow") ||
+    norm.includes("turnover") ||
+    norm.includes("retinol") ||
+    norm.includes("exfoliat") ||
+    norm.includes("lactic")
   ) {
-    return Sparkles;
+    candidates.push(Sparkles);
   }
+
+  // 3. Optical hydrogel / LED phototherapy / Light synergy / Sun / AM/PM (Sun)
   if (
-    norm.includes("hydration") ||
-    norm.includes("hyaluronic") ||
-    norm.includes("pca") ||
-    norm.includes("moisture") ||
-    norm.includes("water")
-  ) {
-    return Droplets;
-  }
-  if (
-    norm.includes("butter") ||
-    norm.includes("lipid") ||
-    norm.includes("barrier") ||
-    norm.includes("mango") ||
-    norm.includes("blueberry") ||
-    norm.includes("seed") ||
-    norm.includes("oil")
-  ) {
-    return Leaf;
-  }
-  if (
-    norm.includes("am/pm") ||
-    norm.includes("day") ||
-    norm.includes("night") ||
-    norm.includes("seal") ||
-    norm.includes("rejuvenation") ||
+    norm.includes("phototherapy") ||
+    norm.includes("optical") ||
+    norm.includes("light therapy") ||
+    norm.includes("wavelength") ||
+    norm.includes("630nm") ||
+    norm.includes("830nm") ||
     norm.includes("led") ||
-    norm.includes("regimen") ||
-    norm.includes("ritual")
+    norm.includes("sun") ||
+    norm.includes("am/pm")
   ) {
-    return Sun;
+    candidates.push(Sun);
   }
-  const fallbackIcons = [Sparkles, Droplets, Leaf, Sun, ShieldCheck];
-  return fallbackIcons[index % fallbackIcons.length];
+
+  // 4. Moisture reservoir / B5 lock-in / barrier protection (ShieldCheck / Waves / Layers)
+  if (
+    norm.includes("reservoir") ||
+    norm.includes("72-hour") ||
+    norm.includes("72h") ||
+    norm.includes("72 hour") ||
+    norm.includes("lock in") ||
+    norm.includes("lock") ||
+    norm.includes("b5") ||
+    norm.includes("barrier") ||
+    norm.includes("lipid") ||
+    norm.includes("shield") ||
+    norm.includes("defence") ||
+    norm.includes("defend")
+  ) {
+    candidates.push(ShieldCheck, Waves, Layers);
+  }
+
+  // 5. Hyaluronic, deep hydration, moisture, hydrogel, water (Droplets)
+  if (
+    norm.includes("hyaluronic") ||
+    norm.includes("hydration") ||
+    norm.includes("hydrate") ||
+    norm.includes("moisture") ||
+    norm.includes("water") ||
+    norm.includes("hydrogel") ||
+    norm.includes("plump") ||
+    norm.includes("quench") ||
+    norm.includes("pca")
+  ) {
+    candidates.push(Droplets);
+  }
+
+  // 6. Soothing, micro-circulation, calming, redness (Waves / Heart)
+  if (
+    norm.includes("circulation") ||
+    norm.includes("puffiness") ||
+    norm.includes("calm") ||
+    norm.includes("sooth") ||
+    norm.includes("redness") ||
+    norm.includes("healing") ||
+    norm.includes("pore")
+  ) {
+    candidates.push(Waves, Heart);
+  }
+
+  // 7. Time / age / wrinkles (Hourglass / Sparkles)
+  if (
+    norm.includes("age") ||
+    norm.includes("wrinkle") ||
+    norm.includes("line") ||
+    norm.includes("time")
+  ) {
+    candidates.push(Hourglass, Sparkles);
+  }
+
+  // Pick first candidate that hasn't been used yet
+  let chosen = seenIcons
+    ? candidates.find((icon) => !seenIcons.has(icon))
+    : candidates[0];
+
+  // If all matched candidates are already used or no candidate matched, find next unused icon in luxuryFallbackRing
+  if (!chosen) {
+    if (seenIcons) {
+      for (let offset = 0; offset < luxuryFallbackRing.length; offset++) {
+        const ringIcon =
+          luxuryFallbackRing[(index + offset) % luxuryFallbackRing.length];
+        if (!seenIcons.has(ringIcon)) {
+          chosen = ringIcon;
+          break;
+        }
+      }
+    }
+  }
+
+  // Fallback if ring is exhausted or no seenIcons provided
+  if (!chosen) {
+    chosen = luxuryFallbackRing[index % luxuryFallbackRing.length];
+  }
+
+  if (seenIcons) {
+    seenIcons.add(chosen);
+  }
+
+  return chosen;
+}
+
+function getDistinctBenefitIcons(items: string[]): LucideIcon[] {
+  const seenIcons = new Set<LucideIcon>();
+  return items.map((item, index) => getBenefitIcon(item, index, seenIcons));
 }
 
 const keyBenefitIcons = [
@@ -246,15 +365,15 @@ export function GiftBundle({
     product.id.includes("eye") ||
     product.slug.includes("collagen");
 
-  const giftButtonLabel = isSimplifiedProduct
-    ? "Add to cart"
-    : isEarlyBlackFriday
-    ? hasGifts
-      ? `CLAIM EARLY ACCESS + ${product.gifts.length} FREE GIFTS`
-      : "CLAIM BLACK FRIDAY EARLY ACCESS"
-    : hasGifts
+  const giftButtonLabel = product.template === "mask" && hasGifts
     ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
-    : "ADD TO CART + FREE SHIPPING";
+    : "Add to cart";
+
+  const benefitList = product.keyBenefits ?? product.highlights;
+  const benefitIcons =
+    product.template === "mask"
+      ? benefitList.map((_, i) => keyBenefitIcons[i % keyBenefitIcons.length])
+      : getDistinctBenefitIcons(benefitList);
   return (
     <div>
       <a
@@ -292,38 +411,40 @@ export function GiftBundle({
       </div>
 
       {/* Clinically Proven Badges */}
-      <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
-        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
-          <ShieldCheck
-            size={14}
-            strokeWidth={2}
-            className="hidden sm:block shrink-0 text-[var(--gold)]"
-          />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            Clinically Proven
+      {!isSimplifiedProduct && (
+        <div className="mt-3 flex flex-nowrap items-center gap-1 sm:gap-2">
+          <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
+            <ShieldCheck
+              size={14}
+              strokeWidth={2}
+              className="hidden sm:block shrink-0 text-[var(--gold)]"
+            />
+            <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
+              Clinically Proven
+            </span>
           </span>
-        </span>
-        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
-          <RotateCcw
-            size={13}
-            strokeWidth={2}
-            className="hidden sm:block shrink-0 text-[var(--gold)]"
-          />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            Easy Returns
+          <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
+            <RotateCcw
+              size={13}
+              strokeWidth={2}
+              className="hidden sm:block shrink-0 text-[var(--gold)]"
+            />
+            <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
+              Easy Returns
+            </span>
           </span>
-        </span>
-        <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
-          <Sparkles
-            size={14}
-            strokeWidth={2}
-            className="hidden sm:block shrink-0 text-[var(--gold)]"
-          />
-          <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
-            Dermatologist Approved
+          <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-[rgba(58,31,61,.15)] bg-[var(--card)] px-1.5 sm:px-3 py-1 sm:py-1.5">
+            <Sparkles
+              size={14}
+              strokeWidth={2}
+              className="hidden sm:block shrink-0 text-[var(--gold)]"
+            />
+            <span className="whitespace-nowrap buudy-display text-[8px] sm:text-[10.5px] font-bold uppercase tracking-[0.02em] sm:tracking-[0.05em] text-[var(--plum)]">
+              Dermatologist Approved
+            </span>
           </span>
-        </span>
-      </div>
+        </div>
+      )}
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <Price
@@ -347,8 +468,8 @@ export function GiftBundle({
 
       {/* Premium Compact Bullet Points List */}
       <ul className="mt-4 mb-4 flex flex-col gap-1.5 pl-1.5">
-        {(product.keyBenefits ?? product.highlights).map((benefit, index) => {
-          const Icon = getBenefitIcon(benefit, index);
+        {benefitList.map((benefit, index) => {
+          const Icon = benefitIcons[index] ?? getBenefitIcon(benefit, index);
           return (
             <li
               className="flex items-center gap-3 text-[14.5px] font-normal leading-normal text-[var(--plum)] buudy-display"

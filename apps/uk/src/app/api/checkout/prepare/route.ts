@@ -357,6 +357,20 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const serumLines = productLines?.filter((line) => line.productId === "buudy-light-activating-hyaluronic-serum");
+  if (serumLines && serumLines.length > 0) {
+    const quantity = serumLines.reduce((total, line) => total + line.quantity, 0) || 1;
+    const planId = "plan_j074lrPIrDe34";
+    const checkout = new URL(`/checkout/${planId}`, "https://buudy.com");
+    checkout.searchParams.set("quantity", String(quantity));
+    checkout.searchParams.set("items", `${planId}:${quantity}`);
+    checkout.searchParams.set("checkoutSource", "buudy-uk");
+    return NextResponse.json(
+      { checkoutUrl: appendAttributionToAbsoluteUrl(checkout.toString(), cleanAttribution(body.attribution)) },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  }
+
   if (
     productLines &&
     (!productLines.length ||

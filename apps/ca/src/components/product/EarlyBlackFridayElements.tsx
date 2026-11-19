@@ -56,7 +56,7 @@ export function EarlyBlackFridayTopBanner() {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e5c17d] opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e5c17d]"></span>
         </span>
-        BLACK FRIDAY EARLY ACCESS
+        BLACK FRIDAY SALE IS LIVE
       </span>
       <span className="text-[rgba(247,241,232,0.4)]">|</span>
       <span className="text-[#f7f1e8]/90 font-medium text-[11px] whitespace-nowrap">
@@ -90,7 +90,7 @@ export function EarlyBlackFridayTopBanner() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#e5c17d]"></span>
           </span>
           <span className="font-bold tracking-wider uppercase text-[#e5c17d] text-[11px] sm:text-xs">
-            BLACK FRIDAY EARLY ACCESS
+            BLACK FRIDAY SALE IS LIVE
           </span>
           <span className="text-[rgba(247,241,232,0.4)]">|</span>
           <span className="text-[#f7f1e8]/90 font-medium">
@@ -132,7 +132,7 @@ export function EarlyBlackFridayTopBanner() {
 
 /**
  * Early Black Friday Sale Badge next to the price
- * Editorial luxury aesthetic matching reference: Serif "60% OFF" in gold | stacked "BLACK FRIDAY / EARLY ACCESS"
+ * Serif discount in gold beside the stacked "BLACK FRIDAY / SALE" label.
  */
 export function EarlyBlackFridaySaleBadge({ discountText }: { discountText?: string } = {}) {
   return (
@@ -148,13 +148,13 @@ export function EarlyBlackFridaySaleBadge({ discountText }: { discountText?: str
         className="h-6 sm:h-7 w-[1px] bg-[var(--plum)]/35 shrink-0"
       />
 
-      {/* Stacked Black Friday Early Access */}
+      {/* Stacked Black Friday Sale */}
       <div className="flex flex-col text-left leading-[1.12] shrink-0">
         <span className="font-sans text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--plum)]">
           BLACK FRIDAY
         </span>
         <span className="font-sans text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.06em] text-[var(--plum)]/80">
-          EARLY ACCESS
+          SALE
         </span>
       </div>
     </div>

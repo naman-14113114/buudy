@@ -342,219 +342,203 @@ export function SerumHowToUse({
   const steps = isCream
     ? [
         {
-          num: "01",
-          title: "Cleanse & Prime",
-          desc: "Cleanse face thoroughly and complete your 10-minute Buudy LED Mask session to boost cellular microcirculation.",
+          num: 1,
+          title: "Cleanse Your Face",
+          desc: "Start with a clean face, morning or night, or after your LED session.",
         },
         {
-          num: "02",
-          title: "Dispense Velvety Cream",
-          desc: "Press 1–2 pumps of Peptide Ageless AM/PM Cream onto clean fingertips and gently warm between hands.",
+          num: 2,
+          title: "Apply the Cream",
+          desc: "Press 1–2 pumps onto clean fingertips and gently warm between hands.",
         },
         {
-          num: "03",
-          title: "Smooth & Sculpt",
-          desc: "Smooth over face, neck, and décolletage in upward sculpting motions to seal in moisture and firm facial contours.",
+          num: 3,
+          title: "Sculpt & Absorb",
+          desc: "Smooth over face, neck, and décolletage in upward sculpting motions.",
+        },
+        {
+          num: 4,
+          title: "Lock & Protect",
+          desc: "Seal in cellular firmness and hydration. Always follow with SPF in the morning.",
         },
       ]
     : isEyeCream
     ? [
         {
-          num: "01",
-          title: "Cleanse & Prime",
-          desc: "Cleanse periorbital area thoroughly and complete your Buudy LED Mask session to boost cellular micro-circulation.",
+          num: 1,
+          title: "Cleanse Your Face",
+          desc: "Cleanse periorbital area thoroughly before morning or evening application.",
         },
         {
-          num: "02",
-          title: "Dispense Precision Droplet",
-          desc: "Gently press a rice-grain amount from the needle-nose applicator directly onto your ring fingertip.",
+          num: 2,
+          title: "Apply Eye Cream",
+          desc: "Gently press a rice-grain droplet directly onto your ring fingertip.",
         },
         {
-          num: "03",
-          title: "Dot & Pat Eye Contours",
-          desc: "Lightly pat along the orbital bone, crow's feet, and under-eye area in outward tapping motions until fully absorbed.",
+          num: 3,
+          title: "Pat Eye Contours",
+          desc: "Lightly pat along orbital bone and crow's feet until fully absorbed.",
+        },
+        {
+          num: 4,
+          title: "Follow with Moisturiser",
+          desc: "Layer your face cream on top to lock in actives. Follow with SPF in morning.",
         },
       ]
     : isRenewalBox
     ? [
         {
-          num: "01",
-          title: "Weekly AHA Exfoliation",
-          desc: "Smooth 3–4 drops of AHA Peeling Concentrate 1–2 evenings per week over cleansed skin. Leave on overnight to dissolve dead cells.",
+          num: 1,
+          title: "Cleanse Your Face",
+          desc: "Start with a fresh, clean face before your targeted renewal protocol.",
         },
         {
-          num: "02",
-          title: "Daily Hydrogel Priming",
-          desc: "Apply 2–3 pumps of Double Hydration Boost Gel daily AM/PM. Crystal-clear water hydrogel delivers 100% optical light permeability.",
+          num: 2,
+          title: "Apply the Active",
+          desc: "Smooth 2–3 drops of AHA peeling or 1–2 pumps of peptide serum.",
         },
         {
-          num: "03",
-          title: "Post-Light Collagen Lock",
-          desc: "Apply 2–3 pumps of Peptide Serum immediately after LED light therapy to stimulate fibroblasts and lock in cellular firmness.",
+          num: 3,
+          title: "Massage & Absorb",
+          desc: "Gently massage across face and neck in upward sculpting strokes.",
+        },
+        {
+          num: 4,
+          title: "Follow with Moisturiser",
+          desc: "Layer cream on top to seal in cellular firmness. Follow with SPF in morning.",
         },
       ]
     : isAha
     ? [
         {
-          num: "01",
-          title: "Cleanse & Dry",
-          desc: "Cleanse skin thoroughly with lukewarm water. Pat completely dry before applying your peeling concentrate.",
+          num: 1,
+          title: "Cleanse Your Face",
+          desc: "Cleanse thoroughly with lukewarm water. Pat skin completely dry.",
         },
         {
-          num: "02",
-          title: "Dispense & Smooth",
-          desc: "Dispense 3–4 drops onto fingertips and smooth gently over cleansed face and neck, avoiding eye contours.",
+          num: 2,
+          title: "Apply the Peel",
+          desc: "Dispense 3–4 drops onto fingertips and smooth gently over face and neck.",
         },
         {
-          num: "03",
-          title: "Leave-On Overnight & Protect",
-          desc: "Leave on overnight for active cellular resurfacing. Rinse off in morning and always follow with SPF.",
+          num: 3,
+          title: "Massage & Absorb",
+          desc: "Use light circular motions until peeling concentrate is fully absorbed.",
+        },
+        {
+          num: 4,
+          title: "Leave-On & Protect",
+          desc: "Leave on overnight for cellular renewal. Rinse in AM and always apply SPF.",
         },
       ]
     : isPrebiotic
     ? [
         {
-          num: "01",
-          title: "Cleanse & Prep",
-          desc: "Cleanse with lukewarm water. Pat lightly, leaving skin slightly damp for optimal hydrogel absorption.",
+          num: 1,
+          title: "Cleanse Your Face",
+          desc: "Start with a clean face. Leave skin slightly damp for optimal hydrogel binding.",
         },
         {
-          num: "02",
-          title: "Dispense & Press",
-          desc: "Dispense 3–4 drops onto fingertips and gently press over face, neck, and décolletage until absorbed.",
+          num: 2,
+          title: "Apply the Serum",
+          desc: "Dispense 1–2 drops and gently press into face, neck, and décolletage.",
         },
         {
-          num: "03",
-          title: "Activate with Light & Seal",
-          desc: "Wear your Buudy 7-Colour LED Mask for 10 minutes. Follow with your daily moisturiser to lock in the microbiome shield.",
+          num: 3,
+          title: "Massage & Absorb",
+          desc: "Use light upward strokes to massage in until the jelly serum is fully absorbed.",
+        },
+        {
+          num: 4,
+          title: "Follow with Moisturiser",
+          desc: "Layer a moisturiser on top to lock in the microbiome shield. Follow with SPF.",
         },
       ]
     : isPeptide
     ? [
         {
-          num: "01",
-          title: "Cleanse & Light Therapy",
-          desc: "Cleanse thoroughly and complete your 10-minute Buudy LED Mask session to prime cellular receptivity.",
+          num: 1,
+          title: "Cleanse Your Face",
+          desc: "Start with a clean face, morning or night, or immediately after LED therapy.",
         },
         {
-          num: "02",
-          title: "Dispense & Warm",
-          desc: "Dispense 2–3 pumps onto fingertips and warm gently to activate the bio-fermented peptide matrix.",
+          num: 2,
+          title: "Apply the Serum",
+          desc: "Dispense 1–2 drops and press gently into the face, neck, and décolletage.",
         },
         {
-          num: "03",
-          title: "Smooth & Sculpt",
-          desc: "Smooth over face, neck, and décolletage in upward sculpting strokes. Follow with moisturiser and SPF.",
+          num: 3,
+          title: "Massage & Absorb",
+          desc: "Use light upward strokes to massage in until peptides are fully absorbed.",
+        },
+        {
+          num: 4,
+          title: "Follow with Moisturiser",
+          desc: "Layer a moisturiser on top to seal in collagen stimulation. Follow with SPF.",
         },
       ]
     : [
         {
-          num: "01",
-          title: "Cleanse & Prep",
-          desc: "Cleanse thoroughly with lukewarm water. Leave skin slightly damp so hyaluronic acid binds deep hydration.",
+          num: 1,
+          title: "Cleanse Your Face",
+          desc: "Start with a clean face, morning or night.",
         },
         {
-          num: "02",
-          title: "Dispense & Smooth",
-          desc: "Dispense 2–3 pumps directly onto fingertips. Gently smooth over face, neck, and décolletage in upward strokes.",
+          num: 2,
+          title: "Apply the Serum",
+          desc: "Dispense 1–2 drops and gently press into the face, neck and décolletage.",
         },
         {
-          num: "03",
-          title: "Activate with Light & Hydrate",
-          desc: "Wear your Buudy 7-Colour LED Mask for 10 minutes of unimpeded light penetration. Follow with moisturiser.",
+          num: 3,
+          title: "Massage & Absorb",
+          desc: "Use light upward strokes to massage in until the serum is fully absorbed into the skin.",
+        },
+        {
+          num: 4,
+          title: "Follow with Moisturiser",
+          desc: "Layer a moisturiser on top to lock in the actives. Always follow with SPF in the morning.",
         },
       ];
 
-  const introText = isCream
-    ? "High-performance dual AM/PM restorative cream powered by Hexapeptide-11 and Dipalmitoyl Hydroxyproline to lock in light therapy results and restore dermal elasticity."
-    : isEyeCream
-    ? "Precision ophthalmic periorbital formula enriched with bio-fermented Hexapeptide-11 and borage seed oil to target crow's feet and restore delicate contour bounce."
-    : isRenewalBox
-    ? "A synchronized 3-step ritual combining weekly resurfacing, daily optical hydrogel priming, and post-phototherapy collagen firming."
-    : isAha
-    ? "Gentle overnight resurfacing concentrate formulated with 10% plant Lactic Acid and 1% Hyaluronic Acid for smooth, refined radiance."
-    : isPrebiotic
-    ? "Lightweight, fast-absorbing hydrogel formulated to fortify your microbiome and optimise phototherapy penetration."
-    : isPeptide
-    ? "Formulated with bio-fermented Hexapeptide-11 to absorb rapidly into post-light dermis without tacky residue."
-    : "Pure water-based hydrogel formulated to absorb instantly for maximum hydration and 100% unimpeded light penetration.";
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-10 md:py-16" id="how-to-use">
-      <div className="buudy-wrap grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
-        {/* Model UGC Image Column */}
-        <div className="relative overflow-hidden rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] shadow-lg aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
-          <Image
-            src={
-              isCream
-                ? "/images/products/buudy-peptide-ageless-am-pm-cream/buudy-peptide-ageless-cream-plum-bottle-portrait-uk.webp"
-                : isEyeCream
-                ? "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-plum-reflection-display-uk.webp"
-                : isRenewalBox
-                ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-gift-box-in-hand-portrait-uk.webp"
-                : isAha
-                ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-deep-plum-campaign-duo-uk.webp"
-                : isPrebiotic
-                ? "/images/products/buudy-prebiotics-serum/08-two-hand-dropper-ritual.webp"
-                : isPeptide
-                ? "/images/products/buudy-peptide-serum/buudy-peptide-serum-bottle-angle-plum-backdrop-uk.webp"
-                : "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-bottle-three-quarter-plum-backdrop-uk.webp"
-            }
-            alt={
-              isCream
-                ? "Buudy Peptide Ageless AM/PM Cream bottle portrait on signature plum background for daily AM/PM ritual UK"
-                : isEyeCream
-                ? "Buudy Peptide Eye Cream precision tube displayed with subtle reflection on signature deep plum studio backdrop UK"
-                : isRenewalBox
-                ? "The Ultimate Renewal Collection Box gift packaging held in hand UK"
-                : isAha
-                ? "Buudy AHA Peeling Concentrate bottle and luxury packaging carton on deep plum studio backdrop UK"
-                : isPrebiotic
-                ? "Buudy Bioactive Prebiotics Jelly Serum daily application ritual"
-                : isPeptide
-                ? "Buudy Peptide Serum bottle angled portrait on signature plum background for post-phototherapy ritual UK"
-                : "Buudy Hyaluronic Serum bottle three-quarter perspective on signature plum backdrop UK"
-            }
-            fill
-            sizes="(min-width: 1024px) 500px, 100vw"
-            className="object-cover object-top"
-            priority={false}
-          />
+    <section className="buudy-section bg-[var(--cream)] py-14 md:py-20" id="how-to-use">
+      <div className="buudy-wrap">
+        {/* Centered Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+          <h2 className="buudy-display text-3xl sm:text-4xl lg:text-[2.6rem] text-[var(--plum)]">
+            How to Use
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-[var(--muted)]">
+            Follow these simple steps to get the best results
+          </p>
         </div>
 
-        {/* Steps Column */}
-        <div className="flex flex-col justify-center">
-          <SectionHeading
-            eyebrow="The Daily Ritual"
-            title={
-              <>
-                How to use for{" "}
-                <em className="buudy-italic text-[var(--gold)]">maximum absorption</em>.
-              </>
-            }
+        {/* Horizontal Stepper Timeline */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Connecting line on desktop */}
+          <div
+            aria-hidden="true"
+            className="hidden md:block absolute top-7 left-[12.5%] right-[12.5%] h-[1.5px] bg-[#d5cfc5] z-0"
           />
-          <p className="mt-2 text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
-            {introText}
-          </p>
 
-          {/* 3 Step Cards */}
-          <div className="mt-6 space-y-3 sm:space-y-3.5">
-            {steps.map((step, idx) => (
-              <div
-                key={idx}
-                className="flex items-start gap-3.5 p-3 sm:p-3.5 rounded-xl border border-[rgba(58,31,61,.08)] bg-[var(--card)]/80 transition-colors hover:bg-[var(--card)]"
-              >
-                <div className="grid h-8 w-8 sm:h-9 sm:w-9 shrink-0 place-items-center rounded-full bg-[var(--plum)] text-white font-serif font-bold text-xs sm:text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 relative z-10">
+            {steps.map((step) => (
+              <div key={step.num} className="flex flex-col items-center text-center">
+                {/* Number Badge */}
+                <div className="w-14 h-14 rounded-full bg-white border border-[#d5cfc5] shadow-xs text-[var(--plum)] font-serif font-bold text-lg flex items-center justify-center mb-4 md:mb-6 shrink-0 transition-transform hover:scale-105">
                   {step.num}
                 </div>
-                <div className="min-w-0 flex-1">
-                  <h3 className="buudy-display text-sm sm:text-base font-semibold text-[var(--plum)] leading-snug">
-                    {step.title}
-                  </h3>
-                  <p className="mt-0.5 text-xs text-[var(--muted)] leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
+
+                {/* Title */}
+                <h3 className="buudy-display font-semibold text-base sm:text-lg text-[var(--plum)] mb-2">
+                  {step.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed max-w-[240px]">
+                  {step.desc}
+                </p>
               </div>
             ))}
           </div>

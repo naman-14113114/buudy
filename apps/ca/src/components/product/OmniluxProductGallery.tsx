@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState, useRef, useMemo } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
+import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
 import {
   ChevronLeft,
   ChevronRight,
@@ -186,7 +188,6 @@ export function OmniluxProductGallery({
 
   // Current global media index. By default always starts on first gallery image (0)
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [hoverSide, setHoverSide] = useState<"left" | "right">("right");
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -214,7 +215,7 @@ export function OmniluxProductGallery({
     else if (tab === "video") setCurrentIndex(videoStartIndex);
   };
 
-  // Continuous linear navigation across all items (Gallery -> Before & After -> Video)
+  // Continuous linear navigation across all items
   const goNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % allMediaItems.length);
   }, [allMediaItems.length]);
@@ -223,27 +224,30 @@ export function OmniluxProductGallery({
     setCurrentIndex((prev) => (prev - 1 + allMediaItems.length) % allMediaItems.length);
   }, [allMediaItems.length]);
 
-  // Handle mouse move on main stage to toggle < or > cursor depending on side from center
-  const handleStageMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    if (mouseX < rect.width / 2) {
-      setHoverSide("left");
+  // Lightbox opening (for both images and video)
+  const openLightbox = useCallback(() => {
+    setIsLightboxOpen(true);
+  }, []);
+
+  const toggleVideoPlay = useCallback(() => {
+    const video = videoPlayerRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().then(() => setIsVideoPlaying(true)).catch(() => {});
     } else {
-      setHoverSide("right");
+      video.pause();
+      setIsVideoPlaying(false);
     }
   }, []);
 
-  // Handle click on main stage: left side goes backward (<), right side goes forward (>)
+  // Handle click on main stage: clicking the stage opens the magnification lightbox (unless video); video toggles play/pause
   const handleStageClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    if (mouseX < rect.width / 2) {
-      goPrev();
+    if (allMediaItems[currentIndex]?.type === "video") {
+      toggleVideoPlay();
     } else {
-      goNext();
+      openLightbox();
     }
-  }, [goNext, goPrev]);
+  }, [allMediaItems, currentIndex, toggleVideoPlay, openLightbox]);
 
   // Dynamic Thumbnail Centering Scroll (1:1 from Miroooo): centers active thumbnail vertically on desktop & horizontally on mobile
   useEffect(() => {
@@ -275,21 +279,9 @@ export function OmniluxProductGallery({
     if (currentItem?.type === "video") {
       videoPlayerRef.current?.play().then(() => setIsVideoPlaying(true)).catch(() => {});
     } else {
-      setIsVideoPlaying(false);
       videoPlayerRef.current?.pause();
     }
   }, [currentIndex, allMediaItems]);
-
-  const toggleVideoPlay = useCallback(() => {
-    const video = videoPlayerRef.current;
-    if (!video) return;
-    if (video.paused) {
-      video.play().then(() => setIsVideoPlaying(true)).catch(() => {});
-    } else {
-      video.pause();
-      setIsVideoPlaying(false);
-    }
-  }, []);
 
   const toggleVideoMute = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -297,11 +289,6 @@ export function OmniluxProductGallery({
     if (!video) return;
     video.muted = !video.muted;
     setIsVideoMuted(video.muted);
-  }, []);
-
-  // Lightbox opening (for both images and video)
-  const openLightbox = useCallback(() => {
-    setIsLightboxOpen(true);
   }, []);
 
   // Lightbox keyboard & scroll lock
@@ -496,6 +483,66 @@ export function OmniluxProductGallery({
         }
         .omni-main-stage--cursor-right {
           cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='13' fill='%23ffffff' stroke='%23e5e7eb' stroke-width='1' fill-opacity='0.94'/%3E%3Cpath d='M12 8.5L17.5 14L12 19.5' stroke='%231f2937' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E") 14 14, e-resize !important;
+        }
+        .omni-main-stage--zoom {
+          cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in !important;
+        }
+        .omni-main-stage--zoom .omni-main-img-wrap,
+        .omni-main-stage--zoom .omni-main-img {
+          cursor: url("/cursor-zoom-in.svg") 20 20, zoom-in !important;
+        }
+
+        /* BUUDY LUXURY STAGE NAVIGATION ARROWS */
+        .omni-stage-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 12;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.94);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border: 1px solid rgba(46, 16, 47, 0.12);
+          color: #2E102F;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer !important;
+          transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.22s ease, color 0.2s ease;
+          box-shadow: 0 4px 14px rgba(46, 16, 47, 0.1);
+          padding: 0;
+          user-select: none;
+        }
+        .omni-stage-arrow--prev {
+          left: clamp(10px, 1.4vw, 16px);
+        }
+        .omni-stage-arrow--next {
+          right: clamp(10px, 1.4vw, 16px);
+        }
+        .omni-stage-arrow:hover {
+          background-color: #FFFFFF;
+          border-color: var(--gold, #B89556);
+          color: #2E102F;
+          transform: translateY(-50%) scale(1.08);
+          box-shadow: 0 6px 20px rgba(46, 16, 47, 0.18), 0 0 0 1px rgba(184, 149, 86, 0.25);
+        }
+        .omni-stage-arrow:active {
+          transform: translateY(-50%) scale(0.96);
+        }
+        .omni-stage-arrow svg {
+          width: 22px;
+          height: 22px;
+          color: currentColor;
+          flex-shrink: 0;
+          transition: transform 0.2s ease;
+        }
+        .omni-stage-arrow--prev:hover svg {
+          transform: translateX(-1px);
+        }
+        .omni-stage-arrow--next:hover svg {
+          transform: translateX(1px);
         }
         .omni-main-img-wrap {
           position: absolute;
@@ -1005,8 +1052,18 @@ export function OmniluxProductGallery({
             gap: 6px;
           }
           .omni-stage-arrow {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
+          }
+          .omni-stage-arrow svg {
+            width: 18px;
+            height: 18px;
+          }
+          .omni-stage-arrow--prev {
+            left: 8px;
+          }
+          .omni-stage-arrow--next {
+            right: 8px;
           }
           .omni-tabs-row {
             gap: 16px;
@@ -1057,20 +1114,11 @@ export function OmniluxProductGallery({
               >
                 {item.type === "video" || item.src.endsWith(".mp4") || item.src.endsWith(".webm") ? (
                   <>
-                    <video
+                    <LazyAutoplayVideo
                       src={item.src}
+                      ariaLabel={item.alt}
                       className="omni-thumb-img"
-                      muted
-                      playsInline
-                      autoPlay
-                      loop
-                      preload="metadata"
-                      ref={(el) => {
-                        if (el) {
-                          el.defaultMuted = true;
-                          el.muted = true;
-                        }
-                      }}
+                      rootMargin="120px 0px"
                     />
                     {item.type === "video" && (
                       <div className="omni-video-thumb-overlay">
@@ -1079,11 +1127,15 @@ export function OmniluxProductGallery({
                     )}
                   </>
                 ) : (
-                  <img
+                  <Image
                     src={item.src}
                     alt={item.alt}
                     className="omni-thumb-img"
+                    width={128}
+                    height={128}
+                    sizes="90px"
                     decoding="async"
+                    fetchPriority="low"
                     loading="lazy"
                   />
                 )}
@@ -1107,18 +1159,42 @@ export function OmniluxProductGallery({
         <div className="omni-gallery-main-col">
           {/* TOP MAIN DISPLAY STAGE ROW */}
           <div className="omni-stage-row">
-            {/* MAIN DISPLAY STAGE WITH DYNAMIC < AND > HOVER CURSORS */}
+            {/* MAIN DISPLAY STAGE WITH ZOOM CURSOR */}
             <div
               className={`omni-main-stage ${
-                hoverSide === "left"
-                  ? "omni-main-stage--cursor-left"
-                  : "omni-main-stage--cursor-right"
+                currentItem.type === "video" ? "" : "omni-main-stage--zoom"
               }`}
               onTouchStart={handleTouchStart}
               onTouchEnd={handleTouchEnd}
-              onMouseMove={handleStageMouseMove}
               onClick={handleStageClick}
             >
+              {/* STAGE NAVIGATION ARROWS (ALL PRODUCTS WITH MULTIPLE MEDIA ITEMS) */}
+              {allMediaItems.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    aria-label="Previous image"
+                    className="omni-stage-arrow omni-stage-arrow--prev"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      goPrev();
+                    }}
+                  >
+                    <ChevronLeft size={22} strokeWidth={2.2} />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next image"
+                    className="omni-stage-arrow omni-stage-arrow--next"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      goNext();
+                    }}
+                  >
+                    <ChevronRight size={22} strokeWidth={2.2} />
+                  </button>
+                </>
+              )}
               {/* 1. GALLERY IMAGE / VIDEO DISPLAY */}
               {currentItem.type === "gallery" && (
                 <div className="omni-main-img-wrap">
@@ -1129,13 +1205,16 @@ export function OmniluxProductGallery({
                       className="omni-main-img"
                     />
                   ) : (
-                    <img
+                    <Image
                       src={currentItem.src}
                       alt={currentItem.alt}
                       className="omni-main-img"
+                      width={1200}
+                      height={1200}
+                      sizes="(min-width: 1280px) 520px, (min-width: 1024px) 44vw, calc(100vw - 32px)"
                       decoding="async"
-                      fetchPriority={currentIndex === 0 ? "high" : "low"}
-                      loading={currentIndex === 0 ? "eager" : "lazy"}
+                      fetchPriority="high"
+                      loading="eager"
                     />
                   )}
                   {currentItem.badge && (
@@ -1149,11 +1228,15 @@ export function OmniluxProductGallery({
               {/* 2. BEFORE & AFTER DISPLAY (With 3 Bottom Treatment Pills) */}
               {currentItem.type === "before-after" && (
                 <div className="omni-main-img-wrap">
-                  <img
+                  <Image
                     src={currentItem.src}
                     alt={currentItem.alt}
                     className="omni-main-img omni-main-img--contain"
+                    width={1200}
+                    height={1200}
+                    sizes="(min-width: 1280px) 520px, (min-width: 1024px) 44vw, calc(100vw - 32px)"
                     decoding="async"
+                    fetchPriority="high"
                     loading="eager"
                   />
                   {currentItem.pills && (
@@ -1485,14 +1568,14 @@ function GalleryVideo({
   return (
     <video
       ref={videoRef}
-      src={src}
+      src={isActive ? src : undefined}
       id={id}
       className={className}
-      autoPlay
+      autoPlay={isActive}
       muted
       loop
       playsInline
-      preload="auto"
+      preload={isActive ? "auto" : "none"}
     />
   );
 }

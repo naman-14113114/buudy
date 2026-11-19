@@ -21,6 +21,7 @@ export function LazyAutoplayVideo({
 }: LazyAutoplayVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [shouldPlay, setShouldPlay] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -28,17 +29,14 @@ export function LazyAutoplayVideo({
       return;
     }
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) {
-          return;
+        if (entry.isIntersecting) {
+          setHasLoaded(true);
         }
-
-        setShouldPlay(true);
+        setShouldPlay(entry.isIntersecting && !reducedMotion.matches);
       },
       { rootMargin, threshold: 0.01 },
     );
@@ -49,12 +47,17 @@ export function LazyAutoplayVideo({
   }, [rootMargin]);
 
   useEffect(() => {
+    if (hasLoaded) videoRef.current?.load();
+  }, [hasLoaded, src]);
+
+  useEffect(() => {
     if (!shouldPlay) {
+      videoRef.current?.pause();
       return;
     }
 
     videoRef.current?.play().catch(() => undefined);
-  }, [shouldPlay]);
+  }, [shouldPlay, hasLoaded]);
 
   return (
     <video
@@ -65,10 +68,13 @@ export function LazyAutoplayVideo({
       muted
       playsInline
       poster={poster}
-      preload="metadata"
-      ref={videoRef}
+      preload={hasLoaded ? "metadata" : "none"}
+      ref={(video) => {
+        if (video) video.defaultMuted = true;
+        videoRef.current = video;
+      }}
     >
-      <source src={src} type={type} />
+      {hasLoaded && <source src={src} type={type} />}
     </video>
   );
 }

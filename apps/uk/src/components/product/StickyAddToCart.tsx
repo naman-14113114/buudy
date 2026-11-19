@@ -17,7 +17,6 @@ import { useCart } from "@/components/cart/CartProvider";
 
 export function StickyAddToCart({
   product,
-  isEarlyBlackFriday = true,
 }: {
   product: Product;
   isEarlyBlackFriday?: boolean;
@@ -48,27 +47,9 @@ export function StickyAddToCart({
       .catch((err) => console.error("Error loading sticky cart lottie", err));
   }, []);
 
-  const isSimplifiedProduct =
-    product.template === "serum" ||
-    product.template === "cleanser" ||
-    product.slug === "double-hydration-boost-gel" ||
-    product.slug === "buudy-double-hydration-boost-gel" ||
-    product.id === "buudy-light-activating-hyaluronic-serum" ||
-    product.slug === "the-ultimate-renewal-collection-box" ||
-    product.id === "the-ultimate-renewal-collection-box" ||
-    product.slug.includes("aha") ||
-    product.id.includes("aha") ||
-    product.id.includes("peptide") ||
-    product.slug.includes("peptide") ||
-    product.slug.includes("eye") ||
-    product.id.includes("eye") ||
-    product.slug.includes("collagen");
-
-  const giftLabel = isSimplifiedProduct
-    ? ""
-    : product.gifts.length > 0
+  const giftLabel = product.template === "mask" && product.gifts.length > 0
     ? ` + ${product.gifts.length} free gifts`
-    : " + free shipping";
+    : "";
 
   useEffect(() => {
     document.documentElement.classList.add("buudy-mask-sticky-cta");
@@ -170,7 +151,7 @@ export function StickyAddToCart({
                 ) : (
                   <ShoppingBag size={17} />
                 )}
-                <span>{isSimplifiedProduct ? "Add to cart" : isEarlyBlackFriday ? `Early Access${giftLabel}` : `Add to cart${giftLabel}`}</span>
+                <span>{`Add to cart${giftLabel}`}</span>
               </span>
               <span className="absolute inset-0 flex items-center justify-center">
                 <Lottie animationData={loadingLottie} loop={true} className="h-16 w-24 scale-[1.35]" />
@@ -185,7 +166,7 @@ export function StickyAddToCart({
               ) : (
                 <ShoppingBag size={17} />
               )}
-              <span>{isSimplifiedProduct ? "Add to cart" : `Add to cart${giftLabel}`}</span>
+              <span>{`Add to cart${giftLabel}`}</span>
             </>
           )}
         </Button>

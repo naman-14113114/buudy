@@ -17,6 +17,7 @@ const submittedReviewDateFormatter = new Intl.DateTimeFormat(market.locale, {
   day: "2-digit",
   month: "short",
   year: "numeric",
+  timeZone: "Europe/London",
 });
 
 function formatSubmittedReviewDate(value: string) {

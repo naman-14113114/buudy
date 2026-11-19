@@ -590,7 +590,7 @@ export const buudyMask: Product = {
   heroTitle: "Buudy LED",
   heroEmphasis: "Mask",
   shortDescription:
-    "Salon-grade LED mask with the Premium Travel Box included for protected storage and travel.",
+    "Salon-grade LED face mask with 192 high-density LEDs, 7 wavelengths plus 830nm near-infrared, and full face plus neck coverage.",
   description:
     "Salon-grade light therapy reimagined for Australian homes. The Buudy LED Mask combines 192 high-density LEDs, 7 visible light colours plus a dedicated 830nm near-infrared mode, full face and neck coverage, cordless wearability, and a simple ritual built for consistent at-home skincare.",
   seoTitle: "Best LED Face Mask Australia | Buudy Red Light Therapy Mask",
@@ -1431,32 +1431,8 @@ export const buudyHyaluronicSerum: Product = {
   customerCount: "16,000+",
   promoCode: "",
   promoLabel: "SAVE 17%",
-  cartImage: "/images/products/buudy-serum/selfnamed/gallery-01-3d-flat.jpg",
+  cartImage: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-cream-plinth-pair-display-uk.webp",
   gallery: [
-    {
-      src: "/images/products/buudy-serum/selfnamed/gallery-01-3d-flat.jpg",
-      alt: "Buudy Hyaluronic Serum Double Hydration Boost Gel + HA product bottle display",
-    },
-    {
-      src: "/images/products/buudy-serum/selfnamed/gallery-02-mood-usps.jpg",
-      alt: "Buudy Hyaluronic Serum multi-molecular weight hyaluronic acid key benefits and deep moisture lock",
-    },
-    {
-      src: "/images/products/buudy-serum/selfnamed/gallery-03-box-badge.jpg",
-      alt: "Buudy Hyaluronic Serum 30ml bottle with luxury presentation folding carton",
-    },
-    {
-      src: "/images/products/buudy-serum/selfnamed/gallery-04-texture-macro.jpg",
-      alt: "Crystal clear water-based hydrogel texture macro with zero oils or silicones",
-    },
-    {
-      src: "/images/products/buudy-serum/selfnamed/gallery-05-model-face.jpg",
-      alt: "Model face application showcasing dewy, plump skin after Buudy Hyaluronic Serum ritual",
-    },
-    {
-      src: "/images/products/buudy-serum/selfnamed/gallery-06-texture-swatch.jpg",
-      alt: "Silky lightweight hydrating gel texture swatch on architectural plinth",
-    },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-cream-plinth-pair-display-uk.webp",
       alt: "Buudy Hyaluronic Serum bottle and luxury folding carton displayed on cream architectural plinths UK",

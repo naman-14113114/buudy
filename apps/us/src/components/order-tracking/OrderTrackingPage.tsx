@@ -139,7 +139,7 @@ export function OrderTrackingPage() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const initialQuery = (params.get("tracking") || params.get("number") || params.get("order") || "").trim();
+    const initialQuery = (params.get("tracking") || params.get("query") || params.get("number") || params.get("order") || "").trim();
     let mounted = true;
     if (initialQuery) void Promise.resolve().then(() => {
       if (mounted) { setQuery(initialQuery); handleSearch(initialQuery); }

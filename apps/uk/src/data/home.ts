@@ -99,7 +99,7 @@ export const homeTorchSpotlight = {
   ctaLabel: "Buy Now",
   ctaHref: `/products/${buudyRedTorch.slug}`,
   image: {
-    src: productMediaAsset("35-w.webp"),
+    src: productAsset("01-buudy-red-light-therapy-torch-main.webp", "buudy-red-torch"),
     alt: "Buudy LED Torch product spotlight",
   },
   product: buudyRedTorch,

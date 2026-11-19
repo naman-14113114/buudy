@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
+import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
 import { X } from "lucide-react";
 import type { ProductImage } from "@/lib/media";
 
@@ -129,11 +131,11 @@ export function ProductGallery({
         .buudyLED-23435t23-thumb_item:hover .buudyLED-23435t23-thumb_img { transform: scale(1.08); }
         .buudyLED-23435t23-thumb_item.buudyLED-23435t23-active { box-shadow: inset 0 0 0 2px #000; }
         /* 4. ARROWS */
-        .buudyLED-23435t23-arrow { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.9); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); padding: 0; transition: transform 0.2s, background-color 0.2s; }
-        .buudyLED-23435t23-arrow:hover { background-color: #fff; transform: translateY(-50%) scale(1.1); }
-        .buudyLED-23435t23-icon { border: solid #333; border-width: 0 3px 3px 0; display: inline-block; padding: 5px; }
-        .buudyLED-23435t23-icon_right { transform: rotate(-45deg); margin-left: -4px; }
-        .buudyLED-23435t23-icon_left { transform: rotate(135deg); margin-right: -4px; }
+        .buudyLED-23435t23-arrow { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(46, 16, 47, 0.12); width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 4px 14px rgba(46, 16, 47, 0.1); padding: 0; transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.22s ease; }
+        .buudyLED-23435t23-arrow:hover { background-color: #fff; border-color: var(--gold, #B89556); transform: translateY(-50%) scale(1.08); box-shadow: 0 6px 20px rgba(46, 16, 47, 0.18), 0 0 0 1px rgba(184, 149, 86, 0.25); }
+        .buudyLED-23435t23-icon { border: solid #2E102F; border-width: 0 2.5px 2.5px 0; display: inline-block; padding: 4.5px; }
+        .buudyLED-23435t23-icon_right { transform: rotate(-45deg); margin-left: -3px; }
+        .buudyLED-23435t23-icon_left { transform: rotate(135deg); margin-right: -3px; }
         .buudyLED-23435t23-prev { left: 15px; }
         .buudyLED-23435t23-next { right: 15px; }
         /* 5. LIGHTBOX OVERLAY */
@@ -495,14 +497,17 @@ export function ProductGallery({
                     className="buudyLED-23435t23-main_img"
                   />
                 ) : (
-                  <img
+                  <Image
                     src={image.src}
                     id={isActive ? "buudyLED-23435t23-MainImg" : undefined}
                     className="buudyLED-23435t23-main_img"
                     alt={image.alt}
+                    width={1200}
+                    height={1200}
+                    sizes="(min-width: 1024px) 520px, calc(100vw - 32px)"
                     decoding="async"
-                    fetchPriority={index === 0 ? "high" : "low"}
-                    loading={index === 0 ? "eager" : "lazy"}
+                    fetchPriority={isActive ? "high" : "low"}
+                    loading={isActive ? "eager" : "lazy"}
                   />
                 )}
 
@@ -580,25 +585,20 @@ export function ProductGallery({
               type="button"
             >
               {image.src.endsWith(".mp4") || image.src.endsWith(".webm") ? (
-                <video
+                <LazyAutoplayVideo
                   src={image.src}
+                  ariaLabel={image.alt}
                   className="buudyLED-23435t23-thumb_img"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  ref={(el) => {
-                    if (el) {
-                      el.defaultMuted = true;
-                      el.muted = true;
-                    }
-                  }}
+                  rootMargin="120px 0px"
                 />
               ) : (
-                <img
+                <Image
                   src={image.src}
                   className="buudyLED-23435t23-thumb_img"
                   alt={image.alt}
+                  width={192}
+                  height={192}
+                  sizes="(min-width: 1024px) 160px, 90px"
                   decoding="async"
                   fetchPriority="low"
                   loading="lazy"
@@ -798,14 +798,14 @@ function GalleryVideo({
   return (
     <video
       ref={videoRef}
-      src={src}
+      src={isActive ? src : undefined}
       id={id}
       className={className}
-      autoPlay
+      autoPlay={isActive}
       muted
       loop
       playsInline
-      preload="auto"
+      preload={isActive ? "auto" : "none"}
     />
   );
 }

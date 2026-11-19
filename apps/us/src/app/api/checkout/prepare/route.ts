@@ -2,8 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { appendAttributionToAbsoluteUrl } from "@/lib/attribution";
 import { getAppliedManualPromoCode } from "@/lib/cart";
 import { z } from "zod";
-import { createXpageCheckout } from "@/lib/xpage-checkout";
-import { currencies, resolveCurrency } from '@/lib/international/markets';
+import { normalizeCheckoutProductIds } from "@/lib/maskLandingPages";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -43,7 +42,6 @@ const passthroughAttributionKeys = [
 ];
 
 const prepareSchema = z.object({
-  currency: z.string().refine(code => currencies.includes(code)).optional(),
   quantity: z.number().int().min(1).max(100).optional(),
   cart: z.object({
     lines: z.array(z.object({
@@ -87,6 +85,7 @@ function cleanAttribution(attribution: CheckoutPrepareBody["attribution"]) {
 function getManualPromoFromCart(cart: CheckoutPrepareBody["cart"]) {
   return getAppliedManualPromoCode(
     cart?.manualPromoCode ??
+      cart?.manualPromoCodes?.[0] ??
       cart?.promoCodes?.find((code) => getAppliedManualPromoCode(code)),
   );
 }
@@ -97,43 +96,6 @@ function appendDiscountCodeToUrl(href: string, discountCode: string) {
   const url = new URL(href);
   url.searchParams.set("discount", discountCode);
   return url.toString();
-}
-
-function appendCookies(current: string, response: Response) {
-  const headers = response.headers as Headers & {
-    getSetCookie?: () => string[];
-  };
-  const setCookies =
-    typeof headers.getSetCookie === "function"
-      ? headers.getSetCookie()
-      : headers.get("set-cookie")
-        ? [headers.get("set-cookie") as string]
-        : [];
-
-  if (!setCookies.length) {
-    return current;
-  }
-
-  const cookieMap = new Map<string, string>();
-
-  current
-    .split(";")
-    .map((part) => part.trim())
-    .filter(Boolean)
-    .forEach((part) => {
-      const [name] = part.split("=");
-      cookieMap.set(name, part);
-    });
-
-  setCookies.forEach((cookie) => {
-    const pair = cookie.split(";")[0];
-    const [name] = pair.split("=");
-    if (name && pair) {
-      cookieMap.set(name, pair);
-    }
-  });
-
-  return Array.from(cookieMap.values()).join("; ");
 }
 
 async function createPlusbaseCheckout(
@@ -161,93 +123,83 @@ async function createPlusbaseCheckout(
     requestHeaders["cf-connecting-ip"] = clientHeaders.connectingIp;
   }
 
-  const createResponse = await fetch(
-    `${plusbaseOrigin}/api/checkout/next/cart.json`,
-    {
-      method: "POST",
-      headers: requestHeaders,
-    },
-  );
-  cookie = appendCookies(cookie, createResponse);
+  const createRes = await fetch(`${plusbaseOrigin}/api/checkout/next/cart.json`, {
+    method: "POST",
+    headers: { ...requestHeaders, "content-type": "application/json" },
+    body: JSON.stringify({}),
+  });
 
-  const createJson = await createResponse.json();
-  const cartToken = createJson?.result?.token;
-  const checkoutToken = createJson?.result?.checkout_token;
-
-  if (!createResponse.ok || !cartToken || !checkoutToken) {
-    throw new Error("Could not create PlusBase cart.");
+  if (!createRes.ok) {
+    throw new Error(`PlusBase session creation failed: ${createRes.status}`);
   }
 
-  async function addItem(
+  const sessionData = await createRes.json();
+  const setCookieHeader = createRes.headers.get("set-cookie");
+  const tokenMatch = setCookieHeader?.match(/cart=([a-f0-9]+)/);
+  const checkoutToken = sessionData.cart?.token || tokenMatch?.[1];
+
+  if (!checkoutToken) {
+    throw new Error("Missing PlusBase checkout token");
+  }
+
+  const customProperties = buildPlusbaseAttributionProperties(attribution);
+  const extraCookies = [`cart=${checkoutToken}`];
+  if (setCookieHeader) {
+    const additionalMatches = setCookieHeader.match(/_sb_[^=;]+=[^;]+/g);
+    if (additionalMatches) extraCookies.push(...additionalMatches);
+  }
+  const updateHeaders = {
+    ...requestHeaders,
+    "content-type": "application/json",
+    cookie: `${cookie}; ${extraCookies.join("; ")}`,
+  };
+
+  const addItem = async (
     productId: number,
     variantId: number,
     itemQuantity: number,
-    properties: Array<{ name: string; value: string }> = [],
-  ) {
-    const response = await fetch(
-      `${plusbaseOrigin}/api/checkout/next/cart.json?cart_token=${encodeURIComponent(
-        cartToken,
-      )}`,
-      {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          ...requestHeaders,
-          "content-type": "application/json",
-          ...(cookie ? { cookie } : {}),
-        },
-        body: JSON.stringify({
-          cartItem: {
-            product_id: productId,
-            variant_id: variantId,
-            qty: itemQuantity,
-            properties,
-            metadata: {
-              image_preview_id: "",
-            },
-          },
-          from: "add-to-cart",
-        }),
-      },
-    );
-    cookie = appendCookies(cookie, response);
-
-    const json = await response.json();
-    if (!response.ok || json?.code !== 0) {
-      throw new Error("Could not add item to PlusBase cart.");
+    itemProperties?: Array<{ name: string; value: string }>,
+  ) => {
+    const res = await fetch(`${plusbaseOrigin}/api/checkout/next/cart/items.json`, {
+      method: "POST",
+      headers: updateHeaders,
+      body: JSON.stringify({
+        product_id: productId,
+        variant_id: variantId,
+        quantity: itemQuantity,
+        properties: itemProperties && itemProperties.length > 0 ? itemProperties : undefined,
+      }),
+    });
+    if (!res.ok) {
+      throw new Error(`PlusBase addItem (${productId}) failed: ${res.status}`);
     }
-  }
+  };
 
-  // Support either dynamic cart lines or legacy mask quantity fallback
   if (cart?.lines && cart.lines.length > 0) {
+    let mainProductAdded = false;
+
     for (const line of cart.lines) {
-      if (line.type !== "gift" && PLUSBASE_PRODUCTS[line.productId]) {
-        await addItem(
-          PLUSBASE_PRODUCTS[line.productId].productId,
-          PLUSBASE_PRODUCTS[line.productId].variantId,
-          line.quantity,
-          buildPlusbaseAttributionProperties(attribution),
-        );
-      }
+      if (line.type === "gift") continue;
+      const mapping = PLUSBASE_PRODUCTS[line.productId];
+      if (!mapping) continue;
+
+      const properties = !mainProductAdded && customProperties.length > 0 ? customProperties : undefined;
+      await addItem(mapping.productId, mapping.variantId, line.quantity, properties);
+      mainProductAdded = true;
     }
-    const maskQuantity = cart.lines.find(
-      (line) => line.type !== "gift" && (line.productId === "buudy-led-mask" || line.productId === "buudy-7-colour-led-mask"),
-    )?.quantity;
-    if (maskQuantity) {
-      await addItem(
-        PLUSBASE_PRODUCTS["buudy-red-torch"].productId,
-        PLUSBASE_PRODUCTS["buudy-red-torch"].variantId,
-        maskQuantity,
-      );
+
+    if (!mainProductAdded) {
+      const fallbackMapping = PLUSBASE_PRODUCTS["buudy-led-mask"];
+      await addItem(fallbackMapping.productId, fallbackMapping.variantId, quantity, customProperties);
     }
   } else {
-    // Legacy fallback (assume mask)
-    await addItem(
-      PLUSBASE_PRODUCTS["buudy-led-mask"].productId,
-      PLUSBASE_PRODUCTS["buudy-led-mask"].variantId,
-      quantity,
-      buildPlusbaseAttributionProperties(attribution),
-    );
+    const fallbackMapping = PLUSBASE_PRODUCTS["buudy-led-mask"];
+    await addItem(fallbackMapping.productId, fallbackMapping.variantId, quantity, customProperties);
+  }
+
+  const hasMask = cart?.lines ? cart.lines.some((l) => l.productId === "buudy-led-mask" || l.productId === "buudy-7-colour-led-mask") : true;
+
+  if (hasMask) {
     await addItem(PLUSBASE_PRODUCTS["buudy-red-torch"].productId, PLUSBASE_PRODUCTS["buudy-red-torch"].variantId, quantity);
   }
 
@@ -258,12 +210,36 @@ async function createPlusbaseCheckout(
 }
 
 export async function POST(request: NextRequest) {
+  const clientCountry =
+    request.headers.get("x-vercel-ip-country") ||
+    request.headers.get("cf-ipcountry") ||
+    request.headers.get("x-country-code") ||
+    request.headers.get("x-country");
+
+  if (
+    clientCountry &&
+    (clientCountry.trim().toUpperCase() === "MA" ||
+      clientCountry.trim().toUpperCase() === "MOROCCO")
+  ) {
+    return NextResponse.json(
+      { error: "The checkout has not been connected, and no order has been placed." },
+      { status: 400 },
+    );
+  }
+
   const parsed = prepareSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ error: "Please check your cart quantities and try again." }, { status: 400 });
   }
-  const body = parsed.data;
-
+  const body = {
+    ...parsed.data,
+    cart: parsed.data.cart
+      ? {
+          ...parsed.data.cart,
+          lines: normalizeCheckoutProductIds(parsed.data.cart.lines),
+        }
+      : undefined,
+  };
   const isMaskId = (id: string) =>
     id === "buudy-led-mask" || id === "buudy-7-colour-led-mask";
   const isProtectionId = (id: string) =>
@@ -307,50 +283,45 @@ export async function POST(request: NextRequest) {
       ...(body.cart?.manualPromoCodes || []),
       ...(body.cart?.promoCodes || []),
       ...(body.cart?.manualPromoCode ? [body.cart.manualPromoCode] : []),
-    ].map((c) => c.trim().toUpperCase());
+    ].map((c) => c.trim().toUpperCase()).filter(Boolean);
 
-    const hasPromo = allPromoCodes.some(
-      (c) => c === "BUUDY10" || c === "BUUDY",
-    );
-    const hasGiftCard =
-      allPromoCodes.includes("9PQ28ENBLJ") ||
-      Boolean(productLines?.some((line) => isGiftCardId(line.productId)));
-    const hasProtection = Boolean(
-      productLines?.some((line) => isProtectionId(line.productId)),
-    );
+    const hasBuudy = allPromoCodes.includes("BUUDY10") || allPromoCodes.includes("BUUDY") || allPromoCodes.includes("SAVE10");
+    const hasBlackFriday = allPromoCodes.includes("BLACKFRIDAY10");
 
-    try {
-      const currency = resolveCurrency(
-        body.currency || request.cookies.get("buudy_currency")?.value,
-        request.headers.get("x-vercel-ip-country"),
-      );
-      const checkout = await createXpageCheckout(
-        quantity,
-        {
-          hasPromo,
-          hasGiftCard,
-          hasProtection,
-        },
-        fetch,
-        currency,
-      );
-      return NextResponse.json(checkout, {
-        headers: { "Cache-Control": "no-store" },
-      });
-    } catch (error) {
-      // Never log session cookies, CSRF tokens, checkout URLs or customer data.
-      console.error(
-        "XPage checkout preparation failed",
-        error instanceof Error ? error.message : "Unknown error",
-      );
-      return NextResponse.json(
-        {
-          error:
-            "Could not prepare the mask offer. Please try again; your cart has been kept.",
-        },
-        { status: 502, headers: { "Cache-Control": "no-store" } },
-      );
+    let promoToSend = "";
+    if (hasBuudy && hasBlackFriday) {
+      promoToSend = "BUUDYBF20";
+    } else if (hasBlackFriday) {
+      promoToSend = "BLACKFRIDAY10";
+    } else if (hasBuudy) {
+      promoToSend = "BUUDY10";
+    } else if (allPromoCodes.includes("BUUDYBF20") || allPromoCodes.includes("BUUDY10BLACKFRIDAY10")) {
+      promoToSend = "BUUDYBF20";
     }
+    const planId = "plan_IY6bXASo3Gh15";
+    const checkout = new URL(`/checkout/${planId}`, "https://buudy.com");
+    checkout.searchParams.set("quantity", String(quantity));
+    checkout.searchParams.set("items", `${planId}:${quantity}`);
+    checkout.searchParams.set("checkoutSource", "buudy-us");
+    checkout.searchParams.set("promoCode", promoToSend);
+    return NextResponse.json(
+      { checkoutUrl: appendAttributionToAbsoluteUrl(checkout.toString(), cleanAttribution(body.attribution)) },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  }
+
+  const serumLines = productLines?.filter((line) => line.productId === "buudy-light-activating-hyaluronic-serum");
+  if (serumLines && serumLines.length > 0) {
+    const quantity = serumLines.reduce((total, line) => total + line.quantity, 0) || 1;
+    const planId = "plan_j074lrPIrDe34";
+    const checkout = new URL(`/checkout/${planId}`, "https://buudy.com");
+    checkout.searchParams.set("quantity", String(quantity));
+    checkout.searchParams.set("items", `${planId}:${quantity}`);
+    checkout.searchParams.set("checkoutSource", "buudy-us");
+    return NextResponse.json(
+      { checkoutUrl: appendAttributionToAbsoluteUrl(checkout.toString(), cleanAttribution(body.attribution)) },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   }
 
   if (
@@ -363,7 +334,6 @@ export async function POST(request: NextRequest) {
       { status: 400 },
     );
   }
-
   const quantity = body.quantity || 1;
   const appliedManualPromoCode = getManualPromoFromCart(body.cart);
 

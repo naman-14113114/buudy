@@ -37,6 +37,7 @@ export const VALID_PROMO_CODES: Record<
   BUUDY: { code: "BUUDY10", discountCents: 1000, type: "promo" },
   BUUDYBF20: { code: "BUUDYBF20", discountCents: 2000, type: "promo" },
   BUUDY10BLACKFRIDAY10: { code: "BUUDY10BLACKFRIDAY10", discountCents: 2000, type: "promo" },
+  VIP50: { code: "VIP50", discountCents: 5000, type: "promo" },
   "9PQ28ENBLJ": { code: "9PQ28ENBLJ", discountCents: 2800, type: "gift_card" },
 };
 
@@ -97,16 +98,19 @@ export function buildProductCartLines(product: Product, quantity = 1): CartLine[
   const gifts = product.gifts.map<CartLine>((gift) => {
     const isEbook = gift.id === "skincare-ebook";
     const isTravelBox = gift.id === "premium-travel-box";
+    const isTorch = gift.id === "buudy-led-torch" || gift.id.includes("torch");
     return {
       id: `${product.id}:${gift.id}`,
       productId: product.id,
-      slug: isEbook ? "skincare-ebook" : isTravelBox ? "premium-travel-box" : product.slug,
+      slug: isEbook ? "skincare-ebook" : isTravelBox ? "premium-travel-box" : isTorch ? "red-light-torch" : product.slug,
       type: "gift",
       title: isTravelBox ? "Premium Travel Case" : gift.name,
       subtitle: isEbook
         ? "Delivered digitally via email after checkout"
         : isTravelBox
         ? "Luxury protective hard travel case"
+        : isTorch
+        ? "Targeted red and near-infrared light therapy device"
         : `${product.name} free gift unlocked`,
       image: gift.image,
       unitPriceCents: 0,
@@ -219,11 +223,28 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
   );
 
   const formatted = lines.map((line) => {
-    if (hasMaskProduct && line.productId === "buudy-led-mask" && line.type === "product") {
+    if (line.type === "product") {
+      const prod = findProductForLine(line);
       return {
         ...line,
-        title: "Buudy LED Mask",
-        image: getProductById("buudy-led-mask")?.cartImage ?? line.image,
+        title: line.productId === "buudy-led-mask" ? "Buudy LED Mask" : line.title,
+        subtitle: prod?.shortDescription ?? line.subtitle,
+        image: line.productId === "buudy-led-mask" ? (getProductById("buudy-led-mask")?.cartImage ?? line.image) : line.image,
+      };
+    }
+    if (
+      line.id.includes("buudy-led-torch") ||
+      line.productId === "buudy-red-torch" ||
+      line.title.toLowerCase().includes("torch")
+    ) {
+      return {
+        ...line,
+        title: "Buudy LED Torch",
+        subtitle: "Targeted red and near-infrared light therapy device",
+        compareAtCents:
+          line.type === "gift"
+            ? line.compareAtCents || 7000
+            : line.compareAtCents,
       };
     }
     if (

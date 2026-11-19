@@ -30,13 +30,14 @@ import { SerumCertificationsRow } from "./SerumCertificationsRow";
 import { GiftBoxBundleSection } from "./GiftBoxBundleSection";
 import {
   HyaluronicSerumSelfnamedSections,
+  PackagingSection,
   RelatedProductsSection,
 } from "./HyaluronicSerumSelfnamedSections";
 
 export function ProductPage({
   product,
   variant,
-  galleryVariant = product.template === "mask" || product.template === "serum" || product.template === "cleanser" ? "omnilux" : "default",
+  galleryVariant = "omnilux",
   comparisonPosition = product.template === "mask" ? "below-app" : "default",
   isHalloween = false,
   isEarlyBlackFriday = true,
@@ -146,9 +147,11 @@ export function ProductPage({
       {product.template === "serum" && (
         <SerumClinicalResults isPeptide={isPeptide} isPrebiotic={isPrebiotic} isAha={isAha} productSlug={product.slug} />
       )}
+      {isHyaluronic && <PackagingSection />}
       {product.template === "cleanser" && <CleanserClinicalResults />}
 
       {/* 4. Daily Application / Cleansing Ritual - How To Use Section */}
+      {product.template === "mask" && <DeferredBeforeAfterGrid />}
       {product.template === "mask" && <DeferredWavelengthSelector />}
       {product.template === "mask" && <DeferredHowToUseSection />}
       {product.template === "serum" && !isHyaluronic && (

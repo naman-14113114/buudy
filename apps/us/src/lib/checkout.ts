@@ -17,8 +17,27 @@ export function buildFastWhopCheckoutUrl(
   attribution: AttributionPayload,
 ): string | null {
   const products = lines.filter((line) => line.type !== "gift");
+  if (!products.length) return null;
+
+  // Single serum purchase
+  const isSerumOnly = products.length === 1 && products[0].productId === "buudy-light-activating-hyaluronic-serum";
+  if (isSerumOnly) {
+    const quantity = products[0].quantity;
+    if (!Number.isInteger(quantity) || quantity < 1 || quantity > 100) return null;
+    const planId = "plan_j074lrPIrDe34";
+    const checkout = new URL(`/checkout/${planId}`, "https://buudy.com");
+    checkout.searchParams.set("quantity", String(quantity));
+    checkout.searchParams.set("items", `${planId}:${quantity}`);
+    checkout.searchParams.set("checkoutSource", "buudy-us");
+    const clean = Object.fromEntries(
+      Object.entries(attribution)
+        .filter((entry): entry is [string, string] => typeof entry[1] === "string")
+        .map(([key, value]) => [key, value.slice(0, 500)]),
+    );
+    return appendAttributionToAbsoluteUrl(checkout.toString(), clean);
+  }
+
   if (
-    !products.length ||
     products.some(
       (line) =>
         resolveCheckoutProductId(line.productId) !== "buudy-led-mask" ||
@@ -42,6 +61,7 @@ export function buildFastWhopCheckoutUrl(
           "BLACKFRIDAY10",
           "BUUDYBF20",
           "BUUDY10BLACKFRIDAY10",
+          "VIP50",
         ].includes(code),
     )
   )

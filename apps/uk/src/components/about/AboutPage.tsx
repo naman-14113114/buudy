@@ -1,6 +1,83 @@
+"use client";
+
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { aboutHero, aboutSections } from "@/data/about";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+
+const storyVideo = {
+  src: "/media/about/buudy-uk-our-story-clinical-skincare-led-light-therapy.mp4",
+  poster: "/images/about/buudy-uk-our-story-clinical-skincare-led-light-therapy-poster.webp",
+  alt: "Buudy UK clinical skincare specialist sharing the founding story and LED light therapy mission",
+  title: "Buudy UK — Our Story & Clinical LED Light Therapy Journey",
+};
+
+function AboutStoryVideo({ isRight }: { isRight: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      video.play().catch(() => {});
+      setIsPlaying(true);
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  return (
+    <div
+      className={`relative mx-auto w-full max-w-[360px] lg:max-w-[400px] ${
+        isRight ? "lg:order-2" : ""
+      }`}
+    >
+      <div className="relative overflow-hidden rounded-[24px] border border-[rgba(58,31,61,.12)] bg-[var(--ink)] shadow-[0_16px_40px_-24px_rgba(58,31,61,0.12)]">
+        <video
+          className="w-full aspect-[2/3] object-cover object-center block cursor-pointer"
+          playsInline
+          poster={storyVideo.poster}
+          preload="none"
+          ref={videoRef}
+          title={storyVideo.title}
+          aria-label={storyVideo.alt}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          onClick={togglePlay}
+        >
+          <source src={storyVideo.src} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        {/* Play/Pause Overlay Button */}
+        <button
+          onClick={togglePlay}
+          className={`absolute inset-0 flex items-center justify-center bg-transparent transition-all duration-300 ${
+            isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"
+          }`}
+          aria-label={isPlaying ? "Pause video" : "Play video"}
+        >
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-[var(--plum)] shadow-lg transition-transform hover:scale-110 active:scale-95">
+            {isPlaying ? (
+              // Pause Icon
+              <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+              </svg>
+            ) : (
+              // Play Icon
+              <svg className="h-6 w-6 fill-current translate-x-0.5" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            )}
+          </div>
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export function AboutPage() {
   return (
@@ -59,18 +136,34 @@ export function AboutPage() {
               className="buudy-section py-6 md:py-10 transition-all duration-300"
             >
               <div className="buudy-wrap grid gap-12 lg:grid-cols-2 lg:items-center">
-                {/* Image Column */}
-                <div 
-                  className={`relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] overflow-hidden rounded-[24px] border border-[var(--border)] bg-[var(--blush)] shadow-[0_16px_40px_-24px_rgba(58,31,61,0.12)] ${
-                    isRight ? "lg:order-2" : ""
-                  }`}
-                >
-                  <img
-                    alt={section.image.alt}
-                    src={section.image.src}
-                    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
-                  />
-                </div>
+                {/* Media Column: Clinical Skincare Story Video for our-story, static image for others */}
+                {section.id === "our-story" ? (
+                  <AboutStoryVideo isRight={isRight} />
+                ) : section.id === "our-team" ? (
+                  <div 
+                    className={`relative aspect-square w-full max-w-[500px] lg:max-w-none mx-auto overflow-hidden rounded-[24px] border border-[var(--border)] bg-[var(--blush)] shadow-[0_16px_40px_-24px_rgba(58,31,61,0.12)] ${
+                      isRight ? "lg:order-2" : ""
+                    }`}
+                  >
+                    <img
+                      alt={section.image.alt}
+                      src={section.image.src}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div 
+                    className={`relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] overflow-hidden rounded-[24px] border border-[var(--border)] bg-[var(--blush)] shadow-[0_16px_40px_-24px_rgba(58,31,61,0.12)] ${
+                      isRight ? "lg:order-2" : ""
+                    }`}
+                  >
+                    <img
+                      alt={section.image.alt}
+                      src={section.image.src}
+                      className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
+                    />
+                  </div>
+                )}
 
                 {/* Text Content Column */}
                 <div className={isRight ? "lg:order-1" : ""}>

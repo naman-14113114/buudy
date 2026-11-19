@@ -11,10 +11,12 @@ function ReviewVideoCard({
   index,
   video,
   isInSectionView,
+  hasEnteredView,
 }: {
   index: number;
   video: ReviewVideo;
   isInSectionView: boolean;
+  hasEnteredView: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -27,7 +29,7 @@ function ReviewVideoCard({
     } else {
       el.pause();
     }
-  }, [isInSectionView]);
+  }, [isInSectionView, hasEnteredView]);
 
   return (
     <article
@@ -41,11 +43,11 @@ function ReviewVideoCard({
         className="h-full w-full object-cover"
         disablePictureInPicture
         loop
-        autoPlay
+        autoPlay={isInSectionView}
         muted
         playsInline
         poster={video.poster}
-        preload="auto"
+        preload={hasEnteredView ? "auto" : "none"}
         ref={(el) => {
           if (el) {
             el.defaultMuted = true;
@@ -53,7 +55,7 @@ function ReviewVideoCard({
           }
           videoRef.current = el;
         }}
-        src={video.src}
+        src={hasEnteredView ? video.src : undefined}
         onLoadedData={(e) => {
           if (isInSectionView) {
             e.currentTarget.play().catch(() => undefined);
@@ -78,6 +80,7 @@ function ReviewVideoCard({
 export function VideoReviews() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const [hasEnteredView, setHasEnteredView] = useState(false);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -86,8 +89,9 @@ export function VideoReviews() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView(entry.isIntersecting);
+        if (entry.isIntersecting) setHasEnteredView(true);
       },
-      { rootMargin: "400px 0px", threshold: 0.01 },
+      { rootMargin: "120px 0px", threshold: 0.01 },
     );
 
     observer.observe(el);
@@ -133,6 +137,7 @@ export function VideoReviews() {
                 key={`${video.id}-${index}`}
                 video={video}
                 isInSectionView={isInView}
+                hasEnteredView={hasEnteredView}
               />
             ))}
           </div>

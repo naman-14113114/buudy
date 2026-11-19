@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import {
   homeCustomerReviewsGrid,
   homeFeatureCards,
+  homeHero,
   homeLightTherapy,
   homeMaskSpotlight,
   homeSkincareGuideIntro,
@@ -253,7 +254,10 @@ function CustomerReviewsGrid() {
 
 function HomeVideoHero() {
   return (
-    <section className="buudy-section relative w-full overflow-hidden bg-[var(--plum)]">
+    <section
+      aria-labelledby="home-video-heading"
+      className="buudy-section relative w-full overflow-hidden bg-[var(--plum)]"
+    >
       <video
         autoPlay
         loop
@@ -262,6 +266,30 @@ function HomeVideoHero() {
         className="block h-auto w-full"
         src="/media/products/buudy-led-mask/videos/buudy-goddess-bg.mp4"
       />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(18,9,20,.7)_0%,rgba(18,9,20,.6)_38%,transparent_75%)]"
+      />
+      <div className="pointer-events-none absolute inset-0 flex items-end pb-5 sm:items-center sm:pb-0">
+        <div className="buudy-wrap">
+          <div className="pointer-events-auto w-fit max-w-[48%] text-left text-[var(--cream)]">
+            <p className="buudy-mono mb-4 hidden sm:block">The Buudy LED Mask</p>
+            <h1
+              className="buudy-display text-[26px] leading-[1.04] sm:text-5xl lg:text-6xl"
+              id="home-video-heading"
+            >
+              <span className="block">Your glow.</span>
+              <em className="buudy-italic block">Your ritual.</em>
+            </h1>
+            <Button asChild className="mt-3 min-h-11 !border-[rgba(247,241,232,.55)] px-5 text-xs sm:mt-6 sm:min-h-12 sm:px-8 sm:text-sm">
+              <Link href={homeHero.ctaHref}>
+                Buy Now
+                <ArrowRight aria-hidden="true" size={17} />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
