@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import styles from "./HyaluronicSerumEditorial.module.css";
 import {
   ChevronDown,
   Ruler,
@@ -193,7 +194,47 @@ function AccordionPanel({
   );
 }
 
-export function ProductDetailsAccordion({ product }: { product: Product }) {
+export function ProductSignalsRow({ signals }: { signals: string[] }) {
+  const items = signals.map((signal) => {
+    const Icon = getCertificationIcon(signal);
+    return (
+      <li
+        key={signal}
+        className="inline-flex shrink-0 items-center justify-center gap-2.5 whitespace-nowrap text-[15px] sm:text-base font-semibold tracking-wide leading-none h-full"
+      >
+        <Icon aria-hidden="true" className="shrink-0 text-[var(--gold)]" size={19} strokeWidth={1.7} />
+        <span className="inline-block transform -translate-y-[0.5px] leading-none">{signal}</span>
+      </li>
+    );
+  });
+
+  return (
+    <section aria-label="Product signals" id="product-signals" tabIndex={0}>
+      <div className={styles.signalsTrack}>
+        <ul className={styles.signalsGroup}>
+          {items}
+        </ul>
+        <ul aria-hidden="true" className={styles.signalsGroup}>
+          {items}
+        </ul>
+        <ul aria-hidden="true" className={styles.signalsGroup}>
+          {items}
+        </ul>
+        <ul aria-hidden="true" className={styles.signalsGroup}>
+          {items}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+export function ProductDetailsAccordion({
+  product,
+  showProductSignals = true,
+}: {
+  product: Product;
+  showProductSignals?: boolean;
+}) {
   const [openItems, setOpenItems] = useState<Set<AccordionItem["id"]>>(new Set());
 
   function toggleItem(id: AccordionItem["id"]) {
@@ -306,7 +347,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
         </ul>
       ),
     }, */
-    ...(product.productSignals && product.productSignals.length > 0
+    ...(showProductSignals && product.productSignals && product.productSignals.length > 0
       ? [
           {
             id: "signals" as const,
@@ -367,7 +408,7 @@ export function ProductDetailsAccordion({ product }: { product: Product }) {
     {
       id: "certifications",
       eyebrow: "Certifications",
-      title: "Safety and product signals",
+      title: showProductSignals ? "Safety and product signals" : "Safety and certifications",
       content: (
         <ul className="grid gap-2.5 grid-cols-1 sm:grid-cols-2">
           {product.badges.map((badge) => {

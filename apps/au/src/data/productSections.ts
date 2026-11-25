@@ -63,7 +63,7 @@ export const features: Feature[] = [
   {
     title: "Certified Safety",
     kicker: "Expert Approved",
-    body: "Your safety is our priority. The Buudy LED Mask carries CE, FCC, and ROHS certifications. It is also endorsed by Dermatologists and Licensed Aestheticians who recognize it as a superior way to boost the efficacy of your existing skincare routine at home.",
+    body: "Your safety is our priority. The Buudy LED Mask is Health Canada Approved and carries CE, FCC, and ROHS certifications. It is also endorsed by Dermatologists and Licensed Aestheticians who recognize it as a superior way to boost the efficacy of your existing skincare routine at home.",
   },
   {
     title: "Buudy AI Companion App",
@@ -145,9 +145,9 @@ export const peptideSerumFeatures: Feature[] = [
     body: "A plant-derived hydroxyproline amino acid vector that penetrates deep into dermal architecture. It reinforces collagen fibres, inhibits enzymatic degradation of elastin, and visibly lifts and tightens facial contours.",
   },
   {
-    title: "Dual-Action Multi-Molecular HA",
-    kicker: "Multi-Depth Hydration Reservoir",
-    body: "Combines low and high molecular weight hyaluronic acids with Sodium PCA to draw moisture deep into intercellular matrices, replenishing volume and delivering immediate bouncy plumpness.",
+    title: "Plant-Derived Phytosterols & Sodium PCA",
+    kicker: "Cellular Lipid & Moisture Lock",
+    body: "Bio-compatible plant sterols and skin-identical Sodium PCA work in harmony to reinforce the dermal lipid barrier, lock in hydration, and maintain all-day suppleness without heaviness.",
   },
   {
     title: "Organic Blueberry & Ginkgo Biloba",
@@ -401,7 +401,7 @@ export const transformations: Transformation[] = [
 export const serumTransformations: Transformation[] = [
   {
     id: "serum-result-01",
-    image: "/images/products/buudy-serum/transformations/ha-transformation-01.webp",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-01-acne.webp",
     concern: "Dermal Hydration & Fine Line Smoothing",
     title: "Remarkable hydration and line smoothing",
     quote:
@@ -417,7 +417,7 @@ export const serumTransformations: Transformation[] = [
   },
   {
     id: "serum-result-02",
-    image: "/images/products/buudy-serum/transformations/ha-transformation-02.webp",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-02-profile.webp",
     concern: "Cheek Turgor & Plumpness",
     title: "Visibly plumper cheeks and restored bounce",
     quote:
@@ -468,7 +468,7 @@ export const serumTransformations: Transformation[] = [
 export const peptideTransformations: Transformation[] = [
   {
     id: "peptide-result-01",
-    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-01.webp",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-01-v4.webp",
     concern: "Dynamic Expression Line Smoothing",
     title: "Expression lines visibly relaxed and smoothed",
     quote:
@@ -484,7 +484,7 @@ export const peptideTransformations: Transformation[] = [
   },
   {
     id: "peptide-result-02",
-    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-02.webp",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-02-v4.webp",
     concern: "Skin Firmness & Wrinkle Smoothing",
     title: "Firmer dermal cushion and tightened temple area",
     quote:
@@ -666,202 +666,133 @@ export const prebioticTransformations: Transformation[] = [
   },
 ];
 
+export const renewalCollectionTransformations: Transformation[] = [
+  {
+    id: "renewal-result-01",
+    image: "/images/products/the-ultimate-renewal-collection-box/transformations/renewal-transformation-01.webp",
+    concern: "Cellular Resurfacing & Texture Smoothing",
+    title: "Glass-smooth skin texture after just two peels",
+    quote:
+      '"Alternating the 10% AHA peel twice weekly with daily hyaluronic and peptide serum completely smoothed out my stubborn rough patches and bumpy texture. My skin looks glassy and renewed."',
+    name: "Clare H.",
+    fullName: "Clare Harrison",
+    age: 45,
+    skinType: "Uneven, textured skin with dull complexion",
+    routine:
+      "AHA 10% Lactic Acid Peeling Concentrate 2x weekly at night; daily morning and evening Double Hydration Boost Gel followed by Collagen-Lock Hexapeptide Serum, with 4x weekly Buudy LED phototherapy.",
+    experience:
+      "Clinical photographic monitoring at day 28 recorded marked epidermal smoothing, dissolution of keratolytic surface build-up, and restored cellular turnover without barrier redness.",
+  },
+  {
+    id: "renewal-result-02",
+    image: "/images/products/the-ultimate-renewal-collection-box/transformations/renewal-transformation-02.webp",
+    concern: "Deep Plumpness & Fine Line Softening",
+    title: "Remarkable softening of deep expression lines",
+    quote:
+      '"The complete 3-step trilogy is unmatched. The peel preps the surface, the hyaluronic gel quenches thirst, and the peptide serum locks in firm collagen. My forehead lines have softened dramatically."',
+    name: "Eleanor R.",
+    fullName: "Eleanor Roberts",
+    age: 51,
+    skinType: "Mature skin with dynamic expression lines and dehydration",
+    routine:
+      "Full 3-step renewal ritual: weekly AHA resurfacing, daily AM/PM HA priming, 10-minute Buudy Red Light (630nm), and post-light Hexapeptide-11 serum application.",
+    experience:
+      "High-resolution facial profilometry showed significant attenuation of forehead and perioral line depth, alongside increased stratum corneum moisture retention and restored cellular turgor.",
+  },
+  {
+    id: "renewal-result-03",
+    image: "/images/products/the-ultimate-renewal-collection-box/transformations/renewal-transformation-03.webp",
+    concern: "Pigmentation & Radiant Cellular Glow",
+    title: "Faded sun spots and radiant even skin tone",
+    quote:
+      '"Dealing with sun spots and tired, dull skin was a constant struggle. Within 3 weeks of the renewal box protocol paired with my LED mask, my skin tone is luminous, clear, and uniform."',
+    name: "Siddiq M.",
+    fullName: "Siddiq Malik",
+    age: 39,
+    skinType: "Sun-damaged skin with hyperpigmentation and uneven tone",
+    routine:
+      "Overnight AHA peel applied every Wednesday and Sunday; daily hydration gel and peptide concentrate paired with green and red light phototherapy.",
+    experience:
+      "Dermatological colorimetry demonstrated measurable reduction in melanin contrast and surface dyschromia, with a luminous increase in overall epidermal radiance.",
+  },
+  {
+    id: "renewal-result-04",
+    image: "/images/products/the-ultimate-renewal-collection-box/transformations/renewal-transformation-04.webp",
+    concern: "Facial Elasticity & Dermal Firmness",
+    title: "Restored cheek cushion and youthful bounce",
+    quote:
+      '"The synergy of all three serums in this luxury collection box has taken years off my complexion. My skin has its youthful bounce back, and makeup applies flawlessly without catching on dry patches."',
+    name: "Fiona K.",
+    fullName: "Fiona Kennedy",
+    age: 49,
+    skinType: "Thinning mature skin with loss of dermal cushion",
+    routine:
+      "Daily AM & PM application of HA gel and Hexapeptide serum; weekly lactic acid peel; 10 minutes near-infrared (830nm) LED therapy 4x weekly.",
+    experience:
+      "Serial cutometry revealed a statistically significant increase in skin elasticity parameters (R2/R7) and enhanced cheek contour definition after 6 weeks.",
+  },
+];
+
 export const reviewVideos: ReviewVideo[] = [
   {
     id: "review-01",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486304350_448129a4-6d94-4e44-b8af-511f3e7999b2.webp",
+    poster: productMediaAsset("review-01.webp", "buudy-led-mask", "videos"),
     src: productMediaAsset("review-01.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc:
-      "https://cdn2.videowise.com/converted/videos/1680194145059_06e68cf3-1a7d-4636-a05a-8c1922a066a4_h264c_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-02",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486138534_38dd960f-2287-4bfc-b1be-af40bc8ef5d6.webp",
+    poster: productMediaAsset("review-02.webp", "buudy-led-mask", "videos"),
     src: productMediaAsset("review-02.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc:
-      "https://cdn2.videowise.com/converted/videos/1686511751028_e8ecbe6c-94ca-4754-bff1-4bdfff8aad16_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-03",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485722607_ded18359-40b7-427c-b2a9-62e48436f87c.webp",
+    poster: productMediaAsset("review-03.webp", "buudy-led-mask", "videos"),
     src: productMediaAsset("review-03.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc:
-      "https://cdn2.videowise.com/converted/videos/1679081088110_c7eea873-a477-4a43-aafb-bcbc47f285ca_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-04",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485860443_d12fd0ec-8701-4fe7-8e68-1c801ff59f85.webp",
+    poster: productMediaAsset("review-04.webp", "buudy-led-mask", "videos"),
     src: productMediaAsset("review-04.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc:
-      "https://cdn2.videowise.com/converted/videos/1684780828045_7e4e871c-89be-45e4-9fb5-1d4c9ac1f30f_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-05",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485816239_f9dba8d1-d096-4067-aff8-eb4a72366122.webp",
+    poster: productMediaAsset("review-05.webp", "buudy-led-mask", "videos"),
     src: productMediaAsset("review-05.mp4", "buudy-led-mask", "videos"),
-    fallbackSrc:
-      "https://cdn2.videowise.com/converted/videos/1679081092710_1bac0b63-1caf-46ec-8a9e-33981ec0d67c_h264q6clip.mp4#t=0.1",
   },
   {
     id: "review-06",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485713943_cdd6cc24-2387-470e-b124-abd3854c444a.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081090744_9551ac45-ed4a-43b8-b9ac-8213907377b3_h264c_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-06.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-06.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-07",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485680835_1fadaf66-e8f6-4c8b-aa7c-4396245b1faa.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081088709_a5c725fc-6f49-4c5b-a9df-fcc86e2f961c_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-07.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-07.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-08",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485637662_4fa63d64-8298-4f58-9f47-9adfa370720d.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081087361_1db3b2cc-7be9-4715-bb3f-0fefa4d95837_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-08.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-08.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-09",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485657649_d1f364b2-99cf-46f6-96f5-e4e7c804a5d9.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081086957_557b2d69-79d2-4cee-8ba8-63e316eff8c7_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-09.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-09.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-10",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485662907_1e32b62d-e59f-4f2e-abaf-aa9707c46121.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080157636_4c0c5485-0c6c-476f-bcd4-086de0efc4d1_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-10.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-10.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-11",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485718861_90220ac1-9cdb-473c-8c10-b35687131177.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081086115_9020e9ed-ef75-440f-abce-58841caacb36_h264c_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-11.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-11.mp4", "buudy-led-mask", "videos"),
   },
   {
     id: "review-12",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485624094_cecf6646-da77-4ac9-883e-7cf30e8e552f.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080526334_a0e26759-7e98-43bf-a8fe-040939abf286_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-13",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485613490_a1d783da-99e3-4a91-b8d0-79bcddf4abfe.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679081085529_9c218c6e-a0e2-439b-81ff-c50a5407fda3_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-14",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486208158_29d80d75-e1ff-4e39-b80a-ab619343d7cd.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1680194146707_01323415-baa1-49fb-8fbe-8999c06b4f92_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-15",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485623797_ca63ba95-91e6-464b-aa69-c33b028a278e.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080560470_ddd1fcb3-c697-4b68-97b1-5f59c1785c9f_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-16",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485614738_57d086fc-b048-4943-80ba-2e48eb216f79.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080559256_14815e68-76c4-4f4c-8991-323dbaa4c875_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-17",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485864339_9ebd6aeb-50d4-4a65-bcf6-5e8375e300d3.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1680194146380_4a1dfd25-f7cb-4f36-99b3-9f347213bd09_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-18",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485607620_ce8129d0-16a2-403d-9ef6-15f2d31ca9fb.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080553322_9cc8ec50-1e9b-4003-a64b-b7e5ead46693_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-19",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485604796_4f40348a-0122-4862-9991-381075c11974.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1679080003371_048b58f6-6a7b-42b9-bcdf-3497fb4566c9_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-20",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485973867_0371638d-c985-4dc3-880a-201d20ff0843.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1685495777020_4be03046-1648-42e3-8d35-8cc2988703fd_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-21",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485966523_e259ced8-349a-4757-8484-cbbede120591.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1685495788646_9c258eff-7927-476a-b762-a80b0f06d9b6_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-22",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719485968766_cf0be9a8-a1de-43df-ab1b-4e216bc5870f.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1685495790866_dc5a4963-5545-4605-a051-037126fa3441_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-23",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486127842_b494c98a-fffc-4212-a210-fa087c5557a5.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511754055_118a8958-9318-41c7-a32d-7274fcd00e1f_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-25",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486133236_7778286b-f568-4290-9e0d-dbc77c7c059b.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511743499_33e12c2d-1a10-4f64-be09-d753d4993093_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-26",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486138545_f0794e86-5c68-4520-bf50-aab136b03516.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511747618_c7adc1a0-07e9-4168-b9a6-61ec3fa055dc_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-27",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486056792_591ed0b5-bfc7-4b3a-8157-697d2f003ee1.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511742070_88202514-7c65-4c97-91ea-6df0aa4491d5_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-28",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486143433_69a5ad16-e0be-41c5-80b5-2f984b593616.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511744702_3d725a4a-1a9b-4bfc-963b-687a7e9c1681_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-29",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486030997_e6361edb-97d6-4158-985a-5c39e242e738.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511740669_a9093ce7-c7f1-434f-92a0-663217393a67_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-30",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486133504_f0995a73-a08e-465b-b9dc-b6afd05afa47.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511736936_e8e21d3f-5411-4eae-9e30-6990bccbdb74_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-31",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486042898_a3733ea2-e5a4-4063-ab48-5969ea7c25fd.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511721203_4c27669b-75b8-4d66-b4db-014b87d8e851_h264c_h264q6clip.mp4#t=0.1",
-  },
-  {
-    id: "review-32",
-    poster:
-      "https://images.videowise.com/cdn_v_i/XS/converted/thumbnails/1719486031184_db6562f9-5414-468e-ab1e-2b3d3df446a9.webp",
-    src: "https://cdn2.videowise.com/converted/videos/1686511718245_136b4b13-74af-4d7f-9a5b-202728b15358_h264q6clip.mp4#t=0.1",
+    poster: productMediaAsset("review-12.webp", "buudy-led-mask", "videos"),
+    src: productMediaAsset("review-12.mp4", "buudy-led-mask", "videos"),
   },
 ];
 
@@ -1020,7 +951,7 @@ export const torchFaqs: FAQItem[] = [
   {
     question: "Do you sell this anywhere else?",
     answer:
-      "The Buudy LED Torch is exclusively sold through au.buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
+      "The Buudy LED Torch is exclusively sold through buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites.",
   },
   {
     question: "How do I track my order?",
@@ -1041,10 +972,10 @@ export const expertVideo = {
 export const comparison = {
   intro: "Here is a comparison, but really, there is no comparison.",
   columns: [
-    { label: "Buudy", price: "AU$283", featured: true },
-    { label: "Brand A", price: "AU$540" },
-    { label: "Brand B", price: "AU$580" },
-    { label: "Brand C", price: "AU$389" },
+    { label: "Buudy", price: "£179", featured: true },
+    { label: "Brand A", price: "£299" },
+    { label: "Brand B", price: "£399" },
+    { label: "Brand C", price: "£372" },
   ],
   rows: [
     ["Portable", "Hands-free, cordless and rechargeable", "-", "-", "-"],
@@ -1053,6 +984,13 @@ export const comparison = {
     ["Customizable treatments", "Yes", "-", "-", "Yes"],
     ["Hands-free, cordless, rechargeable", "Yes", "Yes", "-", "-"],
     ["App companion (iPhone/Android)", "Yes", "-", "-", "-"],
+    [
+      "Treatment Time (Full Face + Neck)",
+      "3 mins",
+      "10 mins",
+      "10 mins",
+      "3 mins",
+    ],
   ],
 };
 
@@ -1073,9 +1011,9 @@ export const touchTech = [
 
 export const standardMaskFaqs: FAQItem[] = [
   {
-    question: "Is Buudy the best LED face mask for Australian buyers?",
+    question: "Is Buudy the best LED face mask for UK buyers?",
     answer:
-      "Buudy is designed for Australian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Australian launch offer is AU$283 with an AU$568 compare-at price, free tracked Australia delivery, a free glow kit while available, and an easy return and refund policy.",
+      "Buudy is designed for UK shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current UK launch offer is £179 with a £449 compare-at price, free tracked UK shipping, a free glow kit while available, and an easy return and refund policy.",
   },
   {
     question: "Does this cover the neck?",
@@ -1105,7 +1043,7 @@ export const standardMaskFaqs: FAQItem[] = [
   {
     question: "Do you sell this anywhere else?",
     answer:
-      "The Buudy LED Mask is exclusively sold through au.buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
+      "The Buudy LED Mask is exclusively sold through www.buudy.co.uk at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
   },
   {
     question: "How do I track my order?",
@@ -1116,9 +1054,9 @@ export const standardMaskFaqs: FAQItem[] = [
 
 export const buudyLedMaskFaqs: FAQItem[] = [
   {
-    question: "Is Buudy the best LED face mask for Australian buyers?",
+    question: "Is Buudy the best LED face mask for UK buyers?",
     answer:
-      "Buudy is designed for Australian shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current Australian launch offer is AU$283 with an AU$568 compare-at price, free tracked Australia delivery, a free glow kit while available, and an easy return and refund policy.",
+      "Buudy is designed for UK shoppers comparing LED face masks for anti-ageing, breakout-prone skin, and neck coverage. The mask combines 192 high-density LEDs with seven visible colours plus 830nm near-infrared, so one device can support red light firmness routines, blue light breakout routines, tone-balancing modes, and deeper near-infrared sessions. Unlike face-only masks, Buudy covers the jawline and neck, which matters because the neck often shows visible ageing early. It is cordless, rechargeable, and controlled with a simple tap system, making consistent at-home use easier than clinic appointments or wired masks. The current UK launch offer is £179 with a £449 compare-at price, free tracked UK shipping, a free glow kit while available, and an easy return and refund policy.",
   },
   {
     question: "Does this cover the neck?",
@@ -1148,12 +1086,12 @@ export const buudyLedMaskFaqs: FAQItem[] = [
   {
     question: "Do you sell this anywhere else?",
     answer:
-      "The Buudy LED Mask is exclusively sold through au.buudy.com at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
+      "The Buudy LED Mask is exclusively sold through www.buudy.co.uk at approved clinics, salons, and spas with a strict MSRP. There are no other authorized online sites. You will also find Press links only taking you back to us.",
   },
   {
     question: "Why is Cleopatra written on the mask?",
     answer:
-      "This is the genuine Cleopatra Edition LED Face Mask, supplied and distributed exclusively by Buudy in Australia. When you order from Buudy, you receive the authentic clinical multi-spectrum mask, backed by our official warranty, fast tracked Australia delivery, and dedicated customer support.",
+      "This is the genuine Cleopatra Edition LED Face Mask, supplied and distributed exclusively by Buudy in the UK. When you order from Buudy, you receive the authentic clinical multi-spectrum mask, backed by our official UK warranty, fast tracked UK delivery, and dedicated local customer support.",
   },
   {
     question: "How do I track my order?",

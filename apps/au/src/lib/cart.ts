@@ -38,7 +38,6 @@ export const VALID_PROMO_CODES: Record<
   BUUDYBF20: { code: "BUUDYBF20", discountCents: 2000, type: "promo" },
   BUUDY10BLACKFRIDAY10: { code: "BUUDY10BLACKFRIDAY10", discountCents: 2000, type: "promo" },
   VIP50: { code: "VIP50", discountCents: 5000, type: "promo" },
-  "9PQ28ENBLJ": { code: "9PQ28ENBLJ", discountCents: 2800, type: "gift_card" },
 };
 
 export const emptyCart: CartState = {
@@ -72,11 +71,181 @@ export function getPromoDiscountCents(code: string | null | undefined): number {
   return config ? config.discountCents : 0;
 }
 
+export function isProtocolProduct(product: Product | { id?: string; slug?: string; template?: string }) {
+  const template = (product as Product).template;
+  const slug = product.slug || "";
+  const id = product.id || "";
+  return (
+    template === "serum" ||
+    template === "cleanser" ||
+    id === "buudy-light-activating-hyaluronic-serum" ||
+    slug.includes("serum") ||
+    slug.includes("cream") ||
+    slug.includes("concentrate") ||
+    slug.includes("face-wash") ||
+    slug.includes("collection") ||
+    slug.includes("box") ||
+    slug.includes("duo") ||
+    slug.includes("hyaluronic")
+  );
+}
+
+export function getProtocolCartDetails(product: Product, quantity: number) {
+  const slug = product.slug || "";
+  const isBox = slug.includes("collection") || slug.includes("box") || slug.includes("duo");
+
+  if (isBox) {
+    if (quantity === 2) {
+      return {
+        unitPriceCents: 17450,
+        compareAtCents: product.compareAtCents ? product.compareAtCents : undefined,
+        subtitle: slug.includes("duo")
+          ? "2 Duo Gift Boxes (4 x 30ml) · Extended 120-Day Protocol"
+          : slug.includes("peptide")
+          ? "2 Collection Boxes · Extended 180-Day Firming Protocol"
+          : "2 Collection Boxes (6 x 30ml) · Continuous Renewal Protocol",
+      };
+    }
+    if (quantity === 3) {
+      return {
+        unitPriceCents: 14967,
+        compareAtCents: product.compareAtCents ? product.compareAtCents : undefined,
+        subtitle: slug.includes("duo")
+          ? "3 Duo Gift Boxes (6 x 30ml) · Year-Round Hydration & Gifting"
+          : slug.includes("peptide")
+          ? "3 Collection Boxes · Ultimate Luxury Gifting & Year-Round Care"
+          : "3 Collection Boxes (9 x 30ml) · Luxury Gifting & Year-Round Care",
+      };
+    }
+    return {
+      unitPriceCents: product.priceCents,
+      compareAtCents: product.compareAtCents && product.compareAtCents > product.priceCents ? product.compareAtCents : undefined,
+      subtitle: slug.includes("duo")
+        ? "1 Duo Gift Box (2 x 30ml) · 2-Step Cellular Hydration"
+        : slug.includes("peptide")
+        ? "1 Collection Box (3-Step Trio) · Full Anti-Age Protocol"
+        : "1 Collection Box (3 x 30ml) · Complete Renewal Trilogy",
+    };
+  }
+
+  const isEyeCream = slug.includes("eye-cream") || slug.includes("eye");
+  const isCream = (slug.includes("cream") || product.id.includes("cream")) && !isEyeCream;
+  const isFaceWash = slug.includes("face-wash") || slug.includes("wash") || product.template === "cleanser";
+
+  if (isEyeCream) {
+    if (quantity === 3) {
+      return {
+        unitPriceCents: 8300,
+        compareAtCents: 11900,
+        subtitle: "3 Tubes (45ml) · Full 90-Day Protocol",
+      };
+    }
+    if (quantity === 6) {
+      return {
+        unitPriceCents: 6650,
+        compareAtCents: 11900,
+        subtitle: "6 Tubes (90ml) · 6-Month Protocol",
+      };
+    }
+    return {
+      unitPriceCents: 9900,
+      compareAtCents: 11900,
+      subtitle: "1 Tube (15ml) · Daily Eye Contour Care",
+    };
+  }
+
+  if (isCream) {
+    if (quantity === 3) {
+      return {
+        unitPriceCents: 8300,
+        compareAtCents: 11900,
+        subtitle: "3 Jars (150ml) · Full 90-Day Protocol",
+      };
+    }
+    if (quantity === 6) {
+      return {
+        unitPriceCents: 6650,
+        compareAtCents: 11900,
+        subtitle: "6 Jars (300ml) · 6-Month Protocol",
+      };
+    }
+    return {
+      unitPriceCents: 9900,
+      compareAtCents: 11900,
+      subtitle: "1 Jar (50ml) · Daily Restorative Care",
+    };
+  }
+
+  if (isFaceWash) {
+    if (quantity === 3) {
+      return {
+        unitPriceCents: 8300,
+        compareAtCents: 11900,
+        subtitle: "3 Bottles (420ml) · Full 90-Day Protocol",
+      };
+    }
+    if (quantity === 6) {
+      return {
+        unitPriceCents: 6650,
+        compareAtCents: 11900,
+        subtitle: "6 Bottles (840ml) · 6-Month Protocol",
+      };
+    }
+    return {
+      unitPriceCents: 9900,
+      compareAtCents: 11900,
+      subtitle: "1 Bottle (140ml) · Daily Purifying & Balancing",
+    };
+  }
+
+  let tier1Action = "Daily Hydration";
+  if (slug.includes("peptide")) tier1Action = "Post-Light Collagen Lock";
+  else if (slug.includes("prebiotic")) tier1Action = "Microbiome & Barrier Balance";
+  else if (slug.includes("aha")) tier1Action = "Overnight Cellular Resurfacing";
+  else if (slug.includes("retinol")) tier1Action = "LED-Safe Night Cellular Renewal";
+  else if (slug.includes("niacinamide")) tier1Action = "Blemish Defence & Pore Control";
+  else if (slug.includes("hydrating")) tier1Action = "Intensive Moisture & Barrier Care";
+
+  if (quantity === 3) {
+    return {
+      unitPriceCents: 8300,
+      compareAtCents: 11900,
+      subtitle: "3 Bottles (90ml) · Full 90-Day Protocol",
+    };
+  }
+  if (quantity === 6) {
+    return {
+      unitPriceCents: 6650,
+      compareAtCents: 11900,
+      subtitle: "6 Bottles (180ml) · 6-Month Protocol",
+    };
+  }
+  return {
+    unitPriceCents: 9900,
+    compareAtCents: 11900,
+    subtitle: `1 Bottle (30ml) · ${tier1Action}`,
+  };
+}
+
 export function buildProductCartLines(product: Product, quantity = 1): CartLine[] {
   const normalizedQuantity = Math.max(quantity, 0);
 
   if (normalizedQuantity <= 0) {
     return [];
+  }
+
+  let unitPriceCents = product.priceCents;
+  let compareAtCents =
+    product.compareAtCents && product.compareAtCents > product.priceCents
+      ? product.compareAtCents
+      : undefined;
+  let subtitle = product.shortDescription;
+
+  if (isProtocolProduct(product)) {
+    const details = getProtocolCartDetails(product, normalizedQuantity);
+    unitPriceCents = details.unitPriceCents;
+    compareAtCents = details.compareAtCents;
+    subtitle = details.subtitle;
   }
 
   const productLine: CartLine = {
@@ -85,13 +254,10 @@ export function buildProductCartLines(product: Product, quantity = 1): CartLine[
     slug: product.slug,
     type: "product",
     title: product.name,
-    subtitle: product.shortDescription,
+    subtitle,
     image: product.cartImage,
-    unitPriceCents: product.priceCents,
-    compareAtCents:
-      product.compareAtCents && product.compareAtCents > product.priceCents
-        ? product.compareAtCents
-        : undefined,
+    unitPriceCents,
+    compareAtCents,
     quantity: normalizedQuantity,
   };
 
@@ -163,7 +329,12 @@ export function ensureProductInCart(
   requestedQuantity = 1,
 ): CartState {
   if (!Number.isSafeInteger(requestedQuantity) || requestedQuantity < 1) return state;
+  const isProtocol = isProtocolProduct(product);
   const existing = state.lines.find(line => line.type === "product" && line.productId === product.id);
+  if (isProtocol) {
+    if (existing && existing.quantity === requestedQuantity) return state;
+    return { ...state, lines: upsertProductCartLines(state.lines, product, requestedQuantity) };
+  }
   if (existing && existing.quantity >= requestedQuantity) return state;
   return { ...state, lines: upsertProductCartLines(state.lines, product, requestedQuantity) };
 }
@@ -225,10 +396,14 @@ export function getDisplayLines(lines: CartLine[]): CartLine[] {
   const formatted = lines.map((line) => {
     if (line.type === "product") {
       const prod = findProductForLine(line);
+      const isProtocol =
+        (prod && isProtocolProduct(prod)) ||
+        line.productId === "buudy-light-activating-hyaluronic-serum" ||
+        Boolean(line.slug && line.slug.includes("hyaluronic"));
       return {
         ...line,
         title: line.productId === "buudy-led-mask" ? "Buudy LED Mask" : line.title,
-        subtitle: prod?.shortDescription ?? line.subtitle,
+        subtitle: isProtocol && line.subtitle ? line.subtitle : (prod?.shortDescription ?? line.subtitle),
         image: line.productId === "buudy-led-mask" ? (getProductById("buudy-led-mask")?.cartImage ?? line.image) : line.image,
       };
     }

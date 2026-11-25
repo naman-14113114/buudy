@@ -1,9 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
   Clock3,
   ExternalLink,
+  FileText,
   HelpCircle,
   MessageCircle,
   Sparkles,
@@ -14,11 +17,21 @@ import {
   contactSocialLinks,
 } from "@/data/contact";
 import { homeAsset } from "@/lib/media";
+import { openTawkChat } from "@/lib/tawk";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ContactForm } from "./ContactForm";
 
 function ContactHero() {
+  const handleScrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const formElement = document.getElementById("contact-form");
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", "#contact-form");
+    }
+  };
+
   return (
     <section className="buudy-section bg-[var(--cream)] py-16 md:py-24">
       <div className="buudy-glow -left-24 top-8 h-[440px] w-[440px] bg-[#f4a17b]" />
@@ -35,7 +48,34 @@ function ContactHero() {
           </h1>
           <p className="buudy-copy mt-6 max-w-2xl text-lg">{contactPage.copy}</p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          {/* Direct contact action CTAs: Live Chat & Contact Form */}
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={openTawkChat}
+              className="buudy-cart-wipe group relative inline-flex min-h-12 items-center justify-center overflow-hidden rounded-full border-2 border-[var(--plum)] bg-[var(--plum)] px-6 py-3 text-sm font-semibold tracking-wide text-[var(--cream)] shadow-md transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-95 cursor-pointer"
+              aria-label="Open Live Chat"
+            >
+              <span className="buudy-cart-wipe-content inline-flex items-center justify-center gap-2">
+                <MessageCircle size={17} className="transition-transform duration-300 group-hover:scale-110" />
+                <span>Live Chat</span>
+              </span>
+            </button>
+
+            <a
+              href="#contact-form"
+              onClick={handleScrollToForm}
+              className="buudy-cart-wipe group relative inline-flex min-h-12 items-center justify-center overflow-hidden rounded-full border-2 border-[var(--plum)] bg-[var(--plum)] px-6 py-3 text-sm font-semibold tracking-wide text-[var(--cream)] shadow-md transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] active:scale-95 cursor-pointer"
+              aria-label="Jump to Contact Form"
+            >
+              <span className="buudy-cart-wipe-content inline-flex items-center justify-center gap-2">
+                <FileText size={17} className="transition-transform duration-300 group-hover:scale-110" />
+                <span>Contact Form</span>
+              </span>
+            </a>
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-3">
             <a
               className="buudy-mono rounded-full bg-[var(--plum)] px-4 py-3 text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--ink)]"
               href="mailto:support@buudy.co.uk"

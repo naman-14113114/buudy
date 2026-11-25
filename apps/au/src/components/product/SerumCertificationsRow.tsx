@@ -2,14 +2,17 @@ const CERTIFICATIONS = [
   {
     title: "FDA Registered",
     icon: "/images/certifications/fda-registered.svg",
+    className: "h-11 sm:h-13 md:h-15 w-auto max-w-[140px]",
   },
   {
     title: "B Corporation",
     icon: "/images/certifications/b-corp.svg",
+    className: "h-16 sm:h-20 md:h-24 w-auto",
   },
   {
     title: "Good Manufacturing Practice",
     icon: "/images/certifications/gmp-certified.svg",
+    className: "h-16 sm:h-18 md:h-22 w-auto",
   },
 ];
 
@@ -21,12 +24,12 @@ export function SerumCertificationsRow() {
           {CERTIFICATIONS.map((badge, idx) => (
             <div
               key={idx}
-              className="flex items-center justify-center w-full h-14 sm:h-16 md:h-20"
+              className="flex items-center justify-center w-full"
             >
               <img
                 src={badge.icon}
                 alt={badge.title}
-                className="max-h-full max-w-full object-contain opacity-90 transition-opacity hover:opacity-100"
+                className={`${badge.className} object-contain opacity-100 transition-transform duration-200 hover:scale-105`}
               />
             </div>
           ))}

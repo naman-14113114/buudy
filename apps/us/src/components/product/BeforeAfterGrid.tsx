@@ -326,7 +326,7 @@ export function BeforeAfterGrid({
       >
         <div
           aria-label="Customer transformation stories"
-          className="no-scrollbar flex gap-5 overflow-x-auto px-4 pt-4 pb-6 md:px-10 md:pt-5 md:pb-7 cursor-grab active:cursor-grabbing select-none"
+          className="no-scrollbar flex gap-5 overflow-x-auto px-4 pt-4 pb-8 md:px-10 md:pt-5 md:pb-8 cursor-grab active:cursor-grabbing select-none"
           onMouseDown={handleMouseDown}
           onMouseLeave={handleMouseUpOrLeave}
           onMouseMove={handleMouseMove}

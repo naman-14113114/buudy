@@ -8,12 +8,28 @@ export function ProductHero({
   galleryVariant = "omnilux",
   isHalloween = false,
   isEarlyBlackFriday = true,
+  hyaluronicEditorial = false,
 }: {
   product: Product;
   galleryVariant?: "default" | "omnilux";
   isHalloween?: boolean;
   isEarlyBlackFriday?: boolean;
+  hyaluronicEditorial?: boolean;
 }) {
+  const isHyaluronic =
+    product.id === "buudy-light-activating-hyaluronic-serum" ||
+    Boolean(product.slug && product.slug.includes("hyaluronic"));
+
+  const gallery = isHyaluronic && hyaluronicEditorial
+    ? [
+        {
+          src: "/images/products/buudy-serum/10-plum-campaign-pair.webp",
+          alt: "Buudy Hyaluronic Serum bottle and carton against a plum studio backdrop",
+        },
+        ...product.gallery.slice(1),
+      ]
+    : product.gallery;
+
   return (
     <section
       id="product-hero"
@@ -36,12 +52,12 @@ export function ProductHero({
         <div className="lg:sticky lg:top-6 lg:self-start w-full">
           {galleryVariant === "omnilux" ? (
             <OmniluxProductGallery
-              images={product.gallery}
+              images={gallery}
               hasGifts={product.gifts.length > 0}
               isMask={product.template === "mask"}
             />
           ) : (
-            <ProductGallery images={product.gallery} hasGifts={product.gifts.length > 0} />
+            <ProductGallery images={gallery} hasGifts={product.gifts.length > 0} />
           )}
         </div>
         <div className="w-full [overflow-anchor:none]">
@@ -49,6 +65,7 @@ export function ProductHero({
             product={product}
             isHalloween={isHalloween}
             isEarlyBlackFriday={isEarlyBlackFriday}
+            hyaluronicEditorial={hyaluronicEditorial}
           />
         </div>
       </div>

@@ -82,7 +82,7 @@ type HyperSKURecord = {
   status?: number; // 1: Delivered, 2: In Transit, 3: Pick Up, 4: Undelivered, 5: Expired, 6: Returned, 0: Not Find, -5: Does not exist, -2: Alert
   deliveredDay?: string;
   flow_0?: HyperSKUTrackEvent[]; // Origin & international transit flow
-  flow_1?: HyperSKUTrackEvent[]; // Destination & last-mile courier flow (e.g. Canada Post, Yodel)
+  flow_1?: HyperSKUTrackEvent[]; // Destination & last-mile courier flow (e.g. Royal Mail, Yodel)
   express_company_info?: { website?: string; name?: string; enName?: string; contact?: string };
   express_company_info_to?: { website?: string; name?: string; enName?: string; contact?: string };
   lasttime?: string;
@@ -628,7 +628,7 @@ async function fetchCJTracking(trackingNumber: string, resolveReplacement = true
     const matched = records.find(record =>
       [record.trackingNumber, record.lastTrackNumber].some(value => value?.toUpperCase() === number));
     // The official endpoint resolves ONE queried barcode to its last-mile
-    // number (e.g. ZHPHD... -> Canada Post ...GB). Its single resolved record
+    // number (e.g. ZHPHD... -> Royal Mail ...GB). Its single resolved record
     // is valid; never choose an arbitrary record from a multi-record response.
     const record = matched || (records.length === 1 && records[0].trackingNumber ? records[0] : null);
     if (!record) {
@@ -909,16 +909,16 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
   {
     "orderId": "1193901880783962112",
     "paymentId": "pay_E5JRd3xCn76O8n",
-    "name": "Me",
-    "firstName": "Me",
-    "lastName": "",
-    "email": null,
+    "name": "Neil Webber",
+    "firstName": "Neil",
+    "lastName": "Webber",
+    "email": "neilwebber@rocketmail.com",
     "postcode": "B63 4LS",
-    "address": "Halesowen",
+    "address": "51 Belbroughton Rd, Halesowen",
     "city": "Halesowen",
     "status": 1,
     "statusStr": "Processing",
-    "carrier": "Canada Post Tracked 48",
+    "carrier": "Royal Mail Tracked 48",
     "trackingNumber": null,
     "initialTracking": null,
     "crtTime": "2026-11-18 12:59:50"
@@ -935,7 +935,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "Ammanford",
     "status": 1,
     "statusStr": "waitPayment",
-    "carrier": "Canada Post Tracked 48",
+    "carrier": "Royal Mail Tracked 48",
     "trackingNumber": null,
     "initialTracking": null,
     "crtTime": "2026-11-17 20:31:22"
@@ -952,7 +952,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "CARDIFF",
     "status": 1,
     "statusStr": "waitPayment",
-    "carrier": "Canada Post Tracked",
+    "carrier": "Royal Mail Tracked",
     "trackingNumber": "YT2632200700682469",
     "initialTracking": null,
     "crtTime": "2026-11-16 20:20:57"
@@ -969,7 +969,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "AYLESBURY",
     "status": 1,
     "statusStr": "waitPayment",
-    "carrier": "Canada Post Tracked",
+    "carrier": "Royal Mail Tracked",
     "trackingNumber": "YT2632200700283540",
     "initialTracking": null,
     "crtTime": "2026-11-16 19:04:00"
@@ -986,7 +986,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "BALLYCLARE",
     "status": 1,
     "statusStr": "waitPayment",
-    "carrier": "Canada Post Tracked",
+    "carrier": "Royal Mail Tracked",
     "trackingNumber": "YT2632200700482175",
     "initialTracking": null,
     "crtTime": "2026-11-16 18:39:13"
@@ -1001,11 +1001,11 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "postcode": "CW3 0JB",
     "address": "Green Court, Hall Lane, HANKELOW  CREWE  CHESHIRE",
     "city": "HANKELOW  CREWE  CHESHIRE",
-    "status": 1,
-    "statusStr": "waitPayment",
-    "carrier": "Canada Post Tracked",
-    "trackingNumber": "YT2632100715210035",
-    "initialTracking": null,
+    "status": 4,
+    "statusStr": "pendingReceipt",
+    "carrier": "Royal Mail Tracked 48",
+    "trackingNumber": "QP424242767GB",
+    "initialTracking": "YT2632100715210035",
     "crtTime": "2026-11-16 18:19:09"
   },
   {
@@ -1018,11 +1018,11 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "postcode": "WR11 3JR",
     "address": "5 Lambourne Close, Evesham",
     "city": "Evesham",
-    "status": 2,
-    "statusStr": "purchase",
+    "status": 4,
+    "statusStr": "pendingReceipt",
     "carrier": "EVRI",
     "trackingNumber": "H00RVA0573472525",
-    "initialTracking": null,
+    "initialTracking": "YT2632100701576415",
     "crtTime": "2026-11-15 22:42:01"
   },
   {
@@ -1037,7 +1037,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "GERRARDS CROSS",
     "status": 1,
     "statusStr": "waitPayment",
-    "carrier": "Canada Post Tracked",
+    "carrier": "Royal Mail Tracked",
     "trackingNumber": "YT2632200700682428",
     "initialTracking": null,
     "crtTime": "2026-11-15 21:55:28"
@@ -1105,7 +1105,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "CHIPPENHAM",
     "status": 2,
     "statusStr": "purchase",
-    "carrier": "Canada Post Tracked",
+    "carrier": "Royal Mail Tracked",
     "trackingNumber": "YT2632100701576324",
     "initialTracking": null,
     "crtTime": "2026-11-14 23:16:01"
@@ -1224,7 +1224,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "BRIGHTWELL-CUM-SOTWELL",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP423167659GB",
     "initialTracking": "YT2631800700220425",
     "crtTime": "2026-11-13 04:50:25"
@@ -1258,7 +1258,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "FERNWOOD, NEWARK",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP423167407GB",
     "initialTracking": "YT2631800700819960",
     "crtTime": "2026-11-12 23:45:21"
@@ -1292,7 +1292,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "FALKIRK",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP423167089GB",
     "initialTracking": "YT2631800700220656",
     "crtTime": "2026-11-12 21:29:21"
@@ -1326,7 +1326,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "MARKINCH",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP423107195GB",
     "initialTracking": "YT2631700701723692",
     "crtTime": "2026-11-12 12:27:45"
@@ -1394,7 +1394,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "Sutton-in-Ashfield",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP316771623GB",
     "initialTracking": "YT2631600700539018",
     "crtTime": "2026-11-11 02:47:32"
@@ -1411,7 +1411,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "COLCHESTER",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP316391404GB",
     "initialTracking": "YT2631600700738537",
     "crtTime": "2026-11-11 01:52:52"
@@ -1445,7 +1445,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "SLEAFORD",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP316771226GB",
     "initialTracking": "YT2631600700738644",
     "crtTime": "2026-11-10 21:28:47"
@@ -1462,7 +1462,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "HALSTEAD",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "FK289746600GB",
     "initialTracking": "FK289746600GB",
     "crtTime": "2026-11-10 20:06:30"
@@ -1479,7 +1479,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "Reading",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP316771274GB",
     "initialTracking": "YT2631500700545611",
     "crtTime": "2026-11-10 16:21:59"
@@ -1513,7 +1513,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "Cardiff",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP316391320GB",
     "initialTracking": "YT2631500700344734",
     "crtTime": "2026-11-09 19:35:39"
@@ -1530,7 +1530,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "MERSEYSIDE",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP315932960GB",
     "initialTracking": "YT2631300715834658",
     "crtTime": "2026-11-09 06:04:59"
@@ -1615,7 +1615,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "DERBY",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP315181925GB",
     "initialTracking": "YT2631200700256406",
     "crtTime": "2026-11-07 17:16:03"
@@ -1649,7 +1649,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "Bury St Edmands",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP315181934GB",
     "initialTracking": "YT2631200700856353",
     "crtTime": "2026-11-06 19:55:40"
@@ -1666,7 +1666,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "Rainhill",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post Tracked",
+    "carrier": "Royal Mail Tracked",
     "trackingNumber": "QP423715029GB",
     "initialTracking": null,
     "crtTime": "2026-11-05 18:57:30"
@@ -1734,7 +1734,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "Newton Stewart",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP423026585GB",
     "initialTracking": null,
     "crtTime": "2026-11-03 16:47:20"
@@ -1751,7 +1751,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "DERBYSHIRE",
     "status": 4,
     "statusStr": "pendingReceipt",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP423026687GB",
     "initialTracking": null,
     "crtTime": "2026-11-03 16:46:49"
@@ -1768,7 +1768,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "Wombourne, South Staffordshire",
     "status": 5,
     "statusStr": "toEvaluate",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP272594967GB",
     "initialTracking": "QP272594967GB",
     "crtTime": "2026-11-01 01:28:07"
@@ -1785,7 +1785,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "WOKING",
     "status": 5,
     "statusStr": "toEvaluate",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP272594975GB",
     "initialTracking": "QP272594975GB",
     "crtTime": "2026-11-01 01:12:24"
@@ -1802,7 +1802,7 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "city": "WHITEHILL",
     "status": 5,
     "statusStr": "toEvaluate",
-    "carrier": "Canada Post",
+    "carrier": "Royal Mail",
     "trackingNumber": "QP272594984GB",
     "initialTracking": "QP272594984GB",
     "crtTime": "2026-11-01 00:43:47"
@@ -1860,11 +1860,11 @@ async function buildVerifiedTrackingData(order: VerifiedOrderRecord): Promise<Tr
   let estimatedDelivery = '18–22 November 2026';
   let statusMessage = 'Your order is confirmed and being prepared for dispatch.';
 
-  let carrierName = 'Canada Post Tracked 48';
+  let carrierName = 'Royal Mail Tracked 48';
   let carrierTrackingUrl: string | undefined = undefined;
 
-  if (order.carrier === 'Canada Post' || order.trackingNumber?.startsWith('QP')) {
-    carrierName = 'Canada Post Tracked 48';
+  if (order.carrier === 'Royal Mail' || order.trackingNumber?.startsWith('QP')) {
+    carrierName = 'Royal Mail Tracked 48';
     if (order.trackingNumber) {
       carrierTrackingUrl = `https://www.royalmail.com/track-your-item#/tracking-results/${order.trackingNumber}`;
     }
@@ -1874,12 +1874,12 @@ async function buildVerifiedTrackingData(order: VerifiedOrderRecord): Promise<Tr
       carrierTrackingUrl = `https://www.evri.com/track-a-parcel?trackingNumber=${order.trackingNumber}`;
     }
   } else if (order.carrier === 'YunExpress' || order.trackingNumber?.startsWith('YT')) {
-    carrierName = 'YunExpress International';
+    carrierName = 'Royal Mail Tracked';
     if (order.trackingNumber) {
-      carrierTrackingUrl = `https://www.yuntrack.com/parcelTracking?id=${order.trackingNumber}`;
+      carrierTrackingUrl = `https://www.buudy.co.uk/order-tracking?tracking=${order.trackingNumber}`;
     }
   } else {
-    carrierName = 'Canada Post Tracked DDP';
+    carrierName = 'Royal Mail Tracked DDP';
   }
 
   const orderDateStr = order.crtTime.split(' ')[0];
@@ -1929,7 +1929,7 @@ async function buildVerifiedTrackingData(order: VerifiedOrderRecord): Promise<Tr
     }
 
     const latestEvent = liveEvents[0]; // liveEvents is sorted newest first by buildCarrierEvents
-    const isDelivered = latestEvent.stage === 'DELIVERED' || /delivered/i.test(latestEvent.title);
+    const isDelivered = latestEvent.stage === 'DELIVERED' || (/delivered/i.test(latestEvent.title) && !/local carrier|courier partner|facility/i.test(latestEvent.title));
     const isOutForDelivery = latestEvent.stage === 'OUT_FOR_DELIVERY' || /out for delivery|with delivery courier|postal carrier/i.test(latestEvent.title);
 
     if (isDelivered) {
@@ -2117,7 +2117,7 @@ async function lookupTracking(rawQuery: string): Promise<TrackingData | null> {
   const royalMail = /royal\s*mail/i.test(rawCarrier) || /^[A-Z]{2}\d{9}GB$/i.test(carrierNumber);
   const evri = /evri|hermes/i.test(rawCarrier) || /^H[0-9A-Z]{15}$/i.test(carrierNumber);
   const yunExpress = /yun\s*express/i.test(rawCarrier) || /^YT\d+$/i.test(carrierNumber);
-  const carrierName = royalMail ? "Canada Post" : evri ? "Evri" : yunExpress ? "YunExpress" : rawCarrier || "Carrier";
+  const carrierName = royalMail ? "Royal Mail" : evri ? "Evri" : yunExpress ? "Royal Mail Tracked" : rawCarrier || "Carrier";
   const carrierTrackingUrl = royalMail
     ? `https://www.royalmail.com/track-your-item#/tracking-results/${encodeURIComponent(carrierNumber)}`
     : /^ZHPHD/i.test(barcode) ? `https://www.cjpacket.com/?trackingNumber=${encodeURIComponent(barcode)}`

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState, useRef, useMemo } from "react";
 import { createPortal } from "react-dom";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { LazyAutoplayVideo } from "@/components/ui/LazyAutoplayVideo";
 import {
   ChevronLeft,
@@ -129,6 +129,12 @@ type MediaItem =
       alt: string;
     };
 
+const galleryImageSizes = "(min-width: 1280px) 520px, (min-width: 1024px) 44vw, calc(100vw - 32px)";
+
+function isGalleryImage(item: MediaItem) {
+  return item.type !== "video" && !/\.(mp4|webm)(?:[?#]|$)/i.test(item.src);
+}
+
 export function OmniluxProductGallery({
   images,
   hasGifts = true,
@@ -188,6 +194,14 @@ export function OmniluxProductGallery({
 
   // Current global media index. By default always starts on first gallery image (0)
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [pendingIndex, setPendingIndex] = useState<number | null>(null);
+  const requestedIndexRef = useRef(0);
+  const displayedIndexRef = useRef(0);
+  const navigationRequestRef = useRef(0);
+  const imagePreloadsRef = useRef(new Map<string, {
+    image: HTMLImageElement;
+    promise: Promise<void>;
+  }>());
 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -200,6 +214,119 @@ export function OmniluxProductGallery({
   const videoPlayerRef = useRef<HTMLVideoElement>(null);
   const previousActiveElementRef = useRef<HTMLElement | null>(null);
 
+  const preloadMaskImage = useCallback((
+    src: string,
+    original = false,
+    priority: "high" | "low" = "low",
+  ) => {
+    // Match next/image's actual responsive candidate instead of caching a different size.
+    const key = original ? src : `${src}:${window.innerWidth}:${window.devicePixelRatio}`;
+    const cached = imagePreloadsRef.current.get(key);
+    if (cached) {
+      if (priority === "high") cached.image.fetchPriority = "high";
+      return cached.promise;
+    }
+
+    const image = new window.Image();
+    image.decoding = "async";
+    image.fetchPriority = priority;
+    const promise = new Promise<void>((resolve, reject) => {
+      const finish = () => {
+        if (!image.naturalWidth) {
+          reject(new Error(`Could not load gallery image: ${src}`));
+          return;
+        }
+        image.decode().then(resolve, reject);
+      };
+      image.onload = finish;
+      image.onerror = () => reject(new Error(`Could not load gallery image: ${src}`));
+
+      if (original) {
+        image.src = src;
+      } else {
+        const { props } = getImageProps({
+          src, alt: "", width: 1200, height: 1200, sizes: galleryImageSizes,
+        });
+        image.sizes = props.sizes ?? "";
+        image.srcset = props.srcSet ?? "";
+        image.src = props.src;
+      }
+      if (image.complete && image.naturalWidth) finish();
+    });
+    imagePreloadsRef.current.set(key, { image, promise });
+    void promise.catch(() => imagePreloadsRef.current.delete(key));
+    return promise;
+  }, []);
+
+  // Start every mask image in the background, including full-resolution lightbox copies.
+  // Finish the first hero image first, then use three low-priority workers.
+  useEffect(() => {
+    if (!isMask) return;
+    let cancelled = false;
+    let generation = 0;
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const warmGallery = async () => {
+      const currentGeneration = ++generation;
+      const first = allMediaItems[0];
+      if (first && isGalleryImage(first)) {
+        await preloadMaskImage(first.src).catch(() => undefined);
+      }
+      const images = allMediaItems.filter(isGalleryImage);
+      const queue = [
+        ...images.map(item => ({ src: item.src, original: false })),
+        ...images.map(item => ({ src: item.src, original: true })),
+      ];
+      await Promise.all(Array.from({ length: 3 }, async () => {
+        while (!cancelled && currentGeneration === generation && queue.length) {
+          const next = queue.shift();
+          if (next) await preloadMaskImage(next.src, next.original).catch(() => undefined);
+        }
+      }));
+    };
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { void warmGallery(); }, 200);
+    };
+    void warmGallery();
+    window.addEventListener("resize", onResize);
+    return () => {
+      cancelled = true;
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", onResize);
+      navigationRequestRef.current += 1;
+    };
+  }, [allMediaItems, isMask, preloadMaskImage]);
+
+  const selectMedia = useCallback((index: number) => {
+    if (!isMask) {
+      setCurrentIndex(index);
+      return;
+    }
+    requestedIndexRef.current = index;
+    const request = ++navigationRequestRef.current;
+    const item = allMediaItems[index];
+    const commit = () => {
+      if (request !== navigationRequestRef.current) return;
+      displayedIndexRef.current = index;
+      setCurrentIndex(index);
+      setPendingIndex(null);
+    };
+    if (!isGalleryImage(item)) {
+      commit();
+      return;
+    }
+    setPendingIndex(index);
+    const ready = [preloadMaskImage(item.src, false, "high")];
+    if (isLightboxOpen) ready.push(preloadMaskImage(item.src, true, "high"));
+    void Promise.all(ready).then(commit).catch(() => {
+      // Leave the previous complete image/overlay together; a later click can retry.
+      if (request === navigationRequestRef.current) {
+        requestedIndexRef.current = displayedIndexRef.current;
+        setPendingIndex(null);
+      }
+    });
+  }, [allMediaItems, isLightboxOpen, isMask, preloadMaskImage]);
+
   // Derive active tab from currentIndex in the continuous line
   const activeTab = useMemo(() => {
     if (!isMask) return "gallery";
@@ -210,23 +337,46 @@ export function OmniluxProductGallery({
 
   // Tab click jumps directly to the start of that section
   const handleTabClick = (tab: "gallery" | "before-after" | "video") => {
-    if (tab === "gallery") setCurrentIndex(galleryStartIndex);
-    else if (tab === "before-after") setCurrentIndex(beforeAfterStartIndex);
-    else if (tab === "video") setCurrentIndex(videoStartIndex);
+    if (tab === "gallery") selectMedia(galleryStartIndex);
+    else if (tab === "before-after") selectMedia(beforeAfterStartIndex);
+    else if (tab === "video") selectMedia(videoStartIndex);
   };
 
   // Continuous linear navigation across all items
   const goNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % allMediaItems.length);
-  }, [allMediaItems.length]);
+    if (isMask) selectMedia((requestedIndexRef.current + 1) % allMediaItems.length);
+    else setCurrentIndex((prev) => (prev + 1) % allMediaItems.length);
+  }, [allMediaItems.length, isMask, selectMedia]);
 
   const goPrev = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + allMediaItems.length) % allMediaItems.length);
-  }, [allMediaItems.length]);
+    if (isMask) selectMedia((requestedIndexRef.current - 1 + allMediaItems.length) % allMediaItems.length);
+    else setCurrentIndex((prev) => (prev - 1 + allMediaItems.length) % allMediaItems.length);
+  }, [allMediaItems.length, isMask, selectMedia]);
 
   // Lightbox opening (for both images and video)
   const openLightbox = useCallback(() => {
-    setIsLightboxOpen(true);
+    const item = allMediaItems[currentIndex];
+    if (!isMask || !isGalleryImage(item)) {
+      setIsLightboxOpen(true);
+      return;
+    }
+    const request = ++navigationRequestRef.current;
+    requestedIndexRef.current = currentIndex;
+    setPendingIndex(currentIndex);
+    void preloadMaskImage(item.src, true, "high").then(() => {
+      if (request !== navigationRequestRef.current) return;
+      setPendingIndex(null);
+      setIsLightboxOpen(true);
+    }).catch(() => {
+      if (request === navigationRequestRef.current) setPendingIndex(null);
+    });
+  }, [allMediaItems, currentIndex, isMask, preloadMaskImage]);
+
+  const closeLightbox = useCallback(() => {
+    navigationRequestRef.current += 1;
+    requestedIndexRef.current = displayedIndexRef.current;
+    setPendingIndex(null);
+    setIsLightboxOpen(false);
   }, []);
 
   const toggleVideoPlay = useCallback(() => {
@@ -303,7 +453,7 @@ export function OmniluxProductGallery({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") goNext();
       if (e.key === "ArrowLeft") goPrev();
-      if (e.key === "Escape") setIsLightboxOpen(false);
+      if (e.key === "Escape") closeLightbox();
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -312,7 +462,7 @@ export function OmniluxProductGallery({
       document.removeEventListener("keydown", handleKeyDown);
       previousActiveElementRef.current?.focus();
     };
-  }, [goNext, goPrev, isLightboxOpen]);
+  }, [closeLightbox, goNext, goPrev, isLightboxOpen]);
 
   // Mobile swipe gestures
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -1110,7 +1260,7 @@ export function OmniluxProductGallery({
                 className={`omni-thumb-item ${
                   idx === currentIndex ? "omni-thumb-item--active" : ""
                 }`}
-                onClick={() => setCurrentIndex(idx)}
+                onClick={() => selectMedia(idx)}
               >
                 {item.type === "video" || item.src.endsWith(".mp4") || item.src.endsWith(".webm") ? (
                   <>
@@ -1136,7 +1286,7 @@ export function OmniluxProductGallery({
                     sizes="90px"
                     decoding="async"
                     fetchPriority="low"
-                    loading="lazy"
+                    loading={isMask ? "eager" : "lazy"}
                   />
                 )}
               </button>
@@ -1161,6 +1311,7 @@ export function OmniluxProductGallery({
           <div className="omni-stage-row">
             {/* MAIN DISPLAY STAGE WITH ZOOM CURSOR */}
             <div
+              aria-busy={isMask && pendingIndex !== null}
               className={`omni-main-stage ${
                 currentItem.type === "video" ? "" : "omni-main-stage--zoom"
               }`}
@@ -1197,7 +1348,7 @@ export function OmniluxProductGallery({
               )}
               {/* 1. GALLERY IMAGE / VIDEO DISPLAY */}
               {currentItem.type === "gallery" && (
-                <div className="omni-main-img-wrap">
+                <div className="omni-main-img-wrap" key={currentItem.src}>
                   {currentItem.src.endsWith(".mp4") || currentItem.src.endsWith(".webm") ? (
                     <GalleryVideo
                       src={currentItem.src}
@@ -1211,7 +1362,7 @@ export function OmniluxProductGallery({
                       className="omni-main-img"
                       width={1200}
                       height={1200}
-                      sizes="(min-width: 1280px) 520px, (min-width: 1024px) 44vw, calc(100vw - 32px)"
+                      sizes={galleryImageSizes}
                       decoding="async"
                       fetchPriority="high"
                       loading="eager"
@@ -1227,14 +1378,14 @@ export function OmniluxProductGallery({
 
               {/* 2. BEFORE & AFTER DISPLAY (With 3 Bottom Treatment Pills) */}
               {currentItem.type === "before-after" && (
-                <div className="omni-main-img-wrap">
+                <div className="omni-main-img-wrap" key={currentItem.src}>
                   <Image
                     src={currentItem.src}
                     alt={currentItem.alt}
                     className="omni-main-img omni-main-img--contain"
                     width={1200}
                     height={1200}
-                    sizes="(min-width: 1280px) 520px, (min-width: 1024px) 44vw, calc(100vw - 32px)"
+                    sizes={galleryImageSizes}
                     decoding="async"
                     fetchPriority="high"
                     loading="eager"
@@ -1394,19 +1545,19 @@ export function OmniluxProductGallery({
               role="dialog"
               style={{ display: "flex" }}
               onClick={(e) => {
-                if (e.target === e.currentTarget) setIsLightboxOpen(false);
+                if (e.target === e.currentTarget) closeLightbox();
               }}
             >
               <div
                 className="buudyLED-23435t23-lightbox_content"
                 onClick={(e) => {
-                  if (e.target === e.currentTarget) setIsLightboxOpen(false);
+                  if (e.target === e.currentTarget) closeLightbox();
                 }}
               >
                 <button
                   className="buudyLED-23435t23-close"
                   aria-label="Close View"
-                  onClick={() => setIsLightboxOpen(false)}
+                  onClick={closeLightbox}
                   ref={closeButtonRef}
                   type="button"
                 >
@@ -1425,7 +1576,7 @@ export function OmniluxProductGallery({
                   <i className="buudyLED-23435t23-icon buudyLED-23435t23-icon_left" />
                 </button>
 
-                <div className="buudyLED-23435t23-lightbox_stage">
+                <div className="buudyLED-23435t23-lightbox_stage" key={currentItem.src}>
                   {currentItem.type === "video" || currentItem.src.endsWith(".mp4") || currentItem.src.endsWith(".webm") ? (
                     <video
                       className="buudyLED-23435t23-lightbox_img"

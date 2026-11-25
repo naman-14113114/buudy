@@ -129,7 +129,8 @@ export function CleanserClinicalResults() {
                 ref={(el) => {
                   statRefs.current[idx] = el;
                 }}
-                className="flex items-center gap-3.5 sm:gap-4 rounded-[18px] border border-[rgba(58,31,61,.08)] bg-[var(--card)] py-3 px-3.5 sm:py-3.5 sm:px-4 shadow-sm transition-all duration-300 hover:shadow-md hover:border-[rgba(58,31,61,.18)]"
+                data-percentage-card
+                className="flex items-center gap-3.5 sm:gap-4 rounded-[18px] border border-[rgba(58,31,61,.08)] bg-white py-3 px-3.5 sm:py-3.5 sm:px-4 shadow-sm transition-all duration-300 hover:shadow-md hover:border-[rgba(58,31,61,.18)]"
               >
                 {/* Miroooo-Style Circular Progress Ring */}
                 <div

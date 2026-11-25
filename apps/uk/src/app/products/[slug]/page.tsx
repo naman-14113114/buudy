@@ -281,7 +281,12 @@ export default async function ProductRoute({ params }: PageProps) {
           type="application/ld+json"
         />
       ))}
-      <ProductPage product={product} isHalloween={false} isEarlyBlackFriday={true} />
+      <ProductPage
+        product={product}
+        isHalloween={false}
+        isEarlyBlackFriday={true}
+        hyaluronicEditorial={slug === "buudy-light-activating-hyaluronic-serum"}
+      />
     </>
   );
 }

@@ -1,0 +1,121 @@
+.editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  --section-gap: clamp(3.5rem, 6vw, 5.5rem);
+  row-gap: var(--section-gap);
+  padding-block: clamp(1rem, 2.5vw, 2rem) clamp(3.5rem, 6vw, 5.5rem);
+  background: var(--cream);
+}
+
+.editorial > section {
+  min-width: 0;
+  padding-block: 0;
+  border: 0;
+}
+
+.editorial > section:not([class~="bg-white"]) {
+  background: inherit;
+}
+
+.editorial > section[class~="bg-white"] {
+  background-color: #ffffff !important;
+  padding-block: clamp(3rem, 5vw, 4.5rem);
+}
+
+.editorial > section h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.editorial > section :global(#hyaluronic-how-to-use),
+.editorial > section :global(#peptide-how-to-use),
+.editorial > section :global(#aha-how-to-use),
+.editorial > section :global(#renewal-how-to-use) {
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
+}
+
+.editorial > section p:global(.buudy-mono) {
+  color: var(--plum-soft);
+}
+
+.editorial [data-story-card],
+.editorial [data-percentage-card] {
+  background-color: #ffffff !important;
+}
+
+.editorial > :global(#product-signals) {
+  margin-block: 0;
+  overflow: hidden;
+  background: var(--plum);
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  height: 50px;
+  max-height: 50px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.signalsTrack {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  height: 100%;
+  animation: signalsScroll 28s linear infinite;
+  will-change: transform;
+}
+
+.signalsGroup {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: clamp(2rem, 3.5vw, 3.5rem);
+  padding: 0 calc(clamp(2rem, 3.5vw, 3.5rem) / 2);
+  height: 100%;
+  margin: 0;
+}
+
+.editorial > :global(#product-signals):is(:hover, :focus-visible) .signalsTrack {
+  animation-play-state: running !important;
+}
+
+@keyframes signalsScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-25%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial > :global(#product-signals) {
+    height: auto;
+    min-height: 52px;
+    padding-block: 0.5rem;
+  }
+
+  .signalsTrack {
+    width: 100%;
+    height: auto;
+    animation: none;
+  }
+
+  .signalsGroup {
+    width: 100%;
+    min-width: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+    height: auto;
+    padding: 0.25rem 1rem;
+  }
+
+  .signalsGroup[aria-hidden="true"] {
+    display: none;
+  }
+}

@@ -909,12 +909,12 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
   {
     "orderId": "1193901880783962112",
     "paymentId": "pay_E5JRd3xCn76O8n",
-    "name": "Me",
-    "firstName": "Me",
-    "lastName": "",
-    "email": null,
+    "name": "Neil Webber",
+    "firstName": "Neil",
+    "lastName": "Webber",
+    "email": "neilwebber@rocketmail.com",
     "postcode": "B63 4LS",
-    "address": "Halesowen",
+    "address": "51 Belbroughton Rd, Halesowen",
     "city": "Halesowen",
     "status": 1,
     "statusStr": "Processing",
@@ -1001,11 +1001,11 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "postcode": "CW3 0JB",
     "address": "Green Court, Hall Lane, HANKELOW  CREWE  CHESHIRE",
     "city": "HANKELOW  CREWE  CHESHIRE",
-    "status": 1,
-    "statusStr": "waitPayment",
-    "carrier": "Royal Mail Tracked",
-    "trackingNumber": "YT2632100715210035",
-    "initialTracking": null,
+    "status": 4,
+    "statusStr": "pendingReceipt",
+    "carrier": "Royal Mail Tracked 48",
+    "trackingNumber": "QP424242767GB",
+    "initialTracking": "YT2632100715210035",
     "crtTime": "2026-11-16 18:19:09"
   },
   {
@@ -1018,11 +1018,11 @@ export const VERIFIED_BUUDY_ORDERS: VerifiedOrderRecord[] = [
     "postcode": "WR11 3JR",
     "address": "5 Lambourne Close, Evesham",
     "city": "Evesham",
-    "status": 2,
-    "statusStr": "purchase",
+    "status": 4,
+    "statusStr": "pendingReceipt",
     "carrier": "EVRI",
     "trackingNumber": "H00RVA0573472525",
-    "initialTracking": null,
+    "initialTracking": "YT2632100701576415",
     "crtTime": "2026-11-15 22:42:01"
   },
   {
@@ -1929,7 +1929,7 @@ async function buildVerifiedTrackingData(order: VerifiedOrderRecord): Promise<Tr
     }
 
     const latestEvent = liveEvents[0]; // liveEvents is sorted newest first by buildCarrierEvents
-    const isDelivered = latestEvent.stage === 'DELIVERED' || /delivered/i.test(latestEvent.title);
+    const isDelivered = latestEvent.stage === 'DELIVERED' || (/delivered/i.test(latestEvent.title) && !/local carrier|courier partner|facility/i.test(latestEvent.title));
     const isOutForDelivery = latestEvent.stage === 'OUT_FOR_DELIVERY' || /out for delivery|with delivery courier|postal carrier/i.test(latestEvent.title);
 
     if (isDelivered) {

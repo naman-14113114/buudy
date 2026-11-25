@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 import loadingLottie from "@/components/cart/loading-lottie.json";
 import {
+  BadgeCheck,
   BatteryCharging,
   Clock,
   ShieldCheck,
@@ -19,7 +20,9 @@ import {
   CircleDot,
   Bandage,
   Umbrella,
+  Droplet,
   Droplets,
+  Feather,
   Leaf,
   Layers,
   Heart,
@@ -274,14 +277,361 @@ const keyBenefitIcons = [
   Waves,
 ];
 
+const hyaluronicEditorialBenefits = [
+  { text: "Helps skin look plump and feel hydrated", icon: Droplet },
+  { text: "Light gel with a fresh, natural finish", icon: Feather },
+  { text: "Layers easily into your AM and PM routine", icon: Sun },
+  { text: "COSMOS Natural certified by ECOCERT", icon: BadgeCheck },
+];
+
+export interface ProtocolTier {
+  tier: number;
+  label: string;
+  subtitle: string;
+  price: number;
+  compareAt: number;
+  priceCents: number;
+  compareAtCents: number;
+  badge: "MOST POPULAR" | "BEST VALUE" | null;
+  details: string;
+  savingsText: string | null;
+}
+
+export function getProductProtocolTiers(product: Product): ProtocolTier[] | null {
+  const isSimplified =
+    product.template === "serum" ||
+    product.template === "cleanser" ||
+    product.slug === "double-hydration-boost-gel" ||
+    product.slug === "buudy-double-hydration-boost-gel" ||
+    product.id === "buudy-light-activating-hyaluronic-serum" ||
+    product.slug === "the-ultimate-renewal-collection-box" ||
+    product.id === "the-ultimate-renewal-collection-box" ||
+    product.slug.includes("aha") ||
+    product.id.includes("aha") ||
+    product.id.includes("peptide") ||
+    product.slug.includes("peptide") ||
+    product.slug.includes("eye") ||
+    product.id.includes("eye") ||
+    product.slug.includes("collagen") ||
+    product.slug.includes("duo") ||
+    product.slug.includes("box") ||
+    product.slug.includes("collection");
+
+  if (!isSimplified) {
+    return null;
+  }
+
+  const slug = product.slug || "";
+  const id = product.id || "";
+  const isBox = slug.includes("collection") || slug.includes("box") || slug.includes("duo");
+
+  if (isBox) {
+    if (slug.includes("duo")) {
+      return [
+        {
+          tier: 1,
+          label: "BUY 1",
+          subtitle: "1 Duo Gift Box (2 x 30ml) · 2-Step Cellular Hydration",
+          price: 199,
+          compareAt: 399,
+          priceCents: 19900,
+          compareAtCents: 39900,
+          badge: null,
+          details: "$199.00 each",
+          savingsText: null,
+        },
+        {
+          tier: 2,
+          label: "BUY 2",
+          subtitle: "2 Duo Gift Boxes (4 x 30ml) · Extended 120-Day Protocol",
+          price: 349,
+          compareAt: 798,
+          priceCents: 34900,
+          compareAtCents: 79800,
+          badge: "MOST POPULAR",
+          details: "$174.50 each",
+          savingsText: "Save $449",
+        },
+        {
+          tier: 3,
+          label: "BUY 3",
+          subtitle: "3 Duo Gift Boxes (6 x 30ml) · Year-Round Hydration & Gifting",
+          price: 449,
+          compareAt: 1197,
+          priceCents: 44900,
+          compareAtCents: 119700,
+          badge: "BEST VALUE",
+          details: "$149.67 each",
+          savingsText: "Save $748",
+        },
+      ];
+    }
+    if (slug.includes("peptide")) {
+      return [
+        {
+          tier: 1,
+          label: "BUY 1",
+          subtitle: "1 Collection Box (3-Step Trio) · Full Anti-Age Protocol",
+          price: 199,
+          compareAt: 399,
+          priceCents: 19900,
+          compareAtCents: 39900,
+          badge: null,
+          details: "$199.00 each",
+          savingsText: null,
+        },
+        {
+          tier: 2,
+          label: "BUY 2",
+          subtitle: "2 Collection Boxes · Extended 180-Day Firming Protocol",
+          price: 349,
+          compareAt: 798,
+          priceCents: 34900,
+          compareAtCents: 79800,
+          badge: "MOST POPULAR",
+          details: "$174.50 each",
+          savingsText: "Save $449",
+        },
+        {
+          tier: 3,
+          label: "BUY 3",
+          subtitle: "3 Collection Boxes · Ultimate Luxury Gifting & Year-Round Care",
+          price: 449,
+          compareAt: 1197,
+          priceCents: 44900,
+          compareAtCents: 119700,
+          badge: "BEST VALUE",
+          details: "$149.67 each",
+          savingsText: "Save $748",
+        },
+      ];
+    }
+    return [
+      {
+        tier: 1,
+        label: "BUY 1",
+        subtitle: "1 Collection Box (3 x 30ml) · Complete Renewal Trilogy",
+        price: 199,
+        compareAt: 249,
+        priceCents: 19900,
+        compareAtCents: 24900,
+        badge: null,
+        details: "$199.00 each",
+        savingsText: null,
+      },
+      {
+        tier: 2,
+        label: "BUY 2",
+        subtitle: "2 Collection Boxes (6 x 30ml) · Continuous Renewal Protocol",
+        price: 349,
+        compareAt: 498,
+        priceCents: 34900,
+        compareAtCents: 49800,
+        badge: "MOST POPULAR",
+        details: "$174.50 each",
+        savingsText: "Save $149",
+      },
+      {
+        tier: 3,
+        label: "BUY 3",
+        subtitle: "3 Collection Boxes (9 x 30ml) · Luxury Gifting & Year-Round Care",
+        price: 449,
+        compareAt: 747,
+        priceCents: 44900,
+        compareAtCents: 74700,
+        badge: "BEST VALUE",
+        details: "$149.67 each",
+        savingsText: "Save $298",
+      },
+    ];
+  }
+
+  const isEyeCream = slug.includes("eye-cream") || slug.includes("eye");
+  const isCream = (slug.includes("cream") || id.includes("cream")) && !isEyeCream;
+  const isFaceWash = slug.includes("face-wash") || slug.includes("wash") || product.template === "cleanser";
+
+  if (isEyeCream) {
+    return [
+      {
+        tier: 1,
+        label: "BUY 1",
+        subtitle: "1 Tube (15ml) · Daily Eye Contour Care",
+        price: 99,
+        compareAt: 119,
+        priceCents: 9900,
+        compareAtCents: 11900,
+        badge: null,
+        details: "$99.00 each",
+        savingsText: null,
+      },
+      {
+        tier: 3,
+        label: "BUY 3",
+        subtitle: "3 Tubes (45ml) · Full 90-Day Protocol",
+        price: 249,
+        compareAt: 357,
+        priceCents: 24900,
+        compareAtCents: 35700,
+        badge: "MOST POPULAR",
+        details: "$83.00 each",
+        savingsText: "Save $108",
+      },
+      {
+        tier: 6,
+        label: "BUY 6",
+        subtitle: "6 Tubes (90ml) · 6-Month Protocol",
+        price: 399,
+        compareAt: 714,
+        priceCents: 39900,
+        compareAtCents: 71400,
+        badge: "BEST VALUE",
+        details: "$66.50 each",
+        savingsText: "Save $315",
+      },
+    ];
+  }
+
+  if (isCream) {
+    return [
+      {
+        tier: 1,
+        label: "BUY 1",
+        subtitle: "1 Jar (50ml) · Daily Restorative Care",
+        price: 99,
+        compareAt: 119,
+        priceCents: 9900,
+        compareAtCents: 11900,
+        badge: null,
+        details: "$99.00 each",
+        savingsText: null,
+      },
+      {
+        tier: 3,
+        label: "BUY 3",
+        subtitle: "3 Jars (150ml) · Full 90-Day Protocol",
+        price: 249,
+        compareAt: 357,
+        priceCents: 24900,
+        compareAtCents: 35700,
+        badge: "MOST POPULAR",
+        details: "$83.00 each",
+        savingsText: "Save $108",
+      },
+      {
+        tier: 6,
+        label: "BUY 6",
+        subtitle: "6 Jars (300ml) · 6-Month Protocol",
+        price: 399,
+        compareAt: 714,
+        priceCents: 39900,
+        compareAtCents: 71400,
+        badge: "BEST VALUE",
+        details: "$66.50 each",
+        savingsText: "Save $315",
+      },
+    ];
+  }
+
+  if (isFaceWash) {
+    return [
+      {
+        tier: 1,
+        label: "BUY 1",
+        subtitle: "1 Bottle (140ml) · Daily Purifying & Balancing",
+        price: 99,
+        compareAt: 119,
+        priceCents: 9900,
+        compareAtCents: 11900,
+        badge: null,
+        details: "$99.00 each",
+        savingsText: null,
+      },
+      {
+        tier: 3,
+        label: "BUY 3",
+        subtitle: "3 Bottles (420ml) · Full 90-Day Protocol",
+        price: 249,
+        compareAt: 357,
+        priceCents: 24900,
+        compareAtCents: 35700,
+        badge: "MOST POPULAR",
+        details: "$83.00 each",
+        savingsText: "Save $108",
+      },
+      {
+        tier: 6,
+        label: "BUY 6",
+        subtitle: "6 Bottles (840ml) · 6-Month Protocol",
+        price: 399,
+        compareAt: 714,
+        priceCents: 39900,
+        compareAtCents: 71400,
+        badge: "BEST VALUE",
+        details: "$66.50 each",
+        savingsText: "Save $315",
+      },
+    ];
+  }
+
+  // All 30ml Serums
+  let tier1Action = "Daily Hydration";
+  if (slug.includes("peptide")) tier1Action = "Post-Light Collagen Lock";
+  else if (slug.includes("prebiotic")) tier1Action = "Microbiome & Barrier Balance";
+  else if (slug.includes("aha")) tier1Action = "Overnight Cellular Resurfacing";
+  else if (slug.includes("retinol")) tier1Action = "LED-Safe Night Cellular Renewal";
+  else if (slug.includes("niacinamide")) tier1Action = "Blemish Defence & Pore Control";
+  else if (slug.includes("hydrating")) tier1Action = "Intensive Moisture & Barrier Care";
+
+  return [
+    {
+      tier: 1,
+      label: "BUY 1",
+      subtitle: `1 Bottle (30ml) · ${tier1Action}`,
+      price: 99,
+      compareAt: 119,
+      priceCents: 9900,
+      compareAtCents: 11900,
+      badge: null,
+      details: "$99.00 each",
+      savingsText: null,
+    },
+    {
+      tier: 3,
+      label: "BUY 3",
+      subtitle: "3 Bottles (90ml) · Full 90-Day Protocol",
+      price: 249,
+      compareAt: 357,
+      priceCents: 24900,
+      compareAtCents: 35700,
+      badge: "MOST POPULAR",
+      details: "$83.00 each",
+      savingsText: "Save $108",
+    },
+    {
+      tier: 6,
+      label: "BUY 6",
+      subtitle: "6 Bottles (180ml) · 6-Month Protocol",
+      price: 399,
+      compareAt: 714,
+      priceCents: 39900,
+      compareAtCents: 71400,
+      badge: "BEST VALUE",
+      details: "$66.50 each",
+      savingsText: "Save $315",
+    },
+  ];
+}
+
 export function GiftBundle({
   product,
   isHalloween = false,
   isEarlyBlackFriday = true,
+  hyaluronicEditorial = false,
 }: {
   product: Product;
   isHalloween?: boolean;
   isEarlyBlackFriday?: boolean;
+  hyaluronicEditorial?: boolean;
 }) {
   const { addProduct } = useCart();
   const router = useRouter();
@@ -349,6 +699,18 @@ export function GiftBundle({
     0,
   );
   const hasGifts = product.gifts.length > 0;
+  const isHyaluronic =
+    product.id === "buudy-light-activating-hyaluronic-serum" ||
+    product.slug === "buudy-light-activating-hyaluronic-serum" ||
+    Boolean(product.slug && product.slug.includes("hyaluronic"));
+
+  const protocolTiers = getProductProtocolTiers(product);
+  const showProtocolTiers = Boolean(protocolTiers && protocolTiers.length > 0);
+
+  const [selectedTier, setSelectedTier] = useState<number>(protocolTiers?.[0]?.tier ?? 1);
+  const currentTierData =
+    protocolTiers?.find((t) => t.tier === selectedTier) ?? protocolTiers?.[0];
+
   const isSimplifiedProduct =
     product.template === "serum" ||
     product.template === "cleanser" ||
@@ -369,9 +731,12 @@ export function GiftBundle({
     ? `ADD TO CART + ${product.gifts.length} FREE GIFTS`
     : "Add to cart";
 
-  const benefitList = product.keyBenefits ?? product.highlights;
-  const benefitIcons =
-    product.template === "mask"
+  const benefitList = isHyaluronic && hyaluronicEditorial
+    ? hyaluronicEditorialBenefits.map(({ text }) => text)
+    : product.keyBenefits ?? product.highlights;
+  const benefitIcons = isHyaluronic && hyaluronicEditorial
+    ? hyaluronicEditorialBenefits.map(({ icon }) => icon)
+    : product.template === "mask"
       ? benefitList.map((_, i) => keyBenefitIcons[i % keyBenefitIcons.length])
       : getDistinctBenefitIcons(benefitList);
   return (
@@ -448,16 +813,18 @@ export function GiftBundle({
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <Price
-          compareAtCents={product.compareAtCents}
+          compareAtCents={currentTierData ? currentTierData.compareAtCents : product.compareAtCents}
           currency={product.currency}
-          priceCents={product.priceCents}
+          priceCents={currentTierData ? currentTierData.priceCents : product.priceCents}
           hideDiscount={isHalloween || isEarlyBlackFriday}
         />
         {isHalloween && <HalloweenSaleBadge />}
         {isEarlyBlackFriday && (
           <EarlyBlackFridaySaleBadge
             discountText={
-              product.compareAtCents && (product.template === "serum" || product.template === "cleanser")
+              currentTierData
+                ? `${percentOff(currentTierData.priceCents, currentTierData.compareAtCents)}% OFF`
+                : product.compareAtCents && (product.template === "serum" || product.template === "cleanser")
                 ? `${percentOff(product.priceCents, product.compareAtCents)}% OFF`
                 : undefined
             }
@@ -531,13 +898,238 @@ export function GiftBundle({
         </div>
       </div>
 
+      {/* 3-Tier Bundle Offer for Serums, Creams, and Collection Boxes */}
+      {showProtocolTiers && protocolTiers && (
+        <div className="mt-5 mb-2">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="h-px flex-1 bg-[rgba(58,31,61,.15)]" />
+            <span className="font-bold uppercase text-[12px] sm:text-[13px] tracking-[0.12em] text-[var(--plum)]/80">
+              CHOOSE YOUR PROTOCOL
+            </span>
+            <span className="h-px flex-1 bg-[rgba(58,31,61,.15)]" />
+          </div>
+
+          <div
+            className="flex flex-col gap-3"
+            role="radiogroup"
+            aria-label="Choose your protocol bundle"
+            onKeyDown={(event) => {
+              const tiers = protocolTiers.map((t) => t.tier);
+              const direction = ["ArrowRight", "ArrowDown"].includes(event.key)
+                ? 1
+                : ["ArrowLeft", "ArrowUp"].includes(event.key)
+                ? -1
+                : 0;
+              if (!direction) return;
+              event.preventDefault();
+              const nextIndex =
+                (tiers.indexOf(selectedTier) + direction + tiers.length) %
+                tiers.length;
+              setSelectedTier(tiers[nextIndex]);
+              event.currentTarget
+                .querySelectorAll<HTMLButtonElement>('[role="radio"]')
+                [nextIndex]?.focus();
+            }}
+          >
+            {protocolTiers.map((tierItem) => {
+              const isSelected = selectedTier === tierItem.tier;
+              return (
+                <div
+                  key={tierItem.tier}
+                  className={`relative flex flex-col rounded-2xl transition-all duration-200 cursor-pointer ${
+                    isSelected
+                      ? "border-2 border-[var(--plum)] bg-[var(--card)] shadow-[0_4px_18px_rgba(58,31,61,0.12)]"
+                      : "border border-[rgba(58,31,61,0.2)] bg-[var(--card)] hover:border-[rgba(58,31,61,0.4)]"
+                  }`}
+                  onClick={() => setSelectedTier(tierItem.tier)}
+                >
+                  {tierItem.badge === "MOST POPULAR" && (
+                    <div
+                      className="tier-popular-badge-wrap badge-popular"
+                      style={{
+                        position: "absolute",
+                        top: "-16px",
+                        right: "0px",
+                        zIndex: 20,
+                        pointerEvents: "none",
+                      }}
+                    >
+                      <div
+                        className="tier-popular-seal"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          filter: "drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4))",
+                        }}
+                      >
+                        <svg
+                          width="84"
+                          height="53"
+                          viewBox="0 0 90 56"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M 85.0 28.0 Q 80.2 31.2 83.0 35.1 Q 76.8 37.3 77.4 41.5 Q 70.2 42.5 68.5 46.6 Q 61.2 46.3 57.4 49.9 Q 50.6 48.2 45.0 51.0 Q 39.4 48.2 32.6 49.9 Q 28.8 46.3 21.5 46.6 Q 19.8 42.5 12.6 41.5 Q 13.2 37.3 7.0 35.1 Q 9.8 31.2 5.0 28.0 Q 9.8 24.8 7.0 20.9 Q 13.2 18.7 12.6 14.5 Q 19.8 13.5 21.5 9.4 Q 28.8 9.7 32.6 6.1 Q 39.4 7.8 45.0 5.0 Q 50.6 7.8 57.4 6.1 Q 61.2 9.7 68.5 9.4 Q 70.2 13.5 77.4 14.5 Q 76.8 18.7 83.0 20.9 Q 80.2 24.8 85.0 28.0 Z"
+                            fill="#22c55e"
+                          />
+                          <ellipse
+                            cx="45"
+                            cy="28"
+                            rx="34"
+                            ry="18.5"
+                            stroke="rgba(255, 255, 255, 0.45)"
+                            strokeWidth="0.9"
+                            strokeDasharray="2 1.5"
+                            fill="none"
+                          />
+                          <text
+                            x="45"
+                            y="23"
+                            textAnchor="middle"
+                            fill="#ffffff"
+                            fontFamily="'Playfair Display', Georgia, serif"
+                            fontSize="12.5"
+                            fontStyle="italic"
+                            fontWeight="600"
+                            letterSpacing="0.3"
+                          >
+                            Most
+                          </text>
+                          <text
+                            x="45"
+                            y="37.5"
+                            textAnchor="middle"
+                            fill="#ffffff"
+                            fontFamily="'Inter', -apple-system, sans-serif"
+                            fontSize="11"
+                            fontWeight="800"
+                            letterSpacing="0.5"
+                          >
+                            Popular
+                          </text>
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+
+                  {tierItem.badge === "BEST VALUE" && (
+                    <div
+                      className="tier-best-value-wrap badge-value"
+                      style={{
+                        position: "absolute",
+                        top: "-11px",
+                        right: "10px",
+                        zIndex: 20,
+                        pointerEvents: "none",
+                      }}
+                    >
+                      <div
+                        className="tier-best-value-ribbon"
+                        style={{
+                          borderRadius: "4px",
+                          background: "#22c55e",
+                          padding: "4px 10px",
+                          fontSize: "11.5px",
+                          fontWeight: 800,
+                          textTransform: "uppercase",
+                          letterSpacing: "0.04em",
+                          color: "#ffffff",
+                          boxShadow: "0 2px 6px rgba(0, 0, 0, 0.3)",
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        BEST VALUE
+                      </div>
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={isSelected}
+                    tabIndex={isSelected ? 0 : -1}
+                    aria-label={`Select ${tierItem.label} - $${tierItem.price}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedTier(tierItem.tier);
+                    }}
+                    className={`flex items-center justify-between gap-2.5 sm:gap-3.5 p-3.5 sm:p-4 w-full text-left bg-transparent border-0 cursor-pointer font-inherit box-border ${
+                      tierItem.badge ? "pt-4 sm:pt-4" : ""
+                    }`}
+                  >
+                    {/* Left: Radio + Label + Subtitle */}
+                    <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                      <div
+                        className={`h-5 w-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
+                          isSelected
+                            ? "border-[var(--plum)] bg-white"
+                            : "border-[rgba(58,31,61,0.35)] bg-white"
+                        }`}
+                      >
+                        {isSelected && (
+                          <div className="h-2.5 w-2.5 rounded-full bg-[var(--plum)]" />
+                        )}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-[14px] sm:text-[15px] uppercase tracking-wide text-[var(--plum)] leading-none">
+                            {tierItem.label}
+                          </span>
+                        </div>
+                        <p className="text-xs sm:text-[13px] text-[var(--plum)]/75 mt-1 leading-snug m-0">
+                          {tierItem.subtitle}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Right: Prices + Details */}
+                    <div
+                      className="text-right flex flex-col items-end justify-center shrink-0 pl-1"
+                      style={
+                        tierItem.badge === "MOST POPULAR"
+                          ? { marginTop: "14px" }
+                          : tierItem.badge === "BEST VALUE"
+                          ? { marginTop: "12px" }
+                          : undefined
+                      }
+                    >
+                      <div className="flex items-baseline gap-1.5 justify-end">
+                        <span className="font-bold text-base sm:text-lg text-[var(--plum)] leading-none">
+                          ${tierItem.price}
+                        </span>
+                        <span className="text-xs sm:text-[13px] text-[var(--muted)]/80 line-through leading-none">
+                          ${tierItem.compareAt}
+                        </span>
+                      </div>
+                      <div className="mt-1 leading-tight text-[11.5px] sm:text-xs">
+                        {tierItem.savingsText ? (
+                          <span className="text-[var(--plum)]/80">
+                            {tierItem.details} · <span className="font-semibold text-[#16a34a]">{tierItem.savingsText}</span>
+                          </span>
+                        ) : (
+                          <span className="text-[var(--muted)]">
+                            {tierItem.details}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <Button
         className={`proxy-bundle-btn relative overflow-hidden mt-5 w-full rounded-[30px] border border-[var(--plum)] bg-[var(--plum)] py-4 text-xl font-bold uppercase tracking-wide text-[var(--cream)] shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[var(--gold)] hover:bg-[var(--plum)] active:scale-[0.98] sm:text-[22px] ${isAdding ? "disabled:!opacity-100" : ""}`}
         disabled={isAdding}
         id="hero-cta"
         onClick={() => {
           setIsAdding(true);
-          addProduct(product);
+          addProduct(product, currentTierData ? currentTierData.tier : 1);
           router.push(
             appendAttributionToPath(
               "/cart",
@@ -561,6 +1153,66 @@ export function GiftBundle({
           </span>
         )}
       </Button>
+
+      {/* Certifications row directly below Add to Cart in ONE LINE with text color var(--plum) */}
+      {showProtocolTiers && (
+        <div className="mt-5 grid grid-cols-3 items-center justify-items-center w-full px-2 sm:px-4 py-2">
+          <div
+            title="FDA Registered"
+            aria-label="FDA Registered"
+            className="shrink-0"
+            style={{
+              width: "62px",
+              height: "39px",
+              maskImage: "url(/images/certifications/fda-registered.svg)",
+              WebkitMaskImage: "url(/images/certifications/fda-registered.svg)",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              backgroundColor: "var(--plum)",
+            }}
+          />
+          <div
+            title="Certified B Corporation"
+            aria-label="Certified B Corporation"
+            className="shrink-0"
+            style={{
+              width: "43px",
+              height: "62px",
+              maskImage: "url(/images/certifications/b-corp.svg)",
+              WebkitMaskImage: "url(/images/certifications/b-corp.svg)",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              backgroundColor: "var(--plum)",
+            }}
+          />
+          <div
+            title="Good Manufacturing Practice"
+            aria-label="Good Manufacturing Practice"
+            className="shrink-0"
+            style={{
+              width: "60px",
+              height: "60px",
+              maskImage: "url(/images/certifications/gmp-certified.svg)",
+              WebkitMaskImage: "url(/images/certifications/gmp-certified.svg)",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              backgroundColor: "var(--plum)",
+            }}
+          />
+        </div>
+      )}
 
       {/* Benefits Grid Row (Mask Only) */}
       {product.id === "buudy-led-mask" && (
@@ -691,7 +1343,7 @@ export function GiftBundle({
           </p>
         </section> */}
 
-      <ProductDetailsAccordion product={product} />
+      <ProductDetailsAccordion product={product} showProductSignals={!hyaluronicEditorial} />
     </div>
   );
 }

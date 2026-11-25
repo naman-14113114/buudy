@@ -5,6 +5,68 @@ import Image from "next/image";
 import Link from "next/link";
 import { aboutHero, aboutSections } from "@/data/about";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { openTawkChat } from "@/lib/tawk";
+
+function renderBulletItem(boldPart: string, rest: string) {
+  const label = boldPart.trim().toLowerCase();
+  const text = rest.trim();
+
+  if (label.includes("email")) {
+    return (
+      <a
+        className="group inline-flex items-baseline underline-offset-2 transition-colors"
+        href={`mailto:${text}`}
+      >
+        <strong className="text-[var(--plum)] font-semibold group-hover:text-[var(--gold)] transition-colors">
+          {boldPart}:
+        </strong>
+        <span className="ml-1 underline group-hover:text-[var(--gold)] transition-colors">
+          {text}
+        </span>
+      </a>
+    );
+  }
+
+  if (label.includes("contact")) {
+    return (
+      <Link
+        className="group inline-flex items-baseline underline-offset-2 transition-colors"
+        href="/pages/contact-us#contact-form"
+      >
+        <strong className="text-[var(--plum)] font-semibold group-hover:text-[var(--gold)] transition-colors">
+          {boldPart}:
+        </strong>
+        <span className="ml-1 underline group-hover:text-[var(--gold)] transition-colors">
+          {text}
+        </span>
+      </Link>
+    );
+  }
+
+  if (label.includes("chat")) {
+    return (
+      <button
+        type="button"
+        onClick={openTawkChat}
+        className="group inline-flex items-baseline underline-offset-2 transition-colors cursor-pointer text-left bg-transparent p-0 border-0 font-inherit text-inherit"
+      >
+        <strong className="text-[var(--plum)] font-semibold group-hover:text-[var(--gold)] transition-colors">
+          {boldPart}:
+        </strong>
+        <span className="ml-1 underline group-hover:text-[var(--gold)] transition-colors">
+          {text}
+        </span>
+      </button>
+    );
+  }
+
+  return (
+    <>
+      <strong className="text-[var(--plum)] font-semibold">{boldPart}:</strong>
+      <span className="ml-1">{text}</span>
+    </>
+  );
+}
 
 const storyVideo = {
   src: "/media/about/buudy-uk-our-story-clinical-skincare-led-light-therapy.mp4",
@@ -78,128 +140,6 @@ function AboutStoryVideo({ isRight }: { isRight: boolean }) {
       </div>
     </div>
   );
-}
-
-function openLiveChat() {
-  if (typeof window === "undefined") return;
-  const w = window as any;
-
-  try {
-    window.dispatchEvent(new Event("pointerdown"));
-  } catch (_) {}
-
-  const tryMaximize = () => {
-    if (w.Tawk_API) {
-      if (typeof w.Tawk_API.showWidget === "function") {
-        try {
-          w.Tawk_API.showWidget();
-        } catch (_) {}
-      }
-      if (typeof w.Tawk_API.maximize === "function") {
-        try {
-          w.Tawk_API.maximize();
-          return true;
-        } catch (_) {}
-      }
-    }
-    return false;
-  };
-
-  if (tryMaximize()) {
-    return;
-  }
-
-  w.Tawk_API = w.Tawk_API || {};
-  const prevOnLoad = w.Tawk_API.onLoad;
-  w.Tawk_API.onLoad = function () {
-    if (typeof prevOnLoad === "function") {
-      try {
-        prevOnLoad();
-      } catch (_) {}
-    }
-    tryMaximize();
-  };
-
-  let attempts = 0;
-  const interval = setInterval(() => {
-    attempts++;
-    if (tryMaximize() || attempts > 30) {
-      clearInterval(interval);
-    }
-  }, 150);
-}
-
-function renderBulletContent(boldPart: string, rest: string | undefined, cleanBullet: string) {
-  const norm = boldPart.toLowerCase().trim();
-  const fullNorm = cleanBullet.toLowerCase().trim();
-
-  if (norm === "email") {
-    const emailVal = rest ? rest.trim() : "support@buudy.co.uk";
-    return (
-      <>
-        <strong className="text-[var(--plum)] font-semibold">{boldPart}:</strong>
-        <a
-          className="ml-1 underline underline-offset-2 hover:text-[var(--gold)] transition-colors"
-          href={`mailto:${emailVal}`}
-        >
-          {emailVal}
-        </a>
-      </>
-    );
-  }
-
-  if (norm.includes("contact") || fullNorm.includes("contact")) {
-    return (
-      <Link
-        href="/pages/contact-us#contact-form"
-        className="group/contact inline-flex items-center hover:text-[var(--gold)] transition-colors cursor-pointer"
-      >
-        <strong className="text-[var(--plum)] font-semibold group-hover/contact:text-[var(--gold)] transition-colors">
-          {boldPart}{rest ? ":" : ""}
-        </strong>
-        {rest ? (
-          <span className="ml-1 underline underline-offset-2 group-hover/contact:text-[var(--gold)] transition-colors">
-            {rest.trim()}
-          </span>
-        ) : null}
-      </Link>
-    );
-  }
-
-  if (
-    norm.includes("live chat") ||
-    fullNorm.includes("live chat") ||
-    norm.includes("chat") ||
-    fullNorm.includes("chat")
-  ) {
-    return (
-      <button
-        type="button"
-        onClick={openLiveChat}
-        className="group/chat inline-flex items-center text-left hover:text-[var(--gold)] transition-colors cursor-pointer bg-transparent border-none p-0 font-light text-sm sm:text-base leading-6 text-[var(--muted)]"
-      >
-        <strong className="text-[var(--plum)] font-semibold group-hover/chat:text-[var(--gold)] transition-colors">
-          {boldPart}{rest ? ":" : ""}
-        </strong>
-        {rest ? (
-          <span className="ml-1 underline underline-offset-2 group-hover/chat:text-[var(--gold)] transition-colors">
-            {rest.trim()}
-          </span>
-        ) : null}
-      </button>
-    );
-  }
-
-  if (rest) {
-    return (
-      <>
-        <strong className="text-[var(--plum)] font-semibold">{boldPart}:</strong>
-        <span className="ml-1">{rest.trim()}</span>
-      </>
-    );
-  }
-
-  return cleanBullet;
 }
 
 export function AboutPage() {
@@ -310,13 +250,18 @@ export function AboutPage() {
                           <ul key={pIdx} className="space-y-3 mt-4">
                             {paragraph.split("\n").map((bullet, bIdx) => {
                               const cleanBullet = bullet.replace(/^- /, "").trim();
-                              const [boldPart, rest] = cleanBullet.split(":");
+                              const [boldPart, ...restParts] = cleanBullet.split(":");
+                              const rest = restParts.join(":");
                               
                               return (
                                 <li key={bIdx} className="flex items-start gap-2.5">
                                   <span className="text-[var(--gold)] mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
                                   <span className="text-sm sm:text-base leading-6 text-[var(--muted)]">
-                                    {renderBulletContent(boldPart, rest, cleanBullet)}
+                                    {rest ? (
+                                      renderBulletItem(boldPart, rest)
+                                    ) : (
+                                      cleanBullet
+                                    )}
                                   </span>
                                 </li>
                               );
@@ -367,13 +312,18 @@ export function AboutPage() {
                         <ul key={pIdx} className="space-y-4 mt-8 pt-6 border-t border-[rgba(58,31,61,0.06)]">
                           {paragraph.split("\n").map((bullet, bIdx) => {
                             const cleanBullet = bullet.replace(/^- /, "").trim();
-                            const [boldPart, rest] = cleanBullet.split(":");
+                            const [boldPart, ...restParts] = cleanBullet.split(":");
+                            const rest = restParts.join(":");
                             
                             return (
-                              <li key={bIdx} className="flex items-center gap-3">
-                                <span className="text-[var(--gold)] h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
+                              <li key={bIdx} className="flex items-start sm:items-center gap-3">
+                                <span className="text-[var(--gold)] mt-2 sm:mt-0 h-1.5 w-1.5 rounded-full bg-[var(--gold)] shrink-0" />
                                 <span className="text-sm sm:text-base leading-6 text-[var(--muted)]">
-                                  {renderBulletContent(boldPart, rest, cleanBullet)}
+                                  {rest ? (
+                                    renderBulletItem(boldPart, rest)
+                                  ) : (
+                                    cleanBullet
+                                  )}
                                 </span>
                               </li>
                             );

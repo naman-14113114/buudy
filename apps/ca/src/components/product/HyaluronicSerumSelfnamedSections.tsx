@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useMemo } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -20,10 +20,31 @@ import {
 import { products, type Product } from "@/data/products";
 import { formatMoney } from "@/lib/money";
 import { useCart } from "@/components/cart/CartProvider";
+import { HyaluronicRoutineSteps } from "./HyaluronicRoutineSteps";
 
 // 1. Product In Details (10-Card Carousel)
 function ProductInDetailsCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScroll, setCanScroll] = useState(false);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const checkScrollable = () => {
+      setCanScroll(el.scrollWidth > el.clientWidth + 2);
+    };
+
+    checkScrollable();
+    const ro = new ResizeObserver(() => checkScrollable());
+    ro.observe(el);
+    window.addEventListener("resize", checkScrollable);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", checkScrollable);
+    };
+  }, []);
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -45,7 +66,7 @@ function ProductInDetailsCarousel() {
   ];
 
   return (
-    <section className="buudy-section bg-[var(--cream)] py-12 md:py-18">
+    <section className="buudy-section bg-white py-12 md:py-18">
       <div className="buudy-wrap">
         {/* Header with Navigation Controls */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
@@ -58,35 +79,37 @@ function ProductInDetailsCarousel() {
             </h2>
           </div>
 
-          <div className="flex items-center gap-2 self-end md:self-auto">
-            <button
-              type="button"
-              onClick={() => scroll("left")}
-              aria-label="Previous card"
-              className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              type="button"
-              onClick={() => scroll("right")}
-              aria-label="Next card"
-              className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
+          {canScroll && (
+            <div className="flex items-center gap-2 self-end md:self-auto">
+              <button
+                type="button"
+                onClick={() => scroll("left")}
+                aria-label="Previous card"
+                className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scroll("right")}
+                aria-label="Next card"
+                className="w-10 h-10 rounded-full border border-[rgba(46,16,47,0.15)] bg-white text-[var(--plum)] hover:bg-[var(--plum)] hover:text-white transition-all flex items-center justify-center cursor-pointer shadow-xs active:scale-95"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Carousel Reel */}
         <div
           ref={scrollRef}
-          className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 scrollbar-none snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0"
+          className="flex gap-4 sm:gap-6 overflow-x-auto pt-2 pb-6 md:pb-8 scrollbar-none snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0"
         >
           {detailCards.map((card) => (
             <div
               key={card.num}
-              className="flex-none w-[260px] sm:w-[290px] md:w-[320px] aspect-[320/488] relative rounded-[20px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-sm hover:shadow-md hover:border-[rgba(184,149,86,0.35)] transition-all snap-start"
+              className="flex-none w-[260px] sm:w-[290px] md:w-[320px] aspect-[320/488] relative rounded-[20px] overflow-hidden border border-[rgba(46,16,47,0.08)] bg-white shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-[rgba(184,149,86,0.35)] transition-all duration-300 snap-start"
             >
               <Image
                 src={card.src}
@@ -132,8 +155,15 @@ function ProductFeaturesSection() {
                 Targeted features, <em className="buudy-italic text-[var(--gold)]">engineered for results</em>.
               </h2>
               <p className="mt-3 text-base md:text-lg text-[var(--muted)] leading-relaxed">
-                Formulated with dual-molecular weight hyaluronic acid and physiological Sodium PCA to form a protective moisture-locking cushion that plumps dehydrated dermal tissue.
+                Use your Buudy LED Mask as directed. After your session, smooth on the clear gel before moisturiser. Hyaluronic acid and sodium PCA help keep skin hydrated and looking plump.
               </p>
+              <Link
+                href="/products/buudy-led-mask"
+                className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--plum)] underline underline-offset-4 hover:text-[var(--gold)] transition-colors"
+              >
+                Explore the Buudy LED Mask
+                <ChevronRight aria-hidden="true" size={17} />
+              </Link>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -240,11 +270,11 @@ function CuratedForSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 py-4 pb-6">
           {roles.map((role) => (
             <div
               key={role.title}
-              className="flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] overflow-hidden shadow-xs hover:shadow-lg hover:border-[rgba(184,149,86,0.35)] transition-all"
+              className="flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 hover:border-[rgba(184,149,86,0.35)] transition-all duration-300"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--cream)]">
                 <Image
@@ -255,7 +285,7 @@ function CuratedForSection() {
                   className="object-cover"
                 />
               </div>
-              <div className="p-5 flex flex-col flex-1">
+              <div className="p-5 pb-7 flex flex-col flex-1">
                 <span className="buudy-mono text-xs text-[var(--gold)] font-bold uppercase tracking-wider mb-1.5">
                   {role.subtitle}
                 </span>
@@ -430,11 +460,11 @@ function KeyIngredientsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 py-4 pb-6">
           {ingredients.map((ing) => (
             <div
               key={ing.name}
-              className="flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] p-5 text-center shadow-xs hover:shadow-md hover:border-[rgba(184,149,86,0.35)] transition-all"
+              className="flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] p-5 pb-7 text-center shadow-xs hover:shadow-lg hover:-translate-y-1 hover:border-[rgba(184,149,86,0.35)] transition-all duration-300"
             >
               <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden bg-[var(--cream)] border border-[rgba(46,16,47,0.08)] mb-4">
                 <Image
@@ -531,7 +561,7 @@ export function PackagingSection() {
 }
 
 // 7. How To Use (Horizontal 4-Step Protocol matching Molekulaire style)
-function HowToUseSection() {
+function HyaluronicHowToUseSection({ editorial = false }: { editorial?: boolean }) {
   const steps = [
     {
       num: 1,
@@ -554,6 +584,53 @@ function HowToUseSection() {
       desc: "Layer a moisturiser on top to lock in the actives. Always follow with SPF in the morning.",
     },
   ];
+
+  if (editorial) {
+    return (
+      <section
+        aria-labelledby="hyaluronic-how-to-use"
+        className="buudy-section scroll-mt-24"
+        id="how-to-use"
+      >
+        <div className="buudy-wrap grid items-center gap-7 md:grid-cols-2 md:gap-10 lg:gap-16">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-2xl md:order-last md:aspect-[4/3]">
+            <Image
+              src="/images/products/buudy-serum/buudy-hyaluronic-serum-facial-hydration-glow-model-uk.webp"
+              alt="Buudy Hyaluronic Serum held beside the face"
+              fill
+              sizes="(min-width: 1260px) 560px, (min-width: 768px) 46vw, calc(100vw - 32px)"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h2 id="hyaluronic-how-to-use" className="buudy-display text-[var(--plum)]">
+              How to Use
+            </h2>
+            <p className="mt-3 text-sm text-[var(--muted)] sm:text-base">
+              Follow these simple steps to get the best results
+            </p>
+            <HyaluronicRoutineSteps>
+              {steps.map(({ num, title, desc }) => (
+                <li className="flex items-baseline gap-3 sm:gap-4" key={num}>
+                  <span aria-hidden="true" className="buudy-mono shrink-0 text-[var(--plum-soft)]">
+                    {String(num).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="buudy-display text-xl leading-tight text-[var(--plum)]">
+                      {title}
+                    </h3>
+                    <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">
+                      {desc}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </HyaluronicRoutineSteps>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="buudy-section bg-[var(--cream)] py-14 md:py-20" id="how-to-use">
@@ -603,7 +680,13 @@ function HowToUseSection() {
 }
 
 // 8. Related Products Section (Complete Your Ritual)
-export function RelatedProductsSection({ currentProductId }: { currentProductId?: string }) {
+export function RelatedProductsSection({
+  currentProductId,
+  heading,
+}: {
+  currentProductId?: string;
+  heading?: string;
+}) {
   const { addProduct, openCart } = useCart();
   const [addedId, setAddedId] = useState<string | null>(null);
 
@@ -638,14 +721,16 @@ export function RelatedProductsSection({ currentProductId }: { currentProductId?
             Complete Your Ritual
           </p>
           <h2 className="buudy-display mt-2 text-3xl sm:text-4xl leading-tight text-[var(--plum)]">
-            Pairs well with <em className="buudy-italic text-[var(--gold)]">clinical synergy</em>.
+            {heading ?? (
+              <>Pairs well with <em className="buudy-italic text-[var(--gold)]">clinical synergy</em>.</>
+            )}
           </h2>
           <p className="mt-3 text-base md:text-lg text-[var(--muted)] leading-relaxed">
             Enhance your cellular results. Layer with our phototherapy hardware and peptide collagen firming formulations.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 py-4 pb-6">
           {relatedList.map((product: Product) => {
             const isAdded = addedId === product.id;
             const imageSrc = product.cartImage || product.gallery?.[0]?.src || "/images/placeholder.webp";
@@ -653,7 +738,7 @@ export function RelatedProductsSection({ currentProductId }: { currentProductId?
             return (
               <div
                 key={product.id}
-                className="group flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] overflow-hidden shadow-sm hover:shadow-xl hover:border-[rgba(184,149,86,0.4)] transition-all duration-300"
+                className="group flex flex-col rounded-2xl bg-white border border-[rgba(46,16,47,0.08)] overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[rgba(184,149,86,0.4)] transition-all duration-300"
               >
                 {/* End-to-end Image */}
                 <Link
@@ -670,7 +755,7 @@ export function RelatedProductsSection({ currentProductId }: { currentProductId?
                 </Link>
 
                 {/* Body */}
-                <div className="p-5 flex flex-col flex-1">
+                <div className="p-5 pb-6 flex flex-col flex-1">
                   <span className="buudy-mono text-xs text-[var(--gold)] font-bold uppercase tracking-wider mb-1">
                     {product.template === "mask" ? "LED Phototherapy" : "Clinical Formulation"}
                   </span>
@@ -744,15 +829,16 @@ export function RelatedProductsSection({ currentProductId }: { currentProductId?
 }
 
 // Master Wrapper for all Selfnamed Sections on Hyaluronic Serum Page
-export function HyaluronicSerumSelfnamedSections() {
+export function HyaluronicSerumSelfnamedSections({ routineFirstGrid = false }: { routineFirstGrid?: boolean }) {
   return (
     <>
       <ProductInDetailsCarousel />
+      {routineFirstGrid && <HyaluronicHowToUseSection editorial />}
       <ProductFeaturesSection />
       <CuratedForSection />
       <ProductFormulaSection />
       <KeyIngredientsSection />
-      <HowToUseSection />
+      {!routineFirstGrid && <HyaluronicHowToUseSection />}
     </>
   );
 }

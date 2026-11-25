@@ -1316,9 +1316,25 @@ export function ProductReviewsGrid({
                 <>
                   Buudy LED Torch <em className="buudy-italic">reviews</em>.
                 </>
+              ) : productHandle.includes("aha") || productHandle.includes("peel") ? (
+                <>
+                  Buudy AHA Peeling <em className="buudy-italic">customer reviews</em>.
+                </>
               ) : productHandle.includes("serum") || productHandle.includes("gel") ? (
                 <>
                   Buudy Clinical Serum <em className="buudy-italic">customer reviews</em>.
+                </>
+              ) : productHandle.includes("renewal") || productHandle.includes("collection") || productHandle.includes("box") ? (
+                <>
+                  The Ultimate Renewal Box <em className="buudy-italic">customer reviews</em>.
+                </>
+              ) : productHandle.includes("face-wash") ? (
+                <>
+                  Buudy Purifying Cleanser <em className="buudy-italic">customer reviews</em>.
+                </>
+              ) : productHandle.includes("cream") ? (
+                <>
+                  Buudy Peptide Cream <em className="buudy-italic">customer reviews</em>.
                 </>
               ) : (
                 <>
@@ -1329,8 +1345,14 @@ export function ProductReviewsGrid({
             copy={
               productHandle === "buudy-red-torch"
                 ? "Real feedback from customers who made the Buudy LED Torch part of their daily wellness ritual."
+                : productHandle.includes("aha") || productHandle.includes("peel")
+                ? "Real feedback from customers who incorporated the Buudy AHA Peeling Concentrate into their weekly evening skincare ritual."
                 : productHandle.includes("serum") || productHandle.includes("gel")
                 ? "Real feedback from customers who paired Buudy Clinical Formulations with their phototherapy ritual."
+                : productHandle.includes("renewal") || productHandle.includes("collection") || productHandle.includes("box")
+                ? "Real feedback from customers who incorporated The Ultimate Renewal Collection Box into their weekly skincare ritual."
+                : productHandle.includes("face-wash")
+                ? "Real feedback from customers who made Buudy Blemish Purifying Face Wash part of their daily cleansing ritual."
                 : "Real feedback from customers who made Buudy part of their at-home skincare ritual."
             }
           />

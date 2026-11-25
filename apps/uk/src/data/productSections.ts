@@ -145,9 +145,9 @@ export const peptideSerumFeatures: Feature[] = [
     body: "A plant-derived hydroxyproline amino acid vector that penetrates deep into dermal architecture. It reinforces collagen fibres, inhibits enzymatic degradation of elastin, and visibly lifts and tightens facial contours.",
   },
   {
-    title: "Dual-Action Multi-Molecular HA",
-    kicker: "Multi-Depth Hydration Reservoir",
-    body: "Combines low and high molecular weight hyaluronic acids with Sodium PCA to draw moisture deep into intercellular matrices, replenishing volume and delivering immediate bouncy plumpness.",
+    title: "Plant-Derived Phytosterols & Sodium PCA",
+    kicker: "Cellular Lipid & Moisture Lock",
+    body: "Bio-compatible plant sterols and skin-identical Sodium PCA work in harmony to reinforce the dermal lipid barrier, lock in hydration, and maintain all-day suppleness without heaviness.",
   },
   {
     title: "Organic Blueberry & Ginkgo Biloba",
@@ -401,7 +401,7 @@ export const transformations: Transformation[] = [
 export const serumTransformations: Transformation[] = [
   {
     id: "serum-result-01",
-    image: "/images/products/buudy-serum/transformations/ha-transformation-01.webp",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-01-acne.webp",
     concern: "Dermal Hydration & Fine Line Smoothing",
     title: "Remarkable hydration and line smoothing",
     quote:
@@ -417,7 +417,7 @@ export const serumTransformations: Transformation[] = [
   },
   {
     id: "serum-result-02",
-    image: "/images/products/buudy-serum/transformations/ha-transformation-02.webp",
+    image: "/images/products/buudy-serum/transformations/ha-transformation-02-profile.webp",
     concern: "Cheek Turgor & Plumpness",
     title: "Visibly plumper cheeks and restored bounce",
     quote:
@@ -468,7 +468,7 @@ export const serumTransformations: Transformation[] = [
 export const peptideTransformations: Transformation[] = [
   {
     id: "peptide-result-01",
-    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-01.webp",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-01-v4.webp",
     concern: "Dynamic Expression Line Smoothing",
     title: "Expression lines visibly relaxed and smoothed",
     quote:
@@ -484,7 +484,7 @@ export const peptideTransformations: Transformation[] = [
   },
   {
     id: "peptide-result-02",
-    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-02.webp",
+    image: "/images/products/buudy-peptide-serum/transformations/peptide-transformation-02-v4.webp",
     concern: "Skin Firmness & Wrinkle Smoothing",
     title: "Firmer dermal cushion and tightened temple area",
     quote:
@@ -663,6 +663,73 @@ export const prebioticTransformations: Transformation[] = [
       "Gentle press of 3 drops onto clean face and neck, followed by daily SPF and alternating Red/Blue LED light sessions.",
     experience:
       "Serial clinical monitoring documented a rapid decrease in cutaneous sensitivity scores, normalised skin microbiome balance, and uniform, healthy complexion tone.",
+  },
+];
+
+export const renewalCollectionTransformations: Transformation[] = [
+  {
+    id: "renewal-result-01",
+    image: "/images/products/the-ultimate-renewal-collection-box/transformations/renewal-transformation-01.webp",
+    concern: "Cellular Resurfacing & Texture Smoothing",
+    title: "Glass-smooth skin texture after just two peels",
+    quote:
+      '"Alternating the 10% AHA peel twice weekly with daily hyaluronic and peptide serum completely smoothed out my stubborn rough patches and bumpy texture. My skin looks glassy and renewed."',
+    name: "Clare H.",
+    fullName: "Clare Harrison",
+    age: 45,
+    skinType: "Uneven, textured skin with dull complexion",
+    routine:
+      "AHA 10% Lactic Acid Peeling Concentrate 2x weekly at night; daily morning and evening Double Hydration Boost Gel followed by Collagen-Lock Hexapeptide Serum, with 4x weekly Buudy LED phototherapy.",
+    experience:
+      "Clinical photographic monitoring at day 28 recorded marked epidermal smoothing, dissolution of keratolytic surface build-up, and restored cellular turnover without barrier redness.",
+  },
+  {
+    id: "renewal-result-02",
+    image: "/images/products/the-ultimate-renewal-collection-box/transformations/renewal-transformation-02.webp",
+    concern: "Deep Plumpness & Fine Line Softening",
+    title: "Remarkable softening of deep expression lines",
+    quote:
+      '"The complete 3-step trilogy is unmatched. The peel preps the surface, the hyaluronic gel quenches thirst, and the peptide serum locks in firm collagen. My forehead lines have softened dramatically."',
+    name: "Eleanor R.",
+    fullName: "Eleanor Roberts",
+    age: 51,
+    skinType: "Mature skin with dynamic expression lines and dehydration",
+    routine:
+      "Full 3-step renewal ritual: weekly AHA resurfacing, daily AM/PM HA priming, 10-minute Buudy Red Light (630nm), and post-light Hexapeptide-11 serum application.",
+    experience:
+      "High-resolution facial profilometry showed significant attenuation of forehead and perioral line depth, alongside increased stratum corneum moisture retention and restored cellular turgor.",
+  },
+  {
+    id: "renewal-result-03",
+    image: "/images/products/the-ultimate-renewal-collection-box/transformations/renewal-transformation-03.webp",
+    concern: "Pigmentation & Radiant Cellular Glow",
+    title: "Faded sun spots and radiant even skin tone",
+    quote:
+      '"Dealing with sun spots and tired, dull skin was a constant struggle. Within 3 weeks of the renewal box protocol paired with my LED mask, my skin tone is luminous, clear, and uniform."',
+    name: "Siddiq M.",
+    fullName: "Siddiq Malik",
+    age: 39,
+    skinType: "Sun-damaged skin with hyperpigmentation and uneven tone",
+    routine:
+      "Overnight AHA peel applied every Wednesday and Sunday; daily hydration gel and peptide concentrate paired with green and red light phototherapy.",
+    experience:
+      "Dermatological colorimetry demonstrated measurable reduction in melanin contrast and surface dyschromia, with a luminous increase in overall epidermal radiance.",
+  },
+  {
+    id: "renewal-result-04",
+    image: "/images/products/the-ultimate-renewal-collection-box/transformations/renewal-transformation-04.webp",
+    concern: "Facial Elasticity & Dermal Firmness",
+    title: "Restored cheek cushion and youthful bounce",
+    quote:
+      '"The synergy of all three serums in this luxury collection box has taken years off my complexion. My skin has its youthful bounce back, and makeup applies flawlessly without catching on dry patches."',
+    name: "Fiona K.",
+    fullName: "Fiona Kennedy",
+    age: 49,
+    skinType: "Thinning mature skin with loss of dermal cushion",
+    routine:
+      "Daily AM & PM application of HA gel and Hexapeptide serum; weekly lactic acid peel; 10 minutes near-infrared (830nm) LED therapy 4x weekly.",
+    experience:
+      "Serial cutometry revealed a statistically significant increase in skin elasticity parameters (R2/R7) and enhanced cheek contour definition after 6 weeks.",
   },
 ];
 

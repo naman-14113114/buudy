@@ -88,10 +88,11 @@ export function GiftBoxBundleSection({ productSlug }: { productSlug: string }) {
           {renewalProducts.map((item, idx) => (
             <div
               key={idx}
-              className="flex flex-col rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300"
+              data-story-card
+              className="flex flex-col rounded-[22px] border border-[rgba(58,31,61,.1)] bg-white p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300"
             >
               {/* Product Spotlight Image */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[16px] bg-[var(--cream)] mb-5">
+              <div className="relative aspect-square w-full overflow-hidden rounded-[16px] bg-[var(--cream)] mb-5">
                 <Image
                   src={item.imageSrc}
                   alt={item.imageAlt}
@@ -99,20 +100,11 @@ export function GiftBoxBundleSection({ productSlug }: { productSlug: string }) {
                   sizes="(min-width: 768px) 33vw, 100vw"
                   className="object-cover object-center transition-transform duration-500 hover:scale-105"
                 />
-                <span className="absolute top-3 left-3 rounded-full bg-[var(--plum)] text-white px-3 py-1 text-[11px] font-semibold buudy-mono tracking-wide">
-                  {item.step}
-                </span>
-                <span className="absolute bottom-3 right-3 rounded-full bg-white/90 backdrop-blur-sm text-[var(--plum)] px-2.5 py-0.5 text-[11px] font-semibold buudy-mono">
-                  {item.volume}
-                </span>
               </div>
 
-              {/* Title & Role */}
+              {/* Title */}
               <div className="mb-3">
-                <p className="buudy-mono text-[11px] uppercase tracking-wider text-[var(--gold)] font-semibold">
-                  {item.role}
-                </p>
-                <h3 className="buudy-display text-lg sm:text-xl font-bold text-[var(--plum)] mt-1 leading-snug">
+                <h3 className="buudy-display text-lg sm:text-xl font-bold text-[var(--plum)] leading-snug">
                   {item.title}
                 </h3>
               </div>
@@ -146,11 +138,11 @@ export function GiftBoxBundleSection({ productSlug }: { productSlug: string }) {
 
         {/* Dual Visual Feature: Skincare Rhythm (Left) + Three Textures (Right) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-center">
-          <div className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] p-6 shadow-sm">
+          <div data-story-card className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-white p-6 shadow-sm">
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] mb-4">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-weekly-skincare-rhythm-guide-uk.webp"
-                alt="Weekly skincare rhythm guide: alternating weekly AHA exfoliation with daily LED priming and peptide collagen-locking"
+                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-step-skincare-in-use-uk.webp"
+                alt="Complete 3-step skincare ritual in use with The Ultimate Renewal Collection Box UK"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover object-center"
@@ -164,11 +156,11 @@ export function GiftBoxBundleSection({ productSlug }: { productSlug: string }) {
             </p>
           </div>
 
-          <div className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-[var(--card)] p-6 shadow-sm">
+          <div data-story-card className="rounded-[22px] border border-[rgba(58,31,61,.1)] bg-white p-6 shadow-sm">
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] mb-4">
               <Image
-                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-three-textures-comparison-uk.webp"
-                alt="Three textures comparison: clear optical hydrogel, silky firming serum, and clarifying lactic acid peeling fluid"
+                src="/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-luxury-gifting-presentation-uk.webp"
+                alt="Full-size 3 x 30ml luxury gifting presentation box set with bespoke deep plum sleeve carton UK"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover object-center"

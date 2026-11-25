@@ -1224,7 +1224,7 @@ export const peptideSerumFaqs: FAQItem[] = [
   },
   {
     question: "Will this serum clog pores, cause breakouts, or feel greasy?",
-    answer: "No. The formula features a lightweight, silky botanical emulsion matrix that absorbs cleanly within 30 seconds. Powered by organic Jojoba and Strawberry seed oils alongside multi-molecular Hyaluronic Acid and Sodium PCA, it delivers intensive nourishment without heaviness, silicones, or comedogenic oils.",
+    answer: "No. The formula features a lightweight, silky botanical emulsion matrix that absorbs cleanly within 30 seconds. Powered by organic Jojoba and Strawberry seed oils alongside cellular phytosterols and Sodium PCA, it delivers intensive nourishment without heaviness, silicones, or comedogenic oils.",
   },
   {
     question: "Is it safe for medical-grade silicone LED masks?",
@@ -1249,7 +1249,7 @@ export const buudyPeptideSerum: Product = {
   heroTitle: "Buudy Peptide Serum",
   heroEmphasis: "",
   shortDescription: "STEP 2: POST-LIGHT PEPTIDE BOOSTER & COLLAGEN LOCK (30ml)",
-  description: "High-performance anti-ageing peptide serum powered by bio-fermented Hexapeptide-11, Dipalmitoyl Hydroxyproline, and multi-molecular hyaluronic acid. Formulated to stimulate cellular collagen synthesis, relax facial expression lines, and restore dermal firmness. Enriched with antioxidant-rich Blueberry, Ginkgo Biloba, and nourishing Jojoba. Engineered specifically for post-phototherapy synergy and intensive daily age-defence.",
+  description: "High-performance anti-ageing peptide concentrate powered by bio-fermented Hexapeptide-11, Dipalmitoyl Hydroxyproline, and cellular phytosterols. Formulated to stimulate fibroblast collagen synthesis, relax dynamic expression lines, and restore dermal firmness. Enriched with antioxidant-rich Blueberry, Ginkgo Biloba, and nourishing Jojoba. Engineered specifically for post-phototherapy synergy and intensive daily age-defence.",
   seoTitle: "Buudy Peptide Serum | Hexapeptide-11 Collagen Booster | Buudy Canada",
   seoDescription: "Clinical-grade Buudy Peptide Serum with Hexapeptide-11 and Dipalmitoyl Hydroxyproline. ECOCERT COSMOS certified, stimulates collagen, smooths wrinkles.",
   currency: market.currency,
@@ -1267,46 +1267,50 @@ export const buudyPeptideSerum: Product = {
       alt: "Buudy Peptide Serum 30ml bottle and luxury folding carton displayed on plum campaign plinths UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-verified-formula-facts-ecocert-uk.webp",
-      alt: "Verified formula facts: ECOCERT COSMOS Natural certified, 1% Hexapeptide-11, vegan and cruelty-free UK",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-neck-collarbone-beauty-glow-uk.webp",
+      alt: "Model neck and collarbone beauty portrait demonstrating firm, radiant skin after peptide care UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-key-ingredients-texture-macro-uk.webp",
-      alt: "Key ingredients macro texture: Hexapeptide-11, Dipalmitoyl Hydroxyproline, and multi-molecular hyaluronic acid UK",
-    },
-    {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-ingredient-spotlight-botanicals-uk.webp",
-      alt: "Ingredient spotlight on bio-fermented peptides, Ginkgo Biloba, and Blueberry antioxidant botanicals UK",
-    },
-    {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plump-smooth-collagen-benefits-uk.webp",
-      alt: "Clinical anti-ageing benefits: visible wrinkle smoothing, skin elasticity, and accelerated collagen synthesis UK",
-    },
-    {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-skin-types-daily-ritual-guide-uk.webp",
-      alt: "Skin types and daily application ritual guide for mature, dry, and combination skin barriers UK",
-    },
-    {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-targeted-daily-care-anti-ageing-uk.webp",
-      alt: "Targeted daily care guide: facial tension relaxation and dermal collagen matrix reinforcement UK",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-natural-origin-formula-composition-uk.webp",
+      alt: "Natural-origin formula composition infographic: 99% from natural origin, 20% organic, 5.15–5.25 formula pH range UK",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-plum-manicure-hand-hero-uk.webp",
       alt: "Model hand with signature plum manicure holding Buudy Peptide Serum bottle UK",
     },
     {
-      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-neck-collarbone-beauty-glow-uk.webp",
-      alt: "Model neck and collarbone beauty portrait demonstrating firm, radiant skin after peptide care UK",
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-inside-formula-infographic-uk.webp",
+      alt: "Inside the formula infographic: Hexapeptide-11 peptide-powered care, Hyaluronic acid hydration support, and soothing Aloe juice base UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-ingredients-with-purpose-infographic-uk.webp",
+      alt: "Ingredients with purpose infographic: Hexapeptide-11 for smoother appearance, Ginkgo extract antioxidant support, and Hyaluronic acid for plumper look UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-smooth-plump-glow-infographic-uk.webp",
+      alt: "Smooth, Plump, Glow infographic: plumper-looking skin, smoother appearance, and improved skin elasticity UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-skin-ritual-guide-infographic-uk.webp",
+      alt: "Made for your skin ritual infographic: targets dehydration and visible fine lines, suitable for normal and dry skin AM/PM UK",
+    },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-daily-care-callout-infographic-uk.webp",
+      alt: "Daily care callout infographic: peptides and hyaluronic acid for comforting hydration and a smoother-looking complexion UK",
     },
     {
       src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-texture-on-hand-editorial-uk.webp",
       alt: "Silky botanical peptide emulsion texture swatch of Buudy Peptide Serum on hand UK",
     },
+    {
+      src: "/images/products/buudy-peptide-serum/buudy-peptide-serum-two-hand-pump-ritual-uk.webp",
+      alt: "Model hands performing two-hand precision dispensing pump ritual with Buudy Peptide Serum UK",
+    },
   ],
   gifts: [],
   specs: [
     { label: "Active Complex", value: "Hexapeptide-11 & Hydroxyproline" },
-    { label: "Hydration Matrix", value: "Multi-Depth Hyaluronic Acid + Sodium PCA" },
+    { label: "Barrier Support", value: "Natural Phytosterols & Sodium PCA" },
     { label: "Regimen Step", value: "Post-LED Phototherapy & Daily AM/PM" },
     { label: "Volume", value: "30ml Precision Treatment Pump" },
     { label: "Skin Compatibility", value: "All Skin Types & Sensitive Barriers" },
@@ -1334,9 +1338,7 @@ export const buudyPeptideSerum: Product = {
     "Vaccinium Myrtillus (Blueberry) Fruit Extract➀",
     "Ricinus Communis (Castor) Seed Oil➀",
     "Ascorbyl Palmitate",
-    "Hydrolyzed Hyaluronic Acid",
     "Potassium Hydroxide",
-    "Sodium Hyaluronate",
     "Sodium Phytate",
     "Tocopherol",
     "Leuconostoc/Radish Root Ferment Filtrate",
@@ -1431,20 +1433,20 @@ export const buudyHyaluronicSerum: Product = {
       alt: "Buudy Hyaluronic Serum bottle and luxury folding carton displayed on cream architectural plinths UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-key-ingredients-hydrogel-macro-uk.webp",
-      alt: "Buudy Hyaluronic Serum key ingredients macro hydrogel droplet swatch with multi-molecular hyaluronic acid UK",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-key-ingredients-pure-white-uk.webp",
+      alt: "Key ingredients infographic: multi-molecular Hyaluronic Acid surface hydration, Sodium PCA moisture attractor, and soothing Aloe leaf juice UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-skin-type-daily-ritual-guide-uk.webp",
-      alt: "Buudy Hyaluronic Serum skin type compatibility and AM PM daily application ritual guide UK",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-skin-type-ritual-pure-white-uk.webp",
+      alt: "Who is it for infographic: ideal for normal and mature skin tackling dehydration and tightness, AM and PM ritual guide UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-lightweight-hydration-benefits-uk.webp",
-      alt: "A lighter way to hydrate: Buudy Hyaluronic Serum lightweight hydrogel benefits and dewy finish UK",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-lightweight-hydration-pure-white-uk.webp",
+      alt: "A lighter way to hydrate infographic: moisture-locking care for refreshed-feeling skin with a soft, plump-looking finish UK",
     },
     {
-      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-moisture-barrier-hydration-held-in-uk.webp",
-      alt: "Hydration held in: Buudy Hyaluronic Serum moisture barrier support and natural plumper looking finish UK",
+      src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-moisture-barrier-pure-white-uk.webp",
+      alt: "Hydration held in infographic: moisture support helps reduce moisture loss and supports natural plumpness and elasticity UK",
     },
     {
       src: "/images/products/buudy-serum/buudy-hyaluronic-acid-serum-diagonal-bottle-editorial-uk.webp",
@@ -2447,11 +2449,11 @@ export const buudyAhaPeelingConcentrate: Product = {
   customerCount: "9,000+",
   promoCode: "",
   promoLabel: "SAVE 17%",
-  cartImage: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-ivory-plinth-duo-uk.webp",
+  cartImage: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-deep-plum-campaign-duo-uk.webp",
   gallery: [
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-ivory-plinth-duo-uk.webp",
-      alt: "Buudy AHA Peeling Concentrate bottle and luxury carton displayed on ivory architectural plinths UK",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-deep-plum-campaign-duo-uk.webp",
+      alt: "Buudy AHA Peeling Concentrate bottle and luxury carton displayed on deep plum campaign plinths UK",
     },
     {
       src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-key-ingredients-botanicals-uk.webp",
@@ -2482,8 +2484,8 @@ export const buudyAhaPeelingConcentrate: Product = {
       alt: "Buudy AHA Peeling Concentrate resting diagonally on natural mineral stone studio still life UK",
     },
     {
-      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-model-radiant-collarbone-uk.webp",
-      alt: "Radiant, smooth skin on model neck and collarbone after overnight Buudy AHA Peeling treatment UK",
+      src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-two-hands-open-dropper-ritual-uk.webp",
+      alt: "Two hands holding open precision pipette dropper with Buudy AHA Peeling Concentrate UK",
     },
     {
       src: "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-closed-bottle-swatch-hand-uk.webp",

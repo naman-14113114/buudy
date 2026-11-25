@@ -24,6 +24,30 @@ export function SerumClinicalResults({
   const isRenewalBox = productSlug === "the-ultimate-renewal-collection-box";
 
   const stats = useMemo(() => {
+    if (isRenewalBox) {
+      return [
+        {
+          target: 97,
+          label: "Visible Cellular Renewal",
+          desc: "Noticeable improvement in skin texture, radiance, and surface smoothness within 21 days.",
+        },
+        {
+          target: 94,
+          label: "Deep Dermal Hydration",
+          desc: "Multi-depth hyaluronic acid and sodium PCA delivered sustained 72-hour moisture.",
+        },
+        {
+          target: 92,
+          label: "Smoothed Fine Lines & Bounce",
+          desc: "Hexapeptide-11 matrix softened dynamic expression lines and restored facial elasticity.",
+        },
+        {
+          target: 95,
+          label: "Enhanced Phototherapy Synergy",
+          desc: "Synergistic application with red and NIR light accelerated overall skin clarity.",
+        },
+      ];
+    }
     if (isAha) {
       return [
         {
@@ -118,7 +142,7 @@ export function SerumClinicalResults({
         desc: "Skin texture felt noticeably softer, balanced, and free from redness.",
       },
     ];
-  }, [isPrebiotic, isPeptide, isAha]);
+  }, [isPrebiotic, isPeptide, isAha, isRenewalBox]);
 
   const targets = useMemo(() => stats.map((s) => s.target), [stats]);
 
@@ -193,7 +217,7 @@ export function SerumClinicalResults({
     : isEyeCream
     ? "/images/products/buudy-peptide-age-defying-eye-cream/buudy-peptide-eye-cream-model-eye-area-contour-portrait-uk.webp"
     : isRenewalBox
-    ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-plum-sleeve-detail-editorial-uk.webp"
+    ? "/images/products/the-ultimate-renewal-collection-box/buudy-ultimate-renewal-full-size-gifting-presentation-uk.webp"
     : isAha
     ? "/images/products/buudy-aha-peeling-concentrate/buudy-aha-peeling-concentrate-model-radiant-collarbone-uk.webp"
     : isPrebiotic
@@ -207,7 +231,7 @@ export function SerumClinicalResults({
     : isEyeCream
     ? "Model eye area portrait showcasing visibly smoothed periorbital contours and diminished crow's feet after Buudy Peptide Eye Cream ritual UK"
     : isRenewalBox
-    ? "The Ultimate Renewal Collection Box deep plum carton sleeve architectural detail and gold foil typography UK"
+    ? "The Ultimate Renewal Collection Box full-size 3-step luxury gifting presentation UK"
     : isAha
     ? "Radiant, smooth skin on model neck and collarbone after overnight Buudy AHA Peeling Concentrate treatment UK"
     : isPrebiotic
@@ -252,7 +276,8 @@ export function SerumClinicalResults({
                 ref={(el) => {
                   statRefs.current[idx] = el;
                 }}
-                className="flex items-center gap-3.5 sm:gap-4 rounded-[18px] border border-[rgba(58,31,61,.08)] bg-[var(--card)] py-3 px-3.5 sm:py-3.5 sm:px-4 shadow-sm transition-all duration-300 hover:shadow-md hover:border-[rgba(58,31,61,.18)]"
+                data-percentage-card
+                className="flex items-center gap-3.5 sm:gap-4 rounded-[18px] border border-[rgba(58,31,61,.08)] bg-white py-3 px-3.5 sm:py-3.5 sm:px-4 shadow-sm transition-all duration-300 hover:shadow-md hover:border-[rgba(58,31,61,.18)]"
               >
                 {/* Miroooo-Style Circular Progress Ring */}
                 <div
